@@ -1,34 +1,204 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    :root { --bg:#ffffff; --text:#0f172a; --accent:#0ea5a2; --radius:18px; }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;background:var(--bg);color:var(--text);}
-    .wrap{max-width:1100px;margin:auto;padding:32px;}
-    header{display:flex;align-items:center;justify-content:space-between;padding:24px;border-bottom:1px solid #e2e8f0;}
-    .card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:var(--radius);padding:24px;box-shadow:0 10px 30px rgba(2,6,23,.07);}
-    a.button{padding:10px 16px;border-radius:999px;border:1px solid #e2e8f0;text-decoration:none}
-    a.button:hover{border-color:var(--accent)}
-  </style>
-</head>
-<body>
-  <header class="wrap">
-    <h1>👋 Hello, I’m <span style="color:var(--accent)">Your Name</span></h1>
-    <nav><a class="button" href="#work">Work</a> <a class="button" href="#contact">Contact</a></nav>
-  </header>
-  <main class="wrap">
-    <section id="work" class="card">
-      <h2>Featured Work</h2>
-      <p>Short intro about you and what this site is for.</p>
-    </section>
-    <section id="contact" style="margin-top:24px" class="card">
-      <h2>Contact</h2>
-      <p>Email: you@example.com · LinkedIn: /in/yourprofile</p>
-    </section>
-  </main>
-</body>
-</html>
+<!-- ONE-FILE PORTFOLIO — BULLETPROOF VERSION (paste in a Custom HTML block). Uses only straight quotes/dashes. -->
+<style type="text/css">
+  /* Minimal scoped skin */
+  #bp-portfolio{--bg:#ffffff;--text:#0f172a;--muted:#475569;--card:#f8fafc;--line:#e2e8f0;--accent:#0ea5a2;--accent2:#1fbdb9;--gold:#d4af37;--gold-soft:#f3e8c1;--radius:18px;--shadow:0 10px 30px rgba(2,6,23,.07);--maxw:1100px;color:var(--text);background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,"Helvetica Neue",Arial}
+  #bp-portfolio .wrap{max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,28px)}
+  #bp-portfolio .grid{display:grid;gap:clamp(14px,2.2vw,22px)}
+  #bp-portfolio .two{grid-template-columns:1.1fr 1fr}
+  @media (max-width:1000px){#bp-portfolio .two{grid-template-columns:1fr}}
+  /* header */
+  #bp-portfolio .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.85);backdrop-filter:saturate(120%) blur(10px);border-bottom:1px solid var(--line)}
+  #bp-portfolio .nav{display:flex;align-items:center;justify-content:space-between}
+  #bp-portfolio .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+  #bp-portfolio .badge{inline-size:34px;block-size:34px;border-radius:10px;background:conic-gradient(from 220deg,var(--accent),var(--accent2));display:grid;place-items:center;box-shadow:0 6px 18px rgba(2,6,23,.06)}
+  #bp-portfolio .menu a{margin-left:14px;text-decoration:none;font-weight:600;color:var(--muted)}
+  #bp-portfolio .menu a:hover{color:var(--accent)}
+  /* hero */
+  #bp-portfolio .hero{padding:clamp(26px,5.5vw,56px) 0}
+  #bp-portfolio h1{font-size:clamp(28px,4.8vw,46px);margin:6px 0 6px}
+  #bp-portfolio .subtitle{color:var(--muted);margin:0 0 12px}
+  #bp-portfolio .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  #bp-portfolio .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);font-weight:700;text-decoration:none}
+  #bp-portfolio .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+  #bp-portfolio .btn.ghost{background:var(--card);color:var(--text)}
+  #bp-portfolio .tag{display:inline-block;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);font-weight:600}
+  /* mosaic accent */
+  #bp-portfolio .mosaic{position:relative}
+  #bp-portfolio .mosaic:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:10px;opacity:.18;background:repeating-linear-gradient(90deg,var(--gold)0 10px,var(--gold-soft)10px 20px,transparent 20px 24px,var(--accent)24px 30px,transparent 30px 34px);border-radius:8px}
+  /* sections */
+  #bp-portfolio .section{margin:clamp(34px,6vw,72px) 0}
+  #bp-portfolio .section h2{font-size:clamp(22px,3vw,32px);margin:0 0 6px}
+  #bp-portfolio .lead{color:var(--muted);max-width:70ch}
+  /* cards */
+  #bp-portfolio .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(14px,2.2vw,22px)}
+  /* timeline */
+  #bp-portfolio .timeline{position:relative;margin-top:12px}
+  #bp-portfolio .timeline:before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--gold));opacity:.55}
+  #bp-portfolio .t-item{display:grid;grid-template-columns:26px 1fr;gap:14px;margin:16px 0}
+  #bp-portfolio .dot{inline-size:22px;block-size:22px;border-radius:50%;border:2px solid var(--accent);background:radial-gradient(circle at 40% 35%,var(--gold),var(--gold-soft));box-shadow:0 0 0 3px rgba(14,165,162,.12)}
+  #bp-portfolio .t-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}
+  #bp-portfolio .t-muted{color:var(--muted);margin:.35rem 0 0}
+  /* grid */
+  #bp-portfolio .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px)}
+  @media (max-width:1000px){#bp-portfolio .projects{grid-template-columns:1fr}}
+  #bp-portfolio .thumb{aspect-ratio:16/10;border-radius:14px;border:1px solid var(--line);background:#e6fffb;background-size:cover;background-position:center}
+  /* about grid */
+  #bp-portfolio .aboutgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:900px){#bp-portfolio .aboutgrid{grid-template-columns:1fr}}
+  /* footer */
+  #bp-portfolio footer{margin-top:56px;border-top:1px solid var(--line);padding:24px 0;color:var(--muted);text-align:left}
+</style>
+
+<div id="bp-portfolio">
+  <!-- Top menu -->
+  <div class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <span>Bader Suliman</span>
+      </div>
+      <nav class="menu">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero + intro -->
+  <section class="wrap hero">
+    <div class="grid two">
+      <div>
+        <span class="tag mosaic">Open to internships • Communications • Data Storytelling</span>
+        <h1>Bader Suliman</h1>
+        <p class="subtitle">Sciences Po (PSIA) • Dual degree with Freie Universität Berlin — International Security, focus on Migration & Middle East.</p>
+        <div class="cta">
+          <a class="btn primary" href="#work">View projects</a>
+          <a class="btn ghost" href="mailto:you@example.com">Email</a>
+          <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <strong>Highlights</strong>
+          <ul style="margin:8px 0 0 18px;color:var(--muted)">
+            <li>Press & social content across FR/EN/AR (UN/NGO)</li>
+            <li>Data cleaning, mapping, and dashboards for field teams</li>
+            <li>Story-driven briefs on migration & climate security</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience timeline -->
+  <section id="experience" class="wrap section">
+    <h2>Experience</h2>
+    <p class="lead">A mix of communications, humanitarian data, and policy research.</p>
+    <div class="timeline">
+      <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Communications Intern — OIF</strong> • 2025 — Paris<p class="t-muted">Social content, media monitoring, reporting; built templates and improved workflows.</p></div></div>
+      <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Graduate Trainee — AQLITY</strong> • 2025 — Remote<p class="t-muted">Data cleaning & mapping for settlement-level assessments; narrative drafting and visuals.</p></div></div>
+      <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Volunteer — ARDHIS</strong> • 2024–2025 — Paris<p class="t-muted">Drop-in sessions; admin guidance for asylum seekers; desk research on country situations.</p></div></div>
+      <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Research Intern — Royal Scientific Society (Jordan)</strong> • 2024 — Amman<p class="t-muted">Desalination, climate security, and science diplomacy with multi-stakeholder teams.</p></div></div>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section id="work" class="wrap section">
+    <h2>Selected Work</h2>
+    <p class="lead">Case studies blending analysis, design, and impact.</p>
+    <div class="projects">
+      <article class="card"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div><h3>Human Security — Interactive Twine</h3><p class="t-muted">Complete interactive learning experience with quizzes and styled passages.</p><p><a href="#" target="_blank" rel="noopener">Open project →</a></p></article>
+      <article class="card"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div><h3>SLAC Assessments — Data to Narrative</h3><p class="t-muted">Transformed settlement-level data into concise briefs and maps for partners.</p><p><a href="#" target="_blank" rel="noopener">Open project →</a></p></article>
+      <article class="card"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div><h3>Desalination — Policy Brief</h3><p class="t-muted">Accessible explainer on environmental & social impacts for the region.</p><p><a href="#" target="_blank" rel="noopener">Open project →</a></p></article>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="wrap section">
+    <h2>About</h2>
+    <p class="lead">International Security MA candidate (Sciences Po), dual degree with Freie Universität Berlin. I mix policy writing, multilingual comms (FR/EN/AR), and clean visual design to make complex topics usable.</p>
+    <div class="aboutgrid">
+      <div class="card"><strong>Languages</strong><br><span class="t-muted">Arabic (native), English (C2), French (C1), Persian (B2), Japanese (A2)</span></div>
+      <div class="card"><strong>Tools</strong><br><span class="t-muted">WordPress, Canva, Excel, QGIS/Mapbox, GitHub Pages, Twine</span></div>
+      <div class="card"><strong>Skills</strong><br><span class="t-muted">Media monitoring, copywriting, data cleaning, layout, mapping</span></div>
+      <div class="card"><strong>Focus</strong><br><span class="t-muted">Migration, climate, water, protection</span></div>
+      <div class="card"><strong>Testimonials</strong><br><span class="t-muted">“Dependable, fast, and design-savvy—turns complex datasets into clear stories.”</span></div>
+      <div class="card"><strong>Education</strong><br><span class="t-muted">MA International Security, Sciences Po (PSIA); Dual degree (FU Berlin, IR). BA Politics & Government, Sciences Po (Menton/Nancy); Exchange, TUFS Tokyo.</span></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="wrap section">
+    <div class="card">
+      <h2>Let’s work together</h2>
+      <p class="lead">Based in Paris • Open to internships and part-time engagements. I value clarity, empathy, and high standards.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:you@example.com">Email me</a>
+        <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2025 Bader Suliman · Built on WordPress (custom HTML)</div>
+  </footer>
+</div>
+<!-- WordPress‑safe version: paste this in a **Custom HTML** block on a Page. No <html>, <head>, <body>, or <script> tags. -->
+
+<style>
+  /* ====== Portfolio (scoped) ====== */
+  #bp-portfolio{--bg:#ffffff;--text:#0f172a;--muted:#475569;--card:#f8fafc;--line:#e2e8f0;--accent:#0ea5a2;--accent-2:#1fbdb9;--gold:#d4af37;--gold-soft:#f3e8c1;--radius:18px;--shadow:0 10px 30px rgba(2,6,23,.07);--shadow-soft:0 6px 18px rgba(2,6,23,.06);--maxw:1100px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,"Noto Sans",Ubuntu,"Helvetica Neue",Arial; color:var(--text);}
+  @media (prefers-color-scheme:dark){ #bp-portfolio{--bg:#0b1220;--text:#e2e8f0;--muted:#94a3b8;--card:#111827;--line:#1f2937;--shadow:0 10px 30px rgba(0,0,0,.45);--shadow-soft:0 6px 18px rgba(0,0,0,.35);} }
+  #bp-portfolio{background:var(--bg)}
+  #bp-portfolio .wrap{max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,28px)}
+  #bp-portfolio .grid{display:grid;gap:clamp(14px,2.2vw,22px)}
+  #bp-portfolio .two{grid-template-columns:1.1fr 1fr}
+  #bp-portfolio .three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:1000px){#bp-portfolio .two,#bp-portfolio .three{grid-template-columns:1fr}}
+  #bp-portfolio .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  #bp-portfolio .p{padding:clamp(16px,2.2vw,26px)}
+  #bp-portfolio .mosaic{position:relative}
+  #bp-portfolio .mosaic:before,#bp-portfolio .mosaic:after{content:"";position:absolute;left:0;right:0;height:10px;background:repeating-linear-gradient(90deg,var(--gold) 0 10px,var(--gold-soft) 10px 20px,transparent 20px 24px,var(--accent) 24px 30px,transparent 30px 34px);opacity:.18;filter:saturate(120%)}
+  #bp-portfolio .mosaic:before{top:-6px;border-radius:8px}
+  #bp-portfolio .mosaic:after{bottom:-6px;border-radius:8px}
+  #bp-portfolio header .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  #bp-portfolio .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+  #bp-portfolio .badge{inline-size:34px;block-size:34px;border-radius:10px;background:conic-gradient(from 220deg, var(--accent), var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow-soft);border:1px solid var(--line)}
+  #bp-portfolio .brand span{font-size:1.05rem}
+  #bp-portfolio nav a{color:var(--muted);text-decoration:none;font-weight:600;margin-left:12px}
+  #bp-portfolio nav a:hover{color:var(--accent)}
+  #bp-portfolio .hero{padding:clamp(28px,6vw,64px) 0}
+  #bp-portfolio .hero h1{font-size:clamp(28px,4.8vw,52px);line-height:1.04;margin:0 0 10px 0}
+  #bp-portfolio .hero p{font-size:clamp(15px,1.6vw,18px);color:var(--muted);max-width:70ch}
+  #bp-portfolio .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);box-shadow:var(--shadow-soft);font-size:.9rem}
+  #bp-portfolio .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+  #bp-portfolio .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);font-weight:700;letter-spacing:.2px;text-decoration:none}
+  #bp-portfolio .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent}
+  #bp-portfolio .btn.ghost{background:var(--card);color:var(--text)}
+  #bp-portfolio .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+  #bp-portfolio .section{margin:clamp(36px,6vw,72px) 0}
+  #bp-portfolio .section h2{font-size:clamp(22px,3vw,32px);margin:0 0 10px 0}
+  #bp-portfolio .section p.lead{color:var(--muted);max-width:70ch}
+  #bp-portfolio .project{overflow:hidden;position:relative}
+  #bp-portfolio .project .thumb{aspect-ratio:16/10;border-radius:calc(var(--radius) - 6px);background:linear-gradient(180deg, rgba(14,165,162,.15), transparent), url('') center/cover no-repeat;border:1px solid var(--line)}
+  #bp-portfolio .project h3{margin:10px 0 6px 0;font-size:1.1rem}
+  #bp-portfolio .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+  #bp-portfolio .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  #bp-portfolio .chip{border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:#fff0}
+  #bp-portfolio .featured{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(18px,2.5vw,28px)}
+  #bp-portfolio .featured .visual{aspect-ratio:16/10;border-radius:var(--radius);background:radial-gradient(60% 80% at 50% 20%, rgba(14,165,162,.25), transparent 60%),linear-gradient(180deg, var(--card), transparent);border:1px solid var(--line)}
+  #bp-portfolio .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  #bp-portfolio .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  #bp-portfolio .kpi strong{font-size:1.2rem}
+  @media(max-width:900px){#bp-portfolio .featured{grid-template-columns:1fr}}
+  #bp-portfolio .timeline{position:relative;margin-top:10px}
+  #bp-portfolio .timeline:before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--gold));opacity:.4}
+  #bp-portfolio .t-item{display:grid;grid-template-columns:26px 1fr;gap:14px;margin:16px 0}
+  #bp-portfolio .dot{inline-size:22px;block-size:22px;border-radius:50%;border:2px solid var(--accent);background:radial-gradient(circle at 40% 35%, var(--gold), var(--gold-soft));box-shadow:0 0 0 3px rgba(14,165,162,.12)}
+  #bp-portfolio .t-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}
+  #bp-portfolio footer{margin-top:60px;border-top:1px solid var(--line);padding:28px 0;color:var(--muted)}
+</style>
