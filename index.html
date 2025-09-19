@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v7: always-spinning badge, wider Skills spacing, simplified Arabic, updated Experience, no title lines -->
+<!-- PORTFOLIO — v8: concise Experience, OIF in English, researchy About, Tarjimly first, always-spinning badge -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -30,7 +30,7 @@
   .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px)}
   .lead{color:var(--muted)}
 
-  /* diverse reveals */
+  /* reveals */
   .reveal{opacity:0; transition:opacity .55s ease, transform .55s ease}
   .reveal.in{opacity:1; transform:none}
   .anim-fade{transform:translateY(14px)}
@@ -80,7 +80,7 @@
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* Skills/Languages spacing increased */
+  /* Skills/Languages spacing */
   .skills-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:6px}
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
@@ -108,7 +108,10 @@
   .t{display:grid; grid-template-columns:26px 1fr; gap:12px; margin:14px 0}
   .dot{width:22px; height:22px; border-radius:50%; border:2px solid var(--accent);
     background:radial-gradient(circle at 40% 35%, #d4af37, #f3e8c1); box-shadow:0 0 0 3px rgba(14,165,162,.12)}
-  .role{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+  .role{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; white-space:nowrap;
+  }
+  @media (max-width:520px){ .role{white-space:normal} }
   .where{color:var(--muted)}
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
   .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
@@ -152,7 +155,7 @@
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
-          Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in five seconds, and short briefs that help a team decide the next step. I work in French, English, and Arabic, and I build small, fast pages like this one to share work without the fluff.
+          Hi, I am Bader. I like turning messy information into something useful: press reviews that highlight what matters, maps that make sense in five seconds, and short briefs that help a team decide the next step. I work in French, English, and Arabic. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into clear, decision ready insights.
         </p>
       </div>
     </div>
@@ -229,7 +232,7 @@
     </div>
   </section>
 
-  <!-- Experience -->
+  <!-- Experience (one sentence each, city + year only on right) -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Experience</h2>
@@ -240,11 +243,11 @@
           <div class="dot" aria-hidden="true"></div>
           <div class="card tilt reveal anim-l">
             <div class="role">
-              <strong>Intern - Conception et Suivi de Projet (Project Design and Monitoring), OIF</strong>
-              <span class="where">Paris, France • 2025</span>
+              <strong>Intern - Project Design and Monitoring, OIF</strong>
+              <span class="where">Paris • 2025</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
-              Collected, processed, and analyzed project data across the Francophone space, then built and updated structured databases for cooperation tracking and strategic programming. Produced country fiches and analytical notes on multilateral cooperation and supported monitoring and evaluation, including inputs to the 2025 execution report.
+              Analyzed project data, maintained structured cooperation databases, wrote country briefs, and supported monitoring and evaluation for the execution report.
             </p>
             <div class="tags">
               <span class="tag">Data analysis</span><span class="tag violet">Database design</span><span class="tag coral">Country briefs</span><span class="tag amber">Monitoring and evaluation</span>
@@ -260,7 +263,7 @@
               <span class="where">Remote • 2025</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
-              Led in depth data cleaning and analysis to improve accuracy and consistency in humanitarian datasets. Produced maps, reports, and visual communications that combined geospatial and analytical insights to explain trends and support decision making.
+              Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends and inform reports.
             </p>
             <div class="tags">
               <span class="tag">Data cleaning</span><span class="tag violet">GIS and mapping</span><span class="tag coral">Infographics</span><span class="tag amber">Reporting</span>
@@ -273,10 +276,10 @@
           <div class="card tilt reveal anim-l">
             <div class="role">
               <strong>Immigration Law Assistant - ARDHIS</strong>
-              <span class="where">Paris, France • Sep 2024 to May 2025</span>
+              <span class="where">Paris • 2024 to 2025</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
-              Provided tailored administrative support and step by step guidance during drop in sessions. Researched legal and geopolitical contexts for countries of origin such as the DRC and Cameroon, drafted concise case notes and background briefs, and developed interviewing and narrative skills to document histories with care.
+              Guided asylum seekers during drop in sessions, researched country conditions, and drafted case notes and briefs for OFPRA and the CNDA.
             </p>
             <div class="tags">
               <span class="tag">Legal support</span><span class="tag violet">Country research</span><span class="tag coral">Case briefs</span><span class="tag amber">Interviewing</span>
@@ -289,10 +292,10 @@
           <div class="card tilt reveal anim-r">
             <div class="role">
               <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
-              <span class="where">Amman, Jordan • Jun 2023 to Aug 2023</span>
+              <span class="where">Amman • 2023</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
-              Authored an article on desalination impacts published by the Konrad Adenauer Stiftung and researched climate, water scarcity, and desalination in the Middle East. Gained hands on exposure to science diplomacy with researchers, policymakers, and international partners.
+              Researched climate, water scarcity, and desalination in the Middle East and published an article with the Konrad Adenauer Stiftung while collaborating across research and policy teams.
             </p>
             <div class="tags">
               <span class="tag">Desalination</span><span class="tag violet">Climate and water</span><span class="tag coral">Research writing</span><span class="tag amber">Science diplomacy</span>
@@ -305,10 +308,10 @@
           <div class="card tilt reveal anim-l">
             <div class="role">
               <strong>Intern - International Relations Department, City Hall</strong>
-              <span class="where">Nancy, France • Jul 2022 to Aug 2022</span>
+              <span class="where">Nancy • 2022</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
-              Organized public events, visibility campaigns, and intercultural outreach with twin cities Newcastle, Lviv, and Lublin. Assisted logistics and diplomatic protocol for official visits.
+              Organized public events and intercultural outreach with twin cities and assisted logistics and protocol for official visits.
             </p>
             <div class="tags">
               <span class="tag">Event operations</span><span class="tag violet">Intercultural outreach</span><span class="tag coral">Protocol</span><span class="tag amber">Logistics</span>
@@ -358,14 +361,14 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (after Projects) -->
+  <!-- Extracurricular Activities (ordered per request) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
       <div class="activities">
         <div class="card tilt reveal anim-l">
-          <strong>MEDMUN - Arabic Committee Director</strong>
-          <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
+          <strong>Tarjimly - Volunteer Translator and Interpreter</strong>
+          <p class="lead" style="margin:.35rem 0 0">Supported refugees and NGOs on the Tarjimly platform with Arabic, English, and French translations and live interpretations via chat and voice.</p>
         </div>
         <div class="card tilt reveal anim-r">
           <strong>Sciences Po Monde Arabe - Communications Director</strong>
@@ -380,6 +383,10 @@
           <p class="lead" style="margin:.35rem 0 0">
             Traveled in many countries. Solo trips include India across the country, Georgia, and Armenia. Regional experience also includes Jordan, Lebanon, United Arab Emirates, France, Germany, and Japan.
           </p>
+        </div>
+        <div class="card tilt reveal anim-l">
+          <strong>MEDMUN - Arabic Committee Director</strong>
+          <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
         </div>
       </div>
     </div>
