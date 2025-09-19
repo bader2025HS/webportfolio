@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v20 effects: new side/text wipes, slide/tilt/zoom mix, subtle stagger. Based on v18 content -->
+<!-- PORTFOLIO — v21 (stable): based on v18 content + fresh side/tilt/zoom effects, robust reveals, titles always visible -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -29,11 +29,14 @@
   .section h2{margin:0 0 10px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
   .lead{color:var(--muted)}
 
-  /* ========= Reveal system ========= */
-  .reveal{opacity:0; will-change:transform, filter, clip-path; transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1), filter .6s cubic-bezier(.2,.7,.2,1), clip-path .7s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1; transform:none; filter:none; clip-path:inset(0 0 0 0)}
+  /* Reveal system (with wipes) */
+  .reveal{opacity:0; will-change:transform, filter, clip-path;
+    transition:opacity .6s cubic-bezier(.2,.7,.2,1),
+               transform .6s cubic-bezier(.2,.7,.2,1),
+               filter .6s cubic-bezier(.2,.7,.2,1),
+               clip-path .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1; transform:none; filter:none; clip-path:inset(0 0 0 0); -webkit-clip-path:inset(0 0 0 0)}
 
-  /* New variants (side text, wipes, tilt, zoom) */
   .fx-from-left{transform:translateX(-28px) skewX(-2deg); filter:blur(4px)}
   .fx-from-right{transform:translateX(28px) skewX(2deg); filter:blur(4px)}
   .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
@@ -42,9 +45,9 @@
   .fx-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
   .fx-soft{transform:translateY(12px); opacity:.001}
 
-  /* Text wipe reveal (left->right or right->left) */
-  .fx-wipe-l{clip-path:inset(0 100% 0 0)}
-  .fx-wipe-r{clip-path:inset(0 0 0 100%)}
+  /* Text wipe reveal */
+  .fx-wipe-l{clip-path:inset(0 100% 0 0); -webkit-clip-path:inset(0 100% 0 0)}
+  .fx-wipe-r{clip-path:inset(0 0 0 100%); -webkit-clip-path:inset(0 0 0 100%)}
 
   /* Stagger support */
   [data-stagger] > *{transition-delay:var(--d,0ms)}
@@ -107,13 +110,13 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — same hover behavior as v18 */
+  /* Projects — strong hover zoom, details on hover (no clicks) */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
-  .project:hover{transform:scale(1.08); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
+  .project:hover{transform:scale(1.12); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
   .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s ease}
-  .project:hover .thumb{transform:scale(1.12)}
+  .project:hover .thumb{transform:scale(1.18)}
   .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:0}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
   .project .body>div{overflow:hidden}
@@ -136,7 +139,7 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities */
+  /* Activities — top full-width, then 2 columns; hover to reveal details */
   .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   .activities-grid .full{grid-column:1 / -1}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
@@ -153,7 +156,7 @@
   /* Reduced motion */
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
-    .reveal{filter:none !important; transform:none !important; opacity:1 !important; clip-path:inset(0 0 0 0) !important}
+    .reveal,.project .body,.activity .body{filter:none !important; transform:none !important; opacity:1 !important; clip-path:inset(0 0 0 0) !important}
     [data-stagger] > *{transition-delay:0ms !important}
   }
 </style>
@@ -208,14 +211,14 @@
         <strong class="reveal fx-wipe-r">Languages</strong>
         <div class="lang-cols reveal fx-from-up" data-stagger=".lead li">
           <ul class="lead">
-            <li> <strong>Arabic</strong> - Native (MSA and dialects)</li>
-            <li> <strong>French</strong> - Native</li>
-            <li> <strong>English</strong> - C2 (spoken, read, written)</li>
+            <li><strong>Arabic</strong> - Native (MSA and dialects)</li>
+            <li><strong>French</strong> - Native</li>
+            <li><strong>English</strong> - C2 (spoken, read, written)</li>
           </ul>
           <ul class="lead">
-            <li> <strong>German</strong> - C1 (spoken, read, written)</li>
-            <li> <strong>Persian</strong> - A2 (spoken, read, written)</li>
-            <li> <strong>Japanese</strong> - A2 (spoken, read, written)</li>
+            <li><strong>German</strong> - C1 (spoken, read, written)</li>
+            <li><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</li>
+            <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
           </ul>
         </div>
       </div>
@@ -456,71 +459,80 @@
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-  // Reveal on scroll + optional stagger
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      const el = e.target;
-      el.classList.add('in');
+/* Reveal on scroll — robust (shows titles immediately; supports Safari) */
+(function(){
+  const els = Array.from(document.querySelectorAll('.reveal'));
 
-      // Stagger children if data-stagger is set
-      const sel = el.getAttribute('data-stagger');
-      if(sel){
-        const kids = el.querySelectorAll(sel);
-        kids.forEach((k,i)=> k.style.setProperty('--d', (i*90)+'ms'));
-        kids.forEach(k=>{
-          if(!k.classList.contains('reveal')) k.classList.add('reveal','fx-soft');
-          requestAnimationFrame(()=>k.classList.add('in'));
-        });
-      }
-      io.unobserve(el);
-    });
-  }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-  document.querySelectorAll('[data-stagger]').forEach(el=>io.observe(el));
-
-  // Rotating tagline under name
-  const words = ["Communications","Data","Mapping","Research"];
-  let wi = 0;
-  const rot = document.getElementById("rotate");
-  function cycle(){
-    if(!rot) return;
-    rot.classList.remove("show");
-    setTimeout(()=>{
-      wi = (wi + 1) % words.length;
-      rot.textContent = words[wi];
-      rot.classList.add('show');
-    }, 220);
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0 });
+    els.forEach(el => io.observe(el));
   }
-  if(rot){ rot.classList.add("show"); setInterval(cycle, 1800); }
 
-  // Back to top visibility
-  const toTop = document.getElementById('toTop');
-  const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
-  document.addEventListener('scroll', toggleTop, {passive:true}); toggleTop();
-
-  // Active nav highlight + progress bar
-  const links = [...document.querySelectorAll('nav a')];
-  const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
-  const secs = ids.map(id=>document.querySelector(id));
-  const prog = document.getElementById('progress');
-
-  const onScroll = ()=>{
-    const h = document.documentElement;
-    const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
-    prog.style.width = (scrolled*100)+'%';
-
-    let idx = 0;
-    secs.forEach((s,i)=>{
-      const r = s.getBoundingClientRect();
-      if(r.top <= window.innerHeight*0.4) idx = i;
+  function kick(){
+    els.forEach(el=>{
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) {
+        el.classList.add('in');
+      }
     });
-    const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
-    if(atBottom){ idx = secs.length - 1; }
+  }
+  requestAnimationFrame(kick);
+  window.addEventListener('load', kick, {once:true});
+  window.addEventListener('resize', kick);
+  window.addEventListener('orientationchange', kick);
+})();
 
-    links.forEach(a=>a.classList.remove('active'));
-    const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
-    if(active) active.classList.add('active');
-  };
-  document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+// Rotating tagline under name
+const words = ["Communications","Data","Mapping","Research"];
+let wi = 0;
+const rot = document.getElementById("rotate");
+function cycle(){
+  if(!rot) return;
+  rot.classList.remove("show");
+  setTimeout(()=>{
+    wi = (wi + 1) % words.length;
+    rot.textContent = words[wi];
+    rot.classList.add('show');
+  }, 220);
+}
+if(rot){ rot.classList.add("show"); setInterval(cycle, 1800); }
+
+// Back to top visibility (bottom-right)
+const toTop = document.getElementById('toTop');
+const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
+document.addEventListener('scroll', toggleTop, {passive:true}); toggleTop();
+
+// Active nav highlight + progress bar
+const links = [...document.querySelectorAll('nav a')];
+const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
+const secs = ids.map(id=>document.querySelector(id));
+const prog = document.getElementById('progress');
+
+const onScroll = ()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
+  prog.style.width = (scrolled*100)+'%';
+
+  let idx = 0;
+  secs.forEach((s,i)=>{
+    const r = s.getBoundingClientRect();
+    if(r.top <= window.innerHeight*0.4) idx = i;
+  });
+  const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
+  if(atBottom){ idx = secs.length - 1; }
+
+  links.forEach(a=>a.classList.remove('active'));
+  const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
+  if(active) active.classList.add('active');
+};
+document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 </script>
