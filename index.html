@@ -1,48 +1,53 @@
-<!-- PORTFOLIO — v5: shorter Languages, no study line under name, richer animations -->
+<!-- PORTFOLIO — v6: Languages 2 cols + new animations + colorful accents + title fixes -->
 <style>
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
+    --coral:#ff7a6e; --violet:#7c61ff; --amber:#f59e0b;
     --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header) + 14px)}
   body{
     margin:0; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
-    /* animated gradient background */
+    /* animated multi-stop gradient */
     background:linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
-    background-size:200% 200%;
-    animation:bgShift 22s ease infinite;
+    background-size:200% 200%; animation:bgShift 22s ease infinite;
   }
-  @keyframes bgShift{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
+  @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
   /* subtle moving grid overlay */
   body:before{
     content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
       repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 26px),
       repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
-    mix-blend-mode:soft-light;
-    animation:gridPan 30s linear infinite;
+    mix-blend-mode:soft-light; animation:gridPan 30s linear infinite;
   }
   @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
 
   /* layout */
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
   .section{margin:clamp(22px,4vw,40px) 0}
-  .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px)}
+  .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px); position:relative}
+  .section h2:after{
+    content:""; display:block; height:3px; width:84px; margin-top:6px;
+    background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber));
+    border-radius:999px;
+  }
   .lead{color:var(--muted)}
 
-  /* reveal-on-scroll */
-  .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+  /* reveal-on-scroll (diverse) */
+  .reveal{opacity:0; transition:opacity .55s ease, transform .55s ease}
   .reveal.in{opacity:1; transform:none}
+  .anim-fade{transform:translateY(14px)}
+  .anim-l{transform:translateX(-18px)}
+  .anim-r{transform:translateX(18px)}
+  .anim-scale{transform:scale(.96)}
+  .anim-pop{transform:translateY(10px) scale(.98)}
 
-  /* sticky header */
+  /* sticky header + active nav */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
@@ -57,24 +62,18 @@
   }
   header:hover .badge{animation-play-state:running}
   @keyframes spin{to{transform:rotate(360deg)}}
-
   nav a{
     color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
   }
-  nav a:after{
-    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s;
-  }
-  nav a:hover{color:var(--accent)}
-  nav a:hover:after{right:0}
-  nav a.active{color:var(--accent)}
-  nav a.active:after{right:0}
-
-  /* top scroll progress */
+  nav a:after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s}
+  nav a:hover{color:var(--accent)} nav a:hover:after{right:0}
+  nav a.active{color:var(--accent)} nav a.active:after{right:0}
+  /* progress bar */
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
-    background:linear-gradient(90deg,var(--accent),var(--accent2))}
-  
+    background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
+
   /* type/buttons/cards */
-  h1{font-size:clamp(38px,6.5vw,64px); margin:0 0 6px}
+  h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
   .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
@@ -95,9 +94,11 @@
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
-  .lang-list{display:grid; grid-template-columns:1fr; gap:6px}
 
-  /* projects with tilt-on-hover */
+  .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
+
+  /* projects */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .thumb{
@@ -112,7 +113,7 @@
   .project.open .body{grid-template-rows:1fr}
   .project.open .chev{transform:rotate(90deg)}
 
-  /* experience timeline */
+  /* experience timeline + colorful tags */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
     background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -122,7 +123,10 @@
   .role{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
   .where{color:var(--muted)}
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
-  .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff0; font-size:.95rem; color:var(--muted)}
+  .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
+  .tag.violet{color:#2e236e; background:#efeaff; border-color:#d9ceff}
+  .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
+  .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
   /* education */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
@@ -158,9 +162,8 @@
 <main>
   <!-- About -->
   <section id="about" class="section">
-    <div class="wrap reveal">
+    <div class="wrap reveal anim-fade">
       <h1>Bader Suliman</h1>
-      <!-- Removed study sentence below the name per your request -->
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
@@ -172,42 +175,50 @@
 
   <!-- Skills & Languages -->
   <section id="skills" class="section">
-    <div class="wrap reveal">
-      <h2>Skills and Languages</h2>
-      <div class="skills-grid">
-        <div class="card">
-          <strong>Languages</strong>
-          <div class="lang-list" style="margin-top:6px">
-            <p class="lead" style="margin:.2rem 0"><strong>Arabic</strong> - Native (Modern Standard and dialectal: Levantine, Gulf, Egyptian)</p>
-            <p class="lead" style="margin:.2rem 0"><strong>French</strong> - Native</p>
-            <p class="lead" style="margin:.2rem 0"><strong>English</strong> - C2 (spoken, read, written)</p>
-            <p class="lead" style="margin:.2rem 0"><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</p>
-            <p class="lead" style="margin:.2rem 0"><strong>Japanese</strong> - A2 (spoken, read, written)</p>
-          </div>
-        </div>
+    <div class="wrap">
+      <div class="reveal anim-l">
+        <h2>Skills and Languages</h2>
+      </div>
 
-        <div class="skills-2">
-          <div class="card">
-            <strong>Soft skills</strong>
-            <ul class="lead">
-              <li>Analytical thinking and synthesis</li>
-              <li>Press review and media monitoring</li>
-              <li>Critical thinking</li>
-              <li>Team work and facilitation</li>
-              <li>Clear, audience first writing</li>
-            </ul>
-          </div>
-          <div class="card">
-            <strong>Hard skills</strong>
-            <ul class="lead">
-              <li>Data analysis and cleaning (Excel)</li>
-              <li>Mapping (QGIS and Mapbox)</li>
-              <li>Dashboards and visuals</li>
-              <li>WordPress and GitHub Pages</li>
-              <li>Basic HTML and CSS, Twine</li>
-              <li>Microsoft 365 (Word, PowerPoint, Outlook)</li>
-            </ul>
-          </div>
+      <!-- Languages (2 columns) -->
+      <div class="card reveal anim-l">
+        <strong>Languages</strong>
+        <div class="lang-cols" style="margin-top:6px">
+          <ul class="lead">
+            <li><strong>Arabic</strong> - Native (Modern Standard and dialectal: Levantine, Gulf, Egyptian)</li>
+            <li><strong>French</strong> - Native</li>
+            <li><strong>English</strong> - C2 (spoken, read, written)</li>
+          </ul>
+          <ul class="lead">
+            <li><strong>German</strong> - C1 (spoken, read, written)</li>
+            <li><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</li>
+            <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Soft vs Hard -->
+      <div class="skills-2">
+        <div class="card reveal anim-scale">
+          <strong>Soft skills</strong>
+          <ul class="lead">
+            <li>Analytical thinking and synthesis</li>
+            <li>Press review and media monitoring</li>
+            <li>Critical thinking</li>
+            <li>Team work and facilitation</li>
+            <li>Clear, audience first writing</li>
+          </ul>
+        </div>
+        <div class="card reveal anim-r">
+          <strong>Hard skills</strong>
+          <ul class="lead">
+            <li>Data analysis and cleaning (Excel)</li>
+            <li>Mapping (QGIS and Mapbox)</li>
+            <li>Dashboards and visuals</li>
+            <li>WordPress and GitHub Pages</li>
+            <li>Basic HTML and CSS, Twine</li>
+            <li>Microsoft 365 (Word, PowerPoint, Outlook)</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -215,19 +226,19 @@
 
   <!-- Education -->
   <section id="education" class="section">
-    <div class="wrap reveal">
-      <h2>Education</h2>
+    <div class="wrap">
+      <h2 class="reveal anim-fade">Education</h2>
       <div class="edu">
-        <div class="card item tilt">
+        <div class="card item tilt reveal anim-pop">
           <strong>Sciences Po - Paris School of International Affairs (PSIA), Paris</strong>
           <p class="lead">M.A. International Security (Migration and Middle Eastern Studies) - 2024 to 2027</p>
           <p class="lead" style="margin:.2rem 0 0">Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics</p>
         </div>
-        <div class="card item tilt">
+        <div class="card item tilt reveal anim-pop">
           <strong>Freie Universität Berlin - Otto Suhr Institut, Berlin</strong>
           <p class="lead">Dual degree (International Relations) - start 2026</p>
         </div>
-        <div class="card item tilt">
+        <div class="card item tilt reveal anim-pop">
           <strong>Sciences Po - B.A. Politics and Government (Menton and Nancy)</strong>
           <p class="lead">2021 to 2024 - Exchange year: Tokyo University of Foreign Studies (TUFS), 2023 to 2024</p>
         </div>
@@ -237,57 +248,57 @@
 
   <!-- Experience -->
   <section id="experience" class="section">
-    <div class="wrap reveal">
-      <h2>Experience</h2>
-      <p class="lead">Communications, humanitarian data, and policy research</p>
+    <div class="wrap">
+      <h2 class="reveal anim-fade">Experience</h2>
+      <p class="lead reveal anim-fade">Communications, humanitarian data, and policy research</p>
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
-          <div class="card tilt">
-            <div class="role"><strong>Communications Intern - OIF</strong><span class="where">2025 - Paris</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Social content, media monitoring, and reporting. Built templates and improved workflows.</p>
+          <div class="card tilt reveal anim-l">
+            <div class="role"><strong>Intern - Conception et Suivi de Projet, OIF</strong><span class="where">2025 - Paris</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Project design and reporting. Media monitoring and internal templates to improve workflows.</p>
             <div class="tags">
-              <span class="tag">Social media</span><span class="tag">Media monitoring</span><span class="tag">Reporting</span><span class="tag">Templates</span>
+              <span class="tag">Project design</span><span class="tag violet">Reporting</span><span class="tag coral">Media monitoring</span><span class="tag amber">Stakeholders</span>
             </div>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt">
+          <div class="card tilt reveal anim-r">
             <div class="role"><strong>Graduate Trainee - AQLITY</strong><span class="where">2025 - Remote</span></div>
             <p class="lead" style="margin:.35rem 0 0">Data cleaning and mapping for settlement level assessments. Narrative drafting and visuals.</p>
             <div class="tags">
-              <span class="tag">Data cleaning</span><span class="tag">Mapping</span><span class="tag">Storytelling</span><span class="tag">Dashboards</span>
+              <span class="tag">Data cleaning</span><span class="tag violet">Mapping</span><span class="tag coral">Storytelling</span><span class="tag amber">Dashboards</span>
             </div>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt">
-            <div class="role"><strong>Volunteer - ARDHIS</strong><span class="where">2024 to 2025 - Paris</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Drop in sessions. Administrative guidance for asylum seekers. Desk research on country situations.</p>
+          <div class="card tilt reveal anim-l">
+            <div class="role"><strong>Immigration Law Assistant - ARDHIS</strong><span class="where">2024 to 2025 - Paris</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Drop in sessions and administrative guidance for asylum seekers. Country research and documentation.</p>
             <div class="tags">
-              <span class="tag">Protection</span><span class="tag">Admin support</span><span class="tag">Country research</span>
+              <span class="tag">Protection</span><span class="tag violet">Legal support</span><span class="tag coral">Country research</span>
             </div>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt">
+          <div class="card tilt reveal anim-r">
+            <div class="role"><strong>Intern - International Relations Service, City of Nancy</strong><span class="where">2022 - Nancy</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Coordinated intercultural visits and museum tours for twin cities. Supported a conference on city environmental policy.</p>
+            <div class="tags">
+              <span class="tag">Event ops</span><span class="tag violet">Intercultural</span><span class="tag coral">Logistics</span><span class="tag amber">Public speaking</span>
+            </div>
+          </div>
+        </div>
+        <div class="t">
+          <div class="dot"></div>
+          <div class="card tilt reveal anim-l">
             <div class="role"><strong>Research Intern - Royal Scientific Society (Jordan)</strong><span class="where">2024 - Amman</span></div>
             <p class="lead" style="margin:.35rem 0 0">Desalination, climate security, and science diplomacy with multi stakeholder teams.</p>
             <div class="tags">
-              <span class="tag">Climate</span><span class="tag">Water</span><span class="tag">Science diplomacy</span>
-            </div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card tilt">
-            <div class="role"><strong>Student Lead - Twin Cities Program, City of Nancy</strong><span class="where">2022 - Nancy</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Organized intercultural visits and museum tours for students from Newcastle, Lviv, and Lublin. Supported a conference on the city environmental policy.</p>
-            <div class="tags">
-              <span class="tag">Event ops</span><span class="tag">Intercultural</span><span class="tag">Logistics</span><span class="tag">Public speaking</span>
+              <span class="tag">Climate</span><span class="tag violet">Water</span><span class="tag coral">Science diplomacy</span>
             </div>
           </div>
         </div>
@@ -297,11 +308,11 @@
 
   <!-- Projects (accordion only here) -->
   <section id="work" class="section">
-    <div class="wrap reveal">
-      <h2>Selected Work</h2>
-      <p class="lead">Click a project to reveal details</p>
+    <div class="wrap">
+      <h2 class="reveal anim-fade">Selected Work</h2>
+      <p class="lead reveal anim-fade">Click a project to reveal details</p>
       <div class="projects">
-        <article class="card project tilt">
+        <article class="card project tilt reveal anim-pop">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Human Security - Interactive Twine</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
@@ -311,7 +322,7 @@
           </div></div>
         </article>
 
-        <article class="card project tilt">
+        <article class="card project tilt reveal anim-pop">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">SLAC Assessments - Data to Narrative</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
@@ -321,7 +332,7 @@
           </div></div>
         </article>
 
-        <article class="card project tilt">
+        <article class="card project tilt reveal anim-pop">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Desalination - Policy Brief</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
@@ -334,24 +345,24 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (after Projects, no tags) -->
+  <!-- Extracurricular Activities (after Projects) -->
   <section id="activities" class="section">
-    <div class="wrap reveal">
-      <h2>Extracurricular Activities</h2>
+    <div class="wrap">
+      <h2 class="reveal anim-fade">Extracurricular Activities</h2>
       <div class="activities">
-        <div class="card tilt">
+        <div class="card tilt reveal anim-l">
           <strong>MEDMUN - Arabic Committee Director</strong>
           <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
         </div>
-        <div class="card tilt">
+        <div class="card tilt reveal anim-r">
           <strong>Sciences Po Monde Arabe - Communications Director</strong>
           <p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p>
         </div>
-        <div class="card tilt">
+        <div class="card tilt reveal anim-l">
           <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
           <p class="lead" style="margin:.35rem 0 0">Helped organize and support sessions, speakers, and delegations. Hands on logistics and stakeholder coordination.</p>
         </div>
-        <div class="card tilt">
+        <div class="card tilt reveal anim-r">
           <strong>Solo travel and field exposure</strong>
           <p class="lead" style="margin:.35rem 0 0">
             Traveled in many countries. Solo trips include India across the country, Georgia, and Armenia. Regional experience also includes Jordan, Lebanon, United Arab Emirates, France, Germany, and Japan.
@@ -363,7 +374,7 @@
 
   <!-- Contact -->
   <section id="contact" class="section">
-    <div class="wrap reveal">
+    <div class="wrap reveal anim-pop">
       <div class="card tilt">
         <h2>Let’s work together</h2>
         <p class="lead">Based in Paris. I value clarity, empathy, and high standards.</p>
@@ -382,7 +393,7 @@
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-  // Reveal on scroll
+  // Reveal on scroll (diverse)
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold: .12});
