@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v21 (stable): based on v18 content + fresh side/tilt/zoom effects, robust reveals, titles always visible -->
+<!-- PORTFOLIO — v22: Fix rounded corners (no global clip-path), stable reveals, varied effects. Based on your v18 content. -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -29,14 +29,16 @@
   .section h2{margin:0 0 10px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
   .lead{color:var(--muted)}
 
-  /* Reveal system (with wipes) */
-  .reveal{opacity:0; will-change:transform, filter, clip-path;
+  /* ===== Reveal system (no global clip-path, keeps rounded corners) ===== */
+  .reveal{
+    opacity:0; will-change:transform, filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
                transform .6s cubic-bezier(.2,.7,.2,1),
-               filter .6s cubic-bezier(.2,.7,.2,1),
-               clip-path .7s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1; transform:none; filter:none; clip-path:inset(0 0 0 0); -webkit-clip-path:inset(0 0 0 0)}
+               filter .6s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in{ opacity:1; transform:none; filter:none }
 
+  /* Motion variants */
   .fx-from-left{transform:translateX(-28px) skewX(-2deg); filter:blur(4px)}
   .fx-from-right{transform:translateX(28px) skewX(2deg); filter:blur(4px)}
   .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
@@ -45,11 +47,13 @@
   .fx-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
   .fx-soft{transform:translateY(12px); opacity:.001}
 
-  /* Text wipe reveal */
+  /* Text wipe reveal (applies only to headings/labels) */
+  .fx-wipe-l, .fx-wipe-r{display:inline-block; will-change:clip-path; transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
   .fx-wipe-l{clip-path:inset(0 100% 0 0); -webkit-clip-path:inset(0 100% 0 0)}
   .fx-wipe-r{clip-path:inset(0 0 0 100%); -webkit-clip-path:inset(0 0 0 100%)}
+  .fx-wipe-l.in, .fx-wipe-r.in{clip-path:inset(0 0 0 0); -webkit-clip-path:inset(0 0 0 0)}
 
-  /* Stagger support */
+  /* Optional stagger */
   [data-stagger] > *{transition-delay:var(--d,0ms)}
 
   /* header */
@@ -110,7 +114,7 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — strong hover zoom, details on hover (no clicks) */
+  /* Projects — strong hover zoom, details on hover */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
@@ -139,7 +143,7 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — top full-width, then 2 columns; hover to reveal details */
+  /* Activities */
   .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   .activities-grid .full{grid-column:1 / -1}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
@@ -156,7 +160,7 @@
   /* Reduced motion */
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
-    .reveal,.project .body,.activity .body{filter:none !important; transform:none !important; opacity:1 !important; clip-path:inset(0 0 0 0) !important}
+    .reveal,.project .body,.activity .body{filter:none !important; transform:none !important; opacity:1 !important}
     [data-stagger] > *{transition-delay:0ms !important}
   }
 </style>
@@ -217,7 +221,7 @@
           </ul>
           <ul class="lead">
             <li><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</li>
+            <li><strong>Persian</strong> - A2 (spoken, read, written)</li>
             <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
           </ul>
         </div>
@@ -459,7 +463,7 @@
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-/* Reveal on scroll — robust (shows titles immediately; supports Safari) */
+/* Reveal on scroll — robust and immediate (titles visible on load) */
 (function(){
   const els = Array.from(document.querySelectorAll('.reveal'));
 
@@ -480,9 +484,7 @@
   function kick(){
     els.forEach(el=>{
       const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) {
-        el.classList.add('in');
-      }
+      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) el.classList.add('in');
     });
   }
   requestAnimationFrame(kick);
