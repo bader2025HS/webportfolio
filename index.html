@@ -1,19 +1,18 @@
-<!-- PORTFOLIO — v28: Desktop header fix + no underline, brand name steady, Activities as 4 squares, mobile overlay brand shown only on phones -->
+<!-- PORTFOLIO — v29: Keep current desktop header; restore earlier mobile overlay menu style (white background, card links, brand name shown). Activities stay 4 squares on desktop. -->
 
-<!-- Inject a viewport meta if the theme doesn’t add one -->
 <script>
+/* Inject viewport if missing */
 (function(){
   if(!document.querySelector('meta[name="viewport"]')){
-    const m = document.createElement('meta');
-    m.name = 'viewport';
-    m.content = 'width=device-width, initial-scale=1';
+    const m=document.createElement('meta');
+    m.name='viewport'; m.content='width=device-width, initial-scale=1';
     document.head.appendChild(m);
   }
 })();
 </script>
 
 <style>
-  /* Soft topo background */
+  /* --- Background --- */
   body::after{
     content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.18;
     background:
@@ -21,7 +20,6 @@
       repeating-radial-gradient(circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
     filter:blur(.2px);
   }
-
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
@@ -48,12 +46,12 @@
 
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
   .section{margin:clamp(24px,5vw,46px) 0}
-  .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
+  .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px)}
   .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
-  /* Reveal animations */
-  .reveal{opacity:0; will-change:transform, filter;
+  /* --- Reveal system --- */
+  .reveal{opacity:0; will-change:transform,filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
                transform .6s cubic-bezier(.2,.7,.2,1),
                filter .6s cubic-bezier(.2,.7,.2,1)}
@@ -68,7 +66,7 @@
   .fx-wipe-l{clip-path:inset(0 100% 0 0)} .fx-wipe-r{clip-path:inset(0 0 0 100%)}
   .fx-wipe-l.in,.fx-wipe-r.in{clip-path:inset(0 0 0 0)}
 
-  /* Header */
+  /* --- Header --- */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
@@ -85,7 +83,7 @@
   }
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Navigation: NO underline, pill hover/active */
+  /* --- Desktop nav (keep current look): no underline, pill hover/active) --- */
   nav a{
     color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px;
     padding:8px 10px; border-radius:12px; display:inline-block;
@@ -94,11 +92,11 @@
   nav a:hover{color:var(--accent); background:rgba(14,165,162,.08)}
   nav a.active{color:var(--accent); background:rgba(14,165,162,.10); box-shadow:inset 0 0 0 1px rgba(14,165,162,.25)}
 
-  /* Desktop header fix: hide mobile brand inside overlay */
+  /* Ensure desktop layout keeps links inline & hides mobile-only brand */
   #siteNav .mhead{display:none;}
   header nav#siteNav{display:flex; align-items:center;}
 
-  /* Hamburger button */
+  /* --- Hamburger button --- */
   .menu-toggle{display:none; align-items:center; justify-content:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s ease}
@@ -112,36 +110,37 @@
   body.nav-open .menu-toggle .bar:after{transform:rotate(-90deg); top:0}
   body.nav-open{overflow:hidden}
 
-  /* Mobile full-screen white overlay menu */
+  /* --- Mobile overlay (restored earlier style) --- */
   @media (max-width:760px), (max-device-width:812px){
     .menu-toggle{display:flex; position:fixed; right:12px; top:12px; z-index:10004}
 
     header nav#siteNav{
       position:fixed; inset:0; z-index:10003;
-      padding: calc(env(safe-area-inset-top,0px) + 68px) 18px 24px;
-      display:flex; flex-direction:column; gap:12px;
-      background:#fff; /* WHITE BG */
-      backdrop-filter:saturate(120%) blur(12px);
+      padding: calc(env(safe-area-inset-top,0px) + 72px) 18px 24px;
+      display:flex; flex-direction:column; gap:14px; overflow:auto;
+      background:#fff; /* solid white */
       transform:translate3d(0,-100%,0);
       opacity:0; visibility:hidden; pointer-events:none;
       transition:transform .28s ease, opacity .2s ease;
+      box-shadow:0 10px 40px rgba(2,6,23,.12);
     }
-    body.nav-open header nav#siteNav{
-      transform:translate3d(0,0,0); opacity:1; visibility:visible; pointer-events:auto;
-    }
+    body.nav-open header nav#siteNav{transform:translate3d(0,0,0); opacity:1; visibility:visible; pointer-events:auto}
 
-    /* brand inside overlay (mobile only) */
+    /* Brand row inside overlay (icon + name) */
     #siteNav .mhead{
       display:flex; align-items:center; gap:10px;
-      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 18px);
+      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 16px);
       font-weight:800;
     }
 
+    /* Card-style links (frames), no underline */
     header nav a{
-      margin:0; padding:16px 14px; border-radius:14px; font-size:1.125rem;
+      margin:0; padding:16px 16px; border-radius:14px; font-size:1.125rem;
       background:#fff; border:1px solid var(--line); box-shadow:var(--shadow);
+      width:100%;
     }
-    header nav a.active{background:rgba(14,165,162,.06); color:var(--accent)}
+    header nav a:active{transform:translateY(1px)}
+    header nav a.active{background:rgba(14,165,162,.06); color:var(--accent); box-shadow:inset 0 0 0 2px rgba(14,165,162,.25)}
     header .inner{gap:8px}
     .wrap{padding:16px}
   }
@@ -149,7 +148,7 @@
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
 
-  /* Type / buttons / cards */
+  /* --- Type/buttons/cards --- */
   h1{font-size:clamp(44px,7vw,74px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -159,14 +158,11 @@
   .btn:after{content:""; position:absolute; inset:auto; top:0; left:0; width:0; height:100%; background:rgba(255,255,255,.15); transition:width .25s}
   .btn:hover:after{width:100%}
 
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s ease, box-shadow .2s ease;
-    transform:translateZ(0)
-  }
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s ease, box-shadow .2s ease; transform:translateZ(0)}
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* Strap under name */
+  /* Strap */
   .strap{margin:6px 0 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
   .rotator{font-weight:800; letter-spacing:.2px}
   .fade{opacity:0; transform:translateY(6px); transition:opacity .25s ease, transform .25s ease}
@@ -191,10 +187,7 @@
   .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:0}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
   .project .body>div{overflow:hidden}
-  @media (hover:none){
-    .project .body{grid-template-rows:1fr; opacity:1}
-    .project:hover,.project:hover .thumb{transform:none}
-  }
+  @media (hover:none){ .project .body{grid-template-rows:1fr; opacity:1} .project:hover,.project:hover .thumb{transform:none} }
 
   /* Experience */
   .timeline{position:relative; margin-top:8px}
@@ -215,29 +208,22 @@
   .edu .item p{margin:.35rem 0 0}
 
   /* Activities — 4 squares on desktop */
-  .activities-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
-  }
+  .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr 1fr} }
   @media (max-width:520px){ .activities-grid{grid-template-columns:1fr} }
-  .activity{
-    position:relative; overflow:hidden; aspect-ratio:1 / 1;
-    display:flex; align-items:center; justify-content:center; text-align:center;
-  }
+  .activity{position:relative; overflow:hidden; aspect-ratio:1 / 1;
+    display:flex; align-items:center; justify-content:center; text-align:center}
   .activity .title{font-weight:800}
   .activity:hover{transform:translateY(-2px)}
   .activity.card{padding:0}
   .activity .inner{padding:16px}
 
   /* Footer */
-  footer{
-    border-top:1px solid var(--line); color:var(--muted); padding:12px 0; margin-top:22px;
-    background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px);
-  }
+  footer{border-top:1px solid var(--line); color:var(--muted); padding:12px 0; margin-top:22px;
+    background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px)}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 
-  /* Reduced motion */
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
     .reveal,.project .body{filter:none !important; transform:none !important; opacity:1 !important}
@@ -250,13 +236,12 @@
   <div class="inner">
     <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
-    <!-- Hamburger (mobile) -->
     <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
       <span class="bar"></span>
     </button>
 
     <nav id="siteNav">
-      <!-- Mobile overlay brand (hidden on desktop by CSS) -->
+      <!-- Mobile overlay brand -->
       <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
       <a href="#about">About</a>
@@ -484,7 +469,7 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (4 squares, titles only) -->
+  <!-- Activities (4 squares) -->
   <section id="activities" class="section">
     <div class="wrap" data-stagger=".activity">
       <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
@@ -517,73 +502,57 @@
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 
-<!-- Bottom-right Top button -->
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
 /* Reveal on scroll */
 (function(){
-  const els = Array.from(document.querySelectorAll('.reveal'));
-  if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); }
-  else {
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0 });
-    els.forEach(el => io.observe(el));
+  const els=[...document.querySelectorAll('.reveal')];
+  if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('in')); }
+  else{
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{root:null,rootMargin:'0px 0px -10% 0px',threshold:0});
+    els.forEach(el=>io.observe(el));
   }
-  function kick(){
-    els.forEach(el=>{
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) el.classList.add('in');
-    });
-  }
-  requestAnimationFrame(kick);
-  window.addEventListener('load', kick, {once:true});
-  window.addEventListener('resize', kick);
-  window.addEventListener('orientationchange', kick);
+  const kick=()=>els.forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<innerHeight*.9 && r.bottom>0) el.classList.add('in');});
+  requestAnimationFrame(kick); addEventListener('load',kick,{once:true}); addEventListener('resize',kick); addEventListener('orientationchange',kick);
 })();
 
 // Rotating tagline
-const words = ["Communications","Data","Mapping","Research"];
-let wi = 0;
-const rot = document.getElementById("rotate");
-function cycle(){ if(!rot) return; rot.classList.remove("show"); setTimeout(()=>{ wi = (wi + 1) % words.length; rot.textContent = words[wi]; rot.classList.add('show'); }, 220); }
-if(rot){ rot.classList.add("show"); setInterval(cycle, 1800); }
+const words=["Communications","Data","Mapping","Research"]; let wi=0;
+const rot=document.getElementById("rotate");
+function cycle(){ if(!rot) return; rot.classList.remove("show"); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
+if(rot){ rot.classList.add("show"); setInterval(cycle,1800); }
 
-// Back to top visibility
-const toTop = document.getElementById('toTop');
-const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
-document.addEventListener('scroll', toggleTop, {passive:true}); toggleTop();
+// Back-to-top visibility
+const toTop=document.getElementById('toTop');
+const toggleTop=()=>{ scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show'); };
+addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
 
-// Active nav highlight + progress bar
-const links = [...document.querySelectorAll('nav a')];
-const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
-const secs = ids.map(id=>document.querySelector(id));
-const prog = document.getElementById('progress');
-
-const onScroll = ()=>{
-  const h = document.documentElement;
-  const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
-  prog.style.width = (scrolled*100)+'%';
-
-  let idx = 0;
-  secs.forEach((s,i)=>{ const r = s.getBoundingClientRect(); if(r.top <= window.innerHeight*0.4) idx = i; });
-  const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
-  if(atBottom){ idx = secs.length - 1; }
-
+// Active nav + progress bar
+const links=[...document.querySelectorAll('nav a')];
+const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
+const secs=ids.map(id=>document.querySelector(id));
+const prog=document.getElementById('progress');
+const onScroll=()=>{
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  let idx=0;
+  secs.forEach((s,i)=>{ const r=s.getBoundingClientRect(); if(r.top<=innerHeight*0.4) idx=i; });
+  const atBottom=Math.ceil(scrollY+innerHeight)>=document.body.scrollHeight-2;
+  if(atBottom) idx=secs.length-1;
   links.forEach(a=>a.classList.remove('active'));
-  const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
-  if(active) active.classList.add('active');
+  const active=document.querySelector(`nav a[href="${ids[idx]}"]`); if(active) active.classList.add('active');
 };
-document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
-// Mobile menu open/close
-const menuBtn = document.getElementById('menuBtn');
-const nav = document.getElementById('siteNav');
+// Mobile menu
+const menuBtn=document.getElementById('menuBtn'); const nav=document.getElementById('siteNav');
 function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
 function openNav(){ document.body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded','true'); nav.removeAttribute('aria-hidden'); }
-menuBtn.addEventListener('click', ()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
-window.addEventListener('resize', ()=>{ if(window.innerWidth>760) closeNav(); }, {passive:true});
+menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
+addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 </script>
