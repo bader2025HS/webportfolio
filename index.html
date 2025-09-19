@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v32 (Languages with flag roundels, brand unframed) -->
+<!-- PORTFOLIO — v31 (desktop menu framed) -->
 
 <!-- Viewport (safety) -->
 <script>
@@ -140,68 +140,12 @@
   .chips-mini{display:flex; gap:8px; flex-wrap:wrap}
   .chip-mini{padding:4px 10px; border:1px solid var(--line); border-radius:999px; background:var(--card); font-weight:600; font-size:.92rem}
 
-  /* Skills & Languages: NEW flags layout */
+  /* Skills & Languages */
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
-
-  .lang-flags{margin-top:6px}
-  .lang-kpis{margin:.25rem 0 .5rem; color:var(--muted); font-weight:700; font-size:.95rem}
-  .lang-list{list-style:none; padding:0; margin:8px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:10px 16px}
-  @media (max-width:800px){ .lang-list{grid-template-columns:1fr} }
-  .lang-list li{display:flex; align-items:center; gap:12px; font-size:1.05rem}
-  .lang-list .name{font-weight:800}
-  .lang-list .chip{
-    margin-left:auto;
-    padding:3px 9px;
-    border:1px solid var(--line);
-    border-radius:999px;
-    background:var(--card);
-    font-size:.88rem; font-weight:700; color:var(--muted);
-  }
-  .flag{width:26px; height:26px; border-radius:50%; box-shadow:0 6px 18px rgba(2,6,23,.08); border:1px solid var(--line); background-size:cover; background-position:center}
-
-  /* Data-URI SVG round flags (FR, GB, DE, IR, JP) + Neutral globe (Arabic) */
-  .flag-fr{background-image:url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
-<rect width='1' height='2' x='0' fill='%23005BBB'/>\
-<rect width='1' height='2' x='1' fill='%23FFFFFF'/>\
-<rect width='1' height='2' x='2' fill='%23EF3340'/>\
-</svg>");}
-
-  .flag-gb{background-image:url(\"data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'>\
-<clipPath id='c'><path d='M0,0 v30 h60 v-30 z'/></clipPath>\
-<path d='M0,0 v30 h60 v-30 z' fill='%2301247D'/>\
-<path d='M0,0 L60,30 M60,0 L0,30' stroke='%23FFFFFF' stroke-width='6'/>\
-<path d='M0,0 L60,30 M60,0 L0,30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23c)'/>\
-<path d='M30,0 v30 M0,15 h60' stroke='%23FFFFFF' stroke-width='10'/>\
-<path d='M30,0 v30 M0,15 h60' stroke='%23C8102E' stroke-width='6'/>\
-</svg>\");}
-
-  .flag-de{background-image:url(\"data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'>\
-<rect width='5' height='1' y='0' fill='%23000000'/>\
-<rect width='5' height='1' y='1' fill='%23DD0000'/>\
-<rect width='5' height='1' y='2' fill='%23FFCE00'/>\
-</svg>\");}
-
-  .flag-ir{background-image:url(\"data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
-<rect width='3' height='2' fill='%23FFFFFF'/>\
-<rect width='3' height='0.5' y='0' fill='%2300903B'/>\
-<rect width='3' height='0.5' y='1.5' fill='%23DA0000'/>\
-</svg>\");}
-
-  .flag-jp{background-image:url(\"data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
-<rect width='3' height='2' fill='%23FFFFFF'/>\
-<circle cx='1.5' cy='1' r='0.5' fill='%23BC002D'/>\
-</svg>\");}
-
-  /* Neutral globe for Arabic (keeps it language-agnostic) */
-  .flag-globe{
-    background-image: radial-gradient(circle at 30% 30%, #79c7ff 0 35%, #1f77d0 36% 100%);
-  }
+  .skills-2 ul{margin:.3rem 0 0 18px}
+  .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
+  @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
   /* Projects */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
@@ -248,13 +192,13 @@
 
   /* === Desktop menu framing (mobile untouched) === */
   @media (min-width:761px){
-    /* Brand: unframed (as requested) */
+    /* Frame around the name (brand) */
     header .brand{
-      padding:0;
-      border:none;
-      border-radius:0;
-      background:transparent;
-      box-shadow:none;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      box-shadow:var(--shadow);
     }
     /* Keep nav inline and add framed pills */
     header nav#siteNav{
@@ -340,45 +284,22 @@
       <h2 class="reveal fx-wipe-l">Skills and Languages</h2>
       <p class="lead reveal fx-from-right">Fluency, methods, and tools.</p>
 
-      <!-- LANGUAGES CARD (with flag roundels) -->
-      <div class="card reveal fx-zoom lang-flags" aria-labelledby="lang-header">
-        <strong id="lang-header" class="reveal fx-wipe-r">Languages</strong>
-        <div class="lang-kpis reveal fx-from-up">5 languages • 2 native • 3 working</div>
-        <ul class="lang-list reveal fx-from-up">
-          <li>
-            <span class="flag flag-globe" aria-hidden="true"></span>
-            <span class="name">Arabic</span>
-            <span class="chip" aria-label="Native level">Native</span>
-          </li>
-          <li>
-            <span class="flag flag-fr" aria-hidden="true"></span>
-            <span class="name">French</span>
-            <span class="chip" aria-label="Native level">Native</span>
-          </li>
-          <li>
-            <span class="flag flag-gb" aria-hidden="true"></span>
-            <span class="name">English</span>
-            <span class="chip" aria-label="C2 proficiency">C2</span>
-          </li>
-          <li>
-            <span class="flag flag-de" aria-hidden="true"></span>
-            <span class="name">German</span>
-            <span class="chip" aria-label="C1 proficiency">C1</span>
-          </li>
-          <li>
-            <span class="flag flag-ir" aria-hidden="true"></span>
-            <span class="name">Persian</span>
-            <span class="chip" aria-label="A2 proficiency">A2</span>
-          </li>
-          <li>
-            <span class="flag flag-jp" aria-hidden="true"></span>
-            <span class="name">Japanese</span>
-            <span class="chip" aria-label="A2 proficiency">A2</span>
-          </li>
-        </ul>
+      <div class="card reveal fx-zoom">
+        <strong class="reveal fx-wipe-r">Languages</strong>
+        <div class="lang-cols reveal fx-from-up">
+          <ul class="lead">
+            <li><strong>Arabic</strong> - Native (MSA and dialects)</li>
+            <li><strong>French</strong> - Native</li>
+            <li><strong>English</strong> - C2 (spoken, read, written)</li>
+          </ul>
+          <ul class="lead">
+            <li><strong>German</strong> - C1 (spoken, read, written)</li>
+            <li><strong>Persian</strong> - A2 (spoken, read, written)</li>
+            <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- SKILLS CARDS -->
       <div class="skills-2">
         <div class="card reveal fx-from-left">
           <strong class="reveal fx-wipe-l">Soft skills</strong>
