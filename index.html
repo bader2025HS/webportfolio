@@ -1,6 +1,6 @@
-<!-- PORTFOLIO — v29: Activities = 2x2 squares (no travel), rock-solid mobile menu (full white panel) -->
+<!-- PORTFOLIO — v30: Activities 4-in-row (desktop), mobile menu shows name, no nav underline -->
 
-<!-- Viewport (in case your theme doesn’t add it) -->
+<!-- Viewport (safety for WP) -->
 <script>
 (function(){
   if(!document.querySelector('meta[name="viewport"]')){
@@ -49,7 +49,7 @@
   .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
-  /* ===== Reveals ===== */
+  /* Reveals */
   .reveal{opacity:0; will-change:transform,filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
                transform .6s cubic-bezier(.2,.7,.2,1),
@@ -64,7 +64,7 @@
   .fx-wipe-l{clip-path:inset(0 100% 0 0)} .fx-wipe-r{clip-path:inset(0 0 0 100%)}
   .fx-wipe-l.in,.fx-wipe-r.in{clip-path:inset(0 0 0 0)}
 
-  /* ===== Header ===== */
+  /* Header */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
@@ -72,17 +72,23 @@
   }
   header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
     display:flex; align-items:center; justify-content:space-between; gap:12px}
-  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap}
+  .brand span{display:inline-block}
   .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
     box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
-  nav a{color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0}
-  nav a:after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s}
-  nav a:hover{color:var(--accent)} nav a:hover:after{right:0}
-  nav a.active{color:var(--accent)} nav a.active:after{right:0}
 
-  /* ===== Hamburger + Phone menu (full white panel) ===== */
+  /* Navbar links (no underline) */
+  nav a{
+    color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
+  }
+  nav a:hover{color:var(--accent)}
+  nav a.active{color:var(--accent)}
+  /* REMOVE underline */
+  nav a:after{display:none !important}
+
+  /* Hamburger + mobile overlay */
   .menu-toggle{display:none; place-items:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
@@ -97,19 +103,20 @@
   @media (max-width:760px), (max-device-width:812px){
     .menu-toggle{display:grid; position:fixed; right:12px; top:12px; z-index:10005}
     header nav#siteNav{
-      position:fixed; inset:0; z-index:10004;
-      height:100svh; /* iOS safe height */
-      padding:calc(env(safe-area-inset-top,0px) + 76px) 18px 24px;
-      display:flex; flex-direction:column; gap:8px;
-      background:#fff !important; /* solid white background */
-      /* hidden by default */
+      position:fixed; inset:0; z-index:10004; height:100svh;
+      padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
+      display:flex; flex-direction:column; gap:10px;
+      background:#fff !important; /* solid white */
       transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
       transition:transform .28s ease, opacity .2s ease;
     }
     body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
     header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
     header nav a.active{color:var(--accent); border-color:var(--accent)}
-    .wrap{padding:16px}
+    /* Brand shown at top of overlay too */
+    #siteNav .mhead{display:flex; align-items:center; gap:10px;
+      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 18px);
+      font-weight:800}
   }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
@@ -172,13 +179,13 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — 2x2 equal squares */
-  .activities-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-  @media (max-width:600px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
+  /* Activities — 4-in-row desktop, 2x2 on phones */
+  .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+  @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
   .activity{aspect-ratio:1/1; display:grid; place-items:center; text-align:center; padding:12px}
   .activity .title{font-weight:800}
 
-  /* Footer (smaller) */
+  /* Footer (small) */
   footer{border-top:1px solid var(--line); color:var(--muted); padding:10px 0; margin-top:24px;
     background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px); font-size:.92rem}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
@@ -197,6 +204,9 @@
     </button>
 
     <nav id="siteNav">
+      <!-- brand inside the overlay too -->
+      <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
+
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
@@ -460,7 +470,7 @@
 // Rotating tagline
 const words=["Communications","Data","Mapping","Research"]; let wi=0;
 const rot=document.getElementById("rotate");
-function cycle(){ if(!rot) return; rot.classList.remove("show"); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
+function cycle(){ if(!rot) return; rot.classList.remove('show'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
 if(rot){ rot.classList.add('show'); setInterval(cycle,1800); }
 
 // Back to top
@@ -472,10 +482,10 @@ addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
 const links=[...document.querySelectorAll('nav a')];
 const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
 const secs=ids.map(id=>document.querySelector(id));
-const prog=document.createElement('div'); prog.id='progress'; document.body.appendChild(prog);
+let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
 const onScroll=()=>{
   const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
-  document.getElementById('progress').style.width=(scrolled*100)+'%';
+  prog.style.width=(scrolled*100)+'%';
   let idx=0; secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.top<=innerHeight*0.4) idx=i;});
   const atBottom=Math.ceil(scrollY+innerHeight)>=document.body.scrollHeight-2; if(atBottom) idx=secs.length-1;
   links.forEach(a=>a.classList.remove('active')); const active=document.querySelector(`nav a[href="${ids[idx]}"]`); if(active) active.classList.add('active');
