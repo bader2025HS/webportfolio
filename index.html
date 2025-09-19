@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v19: motion polish (varied entrances, stagger, parallax), content unchanged -->
+<!-- PORTFOLIO — v20 effects: new side/text wipes, slide/tilt/zoom mix, subtle stagger. Based on v18 content -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -29,21 +29,24 @@
   .section h2{margin:0 0 10px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
   .lead{color:var(--muted)}
 
-  /* ===== Reveal system (varied entrances) ===== */
-  .reveal{opacity:0; will-change:transform, filter; transition-property:opacity, transform, filter}
-  .reveal.in{opacity:1; transform:none; filter:none}
-  /* base durations/ease */
-  .reveal{transition-duration:.65s; transition-timing-function:cubic-bezier(.2,.7,.2,1)}
-  /* variants */
-  .anim-up{transform:translateY(26px); filter:blur(6px)}
-  .anim-down{transform:translateY(-26px); filter:blur(6px)}
-  .anim-l{transform:translateX(-26px); filter:blur(4px)}
-  .anim-r{transform:translateX(26px); filter:blur(4px)}
-  .anim-zoom{transform:scale(.94); filter:blur(4px)}
-  .anim-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
-  .anim-soft{transform:translateY(12px); opacity:.001}
+  /* ========= Reveal system ========= */
+  .reveal{opacity:0; will-change:transform, filter, clip-path; transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1), filter .6s cubic-bezier(.2,.7,.2,1), clip-path .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1; transform:none; filter:none; clip-path:inset(0 0 0 0)}
 
-  /* stagger container: set data-stagger=".childSelector" on a parent */
+  /* New variants (side text, wipes, tilt, zoom) */
+  .fx-from-left{transform:translateX(-28px) skewX(-2deg); filter:blur(4px)}
+  .fx-from-right{transform:translateX(28px) skewX(2deg); filter:blur(4px)}
+  .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
+  .fx-from-down{transform:translateY(24px); filter:blur(6px)}
+  .fx-zoom{transform:scale(.94); filter:blur(4px)}
+  .fx-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
+  .fx-soft{transform:translateY(12px); opacity:.001}
+
+  /* Text wipe reveal (left->right or right->left) */
+  .fx-wipe-l{clip-path:inset(0 100% 0 0)}
+  .fx-wipe-r{clip-path:inset(0 0 0 100%)}
+
+  /* Stagger support */
   [data-stagger] > *{transition-delay:var(--d,0ms)}
 
   /* header */
@@ -104,16 +107,16 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — strong zoom + hover-to-reveal details + subtle parallax */
+  /* Projects — same hover behavior as v18 */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
   .project:hover{transform:scale(1.08); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
-  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s ease; transform:translateY(var(--py,0px))}
-  .project:hover .thumb{transform:translateY(var(--py,0px)) scale(1.12)}
+  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s ease}
+  .project:hover .thumb{transform:scale(1.12)}
   .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:0}
-  .project .body>div{overflow:hidden}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
+  .project .body>div{overflow:hidden}
 
   /* Experience */
   .timeline{position:relative; margin-top:8px}
@@ -133,7 +136,7 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — top full width, then 2 cols; hover to reveal details */
+  /* Activities */
   .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   .activities-grid .full{grid-column:1 / -1}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
@@ -147,10 +150,11 @@
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 
-  /* Respect reduced motion */
+  /* Reduced motion */
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
-    .reveal,.project .body,.activity .body{filter:none !important; transform:none !important; opacity:1 !important}
+    .reveal{filter:none !important; transform:none !important; opacity:1 !important; clip-path:inset(0 0 0 0) !important}
+    [data-stagger] > *{transition-delay:0ms !important}
   }
 </style>
 
@@ -174,10 +178,10 @@
 <main>
   <!-- About -->
   <section id="about" class="section">
-    <div class="wrap reveal anim-up">
-      <h1>Bader Suliman</h1>
+    <div class="wrap reveal fx-from-down">
+      <h1 class="reveal fx-wipe-l">Bader Suliman</h1>
 
-      <div class="strap reveal anim-tilt in" style="transition-duration:.5s">
+      <div class="strap reveal fx-from-right">
         <span class="rotator"><span id="rotate" class="fade">Communications</span></span>
         <div class="chips-mini">
           <span class="chip-mini">AR EN FR DE</span>
@@ -185,9 +189,9 @@
         </div>
       </div>
 
-      <div class="card reveal anim-zoom">
-        <strong>About</strong>
-        <p class="lead" style="margin:.4rem 0 0">
+      <div class="card reveal fx-zoom">
+        <strong class="reveal fx-wipe-r">About</strong>
+        <p class="lead reveal fx-from-left" style="margin:.4rem 0 0">
           I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
         </p>
       </div>
@@ -196,29 +200,29 @@
 
   <!-- Skills & Languages -->
   <section id="skills" class="section">
-    <div class="wrap">
-      <div class="reveal anim-down"><h2>Skills and Languages</h2></div>
-      <p class="lead reveal anim-soft">Languages, soft skills, and hard skills.</p>
+    <div class="wrap" data-stagger=".card">
+      <h2 class="reveal fx-wipe-l">Skills and Languages</h2>
+      <p class="lead reveal fx-from-right">Fluency, methods, and tools.</p>
 
-      <div class="card reveal anim-zoom">
-        <strong>Languages</strong>
-        <div class="lang-cols" data-stagger=".lead li">
+      <div class="card reveal fx-tilt">
+        <strong class="reveal fx-wipe-r">Languages</strong>
+        <div class="lang-cols reveal fx-from-up" data-stagger=".lead li">
           <ul class="lead">
-            <li><strong>Arabic</strong> - Native (MSA and dialects)</li>
-            <li><strong>French</strong> - Native</li>
-            <li><strong>English</strong> - C2 (spoken, read, written)</li>
+            <li> <strong>Arabic</strong> - Native (MSA and dialects)</li>
+            <li> <strong>French</strong> - Native</li>
+            <li> <strong>English</strong> - C2 (spoken, read, written)</li>
           </ul>
           <ul class="lead">
-            <li><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</li>
-            <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+            <li> <strong>German</strong> - C1 (spoken, read, written)</li>
+            <li> <strong>Persian</strong> - A2 (spoken, read, written)</li>
+            <li> <strong>Japanese</strong> - A2 (spoken, read, written)</li>
           </ul>
         </div>
       </div>
 
-      <div class="skills-2" data-stagger=".card">
-        <div class="card reveal anim-l">
-          <strong>Soft skills</strong>
+      <div class="skills-2">
+        <div class="card reveal fx-from-left">
+          <strong class="reveal fx-wipe-l">Soft skills</strong>
           <ul class="lead">
             <li>Analytical thinking and synthesis</li>
             <li>Press review and media monitoring</li>
@@ -228,8 +232,8 @@
             <li>Stakeholder coordination</li>
           </ul>
         </div>
-        <div class="card reveal anim-r">
-          <strong>Hard skills</strong>
+        <div class="card reveal fx-from-right">
+          <strong class="reveal fx-wipe-r">Hard skills</strong>
           <ul class="lead">
             <li>Data analysis and cleaning (Excel)</li>
             <li>Mapping (QGIS and Mapbox)</li>
@@ -245,28 +249,28 @@
 
   <!-- Education -->
   <section id="education" class="section">
-    <div class="wrap">
-      <div class="reveal anim-up"><h2>Education</h2></div>
-      <p class="lead reveal anim-soft">International Security and European Affairs studies.</p>
-      <div class="edu" data-stagger=".item">
-        <div class="card item reveal anim-up">
+    <div class="wrap" data-stagger=".item">
+      <h2 class="reveal fx-wipe-r">Education</h2>
+      <p class="lead reveal fx-from-left">Focus on security, migration, and EU governance.</p>
+      <div class="edu">
+        <div class="card item reveal fx-from-up">
           <div class="head">
-            <strong>M.A. International Security - Sciences Po (PSIA)</strong>
-            <span class="where">Paris • 2024–2027</span>
+            <strong class="reveal fx-wipe-l">M.A. International Security - Sciences Po (PSIA)</strong>
+            <span class="where reveal fx-from-right">Paris • 2024–2027</span>
           </div>
-          <p class="lead">Focus on Migration and Middle Eastern Studies. Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
+          <p class="lead">Focus on Migration and Middle Eastern Studies at the Paris School of International Affairs.</p>
         </div>
-        <div class="card item reveal anim-zoom">
+        <div class="card item reveal fx-zoom">
           <div class="head">
-            <strong>M.A. International Relations - Freie Universität Berlin (OSI)</strong>
-            <span class="where">Berlin • 2024–2027</span>
+            <strong class="reveal fx-wipe-r">M.A. International Relations - Freie Universität Berlin (OSI)</strong>
+            <span class="where reveal fx-from-right">Berlin • 2024–2027</span>
           </div>
           <p class="lead">Coursework in international relations and European Affairs in the Otto Suhr Institute track.</p>
         </div>
-        <div class="card item reveal anim-down">
+        <div class="card item reveal fx-from-down">
           <div class="head">
-            <strong>B.A. Politics and Government - Sciences Po</strong>
-            <span class="where">Menton/Nancy • 2021–2024</span>
+            <strong class="reveal fx-wipe-l">B.A. Politics and Government - Sciences Po</strong>
+            <span class="where reveal fx-from-right">Menton/Nancy • 2021–2024</span>
           </div>
           <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) - Tokyo • 2023–2024.</p>
         </div>
@@ -277,12 +281,12 @@
   <!-- Experience -->
   <section id="experience" class="section">
     <div class="wrap">
-      <div class="reveal anim-up"><h2>Experience</h2></div>
-      <p class="lead reveal anim-soft">Communications, humanitarian data, and policy research.</p>
+      <h2 class="reveal fx-wipe-l">Experience</h2>
+      <p class="lead reveal fx-from-right">Communications, humanitarian data, and policy research.</p>
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
-          <div class="card reveal anim-l">
+          <div class="card reveal fx-from-left">
             <div class="role">
               <strong>Intern - Project Design and Monitoring, OIF</strong>
               <span class="where">Paris • 2025</span>
@@ -297,7 +301,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card reveal anim-r">
+          <div class="card reveal fx-from-right">
             <div class="role">
               <strong>Intern - Data Analysis, AQLITY</strong>
               <span class="where">Remote • 2025</span>
@@ -312,7 +316,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card reveal anim-l">
+          <div class="card reveal fx-from-left">
             <div class="role">
               <strong>Assistant - Immigration Law, ARDHIS</strong>
               <span class="where">Paris • 2024 to 2025</span>
@@ -327,7 +331,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card reveal anim-r">
+          <div class="card reveal fx-from-right">
             <div class="role">
               <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
               <span class="where">Amman • 2023</span>
@@ -342,7 +346,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card reveal anim-l">
+          <div class="card reveal fx-from-left">
             <div class="role">
               <strong>Intern - International Relations Department, City Hall</strong>
               <span class="where">Nancy • 2022</span>
@@ -361,11 +365,11 @@
 
   <!-- Selected Work -->
   <section id="work" class="section">
-    <div class="wrap">
-      <div class="reveal anim-down"><h2>Selected Work</h2></div>
-      <p class="lead reveal anim-soft">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
-      <div class="projects" data-stagger=".project">
-        <article class="card project reveal anim-zoom">
+    <div class="wrap" data-stagger=".project">
+      <h2 class="reveal fx-wipe-r">Selected Work</h2>
+      <p class="lead reveal fx-from-left">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
+      <div class="projects">
+        <article class="card project reveal fx-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Human Security - Interactive Twine</h3>
           <div class="body"><div>
@@ -374,7 +378,7 @@
           </div></div>
         </article>
 
-        <article class="card project reveal anim-zoom">
+        <article class="card project reveal fx-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">SLAC Assessments - Data to Narrative</h3>
           <div class="body"><div>
@@ -383,7 +387,7 @@
           </div></div>
         </article>
 
-        <article class="card project reveal anim-zoom">
+        <article class="card project reveal fx-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Desalination - Policy Brief</h3>
           <div class="body"><div>
@@ -397,32 +401,32 @@
 
   <!-- Extracurricular Activities -->
   <section id="activities" class="section">
-    <div class="wrap">
-      <div class="reveal anim-up"><h2>Extracurricular Activities</h2></div>
-      <p class="lead reveal anim-soft">Clubs, volunteering, events, and field exposure.</p>
+    <div class="wrap" data-stagger=".activity">
+      <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
+      <p class="lead reveal fx-from-right">Clubs, volunteering, events, and field exposure.</p>
 
-      <div class="activities-grid" data-stagger=".activity">
-        <article class="card activity full reveal anim-down">
+      <div class="activities-grid">
+        <article class="card activity full reveal fx-tilt">
           <div class="title">Sciences Po Monde Arabe - Communications Director</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p></div>
         </article>
 
-        <article class="card activity reveal anim-up">
+        <article class="card activity reveal fx-from-left">
           <div class="title">Tarjimly - Volunteer Translator and Interpreter</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p></div>
         </article>
 
-        <article class="card activity reveal anim-up">
+        <article class="card activity reveal fx-from-right">
           <div class="title">Events - Mediterranean of the Future and Paris Peace Forum</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Helped organize sessions and delegations with hands-on logistics and stakeholder coordination.</p></div>
         </article>
 
-        <article class="card activity reveal anim-up">
+        <article class="card activity reveal fx-from-left">
           <div class="title">Solo travel - 15+ countries</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Regions: Europe, Middle East, Asia.</p></div>
         </article>
 
-        <article class="card activity reveal anim-up">
+        <article class="card activity reveal fx-from-right">
           <div class="title">MEDMUN - Arabic Committee Director</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p></div>
         </article>
@@ -432,10 +436,10 @@
 
   <!-- Contact -->
   <section id="contact" class="section">
-    <div class="wrap reveal anim-up">
-      <div class="card">
-        <h2>Let’s work together</h2>
-        <p class="lead reveal anim-soft">Available for research, data, and communications projects.</p>
+    <div class="wrap reveal fx-from-up">
+      <div class="card reveal fx-zoom">
+        <h2 class="reveal fx-wipe-r">Let’s work together</h2>
+        <p class="lead reveal fx-from-left">Available for research, data, and communications projects.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <a class="btn primary" href="mailto:you@example.com">Email me</a>
           <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
@@ -448,24 +452,24 @@
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 
+<!-- Bottom-right Top button -->
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-  // Reveal on scroll + stagger
+  // Reveal on scroll + optional stagger
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(!e.isIntersecting) return;
       const el = e.target;
       el.classList.add('in');
 
-      // Stagger children if requested: data-stagger=".selector"
+      // Stagger children if data-stagger is set
       const sel = el.getAttribute('data-stagger');
       if(sel){
         const kids = el.querySelectorAll(sel);
         kids.forEach((k,i)=> k.style.setProperty('--d', (i*90)+'ms'));
-        // give them a gentle soft entrance by default if they don't have reveal
         kids.forEach(k=>{
-          if(!k.classList.contains('reveal')) k.classList.add('reveal','anim-soft');
+          if(!k.classList.contains('reveal')) k.classList.add('reveal','fx-soft');
           requestAnimationFrame(()=>k.classList.add('in'));
         });
       }
@@ -485,49 +489,23 @@
     setTimeout(()=>{
       wi = (wi + 1) % words.length;
       rot.textContent = words[wi];
-      rot.classList.add("show");
+      rot.classList.add('show');
     }, 220);
   }
   if(rot){ rot.classList.add("show"); setInterval(cycle, 1800); }
 
-  // Subtle parallax on project thumbnails
-  const thumbs = [...document.querySelectorAll('.thumb')];
-  function parallax(){
-    const vh = window.innerHeight;
-    thumbs.forEach(t=>{
-      const r = t.getBoundingClientRect();
-      const center = r.top + r.height/2;
-      const delta = (center - vh/2) / vh; // -0.5..0.5
-      const shift = Math.max(-10, Math.min(10, -delta*14)); // clamp
-      t.style.setProperty('--py', shift.toFixed(1)+'px');
-    });
-  }
-  let ticking = false;
-  function onScroll(){
-    if(!ticking){
-      window.requestAnimationFrame(()=>{
-        parallax();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-  document.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', parallax);
-  parallax();
-
-  // Back to top visibility (bottom-right)
+  // Back to top visibility
   const toTop = document.getElementById('toTop');
   const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
   document.addEventListener('scroll', toggleTop, {passive:true}); toggleTop();
 
-  // Active nav highlight + progress bar (+ Contact highlight at bottom)
+  // Active nav highlight + progress bar
   const links = [...document.querySelectorAll('nav a')];
   const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
   const secs = ids.map(id=>document.querySelector(id));
   const prog = document.getElementById('progress');
 
-  const onNavScroll = ()=>{
+  const onScroll = ()=>{
     const h = document.documentElement;
     const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
     prog.style.width = (scrolled*100)+'%';
@@ -539,9 +517,10 @@
     });
     const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
     if(atBottom){ idx = secs.length - 1; }
+
     links.forEach(a=>a.classList.remove('active'));
     const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
     if(active) active.classList.add('active');
   };
-  document.addEventListener('scroll', onNavScroll, {passive:true}); onNavScroll();
+  document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 </script>
