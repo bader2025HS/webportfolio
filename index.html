@@ -1,11 +1,11 @@
 <!-- PORTFOLIO — v22: Fix rounded corners (no global clip-path), stable reveals, varied effects. Based on your v18 content. -->
 <style>
-  body::before{
-  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.25;
+ body::after{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.15;
   background:
-    radial-gradient(circle at 1px 1px, rgba(2,6,23,.08) 1px, transparent 1px);
-  background-size:16px 16px;
-  mix-blend-mode:soft-light;
+    repeating-linear-gradient(45deg,
+      rgba(31,189,185,.35) 0 14px,
+      rgba(31,189,185,0) 14px 32px);
 }
   :root{
     --header:72px; --maxw:860px;
