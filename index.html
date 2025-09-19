@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v31: Keep v30 mobile menu EXACT; Activities force 2×2 on phones. -->
+<!-- PORTFOLIO — v31 (desktop menu framed) -->
 
 <!-- Viewport (safety) -->
 <script>
@@ -189,6 +189,44 @@
     background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px); font-size:.92rem}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
+
+  /* === Desktop menu framing (mobile untouched) === */
+  @media (min-width:761px){
+    /* Frame around the name (brand) */
+    header .brand{
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    /* Keep nav inline and add framed pills */
+    header nav#siteNav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    header nav#siteNav a{
+      margin:0;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.9);
+      text-decoration:none;
+      color:var(--muted);
+    }
+    header nav#siteNav a:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    header nav#siteNav a.active{
+      border-color:var(--accent);
+      color:var(--accent);
+      box-shadow:0 0 0 2px rgba(14,165,162,.12) inset;
+    }
+    /* Hide overlay brand (avoid duplicate) on desktop only */
+    #siteNav .mhead{display:none;}
+  }
 </style>
 
 <div id="progress"></div>
