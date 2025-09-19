@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v16: AQLITY title updated, bottom-right Top button kept, strap under name -->
+<!-- PORTFOLIO — v17: strap language chip AR EN FR DE, contact text trimmed, Activities show 'Hover for details', AQLITY = Data Analyst Intern -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -133,9 +133,12 @@
   .activities-grid .full{grid-column:1 / -1}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
   .activity{position:relative; overflow:hidden}
+  .activity .head{display:flex; align-items:center; justify-content:space-between; gap:10px}
   .activity .title{font-weight:700}
-  .activity .body{max-height:0; opacity:0; transition:max-height .35s ease, opacity .25s ease, transform .25s ease}
+  .activity .hint{font-size:.85rem; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:3px 8px; background:var(--card); opacity:.85; transition:transform .2s, opacity .2s}
   .activity:hover{transform:translateY(-2px)}
+  .activity:hover .hint{transform:translateY(-1px); opacity:1}
+  .activity .body{max-height:0; opacity:0; transition:max-height .35s ease, opacity .25s ease, transform .25s ease}
   .activity:hover .body{max-height:220px; opacity:1}
 
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
@@ -166,12 +169,11 @@
     <div class="wrap reveal anim-fade">
       <h1>Bader Suliman</h1>
 
-      <!-- NEW strap under name -->
+      <!-- strap under name -->
       <div class="strap">
         <span class="rotator"><span id="rotate" class="fade">Communications</span></span>
         <div class="chips-mini">
-          <span class="chip-mini">FR EN AR</span>
-          <span class="chip-mini">C1 DE</span>
+          <span class="chip-mini">AR EN FR DE</span>
           <span class="chip-mini">Paris • willing to relocate</span>
         </div>
       </div>
@@ -179,7 +181,7 @@
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
-          I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward. 
+          I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
         </p>
       </div>
     </div>
@@ -288,7 +290,7 @@
           <div class="dot"></div>
           <div class="card reveal anim-r">
             <div class="role">
-              <strong>Intern - Data Analysis, AQLITY</strong>
+              <strong>Data Analyst Intern - AQLITY</strong>
               <span class="where">Remote • 2025</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
@@ -395,28 +397,43 @@
       <div class="activities-grid">
         <!-- Top: full width -->
         <article class="card activity full reveal anim-l">
-          <div class="title">Sciences Po Monde Arabe - Communications Director</div>
+          <div class="head">
+            <div class="title">Sciences Po Monde Arabe - Communications Director</div>
+            <span class="hint">Hover for details</span>
+          </div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p></div>
         </article>
 
         <!-- Two columns below -->
         <article class="card activity reveal anim-pop">
-          <div class="title">Tarjimly - Volunteer Translator and Interpreter</div>
+          <div class="head">
+            <div class="title">Tarjimly - Volunteer Translator and Interpreter</div>
+            <span class="hint">Hover for details</span>
+          </div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p></div>
         </article>
 
         <article class="card activity reveal anim-pop">
-          <div class="title">Events - Mediterranean of the Future and Paris Peace Forum</div>
+          <div class="head">
+            <div class="title">Events - Mediterranean of the Future and Paris Peace Forum</div>
+            <span class="hint">Hover for details</span>
+          </div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Helped organize sessions and delegations with hands-on logistics and stakeholder coordination.</p></div>
         </article>
 
         <article class="card activity reveal anim-pop">
-          <div class="title">Solo travel - 15+ countries</div>
+          <div class="head">
+            <div class="title">Solo travel - 15+ countries</div>
+            <span class="hint">Hover for details</span>
+          </div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Regions: Europe, Middle East, Asia.</p></div>
         </article>
 
         <article class="card activity reveal anim-pop">
-          <div class="title">MEDMUN - Arabic Committee Director</div>
+          <div class="head">
+            <div class="title">MEDMUN - Arabic Committee Director</div>
+            <span class="hint">Hover for details</span>
+          </div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p></div>
         </article>
       </div>
@@ -428,7 +445,7 @@
     <div class="wrap reveal anim-pop">
       <div class="card">
         <h2>Let’s work together</h2>
-        <p class="lead">Based in Paris. Always willing to relocate. I value clarity, empathy, and high standards.</p>
+        <p class="lead">Based in Paris. I value clarity, empathy, and high standards.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <a class="btn primary" href="mailto:you@example.com">Email me</a>
           <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
