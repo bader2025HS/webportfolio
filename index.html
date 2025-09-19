@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v23: tighter title/lead spacing + white footer like header -->
+<!-- PORTFOLIO — v24: mobile-friendly with hamburger menu + touch tweaks -->
 <style>
   /* Topographic background overlay */
   body::after{
@@ -35,9 +35,7 @@
 
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
   .section{margin:clamp(24px,5vw,46px) 0}
-  /* tighter space beneath H2s */
   .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
-  /* reduce gap from title to leading sentence */
   .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
@@ -75,7 +73,7 @@
     background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
   }
   header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
-    display:flex; align-items:center; justify-content:space-between}
+    display:flex; align-items:center; justify-content:space-between; gap:12px}
   .brand{display:flex; align-items:center; gap:10px; font-weight:800}
   .badge{
     width:34px; height:34px; border-radius:10px; flex:0 0 34px;
@@ -90,6 +88,46 @@
   nav a:after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s}
   nav a:hover{color:var(--accent)} nav a:hover:after{right:0}
   nav a.active{color:var(--accent)} nav a.active:after{right:0}
+
+  /* Hamburger button (hidden on desktop) */
+  .menu-toggle{display:none; align-items:center; justify-content:center; width:42px; height:42px;
+    border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
+  .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s ease}
+  .menu-toggle .bar:before,.menu-toggle .bar:after{
+    content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text);
+    transition:transform .25s ease, opacity .25s ease, top .25s ease
+  }
+  .menu-toggle .bar:before{top:-6px}
+  .menu-toggle .bar:after{top:6px}
+  body.nav-open .menu-toggle .bar{transform:rotate(45deg)}
+  body.nav-open .menu-toggle .bar:before{transform:rotate(-90deg) translateX(-6px); opacity:0}
+  body.nav-open .menu-toggle .bar:after{transform:rotate(-90deg); top:0}
+
+  /* Mobile nav panel + overlay */
+  .nav-overlay{position:fixed; inset:0; background:rgba(2,6,23,.35); backdrop-filter:blur(2px);
+    z-index:9998; opacity:0; pointer-events:none; transition:opacity .2s}
+  body.nav-open .nav-overlay{opacity:1; pointer-events:auto}
+  body.nav-open{overflow:hidden}
+
+  @media (max-width:720px){
+    header .inner{flex-wrap:nowrap}
+    /* show hamburger */
+    .menu-toggle{display:flex}
+    /* off-canvas nav */
+    header nav{
+      position:fixed; top:var(--header); right:0; bottom:0; width:min(82vw,360px);
+      background:rgba(255,255,255,.98); border-left:1px solid var(--line);
+      backdrop-filter:saturate(120%) blur(12px);
+      transform:translateX(100%); transition:transform .25s ease;
+      display:flex; flex-direction:column; gap:6px; padding:16px; z-index:9999
+    }
+    body.nav-open header nav{transform:translateX(0)}
+    /* mobile nav link style */
+    header nav a{margin:0; padding:12px 10px; border-radius:10px}
+    header nav a.active{background:var(--card)}
+    /* tighten sections on phones */
+    .wrap{padding:16px}
+  }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
@@ -137,6 +175,13 @@
   .project:hover .body{grid-template-rows:1fr; opacity:1}
   .project .body>div{overflow:hidden}
 
+  /* Touch devices: reveal details without hover, reduce zoom jump */
+  @media (hover:none){
+    .project .body{grid-template-rows:1fr; opacity:1}
+    .project:hover,.project:hover .thumb{transform:none}
+    .activity .body{max-height:none; opacity:1}
+  }
+
   /* Experience */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -170,7 +215,7 @@
     border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px;
     background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px);
   }
-  .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
+  .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 
   /* Reduced motion */
@@ -186,7 +231,13 @@
 <header>
   <div class="inner">
     <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
-    <nav>
+
+    <!-- Hamburger for mobile -->
+    <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+      <span class="bar"></span>
+    </button>
+
+    <nav id="siteNav">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
@@ -197,6 +248,8 @@
     </nav>
   </div>
 </header>
+<!-- Dim overlay for mobile nav -->
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
 <main>
   <!-- About -->
@@ -553,4 +606,25 @@ const onScroll = ()=>{
   if(active) active.classList.add('active');
 };
 document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* ===== Mobile hamburger logic ===== */
+const menuBtn = document.getElementById('menuBtn');
+const nav = document.getElementById('siteNav');
+const overlay = document.getElementById('navOverlay');
+
+function closeNav(){
+  document.body.classList.remove('nav-open');
+  menuBtn.setAttribute('aria-expanded','false');
+}
+function openNav(){
+  document.body.classList.add('nav-open');
+  menuBtn.setAttribute('aria-expanded','true');
+}
+menuBtn.addEventListener('click', ()=>{
+  document.body.classList.contains('nav-open') ? closeNav() : openNav();
+});
+overlay.addEventListener('click', closeNav);
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
+window.addEventListener('resize', ()=>{ if(window.innerWidth>720) closeNav(); }, {passive:true});
 </script>
