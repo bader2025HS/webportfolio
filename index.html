@@ -115,35 +115,47 @@
   /* Mobile full-screen white overlay menu */
   @media (max-width:760px), (max-device-width:812px){
     .menu-toggle{display:flex; position:fixed; right:12px; top:12px; z-index:10004}
+/* 1) Puts the hamburger in the top-right */
+.menu-toggle{display:grid; position:fixed; right:12px; top:12px; z-index:10005}
 
-    header nav#siteNav{
-      position:fixed; inset:0; z-index:10003;
-      padding: calc(env(safe-area-inset-top,0px) + 68px) 18px 24px;
-      display:flex; flex-direction:column; gap:12px;
-      background:#fff; /* WHITE BG */
-      backdrop-filter:saturate(120%) blur(12px);
-      transform:translate3d(0,-100%,0);
-      opacity:0; visibility:hidden; pointer-events:none;
-      transition:transform .28s ease, opacity .2s ease;
-    }
-    body.nav-open header nav#siteNav{
-      transform:translate3d(0,0,0); opacity:1; visibility:visible; pointer-events:auto;
-    }
+/* 2) Full-screen white overlay that slides down */
+header nav#siteNav{
+  position:fixed; inset:0; z-index:10004; height:100svh;
+  padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
+  display:flex; flex-direction:column; gap:10px;
+  background:#fff !important;                 /* <- solid white background */
+  transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
+  transition:transform .28s ease, opacity .2s ease;
+}
 
-    /* brand inside overlay (mobile only) */
-    #siteNav .mhead{
-      display:flex; align-items:center; gap:10px;
-      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 18px);
-      font-weight:800;
-    }
+/* 3) Makes overlay visible when the body has .nav-open (set by JS) */
+body.nav-open header nav#siteNav{
+  transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto;
+}
 
-    header nav a{
-      margin:0; padding:16px 14px; border-radius:14px; font-size:1.125rem;
-      background:#fff; border:1px solid var(--line); box-shadow:var(--shadow);
-    }
-    header nav a.active{background:rgba(14,165,162,.06); color:var(--accent)}
-    header .inner{gap:8px}
-    .wrap{padding:16px}
+/* 4) Styles EACH menu item as a rounded framed card */
+header nav a{
+  margin:0;
+  padding:16px 14px;
+  border-radius:12px;
+  font-size:1.12rem;
+  background:#fff;
+  border:1px solid var(--line);               /* <- the light frame */
+}
+
+/* 5) Active/selected item gets accent frame */
+header nav a.active{
+  color:var(--accent);
+  border-color:var(--accent);                  /* <- teal outline you see on “About” */
+}
+
+/* 6) Brand row at the top of the overlay (badge + name) */
+#siteNav .mhead{
+  display:flex; align-items:center; gap:10px;
+  position:absolute; left:18px;
+  top:calc(env(safe-area-inset-top,0px) + 18px);
+  font-weight:800;
+}
   }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
@@ -578,12 +590,12 @@ const onScroll = ()=>{
 document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
 // Mobile menu open/close
-const menuBtn = document.getElementById('menuBtn');
-const nav = document.getElementById('siteNav');
-function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
-function openNav(){ document.body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded','true'); nav.removeAttribute('aria-hidden'); }
-menuBtn.addEventListener('click', ()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
+const menuBtn=document.getElementById('menuBtn');
+const nav=document.getElementById('siteNav');
+function closeNav(){ document.body.classList.remove('nav-open'); ... }
+function openNav(){ document.body.classList.add('nav-open'); ... }
+menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
 window.addEventListener('resize', ()=>{ if(window.innerWidth>760) closeNav(); }, {passive:true});
 </script>
