@@ -1,185 +1,242 @@
-<!-- ONE-FILE PORTFOLIO — FIXED HEADER, TRUE BG, EXPERIENCE BEFORE WORK -->
-<style type="text/css">
-  /* ===== Theme (scoped) ===== */
-  #bp-portfolio{
-    --bg-top:#f2fbfa;        /* soft teal */
-    --bg-bot:#f9fbff;        /* off-white */
+<!-- PORTFOLIO — CENTERED, INTERACTIVE, FIXED HEADER -->
+<style>
+  /* ===== Theme ===== */
+  :root{
+    --header:72px; --maxw:860px;
+    --bg-top:#eafaf7; --bg-bot:#f7fbff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
     --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
-    --maxw:980px; --header:72px;
-    color:var(--text);
-    /* Full-page background (no white): gradient + faint grid */
-    background:
-      linear-gradient(180deg, var(--bg-top), var(--bg-bot));
-    font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,"Helvetica Neue",Arial;
-    margin:0 auto;
   }
-  /* subtle pattern layer */
-  #bp-portfolio:before{
-    content:""; position:fixed; inset:0; z-index:-1; opacity:.06;
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header) + 14px)}
+  body{
+    margin:0; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
+    background: linear-gradient(180deg,var(--bg-top),var(--bg-bot));
+  }
+  /* subtle grid across page */
+  body:before{
+    content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
-      repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 26px),
-      repeating-linear-gradient(0deg,  #000 0 1px, transparent 1px 26px);
+      repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 26px),
+      repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
     mix-blend-mode:soft-light;
-    pointer-events:none;
   }
 
-  /* ===== Layout ===== */
-  #bp-portfolio .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(18px,3vw,28px)}
-  #bp-portfolio .section{margin:clamp(28px,5vw,56px) 0}
-  #bp-portfolio .section h2{font-size:clamp(22px,3vw,32px); margin:0 0 8px}
-  #bp-portfolio .lead{color:var(--muted); max-width:70ch}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
+  .section{margin:clamp(22px,4vw,40px) 0} /* tighter gaps */
+  .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px)}
+  .lead{color:var(--muted)}
 
-  /* anchor offset so menu hits exact spot */
-  #bp-portfolio section[id]{scroll-margin-top:calc(var(--header) + 14px)}
-  #bp-portfolio{scroll-behavior:smooth}
-
-  /* ===== Header (not cut) ===== */
-  #bp-portfolio .topbar{
-    position:sticky; top:0; z-index:1000; height:var(--header);
-    background:rgba(255,255,255,.92);
+  /* ===== Sticky header (never cut) ===== */
+  header{
+    position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
-    border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
   }
-  #bp-portfolio .nav{display:flex; align-items:center; justify-content:space-between; height:100%}
-  #bp-portfolio .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-  #bp-portfolio .badge{inline-size:34px; block-size:34px; border-radius:10px;
+  header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
+    display:flex; align-items:center; justify-content:space-between}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+  .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(2,6,23,.06)}
-  #bp-portfolio .menu a{margin-left:14px; text-decoration:none; font-weight:600; color:var(--muted)}
-  #bp-portfolio .menu a:hover{color:var(--accent)}
-
-  /* spacer so first content never hides under sticky header */
-  #bp-portfolio .after-header{height:calc(var(--header) * .25)}
-
-  /* ===== Hero ===== */
-  #bp-portfolio .hero{padding:clamp(20px,5vw,48px) 0}
-  #bp-portfolio h1{font-size:clamp(30px,5vw,48px); margin:0 0 6px}
-  #bp-portfolio .subtitle{color:var(--muted); margin:0 0 12px}
-  #bp-portfolio .cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-  #bp-portfolio .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
-    border-radius:14px; border:1px solid var(--line); font-weight:700; text-decoration:none}
-  #bp-portfolio .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
-  #bp-portfolio .btn.ghost{background:var(--card); color:var(--text)}
-
-  /* ===== Cards / grids ===== */
-  #bp-portfolio .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,20px)}
-  #bp-portfolio .facts{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px}
-  @media (max-width:900px){#bp-portfolio .facts{grid-template-columns:1fr 1fr}}
-
-  #bp-portfolio .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.8vw,18px)}
-  @media (max-width:1000px){#bp-portfolio .projects{grid-template-columns:1fr}}
-  #bp-portfolio .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line);
-    background:#e6fffb; background-size:cover; background-position:center}
-
-  /* ===== Timeline ===== */
-  #bp-portfolio .timeline{position:relative; margin-top:8px}
-  #bp-portfolio .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
-    background:linear-gradient(var(--accent),var(--gold)); opacity:.32}
-  #bp-portfolio .t-item{display:grid; grid-template-columns:26px 1fr; gap:12px; margin:14px 0}
-  #bp-portfolio .dot{inline-size:22px; block-size:22px; border-radius:50%; border:2px solid var(--accent);
-    background:radial-gradient(circle at 40% 35%, #d4af37, #f3e8c1); box-shadow:0 0 0 3px rgba(14,165,162,.12)}
-  #bp-portfolio .t-card{border:1px solid var(--line); border-radius:14px; padding:12px; background:var(--card)}
-
-  /* ===== Footer ===== */
-  #bp-portfolio footer{margin-top:40px; border-top:1px solid var(--line); padding:20px 0; color:var(--muted); text-align:left}
-
-  /* Dark mode */
-  @media (prefers-color-scheme:dark){
-    #bp-portfolio{
-      --bg-top:#0b1f1e; --bg-bot:#0b1220; --text:#e2e8f0; --muted:#94a3b8; --card:#111827; --line:#1f2937;
-      --shadow:0 10px 30px rgba(0,0,0,.45)
-    }
+  nav a{
+    color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
   }
+  nav a:after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s;
+  }
+  nav a:hover{color:var(--accent)}
+  nav a:hover:after{right:0}
+
+  /* ===== Buttons / cards ===== */
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
+    border:1px solid var(--line); font-weight:700; text-decoration:none;}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
+  .btn.ghost{background:var(--card); color:var(--text)}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
+
+  /* Interactive accordions */
+  .accordion .item{margin:12px 0}
+  .accordion .head{
+    display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none;
+  }
+  .accordion .head .chev{transition:transform .2s}
+  .accordion .body{grid-template-rows:0fr; display:grid; transition:grid-template-rows .25s ease}
+  .accordion .body>div{overflow:hidden}
+  .accordion .item.open .body{grid-template-rows:1fr}
+  .accordion .item.open .chev{transform:rotate(90deg)}
+
+  /* Facts grid */
+  .facts{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+  @media (max-width:900px){.facts{grid-template-columns:1fr 1fr}}
+
+  /* Projects grid with hover scale */
+  .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  @media (max-width:1000px){.projects{grid-template-columns:1fr}}
+  .thumb{
+    aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line);
+    background:#e6fffb center/cover no-repeat; transform:translateZ(0); transition:transform .25s ease;
+  }
+  .project.card:hover .thumb{transform:scale(1.03)}
+
+  /* Timeline (experience) */
+  .timeline{position:relative; margin-top:8px}
+  .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
+    background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
+  .t{display:grid; grid-template-columns:26px 1fr; gap:12px; margin:14px 0}
+  .dot{width:22px; height:22px; border-radius:50%; border:2px solid var(--accent);
+    background:radial-gradient(circle at 40% 35%, #d4af37, #f3e8c1); box-shadow:0 0 0 3px rgba(14,165,162,.12)}
+
+  footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
+
+  /* Back to top */
+  .to-top{
+    position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none;
+    transition:opacity .2s;
+  }
+  .to-top.show{opacity:1; pointer-events:auto}
 </style>
 
-<div id="bp-portfolio">
-  <!-- Sticky header -->
-  <div class="topbar">
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="badge" aria-hidden="true"></div>
-        <span>Bader Suliman</span>
-      </div>
-      <nav class="menu">
-        <a href="#about">About</a>
-        <a href="#facts">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#experience">Experience</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+<header>
+  <div class="inner">
+    <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#facts">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
-  <div class="after-header" aria-hidden="true"></div>
+</header>
 
+<main>
   <!-- About -->
   <section id="about" class="section">
     <div class="wrap">
-      <h1>Bader Suliman</h1>
-      <p class="subtitle">Sciences Po (PSIA) • Dual degree with Freie Universität Berlin — International Security, focus on Migration & Middle East.</p>
+      <h1 style="margin:0 0 6px">Bader Suliman</h1>
+      <p class="lead" style="margin:0 0 12px">Sciences Po (PSIA) • Dual degree with Freie Universität Berlin — International Security, focus on Migration & Middle East.</p>
       <div class="card">
-        <strong>About</strong>
-        <p class="t-muted" style="margin:.4rem 0 0">
-          I work at the intersection of migration, climate, and security—turning data and field insights into clear, ethical narratives for policy and the public. I support NGOs and research teams with media monitoring, mapping, and accessible briefs, and I build lightweight web pages and visuals to make complex issues understandable.
-        </p>
-        <div class="cta" style="margin-top:10px">
-          <a class="btn primary" href="#experience">See experience</a>
-          <a class="btn ghost" href="mailto:you@example.com">Email</a>
-          <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+        <div class="accordion">
+          <div class="item open">
+            <div class="head">
+              <strong>About</strong>
+              <span class="chev">▶</span>
+            </div>
+            <div class="body"><div>
+              <p class="lead" style="margin:.4rem 0 0">
+                I work at the intersection of migration, climate, and security—turning data and field insights into clear, ethical narratives for policy and the public. I support NGOs and research teams with media monitoring, mapping, and accessible briefs, and I build lightweight web pages and visuals to make complex issues understandable.
+              </p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+                <a class="btn primary" href="#experience">See experience</a>
+                <a class="btn ghost" href="mailto:you@example.com">Email</a>
+                <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+                <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+              </div>
+            </div></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills / facts (TOP) -->
+  <!-- Skills / Facts -->
   <section id="facts" class="section">
     <div class="wrap">
       <h2>Skills & Quick Facts</h2>
       <div class="facts">
-        <div class="card"><strong>Languages</strong><br><span class="t-muted">Arabic (native), English (C2), French (C1), Persian (B2), Japanese (A2)</span></div>
-        <div class="card"><strong>Skills</strong><br><span class="t-muted">Media monitoring, copywriting, data cleaning, layout, mapping</span></div>
-        <div class="card"><strong>Tools</strong><br><span class="t-muted">WordPress, Canva, Excel, QGIS/Mapbox, GitHub Pages, Twine</span></div>
-        <div class="card"><strong>Focus</strong><br><span class="t-muted">Migration, climate, water, protection</span></div>
+        <div class="card"><strong>Languages</strong><br><span class="lead">Arabic (native), English (C2), French (C1), Persian (B2), Japanese (A2)</span></div>
+        <div class="card"><strong>Skills</strong><br><span class="lead">Media monitoring, copywriting, data cleaning, layout, mapping</span></div>
+        <div class="card"><strong>Tools</strong><br><span class="lead">WordPress, Canva, Excel, QGIS/Mapbox, GitHub Pages, Twine</span></div>
+        <div class="card"><strong>Focus</strong><br><span class="lead">Migration, climate, water, protection</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Education (shorter) -->
+  <!-- Education (short) -->
   <section id="education" class="section">
     <div class="wrap">
       <h2>Education</h2>
-      <div class="card">
-        <p class="t-muted" style="margin:0">
-          <strong>Sciences Po — PSIA (Paris)</strong> · M.A. International Security — Migration & Middle Eastern Studies · 2024–2027
-          <br>
-          Core: Human Security; Cities & Migration; Environmental Policy in MENA; Media & Politics.
-        </p>
-        <hr style="border:none;border-top:1px solid var(--line);margin:12px 0">
-        <p class="t-muted" style="margin:0">
-          <strong>Freie Universität Berlin — Otto-Suhr-Institut</strong> · Dual degree (International Relations) · Start 2026
-        </p>
-        <hr style="border:none;border-top:1px solid var(--line);margin:12px 0">
-        <p class="t-muted" style="margin:0">
-          <strong>Sciences Po — B.A. Politics & Government</strong> · Menton & Nancy · 2021–2024
-          <br>
-          Exchange: Tokyo University of Foreign Studies (TUFS), 2023–2024.
-        </p>
+      <div class="accordion">
+        <div class="item open">
+          <div class="head"><strong>Sciences Po — PSIA (Paris)</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead" style="margin:.3rem 0">M.A. International Security — Migration & Middle Eastern Studies · 2024–2027</p>
+            <p class="lead" style="margin:.3rem 0">Core: Human Security; Cities & Migration; Environmental Policy in MENA; Media & Politics.</p>
+          </div></div>
+        </div>
+        <div class="item">
+          <div class="head"><strong>Freie Universität Berlin — Otto-Suhr-Institut</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead" style="margin:.3rem 0">Dual degree (International Relations) · Start 2026.</p>
+          </div></div>
+        </div>
+        <div class="item">
+          <div class="head"><strong>Sciences Po — B.A. Politics & Government</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead" style="margin:.3rem 0">Menton & Nancy · 2021–2024</p>
+            <p class="lead" style="margin:.3rem 0">Exchange: Tokyo University of Foreign Studies (TUFS), 2023–2024.</p>
+          </div></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience BEFORE Work -->
+  <!-- Experience (before Work) -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2>Experience</h2>
       <p class="lead">Communications · humanitarian data · policy research.</p>
       <div class="timeline">
-        <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Communications Intern — OIF</strong> • 2025 — Paris<p class="t-muted">Social content, media monitoring, reporting; built templates and improved workflows.</p></div></div>
-        <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Graduate Trainee — AQLITY</strong> • 2025 — Remote<p class="t-muted">Data cleaning & mapping for settlement-level assessments; narrative drafting and visuals.</p></div></div>
-        <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Volunteer — ARDHIS</strong> • 2024–2025 — Paris<p class="t-muted">Drop-in sessions; admin guidance for asylum seekers; desk research on country situations.</p></div></div>
-        <div class="t-item"><div class="dot" aria-hidden="true"></div><div class="t-card"><strong>Research Intern — Royal Scientific Society (Jordan)</strong> • 2024 — Amman<p class="t-muted">Desalination, climate security, and science diplomacy with multi-stakeholder teams.</p></div></div>
+        <div class="t">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="card project">
+            <div class="head" style="display:flex;justify-content:space-between;cursor:pointer">
+              <strong>Communications Intern — OIF • 2025 · Paris</strong><span class="chev">▶</span>
+            </div>
+            <div class="body"><div>
+              <p class="lead">Social content, media monitoring, reporting; built templates and improved workflows.</p>
+            </div></div>
+          </div>
+        </div>
+        <div class="t">
+          <div class="dot"></div>
+          <div class="card project">
+            <div class="head" style="display:flex;justify-content:space-between;cursor:pointer">
+              <strong>Graduate Trainee — AQLITY • 2025 · Remote</strong><span class="chev">▶</span>
+            </div>
+            <div class="body"><div>
+              <p class="lead">Data cleaning & mapping for settlement-level assessments; narrative drafting and visuals.</p>
+            </div></div>
+          </div>
+        </div>
+        <div class="t">
+          <div class="dot"></div>
+          <div class="card project">
+            <div class="head" style="display:flex;justify-content:space-between;cursor:pointer">
+              <strong>Volunteer — ARDHIS • 2024–2025 · Paris</strong><span class="chev">▶</span>
+            </div>
+            <div class="body"><div>
+              <p class="lead">Drop-in sessions; admin guidance for asylum seekers; desk research on country situations.</p>
+            </div></div>
+          </div>
+        </div>
+        <div class="t">
+          <div class="dot"></div>
+          <div class="card project">
+            <div class="head" style="display:flex;justify-content:space-between;cursor:pointer">
+              <strong>Research Intern — Royal Scientific Society (Jordan) • 2024 · Amman</strong><span class="chev">▶</span>
+            </div>
+            <div class="body"><div>
+              <p class="lead">Desalination, climate security, and science diplomacy with multi-stakeholder teams.</p>
+            </div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -188,25 +245,36 @@
   <section id="work" class="section">
     <div class="wrap">
       <h2>Selected Work</h2>
-      <p class="lead">Case studies blending analysis, design, and impact.</p>
+      <p class="lead">Click a project to reveal details.</p>
       <div class="projects">
-        <article class="card">
+        <article class="card project">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3>Human Security — Interactive Twine</h3>
-          <p class="t-muted">Interactive learning experience with quizzes and styled passages.</p>
-          <p><a href="#" target="_blank" rel="noopener">Open project →</a></p>
+          <h3 style="margin:10px 0">Human Security — Interactive Twine</h3>
+          <div class="head" style="display:flex;justify-content:space-between;cursor:pointer"><span class="lead">Overview</span><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Interactive learning experience with quizzes and styled passages.</p>
+            <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
+          </div></div>
         </article>
-        <article class="card">
+
+        <article class="card project">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3>SLAC Assessments — Data to Narrative</h3>
-          <p class="t-muted">Settlement-level data distilled into briefs and maps for partners.</p>
-          <p><a href="#" target="_blank" rel="noopener">Open project →</a></p>
+          <h3 style="margin:10px 0">SLAC Assessments — Data to Narrative</h3>
+          <div class="head" style="display:flex;justify-content:space-between;cursor:pointer"><span class="lead">Overview</span><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Settlement-level data distilled into briefs and maps for partners.</p>
+            <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
+          </div></div>
         </article>
-        <article class="card">
+
+        <article class="card project">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3>Desalination — Policy Brief</h3>
-          <p class="t-muted">Explainer on environmental & social impacts.</p>
-          <p><a href="#" target="_blank" rel="noopener">Open project →</a></p>
+          <h3 style="margin:10px 0">Desalination — Policy Brief</h3>
+          <div class="head" style="display:flex;justify-content:space-between;cursor:pointer"><span class="lead">Overview</span><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Explainer on environmental & social impacts.</p>
+            <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
+          </div></div>
         </article>
       </div>
     </div>
@@ -218,7 +286,7 @@
       <div class="card">
         <h2>Let’s work together</h2>
         <p class="lead">Based in Paris. I value clarity, empathy, and high standards.</p>
-        <div class="cta">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
           <a class="btn primary" href="mailto:you@example.com">Email me</a>
           <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
@@ -226,8 +294,22 @@
       </div>
     </div>
   </section>
+</main>
 
-  <footer>
-    <div class="wrap">© 2025 Bader Suliman · GitHub Pages / WordPress (Custom HTML)</div>
-  </footer>
-</div>
+<footer><div class="wrap">© 2025 Bader Suliman</div></footer>
+
+<a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
+
+<script>
+  /* Accordions: skills/education + experience + projects */
+  document.querySelectorAll('.accordion .head, .project .head').forEach(h=>{
+    h.addEventListener('click', ()=>{
+      const item = h.closest('.item') || h.closest('.project');
+      item.classList.toggle('open');
+    });
+  });
+  /* Back to top visibility */
+  const toTop = document.getElementById('toTop');
+  const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
+  document.addEventListener('scroll', toggleTop); toggleTop();
+</script>
