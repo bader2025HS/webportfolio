@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v31: Keep v30 mobile menu EXACT; Activities force 2×2 on phones. -->
+<!-- PORTFOLIO — v31.1: Desktop menu only — hide duplicate name in desktop nav, keep mobile EXACT, add framed brand on desktop scroll/header -->
 
 <!-- Viewport (safety) -->
 <script>
@@ -74,6 +74,24 @@
     display:flex; align-items:center; justify-content:space-between; gap:12px}
   .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap}
   .brand span{display:inline-block}
+
+  /* >>> DESKTOP NAV ONLY CHANGES (keep mobile EXACT) <<< */
+  /* Hide duplicate name block inside desktop nav; keep inline links */
+  #siteNav .mhead{display:none}
+  header nav#siteNav{display:flex; align-items:center}
+
+  /* Brand name framed on desktop (capsule) */
+  @media (min-width:761px){
+    .brand span{
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--card);
+      box-shadow:var(--shadow);
+    }
+  }
+  /* <<< END DESKTOP NAV CHANGES */
+
   .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
     box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
