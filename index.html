@@ -1,17 +1,11 @@
 <!-- PORTFOLIO — v22: Fix rounded corners (no global clip-path), stable reveals, varied effects. Based on your v18 content. -->
 <style>
-  body::after{
-  content:""; position:fixed; inset:-20vmax; z-index:-1; pointer-events:none; opacity:.35;
+  body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.25;
   background:
-    radial-gradient(40vmax 30vmax at 15% 20%, #8ee7df 0%, transparent 60%),
-    radial-gradient(35vmax 35vmax at 85% 25%, #b2c8ff 0%, transparent 60%),
-    radial-gradient(45vmax 30vmax at 60% 85%, #ffe2b5 0%, transparent 60%);
-  filter:blur(40px);
-  animation:meshFloat 24s ease-in-out infinite alternate;
-}
-@keyframes meshFloat{
-  50%{ transform:translate3d(2vw, -1vh, 0) scale(1.02) }
-  100%{ transform:translate3d(-2vw, 1vh, 0) scale(0.98) }
+    radial-gradient(circle at 1px 1px, rgba(2,6,23,.08) 1px, transparent 1px);
+  background-size:16px 16px;
+  mix-blend-mode:soft-light;
 }
   :root{
     --header:72px; --maxw:860px;
