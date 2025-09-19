@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v2: bigger name, friendly About, Skills split, detailed Languages, new Education -->
+<!-- PORTFOLIO — v3: no em dashes, + Extracurricular Activities -->
 <style>
   /* ===== Theme ===== */
   :root{
@@ -72,7 +72,7 @@
   .lang-list{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:900px){.lang-list{grid-template-columns:1fr}}
 
-  /* ===== Projects (accordion is used ONLY here) ===== */
+  /* ===== Projects (accordion only here) ===== */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .thumb{
@@ -102,6 +102,10 @@
   .edu .item strong{display:block}
   .edu .item p{margin:.25rem 0 0}
 
+  /* ===== Activities ===== */
+  .activities{display:grid; grid-template-columns:1fr; gap:12px}
+  .pill{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff0; margin:4px 6px 0 0}
+
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
 
   /* Back to top */
@@ -119,6 +123,7 @@
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
+      <a href="#activities">Activities</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
       <a href="#contact">Contact</a>
@@ -131,13 +136,11 @@
   <section id="about" class="section">
     <div class="wrap">
       <h1>Bader Suliman</h1>
-      <p class="lead" style="margin:0 0 12px">Sciences Po (PSIA) • Dual degree with Freie Universität Berlin — International Security, focus on Migration & Middle East.</p>
+      <p class="lead" style="margin:0 0 12px">Sciences Po (PSIA) - Dual degree with Freie Universität Berlin. International Security with a focus on Migration and the Middle East.</p>
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
-          Hi! I’m Bader. I care about how people actually experience policy on the ground—especially around migration, climate, and protection.
-          I turn messy information into clear stories: press reviews that matter, maps you can read in seconds, and short briefs that help teams decide what to do next.
-          I work in FR/EN/AR and love building small, fast pages like this one to share work without the fluff.
+          Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in 5 seconds, and short briefs that help a team decide the next step. I work in French, English, and Arabic, and I build small, fast pages like this one to share work without the fluff.
         </p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
           <a class="btn primary" href="#experience">See experience</a>
@@ -152,20 +155,20 @@
   <!-- Skills & Languages -->
   <section id="skills" class="section">
     <div class="wrap">
-      <h2>Skills & Languages</h2>
+      <h2>Skills and Languages</h2>
       <div class="skills-grid">
         <!-- Languages detailed -->
         <div class="card">
           <strong>Languages</strong>
           <div class="lang-list" style="margin-top:6px">
             <div>
-              <p class="lead" style="margin:.2rem 0"><strong>Arabic</strong> — Native · Modern Standard Arabic + dialects (Egyptian / Levantine / Gulf) · spoken, read, written</p>
-              <p class="lead" style="margin:.2rem 0"><strong>English</strong> — C2 · spoken, read, written</p>
+              <p class="lead" style="margin:.2rem 0"><strong>Arabic</strong> - Native. Modern Standard Arabic plus dialectal Arabic (Egyptian, Levantine, Gulf). Spoken, read, written.</p>
+              <p class="lead" style="margin:.2rem 0"><strong>English</strong> - C2. Spoken, read, written.</p>
             </div>
             <div>
-              <p class="lead" style="margin:.2rem 0"><strong>French</strong> — C1 · spoken, read, written</p>
-              <p class="lead" style="margin:.2rem 0"><strong>Persian (Farsi)</strong> — B2 · spoken, read, written</p>
-              <p class="lead" style="margin:.2rem 0"><strong>Japanese</strong> — A2 · spoken, read, written</p>
+              <p class="lead" style="margin:.2rem 0"><strong>French</strong> - C1. Spoken, read, written.</p>
+              <p class="lead" style="margin:.2rem 0"><strong>Persian (Farsi)</strong> - B2. Spoken, read, written.</p>
+              <p class="lead" style="margin:.2rem 0"><strong>Japanese</strong> - A2. Spoken, read, written.</p>
             </div>
           </div>
         </div>
@@ -175,21 +178,22 @@
           <div class="card">
             <strong>Soft skills</strong>
             <ul class="lead">
-              <li>Analytical thinking & synthesis</li>
-              <li>Press review & media monitoring</li>
+              <li>Analytical thinking and synthesis</li>
+              <li>Press review and media monitoring</li>
               <li>Critical thinking</li>
-              <li>Teamwork & facilitation</li>
-              <li>Clear, audience-first writing</li>
+              <li>Team work and facilitation</li>
+              <li>Clear, audience first writing</li>
             </ul>
           </div>
           <div class="card">
             <strong>Hard skills</strong>
             <ul class="lead">
-              <li>Data analysis & cleaning (Excel)</li>
-              <li>Mapping (QGIS / Mapbox)</li>
-              <li>Dashboards & visuals</li>
-              <li>WordPress / GitHub Pages</li>
-              <li>Basic HTML/CSS & Twine</li>
+              <li>Data analysis and cleaning (Excel)</li>
+              <li>Mapping (QGIS and Mapbox)</li>
+              <li>Dashboards and visuals</li>
+              <li>WordPress and GitHub Pages</li>
+              <li>Basic HTML and CSS, Twine</li>
+              <li>Microsoft 365 (Word, PowerPoint, Outlook)</li>
             </ul>
           </div>
         </div>
@@ -203,54 +207,85 @@
       <h2>Education</h2>
       <div class="edu">
         <div class="card item">
-          <strong>Sciences Po — Paris School of International Affairs (PSIA), Paris</strong>
-          <p class="lead">M.A. International Security (Migration & Middle Eastern Studies) · 2024–2027</p>
-          <p class="lead" style="margin:.2rem 0 0">Selected: Human Security · Cities & Migration · Environmental Policy in MENA · Media & Politics</p>
+          <strong>Sciences Po - Paris School of International Affairs (PSIA), Paris</strong>
+          <p class="lead">M.A. International Security (Migration and Middle Eastern Studies) - 2024 to 2027</p>
+          <p class="lead" style="margin:.2rem 0 0">Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
         </div>
         <div class="card item">
-          <strong>Freie Universität Berlin — Otto-Suhr-Institut, Berlin</strong>
-          <p class="lead">Dual degree (International Relations) · start 2026</p>
+          <strong>Freie Universität Berlin - Otto Suhr Institut, Berlin</strong>
+          <p class="lead">Dual degree (International Relations) - start 2026</p>
         </div>
         <div class="card item">
-          <strong>Sciences Po — B.A. Politics & Government (Menton & Nancy)</strong>
-          <p class="lead">2021–2024 · Exchange: Tokyo University of Foreign Studies (TUFS), 2023–2024</p>
+          <strong>Sciences Po - B.A. Politics and Government (Menton and Nancy)</strong>
+          <p class="lead">2021 to 2024 - Exchange year: Tokyo University of Foreign Studies (TUFS), 2023 to 2024</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience (timeline, no accordion) -->
+  <!-- Extracurricular Activities -->
+  <section id="activities" class="section">
+    <div class="wrap">
+      <h2>Extracurricular Activities</h2>
+      <div class="activities">
+        <div class="card">
+          <strong>MEDMUN - Arabic Committee Director</strong>
+          <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
+          <span class="pill">Model UN</span> <span class="pill">Conference design</span> <span class="pill">Facilitation</span>
+        </div>
+        <div class="card">
+          <strong>Sciences Po Monde Arabe - Communications Director</strong>
+          <p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p>
+          <span class="pill">Comms</span> <span class="pill">Branding</span> <span class="pill">Community</span>
+        </div>
+        <div class="card">
+          <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
+          <p class="lead" style="margin:.35rem 0 0">Helped organize and support sessions, speakers, and delegations. Hands on logistics and stakeholder coordination.</p>
+          <span class="pill">Event ops</span> <span class="pill">Stakeholders</span> <span class="pill">Logistics</span>
+        </div>
+        <div class="card">
+          <strong>Solo travel and field exposure</strong>
+          <p class="lead" style="margin:.35rem 0 0">
+            Traveled in many countries. Solo trips include India (across the country), Georgia, and Armenia. Regional experience also includes Jordan, Lebanon, United Arab Emirates, France, Germany, and Japan.
+          </p>
+          <span class="pill">Adaptability</span> <span class="pill">Intercultural</span> <span class="pill">Field savvy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience (timeline) -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2>Experience</h2>
-      <p class="lead">Communications · humanitarian data · policy research.</p>
+      <p class="lead">Communications, humanitarian data, and policy research.</p>
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
           <div class="card">
-            <div class="role"><strong>Communications Intern — OIF</strong><span class="where">2025 · Paris</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Social content, media monitoring, reporting; built templates and improved workflows.</p>
+            <div class="role"><strong>Communications Intern - OIF</strong><span class="where">2025 - Paris</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Social content, media monitoring, and reporting. Built templates and improved workflows.</p>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
           <div class="card">
-            <div class="role"><strong>Graduate Trainee — AQLITY</strong><span class="where">2025 · Remote</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Data cleaning & mapping for settlement-level assessments; narrative drafting and visuals.</p>
+            <div class="role"><strong>Graduate Trainee - AQLITY</strong><span class="where">2025 - Remote</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Data cleaning and mapping for settlement level assessments. Narrative drafting and visuals.</p>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
           <div class="card">
-            <div class="role"><strong>Volunteer — ARDHIS</strong><span class="where">2024–2025 · Paris</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Drop-in sessions; admin guidance for asylum seekers; desk research on country situations.</p>
+            <div class="role"><strong>Volunteer - ARDHIS</strong><span class="where">2024 to 2025 - Paris</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Drop in sessions. Administrative guidance for asylum seekers. Desk research on country situations.</p>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
           <div class="card">
-            <div class="role"><strong>Research Intern — Royal Scientific Society (Jordan)</strong><span class="where">2024 · Amman</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Desalination, climate security, and science diplomacy with multi-stakeholder teams.</p>
+            <div class="role"><strong>Research Intern - Royal Scientific Society (Jordan)</strong><span class="where">2024 - Amman</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Desalination, climate security, and science diplomacy with multi stakeholder teams.</p>
           </div>
         </div>
       </div>
@@ -265,7 +300,7 @@
       <div class="projects">
         <article class="card project">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3 style="margin:10px 0">Human Security — Interactive Twine</h3>
+          <h3 style="margin:10px 0">Human Security - Interactive Twine</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
           <div class="body"><div>
             <p class="lead">Interactive learning experience with quizzes and styled passages.</p>
@@ -275,20 +310,20 @@
 
         <article class="card project">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3 style="margin:10px 0">SLAC Assessments — Data to Narrative</h3>
+          <h3 style="margin:10px 0">SLAC Assessments - Data to Narrative</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
           <div class="body"><div>
-            <p class="lead">Settlement-level data distilled into briefs and maps for partners.</p>
+            <p class="lead">Settlement level data distilled into briefs and maps for partners.</p>
             <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
           </div></div>
         </article>
 
         <article class="card project">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3 style="margin:10px 0">Desalination — Policy Brief</h3>
+          <h3 style="margin:10px 0">Desalination - Policy Brief</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
           <div class="body"><div>
-            <p class="lead">Explainer on environmental & social impacts.</p>
+            <p class="lead">Explainer on environmental and social impacts.</p>
             <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
           </div></div>
         </article>
