@@ -1,6 +1,18 @@
-<!-- PORTFOLIO — v24: mobile-friendly with hamburger menu + touch tweaks -->
+<!-- PORTFOLIO — v25: Full rebuild with rock-solid mobile (viewport injection + hamburger), tidy spacing, hover/touch behaviors -->
+<!-- 0) Viewport injection (works even if you can't edit <head>) -->
+<script>
+(function(){
+  if(!document.querySelector('meta[name="viewport"]')){
+    const m = document.createElement('meta');
+    m.name = 'viewport';
+    m.content = 'width=device-width, initial-scale=1';
+    document.head.appendChild(m);
+  }
+})();
+</script>
+
 <style>
-  /* Topographic background overlay */
+  /* Background overlay (subtle topographic feel) */
   body::after{
     content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.18;
     background:
@@ -47,26 +59,18 @@
                filter .6s cubic-bezier(.2,.7,.2,1);
   }
   .reveal.in{ opacity:1; transform:none; filter:none }
-
-  /* Motion variants */
   .fx-from-left{transform:translateX(-28px) skewX(-2deg); filter:blur(4px)}
   .fx-from-right{transform:translateX(28px) skewX(2deg); filter:blur(4px)}
   .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
   .fx-from-down{transform:translateY(24px); filter:blur(6px)}
   .fx-zoom{transform:scale(.94); filter:blur(4px)}
   .fx-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
-  .fx-soft{transform:translateY(12px); opacity:.001}
-
-  /* Text wipe reveal (only for headings/labels) */
   .fx-wipe-l, .fx-wipe-r{display:inline-block; will-change:clip-path; transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
-  .fx-wipe-l{clip-path:inset(0 100% 0 0); -webkit-clip-path:inset(0 100% 0 0)}
-  .fx-wipe-r{clip-path:inset(0 0 0 100%); -webkit-clip-path:inset(0 0 0 100%)}
-  .fx-wipe-l.in, .fx-wipe-r.in{clip-path:inset(0 0 0 0); -webkit-clip-path:inset(0 0 0 0)}
-
-  /* Optional stagger */
+  .fx-wipe-l{clip-path:inset(0 100% 0 0)} .fx-wipe-r{clip-path:inset(0 0 0 100%)}
+  .fx-wipe-l.in, .fx-wipe-r.in{clip-path:inset(0 0 0 0)}
   [data-stagger] > *{transition-delay:var(--d,0ms)}
 
-  /* header */
+  /* Header */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
@@ -89,7 +93,7 @@
   nav a:hover{color:var(--accent)} nav a:hover:after{right:0}
   nav a.active{color:var(--accent)} nav a.active:after{right:0}
 
-  /* Hamburger button (hidden on desktop) */
+  /* Hamburger (mobile) */
   .menu-toggle{display:none; align-items:center; justify-content:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s ease}
@@ -97,23 +101,18 @@
     content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text);
     transition:transform .25s ease, opacity .25s ease, top .25s ease
   }
-  .menu-toggle .bar:before{top:-6px}
-  .menu-toggle .bar:after{top:6px}
+  .menu-toggle .bar:before{top:-6px} .menu-toggle .bar:after{top:6px}
   body.nav-open .menu-toggle .bar{transform:rotate(45deg)}
   body.nav-open .menu-toggle .bar:before{transform:rotate(-90deg) translateX(-6px); opacity:0}
   body.nav-open .menu-toggle .bar:after{transform:rotate(-90deg); top:0}
 
-  /* Mobile nav panel + overlay */
   .nav-overlay{position:fixed; inset:0; background:rgba(2,6,23,.35); backdrop-filter:blur(2px);
     z-index:9998; opacity:0; pointer-events:none; transition:opacity .2s}
   body.nav-open .nav-overlay{opacity:1; pointer-events:auto}
   body.nav-open{overflow:hidden}
 
-  @media (max-width:720px){
-    header .inner{flex-wrap:nowrap}
-    /* show hamburger */
+  @media (max-width:720px), (max-device-width:812px){
     .menu-toggle{display:flex}
-    /* off-canvas nav */
     header nav{
       position:fixed; top:var(--header); right:0; bottom:0; width:min(82vw,360px);
       background:rgba(255,255,255,.98); border-left:1px solid var(--line);
@@ -122,17 +121,16 @@
       display:flex; flex-direction:column; gap:6px; padding:16px; z-index:9999
     }
     body.nav-open header nav{transform:translateX(0)}
-    /* mobile nav link style */
+    header .inner{gap:8px}
     header nav a{margin:0; padding:12px 10px; border-radius:10px}
     header nav a.active{background:var(--card)}
-    /* tighten sections on phones */
     .wrap{padding:16px}
   }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
 
-  /* type/buttons/cards */
+  /* Type / buttons / cards */
   h1{font-size:clamp(44px,7vw,74px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -149,7 +147,7 @@
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* strap under name */
+  /* Strap under name */
   .strap{margin:6px 0 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
   .rotator{font-weight:800; letter-spacing:.2px}
   .fade{opacity:0; transform:translateY(6px); transition:opacity .25s ease, transform .25s ease}
@@ -164,7 +162,7 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — strong hover zoom, details on hover */
+  /* Projects (hover reveal; on touch, show by default) */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
@@ -174,8 +172,6 @@
   .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:0}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
   .project .body>div{overflow:hidden}
-
-  /* Touch devices: reveal details without hover, reduce zoom jump */
   @media (hover:none){
     .project .body{grid-template-rows:1fr; opacity:1}
     .project:hover,.project:hover .thumb{transform:none}
@@ -232,7 +228,7 @@
   <div class="inner">
     <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
-    <!-- Hamburger for mobile -->
+    <!-- Hamburger (mobile) -->
     <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
       <span class="bar"></span>
     </button>
@@ -248,7 +244,6 @@
     </nav>
   </div>
 </header>
-<!-- Dim overlay for mobile nav -->
 <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
 <main>
@@ -282,7 +277,7 @@
 
       <div class="card reveal fx-tilt">
         <strong class="reveal fx-wipe-r">Languages</strong>
-        <div class="lang-cols reveal fx-from-up" data-stagger=".lead li">
+        <div class="lang-cols reveal fx-from-up">
           <ul class="lead">
             <li><strong>Arabic</strong> - Native (MSA and dialects)</li>
             <li><strong>French</strong> - Native</li>
@@ -607,7 +602,7 @@ const onScroll = ()=>{
 };
 document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-/* ===== Mobile hamburger logic ===== */
+/* Mobile hamburger logic */
 const menuBtn = document.getElementById('menuBtn');
 const nav = document.getElementById('siteNav');
 const overlay = document.getElementById('navOverlay');
