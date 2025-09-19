@@ -1,27 +1,17 @@
-<!-- PORTFOLIO — v28: Desktop header fix + no underline, brand name steady, Activities as 4 squares, mobile overlay brand shown only on phones -->
+<!-- PORTFOLIO — v31: Keep v30 mobile menu EXACT; Activities force 2×2 on phones. -->
 
-<!-- Inject a viewport meta if the theme doesn’t add one -->
+<!-- Viewport (safety) -->
 <script>
 (function(){
   if(!document.querySelector('meta[name="viewport"]')){
-    const m = document.createElement('meta');
-    m.name = 'viewport';
-    m.content = 'width=device-width, initial-scale=1';
+    const m=document.createElement('meta');
+    m.name='viewport'; m.content='width=device-width, initial-scale=1';
     document.head.appendChild(m);
   }
 })();
 </script>
 
 <style>
-  /* Soft topo background */
-  body::after{
-    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.18;
-    background:
-      repeating-radial-gradient(circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
-      repeating-radial-gradient(circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
-    filter:blur(.2px);
-  }
-
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
@@ -44,16 +34,23 @@
       repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
     mix-blend-mode:soft-light; animation:gridPan 30s linear infinite;
   }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.18;
+    background:
+      repeating-radial-gradient(circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
+      repeating-radial-gradient(circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
+    filter:blur(.2px);
+  }
   @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
 
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
   .section{margin:clamp(24px,5vw,46px) 0}
-  .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
+  .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px)}
   .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
-  /* Reveal animations */
-  .reveal{opacity:0; will-change:transform, filter;
+  /* Reveals */
+  .reveal{opacity:0; will-change:transform,filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
                transform .6s cubic-bezier(.2,.7,.2,1),
                filter .6s cubic-bezier(.2,.7,.2,1)}
@@ -63,7 +60,6 @@
   .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
   .fx-from-down{transform:translateY(24px); filter:blur(6px)}
   .fx-zoom{transform:scale(.94); filter:blur(4px)}
-  .fx-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
   .fx-wipe-l,.fx-wipe-r{display:inline-block; will-change:clip-path; transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
   .fx-wipe-l{clip-path:inset(0 100% 0 0)} .fx-wipe-r{clip-path:inset(0 0 0 100%)}
   .fx-wipe-l.in,.fx-wipe-r.in{clip-path:inset(0 0 0 0)}
@@ -71,91 +67,54 @@
   /* Header */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
-    backdrop-filter:saturate(120%) blur(10px);
     background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
+    backdrop-filter:saturate(120%) blur(10px);
   }
   header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
     display:flex; align-items:center; justify-content:space-between; gap:12px}
-  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-  .badge{
-    width:34px; height:34px; border-radius:10px; flex:0 0 34px;
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap}
+  .brand span{display:inline-block}
+  .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
-    box-shadow:0 6px 18px rgba(2,6,23,.06);
-    animation:spin 10s linear infinite;
-  }
+    box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Navigation: NO underline, pill hover/active */
+  /* Navbar links (no underline) */
   nav a{
-    color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px;
-    padding:8px 10px; border-radius:12px; display:inline-block;
-    transition:background-color .2s ease, color .2s ease, box-shadow .2s ease;
+    color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
   }
-  nav a:hover{color:var(--accent); background:rgba(14,165,162,.08)}
-  nav a.active{color:var(--accent); background:rgba(14,165,162,.10); box-shadow:inset 0 0 0 1px rgba(14,165,162,.25)}
+  nav a:hover{color:var(--accent)}
+  nav a.active{color:var(--accent)}
+  nav a:after{display:none !important} /* remove underline */
 
-  /* Desktop header fix: hide mobile brand inside overlay */
-  #siteNav .mhead{display:none;}
-  header nav#siteNav{display:flex; align-items:center;}
-
-  /* Hamburger button */
-  .menu-toggle{display:none; align-items:center; justify-content:center; width:42px; height:42px;
+  /* Hamburger + mobile overlay — EXACTLY like v30 */
+  .menu-toggle{display:none; place-items:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
-  .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s ease}
+  .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
   .menu-toggle .bar:before,.menu-toggle .bar:after{
-    content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text);
-    transition:transform .25s ease, opacity .25s ease, top .25s ease
-  }
+    content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text); transition:.25s}
   .menu-toggle .bar:before{top:-6px} .menu-toggle .bar:after{top:6px}
   body.nav-open .menu-toggle .bar{transform:rotate(45deg)}
   body.nav-open .menu-toggle .bar:before{transform:rotate(-90deg) translateX(-6px); opacity:0}
   body.nav-open .menu-toggle .bar:after{transform:rotate(-90deg); top:0}
   body.nav-open{overflow:hidden}
 
-  /* Mobile full-screen white overlay menu */
   @media (max-width:760px), (max-device-width:812px){
-    .menu-toggle{display:flex; position:fixed; right:12px; top:12px; z-index:10004}
-/* 1) Puts the hamburger in the top-right */
-.menu-toggle{display:grid; position:fixed; right:12px; top:12px; z-index:10005}
-
-/* 2) Full-screen white overlay that slides down */
-header nav#siteNav{
-  position:fixed; inset:0; z-index:10004; height:100svh;
-  padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
-  display:flex; flex-direction:column; gap:10px;
-  background:#fff !important;                 /* <- solid white background */
-  transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
-  transition:transform .28s ease, opacity .2s ease;
-}
-
-/* 3) Makes overlay visible when the body has .nav-open (set by JS) */
-body.nav-open header nav#siteNav{
-  transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto;
-}
-
-/* 4) Styles EACH menu item as a rounded framed card */
-header nav a{
-  margin:0;
-  padding:16px 14px;
-  border-radius:12px;
-  font-size:1.12rem;
-  background:#fff;
-  border:1px solid var(--line);               /* <- the light frame */
-}
-
-/* 5) Active/selected item gets accent frame */
-header nav a.active{
-  color:var(--accent);
-  border-color:var(--accent);                  /* <- teal outline you see on “About” */
-}
-
-/* 6) Brand row at the top of the overlay (badge + name) */
-#siteNav .mhead{
-  display:flex; align-items:center; gap:10px;
-  position:absolute; left:18px;
-  top:calc(env(safe-area-inset-top,0px) + 18px);
-  font-weight:800;
-}
+    .menu-toggle{display:grid; position:fixed; right:12px; top:12px; z-index:10005}
+    header nav#siteNav{
+      position:fixed; inset:0; z-index:10004; height:100svh;
+      padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
+      display:flex; flex-direction:column; gap:10px;
+      background:#fff !important; /* solid white */
+      transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
+      transition:transform .28s ease, opacity .2s ease;
+    }
+    body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
+    header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
+    header nav a.active{color:var(--accent); border-color:var(--accent)}
+    #siteNav .mhead{display:flex; align-items:center; gap:10px;
+      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 18px);
+      font-weight:800}
   }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
@@ -170,18 +129,13 @@ header nav a.active{
   .btn:hover{transform:translateY(-1px)}
   .btn:after{content:""; position:absolute; inset:auto; top:0; left:0; width:0; height:100%; background:rgba(255,255,255,.15); transition:width .25s}
   .btn:hover:after{width:100%}
-
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s ease, box-shadow .2s ease;
-    transform:translateZ(0)
-  }
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s, box-shadow .2s}
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
   /* Strap under name */
   .strap{margin:6px 0 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
   .rotator{font-weight:800; letter-spacing:.2px}
-  .fade{opacity:0; transform:translateY(6px); transition:opacity .25s ease, transform .25s ease}
+  .fade{opacity:0; transform:translateY(6px); transition:opacity .25s, transform .25s}
   .fade.show{opacity:1; transform:none}
   .chips-mini{display:flex; gap:8px; flex-wrap:wrap}
   .chip-mini{padding:4px 10px; border:1px solid var(--line); border-radius:999px; background:var(--card); font-weight:600; font-size:.92rem}
@@ -196,17 +150,14 @@ header nav a.active{
   /* Projects */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
-  .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
+  .project{will-change:transform; transform:translateZ(0); transition:transform .28s, box-shadow .28s}
   .project:hover{transform:scale(1.12); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
-  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s ease}
+  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s}
   .project:hover .thumb{transform:scale(1.18)}
-  .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:0}
+  .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s, opacity .25s; opacity:0}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
   .project .body>div{overflow:hidden}
-  @media (hover:none){
-    .project .body{grid-template-rows:1fr; opacity:1}
-    .project:hover,.project:hover .thumb{transform:none}
-  }
+  @media (hover:none){ .project .body{grid-template-rows:1fr; opacity:1} .project:hover,.project:hover .thumb{transform:none} }
 
   /* Experience */
   .timeline{position:relative; margin-top:8px}
@@ -226,34 +177,18 @@ header nav a.active{
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — 4 squares on desktop */
-  .activities-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
-  }
-  @media (max-width:900px){ .activities-grid{grid-template-columns:1fr 1fr} }
-  @media (max-width:520px){ .activities-grid{grid-template-columns:1fr} }
-  .activity{
-    position:relative; overflow:hidden; aspect-ratio:1 / 1;
-    display:flex; align-items:center; justify-content:center; text-align:center;
-  }
+  /* Activities — 4-in-row desktop, FORCE 2×2 on phones */
+  .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+  @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:420px){ .activities-grid{grid-template-columns:repeat(2,1fr)} } /* keep 2 columns on very small phones */
+  .activity{aspect-ratio:1/1; display:grid; place-items:center; text-align:center; padding:12px}
   .activity .title{font-weight:800}
-  .activity:hover{transform:translateY(-2px)}
-  .activity.card{padding:0}
-  .activity .inner{padding:16px}
 
-  /* Footer */
-  footer{
-    border-top:1px solid var(--line); color:var(--muted); padding:12px 0; margin-top:22px;
-    background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px);
-  }
+  /* Footer (small) */
+  footer{border-top:1px solid var(--line); color:var(--muted); padding:10px 0; margin-top:24px;
+    background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px); font-size:.92rem}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion:reduce){
-    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
-    .reveal,.project .body{filter:none !important; transform:none !important; opacity:1 !important}
-  }
 </style>
 
 <div id="progress"></div>
@@ -262,13 +197,13 @@ header nav a.active{
   <div class="inner">
     <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
-    <!-- Hamburger (mobile) -->
+    <!-- Hamburger -->
     <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
       <span class="bar"></span>
     </button>
 
     <nav id="siteNav">
-      <!-- Mobile overlay brand (hidden on desktop by CSS) -->
+      <!-- brand inside the overlay too -->
       <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
       <a href="#about">About</a>
@@ -307,11 +242,11 @@ header nav a.active{
 
   <!-- Skills & Languages -->
   <section id="skills" class="section">
-    <div class="wrap" data-stagger=".card">
+    <div class="wrap">
       <h2 class="reveal fx-wipe-l">Skills and Languages</h2>
       <p class="lead reveal fx-from-right">Fluency, methods, and tools.</p>
 
-      <div class="card reveal fx-tilt">
+      <div class="card reveal fx-zoom">
         <strong class="reveal fx-wipe-r">Languages</strong>
         <div class="lang-cols reveal fx-from-up">
           <ul class="lead">
@@ -356,7 +291,7 @@ header nav a.active{
 
   <!-- Education -->
   <section id="education" class="section">
-    <div class="wrap" data-stagger=".item">
+    <div class="wrap">
       <h2 class="reveal fx-wipe-r">Education</h2>
       <p class="lead reveal fx-from-left">Focus on security, migration, and EU governance.</p>
       <div class="edu">
@@ -379,7 +314,7 @@ header nav a.active{
             <strong class="reveal fx-wipe-l">B.A. Politics and Government - Sciences Po</strong>
             <span class="where reveal fx-from-right">Menton/Nancy • 2021–2024</span>
           </div>
-          <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) — Tokyo • 2023–2024.</p>
+          <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) - Tokyo • 2023–2024.</p>
         </div>
       </div>
     </div>
@@ -398,10 +333,8 @@ header nav a.active{
               <strong>Intern - Project Design and Monitoring, OIF</strong>
               <span class="where">Paris • 2025</span>
             </div>
-            <p class="lead" style="margin:.35rem 0 0">Analyzed project data, maintained cooperation databases, wrote country briefs, and supported monitoring and evaluation.</p>
-            <div class="tags">
-              <span class="tag">Data analysis</span><span class="tag">Database design</span><span class="tag">Country briefs</span><span class="tag">Monitoring & evaluation</span>
-            </div>
+            <p class="lead" style="margin:.35rem 0 0">Analyzed project data, maintained structured cooperation databases, wrote country briefs, and supported monitoring and evaluation for the execution report.</p>
+            <div class="tags"><span class="tag">Data analysis</span><span class="tag">Database design</span><span class="tag">Country briefs</span><span class="tag">Monitoring and evaluation</span></div>
           </div>
         </div>
         <div class="t">
@@ -411,10 +344,8 @@ header nav a.active{
               <strong>Intern - Data Analysis, AQLITY</strong>
               <span class="where">Remote • 2025</span>
             </div>
-            <p class="lead" style="margin:.35rem 0 0">Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends.</p>
-            <div class="tags">
-              <span class="tag">Data cleaning</span><span class="tag">GIS & mapping</span><span class="tag">Infographics</span><span class="tag">Reporting</span>
-            </div>
+            <p class="lead" style="margin:.35rem 0 0">Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends and inform reports.</p>
+            <div class="tags"><span class="tag">Data cleaning</span><span class="tag">GIS and mapping</span><span class="tag">Infographics</span><span class="tag">Reporting</span></div>
           </div>
         </div>
         <div class="t">
@@ -422,25 +353,21 @@ header nav a.active{
           <div class="card reveal fx-from-left">
             <div class="role">
               <strong>Assistant - Immigration Law, ARDHIS</strong>
-              <span class="where">Paris • 2024–2025</span>
+              <span class="where">Paris • 2024 to 2025</span>
             </div>
-            <p class="lead" style="margin:.35rem 0 0">Guided asylum seekers during drop-in sessions, researched country conditions, and drafted notes for OFPRA/CNDA.</p>
-            <div class="tags">
-              <span class="tag">Legal support</span><span class="tag">Country research</span><span class="tag">Case briefs</span><span class="tag">Interviewing</span>
-            </div>
+            <p class="lead" style="margin:.35rem 0 0">Guided asylum seekers during drop in sessions, researched country conditions, and drafted case notes and briefs for OFPRA and the CNDA.</p>
+            <div class="tags"><span class="tag">Legal support</span><span class="tag">Country research</span><span class="tag">Case briefs</span><span class="tag">Interviewing</span></div>
           </div>
         </div>
         <div class="t">
           <div class="dot"></div>
           <div class="card reveal fx-from-right">
             <div class="role">
-              <strong>Intern - Partnerships & Development Dept., Royal Scientific Society</strong>
+              <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
               <span class="where">Amman • 2023</span>
             </div>
-            <p class="lead" style="margin:.35rem 0 0">Researched climate, water scarcity, and desalination in the Middle East and co-published with the Konrad Adenauer Stiftung.</p>
-            <div class="tags">
-              <span class="tag">Desalination</span><span class="tag">Climate & water</span><span class="tag">Research writing</span><span class="tag">Science diplomacy</span>
-            </div>
+            <p class="lead" style="margin:.35rem 0 0">Researched climate, water scarcity, and desalination in the Middle East and published an article with the Konrad Adenauer Stiftung while collaborating across research and policy teams.</p>
+            <div class="tags"><span class="tag">Desalination</span><span class="tag">Climate and water</span><span class="tag">Research writing</span><span class="tag">Science diplomacy</span></div>
           </div>
         </div>
         <div class="t">
@@ -450,10 +377,8 @@ header nav a.active{
               <strong>Intern - International Relations Department, City Hall</strong>
               <span class="where">Nancy • 2022</span>
             </div>
-            <p class="lead" style="margin:.35rem 0 0">Organized public events and intercultural outreach with twin cities; assisted logistics and protocol for official visits.</p>
-            <div class="tags">
-              <span class="tag">Event ops</span><span class="tag">Outreach</span><span class="tag">Protocol</span><span class="tag">Logistics</span>
-            </div>
+            <p class="lead" style="margin:.35rem 0 0">Organized public events and intercultural outreach with twin cities and assisted logistics and protocol for official visits.</p>
+            <div class="tags"><span class="tag">Event operations</span><span class="tag">Intercultural outreach</span><span class="tag">Protocol</span><span class="tag">Logistics</span></div>
           </div>
         </div>
       </div>
@@ -462,31 +387,29 @@ header nav a.active{
 
   <!-- Selected Work -->
   <section id="work" class="section">
-    <div class="wrap" data-stagger=".project">
+    <div class="wrap">
       <h2 class="reveal fx-wipe-r">Selected Work</h2>
       <p class="lead reveal fx-from-left">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
       <div class="projects">
         <article class="card project reveal fx-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3 style="margin:10px 0">Human Security — Interactive Twine</h3>
+          <h3 style="margin:10px 0">Human Security - Interactive Twine</h3>
           <div class="body"><div>
             <p class="lead">Interactive learning experience with quizzes and styled passages.</p>
             <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
           </div></div>
         </article>
-
         <article class="card project reveal fx-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3 style="margin:10px 0">SLAC Assessments — Data to Narrative</h3>
+          <h3 style="margin:10px 0">SLAC Assessments - Data to Narrative</h3>
           <div class="body"><div>
-            <p class="lead">Settlement-level data distilled into briefs and maps for partners.</p>
+            <p class="lead">Settlement level data distilled into briefs and maps for partners.</p>
             <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
           </div></div>
         </article>
-
         <article class="card project reveal fx-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
-          <h3 style="margin:10px 0">Desalination — Policy Brief</h3>
+          <h3 style="margin:10px 0">Desalination - Policy Brief</h3>
           <div class="body"><div>
             <p class="lead">Explainer on environmental and social impacts.</p>
             <p><a class="btn ghost" href="#" target="_blank" rel="noopener">Open project →</a></p>
@@ -496,17 +419,17 @@ header nav a.active{
     </div>
   </section>
 
-  <!-- Extracurricular Activities (4 squares, titles only) -->
+  <!-- Extracurricular Activities — 4 squares -->
   <section id="activities" class="section">
-    <div class="wrap" data-stagger=".activity">
+    <div class="wrap">
       <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
       <p class="lead reveal fx-from-right">Clubs, volunteering, events, and field exposure.</p>
 
       <div class="activities-grid">
-        <article class="card activity reveal fx-from-left"><div class="inner"><div class="title">Sciences Po Monde Arabe — Communications Director</div></div></article>
-        <article class="card activity reveal fx-from-right"><div class="inner"><div class="title">Tarjimly — Volunteer Translator & Interpreter</div></div></article>
-        <article class="card activity reveal fx-from-left"><div class="inner"><div class="title">Events — Mediterranean of the Future & Paris Peace Forum</div></div></article>
-        <article class="card activity reveal fx-from-right"><div class="inner"><div class="title">MEDMUN — Arabic Committee Director</div></div></article>
+        <article class="card activity reveal fx-zoom"><div class="title">Sciences Po Monde Arabe — Communications Director</div></article>
+        <article class="card activity reveal fx-zoom"><div class="title">Tarjimly — Volunteer Translator & Interpreter</div></article>
+        <article class="card activity reveal fx-zoom"><div class="title">Events — Mediterranean of the Future & Paris Peace Forum</div></article>
+        <article class="card activity reveal fx-zoom"><div class="title">MEDMUN — Arabic Committee Director</div></article>
       </div>
     </div>
   </section>
@@ -528,74 +451,53 @@ header nav a.active{
 </main>
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
-
-<!-- Bottom-right Top button -->
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
 /* Reveal on scroll */
 (function(){
-  const els = Array.from(document.querySelectorAll('.reveal'));
-  if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); }
-  else {
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0 });
-    els.forEach(el => io.observe(el));
+  const els=[...document.querySelectorAll('.reveal')];
+  if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
+  else{
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{root:null,rootMargin:'0px 0px -10% 0px',threshold:0});
+    els.forEach(e=>io.observe(e));
   }
-  function kick(){
-    els.forEach(el=>{
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) el.classList.add('in');
-    });
-  }
-  requestAnimationFrame(kick);
-  window.addEventListener('load', kick, {once:true});
-  window.addEventListener('resize', kick);
-  window.addEventListener('orientationchange', kick);
+  const kick=()=>els.forEach(e=>{const r=e.getBoundingClientRect(); if(r.top<innerHeight*.9&&r.bottom>0)e.classList.add('in')});
+  requestAnimationFrame(kick); addEventListener('load',kick,{once:true}); addEventListener('resize',kick); addEventListener('orientationchange',kick);
 })();
 
 // Rotating tagline
-const words = ["Communications","Data","Mapping","Research"];
-let wi = 0;
-const rot = document.getElementById("rotate");
-function cycle(){ if(!rot) return; rot.classList.remove("show"); setTimeout(()=>{ wi = (wi + 1) % words.length; rot.textContent = words[wi]; rot.classList.add('show'); }, 220); }
-if(rot){ rot.classList.add("show"); setInterval(cycle, 1800); }
+const words=["Communications","Data","Mapping","Research"]; let wi=0;
+const rot=document.getElementById("rotate");
+function cycle(){ if(!rot) return; rot.classList.remove('show'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
+if(rot){ rot.classList.add('show'); setInterval(cycle,1800); }
 
-// Back to top visibility
-const toTop = document.getElementById('toTop');
-const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
-document.addEventListener('scroll', toggleTop, {passive:true}); toggleTop();
+// Back to top
+const toTop=document.getElementById('toTop');
+const toggleTop=()=>{ scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
+addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
 
 // Active nav highlight + progress bar
-const links = [...document.querySelectorAll('nav a')];
-const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
-const secs = ids.map(id=>document.querySelector(id));
-const prog = document.getElementById('progress');
-
-const onScroll = ()=>{
-  const h = document.documentElement;
-  const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
-  prog.style.width = (scrolled*100)+'%';
-
-  let idx = 0;
-  secs.forEach((s,i)=>{ const r = s.getBoundingClientRect(); if(r.top <= window.innerHeight*0.4) idx = i; });
-  const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
-  if(atBottom){ idx = secs.length - 1; }
-
-  links.forEach(a=>a.classList.remove('active'));
-  const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
-  if(active) active.classList.add('active');
+const links=[...document.querySelectorAll('nav a')];
+const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
+const secs=ids.map(id=>document.querySelector(id));
+let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
+const onScroll=()=>{
+  const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
+  prog.style.width=(scrolled*100)+'%';
+  let idx=0; secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.top<=innerHeight*0.4) idx=i;});
+  const atBottom=Math.ceil(scrollY+innerHeight)>=document.body.scrollHeight-2; if(atBottom) idx=secs.length-1;
+  links.forEach(a=>a.classList.remove('active')); const active=document.querySelector(`nav a[href="${ids[idx]}"]`); if(active) active.classList.add('active');
 };
-document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
-// Mobile menu open/close
+/* Mobile menu (unchanged from v30) */
 const menuBtn=document.getElementById('menuBtn');
 const nav=document.getElementById('siteNav');
-function closeNav(){ document.body.classList.remove('nav-open'); ... }
-function openNav(){ document.body.classList.add('nav-open'); ... }
+function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
+function openNav(){ document.body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded','true'); nav.removeAttribute('aria-hidden'); }
 menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
-window.addEventListener('resize', ()=>{ if(window.innerWidth>760) closeNav(); }, {passive:true});
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
+addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 </script>
