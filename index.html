@@ -1,6 +1,5 @@
-<!-- PORTFOLIO — v3: no em dashes, + Extracurricular Activities -->
+<!-- PORTFOLIO — v4: Activities after Projects, tags only in Experience, Nancy added, no CTAs in About -->
 <style>
-  /* ===== Theme ===== */
   :root{
     --header:72px; --maxw:860px;
     --bg-top:#eafaf7; --bg-bot:#f7fbff;
@@ -14,7 +13,6 @@
     margin:0; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
     background: linear-gradient(180deg,var(--bg-top),var(--bg-bot));
   }
-  /* subtle grid */
   body:before{
     content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
@@ -22,17 +20,12 @@
       repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
     mix-blend-mode:soft-light;
   }
-
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
-  .section{margin:clamp(22px,4vw,40px) 0}
+  .section{margin:clamp(22px,4vw,40px) 0; opacity:0; transform:translateY(10px); animation:fadeup .6s ease forwards}
+  @keyframes fadeup{to{opacity:1; transform:none}}
   .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px)}
   .lead{color:var(--muted)}
 
-  /* simple fade-up once per section */
-  .section{opacity:0; transform:translateY(10px); animation:fadeup .6s ease forwards}
-  @keyframes fadeup{to{opacity:1; transform:none}}
-
-  /* ===== Sticky header ===== */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
@@ -46,14 +39,11 @@
   nav a{
     color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
   }
-  nav a:after{
-    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s;
-  }
+  nav a:after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s}
   nav a:hover{color:var(--accent)}
   nav a:hover:after{right:0}
 
-  /* ===== Headings / buttons / cards ===== */
-  h1{font-size:clamp(38px,6.5vw,64px); margin:0 0 6px} /* bigger name */
+  h1{font-size:clamp(38px,6.5vw,64px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none;}
   .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
@@ -64,7 +54,6 @@
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* ===== Skills & Languages ===== */
   .skills-grid{display:grid; grid-template-columns:1fr; gap:12px}
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
@@ -72,7 +61,6 @@
   .lang-list{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:900px){.lang-list{grid-template-columns:1fr}}
 
-  /* ===== Projects (accordion only here) ===== */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .thumb{
@@ -87,7 +75,6 @@
   .project.open .body{grid-template-rows:1fr}
   .project.open .chev{transform:rotate(90deg)}
 
-  /* ===== Experience (timeline, no accordion) ===== */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
     background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -96,23 +83,17 @@
     background:radial-gradient(circle at 40% 35%, #d4af37, #f3e8c1); box-shadow:0 0 0 3px rgba(14,165,162,.12)}
   .role{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
   .where{color:var(--muted)}
+  .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff0; font-size:.95rem; color:var(--muted)}
 
-  /* ===== Education (compact cards, no accordion) ===== */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item strong{display:block}
   .edu .item p{margin:.25rem 0 0}
 
-  /* ===== Activities ===== */
   .activities{display:grid; grid-template-columns:1fr; gap:12px}
-  .pill{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff0; margin:4px 6px 0 0}
 
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
-
-  /* Back to top */
-  .to-top{
-    position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none;
-    transition:opacity .2s;
-  }
+  .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 </style>
 
@@ -123,9 +104,9 @@
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
-      <a href="#activities">Activities</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
+      <a href="#activities">Activities</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -140,14 +121,9 @@
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
-          Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in 5 seconds, and short briefs that help a team decide the next step. I work in French, English, and Arabic, and I build small, fast pages like this one to share work without the fluff.
+          Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in five seconds, and short briefs that help a team decide the next step. I work in French, English, and Arabic, and I build small, fast pages like this one to share work without the fluff.
         </p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-          <a class="btn primary" href="#experience">See experience</a>
-          <a class="btn ghost" href="mailto:you@example.com">Email</a>
-          <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
-        </div>
+        <!-- no buttons here (contact only at the bottom) -->
       </div>
     </div>
   </section>
@@ -157,7 +133,6 @@
     <div class="wrap">
       <h2>Skills and Languages</h2>
       <div class="skills-grid">
-        <!-- Languages detailed -->
         <div class="card">
           <strong>Languages</strong>
           <div class="lang-list" style="margin-top:6px">
@@ -173,7 +148,6 @@
           </div>
         </div>
 
-        <!-- Soft vs Hard -->
         <div class="skills-2">
           <div class="card">
             <strong>Soft skills</strong>
@@ -201,7 +175,7 @@
     </div>
   </section>
 
-  <!-- Education (compact, no accordion) -->
+  <!-- Education -->
   <section id="education" class="section">
     <div class="wrap">
       <h2>Education</h2>
@@ -223,38 +197,7 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities -->
-  <section id="activities" class="section">
-    <div class="wrap">
-      <h2>Extracurricular Activities</h2>
-      <div class="activities">
-        <div class="card">
-          <strong>MEDMUN - Arabic Committee Director</strong>
-          <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
-          <span class="pill">Model UN</span> <span class="pill">Conference design</span> <span class="pill">Facilitation</span>
-        </div>
-        <div class="card">
-          <strong>Sciences Po Monde Arabe - Communications Director</strong>
-          <p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p>
-          <span class="pill">Comms</span> <span class="pill">Branding</span> <span class="pill">Community</span>
-        </div>
-        <div class="card">
-          <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
-          <p class="lead" style="margin:.35rem 0 0">Helped organize and support sessions, speakers, and delegations. Hands on logistics and stakeholder coordination.</p>
-          <span class="pill">Event ops</span> <span class="pill">Stakeholders</span> <span class="pill">Logistics</span>
-        </div>
-        <div class="card">
-          <strong>Solo travel and field exposure</strong>
-          <p class="lead" style="margin:.35rem 0 0">
-            Traveled in many countries. Solo trips include India (across the country), Georgia, and Armenia. Regional experience also includes Jordan, Lebanon, United Arab Emirates, France, Germany, and Japan.
-          </p>
-          <span class="pill">Adaptability</span> <span class="pill">Intercultural</span> <span class="pill">Field savvy</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience (timeline) -->
+  <!-- Experience -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2>Experience</h2>
@@ -265,6 +208,9 @@
           <div class="card">
             <div class="role"><strong>Communications Intern - OIF</strong><span class="where">2025 - Paris</span></div>
             <p class="lead" style="margin:.35rem 0 0">Social content, media monitoring, and reporting. Built templates and improved workflows.</p>
+            <div class="tags">
+              <span class="tag">Social media</span><span class="tag">Media monitoring</span><span class="tag">Reporting</span><span class="tag">Templates</span>
+            </div>
           </div>
         </div>
         <div class="t">
@@ -272,6 +218,9 @@
           <div class="card">
             <div class="role"><strong>Graduate Trainee - AQLITY</strong><span class="where">2025 - Remote</span></div>
             <p class="lead" style="margin:.35rem 0 0">Data cleaning and mapping for settlement level assessments. Narrative drafting and visuals.</p>
+            <div class="tags">
+              <span class="tag">Data cleaning</span><span class="tag">Mapping</span><span class="tag">Storytelling</span><span class="tag">Dashboards</span>
+            </div>
           </div>
         </div>
         <div class="t">
@@ -279,6 +228,9 @@
           <div class="card">
             <div class="role"><strong>Volunteer - ARDHIS</strong><span class="where">2024 to 2025 - Paris</span></div>
             <p class="lead" style="margin:.35rem 0 0">Drop in sessions. Administrative guidance for asylum seekers. Desk research on country situations.</p>
+            <div class="tags">
+              <span class="tag">Protection</span><span class="tag">Admin support</span><span class="tag">Country research</span>
+            </div>
           </div>
         </div>
         <div class="t">
@@ -286,13 +238,27 @@
           <div class="card">
             <div class="role"><strong>Research Intern - Royal Scientific Society (Jordan)</strong><span class="where">2024 - Amman</span></div>
             <p class="lead" style="margin:.35rem 0 0">Desalination, climate security, and science diplomacy with multi stakeholder teams.</p>
+            <div class="tags">
+              <span class="tag">Climate</span><span class="tag">Water</span><span class="tag">Science diplomacy</span>
+            </div>
+          </div>
+        </div>
+        <!-- Nancy experience -->
+        <div class="t">
+          <div class="dot"></div>
+          <div class="card">
+            <div class="role"><strong>Student Lead - Twin Cities Program, City of Nancy</strong><span class="where">2022 - Nancy</span></div>
+            <p class="lead" style="margin:.35rem 0 0">Organized intercultural visits and museum tours for students from Newcastle, Lviv, and Lublin. Supported a conference on the city environmental policy.</p>
+            <div class="tags">
+              <span class="tag">Event ops</span><span class="tag">Intercultural</span><span class="tag">Logistics</span><span class="tag">Public speaking</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects (only place with accordion interaction) -->
+  <!-- Projects (accordion only here) -->
   <section id="work" class="section">
     <div class="wrap">
       <h2>Selected Work</h2>
@@ -331,6 +297,33 @@
     </div>
   </section>
 
+  <!-- Extracurricular Activities AFTER Projects (no tags here) -->
+  <section id="activities" class="section">
+    <div class="wrap">
+      <h2>Extracurricular Activities</h2>
+      <div class="activities">
+        <div class="card">
+          <strong>MEDMUN - Arabic Committee Director</strong>
+          <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
+        </div>
+        <div class="card">
+          <strong>Sciences Po Monde Arabe - Communications Director</strong>
+          <p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p>
+        </div>
+        <div class="card">
+          <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
+          <p class="lead" style="margin:.35rem 0 0">Helped organize and support sessions, speakers, and delegations. Hands on logistics and stakeholder coordination.</p>
+        </div>
+        <div class="card">
+          <strong>Solo travel and field exposure</strong>
+          <p class="lead" style="margin:.35rem 0 0">
+            Traveled in many countries. Solo trips include India across the country, Georgia, and Armenia. Regional experience also includes Jordan, Lebanon, United Arab Emirates, France, Germany, and Japan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section id="contact" class="section">
     <div class="wrap">
@@ -352,7 +345,7 @@
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-  // Projects accordion (only here)
+  // Projects accordion only
   document.querySelectorAll('.project .head').forEach(h=>{
     h.addEventListener('click', ()=> h.closest('.project').classList.toggle('open'));
   });
