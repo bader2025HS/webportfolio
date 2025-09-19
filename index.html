@@ -1,11 +1,10 @@
-<!-- PORTFOLIO — v14: Activities w/o colored frames + true isolated accordion (masonry columns) -->
+<!-- PORTFOLIO — v15: Activities = top+2-col, hover reveal; Projects isolated toggle; Contact text updated -->
 <style>
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
-    --coral:#ff7a6e; --violet:#7c61ff; --amber:#f59e0b;
     --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
   }
   *{box-sizing:border-box}
@@ -63,9 +62,8 @@
   nav a.active{color:var(--accent)} nav a.active:after{right:0}
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
-    background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
+    background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
 
-  /* type/buttons/cards */
   h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -89,7 +87,7 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — strong zoom */
+  /* Projects — strong zoom + isolated accordion */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
@@ -118,31 +116,23 @@
   .where{color:var(--muted)}
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
   .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
-  .tag.violet{color:#2e236e; background:#efeaff; border-color:#d9ceff}
-  .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
-  .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
-  /* Education (title left, Location • Years right) */
+  /* Education (title left, Location • Years right) — hyphens instead of em dashes */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
   .edu .item strong{display:block}
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — masonry columns, no color frames, true isolated expansion */
-  .activities-masonry{column-count:2; column-gap:12px}
-  @media (max-width:900px){ .activities-masonry{column-count:1} }
-  .activity{display:inline-block; width:100%; break-inside:avoid; margin:0 0 12px}
-  .activity .head{display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none}
-  .activity .chev{transition:transform .2s}
-  .activity .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease}
-  .activity .body>div{overflow:hidden}
-  .activity.open .body{grid-template-rows:1fr}
-  .activity.open .chev{transform:rotate(90deg)}
-
-  footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
-  .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
-  .to-top.show{opacity:1; pointer-events:auto}
+  /* Activities — top full-width, then 2 columns; hover to reveal details (no arrows) */
+  .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .activities-grid .full{grid-column:1 / -1}
+  @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
+  .activity{position:relative; overflow:hidden}
+  .activity .title{font-weight:700}
+  .activity .body{max-height:0; opacity:0; transition:max-height .35s ease, opacity .25s ease, transform .25s ease}
+  .activity:hover{transform:translateY(-2px)}
+  .activity:hover .body{max-height:220px; opacity:1}
 </style>
 
 <div id="progress"></div>
@@ -224,37 +214,37 @@
     </div>
   </section>
 
-  <!-- Education -->
+  <!-- Education (hyphens) -->
   <section id="education" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Education</h2>
       <div class="edu">
         <div class="card item reveal anim-pop">
           <div class="head">
-            <strong>M.A. International Security — Sciences Po (PSIA)</strong>
+            <strong>M.A. International Security - Sciences Po (PSIA)</strong>
             <span class="where">Paris • 2024–2027</span>
           </div>
           <p class="lead">Focus on Migration and Middle Eastern Studies. Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
         </div>
         <div class="card item reveal anim-pop">
           <div class="head">
-            <strong>Dual Degree (International Relations) — Freie Universität Berlin</strong>
+            <strong>Dual Degree (International Relations) - Freie Universität Berlin</strong>
             <span class="where">Berlin • 2026–2027</span>
           </div>
           <p class="lead">Coursework in international relations and policy analysis within the dual degree track.</p>
         </div>
         <div class="card item reveal anim-pop">
           <div class="head">
-            <strong>B.A. Politics and Government — Sciences Po</strong>
+            <strong>B.A. Politics and Government - Sciences Po</strong>
             <span class="where">Menton/Nancy • 2021–2024</span>
           </div>
-          <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) — Tokyo • 2023–2024.</p>
+          <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) - Tokyo • 2023–2024.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience (unchanged) -->
+  <!-- Experience -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Experience</h2>
@@ -271,7 +261,7 @@
               Analyzed project data, maintained structured cooperation databases, wrote country briefs, and supported monitoring and evaluation for the execution report.
             </p>
             <div class="tags">
-              <span class="tag">Data analysis</span><span class="tag violet">Database design</span><span class="tag coral">Country briefs</span><span class="tag amber">Monitoring and evaluation</span>
+              <span class="tag">Data analysis</span><span class="tag">Database design</span><span class="tag">Country briefs</span><span class="tag">Monitoring and evaluation</span>
             </div>
           </div>
         </div>
@@ -279,14 +269,14 @@
           <div class="dot"></div>
           <div class="card reveal anim-r">
             <div class="role">
-              <strong>Graduate Trainee - AQLITY</strong>
+              <strong>Data Analyst Intern - AQLITY</strong>
               <span class="where">Remote • 2025</span>
             </div>
             <p class="lead" style="margin:.35rem 0 0">
               Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends and inform reports.
             </p>
             <div class="tags">
-              <span class="tag">Data cleaning</span><span class="tag violet">GIS and mapping</span><span class="tag coral">Infographics</span><span class="tag amber">Reporting</span>
+              <span class="tag">Data cleaning</span><span class="tag">GIS and mapping</span><span class="tag">Infographics</span><span class="tag">Reporting</span>
             </div>
           </div>
         </div>
@@ -301,7 +291,7 @@
               Guided asylum seekers during drop in sessions, researched country conditions, and drafted case notes and briefs for OFPRA and the CNDA.
             </p>
             <div class="tags">
-              <span class="tag">Legal support</span><span class="tag violet">Country research</span><span class="tag coral">Case briefs</span><span class="tag amber">Interviewing</span>
+              <span class="tag">Legal support</span><span class="tag">Country research</span><span class="tag">Case briefs</span><span class="tag">Interviewing</span>
             </div>
           </div>
         </div>
@@ -316,7 +306,7 @@
               Researched climate, water scarcity, and desalination in the Middle East and published an article with the Konrad Adenauer Stiftung while collaborating across research and policy teams.
             </p>
             <div class="tags">
-              <span class="tag">Desalination</span><span class="tag violet">Climate and water</span><span class="tag coral">Research writing</span><span class="tag amber">Science diplomacy</span>
+              <span class="tag">Desalination</span><span class="tag">Climate and water</span><span class="tag">Research writing</span><span class="tag">Science diplomacy</span>
             </div>
           </div>
         </div>
@@ -331,7 +321,7 @@
               Organized public events and intercultural outreach with twin cities and assisted logistics and protocol for official visits.
             </p>
             <div class="tags">
-              <span class="tag">Event operations</span><span class="tag violet">Intercultural outreach</span><span class="tag coral">Protocol</span><span class="tag amber">Logistics</span>
+              <span class="tag">Event operations</span><span class="tag">Intercultural outreach</span><span class="tag">Protocol</span><span class="tag">Logistics</span>
             </div>
           </div>
         </div>
@@ -378,57 +368,48 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (no color frames, masonry columns, click-to-reveal) -->
+  <!-- Extracurricular Activities (top full-width + 2 columns; hover reveal) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
 
-      <div class="activities-masonry">
-        <article class="card activity reveal anim-l">
-          <div class="head"><strong>Sciences Po Monde Arabe — Communications Director</strong><span class="chev">▶</span></div>
-          <div class="body"><div>
-            <p class="lead">Managed branding, content, and outreach; produced visuals and coordinated announcements for talks and cultural events.</p>
-          </div></div>
+      <div class="activities-grid">
+        <!-- Top: full width -->
+        <article class="card activity full reveal anim-l">
+          <div class="title">Sciences Po Monde Arabe - Communications Director</div>
+          <div class="body"><p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p></div>
         </article>
 
-        <article class="card activity reveal anim-r">
-          <div class="head"><strong>Tarjimly — Volunteer Translator and Interpreter</strong><span class="chev">▶</span></div>
-          <div class="body"><div>
-            <p class="lead">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p>
-          </div></div>
+        <!-- Two columns below -->
+        <article class="card activity reveal anim-pop">
+          <div class="title">Tarjimly - Volunteer Translator and Interpreter</div>
+          <div class="body"><p class="lead" style="margin:.35rem 0 0">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p></div>
         </article>
 
         <article class="card activity reveal anim-pop">
-          <div class="head"><strong>Events — Mediterranean of the Future & Paris Peace Forum</strong><span class="chev">▶</span></div>
-          <div class="body"><div>
-            <p class="lead">Helped organize sessions and delegations with hands-on logistics and stakeholder coordination.</p>
-          </div></div>
+          <div class="title">Events - Mediterranean of the Future & Paris Peace Forum</div>
+          <div class="body"><p class="lead" style="margin:.35rem 0 0">Helped organize sessions and delegations with hands-on logistics and stakeholder coordination.</p></div>
         </article>
 
         <article class="card activity reveal anim-pop">
-          <div class="head"><strong>Solo travel and field exposure</strong><span class="chev">▶</span></div>
-          <div class="body"><div>
-            <p class="lead">Solo trips to India, Georgia, and Armenia; regional experience in Jordan, Lebanon, UAE, France, Germany, and Japan.</p>
-          </div></div>
+          <div class="title">Solo travel - 15+ countries</div>
+          <div class="body"><p class="lead" style="margin:.35rem 0 0">Regions: Europe, Middle East, Asia.</p></div>
         </article>
 
         <article class="card activity reveal anim-pop">
-          <div class="head"><strong>MEDMUN — Arabic Committee Director</strong><span class="chev">▶</span></div>
-          <div class="body"><div>
-            <p class="lead">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p>
-          </div></div>
+          <div class="title">MEDMUN - Arabic Committee Director</div>
+          <div class="body"><p class="lead" style="margin:.35rem 0 0">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p></div>
         </article>
       </div>
-
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="section">
     <div class="wrap reveal anim-pop">
-      <div class="card tilt">
+      <div class="card">
         <h2>Let’s work together</h2>
-        <p class="lead">Based in Paris. I value clarity, empathy, and high standards.</p>
+        <p class="lead">Based in Paris. Always willing to relocate. I value clarity, empathy, and high standards.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <a class="btn primary" href="mailto:you@example.com">Email me</a>
           <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
@@ -450,19 +431,14 @@
   }, {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Projects accordion (unchanged)
+  // Projects accordion — isolate toggles (neighbors never open)
   document.querySelectorAll('.project .head').forEach(h=>{
     h.addEventListener('click', (e)=>{
       e.stopPropagation();
-      h.closest('.project').classList.toggle('open');
-    });
-  });
-
-  // Activities accordion — toggle ONLY the clicked card; neighbors unaffected
-  document.querySelectorAll('.activity .head').forEach(h=>{
-    h.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      h.closest('.activity').classList.toggle('open');
+      const card = h.closest('.project');
+      const container = card.parentElement;
+      container.querySelectorAll('.project.open').forEach(p=>{ if(p!==card) p.classList.remove('open'); });
+      card.classList.toggle('open');
     });
   });
 
