@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v6: Languages 2 cols + new animations + colorful accents + title fixes -->
+<!-- PORTFOLIO — v7: always-spinning badge, wider Skills spacing, simplified Arabic, updated Experience, no title lines -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -12,12 +12,10 @@
   html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header) + 14px)}
   body{
     margin:0; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
-    /* animated multi-stop gradient */
     background:linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
     background-size:200% 200%; animation:bgShift 22s ease infinite;
   }
   @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  /* subtle moving grid overlay */
   body:before{
     content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
@@ -27,18 +25,12 @@
   }
   @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
 
-  /* layout */
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
   .section{margin:clamp(22px,4vw,40px) 0}
-  .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px); position:relative}
-  .section h2:after{
-    content:""; display:block; height:3px; width:84px; margin-top:6px;
-    background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber));
-    border-radius:999px;
-  }
+  .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px)}
   .lead{color:var(--muted)}
 
-  /* reveal-on-scroll (diverse) */
+  /* diverse reveals */
   .reveal{opacity:0; transition:opacity .55s ease, transform .55s ease}
   .reveal.in{opacity:1; transform:none}
   .anim-fade{transform:translateY(14px)}
@@ -47,7 +39,6 @@
   .anim-scale{transform:scale(.96)}
   .anim-pop{transform:translateY(10px) scale(.98)}
 
-  /* sticky header + active nav */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
@@ -56,11 +47,12 @@
   header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
     display:flex; align-items:center; justify-content:space-between}
   .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-  .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
-    background:conic-gradient(from 220deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(2,6,23,.06);
-    animation:spin 8s linear infinite paused;
+  .badge{
+    width:34px; height:34px; border-radius:10px; flex:0 0 34px;
+    background:conic-gradient(from 220deg,var(--accent),var(--accent2));
+    box-shadow:0 6px 18px rgba(2,6,23,.06);
+    animation:spin 10s linear infinite; /* always spinning */
   }
-  header:hover .badge{animation-play-state:running}
   @keyframes spin{to{transform:rotate(360deg)}}
   nav a{
     color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
@@ -68,11 +60,10 @@
   nav a:after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s}
   nav a:hover{color:var(--accent)} nav a:hover:after{right:0}
   nav a.active{color:var(--accent)} nav a.active:after{right:0}
-  /* progress bar */
+
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
 
-  /* type/buttons/cards */
   h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -89,16 +80,14 @@
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* skills & languages */
-  .skills-grid{display:grid; grid-template-columns:1fr; gap:12px}
-  .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  /* Skills/Languages spacing increased */
+  .skills-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:6px}
+  .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
-
-  .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* projects */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .thumb{
@@ -113,7 +102,6 @@
   .project.open .body{grid-template-rows:1fr}
   .project.open .chev{transform:rotate(90deg)}
 
-  /* experience timeline + colorful tags */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
     background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -128,15 +116,12 @@
   .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
   .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
-  /* education */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item strong{display:block}
   .edu .item p{margin:.25rem 0 0}
 
-  /* activities */
   .activities{display:grid; grid-template-columns:1fr; gap:12px}
 
-  /* footer + back to top */
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
@@ -176,16 +161,14 @@
   <!-- Skills & Languages -->
   <section id="skills" class="section">
     <div class="wrap">
-      <div class="reveal anim-l">
-        <h2>Skills and Languages</h2>
-      </div>
+      <div class="reveal anim-l"><h2>Skills and Languages</h2></div>
 
       <!-- Languages (2 columns) -->
       <div class="card reveal anim-l">
         <strong>Languages</strong>
-        <div class="lang-cols" style="margin-top:6px">
+        <div class="lang-cols">
           <ul class="lead">
-            <li><strong>Arabic</strong> - Native (Modern Standard and dialectal: Levantine, Gulf, Egyptian)</li>
+            <li><strong>Arabic</strong> - Native (MSA and dialects: Levantine, Gulf, Egyptian)</li>
             <li><strong>French</strong> - Native</li>
             <li><strong>English</strong> - C2 (spoken, read, written)</li>
           </ul>
@@ -252,53 +235,83 @@
       <h2 class="reveal anim-fade">Experience</h2>
       <p class="lead reveal anim-fade">Communications, humanitarian data, and policy research</p>
       <div class="timeline">
+        <!-- OIF -->
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
           <div class="card tilt reveal anim-l">
-            <div class="role"><strong>Intern - Conception et Suivi de Projet, OIF</strong><span class="where">2025 - Paris</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Project design and reporting. Media monitoring and internal templates to improve workflows.</p>
+            <div class="role">
+              <strong>Intern - Conception et Suivi de Projet (Project Design and Monitoring), OIF</strong>
+              <span class="where">Paris, France • 2025</span>
+            </div>
+            <p class="lead" style="margin:.35rem 0 0">
+              Collected, processed, and analyzed project data across the Francophone space, then built and updated structured databases for cooperation tracking and strategic programming. Produced country fiches and analytical notes on multilateral cooperation and supported monitoring and evaluation, including inputs to the 2025 execution report.
+            </p>
             <div class="tags">
-              <span class="tag">Project design</span><span class="tag violet">Reporting</span><span class="tag coral">Media monitoring</span><span class="tag amber">Stakeholders</span>
+              <span class="tag">Data analysis</span><span class="tag violet">Database design</span><span class="tag coral">Country briefs</span><span class="tag amber">Monitoring and evaluation</span>
             </div>
           </div>
         </div>
+        <!-- AQLITY -->
         <div class="t">
           <div class="dot"></div>
           <div class="card tilt reveal anim-r">
-            <div class="role"><strong>Graduate Trainee - AQLITY</strong><span class="where">2025 - Remote</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Data cleaning and mapping for settlement level assessments. Narrative drafting and visuals.</p>
+            <div class="role">
+              <strong>Graduate Trainee - AQLITY</strong>
+              <span class="where">Remote • 2025</span>
+            </div>
+            <p class="lead" style="margin:.35rem 0 0">
+              Led in depth data cleaning and analysis to improve accuracy and consistency in humanitarian datasets. Produced maps, reports, and visual communications that combined geospatial and analytical insights to explain trends and support decision making.
+            </p>
             <div class="tags">
-              <span class="tag">Data cleaning</span><span class="tag violet">Mapping</span><span class="tag coral">Storytelling</span><span class="tag amber">Dashboards</span>
+              <span class="tag">Data cleaning</span><span class="tag violet">GIS and mapping</span><span class="tag coral">Infographics</span><span class="tag amber">Reporting</span>
             </div>
           </div>
         </div>
+        <!-- ARDHIS -->
         <div class="t">
           <div class="dot"></div>
           <div class="card tilt reveal anim-l">
-            <div class="role"><strong>Immigration Law Assistant - ARDHIS</strong><span class="where">2024 to 2025 - Paris</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Drop in sessions and administrative guidance for asylum seekers. Country research and documentation.</p>
+            <div class="role">
+              <strong>Immigration Law Assistant - ARDHIS</strong>
+              <span class="where">Paris, France • Sep 2024 to May 2025</span>
+            </div>
+            <p class="lead" style="margin:.35rem 0 0">
+              Provided tailored administrative support and step by step guidance during drop in sessions. Researched legal and geopolitical contexts for countries of origin such as the DRC and Cameroon, drafted concise case notes and background briefs, and developed interviewing and narrative skills to document histories with care.
+            </p>
             <div class="tags">
-              <span class="tag">Protection</span><span class="tag violet">Legal support</span><span class="tag coral">Country research</span>
+              <span class="tag">Legal support</span><span class="tag violet">Country research</span><span class="tag coral">Case briefs</span><span class="tag amber">Interviewing</span>
             </div>
           </div>
         </div>
+        <!-- RSS Jordan -->
         <div class="t">
           <div class="dot"></div>
           <div class="card tilt reveal anim-r">
-            <div class="role"><strong>Intern - International Relations Service, City of Nancy</strong><span class="where">2022 - Nancy</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Coordinated intercultural visits and museum tours for twin cities. Supported a conference on city environmental policy.</p>
+            <div class="role">
+              <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
+              <span class="where">Amman, Jordan • Jun 2023 to Aug 2023</span>
+            </div>
+            <p class="lead" style="margin:.35rem 0 0">
+              Authored an article on desalination impacts published by the Konrad Adenauer Stiftung and researched climate, water scarcity, and desalination in the Middle East. Gained hands on exposure to science diplomacy with researchers, policymakers, and international partners.
+            </p>
             <div class="tags">
-              <span class="tag">Event ops</span><span class="tag violet">Intercultural</span><span class="tag coral">Logistics</span><span class="tag amber">Public speaking</span>
+              <span class="tag">Desalination</span><span class="tag violet">Climate and water</span><span class="tag coral">Research writing</span><span class="tag amber">Science diplomacy</span>
             </div>
           </div>
         </div>
+        <!-- City Hall Nancy -->
         <div class="t">
           <div class="dot"></div>
           <div class="card tilt reveal anim-l">
-            <div class="role"><strong>Research Intern - Royal Scientific Society (Jordan)</strong><span class="where">2024 - Amman</span></div>
-            <p class="lead" style="margin:.35rem 0 0">Desalination, climate security, and science diplomacy with multi stakeholder teams.</p>
+            <div class="role">
+              <strong>Intern - International Relations Department, City Hall</strong>
+              <span class="where">Nancy, France • Jul 2022 to Aug 2022</span>
+            </div>
+            <p class="lead" style="margin:.35rem 0 0">
+              Organized public events, visibility campaigns, and intercultural outreach with twin cities Newcastle, Lviv, and Lublin. Assisted logistics and diplomatic protocol for official visits.
+            </p>
             <div class="tags">
-              <span class="tag">Climate</span><span class="tag violet">Water</span><span class="tag coral">Science diplomacy</span>
+              <span class="tag">Event operations</span><span class="tag violet">Intercultural outreach</span><span class="tag coral">Protocol</span><span class="tag amber">Logistics</span>
             </div>
           </div>
         </div>
@@ -393,7 +406,7 @@
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-  // Reveal on scroll (diverse)
+  // Reveal on scroll
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold: .12});
@@ -404,7 +417,7 @@
     h.addEventListener('click', ()=> h.closest('.project').classList.toggle('open'));
   });
 
-  // Tilt on hover (cards with .tilt)
+  // Tilt on hover
   document.querySelectorAll('.tilt').forEach(card=>{
     card.addEventListener('mousemove', (e)=>{
       const r = card.getBoundingClientRect();
