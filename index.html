@@ -1,8 +1,8 @@
-<!-- PORTFOLIO — v4: Activities after Projects, tags only in Experience, Nancy added, no CTAs in About -->
+<!-- PORTFOLIO — v5: shorter Languages, no study line under name, richer animations -->
 <style>
   :root{
     --header:72px; --maxw:860px;
-    --bg-top:#eafaf7; --bg-bot:#f7fbff;
+    --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
     --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
@@ -11,21 +11,38 @@
   html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header) + 14px)}
   body{
     margin:0; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
-    background: linear-gradient(180deg,var(--bg-top),var(--bg-bot));
+    /* animated gradient background */
+    background:linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
+    background-size:200% 200%;
+    animation:bgShift 22s ease infinite;
   }
+  @keyframes bgShift{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  /* subtle moving grid overlay */
   body:before{
     content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
       repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 26px),
       repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
     mix-blend-mode:soft-light;
+    animation:gridPan 30s linear infinite;
   }
+  @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
+
+  /* layout */
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
-  .section{margin:clamp(22px,4vw,40px) 0; opacity:0; transform:translateY(10px); animation:fadeup .6s ease forwards}
-  @keyframes fadeup{to{opacity:1; transform:none}}
+  .section{margin:clamp(22px,4vw,40px) 0}
   .section h2{margin:0 0 8px; font-size:clamp(22px,3vw,30px)}
   .lead{color:var(--muted)}
 
+  /* reveal-on-scroll */
+  .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  /* sticky header */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     backdrop-filter:saturate(120%) blur(10px);
@@ -35,39 +52,59 @@
     display:flex; align-items:center; justify-content:space-between}
   .brand{display:flex; align-items:center; gap:10px; font-weight:800}
   .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
-    background:conic-gradient(from 220deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(2,6,23,.06)}
+    background:conic-gradient(from 220deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(2,6,23,.06);
+    animation:spin 8s linear infinite paused;
+  }
+  header:hover .badge{animation-play-state:running}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
   nav a{
     color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
   }
-  nav a:after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s}
+  nav a:after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s;
+  }
   nav a:hover{color:var(--accent)}
   nav a:hover:after{right:0}
+  nav a.active{color:var(--accent)}
+  nav a.active:after{right:0}
 
+  /* top scroll progress */
+  #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
+    background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  
+  /* type/buttons/cards */
   h1{font-size:clamp(38px,6.5vw,64px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
-    border:1px solid var(--line); font-weight:700; text-decoration:none;}
+    border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
   .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
   .btn.ghost{background:var(--card); color:var(--text)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:after{content:""; position:absolute; inset:auto; top:0; left:0; width:0; height:100%; background:rgba(255,255,255,.15); transition:width .25s}
+  .btn:hover:after{width:100%}
+
   .card{
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s ease, box-shadow .2s ease;
+    transform:translateZ(0)
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
+  /* skills & languages */
   .skills-grid{display:grid; grid-template-columns:1fr; gap:12px}
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
-  .lang-list{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-  @media (max-width:900px){.lang-list{grid-template-columns:1fr}}
+  .lang-list{display:grid; grid-template-columns:1fr; gap:6px}
 
+  /* projects with tilt-on-hover */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .thumb{
     aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line);
-    background:#e6fffb center/cover no-repeat; transform:translateZ(0); transition:transform .25s ease;
+    background:#e6fffb center/cover no-repeat; transition:transform .25s ease;
   }
-  .project.card:hover .thumb{transform:scale(1.03)}
+  .tilt:hover .thumb{transform:scale(1.03)}
   .project .head{display:flex;justify-content:space-between;cursor:pointer;user-select:none}
   .project .chev{transition:transform .2s}
   .project .body{grid-template-rows:0fr; display:grid; transition:grid-template-rows .25s ease}
@@ -75,6 +112,7 @@
   .project.open .body{grid-template-rows:1fr}
   .project.open .chev{transform:rotate(90deg)}
 
+  /* experience timeline */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
     background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -86,16 +124,21 @@
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
   .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff0; font-size:.95rem; color:var(--muted)}
 
+  /* education */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item strong{display:block}
   .edu .item p{margin:.25rem 0 0}
 
+  /* activities */
   .activities{display:grid; grid-template-columns:1fr; gap:12px}
 
+  /* footer + back to top */
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 </style>
+
+<div id="progress"></div>
 
 <header>
   <div class="inner">
@@ -115,36 +158,31 @@
 <main>
   <!-- About -->
   <section id="about" class="section">
-    <div class="wrap">
+    <div class="wrap reveal">
       <h1>Bader Suliman</h1>
-      <p class="lead" style="margin:0 0 12px">Sciences Po (PSIA) - Dual degree with Freie Universität Berlin. International Security with a focus on Migration and the Middle East.</p>
+      <!-- Removed study sentence below the name per your request -->
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
           Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in five seconds, and short briefs that help a team decide the next step. I work in French, English, and Arabic, and I build small, fast pages like this one to share work without the fluff.
         </p>
-        <!-- no buttons here (contact only at the bottom) -->
       </div>
     </div>
   </section>
 
   <!-- Skills & Languages -->
   <section id="skills" class="section">
-    <div class="wrap">
+    <div class="wrap reveal">
       <h2>Skills and Languages</h2>
       <div class="skills-grid">
         <div class="card">
           <strong>Languages</strong>
           <div class="lang-list" style="margin-top:6px">
-            <div>
-              <p class="lead" style="margin:.2rem 0"><strong>Arabic</strong> - Native. Modern Standard Arabic plus dialectal Arabic (Egyptian, Levantine, Gulf). Spoken, read, written.</p>
-              <p class="lead" style="margin:.2rem 0"><strong>English</strong> - C2. Spoken, read, written.</p>
-            </div>
-            <div>
-              <p class="lead" style="margin:.2rem 0"><strong>French</strong> - C1. Spoken, read, written.</p>
-              <p class="lead" style="margin:.2rem 0"><strong>Persian (Farsi)</strong> - B2. Spoken, read, written.</p>
-              <p class="lead" style="margin:.2rem 0"><strong>Japanese</strong> - A2. Spoken, read, written.</p>
-            </div>
+            <p class="lead" style="margin:.2rem 0"><strong>Arabic</strong> - Native (Modern Standard and dialectal: Levantine, Gulf, Egyptian)</p>
+            <p class="lead" style="margin:.2rem 0"><strong>French</strong> - Native</p>
+            <p class="lead" style="margin:.2rem 0"><strong>English</strong> - C2 (spoken, read, written)</p>
+            <p class="lead" style="margin:.2rem 0"><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</p>
+            <p class="lead" style="margin:.2rem 0"><strong>Japanese</strong> - A2 (spoken, read, written)</p>
           </div>
         </div>
 
@@ -177,19 +215,19 @@
 
   <!-- Education -->
   <section id="education" class="section">
-    <div class="wrap">
+    <div class="wrap reveal">
       <h2>Education</h2>
       <div class="edu">
-        <div class="card item">
+        <div class="card item tilt">
           <strong>Sciences Po - Paris School of International Affairs (PSIA), Paris</strong>
           <p class="lead">M.A. International Security (Migration and Middle Eastern Studies) - 2024 to 2027</p>
-          <p class="lead" style="margin:.2rem 0 0">Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
+          <p class="lead" style="margin:.2rem 0 0">Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics</p>
         </div>
-        <div class="card item">
+        <div class="card item tilt">
           <strong>Freie Universität Berlin - Otto Suhr Institut, Berlin</strong>
           <p class="lead">Dual degree (International Relations) - start 2026</p>
         </div>
-        <div class="card item">
+        <div class="card item tilt">
           <strong>Sciences Po - B.A. Politics and Government (Menton and Nancy)</strong>
           <p class="lead">2021 to 2024 - Exchange year: Tokyo University of Foreign Studies (TUFS), 2023 to 2024</p>
         </div>
@@ -199,13 +237,13 @@
 
   <!-- Experience -->
   <section id="experience" class="section">
-    <div class="wrap">
+    <div class="wrap reveal">
       <h2>Experience</h2>
-      <p class="lead">Communications, humanitarian data, and policy research.</p>
+      <p class="lead">Communications, humanitarian data, and policy research</p>
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
-          <div class="card">
+          <div class="card tilt">
             <div class="role"><strong>Communications Intern - OIF</strong><span class="where">2025 - Paris</span></div>
             <p class="lead" style="margin:.35rem 0 0">Social content, media monitoring, and reporting. Built templates and improved workflows.</p>
             <div class="tags">
@@ -215,7 +253,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card">
+          <div class="card tilt">
             <div class="role"><strong>Graduate Trainee - AQLITY</strong><span class="where">2025 - Remote</span></div>
             <p class="lead" style="margin:.35rem 0 0">Data cleaning and mapping for settlement level assessments. Narrative drafting and visuals.</p>
             <div class="tags">
@@ -225,7 +263,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card">
+          <div class="card tilt">
             <div class="role"><strong>Volunteer - ARDHIS</strong><span class="where">2024 to 2025 - Paris</span></div>
             <p class="lead" style="margin:.35rem 0 0">Drop in sessions. Administrative guidance for asylum seekers. Desk research on country situations.</p>
             <div class="tags">
@@ -235,7 +273,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card">
+          <div class="card tilt">
             <div class="role"><strong>Research Intern - Royal Scientific Society (Jordan)</strong><span class="where">2024 - Amman</span></div>
             <p class="lead" style="margin:.35rem 0 0">Desalination, climate security, and science diplomacy with multi stakeholder teams.</p>
             <div class="tags">
@@ -243,10 +281,9 @@
             </div>
           </div>
         </div>
-        <!-- Nancy experience -->
         <div class="t">
           <div class="dot"></div>
-          <div class="card">
+          <div class="card tilt">
             <div class="role"><strong>Student Lead - Twin Cities Program, City of Nancy</strong><span class="where">2022 - Nancy</span></div>
             <p class="lead" style="margin:.35rem 0 0">Organized intercultural visits and museum tours for students from Newcastle, Lviv, and Lublin. Supported a conference on the city environmental policy.</p>
             <div class="tags">
@@ -260,11 +297,11 @@
 
   <!-- Projects (accordion only here) -->
   <section id="work" class="section">
-    <div class="wrap">
+    <div class="wrap reveal">
       <h2>Selected Work</h2>
-      <p class="lead">Click a project to reveal details.</p>
+      <p class="lead">Click a project to reveal details</p>
       <div class="projects">
-        <article class="card project">
+        <article class="card project tilt">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Human Security - Interactive Twine</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
@@ -274,7 +311,7 @@
           </div></div>
         </article>
 
-        <article class="card project">
+        <article class="card project tilt">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">SLAC Assessments - Data to Narrative</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
@@ -284,7 +321,7 @@
           </div></div>
         </article>
 
-        <article class="card project">
+        <article class="card project tilt">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Desalination - Policy Brief</h3>
           <div class="head"><span class="lead">Overview</span><span class="chev">▶</span></div>
@@ -297,24 +334,24 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities AFTER Projects (no tags here) -->
+  <!-- Extracurricular Activities (after Projects, no tags) -->
   <section id="activities" class="section">
-    <div class="wrap">
+    <div class="wrap reveal">
       <h2>Extracurricular Activities</h2>
       <div class="activities">
-        <div class="card">
+        <div class="card tilt">
           <strong>MEDMUN - Arabic Committee Director</strong>
           <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee. Prepared topics, guided delegates, and coordinated with the Secretariat to deliver a smooth conference experience.</p>
         </div>
-        <div class="card">
+        <div class="card tilt">
           <strong>Sciences Po Monde Arabe - Communications Director</strong>
           <p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p>
         </div>
-        <div class="card">
+        <div class="card tilt">
           <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
           <p class="lead" style="margin:.35rem 0 0">Helped organize and support sessions, speakers, and delegations. Hands on logistics and stakeholder coordination.</p>
         </div>
-        <div class="card">
+        <div class="card tilt">
           <strong>Solo travel and field exposure</strong>
           <p class="lead" style="margin:.35rem 0 0">
             Traveled in many countries. Solo trips include India across the country, Georgia, and Armenia. Regional experience also includes Jordan, Lebanon, United Arab Emirates, France, Germany, and Japan.
@@ -326,8 +363,8 @@
 
   <!-- Contact -->
   <section id="contact" class="section">
-    <div class="wrap">
-      <div class="card">
+    <div class="wrap reveal">
+      <div class="card tilt">
         <h2>Let’s work together</h2>
         <p class="lead">Based in Paris. I value clarity, empathy, and high standards.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -345,12 +382,53 @@
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
   // Projects accordion only
   document.querySelectorAll('.project .head').forEach(h=>{
     h.addEventListener('click', ()=> h.closest('.project').classList.toggle('open'));
   });
+
+  // Tilt on hover (cards with .tilt)
+  document.querySelectorAll('.tilt').forEach(card=>{
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5;
+      const y = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = `perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-2px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform='translateY(-2px)'; });
+  });
+
   // Back to top visibility
   const toTop = document.getElementById('toTop');
   const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
   document.addEventListener('scroll', toggleTop); toggleTop();
+
+  // Active nav highlight + progress bar
+  const links = [...document.querySelectorAll('nav a')];
+  const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
+  const secs = ids.map(id=>document.querySelector(id));
+  const prog = document.getElementById('progress');
+
+  const onScroll = ()=>{
+    // progress
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
+    prog.style.width = (scrolled*100)+'%';
+    // active section
+    let idx = 0;
+    secs.forEach((s,i)=>{
+      const rect = s.getBoundingClientRect();
+      if(rect.top <= window.innerHeight*0.35) idx = i;
+    });
+    links.forEach(a=>a.classList.remove('active'));
+    const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
+    if(active) active.classList.add('active');
+  };
+  document.addEventListener('scroll', onScroll); onScroll();
 </script>
