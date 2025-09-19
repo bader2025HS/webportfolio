@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v11: revert Education style, no-gap Activities grid, stronger project zoom, Contact highlight fix -->
+<!-- PORTFOLIO — v12: Education right-aligned place/years, Activities click-to-reveal (no gaps), Contact highlight intact -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -52,7 +52,7 @@
     width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
     box-shadow:0 6px 18px rgba(2,6,23,.06);
-    animation:spin 10s linear infinite;
+    animation:spin 10s linear infinite; /* always spinning */
   }
   @keyframes spin{to{transform:rotate(360deg)}}
   nav a{
@@ -65,7 +65,6 @@
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
 
-  /* type/buttons/cards */
   h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -107,7 +106,7 @@
   .project.open .body{grid-template-rows:1fr}
   .project.open .chev{transform:rotate(90deg)}
 
-  /* Experience (unchanged) */
+  /* Experience */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
     background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -123,20 +122,33 @@
   .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
   .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
-  /* Education — revert to earlier simple style */
+  /* Education — consistent: left title, right Location • Years */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
+  .edu .item .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
   .edu .item strong{display:block}
-  .edu .item p{margin:.25rem 0 0}
+  .edu .item .where{color:var(--muted); font-weight:600}
+  .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — dense two-column grid, titles only, no gaps */
-  .activities-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; grid-auto-flow:row dense}
+  /* Activities — dense grid, titles + click-to-reveal details */
+  .activities-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px; grid-auto-flow:row dense;
+  }
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
-  .activities-grid .card{min-height:62px; display:flex; align-items:center}
+  .activities-grid .card{min-height:62px}
   .span-2{grid-column:1 / -1}
   .stripe-teal{border-left:4px solid var(--teal)}
   .stripe-violet{border-left:4px solid var(--violet)}
   .stripe-amber{border-left:4px solid var(--amber)}
   .stripe-coral{border-left:4px solid var(--coral)}
+  .stripe-aqua{border-left:4px solid var(--accent2)} /* NEW for Events so it differs from Solo travel */
+
+  /* Activity toggles (like projects) */
+  .activity .head{display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none}
+  .activity .chev{transition:transform .2s}
+  .activity .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease}
+  .activity .body>div{overflow:hidden}
+  .activity.open .body{grid-template-rows:1fr}
+  .activity.open .chev{transform:rotate(90deg)}
 
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
@@ -222,23 +234,31 @@
     </div>
   </section>
 
-  <!-- Education (reverted simple style) -->
+  <!-- Education (title left, Location • Years right) -->
   <section id="education" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Education</h2>
       <div class="edu">
-        <div class="card item tilt reveal anim-pop">
-          <strong>Sciences Po - Paris School of International Affairs (PSIA), Paris</strong>
-          <p class="lead">M.A. International Security (Migration and Middle Eastern Studies) - 2024 to 2027</p>
-          <p class="lead" style="margin:.2rem 0 0">Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics</p>
+        <div class="card item reveal anim-pop">
+          <div class="head">
+            <strong>M.A. International Security — Sciences Po (PSIA)</strong>
+            <span class="where">Paris • 2024–2027</span>
+          </div>
+          <p class="lead">Focus on Migration and Middle Eastern Studies. Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
         </div>
-        <div class="card item tilt reveal anim-pop">
-          <strong>Freie Universität Berlin - Otto Suhr Institut, Berlin</strong>
-          <p class="lead">Dual degree (International Relations) - start 2026</p>
+        <div class="card item reveal anim-pop">
+          <div class="head">
+            <strong>Dual Degree (International Relations) — Freie Universität Berlin</strong>
+            <span class="where">Berlin • 2026–2027</span>
+          </div>
+          <p class="lead">Coursework in international relations and policy analysis within the dual degree track.</p>
         </div>
-        <div class="card item tilt reveal anim-pop">
-          <strong>Sciences Po - B.A. Politics and Government (Menton and Nancy)</strong>
-          <p class="lead">2021 to 2024 - Exchange year: Tokyo University of Foreign Studies (TUFS), 2023 to 2024</p>
+        <div class="card item reveal anim-pop">
+          <div class="head">
+            <strong>B.A. Politics and Government — Sciences Po</strong>
+            <span class="where">Menton/Nancy • 2021–2024</span>
+          </div>
+          <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) — Tokyo • 2023–2024.</p>
         </div>
       </div>
     </div>
@@ -252,7 +272,7 @@
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
-          <div class="card tilt reveal anim-l">
+          <div class="card reveal anim-l">
             <div class="role">
               <strong>Intern - Project Design and Monitoring, OIF</strong>
               <span class="where">Paris • 2025</span>
@@ -267,7 +287,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt reveal anim-r">
+          <div class="card reveal anim-r">
             <div class="role">
               <strong>Graduate Trainee - AQLITY</strong>
               <span class="where">Remote • 2025</span>
@@ -282,7 +302,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt reveal anim-l">
+          <div class="card reveal anim-l">
             <div class="role">
               <strong>Immigration Law Assistant - ARDHIS</strong>
               <span class="where">Paris • 2024 to 2025</span>
@@ -297,7 +317,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt reveal anim-r">
+          <div class="card reveal anim-r">
             <div class="role">
               <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
               <span class="where">Amman • 2023</span>
@@ -312,7 +332,7 @@
         </div>
         <div class="t">
           <div class="dot"></div>
-          <div class="card tilt reveal anim-l">
+          <div class="card reveal anim-l">
             <div class="role">
               <strong>Intern - International Relations Department, City Hall</strong>
               <span class="where">Nancy • 2022</span>
@@ -368,16 +388,47 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (dense, no gaps; titles only) -->
+  <!-- Extracurricular Activities (no gaps, titles + click-to-reveal details) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
       <div class="activities-grid">
-        <div class="card tilt stripe-teal reveal anim-l span-2"><strong>Tarjimly - Volunteer Translator and Interpreter</strong></div>
-        <div class="card tilt stripe-violet reveal anim-r"><strong>Sciences Po Monde Arabe - Communications Director</strong></div>
-        <div class="card tilt stripe-amber reveal anim-r"><strong>Solo travel and field exposure</strong></div>
-        <div class="card tilt stripe-coral reveal anim-r"><strong>MEDMUN - Arabic Committee Director</strong></div>
-        <div class="card tilt stripe-amber reveal anim-r"><strong>Events - Mediterranean of the Future and Paris Peace Forum</strong></div>
+        <!-- Tarjimly spans both columns -->
+        <article class="card activity tilt stripe-teal reveal anim-l span-2">
+          <div class="head"><strong>Tarjimly — Volunteer Translator and Interpreter</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p>
+          </div></div>
+        </article>
+
+        <article class="card activity tilt stripe-violet reveal anim-r">
+          <div class="head"><strong>Sciences Po Monde Arabe — Communications Director</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Managed branding, content, and outreach; produced visuals and coordinated announcements for talks and cultural events.</p>
+          </div></div>
+        </article>
+
+        <!-- Events now AQUA (not amber) -->
+        <article class="card activity tilt stripe-aqua reveal anim-r">
+          <div class="head"><strong>Events — Mediterranean of the Future & Paris Peace Forum</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Helped organize sessions and delegations; hands-on logistics and stakeholder coordination.</p>
+          </div></div>
+        </article>
+
+        <article class="card activity tilt stripe-amber reveal anim-r">
+          <div class="head"><strong>Solo travel and field exposure</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Solo trips to India, Georgia, and Armenia; regional experience in Jordan, Lebanon, UAE, France, Germany, and Japan.</p>
+          </div></div>
+        </article>
+
+        <article class="card activity tilt stripe-coral reveal anim-r">
+          <div class="head"><strong>MEDMUN — Arabic Committee Director</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p>
+          </div></div>
+        </article>
       </div>
     </div>
   </section>
@@ -409,9 +460,14 @@
   }, {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Projects accordion only
+  // Projects accordion
   document.querySelectorAll('.project .head').forEach(h=>{
     h.addEventListener('click', ()=> h.closest('.project').classList.toggle('open'));
+  });
+
+  // Activities accordion (titles show, click to reveal details)
+  document.querySelectorAll('.activity .head').forEach(h=>{
+    h.addEventListener('click', ()=> h.closest('.activity').classList.toggle('open'));
   });
 
   // Back to top visibility
@@ -430,18 +486,14 @@
     const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
     prog.style.width = (scrolled*100)+'%';
 
-    // Default: find last section whose top is above 40% viewport height
     let idx = 0;
     secs.forEach((s,i)=>{
       const r = s.getBoundingClientRect();
       if(r.top <= window.innerHeight*0.4) idx = i;
     });
 
-    // If at the very bottom, force Contact active
     const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
-    if(atBottom){
-      idx = secs.length - 1; // #contact
-    }
+    if(atBottom){ idx = secs.length - 1; } // force Contact active
 
     links.forEach(a=>a.classList.remove('active'));
     const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
