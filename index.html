@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v32: Desktop nav restored to earlier style (hide .mhead on desktop, inline links), mobile menu kept EXACT from v30. -->
+<!-- PORTFOLIO — v31: Keep v30 mobile menu EXACT; Activities force 2×2 on phones. -->
 
 <!-- Viewport (safety) -->
 <script>
@@ -79,9 +79,7 @@
     box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Desktop NAV — restore earlier style */
-  header nav#siteNav{display:flex; align-items:center}      /* inline links */
-  #siteNav .mhead{display:none}                              /* hide overlay brand on desktop */
+  /* Navbar links (no underline) */
   nav a{
     color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
   }
@@ -89,7 +87,7 @@
   nav a.active{color:var(--accent)}
   nav a:after{display:none !important} /* remove underline */
 
-  /* Hamburger + mobile overlay (exact from v30) */
+  /* Hamburger + mobile overlay — EXACTLY like v30 */
   .menu-toggle{display:none; place-items:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
@@ -182,7 +180,7 @@
   /* Activities — 4-in-row desktop, FORCE 2×2 on phones */
   .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
   @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:420px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:420px){ .activities-grid{grid-template-columns:repeat(2,1fr)} } /* keep 2 columns on very small phones */
   .activity{aspect-ratio:1/1; display:grid; place-items:center; text-align:center; padding:12px}
   .activity .title{font-weight:800}
 
@@ -205,7 +203,7 @@
     </button>
 
     <nav id="siteNav">
-      <!-- shown only on mobile overlay -->
+      <!-- brand inside the overlay too -->
       <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
       <a href="#about">About</a>
@@ -493,7 +491,7 @@ const onScroll=()=>{
 };
 addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
-/* Mobile menu (exact v30 behavior) */
+/* Mobile menu (unchanged from v30) */
 const menuBtn=document.getElementById('menuBtn');
 const nav=document.getElementById('siteNav');
 function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
