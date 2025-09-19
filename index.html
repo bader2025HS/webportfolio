@@ -1,11 +1,11 @@
-<!-- PORTFOLIO — v13: swap Tarjimly/Monde Arabe order + isolate accordion toggles -->
+<!-- PORTFOLIO — v14: Activities w/o colored frames + true isolated accordion (masonry columns) -->
 <style>
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
-    --coral:#ff7a6e; --violet:#7c61ff; --amber:#f59e0b; --teal:#14b8a6;
+    --coral:#ff7a6e; --violet:#7c61ff; --amber:#f59e0b;
     --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
   }
   *{box-sizing:border-box}
@@ -82,8 +82,7 @@
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* Skills/Languages spacing */
-  .skills-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:6px}
+  /* Skills & Languages */
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
@@ -130,17 +129,10 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — dense grid, titles + click-to-reveal details */
-  .activities-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; grid-auto-flow:row dense}
-  @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
-  .activities-grid .card{min-height:62px}
-  .span-2{grid-column:1 / -1}
-  .stripe-teal{border-left:4px solid var(--teal)}
-  .stripe-violet{border-left:4px solid var(--violet)}
-  .stripe-amber{border-left:4px solid var(--amber)}
-  .stripe-coral{border-left:4px solid var(--coral)}
-  .stripe-aqua{border-left:4px solid var(--accent2)}
-
+  /* Activities — masonry columns, no color frames, true isolated expansion */
+  .activities-masonry{column-count:2; column-gap:12px}
+  @media (max-width:900px){ .activities-masonry{column-count:1} }
+  .activity{display:inline-block; width:100%; break-inside:avoid; margin:0 0 12px}
   .activity .head{display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none}
   .activity .chev{transition:transform .2s}
   .activity .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease}
@@ -386,48 +378,48 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (SWAPPED order: Monde Arabe first (span-2), then Tarjimly, etc.) -->
+  <!-- Extracurricular Activities (no color frames, masonry columns, click-to-reveal) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
-      <div class="activities-grid">
-        <!-- SWAPPED: Monde Arabe now first and wide -->
-        <article class="card activity tilt stripe-violet reveal anim-l span-2">
+
+      <div class="activities-masonry">
+        <article class="card activity reveal anim-l">
           <div class="head"><strong>Sciences Po Monde Arabe — Communications Director</strong><span class="chev">▶</span></div>
           <div class="body"><div>
-            <p class="lead">Managed branding, content, and outreach; crafted visuals and coordinated announcements for talks and cultural events.</p>
+            <p class="lead">Managed branding, content, and outreach; produced visuals and coordinated announcements for talks and cultural events.</p>
           </div></div>
         </article>
 
-        <!-- Tarjimly now after Monde Arabe -->
-        <article class="card activity tilt stripe-teal reveal anim-r">
+        <article class="card activity reveal anim-r">
           <div class="head"><strong>Tarjimly — Volunteer Translator and Interpreter</strong><span class="chev">▶</span></div>
           <div class="body"><div>
             <p class="lead">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p>
           </div></div>
         </article>
 
-        <article class="card activity tilt stripe-aqua reveal anim-r">
+        <article class="card activity reveal anim-pop">
           <div class="head"><strong>Events — Mediterranean of the Future & Paris Peace Forum</strong><span class="chev">▶</span></div>
           <div class="body"><div>
-            <p class="lead">Helped organize sessions and delegations; hands-on logistics and stakeholder coordination.</p>
+            <p class="lead">Helped organize sessions and delegations with hands-on logistics and stakeholder coordination.</p>
           </div></div>
         </article>
 
-        <article class="card activity tilt stripe-amber reveal anim-r">
+        <article class="card activity reveal anim-pop">
           <div class="head"><strong>Solo travel and field exposure</strong><span class="chev">▶</span></div>
           <div class="body"><div>
             <p class="lead">Solo trips to India, Georgia, and Armenia; regional experience in Jordan, Lebanon, UAE, France, Germany, and Japan.</p>
           </div></div>
         </article>
 
-        <article class="card activity tilt stripe-coral reveal anim-r">
+        <article class="card activity reveal anim-pop">
           <div class="head"><strong>MEDMUN — Arabic Committee Director</strong><span class="chev">▶</span></div>
           <div class="body"><div>
             <p class="lead">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p>
           </div></div>
         </article>
       </div>
+
     </div>
   </section>
 
@@ -458,25 +450,19 @@
   }, {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Projects accordion — only toggle the clicked card, close siblings
+  // Projects accordion (unchanged)
   document.querySelectorAll('.project .head').forEach(h=>{
     h.addEventListener('click', (e)=>{
       e.stopPropagation();
-      const card = h.closest('.project');
-      const container = card.parentElement;
-      container.querySelectorAll('.project.open').forEach(p=>{ if(p!==card) p.classList.remove('open'); });
-      card.classList.toggle('open');
+      h.closest('.project').classList.toggle('open');
     });
   });
 
-  // Activities accordion — only toggle the clicked card, close siblings
+  // Activities accordion — toggle ONLY the clicked card; neighbors unaffected
   document.querySelectorAll('.activity .head').forEach(h=>{
     h.addEventListener('click', (e)=>{
       e.stopPropagation();
-      const card = h.closest('.activity');
-      const container = card.parentElement;
-      container.querySelectorAll('.activity.open').forEach(a=>{ if(a!==card) a.classList.remove('open'); });
-      card.classList.toggle('open');
+      h.closest('.activity').classList.toggle('open');
     });
   });
 
@@ -485,7 +471,7 @@
   const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
   document.addEventListener('scroll', toggleTop); toggleTop();
 
-  // Active nav highlight + progress bar (+ bottom-of-page Contact fix)
+  // Active nav highlight + progress bar (+ Contact highlight at bottom)
   const links = [...document.querySelectorAll('nav a')];
   const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
   const secs = ids.map(id=>document.querySelector(id));
@@ -501,8 +487,6 @@
       const r = s.getBoundingClientRect();
       if(r.top <= window.innerHeight*0.4) idx = i;
     });
-
-    // Force Contact active at page end
     const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
     if(atBottom){ idx = secs.length - 1; }
 
