@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v10: stronger project zoom, tidy Activities (titles only), single-paragraph About -->
+<!-- PORTFOLIO — v11: revert Education style, no-gap Activities grid, stronger project zoom, Contact highlight fix -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -52,7 +52,7 @@
     width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
     box-shadow:0 6px 18px rgba(2,6,23,.06);
-    animation:spin 10s linear infinite; /* always spinning */
+    animation:spin 10s linear infinite;
   }
   @keyframes spin{to{transform:rotate(360deg)}}
   nav a{
@@ -65,6 +65,7 @@
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
 
+  /* type/buttons/cards */
   h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -89,7 +90,7 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — stronger zoom */
+  /* Projects — strong zoom */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
@@ -106,7 +107,7 @@
   .project.open .body{grid-template-rows:1fr}
   .project.open .chev{transform:rotate(90deg)}
 
-  /* Experience timeline (unchanged) */
+  /* Experience (unchanged) */
   .timeline{position:relative; margin-top:8px}
   .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px;
     background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
@@ -122,25 +123,17 @@
   .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
   .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
-  /* Education */
+  /* Education — revert to earlier simple style */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item strong{display:block}
-  .edu .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
-  .edu .where{color:var(--muted); font-weight:600}
+  .edu .item p{margin:.25rem 0 0}
 
-  /* Activities — organized two columns, titles only */
-  .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  /* Activities — dense two-column grid, titles only, no gaps */
+  .activities-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; grid-auto-flow:row dense}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
-  .stack{display:grid; gap:12px}
-  .accent{position:relative}
-  .accent:before{
-    content:""; position:absolute; inset:0; border-radius:calc(var(--radius) + 1px);
-    padding:1px; background:linear-gradient(135deg,var(--accent),var(--violet),var(--coral),var(--amber));
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor; mask-composite:exclude;
-  }
-  .accent .card{border-color:transparent}
-  /* right column color stripes preserved */
+  .activities-grid .card{min-height:62px; display:flex; align-items:center}
+  .span-2{grid-column:1 / -1}
+  .stripe-teal{border-left:4px solid var(--teal)}
   .stripe-violet{border-left:4px solid var(--violet)}
   .stripe-amber{border-left:4px solid var(--amber)}
   .stripe-coral{border-left:4px solid var(--coral)}
@@ -186,7 +179,6 @@
     <div class="wrap">
       <div class="reveal anim-l"><h2>Skills and Languages</h2></div>
 
-      <!-- Languages (2 columns) -->
       <div class="card reveal anim-l">
         <strong>Languages</strong>
         <div class="lang-cols">
@@ -203,7 +195,6 @@
         </div>
       </div>
 
-      <!-- Soft vs Hard (balanced) -->
       <div class="skills-2">
         <div class="card reveal anim-scale">
           <strong>Soft skills</strong>
@@ -231,31 +222,23 @@
     </div>
   </section>
 
-  <!-- Education -->
+  <!-- Education (reverted simple style) -->
   <section id="education" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Education</h2>
       <div class="edu">
         <div class="card item tilt reveal anim-pop">
-          <div class="head">
-            <strong>M.A. International Security — Sciences Po (PSIA)</strong>
-            <span class="where">Paris • 2024–2027</span>
-          </div>
-          <p class="lead" style="margin:.35rem 0 0">Focus on Migration and Middle Eastern Studies. Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
+          <strong>Sciences Po - Paris School of International Affairs (PSIA), Paris</strong>
+          <p class="lead">M.A. International Security (Migration and Middle Eastern Studies) - 2024 to 2027</p>
+          <p class="lead" style="margin:.2rem 0 0">Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics</p>
         </div>
         <div class="card item tilt reveal anim-pop">
-          <div class="head">
-            <strong>Dual Degree (International Relations) — Freie Universität Berlin</strong>
-            <span class="where">Berlin • 2026–2027</span>
-          </div>
-          <p class="lead" style="margin:.35rem 0 0">Coursework in international relations and policy analysis within the dual degree track.</p>
+          <strong>Freie Universität Berlin - Otto Suhr Institut, Berlin</strong>
+          <p class="lead">Dual degree (International Relations) - start 2026</p>
         </div>
         <div class="card item tilt reveal anim-pop">
-          <div class="head>
-            <strong>B.A. Politics and Government — Sciences Po</strong>
-            <span class="where">Menton/Nancy • 2021–2024</span>
-          </div>
-          <p class="lead" style="margin:.35rem 0 0">Exchange: Tokyo University of Foreign Studies (TUFS) — Tokyo • 2023–2024.</p>
+          <strong>Sciences Po - B.A. Politics and Government (Menton and Nancy)</strong>
+          <p class="lead">2021 to 2024 - Exchange year: Tokyo University of Foreign Studies (TUFS), 2023 to 2024</p>
         </div>
       </div>
     </div>
@@ -385,36 +368,17 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (organized, titles only; colors preserved) -->
+  <!-- Extracurricular Activities (dense, no gaps; titles only) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
-
       <div class="activities-grid">
-        <!-- Left column -->
-        <div class="accent">
-          <div class="card tilt reveal anim-l">
-            <strong>Tarjimly - Volunteer Translator and Interpreter</strong>
-          </div>
-          <div class="card tilt reveal anim-pop" style="margin-top:12px">
-            <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
-          </div>
-        </div>
-
-        <!-- Right column stacked with side colors -->
-        <div class="stack">
-          <div class="card tilt stripe-violet reveal anim-r">
-            <strong>Sciences Po Monde Arabe - Communications Director</strong>
-          </div>
-          <div class="card tilt stripe-amber reveal anim-r">
-            <strong>Solo travel and field exposure</strong>
-          </div>
-          <div class="card tilt stripe-coral reveal anim-r">
-            <strong>MEDMUN - Arabic Committee Director</strong>
-          </div>
-        </div>
+        <div class="card tilt stripe-teal reveal anim-l span-2"><strong>Tarjimly - Volunteer Translator and Interpreter</strong></div>
+        <div class="card tilt stripe-violet reveal anim-r"><strong>Sciences Po Monde Arabe - Communications Director</strong></div>
+        <div class="card tilt stripe-amber reveal anim-r"><strong>Solo travel and field exposure</strong></div>
+        <div class="card tilt stripe-coral reveal anim-r"><strong>MEDMUN - Arabic Committee Director</strong></div>
+        <div class="card tilt stripe-amber reveal anim-r"><strong>Events - Mediterranean of the Future and Paris Peace Forum</strong></div>
       </div>
-
     </div>
   </section>
 
@@ -455,7 +419,7 @@
   const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
   document.addEventListener('scroll', toggleTop); toggleTop();
 
-  // Active nav highlight + progress bar
+  // Active nav highlight + progress bar (+ bottom-of-page Contact fix)
   const links = [...document.querySelectorAll('nav a')];
   const ids = links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
   const secs = ids.map(id=>document.querySelector(id));
@@ -465,11 +429,20 @@
     const h = document.documentElement;
     const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
     prog.style.width = (scrolled*100)+'%';
+
+    // Default: find last section whose top is above 40% viewport height
     let idx = 0;
     secs.forEach((s,i)=>{
-      const rect = s.getBoundingClientRect();
-      if(rect.top <= window.innerHeight*0.35) idx = i;
+      const r = s.getBoundingClientRect();
+      if(r.top <= window.innerHeight*0.4) idx = i;
     });
+
+    // If at the very bottom, force Contact active
+    const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
+    if(atBottom){
+      idx = secs.length - 1; // #contact
+    }
+
     links.forEach(a=>a.classList.remove('active'));
     const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
     if(active) active.classList.add('active');
