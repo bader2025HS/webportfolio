@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v18: hover projects, activities no hint, AQLITY phrasing, Berlin entry updated, leads under titles -->
+<!-- PORTFOLIO — v19: motion polish (varied entrances, stagger, parallax), content unchanged -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -29,14 +29,22 @@
   .section h2{margin:0 0 10px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
   .lead{color:var(--muted)}
 
-  /* reveals */
-  .reveal{opacity:0; transition:opacity .55s ease, transform .55s ease}
-  .reveal.in{opacity:1; transform:none}
-  .anim-fade{transform:translateY(14px)}
-  .anim-l{transform:translateX(-18px)}
-  .anim-r{transform:translateX(18px)}
-  .anim-scale{transform:scale(.96)}
-  .anim-pop{transform:translateY(10px) scale(.98)}
+  /* ===== Reveal system (varied entrances) ===== */
+  .reveal{opacity:0; will-change:transform, filter; transition-property:opacity, transform, filter}
+  .reveal.in{opacity:1; transform:none; filter:none}
+  /* base durations/ease */
+  .reveal{transition-duration:.65s; transition-timing-function:cubic-bezier(.2,.7,.2,1)}
+  /* variants */
+  .anim-up{transform:translateY(26px); filter:blur(6px)}
+  .anim-down{transform:translateY(-26px); filter:blur(6px)}
+  .anim-l{transform:translateX(-26px); filter:blur(4px)}
+  .anim-r{transform:translateX(26px); filter:blur(4px)}
+  .anim-zoom{transform:scale(.94); filter:blur(4px)}
+  .anim-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
+  .anim-soft{transform:translateY(12px); opacity:.001}
+
+  /* stagger container: set data-stagger=".childSelector" on a parent */
+  [data-stagger] > *{transition-delay:var(--d,0ms)}
 
   /* header */
   header{
@@ -96,13 +104,13 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects — strong zoom + hover-to-reveal details (no click, no arrows) */
+  /* Projects — strong zoom + hover-to-reveal details + subtle parallax */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
   .project:hover{transform:scale(1.08); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
-  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s ease}
-  .project:hover .thumb{transform:scale(1.12)}
+  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s ease; transform:translateY(var(--py,0px))}
+  .project:hover .thumb{transform:translateY(var(--py,0px)) scale(1.12)}
   .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:0}
   .project .body>div{overflow:hidden}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
@@ -125,7 +133,7 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — top full-width, then 2 columns; hover to reveal details (no hint) */
+  /* Activities — top full width, then 2 cols; hover to reveal details */
   .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   .activities-grid .full{grid-column:1 / -1}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
@@ -138,6 +146,12 @@
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
+    .reveal,.project .body,.activity .body{filter:none !important; transform:none !important; opacity:1 !important}
+  }
 </style>
 
 <div id="progress"></div>
@@ -160,10 +174,10 @@
 <main>
   <!-- About -->
   <section id="about" class="section">
-    <div class="wrap reveal anim-fade">
+    <div class="wrap reveal anim-up">
       <h1>Bader Suliman</h1>
 
-      <div class="strap">
+      <div class="strap reveal anim-tilt in" style="transition-duration:.5s">
         <span class="rotator"><span id="rotate" class="fade">Communications</span></span>
         <div class="chips-mini">
           <span class="chip-mini">AR EN FR DE</span>
@@ -171,7 +185,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal anim-zoom">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
           I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
@@ -183,12 +197,12 @@
   <!-- Skills & Languages -->
   <section id="skills" class="section">
     <div class="wrap">
-      <div class="reveal anim-l"><h2>Skills and Languages</h2></div>
-      <p class="lead reveal anim-l">Fluency, methods, and tools.</p>
+      <div class="reveal anim-down"><h2>Skills and Languages</h2></div>
+      <p class="lead reveal anim-soft">Languages, soft skills, and hard skills.</p>
 
-      <div class="card reveal anim-l">
+      <div class="card reveal anim-zoom">
         <strong>Languages</strong>
-        <div class="lang-cols">
+        <div class="lang-cols" data-stagger=".lead li">
           <ul class="lead">
             <li><strong>Arabic</strong> - Native (MSA and dialects)</li>
             <li><strong>French</strong> - Native</li>
@@ -196,14 +210,14 @@
           </ul>
           <ul class="lead">
             <li><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li><strong>Persian</strong> - A2 (spoken, read, written)</li>
+            <li><strong>Persian (Farsi)</strong> - B2 (spoken, read, written)</li>
             <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
           </ul>
         </div>
       </div>
 
-      <div class="skills-2">
-        <div class="card reveal anim-scale">
+      <div class="skills-2" data-stagger=".card">
+        <div class="card reveal anim-l">
           <strong>Soft skills</strong>
           <ul class="lead">
             <li>Analytical thinking and synthesis</li>
@@ -232,24 +246,24 @@
   <!-- Education -->
   <section id="education" class="section">
     <div class="wrap">
-      <h2 class="reveal anim-fade">Education</h2>
-      <p class="lead reveal anim-fade">Focus on security, migration, and EU governance.</p>
-      <div class="edu">
-        <div class="card item reveal anim-pop">
+      <div class="reveal anim-up"><h2>Education</h2></div>
+      <p class="lead reveal anim-soft">International Security and European Affairs studies.</p>
+      <div class="edu" data-stagger=".item">
+        <div class="card item reveal anim-up">
           <div class="head">
             <strong>M.A. International Security - Sciences Po (PSIA)</strong>
             <span class="where">Paris • 2024–2027</span>
           </div>
-          <p class="lead">Focus on Migration and Middle Eastern Studies at the Paris School of International Affairs.</p>
+          <p class="lead">Focus on Migration and Middle Eastern Studies. Selected courses: Human Security, Cities and Migration, Environmental Policy in MENA, Media and Politics.</p>
         </div>
-        <div class="card item reveal anim-pop">
+        <div class="card item reveal anim-zoom">
           <div class="head">
             <strong>M.A. International Relations - Freie Universität Berlin (OSI)</strong>
             <span class="where">Berlin • 2024–2027</span>
           </div>
           <p class="lead">Coursework in international relations and European Affairs in the Otto Suhr Institute track.</p>
         </div>
-        <div class="card item reveal anim-pop">
+        <div class="card item reveal anim-down">
           <div class="head">
             <strong>B.A. Politics and Government - Sciences Po</strong>
             <span class="where">Menton/Nancy • 2021–2024</span>
@@ -263,8 +277,8 @@
   <!-- Experience -->
   <section id="experience" class="section">
     <div class="wrap">
-      <h2 class="reveal anim-fade">Experience</h2>
-      <p class="lead reveal anim-fade">Communications, humanitarian data, and policy research.</p>
+      <div class="reveal anim-up"><h2>Experience</h2></div>
+      <p class="lead reveal anim-soft">Communications, humanitarian data, and policy research.</p>
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
@@ -348,10 +362,10 @@
   <!-- Selected Work -->
   <section id="work" class="section">
     <div class="wrap">
-      <h2 class="reveal anim-fade">Selected Work</h2>
-      <p class="lead reveal anim-fade">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
-      <div class="projects">
-        <article class="card project reveal anim-pop">
+      <div class="reveal anim-down"><h2>Selected Work</h2></div>
+      <p class="lead reveal anim-soft">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
+      <div class="projects" data-stagger=".project">
+        <article class="card project reveal anim-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Human Security - Interactive Twine</h3>
           <div class="body"><div>
@@ -360,7 +374,7 @@
           </div></div>
         </article>
 
-        <article class="card project reveal anim-pop">
+        <article class="card project reveal anim-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">SLAC Assessments - Data to Narrative</h3>
           <div class="body"><div>
@@ -369,7 +383,7 @@
           </div></div>
         </article>
 
-        <article class="card project reveal anim-pop">
+        <article class="card project reveal anim-zoom">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop');"></div>
           <h3 style="margin:10px 0">Desalination - Policy Brief</h3>
           <div class="body"><div>
@@ -384,33 +398,31 @@
   <!-- Extracurricular Activities -->
   <section id="activities" class="section">
     <div class="wrap">
-      <h2 class="reveal anim-fade">Extracurricular Activities</h2>
-      <p class="lead reveal anim-fade">Clubs, volunteering, events, and field exposure.</p>
+      <div class="reveal anim-up"><h2>Extracurricular Activities</h2></div>
+      <p class="lead reveal anim-soft">Clubs, volunteering, events, and field exposure.</p>
 
-      <div class="activities-grid">
-        <!-- Top: full width -->
-        <article class="card activity full reveal anim-l">
+      <div class="activities-grid" data-stagger=".activity">
+        <article class="card activity full reveal anim-down">
           <div class="title">Sciences Po Monde Arabe - Communications Director</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p></div>
         </article>
 
-        <!-- Two columns below -->
-        <article class="card activity reveal anim-pop">
+        <article class="card activity reveal anim-up">
           <div class="title">Tarjimly - Volunteer Translator and Interpreter</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p></div>
         </article>
 
-        <article class="card activity reveal anim-pop">
+        <article class="card activity reveal anim-up">
           <div class="title">Events - Mediterranean of the Future and Paris Peace Forum</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Helped organize sessions and delegations with hands-on logistics and stakeholder coordination.</p></div>
         </article>
 
-        <article class="card activity reveal anim-pop">
+        <article class="card activity reveal anim-up">
           <div class="title">Solo travel - 15+ countries</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Regions: Europe, Middle East, Asia.</p></div>
         </article>
 
-        <article class="card activity reveal anim-pop">
+        <article class="card activity reveal anim-up">
           <div class="title">MEDMUN - Arabic Committee Director</div>
           <div class="body"><p class="lead" style="margin:.35rem 0 0">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p></div>
         </article>
@@ -419,32 +431,49 @@
   </section>
 
   <!-- Contact -->
-<section id="contact" class="section">
-  <div class="wrap reveal anim-pop">
-    <div class="card">
-      <h2>Let’s work together</h2>
-      <p class="lead reveal anim-fade">Available for research, data, and communications projects.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn primary" href="mailto:you@example.com">Email me</a>
-        <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+  <section id="contact" class="section">
+    <div class="wrap reveal anim-up">
+      <div class="card">
+        <h2>Let’s work together</h2>
+        <p class="lead reveal anim-soft">Available for research, data, and communications projects.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="mailto:you@example.com">Email me</a>
+          <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </main>
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 
-<!-- Bottom-right Top button -->
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
 <script>
-  // Reveal on scroll
+  // Reveal on scroll + stagger
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold: .12});
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      el.classList.add('in');
+
+      // Stagger children if requested: data-stagger=".selector"
+      const sel = el.getAttribute('data-stagger');
+      if(sel){
+        const kids = el.querySelectorAll(sel);
+        kids.forEach((k,i)=> k.style.setProperty('--d', (i*90)+'ms'));
+        // give them a gentle soft entrance by default if they don't have reveal
+        kids.forEach(k=>{
+          if(!k.classList.contains('reveal')) k.classList.add('reveal','anim-soft');
+          requestAnimationFrame(()=>k.classList.add('in'));
+        });
+      }
+      io.unobserve(el);
+    });
+  }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-stagger]').forEach(el=>io.observe(el));
 
   // Rotating tagline under name
   const words = ["Communications","Data","Mapping","Research"];
@@ -461,10 +490,36 @@
   }
   if(rot){ rot.classList.add("show"); setInterval(cycle, 1800); }
 
+  // Subtle parallax on project thumbnails
+  const thumbs = [...document.querySelectorAll('.thumb')];
+  function parallax(){
+    const vh = window.innerHeight;
+    thumbs.forEach(t=>{
+      const r = t.getBoundingClientRect();
+      const center = r.top + r.height/2;
+      const delta = (center - vh/2) / vh; // -0.5..0.5
+      const shift = Math.max(-10, Math.min(10, -delta*14)); // clamp
+      t.style.setProperty('--py', shift.toFixed(1)+'px');
+    });
+  }
+  let ticking = false;
+  function onScroll(){
+    if(!ticking){
+      window.requestAnimationFrame(()=>{
+        parallax();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', parallax);
+  parallax();
+
   // Back to top visibility (bottom-right)
   const toTop = document.getElementById('toTop');
   const toggleTop = ()=>{ window.scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
-  document.addEventListener('scroll', toggleTop); toggleTop();
+  document.addEventListener('scroll', toggleTop, {passive:true}); toggleTop();
 
   // Active nav highlight + progress bar (+ Contact highlight at bottom)
   const links = [...document.querySelectorAll('nav a')];
@@ -472,7 +527,7 @@
   const secs = ids.map(id=>document.querySelector(id));
   const prog = document.getElementById('progress');
 
-  const onScroll = ()=>{
+  const onNavScroll = ()=>{
     const h = document.documentElement;
     const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
     prog.style.width = (scrolled*100)+'%';
@@ -484,10 +539,9 @@
     });
     const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
     if(atBottom){ idx = secs.length - 1; }
-
     links.forEach(a=>a.classList.remove('active'));
     const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
     if(active) active.classList.add('active');
   };
-  document.addEventListener('scroll', onScroll); onScroll();
+  document.addEventListener('scroll', onNavScroll, {passive:true}); onNavScroll();
 </script>
