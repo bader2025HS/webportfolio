@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v12: Education right-aligned place/years, Activities click-to-reveal (no gaps), Contact highlight intact -->
+<!-- PORTFOLIO — v13: swap Tarjimly/Monde Arabe order + isolate accordion toggles -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -52,7 +52,7 @@
     width:34px; height:34px; border-radius:10px; flex:0 0 34px;
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
     box-shadow:0 6px 18px rgba(2,6,23,.06);
-    animation:spin 10s linear infinite; /* always spinning */
+    animation:spin 10s linear infinite;
   }
   @keyframes spin{to{transform:rotate(360deg)}}
   nav a{
@@ -65,6 +65,7 @@
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
 
+  /* type/buttons/cards */
   h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -122,7 +123,7 @@
   .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
   .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
-  /* Education — consistent: left title, right Location • Years */
+  /* Education (title left, Location • Years right) */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
   .edu .item strong{display:block}
@@ -130,9 +131,7 @@
   .edu .item p{margin:.35rem 0 0}
 
   /* Activities — dense grid, titles + click-to-reveal details */
-  .activities-grid{
-    display:grid; grid-template-columns:repeat(2,1fr); gap:12px; grid-auto-flow:row dense;
-  }
+  .activities-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; grid-auto-flow:row dense}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
   .activities-grid .card{min-height:62px}
   .span-2{grid-column:1 / -1}
@@ -140,9 +139,8 @@
   .stripe-violet{border-left:4px solid var(--violet)}
   .stripe-amber{border-left:4px solid var(--amber)}
   .stripe-coral{border-left:4px solid var(--coral)}
-  .stripe-aqua{border-left:4px solid var(--accent2)} /* NEW for Events so it differs from Solo travel */
+  .stripe-aqua{border-left:4px solid var(--accent2)}
 
-  /* Activity toggles (like projects) */
   .activity .head{display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none}
   .activity .chev{transition:transform .2s}
   .activity .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s ease}
@@ -234,7 +232,7 @@
     </div>
   </section>
 
-  <!-- Education (title left, Location • Years right) -->
+  <!-- Education -->
   <section id="education" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Education</h2>
@@ -388,27 +386,27 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (no gaps, titles + click-to-reveal details) -->
+  <!-- Extracurricular Activities (SWAPPED order: Monde Arabe first (span-2), then Tarjimly, etc.) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
       <div class="activities-grid">
-        <!-- Tarjimly spans both columns -->
-        <article class="card activity tilt stripe-teal reveal anim-l span-2">
+        <!-- SWAPPED: Monde Arabe now first and wide -->
+        <article class="card activity tilt stripe-violet reveal anim-l span-2">
+          <div class="head"><strong>Sciences Po Monde Arabe — Communications Director</strong><span class="chev">▶</span></div>
+          <div class="body"><div>
+            <p class="lead">Managed branding, content, and outreach; crafted visuals and coordinated announcements for talks and cultural events.</p>
+          </div></div>
+        </article>
+
+        <!-- Tarjimly now after Monde Arabe -->
+        <article class="card activity tilt stripe-teal reveal anim-r">
           <div class="head"><strong>Tarjimly — Volunteer Translator and Interpreter</strong><span class="chev">▶</span></div>
           <div class="body"><div>
             <p class="lead">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p>
           </div></div>
         </article>
 
-        <article class="card activity tilt stripe-violet reveal anim-r">
-          <div class="head"><strong>Sciences Po Monde Arabe — Communications Director</strong><span class="chev">▶</span></div>
-          <div class="body"><div>
-            <p class="lead">Managed branding, content, and outreach; produced visuals and coordinated announcements for talks and cultural events.</p>
-          </div></div>
-        </article>
-
-        <!-- Events now AQUA (not amber) -->
         <article class="card activity tilt stripe-aqua reveal anim-r">
           <div class="head"><strong>Events — Mediterranean of the Future & Paris Peace Forum</strong><span class="chev">▶</span></div>
           <div class="body"><div>
@@ -460,14 +458,26 @@
   }, {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Projects accordion
+  // Projects accordion — only toggle the clicked card, close siblings
   document.querySelectorAll('.project .head').forEach(h=>{
-    h.addEventListener('click', ()=> h.closest('.project').classList.toggle('open'));
+    h.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const card = h.closest('.project');
+      const container = card.parentElement;
+      container.querySelectorAll('.project.open').forEach(p=>{ if(p!==card) p.classList.remove('open'); });
+      card.classList.toggle('open');
+    });
   });
 
-  // Activities accordion (titles show, click to reveal details)
+  // Activities accordion — only toggle the clicked card, close siblings
   document.querySelectorAll('.activity .head').forEach(h=>{
-    h.addEventListener('click', ()=> h.closest('.activity').classList.toggle('open'));
+    h.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const card = h.closest('.activity');
+      const container = card.parentElement;
+      container.querySelectorAll('.activity.open').forEach(a=>{ if(a!==card) a.classList.remove('open'); });
+      card.classList.toggle('open');
+    });
   });
 
   // Back to top visibility
@@ -492,8 +502,9 @@
       if(r.top <= window.innerHeight*0.4) idx = i;
     });
 
+    // Force Contact active at page end
     const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= document.body.scrollHeight - 2;
-    if(atBottom){ idx = secs.length - 1; } // force Contact active
+    if(atBottom){ idx = secs.length - 1; }
 
     links.forEach(a=>a.classList.remove('active'));
     const active = document.querySelector(`nav a[href="${ids[idx]}"]`);
