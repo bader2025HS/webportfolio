@@ -147,6 +147,57 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
+  /* === Languages: circular flags instead of bullets (only change) === */
+  .lang-cols ul{list-style:none; margin:.3rem 0 0 0; padding:0; display:grid; gap:10px}
+  .lang-cols li{display:flex; align-items:center; gap:10px; font-size:1.05rem}
+  .lang-flag{
+    width:22px; height:22px; border-radius:50%;
+    background-size:cover; background-position:center;
+    border:1px solid var(--line);
+    box-shadow:0 4px 12px rgba(2,6,23,.10);
+    flex:0 0 22px;
+  }
+  /* Flags (round) — Saudi (Arabic), France (French), USA (English), Germany (German), Iran (Persian), Japan (Japanese) */
+  .flag-sa{background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
+<rect width='3' height='2' fill='%2300903B'/>\
+</svg>");} /* stylized Saudi green */
+  .flag-fr{background-image:url(\"data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
+<rect width='1' height='2' x='0' fill='%23005BBB'/>\
+<rect width='1' height='2' x='1' fill='%23FFFFFF'/>\
+<rect width='1' height='2' x='2' fill='%23EF3340'/>\
+</svg>\");}
+  .flag-us{background-image:url(\"data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 10'>\
+<rect width='19' height='10' fill='%23B22234'/>\
+<g fill='%23FFFFFF'>\
+<rect y='1' width='19' height='.8'/>\
+<rect y='3' width='19' height='.8'/>\
+<rect y='5' width='19' height='.8'/>\
+<rect y='7' width='19' height='.8'/>\
+<rect y='9' width='19' height='.8'/>\
+</g>\
+<rect width='8' height='6' fill='%23003F87'/>\
+</svg>\");} /* simplified */
+  .flag-de{background-image:url(\"data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'>\
+<rect width='5' height='1' y='0' fill='%23000000'/>\
+<rect width='5' height='1' y='1' fill='%23DD0000'/>\
+<rect width='5' height='1' y='2' fill='%23FFCE00'/>\
+</svg>\");}
+  .flag-ir{background-image:url(\"data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
+<rect width='3' height='2' fill='%23FFFFFF'/>\
+<rect width='3' height='0.66' y='0' fill='%2300903B'/>\
+<rect width='3' height='0.66' y='1.34' fill='%23DA0000'/>\
+</svg>\");}
+  .flag-jp{background-image:url(\"data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'>\
+<rect width='3' height='2' fill='%23FFFFFF'/>\
+<circle cx='1.5' cy='1' r='0.5' fill='%23BC002D'/>\
+</svg>\");}
+
   /* Projects */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
@@ -288,14 +339,32 @@
         <strong class="reveal fx-wipe-r">Languages</strong>
         <div class="lang-cols reveal fx-from-up">
           <ul class="lead">
-            <li><strong>Arabic</strong> - Native (MSA and dialects)</li>
-            <li><strong>French</strong> - Native</li>
-            <li><strong>English</strong> - C2 (spoken, read, written)</li>
+            <li>
+              <span class="lang-flag flag-sa" aria-hidden="true"></span>
+              <strong>Arabic</strong> - Native (MSA and dialects)
+            </li>
+            <li>
+              <span class="lang-flag flag-fr" aria-hidden="true"></span>
+              <strong>French</strong> - Native
+            </li>
+            <li>
+              <span class="lang-flag flag-us" aria-hidden="true"></span>
+              <strong>English</strong> - C2 (spoken, read, written)
+            </li>
           </ul>
           <ul class="lead">
-            <li><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li><strong>Persian</strong> - A2 (spoken, read, written)</li>
-            <li><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+            <li>
+              <span class="lang-flag flag-de" aria-hidden="true"></span>
+              <strong>German</strong> - C1 (spoken, read, written)
+            </li>
+            <li>
+              <span class="lang-flag flag-ir" aria-hidden="true"></span>
+              <strong>Persian</strong> - A2 (spoken, read, written)
+            </li>
+            <li>
+              <span class="lang-flag flag-jp" aria-hidden="true"></span>
+              <strong>Japanese</strong> - A2 (spoken, read, written)
+            </li>
           </ul>
         </div>
       </div>
