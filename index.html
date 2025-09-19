@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v9: exact About intro + research, Arabic simplified, balanced skills, consistent Education, bigger titles, project zoom, playful Activities -->
+<!-- PORTFOLIO — v10: stronger project zoom, tidy Activities (titles only), single-paragraph About -->
 <style>
   :root{
     --header:72px; --maxw:860px;
@@ -65,7 +65,6 @@
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),var(--violet),var(--coral),var(--amber))}
 
-  /* type/buttons/cards */
   h1{font-size:clamp(40px,6.8vw,66px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -90,16 +89,16 @@
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
 
-  /* Projects with strong zoom */
+  /* Projects — stronger zoom */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
   @media (max-width:1000px){.projects{grid-template-columns:1fr}}
-  .project{will-change:transform; transform:translateZ(0); transition:transform .25s ease, box-shadow .25s ease}
-  .project:hover{transform:scale(1.03); z-index:5; box-shadow:0 18px 40px rgba(2,6,23,.15)}
+  .project{will-change:transform; transform:translateZ(0); transition:transform .28s ease, box-shadow .28s ease}
+  .project:hover{transform:scale(1.08); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
   .thumb{
     aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line);
-    background:#e6fffb center/cover no-repeat; transition:transform .25s ease;
+    background:#e6fffb center/cover no-repeat; transition:transform .28s ease;
   }
-  .project:hover .thumb{transform:scale(1.06)}
+  .project:hover .thumb{transform:scale(1.12)}
   .project .head{display:flex;justify-content:space-between;cursor:pointer;user-select:none}
   .project .chev{transition:transform .2s}
   .project .body{grid-template-rows:0fr; display:grid; transition:grid-template-rows .25s ease}
@@ -123,16 +122,14 @@
   .tag.coral{color:#7a2d26; background:#ffe7e4; border-color:#ffd1cc}
   .tag.amber{color:#7a4a00; background:#fff3df; border-color:#ffe4b8}
 
-  /* Education consistent layout */
+  /* Education */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
   .edu .item strong{display:block}
   .edu .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
   .edu .where{color:var(--muted); font-weight:600}
 
-  /* Activities mosaic */
-  .activities-grid{
-    display:grid; grid-template-columns:1.2fr .8fr; gap:12px;
-  }
+  /* Activities — organized two columns, titles only */
+  .activities-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
   @media (max-width:900px){ .activities-grid{grid-template-columns:1fr} }
   .stack{display:grid; gap:12px}
   .accent{position:relative}
@@ -143,6 +140,10 @@
     -webkit-mask-composite:xor; mask-composite:exclude;
   }
   .accent .card{border-color:transparent}
+  /* right column color stripes preserved */
+  .stripe-violet{border-left:4px solid var(--violet)}
+  .stripe-amber{border-left:4px solid var(--amber)}
+  .stripe-coral{border-left:4px solid var(--coral)}
 
   footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
@@ -174,10 +175,7 @@
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
-          Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in five seconds, and short briefs that help a team decide the next step.
-        </p>
-        <p class="lead" style="margin:.4rem 0 0">
-          I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into clear, decision ready insights.
+          Hi, I am Bader. I like turning messy information into something useful. Think press reviews that highlight what matters, maps that make sense in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into clear, decision ready insights.
         </p>
       </div>
     </div>
@@ -205,7 +203,7 @@
         </div>
       </div>
 
-      <!-- Soft vs Hard (balanced 6/6) -->
+      <!-- Soft vs Hard (balanced) -->
       <div class="skills-2">
         <div class="card reveal anim-scale">
           <strong>Soft skills</strong>
@@ -233,7 +231,7 @@
     </div>
   </section>
 
-  <!-- Education (consistent: right side shows Location • Years) -->
+  <!-- Education -->
   <section id="education" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Education</h2>
@@ -253,7 +251,7 @@
           <p class="lead" style="margin:.35rem 0 0">Coursework in international relations and policy analysis within the dual degree track.</p>
         </div>
         <div class="card item tilt reveal anim-pop">
-          <div class="head">
+          <div class="head>
             <strong>B.A. Politics and Government — Sciences Po</strong>
             <span class="where">Menton/Nancy • 2021–2024</span>
           </div>
@@ -348,7 +346,7 @@
     </div>
   </section>
 
-  <!-- Selected Work (zoom on hover) -->
+  <!-- Selected Work -->
   <section id="work" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Selected Work</h2>
@@ -387,37 +385,32 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities (playful mosaic; order preserved) -->
+  <!-- Extracurricular Activities (organized, titles only; colors preserved) -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal anim-fade">Extracurricular Activities</h2>
 
       <div class="activities-grid">
-        <!-- Left column: Tarjimly (wide) + Events -->
+        <!-- Left column -->
         <div class="accent">
           <div class="card tilt reveal anim-l">
             <strong>Tarjimly - Volunteer Translator and Interpreter</strong>
-            <p class="lead" style="margin:.35rem 0 0">Supported refugees and NGOs with Arabic, English, and French translations and live interpretations via chat and voice.</p>
           </div>
           <div class="card tilt reveal anim-pop" style="margin-top:12px">
             <strong>Events - Mediterranean of the Future and Paris Peace Forum</strong>
-            <p class="lead" style="margin:.35rem 0 0">Helped organize sessions, speakers, and delegations with hands on logistics and stakeholder coordination.</p>
           </div>
         </div>
 
-        <!-- Right column stacked: Monde Arabe, Traveling, MEDMUN -->
+        <!-- Right column stacked with side colors -->
         <div class="stack">
-          <div class="card tilt reveal anim-r" style="border-left:4px solid var(--violet)">
+          <div class="card tilt stripe-violet reveal anim-r">
             <strong>Sciences Po Monde Arabe - Communications Director</strong>
-            <p class="lead" style="margin:.35rem 0 0">Managed branding, content, and outreach. Produced visuals and coordinated announcements for talks and cultural events.</p>
           </div>
-          <div class="card tilt reveal anim-r" style="border-left:4px solid var(--amber)">
+          <div class="card tilt stripe-amber reveal anim-r">
             <strong>Solo travel and field exposure</strong>
-            <p class="lead" style="margin:.35rem 0 0">Solo trips include India, Georgia, and Armenia; regional experience in Jordan, Lebanon, UAE, France, Germany, and Japan.</p>
           </div>
-          <div class="card tilt reveal anim-r" style="border-left:4px solid var(--coral)">
+          <div class="card tilt stripe-coral reveal anim-r">
             <strong>MEDMUN - Arabic Committee Director</strong>
-            <p class="lead" style="margin:.35rem 0 0">Led the Arabic committee, prepared topics, and guided delegates in collaboration with the Secretariat.</p>
           </div>
         </div>
       </div>
@@ -469,11 +462,9 @@
   const prog = document.getElementById('progress');
 
   const onScroll = ()=>{
-    // progress
     const h = document.documentElement;
     const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
     prog.style.width = (scrolled*100)+'%';
-    // active section
     let idx = 0;
     secs.forEach((s,i)=>{
       const rect = s.getBoundingClientRect();
