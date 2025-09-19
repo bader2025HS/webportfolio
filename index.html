@@ -1,12 +1,14 @@
-<!-- PORTFOLIO — v22: Fix rounded corners (no global clip-path), stable reveals, varied effects. Based on your v18 content. -->
+<!-- PORTFOLIO — v23: tighter title/lead spacing + white footer like header -->
 <style>
+  /* Topographic background overlay */
   body::after{
-  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.18;
-  background:
-    repeating-radial-gradient( circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
-    repeating-radial-gradient( circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
-  filter:blur(0.2px);
-}
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.18;
+    background:
+      repeating-radial-gradient( circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
+      repeating-radial-gradient( circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
+    filter:blur(0.2px);
+  }
+
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
@@ -33,10 +35,13 @@
 
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
   .section{margin:clamp(24px,5vw,46px) 0}
-  .section h2{margin:0 0 10px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
+  /* tighter space beneath H2s */
+  .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px); letter-spacing:.2px}
+  /* reduce gap from title to leading sentence */
+  .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
-  /* ===== Reveal system (no global clip-path, keeps rounded corners) ===== */
+  /* ===== Reveal system (keeps rounded corners) ===== */
   .reveal{
     opacity:0; will-change:transform, filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
@@ -54,7 +59,7 @@
   .fx-tilt{transform:perspective(800px) rotateX(6deg) translateY(10px); filter:blur(4px)}
   .fx-soft{transform:translateY(12px); opacity:.001}
 
-  /* Text wipe reveal (applies only to headings/labels) */
+  /* Text wipe reveal (only for headings/labels) */
   .fx-wipe-l, .fx-wipe-r{display:inline-block; will-change:clip-path; transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
   .fx-wipe-l{clip-path:inset(0 100% 0 0); -webkit-clip-path:inset(0 100% 0 0)}
   .fx-wipe-r{clip-path:inset(0 0 0 100%); -webkit-clip-path:inset(0 0 0 100%)}
@@ -160,7 +165,11 @@
   .activity:hover{transform:translateY(-2px)}
   .activity:hover .body{max-height:220px; opacity:1}
 
-  footer{border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px}
+  /* Footer — white strip like header */
+  footer{
+    border-top:1px solid var(--line); color:var(--muted); padding:20px 0; margin-top:30px;
+    background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px);
+  }
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9999; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 
