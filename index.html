@@ -112,9 +112,7 @@
     body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
     header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
     header nav a.active{color:var(--accent); border-color:var(--accent)}
-    #siteNav .mhead{display:flex; align-items:center; gap:10px;
-      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 18px);
-      font-weight:800}
+    #siteNav .mhead{display:none;} /* hidden on mobile overlay already shows brand elsewhere */
   }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
@@ -144,25 +142,29 @@
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
+
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
+  /* remove bullets ONLY in language lists */
+  .lang-cols ul{list-style:none; padding:0; margin:.3rem 0 0}
+  .lang-item{display:flex; align-items:center; gap:10px; margin:4px 0}
 
-  /* Flag circles for Languages */
-  .flag {
+  /* Flag circles for Languages (sharp + visible) */
+  .flag{
     display:inline-block;
-    width:22px;
-    height:22px;
+    width:24px;
+    height:24px;
     border-radius:50%;
     overflow:hidden;
-    vertical-align:middle;
-    margin-right:8px;
-    box-shadow:0 0 0 1px var(--line);
+    flex:0 0 24px;
+    box-shadow:0 0 0 1px var(--line), 0 1px 2px rgba(2,6,23,.12);
   }
-  .flag img {
+  .flag img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
+    image-rendering:auto;
   }
 
   /* Projects */
@@ -259,7 +261,6 @@ header .brand{
     </button>
 
     <nav id="siteNav">
-      <!-- brand inside the overlay too -->
       <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
 
       <a href="#about">About</a>
@@ -306,14 +307,14 @@ header .brand{
         <strong class="reveal fx-wipe-r">Languages</strong>
         <div class="lang-cols reveal fx-from-up">
           <ul class="lead">
-            <li><span class="flag"><img src="https://flagcdn.com/w20/sa.png" alt="Arabic"></span><strong>Arabic</strong> - Native (MSA and dialects)</li>
-            <li><span class="flag"><img src="https://flagcdn.com/w20/fr.png" alt="French"></span><strong>French</strong> - Native</li>
-            <li><span class="flag"><img src="https://flagcdn.com/w20/gb.png" alt="English"></span><strong>English</strong> - C2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/sa.png" alt="Arabic flag"></span><strong>Arabic</strong> - Native (MSA and dialects)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/fr.png" alt="French flag"></span><strong>French</strong> - Native</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/gb.png" alt="English flag"></span><strong>English</strong> - C2 (spoken, read, written)</li>
           </ul>
           <ul class="lead">
-            <li><span class="flag"><img src="https://flagcdn.com/w20/de.png" alt="German"></span><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li><span class="flag"><img src="https://flagcdn.com/w20/ir.png" alt="Persian"></span><strong>Persian</strong> - A2 (spoken, read, written)</li>
-            <li><span class="flag"><img src="https://flagcdn.com/w20/jp.png" alt="Japanese"></span><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/de.png" alt="German flag"></span><strong>German</strong> - C1 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/ir.png" alt="Persian flag"></span><strong>Persian</strong> - A2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japanese flag"></span><strong>Japanese</strong> - A2 (spoken, read, written)</li>
           </ul>
         </div>
       </div>
@@ -349,7 +350,7 @@ header .brand{
   <section id="education" class="section">
     <div class="wrap">
       <h2 class="reveal fx-wipe-r">Education</h2>
-    <p class="lead reveal fx-from-left">Focus on security, migration, and EU governance.</p>
+      <p class="lead reveal fx-from-left">Focus on security, migration, and EU governance.</p>
       <div class="edu">
         <div class="card item reveal fx-from-up">
           <div class="head">
