@@ -538,9 +538,9 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
 
   const map = L.map(el, { scrollWheelZoom: false, zoomControl: true }).setView([20, 0], 2);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 6, minZoom: 1, attribution: '&copy; OpenStreetMap'
-  }).addTo(map);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 6, minZoom: 1, attribution: '&copy; OpenStreetMap'
+}).addTo(map);
 
   // === EDIT ME: your visited countries list (human names) ===
   const visitedNames = [
