@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — v38 (edu bg removed)</title>
+<title>Portfolio — v37 (bg restored + no grey bar)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <style>
@@ -21,7 +21,7 @@
     background-size:200% 200%; animation:bgShift 22s ease infinite;
   }
   @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  /* Background overlays */
+  /* BACKGROUND OVERLAYS — restored */
   body:before{
     content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
@@ -136,13 +136,14 @@
   .project .body>div{overflow:hidden}
   @media (hover:none){ .project .body{grid-template-rows:1fr; opacity:1} .project:hover,.project:hover .thumb{transform:none} }
 
-  /* ===== Education: Horizontal Scroller (transparent container, no grey strip) ===== */
+  /* ===== Education: Horizontal Scroller (no visible scrollbar) ===== */
   #edu-scroll .box{
     position:relative;
-    background:transparent;  /* no grey background */
-    border:none;
-    box-shadow:none;
-    padding:8px 56px 10px;   /* tight bottom, room for arrows */
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:linear-gradient(180deg,#fff,#fafcff);
+    box-shadow:var(--shadow);
+    padding:18px 56px 12px; /* reduced bottom padding */
     overflow:hidden;
   }
   #edu-scroll .tray{
@@ -150,16 +151,24 @@
     overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
-    padding:6px 0 6px;       /* no extra strip */
+    padding:6px 0 6px;       /* NO extra space for a bar */
     scrollbar-gutter: stable;
-    /* hide scrollbars */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    /* Hide scrollbars everywhere */
+    scrollbar-width: none;   /* Firefox */
+    -ms-overflow-style: none;/* IE/Edge legacy */
   }
   #edu-scroll .tray::-webkit-scrollbar{height:0; width:0; background:transparent}
   #edu-scroll .tray::-webkit-scrollbar-thumb{background:transparent}
   #edu-scroll .tray::-webkit-scrollbar-track{background:transparent}
-  #edu-scroll .box:before, #edu-scroll .box:after{display:none} /* remove edge fades */
+  #edu-scroll .tray::-webkit-scrollbar-button{display:none; width:0; height:0}
+
+  #edu-scroll .box:before, #edu-scroll .box:after{
+    content:""; position:absolute; top:0; bottom:0; width:30px; pointer-events:none;
+    background:linear-gradient(to right, rgba(248,250,252,1), rgba(248,250,252,0));
+    z-index:2;
+  }
+  #edu-scroll .box:after{ right:0; transform:scaleX(-1) }
+  #edu-scroll .box:before{ left:0 }
 
   .edu-card{
     scroll-snap-align:center;
@@ -187,7 +196,7 @@
 
   /* Mobile tweaks */
   @media (max-width:600px){
-    #edu-scroll .box{padding:10px 20px 8px}
+    #edu-scroll .box{padding:14px 20px 10px}
     .edu-arrow{display:none}
     .edu-card{flex:0 0 86vw; min-height:auto}
     .edu-card .school{font-size:1.12rem}
