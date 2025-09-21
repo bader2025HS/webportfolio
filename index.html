@@ -286,7 +286,14 @@
 
   // Exact-looking focus (center and zoom tuned to your screenshot)
   function setEurasiaView(){
-    map.setView([36, 60], 3.5); // lat, lng, zoom
+    // a touch zoomed out
+map.setView([36, 60], 3.0);
+
+// more zoomed out
+map.setView([36, 60], 2.8);
+
+// wide view
+map.setView([36, 60], 2.5);
   }
   setEurasiaView();
 
