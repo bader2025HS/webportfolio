@@ -62,24 +62,28 @@
   .btn.ghost{background:var(--card); color:var(--text)}
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px)}
 
-  /* ===== EDUCATION scroller (no white container) ===== */
+  /* ===== EDUCATION scroller (no container, arrows removed) ===== */
   #edu-scroll .box{
-    position:relative;
     background:transparent !important;
     border:none !important;
     border-radius:0 !important;
     box-shadow:none !important;
     padding:0 !important;
-    overflow:visible;
   }
   #edu-scroll .tray{
     display:flex; gap:12px; align-items:center;
     overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    padding:0; /* mobile: tight, no bar space */
-    scrollbar-width:none; -ms-overflow-style:none;
+    padding:0 0 14px;               /* space for the thicker bar */
+    scrollbar-gutter: stable both-edges;
   }
-  #edu-scroll .tray::-webkit-scrollbar{width:0;height:0;background:transparent}
+  /* visible, thicker grey scrollbar (WebKit/Blink) */
+  #edu-scroll .tray::-webkit-scrollbar{height:14px}
+  #edu-scroll .tray::-webkit-scrollbar-track{background:#e5e7eb; border-radius:999px}
+  #edu-scroll .tray::-webkit-scrollbar-thumb{background:#9ca3af; border-radius:999px}
+  #edu-scroll .tray::-webkit-scrollbar-thumb:hover{background:#6b7280}
+  /* Firefox */
+  #edu-scroll .tray{scrollbar-width:auto; scrollbar-color:#9ca3af #e5e7eb}
 
   #edu-scroll .edu-card{
     scroll-snap-align:center;
@@ -92,45 +96,9 @@
   #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
-
-  .edu-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:38px; height:38px; display:grid; place-items:center;
-    border-radius:999px; background:#fff; border:1px solid var(--line);
-    box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px
-  }
-  .edu-prev{left:8px} .edu-next{right:8px}
-  .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
-
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
 
-  /* ===== Desktop-only: move arrows outside + visible scrollbar below ===== */
-  @media (min-width: 900px){
-    .edu-prev{ left:-22px; }
-    .edu-next{ right:-22px; }
-
-    #edu-scroll .tray{
-      padding-bottom: 12px;         /* space for visible bar */
-      scrollbar-width: thin;        /* Firefox */
-      scrollbar-color: rgba(14,165,162,.45) rgba(15,23,42,.08);
-    }
-    #edu-scroll .tray::-webkit-scrollbar{
-      height: 10px;                 /* visible bar (WebKit) */
-    }
-    #edu-scroll .tray::-webkit-scrollbar-track{
-      background: rgba(15,23,42,.08);
-      border-radius: 999px;
-    }
-    #edu-scroll .tray::-webkit-scrollbar-thumb{
-      background: rgba(14,165,162,.55);
-      border-radius: 999px;
-    }
-    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{
-      background: rgba(14,165,162,.7);
-    }
-  }
-
-  /* ===== Mobile tweaks ===== */
+  /* Mobile: keep your perfect layout (hide scrollbar) */
   @media (max-width:600px){
     :root{ --header:60px; }
     html{ scroll-padding-top: calc(var(--header) + 10px); }
@@ -138,7 +106,10 @@
     .section{ margin: 20px 0; }
     h1{ font-size: clamp(28px,8vw,40px); }
 
-    .edu-arrow{ display:none !important; }
+    #edu-scroll .tray{
+      padding:0; scrollbar-width:none; -ms-overflow-style:none;
+    }
+    #edu-scroll .tray::-webkit-scrollbar{height:0}
     #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
     #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
   }
@@ -224,14 +195,12 @@
     <div class="wrap">
       <h2>Education Journey</h2>
       <p class="lead" style="margin:.25rem 0 .9rem">
-        Scroll sideways or use arrows. Focus on security, migration, and EU governance.
+        Scroll sideways. Focus on security, migration, and EU governance.
       </p>
 
       <div id="edu-scroll">
         <div class="box" role="region" aria-label="Education cards carousel">
-          <button class="edu-arrow edu-prev" aria-label="Scroll left">‹</button>
           <div class="tray" id="eduTray" tabindex="0"></div>
-          <button class="edu-arrow edu-next" aria-label="Scroll right">›</button>
         </div>
       </div>
     </div>
@@ -291,17 +260,6 @@
     </article>
   `).join('');
 
-  const prev = document.querySelector('.edu-prev');
-  const next = document.querySelector('.edu-next');
-  function scrollByCards(dir=1){
-    const card = tray.querySelector('.edu-card');
-    const gap = parseFloat(getComputedStyle(tray).gap) || 12;
-    const w = (card?.getBoundingClientRect().width || 300) + gap;
-    tray.scrollBy({left: dir*w, behavior:'smooth'});
-  }
-  prev?.addEventListener('click', ()=>scrollByCards(-1));
-  next?.addEventListener('click', ()=>scrollByCards(1));
-
   // drag to scroll
   let down=false,startX=0,sl=0,pid=null;
   tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
@@ -326,7 +284,7 @@
   });
 
   function setEurasiaView(){
-    map.setView([36, 60], 3.0); // adjust here to zoom in/out: bigger number = closer
+    map.setView([36, 60], 3.0); // adjust zoom here
   }
   setEurasiaView();
   window.addEventListener('resize', setEurasiaView);
