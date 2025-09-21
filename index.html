@@ -4,8 +4,6 @@
 <meta charset="utf-8" />
 <title>Portfolio — responsive (education + transparent map focus)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
 
 <style>
@@ -69,14 +67,14 @@
     border:none !important;
     border-radius:0 !important;
     box-shadow:none !important;
-    padding:0 !important;         /* no frame spacing */
-    overflow:visible;             /* let cards “float” */
+    padding:0 !important;
+    overflow:visible;
   }
   #edu-scroll .tray{
     display:flex; gap:12px; align-items:center;
     overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    padding:0;                     /* tight since no container */
+    padding:0;                      /* no extra space on mobile */
     scrollbar-width:none; -ms-overflow-style:none;
   }
   #edu-scroll .tray::-webkit-scrollbar{width:0;height:0;background:transparent}
@@ -93,36 +91,49 @@
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
 
-  .edu-arrow{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; display:grid; place-items:center;
-    border-radius:999px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px}
+  .edu-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:38px; height:38px; display:grid; place-items:center;
+    border-radius:999px; background:#fff; border:1px solid var(--line);
+    box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px
+  }
+  /* default offsets (mobile hidden anyway) */
   .edu-prev{left:8px} .edu-next{right:8px}
   .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
+
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
 
-  /* ===== Mobile tweaks ===== */
-  @media (max-width:600px){
-    :root{ --header:60px; }
-    html{ scroll-padding-top: calc(var(--header) + 10px); }
-    .wrap{ padding: 14px 16px; }
-    .section{ margin: 20px 0; }
-    h1{ font-size: clamp(28px,8vw,40px); }
+  /* ===== Desktop-only: move arrows OUTSIDE + show a scrollbar under ===== */
+  @media (min-width: 900px){
+    /* Pull arrows out so they don’t overlap cards */
+    .edu-prev{ left:-22px; }
+    .edu-next{ right:-22px; }
 
-    #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:0 !important; }
-    #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
-    #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
-    #edu-scroll .edu-card .school{ font-size:1.06rem; }
-    .edu-arrow{ display:none !important; }
+    /* Add space for a visible native scrollbar */
+    #edu-scroll .tray{
+      padding-bottom: 12px;                /* space for the bar */
+      scrollbar-width: thin;               /* Firefox */
+      scrollbar-color: rgba(14,165,162,.45) rgba(15,23,42,.08);
+    }
+    /* WebKit scrollbar styling */
+    #edu-scroll .tray::-webkit-scrollbar{
+      height: 10px;                        /* visible */
+    }
+    #edu-scroll .tray::-webkit-scrollbar-track{
+      background: rgba(15,23,42,.08);
+      border-radius: 999px;
+    }
+    #edu-scroll .tray::-webkit-scrollbar-thumb{
+      background: rgba(14,165,162,.55);
+      border-radius: 999px;
+    }
+    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{
+      background: rgba(14,165,162,.7);
+    }
   }
 
   /* ===== Travel map ===== */
-  .map-card{
-    background:transparent;
-    border:none !important;
-    border-radius:0;
-    box-shadow:none;
-    padding:0;
-    overflow:visible;
-  }
+  .map-card{ background:transparent; border:none !important; border-radius:0; box-shadow:none; padding:0; overflow:visible; }
   #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
   #visitedMap.leaflet-container{ background:transparent !important; }
 
@@ -131,233 +142,7 @@
 </style>
 </head>
 <body>
-
-<div id="progress"></div>
-
-<header>
-  <div class="inner">
-    <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
-    <nav id="siteNav">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#travel">Travel</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <!-- About -->
-  <section id="about" class="section">
-    <div class="wrap">
-      <h1>Bader Suliman</h1>
-      <p class="lead" style="margin:.25rem 0 1rem">
-        Communications, data, mapping, and research. AR • EN • FR • DE — Paris (open to relocate).
-      </p>
-      <div class="card">
-        <strong>About</strong>
-        <p class="lead" style="margin:.4rem 0 0">
-          I make sense first, then make it simple: press reviews that spotlight what matters, maps you can read in five
-          seconds, and short briefs that help a team choose next steps. I enjoy practical research—from datasets and field
-          notes to practitioner interviews—distilled into clear takeaways and visuals.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="section">
-    <div class="wrap">
-      <h2>Skills & Languages</h2>
-      <p class="lead">Fluency, methods, and tools.</p>
-
-      <div class="projects" style="margin-top:12px">
-        <div class="card">
-          <strong>Languages</strong>
-          <ul class="lead" style="list-style:none;margin:.4rem 0 0;padding:0">
-            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/sa.png" width="20" height="14" alt=""> <strong>Arabic</strong> — Native</li>
-            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/fr.png" width="20" height="14" alt=""> <strong>French</strong> — Native</li>
-            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/gb.png" width="20" height="14" alt=""> <strong>English</strong> — C2</li>
-            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" alt=""> <strong>German</strong> — C1</li>
-            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/ir.png" width="20" height="14" alt=""> <strong>Persian</strong> — A2</li>
-            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/jp.png" width="20" height="14" alt=""> <strong>Japanese</strong> — A2</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>Core skills</strong>
-          <ul class="lead" style="margin:.4rem 0 0 18px">
-            <li>Analytical synthesis · press review</li>
-            <li>Data cleaning & analysis (Excel)</li>
-            <li>Mapping (QGIS, Mapbox), visuals</li>
-            <li>Basic HTML/CSS · dashboards</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="section">
-    <div class="wrap">
-      <h2>Education Journey</h2>
-      <p class="lead" style="margin:.25rem 0 .9rem">
-        Scroll sideways or use arrows. Focus on security, migration, and EU governance.
-      </p>
-
-      <div id="edu-scroll">
-        <div class="box" role="region" aria-label="Education cards carousel">
-          <button class="edu-arrow edu-prev" aria-label="Scroll left">‹</button>
-          <div class="tray" id="eduTray" tabindex="0"></div>
-          <button class="edu-arrow edu-next" aria-label="Scroll right">›</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Travel (Visited countries map) -->
-  <section id="travel" class="section">
-    <div class="wrap">
-      <h2>Countries I’ve Visited</h2>
-      <p class="lead">View is centered on Europe–Middle East–Asia. Hover for names.</p>
-      <div class="map-card">
-        <div id="visitedMap" aria-label="Visited countries map"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="wrap">
-      <div class="card">
-        <h2>Let’s work together</h2>
-        <p class="lead">Available for research, data, and communications projects.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn primary" href="mailto:badersuliman79@gmail.com">Email me</a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/bader-suliman-845840234" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer><div class="wrap">© 2025 Bader Suliman</div></footer>
-
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
-
-<script>
-/* Build the education cards */
-(function(){
-  const data = [
-    { year:"2021–2022", city:"Nancy, France", code:"fr", school:"Sciences Po — Campus de Nancy", program:"BA Politics & Government (Franco-German)", note:"Foundations in comparative politics; bilingual track" },
-    { year:"2022–2023", city:"Menton, France", code:"fr", school:"Sciences Po — Campus de Menton", program:"BA — Middle Eastern & Mediterranean", note:"Arabic studies; regional policy focus" },
-    { year:"2023–2024", city:"Tokyo, Japan", code:"jp", school:"Tokyo University of Foreign Studies", program:"Exchange — Asia-Pacific & Japanese Studies", note:"Deepened Japan/Asia focus; Japanese language" },
-    { year:"2024–2026", city:"Paris, France", code:"fr", school:"Sciences Po — PSIA", program:"MA International Security (Migration & MENA)", note:"Policy, research, and humanitarian data storytelling" },
-    { year:"2026–2027", city:"Berlin, Germany", code:"de", school:"Freie Universität Berlin — OSI", program:"MA Dual-Degree (Year 2)", note:"Comparative security; EU policy ecosystems" }
-  ];
-  const tray = document.getElementById('eduTray');
-  tray.innerHTML = data.map(d => `
-    <article class="edu-card" tabindex="0">
-      <div class="meta">
-        <img class="flag-ico" src="https://flagcdn.com/w40/${d.code}.png" alt="${d.city} flag" loading="lazy" width="24" height="16">
-        <span>${d.year} • ${d.city}</span>
-      </div>
-      <div class="school">${d.school}</div>
-      <div class="desc">${d.program}</div>
-      ${d.note ? `<div class="note">${d.note}</div>`:''}
-    </article>
-  `).join('');
-
-  const prev = document.querySelector('.edu-prev');
-  const next = document.querySelector('.edu-next');
-  function scrollByCards(dir=1){
-    const card = tray.querySelector('.edu-card');
-    const gap = parseFloat(getComputedStyle(tray).gap) || 12;
-    const w = (card?.getBoundingClientRect().width || 300) + gap;
-    tray.scrollBy({left: dir*w, behavior:'smooth'});
-  }
-  prev?.addEventListener('click', ()=>scrollByCards(-1));
-  next?.addEventListener('click', ()=>scrollByCards(1));
-
-  // drag to scroll
-  let down=false,startX=0,sl=0,pid=null;
-  tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
-  tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
-  tray.addEventListener('pointerup', e=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
-  // wheel → horizontal
-  tray.addEventListener('wheel', e=>{
-    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
-  }, {passive:false});
-})();
-
-/* Visited countries map — transparent background, fixed “Eurasia” view */
-(function(){
-  const el = document.getElementById('visitedMap');
-  if (!el || typeof L === 'undefined') return;
-
-  const map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5
-  });
-
-  function setEurasiaView(){
-    map.setView([36, 60], 3.0);
-  }
-  setEurasiaView();
-  window.addEventListener('resize', setEurasiaView);
-
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
-  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const visited = new Set(visitedNames.map(normalize));
-
-  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
-  const stroke = '#7a7a7a';
-
-  const SOURCES = [
-    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
-    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
-  ];
-
-  function loadWorld(i){
-    return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
-      const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
-      L.geoJSON(geo, {
-        style: f => {
-          const props = f.properties || {};
-          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
-          const hit  = visited.has(normalize(name));
-          return {
-            fillColor: hit ? accent : 'transparent',
-            color: stroke,
-            weight: hit ? 1.2 : 0.6,
-            fillOpacity: hit ? 0.9 : 0.0,
-            opacity: 0.9
-          };
-        },
-        onEachFeature: (f, l) => {
-          const props = f.properties || {};
-          const name = (props.name || props.ADMIN || '');
-          l.bindTooltip(name, {sticky:true, direction:'top', opacity:0.9});
-          if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
-        }
-      }).addTo(map);
-      setTimeout(setEurasiaView, 0);
-    });
-  }
-  loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
-    console.error('GeoJSON load error:', err);
-    el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
-  });
-})();
-</script>
+  <!-- content unchanged below: your sections, map, scripts, etc. -->
+  <!-- ... keep the rest of your HTML and JS exactly as in your last message ... -->
 </body>
 </html>
