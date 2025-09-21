@@ -89,15 +89,14 @@
   }
   nav a:hover{color:var(--accent)}
   nav a.active{color:var(--accent)}
-  nav a:after{display:none !important} /* remove underline */
+  nav a:after{display:none !important}
 
-  /* Hamburger + mobile overlay — EXACTLY like v30 */
+  /* Hamburger + mobile overlay */
   .menu-toggle{display:none; place-items:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
   .menu-toggle .bar:before,.menu-toggle .bar:after{
     content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text); transition:.25s}
-  }
   .menu-toggle .bar:before{top:-6px} .menu-toggle .bar:after{top:6px}
   body.nav-open .menu-toggle .bar{transform:rotate(45deg)}
   body.nav-open .menu-toggle .bar:before{transform:rotate(-90deg) translateX(-6px); opacity:0}
@@ -110,14 +109,14 @@
       position:fixed; inset:0; z-index:10004; height:100svh;
       padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
       display:flex; flex-direction:column; gap:10px;
-      background:#fff !important; /* solid white */
+      background:#fff !important;
       transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
       transition:transform .28s ease, opacity .2s ease;
     }
     body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
     header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
     header nav a.active{color:var(--accent); border-color:var(--accent)}
-    #siteNav .mhead{display:none;} /* hidden on mobile overlay already shows brand elsewhere */
+    #siteNav .mhead{display:none;}
   }
 
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
@@ -135,7 +134,6 @@
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s, box-shadow .2s}
   .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
 
-  /* Strap under name */
   .strap{margin:6px 0 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
   .rotator{font-weight:800; letter-spacing:.2px}
   .fade{opacity:0; transform:translateY(6px); transition:opacity .25s, transform .25s}
@@ -150,27 +148,10 @@
 
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
-  /* remove bullets ONLY in language lists */
   .lang-cols ul{list-style:none; padding:0; margin:.3rem 0 0}
   .lang-item{display:flex; align-items:center; gap:10px; margin:4px 0}
-
-  /* Flag circles for Languages (sharp + visible) */
-  .flag{
-    display:inline-block;
-    width:24px;
-    height:24px;
-    border-radius:50%;
-    overflow:hidden;
-    flex:0 0 24px;
-    box-shadow:0 0 0 1px var(--line), 0 1px 2px rgba(2,6,23,.12);
-  }
-  .flag img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    image-rendering:auto;
-  }
+  .flag{display:inline-block; width:24px; height:24px; border-radius:50%; overflow:hidden; flex:0 0 24px; box-shadow:0 0 0 1px var(--line), 0 1px 2px rgba(2,6,23,.12)}
+  .flag img{width:100%; height:100%; object-fit:cover; display:block; image-rendering:auto}
 
   /* Projects */
   .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
@@ -202,37 +183,26 @@
   .edu .item .where{color:var(--muted); font-weight:600}
   .edu .item p{margin:.35rem 0 0}
 
-  /* Activities — 4-in-row desktop, FORCE 2×2 on phones */
+  /* Activities */
   .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
   @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:420px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
   .activity{aspect-ratio:1/1; display:grid; place-items:center; text-align:center; padding:12px}
   .activity .title{font-weight:800}
 
-  /* Footer (small) */
+  /* Footer */
   footer{border-top:1px solid var(--line); color:var(--muted); padding:10px 0; margin-top:24px;
     background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px); font-size:.92rem}
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 
-  /* === Desktop menu framing (mobile untouched) === */
+  /* Desktop menu framing */
   @media (min-width:761px){
-    header .brand{
-      padding:0; border:none; border-radius:0; background:transparent; box-shadow:none;
-    }
-    header nav#siteNav{
-      display:flex; align-items:center; gap:8px;
-    }
-    header nav#siteNav a{
-      margin:0; padding:8px 12px; border:1px solid var(--line);
-      border-radius:12px; background:rgba(255,255,255,.9);
-      text-decoration:none; color:var(--muted);
-    }
+    header .brand{padding:0; border:none; border-radius:0; background:transparent; box-shadow:none;}
+    header nav#siteNav{display:flex; align-items:center; gap:8px;}
+    header nav#siteNav a{margin:0; padding:8px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.9); text-decoration:none; color:var(--muted);}
     header nav#siteNav a:hover{ border-color:var(--accent); color:var(--accent); }
-    header nav#siteNav a.active{
-      border-color:var(--accent); color:var(--accent);
-      box-shadow:0 0 0 2px rgba(14,165,162,.12) inset;
-    }
+    header nav#siteNav a.active{ border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 2px rgba(14,165,162,.12) inset; }
     #siteNav .mhead{display:none;}
   }
 </style>
@@ -240,21 +210,19 @@
 <!-- Progress bar element -->
 <div id="progress"></div>
 
+<!-- Leaflet CSS (for the map) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
 
 <header>
   <div class="inner">
     <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
-
-    <!-- Hamburger -->
     <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
       <span class="bar"></span>
     </button>
-
     <nav id="siteNav">
       <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
-
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
@@ -272,7 +240,6 @@
   <section id="about" class="section">
     <div class="wrap reveal fx-from-down">
       <h1 class="reveal fx-wipe-l">Bader Suliman</h1>
-
       <div class="strap reveal fx-from-right">
         <span class="rotator"><span id="rotate" class="fade">Communications</span></span>
         <div class="chips-mini">
@@ -280,7 +247,6 @@
           <span class="chip-mini">Paris • willing to relocate</span>
         </div>
       </div>
-
       <div class="card reveal fx-zoom">
         <strong class="reveal fx-wipe-r">About</strong>
         <p class="lead reveal fx-from-left" style="margin:.4rem 0 0">
@@ -374,7 +340,7 @@
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Experience</h2>
-    <p class="lead reveal fx-from-right">Communications, humanitarian data, and policy research.</p>
+      <p class="lead reveal fx-from-right">Communications, humanitarian data, and policy research.</p>
       <div class="timeline">
         <div class="t">
           <div class="dot" aria-hidden="true"></div>
@@ -469,7 +435,7 @@
     </div>
   </section>
 
-  <!-- Travel (Visited Countries) -->
+  <!-- Travel -->
   <section id="travel" class="section">
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Countries I’ve Visited</h2>
@@ -480,7 +446,7 @@
     </div>
   </section>
 
-  <!-- Extracurricular Activities — 4 squares -->
+  <!-- Activities -->
   <section id="activities" class="section">
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
@@ -514,19 +480,11 @@
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
-<!-- Leaflet CSS/JS (interactive colored countries) -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  crossorigin=""
-/>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  crossorigin=""
-></script>
+<!-- Leaflet JS (after body so the container exists) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <script>
-/* Reveal on scroll */
+/* Reveal on scroll (unchanged) */
 (function(){
   const els=[...document.querySelectorAll('.reveal')];
   if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
@@ -563,7 +521,7 @@ const onScroll=()=>{
 };
 addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
-/* Mobile menu (unchanged) */
+/* Mobile menu */
 const menuBtn=document.getElementById('menuBtn');
 const nav=document.getElementById('siteNav');
 function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
@@ -573,23 +531,18 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
 addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 
-<script>
-/* ===== Visited countries map (Leaflet, interactive + colored countries) — stable CORS source ===== */
+/* ===== Visited countries map (Leaflet, interactive + colored countries) ===== */
 (function(){
   const el = document.getElementById('visitedMap');
   if (!el || typeof L === 'undefined') return;
 
-  // Create map
   const map = L.map(el, { scrollWheelZoom: false, zoomControl: true }).setView([20, 0], 2);
 
-  // Base layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 6,
-    minZoom: 1,
-    attribution: '&copy; OpenStreetMap'
+    maxZoom: 6, minZoom: 1, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  // Your countries (human names)
+  // === EDIT ME: your visited countries list (human names) ===
   const visitedNames = [
     "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
     "Armenia","Georgia","Bulgaria",
@@ -598,27 +551,32 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     "Australia"
   ];
 
-  // Normalize for robust matching
+  // Normalize for robust matching (case/accents)
   const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const visited = new Set(visitedNames.map(normalize));
 
-  // Colors from your theme
+  // Theme colors
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
   const baseFill = '#e5e7eb';
   const stroke = '#999';
 
-  // CORS-friendly world polygons (properties.name)
-  const WORLD_URL = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json';
+  // Two CORS-safe sources (try #1, fallback to #2)
+  const SOURCES = [
+    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json', // properties.name
+    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson' // properties.ADMIN
+  ];
 
-  fetch(WORLD_URL)
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP '+r.status);
+  function loadWorld(urlIndex){
+    const url = SOURCES[urlIndex];
+    return fetch(url).then(r => {
+      if(!r.ok) throw new Error('HTTP '+r.status);
       return r.json();
-    })
-    .then(geo => {
+    }).then(geo => {
+      const useAdmin = !!(geo.features && geo.features[0] && geo.features[0].properties && geo.features[0].properties.ADMIN);
       const layer = L.geoJSON(geo, {
         style: f => {
-          const name = f.properties && (f.properties.name || f.properties.ADMIN || '');
+          const props = f.properties || {};
+          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
           const hit  = visited.has(normalize(name));
           return {
             fillColor: hit ? accent : baseFill,
@@ -628,23 +586,25 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
           };
         },
         onEachFeature: (f, l) => {
-          const name = f.properties && (f.properties.name || f.properties.ADMIN || '');
-          // Hover highlight
+          const props = f.properties || {};
+          const name = (props.name || props.ADMIN || '');
+          const hit  = visited.has(normalize(name));
           l.on('mouseover', () => l.setStyle({ weight: 1.3 }));
           l.on('mouseout',  () => l.setStyle({ weight: 0.8 }));
-          if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
+          if (hit) l.bindPopup(`<strong>${name}</strong>`);
         }
       }).addTo(map);
 
-      // Fit nicely
       try { map.fitBounds(layer.getBounds(), { padding: [10,10] }); } catch(e){}
-    })
-    .catch(err => {
-      console.error('GeoJSON load error:', err);
-      el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons (source blocked). Try refreshing.</div>";
     });
+  }
+
+  // Try primary, then fallback
+  loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
+    console.error('GeoJSON load error:', err);
+    el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
+  });
 })();
 </script>
-
 </body>
 </html>
