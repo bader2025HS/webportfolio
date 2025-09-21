@@ -184,6 +184,21 @@
 }
 #edu-scroll .tray::-webkit-scrollbar{height:0 !important; width:0 !important}
 
+  /* === Education: equalize top/bottom spacing & center cards === */
+#edu-scroll .box{
+  padding: 18px 56px 18px !important;  /* equal top & bottom */
+}
+
+#edu-scroll .tray{
+  padding: 6px 0 !important;           /* equal top & bottom inside the box */
+  align-items: center;                  /* vertical centering of cards (cross-axis) */
+}
+
+#edu-scroll .edu-card{
+  margin-block: 0 !important;           /* no extra margins adding bias */
+}
+
+
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
