@@ -584,27 +584,28 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
 addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 
-/* ===== Visited countries map (Leaflet) ===== */
+/* ===== Visited countries map (Leaflet) — match by ADMIN names ===== */
 (function(){
   const el = document.getElementById('visitedMap');
   if(!el || typeof L === 'undefined') return;
 
   const map = L.map('visitedMap', { scrollWheelZoom: false }).setView([20,0], 2);
 
-  // Keep your original tile layer (OSM)
+  // Base tiles (keep your OSM layer)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  // ISO-3 codes for countries you listed
+  // Countries visited — use ADMIN names (exact match with GeoJSON)
   const visited = [
-    "FRA","DEU","BEL","NLD","ITA","LUX","GBR","MLT",
-    "ARM","GEO","BGR",
-    "SYR","JOR","ARE","LBN","SAU",
-    "IND","CHN","HKG","MAC","VNM","JPN","TWN","KHM","THA","SGP","PHL",
-    "AUS"
+    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
+    "Armenia","Georgia","Bulgaria",
+    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
+    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
+    "Australia"
   ];
+  // Note: Hong Kong & Macau are part of "China" in this GeoJSON, so they’re covered via "China".
 
   // Load world countries GeoJSON and shade visited ones
   fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
@@ -612,13 +613,13 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     .then(data => {
       L.geoJSON(data, {
         style: f => ({
-          fillColor: visited.includes(f.properties.ISO_A3) ? "#0ea5a2" : "#e5e7eb",
+          fillColor: visited.includes(f.properties.ADMIN) ? "#0ea5a2" : "#e5e7eb",
           weight: 1,
           color: "#999",
-          fillOpacity: visited.includes(f.properties.ISO_A3) ? 0.8 : 0.2
+          fillOpacity: visited.includes(f.properties.ADMIN) ? 0.8 : 0.2
         }),
         onEachFeature: (f, layer) => {
-          if (visited.includes(f.properties.ISO_A3)) {
+          if (visited.includes(f.properties.ADMIN)) {
             layer.bindPopup(`<strong>${f.properties.ADMIN}</strong>`);
           }
         }
