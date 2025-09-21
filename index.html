@@ -176,13 +176,6 @@
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
   .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
 
-  /* Education */
-  .edu{display:grid; grid-template-columns:1fr; gap:12px}
-  .edu .item .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
-  .edu .item strong{display:block}
-  .edu .item .where{color:var(--muted); font-weight:600}
-  .edu .item p{margin:.35rem 0 0}
-
   /* Activities */
   .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
   @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
@@ -205,12 +198,61 @@
     header nav#siteNav a.active{ border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 2px rgba(14,165,162,.12) inset; }
     #siteNav .mhead{display:none;}
   }
+
+  /* ===== EDUCATION — Visual Rail (scoped) ===== */
+  #edu-rail{
+    --er-bg:#ffffff; --er-ink:#0f172a; --er-muted:#475569; --er-card:#f8fafc; --er-line:#e2e8f0;
+    --er-accent:#0ea5a2; --er-accent2:#1fbdb9; --er-shadow:0 10px 30px rgba(2,6,23,.10); --er-radius:16px;
+    color:var(--er-ink); background:var(--er-bg);
+  }
+  #edu-rail .er-wrap{max-width:1100px; margin:0 auto; padding:0 16px;}
+  #edu-rail .er-title{font-size:clamp(24px,2.2vw,32px); margin:0 0 16px; letter-spacing:.2px}
+  #edu-rail .er-rail{
+    position:relative; background:linear-gradient(180deg, #fff, #fafcff);
+    border:1px solid var(--er-line); border-radius:var(--er-radius); box-shadow:var(--er-shadow);
+    padding:28px 16px 48px; overflow:hidden;
+  }
+  #edu-rail .er-svg{width:100%; height:120px; display:block; filter:drop-shadow(0 2px 0 rgba(2,6,23,.04))}
+  #edu-rail #er-arrow path{ fill: var(--er-accent2); }
+  #edu-rail .er-stops{list-style:none; margin:0; padding:0}
+  #edu-rail .er-stop{--dot:16px; position:absolute; top:40px; transform:translateX(-50%)}
+  #edu-rail .er-dot{width:var(--dot); height:var(--dot); background:#fff; border:4px solid var(--er-accent); border-radius:999px; box-shadow:0 2px 0 rgba(2,6,23,.06); cursor:pointer}
+  #edu-rail .er-stop:hover .er-dot, #edu-rail .er-stop:focus-within .er-dot{border-color:var(--er-accent2)}
+  #edu-rail .er-pop{
+    position:absolute; top:-10px; left:50%; transform:translate(-50%,-100%) scale(.98);
+    background:var(--er-card); border:1px solid var(--er-line); border-radius:14px; box-shadow:var(--er-shadow);
+    width:280px; max-width:34vw; padding:14px 14px 12px; opacity:0; pointer-events:none; transition:.18s ease;
+  }
+  #edu-rail .er-pop::after{
+    content:""; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%) rotate(45deg);
+    width:16px; height:16px; background:var(--er-card);
+    border-right:1px solid var(--er-line); border-bottom:1px solid var(--er-line);
+  }
+  #edu-rail .er-stop:hover .er-pop, #edu-rail .er-stop:focus-within .er-pop{opacity:1; transform:translate(-50%,-100%) scale(1); pointer-events:auto}
+  #edu-rail .er-tag{display:inline-flex; gap:8px; align-items:center; font-size:12px; color:var(--er-muted); margin-bottom:6px}
+  #edu-rail .er-flag{font-size:16px}
+  #edu-rail .er-school{font-weight:700; margin:2px 0 6px}
+  #edu-rail .er-program{font-size:14px; line-height:1.35}
+  #edu-rail .er-notes{font-size:12px; color:var(--er-muted); margin-top:8px}
+  #edu-rail .er-cards{display:none; align-items:center; gap:8px; margin-top:14px}
+  #edu-rail .er-viewport{overflow:hidden; width:100%}
+  #edu-rail .er-track{display:flex; gap:12px; transition:transform .25s ease}
+  #edu-rail .er-card{min-width:84%; background:var(--er-card); border:1px solid var(--er-line); border-radius:14px; box-shadow:var(--er-shadow); padding:14px}
+  #edu-rail .er-card .er-meta{display:flex; gap:8px; align-items:center; color:var(--er-muted); font-size:12px; margin-bottom:4px}
+  #edu-rail .er-card .er-title{font-weight:700; margin:2px 0 6px}
+  #edu-rail .er-card .er-desc{font-size:14px; line-height:1.35}
+  #edu-rail .er-nav{border:1px solid var(--er-line); background:#fff; border-radius:999px; width:36px; height:36px; display:grid; place-items:center; cursor:pointer; box-shadow:var(--er-shadow)}
+  #edu-rail .er-nav:disabled{opacity:.4; cursor:not-allowed}
+  @media (max-width:880px){ #edu-rail .er-rail{display:none} #edu-rail .er-cards{display:flex} }
+
+  /* Map container (no basemap look) */
+  #visitedMap{height:420px; width:100%; background:transparent}
 </style>
 
 <!-- Progress bar element -->
 <div id="progress"></div>
 
-<!-- Leaflet CSS (for the map) -->
+<!-- Leaflet CSS (for the map polygons only) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -268,12 +310,12 @@
           <ul class="lead">
             <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/sa.png" alt="Arabic flag"></span><strong>Arabic</strong> - Native (MSA and dialects)</li>
             <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/fr.png" alt="French flag"></span><strong>French</strong> - Native</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/gb.png" alt="English flag"></span><strong>English</strong> - C2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/gb.png" alt="UK flag"></span><strong>English</strong> - C2 (spoken, read, written)</li>
           </ul>
           <ul class="lead">
             <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/de.png" alt="German flag"></span><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/ir.png" alt="Persian flag"></span><strong>Persian</strong> - A2 (spoken, read, written)</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japanese flag"></span><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/ir.png" alt="Iran flag"></span><strong>Persian</strong> - A2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japan flag"></span><strong>Japanese</strong> - A2 (spoken, read, written)</li>
           </ul>
         </div>
       </div>
@@ -305,34 +347,37 @@
     </div>
   </section>
 
-  <!-- Education -->
+  <!-- Education (Visual Rail) -->
   <section id="education" class="section">
     <div class="wrap">
-      <h2 class="reveal fx-wipe-r">Education</h2>
-      <p class="lead reveal fx-from-left">Focus on security, migration, and EU governance.</p>
-      <div class="edu">
-        <div class="card item reveal fx-from-up">
-          <div class="head">
-            <strong class="reveal fx-wipe-l">M.A. International Security - Sciences Po (PSIA)</strong>
-            <span class="where reveal fx-from-right">Paris • 2024–2027</span>
+      <div id="edu-rail">
+        <div class="er-wrap">
+          <h2 class="er-title">Education Journey</h2>
+          <div class="er-rail">
+            <svg class="er-svg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <marker id="er-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                </marker>
+                <linearGradient id="er-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"  stop-color="var(--er-accent)" />
+                  <stop offset="100%" stop-color="var(--er-accent2)" />
+                </linearGradient>
+              </defs>
+              <line x1="30" y1="60" x2="1170" y2="60" stroke="url(#er-grad)" stroke-width="6" marker-end="url(#er-arrow)"></line>
+            </svg>
+            <ul class="er-stops" role="list"></ul>
           </div>
-          <p class="lead">Focus on Migration and Middle Eastern Studies at the Paris School of International Affairs.</p>
-        </div>
-        <div class="card item reveal fx-zoom">
-          <div class="head">
-            <strong class="reveal fx-wipe-r">M.A. International Relations - Freie Universität Berlin (OSI)</strong>
-            <span class="where reveal fx-from-right">Berlin • 2024–2027</span>
+
+          <!-- Mobile card carousel -->
+          <div class="er-cards" aria-live="polite">
+            <button class="er-nav er-prev" aria-label="Previous">‹</button>
+            <div class="er-viewport"><div class="er-track"></div></div>
+            <button class="er-nav er-next" aria-label="Next">›</button>
           </div>
-          <p class="lead">Coursework in international relations and European Affairs in the Otto Suhr Institute track.</p>
-        </div>
-        <div class="card item reveal fx-from-down">
-          <div class="head">
-            <strong class="reveal fx-wipe-l">B.A. Politics and Government - Sciences Po</strong>
-            <span class="where reveal fx-from-right">Menton/Nancy • 2021–2024</span>
-          </div>
-          <p class="lead">Exchange: Tokyo University of Foreign Studies (TUFS) - Tokyo • 2023–2024.</p>
         </div>
       </div>
+      <p class="lead reveal fx-from-left" style="margin-top:10px">Focus on security, migration, and EU governance.</p>
     </div>
   </section>
 
@@ -441,7 +486,7 @@
       <h2 class="reveal fx-wipe-l">Countries I’ve Visited</h2>
       <p class="lead reveal fx-from-right">Shaded regions show where I’ve been.</p>
       <div class="card reveal fx-zoom" style="padding:0; overflow:hidden">
-        <div id="visitedMap" style="height:420px; width:100%"></div>
+        <div id="visitedMap"></div>
       </div>
     </div>
   </section>
@@ -480,11 +525,11 @@
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
-<!-- Leaflet JS (after body so the container exists) -->
+<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <script>
-/* Reveal on scroll (unchanged) */
+/* Reveal on scroll */
 (function(){
   const els=[...document.querySelectorAll('.reveal')];
   if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
@@ -531,18 +576,97 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
 addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 
-/* ===== Visited countries map (Leaflet, interactive + colored countries) ===== */
+/* ===== Education Rail (data + render) ===== */
+(function(){
+  const EDU_STOPS = [
+    { year:"2021–2022", city:"Nancy, France", flag:"🇫🇷", school:"Sciences Po – Campus de Nancy", program:"BA in Politics & Government (Franco-German focus)", notes:"Foundations in comparative politics; bilingual track", pos:6 },
+    { year:"2022–2023", city:"Menton, France", flag:"🇫🇷", school:"Sciences Po – Campus de Menton", program:"BA – Middle Eastern & Mediterranean focus", notes:"Arabic studies; regional policy focus", pos:26 },
+    { year:"2023–2024", city:"Tokyo, Japan", flag:"🇯🇵", school:"Tokyo University of Foreign Studies (TUFS)", program:"Exchange – Asia-Pacific & Japanese Studies", notes:"Deepened Japan/Asia focus; Japanese language", pos:48 },
+    { year:"2024–2026", city:"Paris, France", flag:"🇫🇷", school:"Sciences Po – PSIA", program:"MA in International Security (Migration & MENA)", notes:"Policy, research, and humanitarian data storytelling", pos:72 },
+    { year:"2026–2027", city:"Berlin, Germany", flag:"🇩🇪", school:"Freie Universität Berlin – Otto-Suhr-Institut", program:"MA Dual-Degree (Year 2)", notes:"Comparative security; European policy ecosystems", pos:92 }
+  ];
+
+  // Desktop: place stops
+  const stopsUL = document.querySelector('#edu-rail .er-stops');
+  if(!stopsUL) return;
+
+  stopsUL.innerHTML = EDU_STOPS.map(s => `
+    <li class="er-stop" style="left:${s.pos}%">
+      <button class="er-dot" aria-label="${s.school} — ${s.city} (${s.year})"></button>
+      <div class="er-pop" role="dialog" aria-label="${s.school}">
+        <div class="er-tag"><span class="er-flag">${s.flag}</span><span>${s.year} • ${s.city}</span></div>
+        <div class="er-school">${s.school}</div>
+        <div class="er-program">${s.program}</div>
+        ${s.notes ? `<div class="er-notes">${s.notes}</div>` : ``}
+      </div>
+    </li>`).join('');
+
+  function clampPopups(){
+    const rail = document.querySelector('#edu-rail .er-rail');
+    const railRect = rail.getBoundingClientRect();
+    document.querySelectorAll('#edu-rail .er-pop').forEach(pop=>{
+      const rect = pop.getBoundingClientRect();
+      const leftOverflow = Math.max(0, railRect.left + 8 - rect.left);
+      const rightOverflow = Math.max(0, rect.right - (railRect.right - 8));
+      if (leftOverflow>0) pop.style.transform = `translate(calc(-50% + ${leftOverflow}px), -100%)`;
+      else if (rightOverflow>0) pop.style.transform = `translate(calc(-50% - ${rightOverflow}px), -100%)`;
+      else pop.style.transform = `translate(-50%, -100%)`;
+    });
+  }
+  addEventListener('resize', clampPopups, {passive:true});
+  setTimeout(clampPopups, 60);
+
+  // Mobile carousel
+  const track = document.querySelector('#edu-rail .er-track');
+  const prev = document.querySelector('#edu-rail .er-prev');
+  const next = document.querySelector('#edu-rail .er-next');
+  if(track){
+    track.innerHTML = EDU_STOPS.map(s => `
+      <article class="er-card">
+        <div class="er-meta"><span class="er-flag">${s.flag}</span><span>${s.year} • ${s.city}</span></div>
+        <div class="er-title">${s.school}</div>
+        <div class="er-desc">${s.program}</div>
+        ${s.notes ? `<div class="er-notes" style="margin-top:8px">${s.notes}</div>` : ``}
+      </article>`).join('');
+
+    let index = 0;
+    function updateCarousel(){
+      const cards = Array.from(document.querySelectorAll('#edu-rail .er-card'));
+      const cardW = cards[0]?.getBoundingClientRect().width || 0;
+      const gap = parseFloat(getComputedStyle(track).gap) || 12;
+      track.style.transform = `translateX(${-(cardW + gap) * index}px)`;
+      if(prev) prev.disabled = index === 0;
+      if(next) next.disabled = index >= cards.length - 1;
+    }
+    updateCarousel();
+    addEventListener('resize', updateCarousel, {passive:true});
+    if(prev) prev.addEventListener('click', ()=>{ index = Math.max(0, index-1); updateCarousel(); });
+    if(next) next.addEventListener('click', ()=>{ index = Math.min(EDU_STOPS.length-1, index+1); updateCarousel(); });
+
+    // Swipe
+    let startX = 0, curX = 0, dragging = false;
+    track.addEventListener('pointerdown', e => { dragging = true; startX = e.clientX; track.setPointerCapture(e.pointerId); });
+    track.addEventListener('pointermove', e => { if(!dragging) return; curX = e.clientX; });
+    track.addEventListener('pointerup', e => {
+      if(!dragging) return;
+      const delta = curX - startX;
+      if (delta < -40 && next) next.click();
+      else if (delta > 40 && prev) prev.click();
+      dragging = false;
+      track.releasePointerCapture(e.pointerId);
+    });
+  }
+})();
+
+/* ===== Visited countries map — polygons only (no basemap) ===== */
 (function(){
   const el = document.getElementById('visitedMap');
   if (!el || typeof L === 'undefined') return;
 
-  const map = L.map(el, { scrollWheelZoom: false, zoomControl: true }).setView([20, 0], 2);
+  const map = L.map(el, { scrollWheelZoom: false, zoomControl: true, zoomSnap: 0.5, zoomDelta: 0.5 })
+               .setView([20, 0], 2);
 
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 6, minZoom: 1, attribution: '&copy; OpenStreetMap'
-}).addTo(map);
-
-  // === EDIT ME: your visited countries list (human names) ===
+  // EDIT: your visited countries (human names)
   const visitedNames = [
     "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
     "Armenia","Georgia","Bulgaria",
@@ -551,28 +675,22 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     "Australia"
   ];
 
-  // Normalize for robust matching (case/accents)
   const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const visited = new Set(visitedNames.map(normalize));
 
-  // Theme colors
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
   const baseFill = '#e5e7eb';
-  const stroke = '#999';
+  const stroke = '#7a7a7a';
 
-  // Two CORS-safe sources (try #1, fallback to #2)
   const SOURCES = [
     'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json', // properties.name
     'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson' // properties.ADMIN
   ];
 
-  function loadWorld(urlIndex){
-    const url = SOURCES[urlIndex];
-    return fetch(url).then(r => {
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      return r.json();
-    }).then(geo => {
-      const useAdmin = !!(geo.features && geo.features[0] && geo.features[0].properties && geo.features[0].properties.ADMIN);
+  function loadWorld(i){
+    const url = SOURCES[i];
+    return fetch(url).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
+      const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
       const layer = L.geoJSON(geo, {
         style: f => {
           const props = f.properties || {};
@@ -580,17 +698,19 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
           const hit  = visited.has(normalize(name));
           return {
             fillColor: hit ? accent : baseFill,
-            weight: 0.8,
             color: stroke,
-            fillOpacity: hit ? 0.85 : 0.25
+            weight: hit ? 1.2 : 0.6,
+            fillOpacity: hit ? 0.9 : 0.22,
+            opacity: 0.9
           };
         },
         onEachFeature: (f, l) => {
           const props = f.properties || {};
           const name = (props.name || props.ADMIN || '');
           const hit  = visited.has(normalize(name));
-          l.on('mouseover', () => l.setStyle({ weight: 1.3 }));
-          l.on('mouseout',  () => l.setStyle({ weight: 0.8 }));
+          l.on('mouseover', () => l.setStyle({ weight: (hit?1.6:1.0) }));
+          l.on('mouseout',  () => l.setStyle({ weight: (hit?1.2:0.6) }));
+          l.bindTooltip(name, {sticky:true, direction:'top', opacity:0.85});
           if (hit) l.bindPopup(`<strong>${name}</strong>`);
         }
       }).addTo(map);
@@ -599,7 +719,7 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     });
   }
 
-  // Try primary, then fallback
+  // No basemap added → purely country shapes
   loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
     console.error('GeoJSON load error:', err);
     el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
