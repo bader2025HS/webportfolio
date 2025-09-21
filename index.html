@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — responsive (education + map fixed)</title>
+<title>Portfolio — responsive (education + transparent map focus)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- Leaflet CSS -->
@@ -13,7 +13,7 @@
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
-    --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
+    --accent:#0ea5a2; --accent2:#1fbdb9;
     --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
   }
   *{box-sizing:border-box}
@@ -24,29 +24,22 @@
     background-size:200% 200%; animation:bgShift 22s ease infinite;
   }
   @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  /* Subtle overlays (put them BEHIND everything) */
-  body:before{
-    content:""; position:fixed; inset:0; z-index:-2; opacity:.05; pointer-events:none;
+  body:before{content:""; position:fixed; inset:0; z-index:-2; opacity:.05; pointer-events:none;
     background:
       repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 26px),
       repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
-    mix-blend-mode:soft-light; animation:gridPan 30s linear infinite;
-  }
-  body::after{
-    content:""; position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.18;
+    mix-blend-mode:soft-light;}
+  body::after{content:""; position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.18;
     background:
       repeating-radial-gradient(circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
       repeating-radial-gradient(circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
-    filter:blur(.2px);
-  }
-  @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
+    filter:blur(.2px)}
 
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,4vw,22px)}
   .section{margin:clamp(24px,6vw,46px) 0}
   .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px)}
   .lead{color:var(--muted)}
 
-  /* Header */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
@@ -56,15 +49,11 @@
     display:flex; align-items:center; justify-content:space-between; gap:12px}
   .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap}
   .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
-    background:conic-gradient(from 220deg,var(--accent),var(--accent2));
-    box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-
+    background:conic-gradient(from 220deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(2,6,23,.06)}
   header nav#siteNav{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
   nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:6px 8px; border-radius:10px}
   nav a:hover{color:var(--accent)} nav a.active{color:var(--accent)}
 
-  /* Types & cards */
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
   h1{font-size:clamp(40px,6vw,64px); margin:0 0 6px}
@@ -73,47 +62,26 @@
   .btn.ghost{background:var(--card); color:var(--text)}
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px)}
 
-  /* ===== EDUCATION: white container, equal spacing, responsive cards ===== */
-  #edu-scroll .box{
-    position:relative; background:#fff; border:1px solid var(--line);
-    border-radius:20px; box-shadow:none;
-    padding:14px 56px 14px; overflow:hidden;
-  }
-  #edu-scroll .tray{
-    display:flex; gap:12px; align-items:center;
-    overflow-x:auto; overflow-y:hidden;
-    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    padding:6px 0; scrollbar-width:none; -ms-overflow-style:none;
-    touch-action:pan-x pinch-zoom;
-  }
+  /* ===== EDUCATION scroller ===== */
+  #edu-scroll .box{position:relative; background:#fff; border:1px solid var(--line);
+    border-radius:20px; box-shadow:none; padding:14px 56px 14px; overflow:hidden}
+  #edu-scroll .tray{display:flex; gap:12px; align-items:center; overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:6px 0; scrollbar-width:none; -ms-overflow-style:none}
   #edu-scroll .tray::-webkit-scrollbar{width:0;height:0;background:transparent}
-  #edu-scroll .edu-card{
-    scroll-snap-align:center;
-    flex:0 0 300px;
-    display:grid; grid-template-rows:auto auto 1fr; gap:8px;
-    min-height:240px; background:var(--card); border:1px solid var(--line);
-    border-radius:14px; box-shadow:none; padding:14px 14px 16px; margin:0;
-  }
-  #edu-scroll .edu-card .meta{
-    display:flex; align-items:center; gap:8px; color:var(--muted); font-size:1rem;
-    white-space:nowrap; word-break:keep-all;
-  }
+  #edu-scroll .edu-card{scroll-snap-align:center; flex:0 0 300px; display:grid; grid-template-rows:auto auto 1fr; gap:8px;
+    min-height:240px; background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:none; padding:14px 14px 16px}
+  #edu-scroll .edu-card .meta{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all}
   #edu-scroll .edu-card .flag-ico{width:24px; height:16px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px var(--line)}
   #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
-
-  .edu-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:38px; height:38px; display:grid; place-items:center;
-    border-radius:999px; background:#fff; border:1px solid var(--line);
-    box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px; line-height:1;
-  }
+  .edu-arrow{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; display:grid; place-items:center;
+    border-radius:999px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px}
   .edu-prev{left:12px} .edu-next{right:12px}
   .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
 
-  /* ===== Mobile layout (<= 600px) ===== */
+  /* ===== Mobile tweaks ===== */
   @media (max-width:600px){
     :root{ --header:60px; }
     html{ scroll-padding-top: calc(var(--header) + 10px); }
@@ -129,23 +97,18 @@
     .edu-arrow{ display:none !important; }
   }
 
-  /* ===== Travel map card ===== */
+  /* ===== Travel map ===== */
   .map-card{
-    background:#fff; border:1px solid var(--line); border-radius:20px; box-shadow:none;
-    padding:10px; overflow:hidden;
+    /* keep the border but make the background transparent */
+    background:transparent; border:1px solid var(--line);
+    border-radius:20px; box-shadow:none; padding:10px; overflow:hidden;
   }
   #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
-  /* kill any Leaflet grey background */
+  /* absolutely no Leaflet background */
   #visitedMap.leaflet-container{ background:transparent !important; }
 
-  /* Misc layout */
   .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
   @media (max-width:820px){.projects{grid-template-columns:1fr}}
-
-  @supports (padding: max(0px)){
-    body{ padding-bottom: max(0px, env(safe-area-inset-bottom)); }
-    header{ padding-top: max(0px, env(safe-area-inset-top)); }
-  }
 </style>
 </head>
 <body>
@@ -176,9 +139,9 @@
       <div class="card">
         <strong>About</strong>
         <p class="lead" style="margin:.4rem 0 0">
-          I make sense first, then make it simple: press reviews that spotlight what matters, maps you can read in five seconds,
-          and short briefs that help a team choose next steps. I enjoy practical research—from datasets and field notes to
-          practitioner interviews—distilled into clear takeaways and visuals.
+          I make sense first, then make it simple: press reviews that spotlight what matters, maps you can read in five
+          seconds, and short briefs that help a team choose next steps. I enjoy practical research—from datasets and field
+          notes to practitioner interviews—distilled into clear takeaways and visuals.
         </p>
       </div>
     </div>
@@ -289,7 +252,6 @@
 
   const prev = document.querySelector('.edu-prev');
   const next = document.querySelector('.edu-next');
-
   function scrollByCards(dir=1){
     const card = tray.querySelector('.edu-card');
     const gap = parseFloat(getComputedStyle(tray).gap) || 12;
@@ -304,28 +266,37 @@
   tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
   tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
   tray.addEventListener('pointerup', e=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
-
   // wheel → horizontal
   tray.addEventListener('wheel', e=>{
     if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
   }, {passive:false});
 })();
 
-/* Visited countries map — polygons only, centered on Eurasia */
+/* Visited countries map — transparent background, fixed “Eurasia” view */
 (function(){
   const el = document.getElementById('visitedMap');
   if (!el || typeof L === 'undefined') return;
 
-  const map = L.map(el, { scrollWheelZoom: false, zoomControl: true, zoomSnap: 0.5, zoomDelta: 0.5 });
+  const map = L.map(el, {
+    scrollWheelZoom: false,
+    zoomControl: true,
+    zoomSnap: 0.5,
+    zoomDelta: 0.5
+  });
 
-  // Start on Europe–MENA–Asia view (lat, lng bounds)
-  const eurAsiaBounds = [[-10, -25],[65, 150]];
-  map.fitBounds(eurAsiaBounds, { padding: [10,10] });
+  // Exact-looking focus (center and zoom tuned to your screenshot)
+  function setEurasiaView(){
+    map.setView([36, 60], 3.5); // lat, lng, zoom
+  }
+  setEurasiaView();
 
-  // Your visited list
+  // Keep the same focus after resizes and after layers load
+  window.addEventListener('resize', setEurasiaView);
+
+  // Visited list
   const visitedNames = [
     "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","Kyrgyzstan",
+    "Armenia","Georgia","Bulgaria","Azerbaijan","Kyrgyzstan",
     "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
     "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
     "Australia"
@@ -334,7 +305,6 @@
   const visited = new Set(visitedNames.map(normalize));
 
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
-  const baseFill = '#eef2f7';
   const stroke = '#7a7a7a';
 
   const SOURCES = [
@@ -343,19 +313,18 @@
   ];
 
   function loadWorld(i){
-    const url = SOURCES[i];
-    return fetch(url).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
+    return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
       const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
-      const layer = L.geoJSON(geo, {
+      L.geoJSON(geo, {
         style: f => {
           const props = f.properties || {};
           const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
           const hit  = visited.has(normalize(name));
           return {
-            fillColor: hit ? accent : baseFill,
+            fillColor: hit ? accent : 'transparent', // transparent for non-visited
             color: stroke,
             weight: hit ? 1.2 : 0.6,
-            fillOpacity: hit ? 0.9 : 0.22,
+            fillOpacity: hit ? 0.9 : 0.0,
             opacity: 0.9
           };
         },
@@ -366,9 +335,8 @@
           if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
         }
       }).addTo(map);
-
-      // keep our preferred view after data loads
-      try { map.fitBounds(eurAsiaBounds, { padding: [10,10] }); } catch(e){}
+      // Re-assert preferred view
+      setTimeout(setEurasiaView, 0);
     });
   }
   loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
