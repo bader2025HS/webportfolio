@@ -573,65 +573,78 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
 addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 
-/* ===== Visited countries map (Leaflet, interactive + colored countries) ===== */
+<script>
+/* ===== Visited countries map (Leaflet, interactive + colored countries) — stable CORS source ===== */
 (function(){
   const el = document.getElementById('visitedMap');
   if (!el || typeof L === 'undefined') return;
 
-  // 1) Create map
+  // Create map
   const map = L.map(el, { scrollWheelZoom: false, zoomControl: true }).setView([20, 0], 2);
 
-  // 2) Base layer
+  // Base layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 6,
     minZoom: 1,
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  // 3) Countries you’ve visited — must match ADMIN names in the GeoJSON exactly
-  const visited = new Set([
+  // Your countries (human names)
+  const visitedNames = [
     "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
     "Armenia","Georgia","Bulgaria",
     "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
     "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
     "Australia"
-  ]);
+  ];
 
-  // 4) Colors (use your theme accent)
+  // Normalize for robust matching
+  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const visited = new Set(visitedNames.map(normalize));
+
+  // Colors from your theme
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
   const baseFill = '#e5e7eb';
   const stroke = '#999';
 
-  // 5) Load world polygons (CORS-safe Natural Earth mirror)
-  const WORLD_URL = 'https://geojson.xyz/collections/ne_110m_admin_0_countries.geojson';
+  // CORS-friendly world polygons (properties.name)
+  const WORLD_URL = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json';
 
   fetch(WORLD_URL)
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
     .then(geo => {
-      const features = geo.features || geo; // safety
-      const layer = L.geoJSON(features, {
-        style: f => ({
-          fillColor: visited.has(f.properties.ADMIN) ? accent : baseFill,
-          weight: 0.8,
-          color: stroke,
-          fillOpacity: visited.has(f.properties.ADMIN) ? 0.85 : 0.25
-        }),
+      const layer = L.geoJSON(geo, {
+        style: f => {
+          const name = f.properties && (f.properties.name || f.properties.ADMIN || '');
+          const hit  = visited.has(normalize(name));
+          return {
+            fillColor: hit ? accent : baseFill,
+            weight: 0.8,
+            color: stroke,
+            fillOpacity: hit ? 0.85 : 0.25
+          };
+        },
         onEachFeature: (f, l) => {
-          const name = f.properties.ADMIN;
+          const name = f.properties && (f.properties.name || f.properties.ADMIN || '');
+          // Hover highlight
           l.on('mouseover', () => l.setStyle({ weight: 1.3 }));
           l.on('mouseout',  () => l.setStyle({ weight: 0.8 }));
-          if (visited.has(name)) l.bindPopup(`<strong>${name}</strong>`);
+          if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
         }
       }).addTo(map);
 
-      // Fit bounds to world layer
-      map.fitBounds(layer.getBounds(), { padding: [10,10] });
+      // Fit nicely
+      try { map.fitBounds(layer.getBounds(), { padding: [10,10] }); } catch(e){}
     })
     .catch(err => {
       console.error('GeoJSON load error:', err);
-      el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
+      el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons (source blocked). Try refreshing.</div>";
     });
 })();
 </script>
+
 </body>
 </html>
