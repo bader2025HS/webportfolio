@@ -72,7 +72,7 @@
     padding:0 !important;
     overflow:visible;
   }
-  /* wrap to position the bar arrows near the scrollbar */
+  /* wrapper to position the bar arrows */
   #edu-scroll .tray-wrap{ position:relative; }
 
   #edu-scroll .tray{
@@ -99,28 +99,37 @@
   /* Hide old overlay arrows */
   .edu-arrow{display:none !important}
 
-  /* Desktop: thinner grey scrollbar + small arrows beside it */
+  /* ===== Desktop: pill grey scrollbar + tiny triangle arrows (like screenshot) ===== */
   @media (min-width:601px){
-    #edu-scroll .tray{ 
-      padding-bottom:10px;           /* space so the bar isn't cramped */
-      scrollbar-width:thin;          /* Firefox thin bar */
+    #edu-scroll .tray{
+      padding-bottom:16px;                 /* space for the bar */
+      scrollbar-width:thin;                /* Firefox thin bar */
+      scrollbar-color:#9ca3af transparent; /* FF colours: thumb, track */
       -ms-overflow-style:auto;
     }
-    #edu-scroll .tray::-webkit-scrollbar{height:10px}               /* thinner */
-    #edu-scroll .tray::-webkit-scrollbar-track{background:#e5e7eb; border-radius:999px}
-    #edu-scroll .tray::-webkit-scrollbar-thumb{background:#9ca3af; border-radius:999px}
-    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{background:#6b7280}
-
-    /* little round buttons aligned with the bar edges */
-    #edu-scroll .bar-arrow{
-      position:absolute; bottom:-2px;        /* sit along the bar */
-      width:26px; height:26px; display:grid; place-items:center;
-      border-radius:999px; background:#fff; border:1px solid var(--line);
-      box-shadow:var(--shadow); color:#374151; cursor:pointer;
-      user-select:none;
+    /* WebKit/Chromium look */
+    #edu-scroll .tray::-webkit-scrollbar{ height:14px; }          /* slim */
+    #edu-scroll .tray::-webkit-scrollbar-track{ background:transparent; }
+    #edu-scroll .tray::-webkit-scrollbar-thumb{
+      background:#9ca3af;                   /* grey pill */
+      border-radius:9999px;
+      border:5px solid transparent;         /* makes ends fully round */
+      background-clip:content-box;
     }
-    #edu-scroll .bar-prev{ left:0 }
-    #edu-scroll .bar-next{ right:0 }
+    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{ background:#6b7280; }
+
+    /* little triangle arrows beside the bar (no circles) */
+    #edu-scroll .bar-arrow{
+      position:absolute; bottom:3px;        /* vertically centered vs 14px bar */
+      width:24px; height:20px;
+      display:grid; place-items:center;
+      background:transparent; border:none; box-shadow:none;
+      color:#9ca3af; font-size:20px; line-height:1;
+      cursor:pointer; user-select:none;
+    }
+    #edu-scroll .bar-arrow:hover{ color:#6b7280; }
+    #edu-scroll .bar-prev{ left:-4px; }
+    #edu-scroll .bar-next{ right:-4px; }
   }
 
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
@@ -137,7 +146,7 @@
     #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
     #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
     #edu-scroll .edu-card .school{ font-size:1.06rem; }
-    /* hide bar-arrows on mobile */
+    /* hide the tiny bar-arrows on mobile */
     #edu-scroll .bar-arrow{ display:none !important; }
   }
 
@@ -240,7 +249,7 @@
 
           <div class="tray-wrap">
             <div class="tray" id="eduTray" tabindex="0"></div>
-            <!-- new small arrows by the bar (desktop only) -->
+            <!-- new tiny arrows by the bar (desktop only) -->
             <button class="bar-arrow bar-prev" aria-label="Scroll left">‹</button>
             <button class="bar-arrow bar-next" aria-label="Scroll right">›</button>
           </div>
