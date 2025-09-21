@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — responsive (education polished)</title>
+<title>Portfolio — responsive (education + visited map)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Leaflet CSS for the map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
 
 <style>
   :root{
@@ -43,10 +46,7 @@
   .lead{color:var(--muted)}
 
   /* Reveal */
-  .reveal{opacity:0; will-change:transform,filter;
-    transition:opacity .6s cubic-bezier(.2,.7,.2,1),
-               transform .6s cubic-bezier(.2,.7,.2,1),
-               filter .6s cubic-bezier(.2,.7,.2,1)}
+  .reveal{opacity:0; will-change:transform,filter; transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1),filter .6s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1; transform:none; filter:none}
 
   /* Header */
@@ -55,22 +55,17 @@
     background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
     backdrop-filter:saturate(120%) blur(10px);
   }
-  header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
-    display:flex; align-items:center; justify-content:space-between; gap:12px}
+  header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px; display:flex; align-items:center; justify-content:space-between; gap:12px}
   .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap}
-  .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
-    background:conic-gradient(from 220deg,var(--accent),var(--accent2));
-    box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
+  .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px; background:conic-gradient(from 220deg,var(--accent),var(--accent2)); box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
   header nav#siteNav{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
   nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:6px 8px; border-radius:10px}
   nav a:hover{color:var(--accent)} nav a.active{color:var(--accent)}
-
   .menu-toggle{display:none}
   @media (max-width:760px){
-    .menu-toggle{display:grid; place-items:center; width:42px; height:42px; position:fixed; right:12px; top:12px; z-index:10005;
-      border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
+    .menu-toggle{display:grid; place-items:center; width:42px; height:42px; position:fixed; right:12px; top:12px; z-index:10005; border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
     .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
     .menu-toggle .bar:before,.menu-toggle .bar:after{content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text); transition:.25s}
     .menu-toggle .bar:before{top:-6px} .menu-toggle .bar:after{top:6px}
@@ -90,77 +85,47 @@
   }
 
   /* Types, buttons, generic card */
-  #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
-    background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
+  #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000; background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
   h1{font-size:clamp(40px,6vw,64px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid var(--line); font-weight:700; text-decoration:none}
   .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
   .btn.ghost{background:var(--card); color:var(--text)}
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px)}
 
-  /* ===== EDUCATION: white container, equal spacing, responsive cards ===== */
-  #edu-scroll .box{
-    position:relative; background:#fff; border:1px solid var(--line);
-    border-radius:20px; box-shadow:none; /* no grey band */
-    padding:14px 56px 14px; overflow:hidden;
-  }
-  #edu-scroll .tray{
-    display:flex; gap:12px; align-items:center;
-    overflow-x:auto; overflow-y:hidden;
-    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    padding:6px 0; scrollbar-width:none; -ms-overflow-style:none;
-    touch-action:pan-x pinch-zoom;
-  }
+  /* ===== EDUCATION ===== */
+  #edu-scroll .box{position:relative; background:#fff; border:1px solid var(--line); border-radius:20px; box-shadow:none; padding:14px 56px; overflow:hidden}
+  #edu-scroll .tray{display:flex; gap:12px; align-items:center; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:6px 0; scrollbar-width:none; -ms-overflow-style:none; touch-action:pan-x pinch-zoom}
   #edu-scroll .tray::-webkit-scrollbar{width:0;height:0;background:transparent}
-  #edu-scroll .edu-card{
-    scroll-snap-align:center;
-    flex:0 0 300px; /* desktop width; see media queries below */
-    display:grid; grid-template-rows:auto auto 1fr; gap:8px;
-    min-height:240px; background:var(--card); border:1px solid var(--line);
-    border-radius:14px; box-shadow:none; padding:14px 14px 16px; margin:0;
-  }
-  #edu-scroll .edu-card .meta{
-    display:flex; align-items:center; gap:8px; color:var(--muted); font-size:1rem;
-    white-space:nowrap; word-break:keep-all; /* stay on one line on desktop */
-  }
-  #edu-scroll .edu-card .flag-ico{width:24px; height:16px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px var(--line)}
+  #edu-scroll .edu-card{scroll-snap-align:center; flex:0 0 300px; display:grid; grid-template-rows:auto auto 1fr; gap:8px; min-height:240px; background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:none; padding:14px 14px 16px; margin:0}
+  #edu-scroll .edu-card .meta{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all}
+  #edu-scroll .flag-ico{width:24px; height:16px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px var(--line)}
   #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
-
-  .edu-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:38px; height:38px; display:grid; place-items:center;
-    border-radius:999px; background:#fff; border:1px solid var(--line);
-    box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px; line-height:1;
-  }
+  .edu-arrow{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; display:grid; place-items:center; border-radius:999px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px; line-height:1}
   .edu-prev{left:12px} .edu-next{right:12px}
   .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
-
-  /* widen on very large desktop so the meta never wraps */
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
-
-  /* ===== Mobile layout (<= 600px) ===== */
   @media (max-width:600px){
     :root{ --header:60px; }
     html{ scroll-padding-top: calc(var(--header) + 10px); }
     .wrap{ padding: 14px 16px; }
     .section{ margin: 20px 0; }
     h1{ font-size: clamp(28px,8vw,40px); }
-
-    #edu-scroll .box{ padding:12px 12px 12px !important; border-radius:16px; }
+    #edu-scroll .box{ padding:12px !important; border-radius:16px; }
     #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:4px 0 !important; }
-    #edu-scroll .edu-card{
-      flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px;
-    }
-    #edu-scroll .edu-card .meta{
-      white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem;
-    }
+    #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
+    #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
     #edu-scroll .edu-card .school{ font-size:1.06rem; }
     #edu-scroll .edu-card .desc{ font-size:.98rem; }
     #edu-scroll .edu-card .note { font-size:.92rem; }
     .edu-arrow{ display:none !important; }
   }
+
+  /* ===== MAP (Visited Countries) ===== */
+  #visitedMap{height:420px; width:100%; background:transparent; border-radius:16px}
+  .leaflet-container{background:transparent !important;} /* remove default grey */
+  @media (max-width:600px){ #visitedMap{height:320px} }
 
   /* Misc layout */
   .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
@@ -189,6 +154,7 @@
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
+      <a href="#travel">Travel</a>
       <a href="#activities">Activities</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -198,7 +164,7 @@
 <main>
   <!-- About -->
   <section id="about" class="section">
-    <div class="wrap reveal">
+    <div class="wrap reveal in">
       <h1>Bader Suliman</h1>
       <p class="lead" style="margin:.25rem 0 1rem">
         Communications, data, mapping, and research. AR • EN • FR • DE — Paris (open to relocate).
@@ -294,6 +260,17 @@
     </div>
   </section>
 
+  <!-- Travel (Visited Countries Map) -->
+  <section id="travel" class="section">
+    <div class="wrap">
+      <h2>Countries I’ve Visited</h2>
+      <p class="lead">Shaded regions show where I’ve been.</p>
+      <div class="card" style="padding:0; overflow:hidden">
+        <div id="visitedMap"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Activities -->
   <section id="activities" class="section">
     <div class="wrap">
@@ -322,13 +299,10 @@
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 
-<script>
-/* Simple reveal-on-load */
-(function(){
-  const els=[...document.querySelectorAll('.reveal')];
-  els.forEach(e=>e.classList.add('in'));
-})();
+<!-- Leaflet JS for the map -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
 
+<script>
 /* Build the education cards */
 (function(){
   const data = [
@@ -353,7 +327,6 @@
 
   const prev = document.querySelector('.edu-prev');
   const next = document.querySelector('.edu-next');
-
   function scrollByCards(dir=1){
     const card = tray.querySelector('.edu-card');
     const gap = parseFloat(getComputedStyle(tray).gap) || 12;
@@ -373,6 +346,85 @@
   tray.addEventListener('wheel', e=>{
     if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
   }, {passive:false});
+})();
+
+/* Visited countries map — polygons only (no basemap) */
+(function(){
+  const el = document.getElementById('visitedMap');
+  if (!el || typeof L === 'undefined') return;
+
+  const map = L.map(el, { scrollWheelZoom: false, zoomControl: true, zoomSnap: 0.5, zoomDelta: 0.5 })
+               .setView([20, 0], 2);
+
+  // EDIT this list as needed:
+  const visitedNames = [
+    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
+    "Armenia","Georgia","Bulgaria",
+    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
+    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
+    "Australia"
+  ];
+
+  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const visited = new Set(visitedNames.map(normalize));
+
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
+  const baseFill = '#e5e7eb';
+  const stroke = '#7a7a7a';
+
+  const SOURCES = [
+    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',      // properties.name
+    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'// properties.ADMIN
+  ];
+
+  function loadWorld(i){
+    const url = SOURCES[i];
+    return fetch(url).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
+      const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
+      let visitedGroup = L.featureGroup();
+      const layer = L.geoJSON(geo, {
+        style: f => {
+          const props = f.properties || {};
+          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
+          const hit  = visited.has(normalize(name));
+          const style = {
+            fillColor: hit ? accent : baseFill,
+            color: stroke,
+            weight: hit ? 1.2 : 0.6,
+            fillOpacity: hit ? 0.9 : 0.22,
+            opacity: 0.9
+          };
+          if(hit) { /* collect visited for fit */ }
+          return style;
+        },
+        onEachFeature: (f, l) => {
+          const props = f.properties || {};
+          const name = (props.name || props.ADMIN || '');
+          const hit  = visited.has(normalize(name));
+          l.on('mouseover', () => l.setStyle({ weight: (hit?1.6:1.0) }));
+          l.on('mouseout',  () => l.setStyle({ weight: (hit?1.2:0.6) }));
+          l.bindTooltip(name, {sticky:true, direction:'top', opacity:0.85});
+          if (hit) {
+            l.bindPopup(`<strong>${name}</strong>`);
+            visitedGroup.addLayer(l);
+          }
+        }
+      }).addTo(map);
+
+      // Fit to visited if we have any, else to whole layer
+      setTimeout(()=>{
+        try{
+          if(visitedGroup.getLayers().length){ map.fitBounds(visitedGroup.getBounds(), { padding:[10,10], maxZoom:4 }); }
+          else { map.fitBounds(layer.getBounds(), { padding:[10,10] }); }
+        }catch(e){}
+      }, 0);
+    });
+  }
+
+  loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
+    console.error('GeoJSON load error:', err);
+    el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
+  });
 })();
 </script>
 </body>
