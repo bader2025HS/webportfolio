@@ -2,22 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — v31 (desktop menu framed)</title>
-
-<!-- Viewport (safety) -->
-<script>
-(function(){
-  if(!document.querySelector('meta[name="viewport"]')){
-    const m=document.createElement('meta');
-    m.name='viewport'; m.content='width=device-width, initial-scale=1';
-    document.head.appendChild(m);
-  }
-})();
-</script>
+<title>Portfolio — v32 (education scroller)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <style>
   :root{
-    --header:72px; --maxw:860px;
+    --header:72px; --maxw:1100px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
@@ -31,6 +21,7 @@
     background-size:200% 200%; animation:bgShift 22s ease infinite;
   }
   @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
   body:before{
     content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
     background:
@@ -53,7 +44,7 @@
   .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
-  /* Reveals */
+  /* Reveal fx */
   .reveal{opacity:0; will-change:transform,filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
                transform .6s cubic-bezier(.2,.7,.2,1),
@@ -83,15 +74,11 @@
     box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Navbar links (no underline) */
-  nav a{
-    color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
-  }
-  nav a:hover{color:var(--accent)}
-  nav a.active{color:var(--accent)}
-  nav a:after{display:none !important}
+  header nav#siteNav{display:flex; align-items:center; gap:8px;}
+  nav a{color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0}
+  nav a:hover{color:var(--accent)} nav a.active{color:var(--accent)} nav a:after{display:none!important}
 
-  /* Hamburger + mobile overlay */
+  /* Mobile menu */
   .menu-toggle{display:none; place-items:center; width:42px; height:42px;
     border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
@@ -103,26 +90,23 @@
   body.nav-open .menu-toggle .bar:after{transform:rotate(-90deg); top:0}
   body.nav-open{overflow:hidden}
 
-  @media (max-width:760px), (max-device-width:812px){
+  @media (max-width:760px){
     .menu-toggle{display:grid; position:fixed; right:12px; top:12px; z-index:10005}
     header nav#siteNav{
       position:fixed; inset:0; z-index:10004; height:100svh;
       padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
-      display:flex; flex-direction:column; gap:10px;
-      background:#fff !important;
+      display:flex; flex-direction:column; gap:10px; background:#fff !important;
       transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
       transition:transform .28s ease, opacity .2s ease;
     }
     body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
     header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
     header nav a.active{color:var(--accent); border-color:var(--accent)}
-    #siteNav .mhead{display:none;}
   }
 
+  /* Basics */
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
-
-  /* Type / buttons / cards */
   h1{font-size:clamp(44px,7vw,74px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
@@ -145,7 +129,6 @@
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
-
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
   @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
   .lang-cols ul{list-style:none; padding:0; margin:.3rem 0 0}
@@ -176,111 +159,75 @@
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
   .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
 
-  /* Activities */
-  .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
-  @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:420px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
-  .activity{aspect-ratio:1/1; display:grid; place-items:center; text-align:center; padding:12px}
-  .activity .title{font-weight:800}
-
-  /* Footer */
-  footer{border-top:1px solid var(--line); color:var(--muted); padding:10px 0; margin-top:24px;
-    background:rgba(255,255,255,.95); backdrop-filter:saturate(120%) blur(10px); font-size:.92rem}
-  .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
-  .to-top.show{opacity:1; pointer-events:auto}
-
-  /* Desktop menu framing */
-  @media (min-width:761px){
-    header .brand{padding:0; border:none; border-radius:0; background:transparent; box-shadow:none;}
-    header nav#siteNav{display:flex; align-items:center; gap:8px;}
-    header nav#siteNav a{margin:0; padding:8px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.9); text-decoration:none; color:var(--muted);}
-    header nav#siteNav a:hover{ border-color:var(--accent); color:var(--accent); }
-    header nav#siteNav a.active{ border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 2px rgba(14,165,162,.12) inset; }
-    #siteNav .mhead{display:none;}
+  /* ===== Education: Horizontal Scroller ===== */
+  #edu-scroll .box{
+    position:relative;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:linear-gradient(180deg,#fff,#fafcff);
+    box-shadow:var(--shadow);
+    padding:18px 56px; /* room for arrows */
+    overflow:hidden;
   }
-
-  /* ===== EDUCATION — Visual Rail (scoped) ===== */
-  #edu-rail{
-    --er-bg:#ffffff; --er-ink:#0f172a; --er-muted:#475569; --er-card:#f8fafc; --er-line:#e2e8f0;
-    --er-accent:#0ea5a2; --er-accent2:#1fbdb9; --er-shadow:0 10px 30px rgba(2,6,23,.10); --er-radius:16px;
-    color:var(--er-ink); background:var(--er-bg);
+  #edu-scroll .tray{
+    display:flex; gap:12px;
+    overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px;
+    scrollbar-width:thin;
   }
-  #edu-rail .er-wrap{max-width:1100px; margin:0 auto; padding:0 16px;}
-  #edu-rail .er-title{font-size:clamp(24px,2.2vw,32px); margin:0 0 16px; letter-spacing:.2px}
-  #edu-rail .er-rail{
-    position:relative; background:linear-gradient(180deg, #fff, #fafcff);
-    border:1px solid var(--er-line); border-radius:var(--er-radius); box-shadow:var(--er-shadow);
-    padding:28px 16px 48px; overflow:hidden;
+  #edu-scroll .tray::-webkit-scrollbar{height:10px}
+  #edu-scroll .tray::-webkit-scrollbar-thumb{background:#cbd5e1; border-radius:999px}
+  #edu-scroll .tray::-webkit-scrollbar-track{background:transparent}
+
+  /* subtle edge fade to hint scroll */
+  #edu-scroll .box:before, #edu-scroll .box:after{
+    content:""; position:absolute; top:0; bottom:0; width:38px; pointer-events:none;
+    background:linear-gradient(to right, rgba(248,250,252,1), rgba(248,250,252,0));
+    z-index:2;
   }
-  #edu-rail .er-svg{width:100%; height:120px; display:block; filter:drop-shadow(0 2px 0 rgba(2,6,23,.04))}
-  #edu-rail #er-arrow path{ fill: var(--er-accent2); }
-  #edu-rail .er-stops{list-style:none; margin:0; padding:0}
-  #edu-rail .er-stop{--dot:16px; position:absolute; top:40px; transform:translateX(-50%)}
-  #edu-rail .er-dot{width:var(--dot); height:var(--dot); background:#fff; border:4px solid var(--er-accent); border-radius:999px; box-shadow:0 2px 0 rgba(2,6,23,.06); cursor:pointer}
-  #edu-rail .er-stop:hover .er-dot, #edu-rail .er-stop:focus-within .er-dot{border-color:var(--er-accent2)}
-  #edu-rail .er-pop{
-    position:absolute; top:-10px; left:50%; transform:translate(-50%,-100%) scale(.98);
-    background:var(--er-card); border:1px solid var(--er-line); border-radius:14px; box-shadow:var(--er-shadow);
-    width:280px; max-width:34vw; padding:14px 14px 12px; opacity:0; pointer-events:none; transition:.18s ease;
+  #edu-scroll .box:after{
+    right:0; transform:scaleX(-1);
   }
-  #edu-rail .er-pop::after{
-    content:""; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%) rotate(45deg);
-    width:16px; height:16px; background:var(--er-card);
-    border-right:1px solid var(--er-line); border-bottom:1px solid var(--er-line);
+  #edu-scroll .box:before{left:0}
+
+  .edu-card{
+    scroll-snap-align:center;
+    min-width: clamp(260px, 37vw, 320px);
+    display:grid; grid-template-rows:auto auto 1fr; gap:8px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:14px;
   }
-  #edu-rail .er-stop:hover .er-pop, #edu-rail .er-stop:focus-within .er-pop{opacity:1; transform:translate(-50%,-100%) scale(1); pointer-events:auto}
-  #edu-rail .er-tag{display:inline-flex; gap:8px; align-items:center; font-size:12px; color:var(--er-muted); margin-bottom:6px}
-  #edu-rail .er-flag{font-size:16px}
-  #edu-rail .er-school{font-weight:700; margin:2px 0 6px}
-  #edu-rail .er-program{font-size:14px; line-height:1.35}
-  #edu-rail .er-notes{font-size:12px; color:var(--er-muted); margin-top:8px}
-  #edu-rail .er-cards{display:none; align-items:center; gap:8px; margin-top:14px}
-  #edu-rail .er-viewport{overflow:hidden; width:100%}
-  #edu-rail .er-track{display:flex; gap:12px; transition:transform .25s ease}
-  #edu-rail .er-card{min-width:84%; background:var(--er-card); border:1px solid var(--er-line); border-radius:14px; box-shadow:var(--er-shadow); padding:14px}
-  #edu-rail .er-card .er-meta{display:flex; gap:8px; align-items:center; color:var(--er-muted); font-size:12px; margin-bottom:4px}
-  #edu-rail .er-card .er-title{font-weight:700; margin:2px 0 6px}
-  #edu-rail .er-card .er-desc{font-size:14px; line-height:1.35}
-  #edu-rail .er-nav{border:1px solid var(--er-line); background:#fff; border-radius:999px; width:36px; height:36px; display:grid; place-items:center; cursor:pointer; box-shadow:var(--er-shadow)}
-  #edu-rail .er-nav:disabled{opacity:.4; cursor:not-allowed}
-  @media (max-width:880px){ #edu-rail .er-rail{display:none} #edu-rail .er-cards{display:flex} }
+  .edu-card .meta{display:flex; gap:8px; align-items:center; color:var(--muted); font-size:12px}
+  .edu-card .flag{font-size:18px}
+  .edu-card .school{font-weight:800}
+  .edu-card .desc{font-size:14px; color:var(--text); line-height:1.35}
+  .edu-card .note{font-size:12px; color:var(--muted)}
 
-  /* --- FIX: make stops clickable on desktop --- */
-#edu-rail .er-rail{ position: relative; }
+  /* arrows */
+  .edu-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:38px; height:38px; display:grid; place-items:center;
+    border-radius:999px; background:#fff; border:1px solid var(--line);
+    box-shadow:var(--shadow); cursor:pointer; z-index:3;
+  }
+  .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
+  .edu-prev{left:12px}
+  .edu-next{right:12px}
 
-/* SVG should not intercept the mouse */
-#edu-rail .er-svg{
-  position: absolute;   /* sit under the stops */
-  inset: 0;
-  width: 100%;
-  height: 120px;
-  z-index: 1;
-  pointer-events: none; /* << key line */
-}
-
-/* Stops layer above the SVG */
-#edu-rail .er-stops{
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-}
-
-/* Ensure the dots still receive events even if a parent ever gets pointer-events:none */
-#edu-rail .er-stop, 
-#edu-rail .er-dot{ pointer-events: auto; }
-
-
-  /* Map container (no basemap look) */
+  /* Travel map container */
   #visitedMap{height:420px; width:100%; background:transparent}
 </style>
 
-<!-- Progress bar element -->
-<div id="progress"></div>
-
-<!-- Leaflet CSS (for the map polygons only) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
+
+<div id="progress"></div>
 
 <header>
   <div class="inner">
@@ -289,7 +236,6 @@
       <span class="bar"></span>
     </button>
     <nav id="siteNav">
-      <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
@@ -372,37 +318,18 @@
     </div>
   </section>
 
-  <!-- Education (Visual Rail) -->
+  <!-- Education (Horizontal Scroller) -->
   <section id="education" class="section">
     <div class="wrap">
-      <div id="edu-rail">
-        <div class="er-wrap">
-          <h2 class="er-title">Education Journey</h2>
-          <div class="er-rail">
-            <svg class="er-svg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <marker id="er-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z"></path>
-                </marker>
-                <linearGradient id="er-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"  stop-color="var(--er-accent)" />
-                  <stop offset="100%" stop-color="var(--er-accent2)" />
-                </linearGradient>
-              </defs>
-              <line x1="30" y1="60" x2="1170" y2="60" stroke="url(#er-grad)" stroke-width="6" marker-end="url(#er-arrow)"></line>
-            </svg>
-            <ul class="er-stops" role="list"></ul>
-          </div>
-
-          <!-- Mobile card carousel -->
-          <div class="er-cards" aria-live="polite">
-            <button class="er-nav er-prev" aria-label="Previous">‹</button>
-            <div class="er-viewport"><div class="er-track"></div></div>
-            <button class="er-nav er-next" aria-label="Next">›</button>
-          </div>
+      <h2 class="reveal fx-wipe-r">Education Journey</h2>
+      <div id="edu-scroll" class="reveal fx-zoom">
+        <div class="box" role="region" aria-label="Education cards carousel">
+          <button class="edu-arrow edu-prev" aria-label="Scroll left">‹</button>
+          <div class="tray" id="eduTray" tabindex="0" aria-describedby="eduHint"><!-- JS injects cards --></div>
+          <button class="edu-arrow edu-next" aria-label="Scroll right">›</button>
         </div>
+        <p id="eduHint" class="lead" style="margin:.6rem 0 0">Scroll sideways or use arrows. Focus on security, migration, and EU governance.</p>
       </div>
-      <p class="lead reveal fx-from-left" style="margin-top:10px">Focus on security, migration, and EU governance.</p>
     </div>
   </section>
 
@@ -521,7 +448,6 @@
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
       <p class="lead reveal fx-from-right">Clubs, volunteering, events, and field exposure.</p>
-
       <div class="activities-grid">
         <article class="card activity reveal fx-zoom"><div class="title">Sciences Po Monde Arabe — Communications Director</div></article>
         <article class="card activity reveal fx-zoom"><div class="title">Tarjimly — Volunteer Translator & Interpreter</div></article>
@@ -550,7 +476,6 @@
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <script>
@@ -572,16 +497,14 @@ const rot=document.getElementById("rotate");
 function cycle(){ if(!rot) return; rot.classList.remove('show'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
 if(rot){ rot.classList.add('show'); setInterval(cycle,1800); }
 
-// Back to top
+// Back to top + progress + active nav
 const toTop=document.getElementById('toTop');
 const toggleTop=()=>{ scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
 addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
-
-// Active nav highlight + progress bar
 const links=[...document.querySelectorAll('nav a')];
 const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
 const secs=ids.map(id=>document.querySelector(id));
-let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
+let prog=document.getElementById('progress');
 const onScroll=()=>{
   const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
   prog.style.width=(scrolled*100)+'%';
@@ -601,89 +524,54 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
 addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
 
-/* ===== Education Rail (data + render) ===== */
+/* ===== Education: build cards + controls ===== */
 (function(){
-  const EDU_STOPS = [
-    { year:"2021–2022", city:"Nancy, France", flag:"🇫🇷", school:"Sciences Po – Campus de Nancy", program:"BA in Politics & Government (Franco-German focus)", notes:"Foundations in comparative politics; bilingual track", pos:6 },
-    { year:"2022–2023", city:"Menton, France", flag:"🇫🇷", school:"Sciences Po – Campus de Menton", program:"BA – Middle Eastern & Mediterranean focus", notes:"Arabic studies; regional policy focus", pos:26 },
-    { year:"2023–2024", city:"Tokyo, Japan", flag:"🇯🇵", school:"Tokyo University of Foreign Studies (TUFS)", program:"Exchange – Asia-Pacific & Japanese Studies", notes:"Deepened Japan/Asia focus; Japanese language", pos:48 },
-    { year:"2024–2026", city:"Paris, France", flag:"🇫🇷", school:"Sciences Po – PSIA", program:"MA in International Security (Migration & MENA)", notes:"Policy, research, and humanitarian data storytelling", pos:72 },
-    { year:"2026–2027", city:"Berlin, Germany", flag:"🇩🇪", school:"Freie Universität Berlin – Otto-Suhr-Institut", program:"MA Dual-Degree (Year 2)", notes:"Comparative security; European policy ecosystems", pos:92 }
+  const data = [
+    { year:"2021–2022", city:"Nancy, France", flag:"🇫🇷", school:"Sciences Po — Campus de Nancy", program:"BA Politics & Government (Franco-German)", note:"Foundations in comparative politics; bilingual track" },
+    { year:"2022–2023", city:"Menton, France", flag:"🇫🇷", school:"Sciences Po — Campus de Menton", program:"BA — Middle Eastern & Mediterranean", note:"Arabic studies; regional policy focus" },
+    { year:"2023–2024", city:"Tokyo, Japan", flag:"🇯🇵", school:"Tokyo University of Foreign Studies (TUFS)", program:"Exchange — Asia-Pacific & Japanese Studies", note:"Deepened Japan/Asia focus; Japanese language" },
+    { year:"2024–2026", city:"Paris, France", flag:"🇫🇷", school:"Sciences Po — PSIA", program:"MA International Security (Migration & MENA)", note:"Policy, research, and humanitarian data storytelling" },
+    { year:"2026–2027", city:"Berlin, Germany", flag:"🇩🇪", school:"Freie Universität Berlin — OSI", program:"MA Dual-Degree (Year 2)", note:"Comparative security; EU policy ecosystems" }
   ];
 
-  // Desktop: place stops
-  const stopsUL = document.querySelector('#edu-rail .er-stops');
-  if(!stopsUL) return;
+  const tray = document.getElementById('eduTray');
+  tray.innerHTML = data.map(d => `
+    <article class="edu-card" tabindex="0">
+      <div class="meta"><span class="flag" aria-hidden="true">${d.flag}</span> <span>${d.year} • ${d.city}</span></div>
+      <div class="school">${d.school}</div>
+      <div class="desc">${d.program}</div>
+      ${d.note ? `<div class="note">${d.note}</div>`:''}
+    </article>
+  `).join('');
 
-  stopsUL.innerHTML = EDU_STOPS.map(s => `
-    <li class="er-stop" style="left:${s.pos}%">
-      <button class="er-dot" aria-label="${s.school} — ${s.city} (${s.year})"></button>
-      <div class="er-pop" role="dialog" aria-label="${s.school}">
-        <div class="er-tag"><span class="er-flag">${s.flag}</span><span>${s.year} • ${s.city}</span></div>
-        <div class="er-school">${s.school}</div>
-        <div class="er-program">${s.program}</div>
-        ${s.notes ? `<div class="er-notes">${s.notes}</div>` : ``}
-      </div>
-    </li>`).join('');
+  const prev = document.querySelector('.edu-prev');
+  const next = document.querySelector('.edu-next');
 
-  function clampPopups(){
-    const rail = document.querySelector('#edu-rail .er-rail');
-    const railRect = rail.getBoundingClientRect();
-    document.querySelectorAll('#edu-rail .er-pop').forEach(pop=>{
-      const rect = pop.getBoundingClientRect();
-      const leftOverflow = Math.max(0, railRect.left + 8 - rect.left);
-      const rightOverflow = Math.max(0, rect.right - (railRect.right - 8));
-      if (leftOverflow>0) pop.style.transform = `translate(calc(-50% + ${leftOverflow}px), -100%)`;
-      else if (rightOverflow>0) pop.style.transform = `translate(calc(-50% - ${rightOverflow}px), -100%)`;
-      else pop.style.transform = `translate(-50%, -100%)`;
-    });
+  function scrollByCards(dir=1){
+    const card = tray.querySelector('.edu-card');
+    const gap = parseFloat(getComputedStyle(tray).gap) || 12;
+    const w = (card?.getBoundingClientRect().width || 300) + gap;
+    tray.scrollBy({left: dir*w, behavior:'smooth'});
   }
-  addEventListener('resize', clampPopups, {passive:true});
-  setTimeout(clampPopups, 60);
+  prev.addEventListener('click', ()=>scrollByCards(-1));
+  next.addEventListener('click', ()=>scrollByCards(1));
 
-  // Mobile carousel
-  const track = document.querySelector('#edu-rail .er-track');
-  const prev = document.querySelector('#edu-rail .er-prev');
-  const next = document.querySelector('#edu-rail .er-next');
-  if(track){
-    track.innerHTML = EDU_STOPS.map(s => `
-      <article class="er-card">
-        <div class="er-meta"><span class="er-flag">${s.flag}</span><span>${s.year} • ${s.city}</span></div>
-        <div class="er-title">${s.school}</div>
-        <div class="er-desc">${s.program}</div>
-        ${s.notes ? `<div class="er-notes" style="margin-top:8px">${s.notes}</div>` : ``}
-      </article>`).join('');
+  // Drag to scroll
+  let down=false, startX=0, sl=0;
+  tray.addEventListener('pointerdown', e=>{ down=true; startX=e.clientX; sl=tray.scrollLeft; tray.setPointerCapture(e.pointerId); });
+  tray.addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-startX; tray.scrollLeft=sl-dx; });
+  tray.addEventListener('pointerup', e=>{ down=false; tray.releasePointerCapture(e.pointerId); });
 
-    let index = 0;
-    function updateCarousel(){
-      const cards = Array.from(document.querySelectorAll('#edu-rail .er-card'));
-      const cardW = cards[0]?.getBoundingClientRect().width || 0;
-      const gap = parseFloat(getComputedStyle(track).gap) || 12;
-      track.style.transform = `translateX(${-(cardW + gap) * index}px)`;
-      if(prev) prev.disabled = index === 0;
-      if(next) next.disabled = index >= cards.length - 1;
+  // Shift + wheel to horizontal
+  tray.addEventListener('wheel', e=>{
+    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+      tray.scrollLeft += e.deltaY;
+      e.preventDefault();
     }
-    updateCarousel();
-    addEventListener('resize', updateCarousel, {passive:true});
-    if(prev) prev.addEventListener('click', ()=>{ index = Math.max(0, index-1); updateCarousel(); });
-    if(next) next.addEventListener('click', ()=>{ index = Math.min(EDU_STOPS.length-1, index+1); updateCarousel(); });
-
-    // Swipe
-    let startX = 0, curX = 0, dragging = false;
-    track.addEventListener('pointerdown', e => { dragging = true; startX = e.clientX; track.setPointerCapture(e.pointerId); });
-    track.addEventListener('pointermove', e => { if(!dragging) return; curX = e.clientX; });
-    track.addEventListener('pointerup', e => {
-      if(!dragging) return;
-      const delta = curX - startX;
-      if (delta < -40 && next) next.click();
-      else if (delta > 40 && prev) prev.click();
-      dragging = false;
-      track.releasePointerCapture(e.pointerId);
-    });
-  }
+  }, {passive:false});
 })();
 
-/* ===== Visited countries map — polygons only (no basemap) ===== */
+/* ===== Visited countries map — polygons only ===== */
 (function(){
   const el = document.getElementById('visitedMap');
   if (!el || typeof L === 'undefined') return;
@@ -691,7 +579,6 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
   const map = L.map(el, { scrollWheelZoom: false, zoomControl: true, zoomSnap: 0.5, zoomDelta: 0.5 })
                .setView([20, 0], 2);
 
-  // EDIT: your visited countries (human names)
   const visitedNames = [
     "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
     "Armenia","Georgia","Bulgaria",
@@ -699,17 +586,15 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
     "Australia"
   ];
-
   const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const visited = new Set(visitedNames.map(normalize));
-
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
   const baseFill = '#e5e7eb';
   const stroke = '#7a7a7a';
 
   const SOURCES = [
-    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json', // properties.name
-    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson' // properties.ADMIN
+    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
+    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
   ];
 
   function loadWorld(i){
@@ -723,10 +608,8 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
           const hit  = visited.has(normalize(name));
           return {
             fillColor: hit ? accent : baseFill,
-            color: stroke,
-            weight: hit ? 1.2 : 0.6,
-            fillOpacity: hit ? 0.9 : 0.22,
-            opacity: 0.9
+            color: stroke, weight: hit ? 1.2 : 0.6,
+            fillOpacity: hit ? 0.9 : 0.22, opacity: 0.9
           };
         },
         onEachFeature: (f, l) => {
@@ -743,8 +626,6 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
       try { map.fitBounds(layer.getBounds(), { padding: [10,10] }); } catch(e){}
     });
   }
-
-  // No basemap added → purely country shapes
   loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
     console.error('GeoJSON load error:', err);
     el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
