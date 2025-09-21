@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — v36 (tighter vertical edu cards)</title>
+<title>Portfolio — v37 (bg restored + no grey bar)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <style>
@@ -21,7 +21,22 @@
     background-size:200% 200%; animation:bgShift 22s ease infinite;
   }
   @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  /* Removed angled/grid overlays */
+  /* BACKGROUND OVERLAYS — restored */
+  body:before{
+    content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
+    background:
+      repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 26px),
+      repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
+    mix-blend-mode:soft-light; animation:gridPan 30s linear infinite;
+  }
+  body::after{
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:.18;
+    background:
+      repeating-radial-gradient(circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
+      repeating-radial-gradient(circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
+    filter:blur(.2px);
+  }
+  @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
 
   .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,4vw,22px)}
   .section{margin:clamp(24px,6vw,46px) 0}
@@ -121,14 +136,14 @@
   .project .body>div{overflow:hidden}
   @media (hover:none){ .project .body{grid-template-rows:1fr; opacity:1} .project:hover,.project:hover .thumb{transform:none} }
 
-  /* ===== Education: Horizontal Scroller (tighter, more vertical) ===== */
+  /* ===== Education: Horizontal Scroller (no visible scrollbar) ===== */
   #edu-scroll .box{
     position:relative;
     border:1px solid var(--line);
     border-radius:18px;
     background:linear-gradient(180deg,#fff,#fafcff);
     box-shadow:var(--shadow);
-    padding:18px 56px 22px; /* space at bottom to lift content above scrollbar */
+    padding:18px 56px 12px; /* reduced bottom padding */
     overflow:hidden;
   }
   #edu-scroll .tray{
@@ -136,13 +151,16 @@
     overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
-    padding:6px 0 26px;  /* EXTRA SPACE before the scrollbar */
-    scrollbar-gutter: stable; /* keeps layout when scrollbar appears */
-    scrollbar-width:thin;
+    padding:6px 0 6px;       /* NO extra space for a bar */
+    scrollbar-gutter: stable;
+    /* Hide scrollbars everywhere */
+    scrollbar-width: none;   /* Firefox */
+    -ms-overflow-style: none;/* IE/Edge legacy */
   }
-  #edu-scroll .tray::-webkit-scrollbar{height:10px}
-  #edu-scroll .tray::-webkit-scrollbar-thumb{background:#cbd5e1; border-radius:999px}
+  #edu-scroll .tray::-webkit-scrollbar{height:0; width:0; background:transparent}
+  #edu-scroll .tray::-webkit-scrollbar-thumb{background:transparent}
   #edu-scroll .tray::-webkit-scrollbar-track{background:transparent}
+  #edu-scroll .tray::-webkit-scrollbar-button{display:none; width:0; height:0}
 
   #edu-scroll .box:before, #edu-scroll .box:after{
     content:""; position:absolute; top:0; bottom:0; width:30px; pointer-events:none;
@@ -154,8 +172,8 @@
 
   .edu-card{
     scroll-snap-align:center;
-    flex: 0 0 clamp(230px, 34vw, 260px); /* narrower = more vertical */
-    min-height: 240px;                   /* taller presence */
+    flex: 0 0 clamp(230px, 34vw, 260px);
+    min-height: 240px;
     display:grid; grid-template-rows:auto auto 1fr; gap:8px;
     background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
     padding:14px 14px 16px;
@@ -176,13 +194,13 @@
   .edu-prev{left:12px}
   .edu-next{right:12px}
 
-  /* Mobile tweaks (behave like earlier phone format) */
+  /* Mobile tweaks */
   @media (max-width:600px){
-    #edu-scroll .box{padding:14px 20px 18px}
+    #edu-scroll .box{padding:14px 20px 10px}
     .edu-arrow{display:none}
     .edu-card{flex:0 0 86vw; min-height:auto}
     .edu-card .school{font-size:1.12rem}
-    #edu-scroll .tray{gap:10px; padding:6px 0 22px}
+    #edu-scroll .tray{gap:10px; padding:6px 0 6px}
   }
 
   /* Travel map */
