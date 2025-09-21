@@ -72,7 +72,7 @@
     padding:0 !important;
     overflow:visible;
   }
-  /* wrapper to position the bar arrows */
+  /* wrapper to place the bar arrows next to the scrollbar */
   #edu-scroll .tray-wrap{ position:relative; }
 
   #edu-scroll .tray{
@@ -96,40 +96,45 @@
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
 
-  /* Hide old overlay arrows */
-  .edu-arrow{display:none !important}
+  /* legacy overlay arrows are gone */
+  .edu-arrow{ display:none !important; width:0 !important; height:0 !important; overflow:hidden !important; }
 
-  /* ===== Desktop: pill grey scrollbar + tiny triangle arrows (like screenshot) ===== */
+  /* ===== Desktop: slim grey scrollbar + tiny arrows beside it ===== */
   @media (min-width:601px){
     #edu-scroll .tray{
-      padding-bottom:16px;                 /* space for the bar */
-      scrollbar-width:thin;                /* Firefox thin bar */
-      scrollbar-color:#9ca3af transparent; /* FF colours: thumb, track */
-      -ms-overflow-style:auto;
+      padding-bottom:16px;             /* room for the bar + arrows */
+      scrollbar-width:thin;            /* Firefox thin bar */
+      scrollbar-color:#9ca3af #e5e7eb; /* thumb / track */
     }
-    /* WebKit/Chromium look */
-    #edu-scroll .tray::-webkit-scrollbar{ height:14px; }          /* slim */
-    #edu-scroll .tray::-webkit-scrollbar-track{ background:transparent; }
+    /* Chrome/Edge/Safari scrollbar */
+    #edu-scroll .tray::-webkit-scrollbar{ height:12px; }
+    #edu-scroll .tray::-webkit-scrollbar-track{
+      background:#e5e7eb; border-radius:9999px;
+    }
     #edu-scroll .tray::-webkit-scrollbar-thumb{
-      background:#9ca3af;                   /* grey pill */
-      border-radius:9999px;
-      border:5px solid transparent;         /* makes ends fully round */
+      background:#9ca3af; border-radius:9999px;
+      border:4px solid transparent;    /* inset look */
       background-clip:content-box;
     }
     #edu-scroll .tray::-webkit-scrollbar-thumb:hover{ background:#6b7280; }
 
-    /* little triangle arrows beside the bar (no circles) */
+    /* arrows next to the bar (CSS triangles) */
     #edu-scroll .bar-arrow{
-      position:absolute; bottom:3px;        /* vertically centered vs 14px bar */
-      width:24px; height:20px;
-      display:grid; place-items:center;
+      position:absolute; bottom:2px;
+      width:24px; height:18px;
       background:transparent; border:none; box-shadow:none;
-      color:#9ca3af; font-size:20px; line-height:1;
-      cursor:pointer; user-select:none;
+      cursor:pointer; padding:0; line-height:0;
     }
-    #edu-scroll .bar-arrow:hover{ color:#6b7280; }
+    #edu-scroll .bar-arrow::before{
+      content:""; display:block; width:0; height:0; border:6px solid transparent;
+    }
     #edu-scroll .bar-prev{ left:-4px; }
+    #edu-scroll .bar-prev::before{ border-right-color:#9ca3af; }
+    #edu-scroll .bar-prev:hover::before{ border-right-color:#6b7280; }
+
     #edu-scroll .bar-next{ right:-4px; }
+    #edu-scroll .bar-next::before{ border-left-color:#9ca3af; }
+    #edu-scroll .bar-next:hover::before{ border-left-color:#6b7280; }
   }
 
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
@@ -146,8 +151,7 @@
     #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
     #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
     #edu-scroll .edu-card .school{ font-size:1.06rem; }
-    /* hide the tiny bar-arrows on mobile */
-    #edu-scroll .bar-arrow{ display:none !important; }
+    #edu-scroll .bar-arrow{ display:none !important; } /* hide the side arrows on mobile */
   }
 
   /* ===== Travel map ===== */
@@ -164,7 +168,6 @@
 
   .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
   @media (max-width:820px){.projects{grid-template-columns:1fr}}
-
 </style>
 </head>
 <body>
@@ -244,17 +247,12 @@
 
       <div id="edu-scroll">
         <div class="box" role="region" aria-label="Education cards carousel">
-          <!-- keep old buttons (hidden by CSS) -->
-          <button class="edu-arrow edu-prev" aria-label="Scroll left">‹</button>
-
           <div class="tray-wrap">
             <div class="tray" id="eduTray" tabindex="0"></div>
-            <!-- new tiny arrows by the bar (desktop only) -->
-            <button class="bar-arrow bar-prev" aria-label="Scroll left">‹</button>
-            <button class="bar-arrow bar-next" aria-label="Scroll right">›</button>
+            <!-- small arrows next to the scrollbar (desktop only) -->
+            <button class="bar-arrow bar-prev" aria-label="Scroll left"></button>
+            <button class="bar-arrow bar-next" aria-label="Scroll right"></button>
           </div>
-
-          <button class="edu-arrow edu-next" aria-label="Scroll right">›</button>
         </div>
       </div>
     </div>
@@ -320,13 +318,9 @@
     tray.scrollBy({left: dir*w, behavior:'smooth'});
   }
 
-  // bar-side arrows (desktop)
+  // arrows beside the scrollbar (desktop)
   document.querySelector('.bar-prev')?.addEventListener('click', ()=>scrollByCards(-1));
   document.querySelector('.bar-next')?.addEventListener('click', ()=>scrollByCards(1));
-
-  // (hidden) legacy overlay arrows still wired up safely
-  document.querySelector('.edu-prev')?.addEventListener('click', ()=>scrollByCards(-1));
-  document.querySelector('.edu-next')?.addEventListener('click', ()=>scrollByCards(1));
 
   // drag to scroll
   let down=false,startX=0,sl=0,pid=null;
