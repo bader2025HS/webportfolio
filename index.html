@@ -245,6 +245,31 @@
   #edu-rail .er-nav:disabled{opacity:.4; cursor:not-allowed}
   @media (max-width:880px){ #edu-rail .er-rail{display:none} #edu-rail .er-cards{display:flex} }
 
+  /* --- FIX: make stops clickable on desktop --- */
+#edu-rail .er-rail{ position: relative; }
+
+/* SVG should not intercept the mouse */
+#edu-rail .er-svg{
+  position: absolute;   /* sit under the stops */
+  inset: 0;
+  width: 100%;
+  height: 120px;
+  z-index: 1;
+  pointer-events: none; /* << key line */
+}
+
+/* Stops layer above the SVG */
+#edu-rail .er-stops{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* Ensure the dots still receive events even if a parent ever gets pointer-events:none */
+#edu-rail .er-stop, 
+#edu-rail .er-dot{ pointer-events: auto; }
+
+
   /* Map container (no basemap look) */
   #visitedMap{height:420px; width:100%; background:transparent}
 </style>
