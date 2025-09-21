@@ -4,10 +4,7 @@
 <meta charset="utf-8" />
 <title>Portfolio — v31 (desktop menu framed)</title>
 
-<!-- Viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!-- (Optional) Safety: keep the old auto-insert just in case -->
+<!-- Viewport (safety) -->
 <script>
 (function(){
   if(!document.querySelector('meta[name="viewport"]')){
@@ -20,7 +17,7 @@
 
 <style>
   :root{
-    --header:72px; --maxw:1100px; /* widened for desktop */
+    --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
@@ -85,9 +82,6 @@
     background:conic-gradient(from 220deg,var(--accent),var(--accent2));
     box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
-
-  /* Desktop nav defaults (ensures desktop layout is visible) */
-  header nav#siteNav{display:flex; align-items:center; gap:8px;}
 
   /* Navbar links (no underline) */
   nav a{
@@ -195,9 +189,10 @@
   .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
   .to-top.show{opacity:1; pointer-events:auto}
 
-  /* Desktop menu framing (extra cosmetics) */
+  /* Desktop menu framing */
   @media (min-width:761px){
     header .brand{padding:0; border:none; border-radius:0; background:transparent; box-shadow:none;}
+    header nav#siteNav{display:flex; align-items:center; gap:8px;}
     header nav#siteNav a{margin:0; padding:8px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.9); text-decoration:none; color:var(--muted);}
     header nav#siteNav a:hover{ border-color:var(--accent); color:var(--accent); }
     header nav#siteNav a.active{ border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 2px rgba(14,165,162,.12) inset; }
@@ -215,7 +210,7 @@
   #edu-rail .er-rail{
     position:relative; background:linear-gradient(180deg, #fff, #fafcff);
     border:1px solid var(--er-line); border-radius:var(--er-radius); box-shadow:var(--er-shadow);
-    padding:28px 16px 48px; overflow:hidden; min-height:140px; /* ensures visible area */
+    padding:28px 16px 48px; overflow:hidden;
   }
   #edu-rail .er-svg{width:100%; height:120px; display:block; filter:drop-shadow(0 2px 0 rgba(2,6,23,.04))}
   #edu-rail #er-arrow path{ fill: var(--er-accent2); }
@@ -248,21 +243,19 @@
   #edu-rail .er-card .er-desc{font-size:14px; line-height:1.35}
   #edu-rail .er-nav{border:1px solid var(--er-line); background:#fff; border-radius:999px; width:36px; height:36px; display:grid; place-items:center; cursor:pointer; box-shadow:var(--er-shadow)}
   #edu-rail .er-nav:disabled{opacity:.4; cursor:not-allowed}
-  /* Mobile shows cards; desktop shows rail */
   @media (max-width:880px){ #edu-rail .er-rail{display:none} #edu-rail .er-cards{display:flex} }
-  @media (min-width:881px){ #edu-rail .er-rail{display:block} #edu-rail .er-cards{display:none} }
 
   /* Map container (no basemap look) */
   #visitedMap{height:420px; width:100%; background:transparent}
 </style>
 
-<!-- Leaflet CSS -->
+<!-- Progress bar element -->
+<div id="progress"></div>
+
+<!-- Leaflet CSS (for the map polygons only) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
-
-<!-- Progress bar element (must be in BODY, not HEAD) -->
-<div id="progress"></div>
 
 <header>
   <div class="inner">
@@ -563,7 +556,7 @@ addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
 const links=[...document.querySelectorAll('nav a')];
 const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
 const secs=ids.map(id=>document.querySelector(id));
-let prog=document.getElementById('progress');
+let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
 const onScroll=()=>{
   const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
   prog.style.width=(scrolled*100)+'%';
@@ -593,6 +586,7 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     { year:"2026–2027", city:"Berlin, Germany", flag:"🇩🇪", school:"Freie Universität Berlin – Otto-Suhr-Institut", program:"MA Dual-Degree (Year 2)", notes:"Comparative security; European policy ecosystems", pos:92 }
   ];
 
+  // Desktop: place stops
   const stopsUL = document.querySelector('#edu-rail .er-stops');
   if(!stopsUL) return;
 
@@ -603,7 +597,7 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
         <div class="er-tag"><span class="er-flag">${s.flag}</span><span>${s.year} • ${s.city}</span></div>
         <div class="er-school">${s.school}</div>
         <div class="er-program">${s.program}</div>
-        ${s.notes ? '<div class="er-notes">'+s.notes+'</div>' : '' }
+        ${s.notes ? `<div class="er-notes">${s.notes}</div>` : ``}
       </div>
     </li>`).join('');
 
@@ -632,7 +626,7 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
         <div class="er-meta"><span class="er-flag">${s.flag}</span><span>${s.year} • ${s.city}</span></div>
         <div class="er-title">${s.school}</div>
         <div class="er-desc">${s.program}</div>
-        ${s.notes ? '<div class="er-notes" style="margin-top:8px">'+s.notes+'</div>' : '' }
+        ${s.notes ? `<div class="er-notes" style="margin-top:8px">${s.notes}</div>` : ``}
       </article>`).join('');
 
     let index = 0;
