@@ -62,7 +62,7 @@
   .btn.ghost{background:var(--card); color:var(--text)}
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px)}
 
-  /* ===== EDUCATION scroller (no white container) ===== */
+  /* ===== EDUCATION scroller (no container frame) ===== */
   #edu-scroll .box{
     position:relative;
     background:transparent !important;
@@ -80,6 +80,21 @@
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
     padding:0;
   }
+  /* Grey rounded scrollbar (desktop) */
+  @media (min-width:601px){
+    #edu-scroll .tray{
+      padding-bottom:16px;
+      scrollbar-width:thin;                  /* Firefox */
+      scrollbar-color:#9ca3af #e5e7eb;      /* thumb / track */
+    }
+    #edu-scroll .tray::-webkit-scrollbar{height:10px;}             /* Chrome/Edge/Safari */
+    #edu-scroll .tray::-webkit-scrollbar-track{background:#e5e7eb; border-radius:9999px;}
+    #edu-scroll .tray::-webkit-scrollbar-thumb{
+      background:#9ca3af; border-radius:9999px;
+      border:3px solid transparent; background-clip:content-box;
+    }
+    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{background:#6b7280;}
+  }
 
   #edu-scroll .edu-card{
     scroll-snap-align:center;
@@ -92,50 +107,9 @@
   #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
-
-  /* make sure any old overlay arrows can’t appear */
-  .edu-arrow{ display:none !important; width:0 !important; height:0 !important; overflow:hidden !important; }
-
-  /* ===== Desktop: grey rounded scrollbar + tiny side arrows (like your ref) ===== */
-  @media (min-width:601px){
-    /* show a slim, rounded, grey scrollbar under the cards */
-    #edu-scroll .tray{
-      padding-bottom:16px;
-      scrollbar-width:thin;                  /* Firefox */
-      scrollbar-color:#9ca3af #e5e7eb;      /* thumb / track */
-    }
-    #edu-scroll .tray::-webkit-scrollbar{    /* Chrome/Edge/Safari */
-      height:10px;
-    }
-    #edu-scroll .tray::-webkit-scrollbar-track{
-      background:#e5e7eb;
-      border-radius:9999px;
-    }
-    #edu-scroll .tray::-webkit-scrollbar-thumb{
-      background:#9ca3af;
-      border-radius:9999px;
-      border:3px solid transparent;          /* inset look */
-      background-clip:content-box;
-    }
-    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{ background:#6b7280; }
-
-    /* little SVG chevrons beside the bar (not overlaying content) */
-    #edu-scroll .bar-arrow{
-      position:absolute; bottom:1px;         /* vertically aligned to bar */
-      width:22px; height:18px;
-      display:flex; align-items:center; justify-content:center;
-      background:transparent; border:none; padding:0; margin:0;
-      cursor:pointer; line-height:0; font-size:0;
-    }
-    #edu-scroll .bar-prev{ left:-2px; }
-    #edu-scroll .bar-next{ right:-2px; }
-    #edu-scroll .bar-arrow svg{ width:14px; height:14px; fill:#9ca3af; }
-    #edu-scroll .bar-arrow:hover svg{ fill:#6b7280; }
-  }
-
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
 
-  /* ===== Mobile ===== */
+  /* Mobile tweaks */
   @media (max-width:600px){
     :root{ --header:60px; }
     html{ scroll-padding-top: calc(var(--header) + 10px); }
@@ -147,7 +121,6 @@
     #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
     #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
     #edu-scroll .edu-card .school{ font-size:1.06rem; }
-    #edu-scroll .bar-arrow{ display:none !important; }
   }
 
   /* ===== Travel map ===== */
@@ -238,20 +211,14 @@
     <div class="wrap">
       <h2>Education Journey</h2>
       <p class="lead" style="margin:.25rem 0 .9rem">
-        Scroll sideways to browse.
+        Scroll sideways to browse. Focus on security, migration, and EU governance.
       </p>
 
       <div id="edu-scroll">
         <div class="box" role="region" aria-label="Education cards carousel">
           <div class="tray-wrap">
             <div class="tray" id="eduTray" tabindex="0"></div>
-            <!-- single-SVG arrows beside the scrollbar (desktop only) -->
-            <button class="bar-arrow bar-prev" aria-label="Scroll left">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </button>
-            <button class="bar-arrow bar-next" aria-label="Scroll right">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
-            </button>
+            <!-- no arrows -->
           </div>
         </div>
       </div>
@@ -312,21 +279,13 @@
     </article>
   `).join('');
 
-  function scrollByCards(dir=1){
-    const gap = parseFloat(getComputedStyle(tray).gap) || 12;
-    const w = (tray.querySelector('.edu-card')?.getBoundingClientRect().width || 300) + gap;
-    tray.scrollBy({left: dir*w, behavior:'smooth'});
-  }
-
-  document.querySelector('.bar-prev')?.addEventListener('click', ()=>scrollByCards(-1));
-  document.querySelector('.bar-next')?.addEventListener('click', ()=>scrollByCards(1));
-
-  // drag to scroll
+  // Drag to scroll
   let down=false,startX=0,sl=0,pid=null;
   tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
   tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
-  tray.addEventListener('pointerup', e=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
-  // wheel → horizontal
+  tray.addEventListener('pointerup', ()=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
+
+  // Wheel → horizontal
   tray.addEventListener('wheel', e=>{
     if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
   }, {passive:false});
