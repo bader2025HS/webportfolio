@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — v40 (white edu card, no grey band)</title>
+<title>Portfolio — responsive (education polished)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <style>
@@ -42,20 +42,14 @@
   .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px)}
   .lead{color:var(--muted)}
 
+  /* Reveal */
   .reveal{opacity:0; will-change:transform,filter;
     transition:opacity .6s cubic-bezier(.2,.7,.2,1),
                transform .6s cubic-bezier(.2,.7,.2,1),
                filter .6s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1; transform:none; filter:none}
-  .fx-from-left{transform:translateX(-28px) skewX(-2deg); filter:blur(4px)}
-  .fx-from-right{transform:translateX(28px) skewX(2deg); filter:blur(4px)}
-  .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
-  .fx-from-down{transform:translateY(24px); filter:blur(6px)}
-  .fx-zoom{transform:scale(.94); filter:blur(4px)}
-  .fx-wipe-l,.fx-wipe-r{display:inline-block; will-change:clip-path; transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
-  .fx-wipe-l{clip-path:inset(0 100% 0 0)} .fx-wipe-r{clip-path:inset(0 0 0 100%)}
-  .fx-wipe-l.in,.fx-wipe-r.in{clip-path:inset(0 0 0 0)}
 
+  /* Header */
   header{
     position:sticky; top:0; z-index:9999; height:var(--header);
     background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
@@ -95,6 +89,7 @@
     header nav a.active{color:var(--accent); border-color:var(--accent)}
   }
 
+  /* Types, buttons, generic card */
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
   h1{font-size:clamp(40px,6vw,64px); margin:0 0 6px}
@@ -103,46 +98,35 @@
   .btn.ghost{background:var(--card); color:var(--text)}
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px)}
 
-  /* ===== Education: white card container, NO SHADOW/BAND, hidden scrollbar ===== */
+  /* ===== EDUCATION: white container, equal spacing, responsive cards ===== */
   #edu-scroll .box{
-    position:relative;
-    background:#fff;               /* white card */
-    border:1px solid var(--line);
-    border-radius:20px;
-    /* remove the grey band completely */
-    box-shadow:none;               /* <— this was the culprit */
-    padding:18px 56px 14px;
-    overflow:hidden;
+    position:relative; background:#fff; border:1px solid var(--line);
+    border-radius:20px; box-shadow:none; /* no grey band */
+    padding:14px 56px 14px; overflow:hidden;
   }
-  #edu-scroll .box::before,#edu-scroll .box::after{display:none}
-
   #edu-scroll .tray{
-    display:flex; gap:12px;
+    display:flex; gap:12px; align-items:center;
     overflow-x:auto; overflow-y:hidden;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    padding:6px 0 6px;             /* tight, no extra strip */
-    scrollbar-width:none;          /* Firefox */
-    -ms-overflow-style:none;       /* old Edge/IE */
-    overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    padding:6px 0; scrollbar-width:none; -ms-overflow-style:none;
+    touch-action:pan-x pinch-zoom;
   }
   #edu-scroll .tray::-webkit-scrollbar{width:0;height:0;background:transparent}
-  #edu-scroll .tray::-webkit-scrollbar-thumb{background:transparent}
-  #edu-scroll .tray::-webkit-scrollbar-track{background:transparent}
-
-  .edu-card{
+  #edu-scroll .edu-card{
     scroll-snap-align:center;
-    flex:0 0 clamp(230px,34vw,260px);
-    min-height:240px;
+    flex:0 0 300px; /* desktop width; see media queries below */
     display:grid; grid-template-rows:auto auto 1fr; gap:8px;
-    background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
-    padding:14px 14px 16px;
+    min-height:240px; background:var(--card); border:1px solid var(--line);
+    border-radius:14px; box-shadow:none; padding:14px 14px 16px; margin:0;
   }
-  .edu-card .meta{display:flex; gap:10px; align-items:center; color:var(--muted); font-size:1rem}
-  .edu-card .flag-ico{width:24px; height:16px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px var(--line)}
-  .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
-  .edu-card .desc{font-size:1.02rem; line-height:1.38}
-  .edu-card .note{font-size:.94rem; color:var(--muted)}
+  #edu-scroll .edu-card .meta{
+    display:flex; align-items:center; gap:8px; color:var(--muted); font-size:1rem;
+    white-space:nowrap; word-break:keep-all; /* stay on one line on desktop */
+  }
+  #edu-scroll .edu-card .flag-ico{width:24px; height:16px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px var(--line)}
+  #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
+  #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
+  #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
 
   .edu-arrow{
     position:absolute; top:50%; transform:translateY(-50%);
@@ -150,75 +134,44 @@
     border-radius:999px; background:#fff; border:1px solid var(--line);
     box-shadow:var(--shadow); cursor:pointer; z-index:3; font-size:20px; line-height:1;
   }
+  .edu-prev{left:12px} .edu-next{right:12px}
   .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
-  .edu-prev{left:12px}
-  .edu-next{right:12px}
 
+  /* widen on very large desktop so the meta never wraps */
+  @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
+
+  /* ===== Mobile layout (<= 600px) ===== */
   @media (max-width:600px){
-    #edu-scroll .box{padding:12px 20px 10px}
-    .edu-arrow{display:none}
-    .edu-card{flex:0 0 86vw; min-height:auto}
-    .edu-card .school{font-size:1.12rem}
-    #edu-scroll .tray{gap:10px; padding:6px 0 6px}
+    :root{ --header:60px; }
+    html{ scroll-padding-top: calc(var(--header) + 10px); }
+    .wrap{ padding: 14px 16px; }
+    .section{ margin: 20px 0; }
+    h1{ font-size: clamp(28px,8vw,40px); }
+
+    #edu-scroll .box{ padding:12px 12px 12px !important; border-radius:16px; }
+    #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:4px 0 !important; }
+    #edu-scroll .edu-card{
+      flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px;
+    }
+    #edu-scroll .edu-card .meta{
+      white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem;
+    }
+    #edu-scroll .edu-card .school{ font-size:1.06rem; }
+    #edu-scroll .edu-card .desc{ font-size:.98rem; }
+    #edu-scroll .edu-card .note { font-size:.92rem; }
+    .edu-arrow{ display:none !important; }
   }
 
-  /* Misc (unchanged) */
-  #visitedMap{height:360px; width:100%; background:transparent}
+  /* Misc layout */
   .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
   @media (max-width:820px){.projects{grid-template-columns:1fr}}
 
-  /* === Education scroller: remove ALL shadows/bands === */
-#edu-scroll .box,
-#edu-scroll .box::before,
-#edu-scroll .box::after,
-#edu-scroll .edu-card,
-#edu-scroll .edu-arrow{
-  box-shadow: none !important;
-  filter: none !important;
-}
-
-/* keep things tight; no extra strip below */
-#edu-scroll .tray{
-  padding-bottom: 0 !important;
-  scrollbar-width: none;          /* FF */
-}
-#edu-scroll .tray::-webkit-scrollbar{height:0 !important; width:0 !important}
-
-  /* === Education: equalize top/bottom spacing & center cards === */
-#edu-scroll .box{
-  padding: 14px 56px 14px !important;  /* equal top & bottom */
-}
-
-#edu-scroll .tray{
-  padding: 6px 0 !important;           /* equal top & bottom inside the box */
-  align-items: center;                  /* vertical centering of cards (cross-axis) */
-}
-
-#edu-scroll .edu-card{
-  margin-block: 0 !important;           /* no extra margins adding bias */
-}
-
-  /* === Education: keep "year • city" on one line & size cards to fit === */
-#edu-scroll .edu-card .meta{
-  white-space: nowrap;          /* no wrapping */
-  word-break: keep-all;         /* don't break at comma */
-  gap: 8px;
-  font-size: 1rem;              /* keep it readable */
-}
-#edu-scroll .edu-card .meta span{ white-space: nowrap; }
-
-/* widen desktop cards slightly so Menton/Berlin fit on one line */
-@media (min-width: 880px){
-  #edu-scroll .edu-card{ flex: 0 0 300px !important; }
-}
-@media (min-width: 1200px){
-  #edu-scroll .edu-card{ flex: 0 0 320px !important; }
-}
-
-
+  /* iOS safe areas */
+  @supports (padding: max(0px)){
+    body{ padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+    header{ padding-top: max(0px, env(safe-area-inset-top)); }
+  }
 </style>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
 </head>
 <body>
 
@@ -236,7 +189,6 @@
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
-      <a href="#travel">Travel</a>
       <a href="#activities">Activities</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -246,42 +198,57 @@
 <main>
   <!-- About -->
   <section id="about" class="section">
-    <div class="wrap reveal fx-from-down">
-      <h1 class="reveal fx-wipe-l">Bader Suliman</h1>
-      <div class="strap reveal fx-from-right">
-        <span class="rotator"><span id="rotate" class="fade">Communications</span></span>
-        <div class="chips-mini">
-          <span class="chip-mini">AR EN FR DE</span>
-          <span class="chip-mini">Paris • willing to relocate</span>
-        </div>
-      </div>
-      <div class="card reveal fx-zoom">
-        <strong class="reveal fx-wipe-r">About</strong>
-        <p class="lead reveal fx-from-left" style="margin:.4rem 0 0">
-          I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
+    <div class="wrap reveal">
+      <h1>Bader Suliman</h1>
+      <p class="lead" style="margin:.25rem 0 1rem">
+        Communications, data, mapping, and research. AR • EN • FR • DE — Paris (open to relocate).
+      </p>
+      <div class="card">
+        <strong>About</strong>
+        <p class="lead" style="margin:.4rem 0 0">
+          I make sense first, then make it simple: press reviews that spotlight what matters, maps you can read in five seconds, and short briefs that help a team choose next steps. I enjoy practical research—from datasets and field notes to practitioner interviews—distilled into clear takeaways and visuals.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Skills (trimmed for brevity) -->
+  <!-- Skills -->
   <section id="skills" class="section">
     <div class="wrap">
-      <h2 class="reveal fx-wipe-l">Skills and Languages</h2>
-      <p class="lead reveal fx-from-right">Fluency, methods, and tools.</p>
+      <h2>Skills & Languages</h2>
+      <p class="lead">Fluency, methods, and tools.</p>
 
-      <div class="card reveal fx-zoom">
-        <strong class="reveal fx-wipe-r">Languages</strong>
-        <div class="lang-cols reveal fx-from-up">
-          <ul class="lead">
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/sa.png" alt="Arabic flag"></span><strong>Arabic</strong> - Native</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/fr.png" alt="French flag"></span><strong>French</strong> - Native</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/gb.png" alt="UK flag"></span><strong>English</strong> - C2</li>
+      <div class="card" style="margin-top:10px">
+        <strong>Languages</strong>
+        <div class="lang-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px">
+          <ul class="lead" style="list-style:none;margin:0;padding:0">
+            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/sa.png" width="20" height="14" alt=""> <strong>Arabic</strong> — Native</li>
+            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/fr.png" width="20" height="14" alt=""> <strong>French</strong> — Native</li>
+            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/gb.png" width="20" height="14" alt=""> <strong>English</strong> — C2</li>
           </ul>
-          <ul class="lead">
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/de.png" alt="German flag"></span><strong>German</strong> - C1</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/ir.png" alt="Iran flag"></span><strong>Persian</strong> - A2</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japan flag"></span><strong>Japanese</strong> - A2</li>
+          <ul class="lead" style="list-style:none;margin:0;padding:0">
+            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" alt=""> <strong>German</strong> — C1</li>
+            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/ir.png" width="20" height="14" alt=""> <strong>Persian</strong> — A2</li>
+            <li style="margin:.3rem 0"><img src="https://flagcdn.com/w40/jp.png" width="20" height="14" alt=""> <strong>Japanese</strong> — A2</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="projects" style="margin-top:12px">
+        <div class="card">
+          <strong>Soft skills</strong>
+          <ul class="lead" style="margin:.4rem 0 0 18px">
+            <li>Analytical thinking & synthesis</li>
+            <li>Press review & media monitoring</li>
+            <li>Team facilitation & storytelling</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>Hard skills</strong>
+          <ul class="lead" style="margin:.4rem 0 0 18px">
+            <li>Data cleaning/analysis (Excel)</li>
+            <li>Mapping (QGIS, Mapbox)</li>
+            <li>Dashboards & visuals; basic HTML/CSS</li>
           </ul>
         </div>
       </div>
@@ -291,12 +258,12 @@
   <!-- Education -->
   <section id="education" class="section">
     <div class="wrap">
-      <h2 class="reveal fx-wipe-r">Education Journey</h2>
+      <h2>Education Journey</h2>
       <p class="lead" style="margin:.25rem 0 .9rem">
         Scroll sideways or use arrows. Focus on security, migration, and EU governance.
       </p>
 
-      <div id="edu-scroll" class="reveal fx-zoom">
+      <div id="edu-scroll">
         <div class="box" role="region" aria-label="Education cards carousel">
           <button class="edu-arrow edu-prev" aria-label="Scroll left">‹</button>
           <div class="tray" id="eduTray" tabindex="0"></div>
@@ -306,25 +273,60 @@
     </div>
   </section>
 
-  <!-- Experience / Work / etc. (unchanged from your last) -->
-  <!-- … keep your other sections … -->
+  <!-- Experience -->
+  <section id="experience" class="section">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <div class="card lead" style="margin-top:8px">
+        Communications, humanitarian data, and policy research across OIF, AQLITY, ARDHIS, Royal Scientific Society, and City Hall.
+      </div>
+    </div>
+  </section>
 
+  <!-- Work -->
+  <section id="work" class="section">
+    <div class="wrap">
+      <h2>Selected Work</h2>
+      <div class="projects" style="margin-top:8px">
+        <article class="card"><strong>Human Security — Twine</strong><p class="lead">Interactive learning experience with quizzes.</p></article>
+        <article class="card"><strong>SLAC Assessments</strong><p class="lead">Settlement data distilled into briefs & maps.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities -->
+  <section id="activities" class="section">
+    <div class="wrap">
+      <h2>Extracurricular</h2>
+      <div class="projects" style="margin-top:8px">
+        <article class="card"><strong>Sciences Po Monde Arabe</strong><p class="lead">Communications Director</p></article>
+        <article class="card"><strong>Tarjimly</strong><p class="lead">Volunteer Translator & Interpreter</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="wrap">
+      <div class="card">
+        <h2>Let’s work together</h2>
+        <p class="lead">Available for research, data, and communications projects.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="mailto:badersuliman79@gmail.com">Email me</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/bader-suliman-845840234" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
-
 <script>
-/* Reveal on scroll */
+/* Simple reveal-on-load */
 (function(){
   const els=[...document.querySelectorAll('.reveal')];
-  if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
-  else{
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{root:null,rootMargin:'0px 0px -10% 0px',threshold:0});
-    els.forEach(e=>io.observe(e));
-  }
+  els.forEach(e=>e.classList.add('in'));
 })();
 
 /* Build the education cards */
@@ -355,17 +357,17 @@
   function scrollByCards(dir=1){
     const card = tray.querySelector('.edu-card');
     const gap = parseFloat(getComputedStyle(tray).gap) || 12;
-    const w = (card?.getBoundingClientRect().width || 240) + gap;
+    const w = (card?.getBoundingClientRect().width || 300) + gap;
     tray.scrollBy({left: dir*w, behavior:'smooth'});
   }
-  prev.addEventListener('click', ()=>scrollByCards(-1));
-  next.addEventListener('click', ()=>scrollByCards(1));
+  prev?.addEventListener('click', ()=>scrollByCards(-1));
+  next?.addEventListener('click', ()=>scrollByCards(1));
 
   // drag to scroll
-  let down=false,startX=0,sl=0;
-  tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;tray.setPointerCapture(e.pointerId);});
+  let down=false,startX=0,sl=0,pid=null;
+  tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
   tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
-  tray.addEventListener('pointerup', e=>{down=false; tray.releasePointerCapture(e.pointerId);});
+  tray.addEventListener('pointerup', e=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
 
   // wheel → horizontal
   tray.addEventListener('wheel', e=>{
