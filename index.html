@@ -79,21 +79,13 @@
     overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
     padding:0;
+
+    /* HIDE SCROLLBAR (all major engines) */
+    scrollbar-width:none;           /* Firefox */
+    -ms-overflow-style:none;        /* IE/old Edge */
   }
-  /* Grey rounded scrollbar (desktop) */
-  @media (min-width:601px){
-    #edu-scroll .tray{
-      padding-bottom:16px;
-      scrollbar-width:thin;                  /* Firefox */
-      scrollbar-color:#9ca3af #e5e7eb;      /* thumb / track */
-    }
-    #edu-scroll .tray::-webkit-scrollbar{height:10px;}             /* Chrome/Edge/Safari */
-    #edu-scroll .tray::-webkit-scrollbar-track{background:#e5e7eb; border-radius:9999px;}
-    #edu-scroll .tray::-webkit-scrollbar-thumb{
-      background:#9ca3af; border-radius:9999px;
-      border:3px solid transparent; background-clip:content-box;
-    }
-    #edu-scroll .tray::-webkit-scrollbar-thumb:hover{background:#6b7280;}
+  #edu-scroll .tray::-webkit-scrollbar{ /* Chrome/Edge/Safari */
+    width:0; height:0; background:transparent;
   }
 
   #edu-scroll .edu-card{
@@ -218,7 +210,7 @@
         <div class="box" role="region" aria-label="Education cards carousel">
           <div class="tray-wrap">
             <div class="tray" id="eduTray" tabindex="0"></div>
-            <!-- no arrows -->
+            <!-- no arrows, scrollbar hidden -->
           </div>
         </div>
       </div>
