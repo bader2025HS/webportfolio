@@ -93,6 +93,7 @@
   .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
   .menu-toggle .bar:before,.menu-toggle .bar:after{
     content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text); transition:.25s}
+  }
   .menu-toggle .bar:before{top:-6px} .menu-toggle .bar:after{top:6px}
   body.nav-open .menu-toggle .bar{transform:rotate(45deg)}
   body.nav-open .menu-toggle .bar:before{transform:rotate(-90deg) translateX(-6px); opacity:0}
@@ -268,6 +269,7 @@ header .brand{
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
+      <a href="#travel">Travel</a><!-- NEW -->
       <a href="#activities">Activities</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -476,6 +478,17 @@ header .brand{
     </div>
   </section>
 
+  <!-- Travel (Visited Cities) -->
+  <section id="travel" class="section">
+    <div class="wrap">
+      <h2 class="reveal fx-wipe-l">Cities I’ve Visited</h2>
+      <p class="lead reveal fx-from-right">A quick map of places I’ve explored.</p>
+      <div class="card reveal fx-zoom" style="padding:0; overflow:hidden">
+        <div id="visitedMap" style="height:420px; width:100%"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Extracurricular Activities — 4 squares -->
   <section id="activities" class="section">
     <div class="wrap">
@@ -509,6 +522,19 @@ header .brand{
 
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
+
+<!-- Leaflet CSS/JS (for the Travel map) -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
 
 <script>
 /* Reveal on scroll */
@@ -557,4 +583,40 @@ menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-ope
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
 addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
+
+/* ===== Visited cities map (Leaflet) ===== */
+(function(){
+  const el = document.getElementById('visitedMap');
+  if(!el || typeof L === 'undefined') return;
+
+  // Your cities — add/remove freely
+  const cities = [
+    { name: "Paris, France",            lat: 48.8566, lng: 2.3522 },
+    { name: "Berlin, Germany",          lat: 52.5200, lng: 13.4050 },
+    { name: "Amman, Jordan",            lat: 31.9539, lng: 35.9106 },
+    { name: "Tokyo, Japan",             lat: 35.6762, lng: 139.6503 },
+    { name: "Cox’s Bazar, Bangladesh",  lat: 21.4272, lng: 92.0058 },
+    { name: "Abu Dhabi, UAE",           lat: 24.4539, lng: 54.3773 }
+    // Add more:
+    // { name: "Tbilisi, Georgia",      lat: 41.7151, lng: 44.8271 },
+    // { name: "Yerevan, Armenia",      lat: 40.1792, lng: 44.4991 },
+  ];
+
+  const map = L.map('visitedMap', { scrollWheelZoom: false });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  const group = L.featureGroup();
+  cities.forEach(c => L.marker([c.lat, c.lng]).bindPopup(`<strong>${c.name}</strong>`).addTo(group));
+  group.addTo(map);
+
+  if (cities.length > 1) {
+    map.fitBounds(group.getBounds().pad(0.2));
+  } else {
+    map.setView([cities[0].lat, cities[0].lng], 6);
+  }
+})();
 </script>
