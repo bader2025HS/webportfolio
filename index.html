@@ -72,7 +72,6 @@
     padding:0 !important;
     overflow:visible;
   }
-  /* wrapper to place the bar arrows next to the scrollbar */
   #edu-scroll .tray-wrap{ position:relative; }
 
   #edu-scroll .tray{
@@ -96,45 +95,39 @@
   #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
   #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
 
-  /* legacy overlay arrows are gone */
+  /* make sure any old overlay arrows can’t appear */
   .edu-arrow{ display:none !important; width:0 !important; height:0 !important; overflow:hidden !important; }
 
-  /* ===== Desktop: slim grey scrollbar + tiny arrows beside it ===== */
+  /* ===== Desktop: slim grey scrollbar + tiny SVG arrows beside it ===== */
   @media (min-width:601px){
     #edu-scroll .tray{
-      padding-bottom:16px;             /* room for the bar + arrows */
-      scrollbar-width:thin;            /* Firefox thin bar */
-      scrollbar-color:#9ca3af #e5e7eb; /* thumb / track */
+      padding-bottom:16px;
+      scrollbar-width:thin;
+      scrollbar-color:#9ca3af #e5e7eb;
     }
-    /* Chrome/Edge/Safari scrollbar */
     #edu-scroll .tray::-webkit-scrollbar{ height:12px; }
     #edu-scroll .tray::-webkit-scrollbar-track{
       background:#e5e7eb; border-radius:9999px;
     }
     #edu-scroll .tray::-webkit-scrollbar-thumb{
       background:#9ca3af; border-radius:9999px;
-      border:4px solid transparent;    /* inset look */
-      background-clip:content-box;
+      border:4px solid transparent; background-clip:content-box;
     }
     #edu-scroll .tray::-webkit-scrollbar-thumb:hover{ background:#6b7280; }
 
-    /* arrows next to the bar (CSS triangles) */
     #edu-scroll .bar-arrow{
       position:absolute; bottom:2px;
       width:24px; height:18px;
-      background:transparent; border:none; box-shadow:none;
-      cursor:pointer; padding:0; line-height:0;
+      display:flex; align-items:center; justify-content:center;
+      background:transparent; border:none; padding:0; margin:0;
+      cursor:pointer; line-height:0; font-size:0; /* nuke any text fallback */
     }
-    #edu-scroll .bar-arrow::before{
-      content:""; display:block; width:0; height:0; border:6px solid transparent;
-    }
+    #edu-scroll .bar-arrow::before, 
+    #edu-scroll .bar-arrow::after{ content:none !important; } /* kill old triangles */
     #edu-scroll .bar-prev{ left:-4px; }
-    #edu-scroll .bar-prev::before{ border-right-color:#9ca3af; }
-    #edu-scroll .bar-prev:hover::before{ border-right-color:#6b7280; }
-
     #edu-scroll .bar-next{ right:-4px; }
-    #edu-scroll .bar-next::before{ border-left-color:#9ca3af; }
-    #edu-scroll .bar-next:hover::before{ border-left-color:#6b7280; }
+    #edu-scroll .bar-arrow svg{ width:14px; height:14px; fill:#9ca3af; }
+    #edu-scroll .bar-arrow:hover svg{ fill:#6b7280; }
   }
 
   @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
@@ -151,7 +144,7 @@
     #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
     #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
     #edu-scroll .edu-card .school{ font-size:1.06rem; }
-    #edu-scroll .bar-arrow{ display:none !important; } /* hide the side arrows on mobile */
+    #edu-scroll .bar-arrow{ display:none !important; }
   }
 
   /* ===== Travel map ===== */
@@ -249,9 +242,13 @@
         <div class="box" role="region" aria-label="Education cards carousel">
           <div class="tray-wrap">
             <div class="tray" id="eduTray" tabindex="0"></div>
-            <!-- small arrows next to the scrollbar (desktop only) -->
-            <button class="bar-arrow bar-prev" aria-label="Scroll left"></button>
-            <button class="bar-arrow bar-next" aria-label="Scroll right"></button>
+            <!-- single-SVG arrows beside the scrollbar (desktop only) -->
+            <button class="bar-arrow bar-prev" aria-label="Scroll left">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
+            <button class="bar-arrow bar-next" aria-label="Scroll right">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -318,7 +315,6 @@
     tray.scrollBy({left: dir*w, behavior:'smooth'});
   }
 
-  // arrows beside the scrollbar (desktop)
   document.querySelector('.bar-prev')?.addEventListener('click', ()=>scrollByCards(-1));
   document.querySelector('.bar-next')?.addEventListener('click', ()=>scrollByCards(1));
 
