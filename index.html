@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Portfolio — v32 (education scroller)</title>
+<title>Portfolio — v33 (centered column)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <style>
   :root{
-    --header:72px; --maxw:1100px;
+    --header:72px; --maxw:860px; /* centered, narrower column */
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
     --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
     --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
@@ -38,10 +38,9 @@
   }
   @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
 
-  .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
-  .section{margin:clamp(24px,5vw,46px) 0}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,4vw,22px)}
+  .section{margin:clamp(24px,6vw,46px) 0}
   .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px)}
-  .section h2 + .lead{margin-top:2px}
   .lead{color:var(--muted)}
 
   /* Reveal fx */
@@ -74,9 +73,9 @@
     box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  header nav#siteNav{display:flex; align-items:center; gap:8px;}
-  nav a{color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0}
-  nav a:hover{color:var(--accent)} nav a.active{color:var(--accent)} nav a:after{display:none!important}
+  header nav#siteNav{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:6px 8px; border-radius:10px}
+  nav a:hover{color:var(--accent)} nav a.active{color:var(--accent)}
 
   /* Mobile menu */
   .menu-toggle{display:none; place-items:center; width:42px; height:42px;
@@ -100,14 +99,14 @@
       transition:transform .28s ease, opacity .2s ease;
     }
     body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
-    header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
+    header nav a{margin:0; padding:16px 14px; border:1px solid var(--line)}
     header nav a.active{color:var(--accent); border-color:var(--accent)}
   }
 
   /* Basics */
   #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
     background:linear-gradient(90deg,var(--accent),#7c61ff,#ff7a6e,#f59e0b)}
-  h1{font-size:clamp(44px,7vw,74px); margin:0 0 6px}
+  h1{font-size:clamp(40px,6vw,64px); margin:0 0 6px}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
     border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
   .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
@@ -127,22 +126,22 @@
 
   /* Skills & Languages */
   .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
-  @media (max-width:900px){.skills-2{grid-template-columns:1fr}}
+  @media (max-width:820px){.skills-2{grid-template-columns:1fr}}
   .skills-2 ul{margin:.3rem 0 0 18px}
   .lang-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
-  @media (max-width:800px){.lang-cols{grid-template-columns:1fr}}
+  @media (max-width:820px){.lang-cols{grid-template-columns:1fr}}
   .lang-cols ul{list-style:none; padding:0; margin:.3rem 0 0}
   .lang-item{display:flex; align-items:center; gap:10px; margin:4px 0}
   .flag{display:inline-block; width:24px; height:24px; border-radius:50%; overflow:hidden; flex:0 0 24px; box-shadow:0 0 0 1px var(--line), 0 1px 2px rgba(2,6,23,.12)}
   .flag img{width:100%; height:100%; object-fit:cover; display:block; image-rendering:auto}
 
-  /* Projects */
-  .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-  @media (max-width:1000px){.projects{grid-template-columns:1fr}}
+  /* Projects (2 cols at desktop, 1 on small) */
+  .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+  @media (max-width:820px){.projects{grid-template-columns:1fr}}
   .project{will-change:transform; transform:translateZ(0); transition:transform .28s, box-shadow .28s}
-  .project:hover{transform:scale(1.12); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
+  .project:hover{transform:scale(1.06); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
   .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s}
-  .project:hover .thumb{transform:scale(1.18)}
+  .project:hover .thumb{transform:scale(1.05)}
   .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s, opacity .25s; opacity:0}
   .project:hover .body{grid-template-rows:1fr; opacity:1}
   .project .body>div{overflow:hidden}
@@ -159,14 +158,14 @@
   .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
   .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
 
-  /* ===== Education: Horizontal Scroller ===== */
+  /* ===== Education: Horizontal Scroller (fits narrow column) ===== */
   #edu-scroll .box{
     position:relative;
     border:1px solid var(--line);
     border-radius:18px;
     background:linear-gradient(180deg,#fff,#fafcff);
     box-shadow:var(--shadow);
-    padding:18px 56px; /* room for arrows */
+    padding:18px 52px; /* room for arrows */
     overflow:hidden;
   }
   #edu-scroll .tray{
@@ -181,20 +180,17 @@
   #edu-scroll .tray::-webkit-scrollbar-thumb{background:#cbd5e1; border-radius:999px}
   #edu-scroll .tray::-webkit-scrollbar-track{background:transparent}
 
-  /* subtle edge fade to hint scroll */
   #edu-scroll .box:before, #edu-scroll .box:after{
-    content:""; position:absolute; top:0; bottom:0; width:38px; pointer-events:none;
+    content:""; position:absolute; top:0; bottom:0; width:34px; pointer-events:none;
     background:linear-gradient(to right, rgba(248,250,252,1), rgba(248,250,252,0));
     z-index:2;
   }
-  #edu-scroll .box:after{
-    right:0; transform:scaleX(-1);
-  }
-  #edu-scroll .box:before{left:0}
+  #edu-scroll .box:after{ right:0; transform:scaleX(-1) }
+  #edu-scroll .box:before{ left:0 }
 
   .edu-card{
     scroll-snap-align:center;
-    min-width: clamp(260px, 37vw, 320px);
+    min-width: clamp(240px, 60vw, 320px); /* responsive card width for narrow column */
     display:grid; grid-template-rows:auto auto 1fr; gap:8px;
     background:var(--card);
     border:1px solid var(--line);
@@ -208,19 +204,18 @@
   .edu-card .desc{font-size:14px; color:var(--text); line-height:1.35}
   .edu-card .note{font-size:12px; color:var(--muted)}
 
-  /* arrows */
   .edu-arrow{
     position:absolute; top:50%; transform:translateY(-50%);
-    width:38px; height:38px; display:grid; place-items:center;
+    width:34px; height:34px; display:grid; place-items:center;
     border-radius:999px; background:#fff; border:1px solid var(--line);
     box-shadow:var(--shadow); cursor:pointer; z-index:3;
   }
   .edu-arrow:disabled{opacity:.4; cursor:not-allowed}
-  .edu-prev{left:12px}
-  .edu-next{right:12px}
+  .edu-prev{left:10px}
+  .edu-next{right:10px}
 
-  /* Travel map container */
-  #visitedMap{height:420px; width:100%; background:transparent}
+  /* Travel map */
+  #visitedMap{height:360px; width:100%; background:transparent}
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
@@ -284,9 +279,9 @@
             <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/gb.png" alt="UK flag"></span><strong>English</strong> - C2 (spoken, read, written)</li>
           </ul>
           <ul class="lead">
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/de.png" alt="German flag"></span><strong>German</strong> - C1 (spoken, read, written)</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/ir.png" alt="Iran flag"></span><strong>Persian</strong> - A2 (spoken, read, written)</li>
-            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japan flag"></span><strong>Japanese</strong> - A2 (spoken, read, written)</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/de.png" alt="German flag"></span><strong>German</strong> - C1</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/ir.png" alt="Iran flag"></span><strong>Persian</strong> - A2</li>
+            <li class="lang-item"><span class="flag"><img src="https://flagcdn.com/w80/jp.png" alt="Japan flag"></span><strong>Japanese</strong> - A2</li>
           </ul>
         </div>
       </div>
@@ -448,7 +443,7 @@
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
       <p class="lead reveal fx-from-right">Clubs, volunteering, events, and field exposure.</p>
-      <div class="activities-grid">
+      <div class="activities-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <article class="card activity reveal fx-zoom"><div class="title">Sciences Po Monde Arabe — Communications Director</div></article>
         <article class="card activity reveal fx-zoom"><div class="title">Tarjimly — Volunteer Translator & Interpreter</div></article>
         <article class="card activity reveal fx-zoom"><div class="title">Events — Mediterranean of the Future & Paris Peace Forum</div></article>
@@ -476,6 +471,7 @@
 <footer><div class="wrap">© 2025 Bader Suliman</div></footer>
 <a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <script>
@@ -550,7 +546,7 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
   function scrollByCards(dir=1){
     const card = tray.querySelector('.edu-card');
     const gap = parseFloat(getComputedStyle(tray).gap) || 12;
-    const w = (card?.getBoundingClientRect().width || 300) + gap;
+    const w = (card?.getBoundingClientRect().width || 280) + gap;
     tray.scrollBy({left: dir*w, behavior:'smooth'});
   }
   prev.addEventListener('click', ()=>scrollByCards(-1));
@@ -562,7 +558,7 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
   tray.addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-startX; tray.scrollLeft=sl-dx; });
   tray.addEventListener('pointerup', e=>{ down=false; tray.releasePointerCapture(e.pointerId); });
 
-  // Shift + wheel to horizontal
+  // Wheel to horizontal
   tray.addEventListener('wheel', e=>{
     if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
       tray.scrollLeft += e.deltaY;
