@@ -99,12 +99,15 @@
 
   /* ===== Travel map ===== */
   .map-card{
-    /* keep the border but make the background transparent */
-    background:transparent; border:1px solid var(--line);
-    border-radius:20px; box-shadow:none; padding:10px; overflow:hidden;
+    /* frame removed */
+    background:transparent;
+    border:none !important;
+    border-radius:0;
+    box-shadow:none;
+    padding:0;
+    overflow:visible;
   }
   #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
-  /* absolutely no Leaflet background */
   #visitedMap.leaflet-container{ background:transparent !important; }
 
   .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
@@ -284,23 +287,20 @@
     zoomDelta: 0.5
   });
 
-  // Exact-looking focus (center and zoom tuned to your screenshot)
   function setEurasiaView(){
     // a touch zoomed out
-map.setView([36, 60], 3.0);
+    map.setView([36, 60], 3.0);
 
-// more zoomed out
-map.setView([36, 60], 2.8);
+    // more zoomed out
+    map.setView([36, 60], 2.8);
 
-// wide view
-map.setView([36, 60], 2.5);
+    // wide view
+    map.setView([36, 60], 2.5);
   }
   setEurasiaView();
 
-  // Keep the same focus after resizes and after layers load
   window.addEventListener('resize', setEurasiaView);
 
-  // Visited list
   const visitedNames = [
     "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
     "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
@@ -328,7 +328,7 @@ map.setView([36, 60], 2.5);
           const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
           const hit  = visited.has(normalize(name));
           return {
-            fillColor: hit ? accent : 'transparent', // transparent for non-visited
+            fillColor: hit ? accent : 'transparent',
             color: stroke,
             weight: hit ? 1.2 : 0.6,
             fillOpacity: hit ? 0.9 : 0.0,
@@ -342,7 +342,6 @@ map.setView([36, 60], 2.5);
           if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
         }
       }).addTo(map);
-      // Re-assert preferred view
       setTimeout(setEurasiaView, 0);
     });
   }
