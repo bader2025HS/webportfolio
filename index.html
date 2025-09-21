@@ -198,6 +198,23 @@
   margin-block: 0 !important;           /* no extra margins adding bias */
 }
 
+  /* === Education: keep "year • city" on one line & size cards to fit === */
+#edu-scroll .edu-card .meta{
+  white-space: nowrap;          /* no wrapping */
+  word-break: keep-all;         /* don't break at comma */
+  gap: 8px;
+  font-size: 1rem;              /* keep it readable */
+}
+#edu-scroll .edu-card .meta span{ white-space: nowrap; }
+
+/* widen desktop cards slightly so Menton/Berlin fit on one line */
+@media (min-width: 880px){
+  #edu-scroll .edu-card{ flex: 0 0 300px !important; }
+}
+@media (min-width: 1200px){
+  #edu-scroll .edu-card{ flex: 0 0 320px !important; }
+}
+
 
 </style>
 
