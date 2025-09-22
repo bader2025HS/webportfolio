@@ -324,18 +324,20 @@
   #edu-scroll .edu-card .school{ font-size:1.06rem; }
 }
 
-  /* Final force override for education cards */
+ /* Softer, more discreet aura for education cards */
 #edu-scroll .edu-card {
   background:#fff !important;
   border:1px solid var(--line) !important;
   border-radius:var(--radius) !important;
-  box-shadow:var(--shadow) !important;
+  box-shadow:0 4px 10px rgba(0,0,0,.06) !important;  /* lighter + softer */
   transition:transform .2s, box-shadow .2s !important;
 }
+
 #edu-scroll .edu-card:hover {
-  transform:translateY(-2px) !important;
-  box-shadow:0 14px 36px rgba(2,6,23,.11) !important;
+  transform:translateY(-1px) !important;  /* subtle lift */
+  box-shadow:0 8px 18px rgba(0,0,0,.08) !important; /* gentle hover glow */
 }
+
 
   /* Travel map */
   .map-card{
