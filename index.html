@@ -314,24 +314,6 @@
   }
   #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
   #visitedMap.leaflet-container{ background:transparent !important; }
-
-  /* === Travel side-by-side layout + detail panel === */
-.map-flex{
-  display:grid; grid-template-columns:2fr 1fr; gap:12px; align-items:start;
-}
-@media (max-width:900px){
-  .map-flex{ grid-template-columns:1fr; }
-}
-#countryPanel{
-  background:#fff; border:1px solid var(--line); border-radius:14px;
-  box-shadow:var(--shadow); padding:12px 14px;
-  min-height:fit-content;
-}
-#countryPanel h3{ margin:4px 0 8px; font-size:1.1rem }
-#countryMap{ height:320px; border-radius:12px; border:1px solid var(--line); margin-top:8px }
-#cityList{ margin:10px 0 0; padding-left:18px; color:var(--muted) }
-#cityList li{ margin:.25rem 0 }
-
 </style>
 
 <div id="progress"></div>
@@ -442,7 +424,7 @@
   <!-- Education (REPLACED with the new horizontal scroller) -->
   <section id="education" class="section">
     <div class="wrap">
-      <h2 class="reveal fx-wipe-r">Education Journey</h2>
+      <h2 class="reveal fx-wipe-r">Education</h2>
       <p class="lead reveal fx-from-left" style="margin:.25rem 0 .9rem">
         Scroll sideways to browse. Focus on security, migration, and EU governance.
       </p>
@@ -573,25 +555,16 @@
     </div>
   </section>
 
-  <!-- Travel (Countries I’ve Visited) -->
-<section id="travel" class="section">
-  <div class="wrap">
-    <h2 class="reveal fx-wipe-l">Countries I’ve Visited</h2>
-    <p class="lead reveal fx-from-right">Click a highlighted country to see a zoomed map and your cities.</p>
-
-    <div class="map-flex">
+  <!-- Travel (ADDED new section) -->
+  <section id="travel" class="section">
+    <div class="wrap">
+      <h2 class="reveal fx-wipe-l">Countries I’ve Visited</h2>
+      <p class="lead reveal fx-from-right">Centered on Europe–Middle East–Asia. Hover for names.</p>
       <div class="map-card reveal fx-from-up">
         <div id="visitedMap" aria-label="Visited countries map"></div>
       </div>
-
-      <aside id="countryPanel" class="reveal fx-from-left">
-        <h3 id="countryTitle">Click a highlighted country</h3>
-        <div id="countryMap" aria-label="Selected country zoom map"></div>
-        <ul id="cityList"></ul>
-      </aside>
     </div>
-  </div>
-</section>
+  </section>
   
   <!-- Contact -->
   <section id="contact" class="section">
@@ -704,57 +677,10 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
 })();
 
 /* ========= NEW: Visited countries map (transparent, polygons only) ========= */
-/* ========= Visited countries map + side detail panel ========= */
 (function(){
   const el = document.getElementById('visitedMap');
   if (!el || typeof L === 'undefined') return;
 
-  // ---- Your visited countries (keep/edit as needed) ----
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
-
-  // ---- Cities per country (ADD/EDIT your real stops here) ----
-  // Use the *official country name* as shown on the tooltip (case-insensitive match).
-  const cityData = {
-    India: [
-      { name:"New Delhi",  lat:28.6139, lng:77.2090 },
-      { name:"Agra",      lat:27.1767, lng:78.0081 },
-      { name:"Jaipur",    lat:26.9124, lng:75.7873 },
-      { name:"Varanasi",  lat:25.3176, lng:82.9739 },
-      { name:"Mumbai",    lat:19.0760, lng:72.8777 },
-      { name:"Bengaluru", lat:12.9716, lng:77.5946 }
-    ],
-    Japan: [
-      { name:"Tokyo",     lat:35.6764, lng:139.6500 },
-      { name:"Kyoto",     lat:35.0116, lng:135.7681 },
-      { name:"Osaka",     lat:34.6937, lng:135.5023 }
-    ],
-    Jordan: [
-      { name:"Amman",     lat:31.9539, lng:35.9106 },
-      { name:"Jerash",    lat:32.2808, lng:35.8961 },
-      { name:"Petra",     lat:30.3285, lng:35.4444 },
-      { name:"Aqaba",     lat:29.5328, lng:35.0060 }
-    ],
-    France: [
-      { name:"Paris",     lat:48.8566, lng:2.3522 },
-      { name:"Nancy",     lat:48.6921, lng:6.1844 },
-      { name:"Menton",    lat:43.7745, lng:7.4975 }
-    ]
-    // Add more countries as needed…
-  };
-
-  // ---- Helpers ----
-  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const visited = new Set(visitedNames.map(normalize));
-  const accent  = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
-  const stroke  = '#7a7a7a';
-
-  // ---- Base map ----
   const map = L.map(el, {
     scrollWheelZoom: false,
     zoomControl: true,
@@ -762,69 +688,29 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     zoomDelta: 0.5
   });
 
-  function setEurasiaView(){ map.setView([36, 60], 3.0); }
+  function setEurasiaView(){
+    map.setView([36, 60], 3.0);
+  }
   setEurasiaView();
-  addEventListener('resize', setEurasiaView, {passive:true});
+  window.addEventListener('resize', setEurasiaView);
 
-  // Transparent background; polygons only (no tile layer)
+  const visitedNames = [
+    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
+    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
+    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
+    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
+    "Australia"
+  ];
+  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const visited = new Set(visitedNames.map(normalize));
+
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
+  const stroke = '#7a7a7a';
+
   const SOURCES = [
     'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
     'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
   ];
-
-  // ---- Detail panel state ----
-  const titleEl = document.getElementById('countryTitle');
-  const countryMapEl = document.getElementById('countryMap');
-  const cityListEl = document.getElementById('cityList');
-  let detailMap = null;   // Leaflet instance for the right-side map
-  let detailLayer = null; // Layer group for city markers
-
-  function clearDetail(){
-    titleEl.textContent = 'Click a highlighted country';
-    cityListEl.innerHTML = '';
-    if(detailMap){
-      detailMap.remove(); // Destroy to avoid multiple instances
-      detailMap = null;
-    }
-    // Recreate container for a fresh map
-    countryMapEl.innerHTML = '';
-    const fresh = document.createElement('div');
-    fresh.id = 'countryMap';
-    fresh.setAttribute('aria-label','Selected country zoom map');
-    fresh.style.height = '320px';
-    fresh.style.borderRadius = '12px';
-    fresh.style.border = '1px solid var(--line)';
-    countryMapEl.parentNode.replaceChild(fresh, countryMapEl);
-    // Update reference
-    window.requestAnimationFrame(()=>{ /* no-op */});
-  }
-
-  function showCountry(name){
-    clearDetail();
-    titleEl.textContent = name;
-
-    const freshEl = document.getElementById('countryMap');
-    detailMap = L.map(freshEl, { zoomControl:true, scrollWheelZoom:false });
-
-    // If we have city points, draw them and fit
-    const points = cityData[name] || cityData[Object.keys(cityData).find(k => normalize(k)===normalize(name))];
-    if(points && points.length){
-      detailLayer = L.layerGroup().addTo(detailMap);
-      const bounds = [];
-      points.forEach(p=>{
-        const m = L.marker([p.lat, p.lng]).addTo(detailLayer).bindTooltip(p.name, {permanent:false, direction:'top'});
-        bounds.push([p.lat, p.lng]);
-      });
-      detailMap.fitBounds(bounds, {padding:[20,20]});
-
-      // List the cities
-      cityListEl.innerHTML = points.map(p=>`<li>${p.name}</li>`).join('');
-    }else{
-      // No city data: center the country approximately or show hint
-      detailMap.setView([20, 0], 2);
-      cityListEl.innerHTML = `<li style="list-style:none;color:#64748b">No city list yet for ${name}. Add it in <code>cityData</code>.</li>`;
-    }
-  }
 
   function loadWorld(i){
     return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
@@ -832,8 +718,8 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
       L.geoJSON(geo, {
         style: f => {
           const props = f.properties || {};
-          const cname = useAdmin ? (props.ADMIN || '') : (props.name || '');
-          const hit   = visited.has(normalize(cname));
+          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
+          const hit  = visited.has(normalize(name));
           return {
             fillColor: hit ? accent : 'transparent',
             color: stroke,
@@ -842,14 +728,11 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
             opacity: 0.9
           };
         },
-        onEachFeature: (f, layer) => {
+        onEachFeature: (f, l) => {
           const props = f.properties || {};
-          const cname = (props.name || props.ADMIN || '');
-          layer.bindTooltip(cname, {sticky:true, direction:'top', opacity:0.9});
-          if (visited.has(normalize(cname))) {
-            layer.bindPopup(`<strong>${cname}</strong>`);
-            layer.on('click', ()=> showCountry(cname));
-          }
+          const name = (props.name || props.ADMIN || '');
+          l.bindTooltip(name, {sticky:true, direction:'top', opacity:0.9});
+          if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
         }
       }).addTo(map);
       setTimeout(setEurasiaView, 0);
@@ -859,6 +742,5 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
     console.error('GeoJSON load error:', err);
     el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
   });
-
 })();
 </script>
