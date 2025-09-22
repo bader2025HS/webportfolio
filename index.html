@@ -591,16 +591,17 @@
     </div>
   </section>
 
-<!-- ===== Portfolio Quiz Section (Auto-advance + Color Feedback) ===== -->
+<!-- ===== Portfolio Quiz Section (Auto-advance + Sources + Commented Score) ===== -->
 <section id="quiz" class="section">
   <div class="wrap">
     <h2>Test Your Knowledge</h2>
     <p class="lead">Answer 5 quick questions related to my portfolio themes.</p>
 
     <div class="card" id="quizBox">
-      <p id="quizQuestion" style="font-weight:600; font-size:1.2rem;"></p>
-      <div id="quizOptions" 
-           style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap"></div>
+      <p id="quizQuestion" style="font-weight:600; font-size:1.2rem; margin-bottom:6px;"></p>
+      <p id="quizSource" class="lead" style="margin:0 0 10px; color:var(--muted); font-size:.95rem;"></p>
+
+      <div id="quizOptions" style="margin-top:8px; display:flex; gap:12px; flex-wrap:wrap"></div>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px">
         <button class="btn primary" id="restartBtn" style="display:none">Play Again</button>
@@ -611,7 +612,7 @@
 
 <style>
   .quiz-option {
-    flex: 1 1 calc(25% - 12px);
+    flex: 1 1 calc(25% - 12px);          /* 4 in a row; wraps on small screens */
     padding: 14px;
     font-size: 1rem;
     text-align: center;
@@ -619,12 +620,12 @@
     border: 2px solid var(--line);
     border-radius: 12px;
     background: #fff;
-    transition: border-color .2s, background .2s;
+    transition: border-color .2s, background .2s, transform .1s;
   }
   .quiz-option:hover { border-color: var(--accent); }
   .quiz-option.correct { border-color: #16a34a; background: #dcfce7; } /* green */
-  .quiz-option.wrong { border-color: #dc2626; background: #fee2e2; }   /* red */
-  .quiz-option:disabled { cursor: not-allowed; opacity: .8; }
+  .quiz-option.wrong   { border-color: #dc2626; background: #fee2e2; } /* red */
+  .quiz-option:disabled { cursor: not-allowed; opacity: .85; }
 </style>
 
 <script>
@@ -632,27 +633,32 @@ const quizData = [
   {
     q: "About what share of the world’s refugees are children?",
     opts: ["20%", "30%", "40%", "50%"],
-    answer: "40%"
+    answer: "40%",
+    src: "[UNHCR Global Trends, 2024]"
   },
   {
     q: "Beef production is responsible for roughly what share of global livestock emissions?",
     opts: ["20%", "40%", "60%", "80%"],
-    answer: "60%"
+    answer: "60%",
+    src: "[FAO – Tackling Climate Change Through Livestock / FAOSTAT]"
   },
   {
     q: "Where are the headquarters of the International Atomic Energy Agency (IAEA)?",
     opts: ["Geneva", "Vienna", "Paris", "New York"],
-    answer: "Vienna"
+    answer: "Vienna",
+    src: "[IAEA.org]"
   },
   {
     q: "Which Semitic language is officially written in the Latin alphabet?",
     opts: ["Arabic", "Hebrew", "Maltese", "Amharic"],
-    answer: "Maltese"
+    answer: "Maltese",
+    src: "[Government of Malta / EU Languages]"
   },
   {
     q: "Roughly what proportion of the world’s population are international migrants (living outside their birth country)?",
     opts: ["~3%", "~15%", "~25%", "~40%"],
-    answer: "~3%"
+    answer: "~3%",
+    src: "[UN DESA – International Migrant Stock]"
   }
 ];
 
@@ -660,12 +666,14 @@ let current = 0;
 let score = 0;
 
 const questionEl = document.getElementById("quizQuestion");
+const sourceEl   = document.getElementById("quizSource");
 const optionsEl  = document.getElementById("quizOptions");
 const restartBtn = document.getElementById("restartBtn");
 
 function loadQuestion() {
   const data = quizData[current];
   questionEl.textContent = data.q;
+  sourceEl.textContent = data.src || "";
   optionsEl.innerHTML = "";
   restartBtn.style.display = "none";
 
@@ -693,7 +701,7 @@ function selectAnswer(button, selected, correct) {
     });
   }
 
-  // auto move to next question
+  // auto move to next question after a short delay
   setTimeout(() => {
     current++;
     if (current < quizData.length) {
@@ -701,15 +709,25 @@ function selectAnswer(button, selected, correct) {
     } else {
       showResult();
     }
-  }, 1200); // 1.2s delay so user sees colors
+  }, 1200);
 }
 
 function showResult() {
-  questionEl.textContent = "Quiz finished!";
-  optionsEl.innerHTML = `<p style="font-size:1.1rem; font-weight:600; margin:10px 0">
-    You scored ${score} out of ${quizData.length}.
-  </p>`;
+  const total = quizData.length;
+  const comment = getComment(score, total);
+  questionEl.textContent = `You scored ${score} / ${total}. ${comment}`;
+  sourceEl.textContent = "";         // no source line on result
+  optionsEl.innerHTML = "";          // clear options
   restartBtn.style.display = "inline-block";
+}
+
+function getComment(score, total){
+  const pct = (score/total)*100;
+  if (pct === 100) return "Perfect — expert level. 🔥";
+  if (pct >= 80)   return "Great job — you really know your stuff. 💪";
+  if (pct >= 60)   return "Solid — a few tricky ones got you. 👍";
+  if (pct >= 40)   return "Not bad — keep exploring these topics. 🙂";
+  return "Tough set — want to try again? 🎯";
 }
 
 function resetQuiz() {
@@ -723,6 +741,7 @@ restartBtn.addEventListener("click", resetQuiz);
 // start quiz
 loadQuestion();
 </script>
+
 
   
   <!-- Travel (ADDED new section) -->
