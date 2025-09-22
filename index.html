@@ -331,18 +331,20 @@
   border: 1px solid #e5e7eb !important; /* light grey border (same tone as line grid) */
 }
 
-  .edu-card {
+/* Make edu-cards behave exactly like normal cards */
+#edu-scroll .edu-card {
   background:#fff !important;
   border:1px solid var(--line);
   border-radius:var(--radius);
-  box-shadow:0 6px 20px rgba(0,0,0,.12);  padding:14px 14px 16px;
+  box-shadow:var(--shadow);   /* same aura as .card */
+  padding:clamp(14px,2vw,18px);
   transition:transform .2s, box-shadow .2s;
 }
-.edu-card:hover {
-  transform:translateY(-2px);
-  box-shadow:0 14px 36px rgba(2,6,23,.11); /* 👈 hover lift like other cards */
-}
 
+#edu-scroll .edu-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 14px 36px rgba(2,6,23,.11);
+}
 
 </style>
 
