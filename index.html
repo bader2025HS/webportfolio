@@ -623,36 +623,37 @@
     .quiz-option{color:#000;}
   }
 
-  .quiz-result{margin-top:8px; font-weight:700; font-size:1.2rem;}
+  .quiz-result{margin-top:12px; font-size:1.2rem; font-weight:400;} /* not bold */
+  .quiz-comment{margin-top:6px; font-size:1.1rem; font-weight:500; color:var(--muted);}
 </style>
 
 <script>
 (function(){
   const questions = [
     {
-      q:"Around what percentage of the world’s refugees are children? (UNHCR)",
+      q:"Around what percentage of the world’s refugees are children? (UNHCR, 2023)",
       options:["25%","40%","55%","70%"],
       answer:1
     },
     {
-      q:"Beef production is responsible for roughly what share of global livestock emissions? (FAO)",
+      q:"Beef production is responsible for roughly what share of global livestock emissions? (FAO, 2021)",
       options:["10%","20%","30%","60%"],
-      answer:3   // ✅ corrected to 60%
+      answer:3
     },
     {
-      q:"Where is the headquarters of the International Atomic Energy Agency (IAEA)?",
+      q:"Where is the headquarters of the International Atomic Energy Agency (IAEA)? (IAEA.org)",
       options:["Geneva","Vienna","New York","The Hague"],
       answer:1
     },
     {
-      q:"Persian (Farsi) is written in Arabic script, but what language family does it belong to?",
+      q:"Persian (Farsi) is written in Arabic script, but what language family does it belong to? (Encyclopaedia Iranica)",
       options:["Semitic","Turkic","Indo-European","Caucasian"],
       answer:2
     },
     {
-      q:"Roughly what proportion of the world's population are international migrants (living outside their birth country)? (UN DESA)",
+      q:"Roughly what proportion of the world's population are international migrants, living outside their birth country? (UN DESA, 2020)",
       options:["~3%","~15%","~25%","~40%"],
-      answer:0   // ✅ replaced Sardinian with ~3% migration question
+      answer:0
     }
   ];
 
@@ -672,11 +673,8 @@
 
     box.querySelectorAll(".quiz-option").forEach(opt=>{
       opt.addEventListener("click",()=>{
-        // prevent double clicks
         if(opt.classList.contains("correct")||opt.classList.contains("wrong")) return;
-
         const idx=parseInt(opt.dataset.idx,10);
-        // disable all further clicks
         box.querySelectorAll(".quiz-option").forEach(b=>b.style.pointerEvents="none");
 
         if(idx===q.answer){
@@ -702,8 +700,9 @@
     else comment = "Tough set — want to try again?";
 
     box.innerHTML = `
-      <div class="quiz-result">You scored ${score}/${total}. ${comment}</div>
-      <div style="margin-top:12px">
+      <div class="quiz-result">Your score: ${score}/${total}</div>
+      <div class="quiz-comment">${comment}</div>
+      <div style="margin-top:14px">
         <button id="playAgainBtn" class="btn primary">Play Again</button>
       </div>
     `;
@@ -715,7 +714,6 @@
     });
   }
 
-  // start
   showQuestion();
 })();
 </script>
