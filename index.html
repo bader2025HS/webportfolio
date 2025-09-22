@@ -367,19 +367,19 @@
   border: 1px solid #e5e7eb !important; /* light grey border (same tone as line grid) */
 }
 
-/* Make edu-cards behave exactly like normal cards */
+/* Education cards — same soft aura as Languages */
 #edu-scroll .edu-card {
   background:#fff !important;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);   /* same aura as .card */
+  border:1px solid var(--line) !important;
+  border-radius:var(--radius) !important;
+  box-shadow:0 1px 2px rgba(2,6,23,.05) !important;  /* same as .lang-pill */
   padding:clamp(14px,2vw,18px);
   transition:transform .2s, box-shadow .2s;
 }
 
 #edu-scroll .edu-card:hover {
-  transform:translateY(-2px);
-  box-shadow:0 14px 36px rgba(2,6,23,.11);
+  transform:translateY(-1px);
+  box-shadow:0 2px 4px rgba(2,6,23,.08) !important; /* subtle hover, same style */
 }
 
 </style>
