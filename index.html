@@ -590,7 +590,125 @@
       </div>
     </div>
   </section>
+<!-- ===== Portfolio Quiz Section (with Replay) ===== -->
+<section id="quiz" class="section">
+  <div class="wrap">
+    <h2>Test Your Knowledge</h2>
+    <p class="lead">Answer 5 quick questions related to my portfolio themes.</p>
 
+    <div class="card" id="quizBox">
+      <p id="quizQuestion" style="font-weight:600; font-size:1.2rem;"></p>
+      <div id="quizOptions" style="margin-top:12px"></div>
+      <p id="quizFeedback" style="margin-top:10px; font-weight:600"></p>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px">
+        <button class="btn ghost" id="nextBtn" style="display:none">Next →</button>
+        <button class="btn primary" id="restartBtn" style="display:none">Play Again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const quizData = [
+  {
+    q: "About what share of the world’s refugees are children?",
+    opts: ["20%", "30%", "40%", "50%"],
+    answer: "40%"
+  },
+  {
+    q: "Beef production is responsible for roughly what share of global livestock emissions?",
+    opts: ["20%", "40%", "60%", "80%"],
+    answer: "60%"
+  },
+  {
+    q: "Where are the headquarters of the International Atomic Energy Agency (IAEA)?",
+    opts: ["Geneva", "Vienna", "Paris", "New York"],
+    answer: "Vienna"
+  },
+  {
+    q: "Which Semitic language is officially written in the Latin alphabet?",
+    opts: ["Arabic", "Hebrew", "Maltese", "Amharic"],
+    answer: "Maltese"
+  },
+  {
+    q: "Roughly what proportion of the world’s population are international migrants (living outside their birth country)?",
+    opts: ["~3%", "~15%", "~25%", "~40%"],
+    answer: "~3%"
+  }
+];
+
+let current = 0;
+let score = 0;
+
+const questionEl = document.getElementById("quizQuestion");
+const optionsEl  = document.getElementById("quizOptions");
+const feedbackEl = document.getElementById("quizFeedback");
+const nextBtn    = document.getElementById("nextBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+function loadQuestion() {
+  const data = quizData[current];
+  questionEl.textContent = data.q;
+  optionsEl.innerHTML = "";
+  feedbackEl.textContent = "";
+  nextBtn.style.display = "none";
+  restartBtn.style.display = "none";
+
+  data.opts.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.className = "btn ghost";
+    btn.style.margin = "6px";
+    btn.onclick = () => checkAnswer(opt, data.answer);
+    optionsEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(selected, correct) {
+  if (selected === correct) {
+    feedbackEl.textContent = "✅ Correct!";
+    feedbackEl.style.color = "#16a34a";
+    score++;
+  } else {
+    feedbackEl.textContent = "❌ Wrong. Correct answer: " + correct;
+    feedbackEl.style.color = "#dc2626";
+  }
+  // disable all options after answering
+  [...optionsEl.children].forEach(b => b.disabled = true);
+  nextBtn.style.display = "inline-block";
+}
+
+nextBtn.addEventListener("click", () => {
+  current++;
+  if (current < quizData.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+});
+
+restartBtn.addEventListener("click", resetQuiz);
+
+function showResult() {
+  questionEl.textContent = "Quiz finished!";
+  optionsEl.innerHTML = "";
+  feedbackEl.textContent = `You scored ${score} out of ${quizData.length}.`;
+  nextBtn.style.display = "none";
+  restartBtn.style.display = "inline-block";
+}
+
+function resetQuiz() {
+  current = 0;
+  score = 0;
+  loadQuestion();
+}
+
+// start quiz
+loadQuestion();
+</script>
+
+  
   <!-- Travel (ADDED new section) -->
   <section id="travel" class="section">
     <div class="wrap">
