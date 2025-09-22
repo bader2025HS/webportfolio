@@ -263,45 +263,67 @@
     #siteNav .mhead{display:none;}
   }
 
-  /* ====== EXTRA CSS ONLY FOR NEW EDUCATION SCROLLER + MAP ====== */
+ /* ====== EXTRA CSS ONLY FOR NEW EDUCATION SCROLLER + MAP ====== */
 
-  /* Education scroller (hidden scrollbar) */
-  #edu-scroll .box{
-    position:relative;
-    background:transparent !important;
-    border:none !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
-    padding:0 !important;
-    overflow:visible;
-  }
-  #edu-scroll .tray-wrap{ position:relative; }
-  #edu-scroll .tray{
-    display:flex; gap:12px; align-items:center;
-    overflow-x:auto; overflow-y:hidden;
-    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    padding:0;
-    scrollbar-width:none; -ms-overflow-style:none;
-  }
-  #edu-scroll .tray::-webkit-scrollbar{ width:0; height:0; background:transparent; }
-  #edu-scroll .edu-card{
-    scroll-snap-align:center;
-    flex:0 0 300px; display:grid; grid-template-rows:auto auto 1fr; gap:8px;
-    min-height:240px; background:#fff; border:1px solid var(--line);
-    border-radius:14px; box-shadow:var(--shadow); padding:14px 14px 16px
-  }
-  #edu-scroll .edu-card .meta{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all}
-  #edu-scroll .edu-card .flag-ico{width:24px; height:16px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px var(--line)}
-  #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
-  #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
-  #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
-  @media (min-width:1200px){ #edu-scroll .edu-card{ flex:0 0 320px; } }
-  @media (max-width:600px){
-    #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:0 !important; }
-    #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
-    #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
-    #edu-scroll .edu-card .school{ font-size:1.06rem; }
-  }
+/* Education scroller (hidden scrollbar) */
+#edu-scroll .box{
+  position:relative;
+  background:transparent !important;
+  border:none !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  overflow:visible;
+}
+#edu-scroll .tray-wrap{ position:relative; }
+#edu-scroll .tray{
+  display:flex; gap:12px; align-items:center;
+  overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  padding:0;
+  scrollbar-width:none; -ms-overflow-style:none;
+}
+#edu-scroll .tray::-webkit-scrollbar{ width:0; height:0; background:transparent; }
+
+#edu-scroll .edu-card{
+  scroll-snap-align:center;
+  flex:0 0 300px;
+  display:grid; grid-template-rows:auto auto 1fr; gap:8px;
+  min-height:240px;
+  background:#fff !important;
+  border:1px solid var(--line) !important;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow) !important;   /* aura */
+  padding:clamp(14px,2vw,18px);
+  transition:transform .2s, box-shadow .2s;
+}
+#edu-scroll .edu-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 36px rgba(2,6,23,.11) !important; /* hover lift */
+}
+
+#edu-scroll .edu-card .meta{
+  display:flex; align-items:center; gap:8px;
+  color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all;
+}
+#edu-scroll .edu-card .flag-ico{
+  width:24px; height:16px; object-fit:cover; border-radius:2px;
+  box-shadow:0 0 0 1px var(--line);
+}
+#edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
+#edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
+#edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
+
+@media (min-width:1200px){
+  #edu-scroll .edu-card{ flex:0 0 320px; }
+}
+@media (max-width:600px){
+  #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:0 !important; }
+  #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
+  #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
+  #edu-scroll .edu-card .school{ font-size:1.06rem; }
+}
+
 
   /* Travel map */
   .map-card{
