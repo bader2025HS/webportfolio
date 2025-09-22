@@ -591,7 +591,7 @@
     </div>
   </section>
 
-<!-- ===== Portfolio Quiz Section (Horizontal Options + Highlight) ===== -->
+<!-- ===== Portfolio Quiz Section (Auto-advance + Color Feedback) ===== -->
 <section id="quiz" class="section">
   <div class="wrap">
     <h2>Test Your Knowledge</h2>
@@ -603,7 +603,6 @@
            style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap"></div>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px">
-        <button class="btn ghost" id="nextBtn" style="display:none">Next →</button>
         <button class="btn primary" id="restartBtn" style="display:none">Play Again</button>
       </div>
     </div>
@@ -612,7 +611,7 @@
 
 <style>
   .quiz-option {
-    flex: 1 1 calc(25% - 12px); /* 4 options in a row */
+    flex: 1 1 calc(25% - 12px);
     padding: 14px;
     font-size: 1rem;
     text-align: center;
@@ -623,8 +622,9 @@
     transition: border-color .2s, background .2s;
   }
   .quiz-option:hover { border-color: var(--accent); }
-  .quiz-option.selected { border-color: #3b82f6; background: #eff6ff; }
-  .quiz-option:disabled { cursor: not-allowed; opacity: .7; }
+  .quiz-option.correct { border-color: #16a34a; background: #dcfce7; } /* green */
+  .quiz-option.wrong { border-color: #dc2626; background: #fee2e2; }   /* red */
+  .quiz-option:disabled { cursor: not-allowed; opacity: .8; }
 </style>
 
 <script>
@@ -658,20 +658,16 @@ const quizData = [
 
 let current = 0;
 let score = 0;
-let answered = false;
 
 const questionEl = document.getElementById("quizQuestion");
 const optionsEl  = document.getElementById("quizOptions");
-const nextBtn    = document.getElementById("nextBtn");
 const restartBtn = document.getElementById("restartBtn");
 
 function loadQuestion() {
   const data = quizData[current];
   questionEl.textContent = data.q;
   optionsEl.innerHTML = "";
-  nextBtn.style.display = "none";
   restartBtn.style.display = "none";
-  answered = false;
 
   data.opts.forEach(opt => {
     const btn = document.createElement("button");
@@ -683,36 +679,36 @@ function loadQuestion() {
 }
 
 function selectAnswer(button, selected, correct) {
-  if (answered) return;
-  answered = true;
-
-  if (selected === correct) score++;
-
-  // highlight selected
-  button.classList.add("selected");
-
-  // disable all
+  // disable further clicks
   [...optionsEl.children].forEach(b => b.disabled = true);
-  nextBtn.style.display = "inline-block";
-}
 
-nextBtn.addEventListener("click", () => {
-  current++;
-  if (current < quizData.length) {
-    loadQuestion();
+  if (selected === correct) {
+    button.classList.add("correct");
+    score++;
   } else {
-    showResult();
+    button.classList.add("wrong");
+    // highlight the correct one
+    [...optionsEl.children].forEach(b => {
+      if (b.textContent === correct) b.classList.add("correct");
+    });
   }
-});
 
-restartBtn.addEventListener("click", resetQuiz);
+  // auto move to next question
+  setTimeout(() => {
+    current++;
+    if (current < quizData.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }, 1200); // 1.2s delay so user sees colors
+}
 
 function showResult() {
   questionEl.textContent = "Quiz finished!";
   optionsEl.innerHTML = `<p style="font-size:1.1rem; font-weight:600; margin:10px 0">
     You scored ${score} out of ${quizData.length}.
   </p>`;
-  nextBtn.style.display = "none";
   restartBtn.style.display = "inline-block";
 }
 
@@ -721,6 +717,8 @@ function resetQuiz() {
   score = 0;
   loadQuestion();
 }
+
+restartBtn.addEventListener("click", resetQuiz);
 
 // start quiz
 loadQuestion();
