@@ -330,20 +330,25 @@
   box-shadow: none !important;      /* no shadow */
   border: 1px solid #e5e7eb !important; /* light grey border (same tone as line grid) */
 }
-
-  /* Education scroller cards — floating subtle shadow */
-#edu-scroll .edu-card {
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius) !important;
-  box-shadow:0 4px 12px rgba(0,0,0,.06) !important; /* subtle shadow always */
-  transition:transform .2s, box-shadow .2s;
+  /* Education scroller cards — white + floating aura */
+#edu-scroll .edu-card{
+  background:#ffffff !important;              /* pure white */
+  border:1px solid #e5e7eb !important;        /* soft border */
+  box-shadow:
+    0 2px 10px rgba(2,6,23,.05),              /* soft base blur */
+    0 12px 28px rgba(2,6,23,.06),             /* outer aura */
+    0 0 0 1px rgba(255,255,255,.8) inset;     /* subtle inner crispness */
+  border-radius:14px;                          /* match site style */
+  transition:transform .2s, box-shadow .2s;    /* smooth hover */
 }
-
-#edu-scroll .edu-card:hover {
+#edu-scroll .edu-card:hover{
   transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,.10) !important; /* soft hover lift */
+  box-shadow:
+    0 6px 16px rgba(2,6,23,.08),
+    0 18px 40px rgba(2,6,23,.10),
+    0 0 0 1px rgba(255,255,255,.85) inset;
 }
+
 
 </style>
 
