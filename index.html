@@ -611,7 +611,7 @@
     text-align:center;
     cursor:pointer;
     transition:.25s;
-    font-weight:700; /* All options bold */
+    font-weight:700; /* bold always */
     color:inherit;
   }
   .quiz-option:hover{background:#f9f9f9}
@@ -619,7 +619,7 @@
   .quiz-option.correct{border:3px solid #22c55e; color:#22c55e;}
   .quiz-option.wrong{border:3px solid #ef4444; color:#ef4444;}
 
-  /* On phones – use black initially */
+  /* On phones – options appear black initially */
   @media (max-width:768px){
     .quiz-option{color:#000;}
   }
@@ -694,6 +694,7 @@
   showQuestion();
 })();
 </script>
+
 
   
   <!-- Travel (ADDED new section) -->
