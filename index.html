@@ -591,7 +591,7 @@
     </div>
   </section>
 
-<!-- ===== Portfolio Quiz Section (Full-width Options, Final Score Only) ===== -->
+<!-- ===== Portfolio Quiz Section (Horizontal Options + Highlight) ===== -->
 <section id="quiz" class="section">
   <div class="wrap">
     <h2>Test Your Knowledge</h2>
@@ -599,7 +599,8 @@
 
     <div class="card" id="quizBox">
       <p id="quizQuestion" style="font-weight:600; font-size:1.2rem;"></p>
-      <div id="quizOptions" style="margin-top:16px; display:grid; gap:12px"></div>
+      <div id="quizOptions" 
+           style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap"></div>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px">
         <button class="btn ghost" id="nextBtn" style="display:none">Next →</button>
@@ -608,6 +609,23 @@
     </div>
   </div>
 </section>
+
+<style>
+  .quiz-option {
+    flex: 1 1 calc(25% - 12px); /* 4 options in a row */
+    padding: 14px;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    transition: border-color .2s, background .2s;
+  }
+  .quiz-option:hover { border-color: var(--accent); }
+  .quiz-option.selected { border-color: #3b82f6; background: #eff6ff; }
+  .quiz-option:disabled { cursor: not-allowed; opacity: .7; }
+</style>
 
 <script>
 const quizData = [
@@ -658,20 +676,22 @@ function loadQuestion() {
   data.opts.forEach(opt => {
     const btn = document.createElement("button");
     btn.textContent = opt;
-    btn.className = "btn ghost";
-    btn.style.width = "100%";
-    btn.style.padding = "14px";
-    btn.style.fontSize = "1rem";
-    btn.onclick = () => selectAnswer(opt, data.answer);
+    btn.className = "quiz-option";
+    btn.onclick = () => selectAnswer(btn, opt, data.answer);
     optionsEl.appendChild(btn);
   });
 }
 
-function selectAnswer(selected, correct) {
-  if (answered) return; // prevent double clicks
+function selectAnswer(button, selected, correct) {
+  if (answered) return;
   answered = true;
+
   if (selected === correct) score++;
-  // disable all buttons
+
+  // highlight selected
+  button.classList.add("selected");
+
+  // disable all
   [...optionsEl.children].forEach(b => b.disabled = true);
   nextBtn.style.display = "inline-block";
 }
@@ -689,8 +709,9 @@ restartBtn.addEventListener("click", resetQuiz);
 
 function showResult() {
   questionEl.textContent = "Quiz finished!";
-  optionsEl.innerHTML = "";
-  optionsEl.innerHTML = `<p style="font-size:1.1rem; font-weight:600; margin:10px 0">You scored ${score} out of ${quizData.length}.</p>`;
+  optionsEl.innerHTML = `<p style="font-size:1.1rem; font-weight:600; margin:10px 0">
+    You scored ${score} out of ${quizData.length}.
+  </p>`;
   nextBtn.style.display = "none";
   restartBtn.style.display = "inline-block";
 }
@@ -704,7 +725,6 @@ function resetQuiz() {
 // start quiz
 loadQuestion();
 </script>
-
 
   
   <!-- Travel (ADDED new section) -->
