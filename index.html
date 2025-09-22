@@ -611,34 +611,33 @@
     text-align:center;
     cursor:pointer;
     transition:.25s;
-    font-weight:700; /* bold always */
+    font-weight:700; /* all options bold */
     color:inherit;
   }
   .quiz-option:hover{background:#f9f9f9}
-  .quiz-option.selected{border:3px solid #0ea5a2;}
-  .quiz-option.correct{border:3px solid #22c55e; color:#22c55e;}
-  .quiz-option.wrong{border:3px solid #ef4444; color:#ef4444;}
+  .quiz-option.correct{border:3px solid #22c55e; color:#22c55e;} /* green */
+  .quiz-option.wrong{border:3px solid #ef4444; color:#ef4444;}   /* red */
 
   /* On phones – options appear black initially */
   @media (max-width:768px){
     .quiz-option{color:#000;}
   }
 
-  .quiz-result{margin-top:20px; font-weight:700; font-size:1.3rem;}
+  .quiz-result{margin-top:8px; font-weight:700; font-size:1.2rem;}
 </style>
 
 <script>
 (function(){
   const questions = [
     {
-      q:"Around what percentage of the world’s refugees are children? (UNHCR, 2023)",
+      q:"Around what percentage of the world’s refugees are children? (UNHCR)",
       options:["25%","40%","55%","70%"],
       answer:1
     },
     {
-      q:"Beef production accounts for roughly what share of global greenhouse gas emissions? (FAO, 2021)",
+      q:"Beef production is responsible for roughly what share of global livestock emissions? (FAO)",
       options:["10%","20%","30%","60%"],
-      answer:1
+      answer:3   // ✅ corrected to 60%
     },
     {
       q:"Where is the headquarters of the International Atomic Energy Agency (IAEA)?",
@@ -646,14 +645,14 @@
       answer:1
     },
     {
-      q:"Persian (Farsi) is written in Arabic script, but what language family does it belong to? (Encyclopaedia Iranica)",
+      q:"Persian (Farsi) is written in Arabic script, but what language family does it belong to?",
       options:["Semitic","Turkic","Indo-European","Caucasian"],
       answer:2
     },
     {
-      q:"Which modern language is considered the closest to Latin? (Linguistic Society of America)",
-      options:["Italian","Spanish","Romanian","Sardinian"],
-      answer:3
+      q:"Roughly what proportion of the world's population are international migrants (living outside their birth country)? (UN DESA)",
+      options:["~3%","~15%","~25%","~40%"],
+      answer:0   // ✅ replaced Sardinian with ~3% migration question
     }
   ];
 
@@ -661,14 +660,8 @@
   const box=document.getElementById("quizBox");
 
   function showQuestion(){
-    if(current>=questions.length){
-      let comment="";
-      if(score===5) comment="🌟 Perfect! You really know your stuff.";
-      else if(score>=3) comment="👍 Good job! You know quite a lot.";
-      else comment="📘 Keep learning — lots more to discover.";
-      box.innerHTML=`<div class="quiz-result">Your score: ${score}/5<br>${comment}</div>`;
-      return;
-    }
+    if(current>=questions.length){ return showResult(); }
+
     const q=questions[current];
     box.innerHTML=`
       <div class="quiz-question">${q.q}</div>
@@ -676,10 +669,16 @@
         ${q.options.map((opt,i)=>`<div class="quiz-option" data-idx="${i}">${opt}</div>`).join("")}
       </div>
     `;
+
     box.querySelectorAll(".quiz-option").forEach(opt=>{
       opt.addEventListener("click",()=>{
+        // prevent double clicks
         if(opt.classList.contains("correct")||opt.classList.contains("wrong")) return;
-        const idx=parseInt(opt.dataset.idx);
+
+        const idx=parseInt(opt.dataset.idx,10);
+        // disable all further clicks
+        box.querySelectorAll(".quiz-option").forEach(b=>b.style.pointerEvents="none");
+
         if(idx===q.answer){
           opt.classList.add("correct");
           score++;
@@ -687,14 +686,39 @@
           opt.classList.add("wrong");
           box.querySelector(`.quiz-option[data-idx="${q.answer}"]`).classList.add("correct");
         }
-        setTimeout(()=>{current++; showQuestion();},1200);
+        setTimeout(()=>{ current++; showQuestion(); }, 1200);
       });
     });
   }
+
+  function showResult(){
+    const total = questions.length;
+    let comment = "";
+    const pct = (score/total)*100;
+    if (pct === 100) comment = "Perfect! Expert vibes.";
+    else if (pct >= 80) comment = "Great job — you really know your stuff.";
+    else if (pct >= 60) comment = "Solid — a couple of tricky ones.";
+    else if (pct >= 40) comment = "Not bad — these were tough.";
+    else comment = "Tough set — want to try again?";
+
+    box.innerHTML = `
+      <div class="quiz-result">You scored ${score}/${total}. ${comment}</div>
+      <div style="margin-top:12px">
+        <button id="playAgainBtn" class="btn primary">Play Again</button>
+      </div>
+    `;
+
+    document.getElementById("playAgainBtn").addEventListener("click", ()=>{
+      current = 0;
+      score = 0;
+      showQuestion();
+    });
+  }
+
+  // start
   showQuestion();
 })();
 </script>
-
 
   
   <!-- Travel (ADDED new section) -->
