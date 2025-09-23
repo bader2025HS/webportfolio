@@ -351,6 +351,15 @@
   #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
   #visitedMap.leaflet-container{ background:transparent !important; }
 
+/* === Country glow micro-interaction (Leaflet SVG paths) === */
+#visitedMap .leaflet-interactive{
+  transition: filter .25s ease, stroke-width .2s ease;
+}
+#visitedMap .leaflet-interactive:hover{
+  /* soft glow around the hovered country */
+  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
+}
+  
   /* Remove background/shadow from education scroller cards */
 #edu-scroll .edu-card {
   background: var(--card) !important; /* or transparent if you want totally see-through */
@@ -911,26 +920,38 @@ addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true})
   function loadWorld(i){
     return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
       const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
-      L.geoJSON(geo, {
-        style: f => {
-          const props = f.properties || {};
-          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
-          const hit  = visited.has(normalize(name));
-          return {
-            fillColor: hit ? accent : 'transparent',
-            color: stroke,
-            weight: hit ? 1.2 : 0.6,
-            fillOpacity: hit ? 0.9 : 0.0,
-            opacity: 0.9
-          };
-        },
-        onEachFeature: (f, l) => {
-          const props = f.properties || {};
-          const name = (props.name || props.ADMIN || '');
-          l.bindTooltip(name, {sticky:true, direction:'top', opacity:0.9});
-          if (visited.has(normalize(name))) l.bindPopup(`<strong>${name}</strong>`);
-        }
-      }).addTo(map);
+     const layer = L.geoJSON(geo, {
+  style: f => {
+    const props = f.properties || {};
+    const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
+    const hit  = visited.has(normalize(name));
+    return {
+      fillColor: hit ? accent : 'transparent',
+      color: stroke,
+      weight: hit ? 1.2 : 0.6,
+      fillOpacity: hit ? 0.9 : 0.0,
+      opacity: 0.9
+    };
+  },
+  onEachFeature: (f, l) => {
+    const props = f.properties || {};
+    const name = (props.name || props.ADMIN || '');
+
+    l.bindTooltip(name, { sticky:true, direction:'top', opacity:0.9 });
+    if (visited.has(normalize(name))) {
+      l.bindPopup(`<strong>${name}</strong>`);
+    }
+
+    // Hover micro-interaction: thicker stroke + bring to front
+    l.on('mouseover', e => {
+      e.target.setStyle({ weight: 2.2 });
+      try { e.target.bringToFront(); } catch {}
+    });
+    l.on('mouseout', e => {
+      try { layer.resetStyle(e.target); } catch {}
+    });
+  }
+}).addTo(map);
       setTimeout(setEurasiaView, 0);
     });
   }
