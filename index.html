@@ -391,6 +391,32 @@
   box-shadow:0 2px 4px rgba(2,6,23,.08) !important; /* subtle hover, same style */
 }
 
+  /* === Parallax background section === */
+.parallax {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop'); /* pick any subtle image/texture */
+  background-attachment: fixed;   /* key: creates the parallax */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text);
+  z-index: 0;
+}
+
+.parallax::before {
+  /* overlay tint so text stays readable */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.7); /* light wash, adjust to taste */
+  z-index: 0;
+}
+
+.parallax .wrap {
+  position: relative;
+  z-index: 1; /* keep text above overlay */
+}
+
 </style>
 
 <div id="progress"></div>
@@ -421,7 +447,7 @@
 
 <main>  
   <!-- About -->
-  <section id="about" class="section">
+  <section id="about" class="section parallax">
     <div class="wrap reveal fx-from-down">
       <h1 class="reveal fx-wipe-l">Bader Suliman</h1>
 
