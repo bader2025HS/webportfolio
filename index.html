@@ -1,4 +1,4 @@
-<!-- PORTFOLIO — v31 (desktop menu framed, phone skills fixed) -->
+<!-- PORTFOLIO — v31 (desktop menu framed, phone skills fixed) + Experience Mind-Map -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,26 +7,26 @@
   <title>Portfolio</title>
 
   <!-- Favicons (use absolute paths + cache-busting) -->
-<link rel="icon" href='favicon.png'>
+  <link rel="icon" href='favicon.png'>
 
   <!-- Viewport (safety) -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Viewport (safety) -->
-<script>
-(function(){
-  if(!document.querySelector('meta[name="viewport"]')){
-    const m=document.createElement('meta');
-    m.name='viewport'; m.content='width=device-width, initial-scale=1';
-    document.head.appendChild(m);
-  }
-})();
-</script>
+  <!-- Viewport (safety) -->
+  <script>
+  (function(){
+    if(!document.querySelector('meta[name="viewport"]')){
+      const m=document.createElement('meta');
+      m.name='viewport'; m.content='width=device-width, initial-scale=1';
+      document.head.appendChild(m);
+    }
+  })();
+  </script>
 
-<!-- Leaflet CSS (needed for the map) -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
+  <!-- Leaflet CSS (needed for the map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
 
-<style>
+  <style>
   :root{
     --header:72px; --maxw:860px;
     --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
@@ -134,9 +134,9 @@
   }
 
   #progress{
-  position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
-  background: var(--accent);
-}
+    position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
+    background: var(--accent);
+  }
 
   /* Type / buttons / cards */
   h1{font-size:clamp(44px,7vw,74px); margin:0 0 6px}
@@ -233,16 +233,58 @@
   .project .body>div{overflow:hidden}
   @media (hover:none){ .project .body{grid-template-rows:1fr; opacity:1} .project:hover,.project:hover .thumb{transform:none} }
 
-  /* Experience */
-  .timeline{position:relative; margin-top:8px}
-  .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
-  .t{display:grid; grid-template-columns:26px 1fr; gap:12px; margin:14px 0}
-  .dot{width:22px; height:22px; border-radius:50%; border:2px solid var(--accent); background:radial-gradient(circle at 40% 35%, #d4af37, #f3e8c1); box-shadow:0 0 0 3px rgba(14,165,162,.12)}
-  .role{display:flex; align-items:center; justify-content:space-between; gap:12px; white-space:nowrap}
-  @media (max-width:520px){ .role{white-space:normal} }
-  .where{color:var(--muted)}
-  .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
-  .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
+  /* ======= Experience — MIND-MAP (replaces old timeline styles only) ======= */
+  .xp-map{
+    position:relative;
+    min-height:520px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .xp-svg{position:absolute; inset:0; width:100%; height:100%}
+  .xp-node{
+    position:absolute; transform:translate(-50%,-50%);
+    display:grid; place-items:center; text-align:center;
+    padding:10px 12px; min-width:180px;
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    box-shadow:0 6px 18px rgba(2,6,23,.07);
+    font-weight:700; cursor:pointer;
+    transition:transform .15s ease, box-shadow .2s ease;
+  }
+  .xp-node:hover{transform:translate(-50%,-50%) scale(1.03); box-shadow:0 14px 36px rgba(2,6,23,.11)}
+  .xp-node .xp-title{font-size:1rem; line-height:1.2}
+  .xp-node .xp-sub{font-weight:600; color:var(--muted); font-size:.92rem}
+  .xp-center{
+    background:linear-gradient(135deg,var(--text), #1f2937);
+    color:#fff; border-color:transparent; padding:14px 16px; min-width:200px;
+  }
+  .xp-center .xp-sub{color:#d1d5db}
+
+  /* subtle category accent blocks (keep palette family soft) */
+  .xp-cat-intl{background:#fff7ed;border-color:#fed7aa}
+  .xp-cat-data{background:#eff6ff;border-color:#bfdbfe}
+  .xp-cat-ngo{background:#fff1f2;border-color:#fecdd3}
+  .xp-cat-public{background:#ecfdf5;border-color:#bbf7d0}
+
+  .xp-detail{
+    position:fixed; right:18px; bottom:18px; z-index:9998;
+    width:min(92vw, 420px);
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    box-shadow:0 18px 46px rgba(2,6,23,.18);
+    padding:14px;
+  }
+  .xp-detail-head{display:flex; justify-content:space-between; align-items:flex-start; gap:10px}
+  .xp-detail-titles strong{display:block; font-size:1.05rem}
+  .xp-detail-titles span{color:var(--muted); font-weight:600; font-size:.95rem}
+  .xp-detail ul{margin:8px 0 0; padding-left:20px}
+  .xp-detail li{margin:4px 0; line-height:1.35}
+
+  @media (max-width:720px){
+    .xp-map{min-height:640px}
+    .xp-node{min-width:160px; padding:10px}
+  }
 
   /* Education (base styles kept for other cards that may exist) */
   .edu{display:grid; grid-template-columns:1fr; gap:12px}
@@ -277,81 +319,80 @@
     #siteNav .mhead{display:none;}
   }
 
- /* ====== EXTRA CSS ONLY FOR NEW EDUCATION SCROLLER + MAP ====== */
+  /* ====== EXTRA CSS ONLY FOR NEW EDUCATION SCROLLER + MAP ====== */
 
-/* Education scroller (hidden scrollbar) */
-#edu-scroll .box{
-  position:relative;
-  background:transparent !important;
-  border:none !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-  padding:0 !important;
-  overflow:visible;
-}
-#edu-scroll .tray-wrap{ position:relative; }
-#edu-scroll .tray{
-  display:flex; gap:12px; align-items:center;
-  overflow-x:auto; overflow-y:hidden;
-  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-  padding:0;
-  scrollbar-width:none; -ms-overflow-style:none;
-}
-#edu-scroll .tray::-webkit-scrollbar{ width:0; height:0; background:transparent; }
+  /* Education scroller (hidden scrollbar) */
+  #edu-scroll .box{
+    position:relative;
+    background:transparent !important;
+    border:none !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    padding:0 !important;
+    overflow:visible;
+  }
+  #edu-scroll .tray-wrap{ position:relative; }
+  #edu-scroll .tray{
+    display:flex; gap:12px; align-items:center;
+    overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    padding:0;
+    scrollbar-width:none; -ms-overflow-style:none;
+  }
+  #edu-scroll .tray::-webkit-scrollbar{ width:0; height:0; background:transparent; }
 
-#edu-scroll .edu-card{
-  scroll-snap-align:center;
-  flex:0 0 300px;
-  display:grid; grid-template-rows:auto auto 1fr; gap:8px;
-  min-height:240px;
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow) !important;   /* aura */
-  padding:clamp(14px,2vw,18px);
-  transition:transform .2s, box-shadow .2s;
-}
-#edu-scroll .edu-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 36px rgba(2,6,23,.11) !important; /* hover lift */
-}
+  #edu-scroll .edu-card{
+    scroll-snap-align:center;
+    flex:0 0 300px;
+    display:grid; grid-template-rows:auto auto 1fr; gap:8px;
+    min-height:240px;
+    background:#fff !important;
+    border:1px solid var(--line) !important;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow) !important;   /* aura */
+    padding:clamp(14px,2vw,18px);
+    transition:transform .2s, box-shadow .2s;
+  }
+  #edu-scroll .edu-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 36px rgba(2,6,23,.11) !important; /* hover lift */
+  }
 
-#edu-scroll .edu-card .meta{
-  display:flex; align-items:center; gap:8px;
-  color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all;
-}
-#edu-scroll .edu-card .flag-ico{
-  width:24px; height:16px; object-fit:cover; border-radius:2px;
-  box-shadow:0 0 0 1px var(--line);
-}
-#edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
-#edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
-#edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
+  #edu-scroll .edu-card .meta{
+    display:flex; align-items:center; gap:8px;
+    color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all;
+  }
+  #edu-scroll .edu-card .flag-ico{
+    width:24px; height:16px; object-fit:cover; border-radius:2px;
+    box-shadow:0 0 0 1px var(--line);
+  }
+  #edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
+  #edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
+  #edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
 
-@media (min-width:1200px){
-  #edu-scroll .edu-card{ flex:0 0 320px; }
-}
-@media (max-width:600px){
-  #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:0 !important; }
-  #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
-  #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
-  #edu-scroll .edu-card .school{ font-size:1.06rem; }
-}
+  @media (min-width:1200px){
+    #edu-scroll .edu-card{ flex:0 0 320px; }
+  }
+  @media (max-width:600px){
+    #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:0 !important; }
+    #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
+    #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
+    #edu-scroll .edu-card .school{ font-size:1.06rem; }
+  }
 
- /* Softer, more discreet aura for education cards */
-#edu-scroll .edu-card {
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius) !important;
-  box-shadow:0 4px 10px rgba(0,0,0,.06) !important;  /* lighter + softer */
-  transition:transform .2s, box-shadow .2s !important;
-}
-
-#edu-scroll .edu-card:hover {
-  transform:translateY(-1px) !important;  /* subtle lift */
-  box-shadow:0 8px 18px rgba(0,0,0,.08) !important; /* gentle hover glow */
-}
-
+  /* Softer aura for education cards (harmonized) */
+  #edu-scroll .edu-card {
+    background:#fff !important;
+    border:1px solid var(--line) !important;
+    border-radius:var(--radius) !important;
+    box-shadow:0 1px 2px rgba(2,6,23,.05) !important;
+    padding:clamp(14px,2vw,18px);
+    transition:transform .2s, box-shadow .2s;
+  }
+  #edu-scroll .edu-card:hover {
+    transform:translateY(-1px);
+    box-shadow:0 2px 4px rgba(2,6,23,.08) !important;
+  }
 
   /* Travel map */
   .map-card{
@@ -365,50 +406,16 @@
   #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
   #visitedMap.leaflet-container{ background:transparent !important; }
 
-/* === Country glow micro-interaction (Leaflet SVG paths) === */
-#visitedMap .leaflet-interactive{
-  transition: filter .25s ease, stroke-width .2s ease;
-}
-#visitedMap .leaflet-interactive:hover{
-  /* soft glow around the hovered country */
-  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
-  
-  /* Remove background/shadow from education scroller cards */
-#edu-scroll .edu-card {
-  background: var(--card) !important; /* or transparent if you want totally see-through */
-  box-shadow: none !important;
-}
-#edu-scroll .edu-card {
-  background: #ffffff !important;  /* pure white */
-  box-shadow: none !important;
-}
-/* Education scroller cards — pure white, soft border */
-#edu-scroll .edu-card {
-  background: #ffffff !important;   /* pure white */
-  box-shadow: none !important;      /* no shadow */
-  border: 1px solid #e5e7eb !important; /* light grey border (same tone as line grid) */
-}
-
-/* Education cards — same soft aura as Languages */
-#edu-scroll .edu-card {
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius) !important;
-  box-shadow:0 1px 2px rgba(2,6,23,.05) !important;  /* same as .lang-pill */
-  padding:clamp(14px,2vw,18px);
-  transition:transform .2s, box-shadow .2s;
-}
-
-#edu-scroll .edu-card:hover {
-  transform:translateY(-1px);
-  box-shadow:0 2px 4px rgba(2,6,23,.08) !important; /* subtle hover, same style */
-}
-
-</style>
-  
+  /* Country glow micro-interaction (Leaflet SVG paths) */
+  #visitedMap .leaflet-interactive{
+    transition: filter .25s ease, stroke-width .2s ease;
+  }
+  #visitedMap .leaflet-interactive:hover{
+    filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
+  }
+  </style>
 </head>
-  <body>
+<body>
 
 <div id="progress"></div>
 
@@ -436,7 +443,7 @@
   </div>
 </header>
 
-<main>  
+<main>
   <!-- About -->
   <section id="about" class="section">
     <div class="wrap reveal fx-from-down">
@@ -533,106 +540,71 @@
     </div>
   </section>
 
-  <!-- Experience -->
+  <!-- Experience (MIND-MAP) -->
   <section id="experience" class="section">
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Experience</h2>
-    <p class="lead reveal fx-from-right">Communications, humanitarian data, and policy research.</p>
-      <div class="timeline">
-        <div class="t">
-          <div class="dot" aria-hidden="true"></div>
-          <div class="card reveal fx-from-left">
-            <div class="role">
-              <strong>Intern - Project Design and Monitoring, OIF</strong>
-              <span class="where">Paris • 2025</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Analyzed project data, maintained structured cooperation databases, wrote country briefs, and supported monitoring and evaluation for the execution report.</p>
-            <div class="tags"><span class="tag">Data analysis</span><span class="tag">Database design</span><span class="tag">Country briefs</span><span class="tag">Monitoring and evaluation</span></div>
+      <p class="lead reveal fx-from-right">Communications, humanitarian data, and policy research.</p>
+
+      <div id="xpMap" class="xp-map card reveal fx-zoom" aria-label="Experience mind map">
+        <!-- connectors via JS -->
+        <svg class="xp-svg" aria-hidden="true"></svg>
+
+        <!-- center hub -->
+        <button class="xp-node xp-center" data-node="center" type="button" aria-label="Experience hub">
+          <div class="xp-title">Experience</div>
+          <div class="xp-sub">What I’ve done so far</div>
+        </button>
+      </div>
+
+      <!-- floating detail card -->
+      <div id="xpDetail" class="xp-detail" hidden>
+        <div class="xp-detail-head">
+          <div class="xp-detail-titles">
+            <strong id="xpDetailTitle">Experience</strong>
+            <span id="xpDetailMeta"></span>
           </div>
+          <button id="xpDetailClose" class="btn ghost" type="button">Close</button>
         </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-right">
-            <div class="role">
-              <strong>Intern - Data Analysis, AQLITY</strong>
-              <span class="where">Remote • 2025</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends and inform reports.</p>
-            <div class="tags"><span class="tag">Data cleaning</span><span class="tag">GIS and mapping</span><span class="tag">Infographics</span><span class="tag">Reporting</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-left">
-            <div class="role">
-              <strong>Assistant - Immigration Law, ARDHIS</strong>
-              <span class="where">Paris • 2024 to 2025</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Guided asylum seekers during drop in sessions, researched country conditions, and drafted case notes and briefs for OFPRA and the CNDA.</p>
-            <div class="tags"><span class="tag">Legal support</span><span class="tag">Country research</span><span class="tag">Case briefs</span><span class="tag">Interviewing</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-right">
-            <div class="role">
-              <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
-              <span class="where">Amman • 2023</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Researched climate, water scarcity, and desalination in the Middle East and published an article with the Konrad Adenauer Stiftung while collaborating across research and policy teams.</p>
-            <div class="tags"><span class="tag">Desalination</span><span class="tag">Climate and water</span><span class="tag">Research writing</span><span class="tag">Science diplomacy</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-left">
-            <div class="role">
-              <strong>Intern - International Relations Department, City Hall</strong>
-              <span class="where">Nancy • 2022</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Organized public events and intercultural outreach with twin cities and assisted logistics and protocol for official visits.</p>
-            <div class="tags"><span class="tag">Event operations</span><span class="tag">Intercultural outreach</span><span class="tag">Protocol</span><span class="tag">Logistics</span></div>
-          </div>
-        </div>
+        <ul id="xpDetailList"></ul>
       </div>
     </div>
   </section>
 
   <section id="work" class="section">
-  <div class="wrap">
-    <h2 class="reveal fx-wipe-r">Selected Work</h2>
-    <p class="lead reveal fx-from-left">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
-    <div class="projects">
-      <article class="card project reveal fx-zoom">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542269766-eed5ddd08721?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <h3 style="margin:10px 0">Human Security - Interactive Module</h3>
-        <div class="body"><div>
-          <p class="lead">Interactive tool introducing key concepts, frameworks, and global governance principles.</p>
-          <p><a class="btn ghost" href="https://bader2025hs.github.io/human-security-final/" target="_blank" rel="noopener">Open project →</a></p>
-        </div></div>
-      </article>
-
-      <!-- Fixed: closing quote after fx-zoom -->
-      <article class="card project reveal fx-zoom">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1649299313612-48cc3493f62e?q=80&w=1819&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <h3 style="margin:10px 0">French ODA in West Africa</h3>
-        <div class="body"><div>
-          <p class="lead">Quantitative study of aid allocation logics shaping development priorities (2003–2023).</p>
-          <p><a class="btn ghost" href="French ODA.pdf" target="_blank" rel="noopener">Open project →</a></p>
-        </div></div>
-      </article>
+    <div class="wrap">
+      <h2 class="reveal fx-wipe-r">Selected Work</h2>
+      <p class="lead reveal fx-from-left">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
+      <div class="projects">
+        <article class="card project reveal fx-zoom">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542269766-eed5ddd08721?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <h3 style="margin:10px 0">Human Security - Interactive Module</h3>
+          <div class="body"><div>
+            <p class="lead">Interactive tool introducing key concepts, frameworks, and global governance principles.</p>
+            <p><a class="btn ghost" href="https://bader2025hs.github.io/human-security-final/" target="_blank" rel="noopener">Open project →</a></p>
+          </div></div>
+        </article>
 
         <article class="card project reveal fx-zoom">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1721390017771-78b4c67d9334?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <h3 style="margin:10px 0">Urbanization & Refugees: Cox’s Bazar</h3>
-        <div class="body"><div>
-          <p class="lead">Analytical study on urban growth and refugee integration in Bangladesh.</p>
-          <p><a class="btn ghost" href="Cox's Bazar.pdf" target="_blank" rel="noopener">Open project →</a></p>
-        </div></div>
-      </article>
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1649299313612-48cc3493f62e?q=80&w=1819&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <h3 style="margin:10px 0">French ODA in West Africa</h3>
+          <div class="body"><div>
+            <p class="lead">Quantitative study of aid allocation logics shaping development priorities (2003–2023).</p>
+            <p><a class="btn ghost" href="French ODA.pdf" target="_blank" rel="noopener">Open project →</a></p>
+          </div></div>
+        </article>
+
+        <article class="card project reveal fx-zoom">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1721390017771-78b4c67d9334?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <h3 style="margin:10px 0">Urbanization & Refugees: Cox’s Bazar</h3>
+          <div class="body"><div>
+            <p class="lead">Analytical study on urban growth and refugee integration in Bangladesh.</p>
+            <p><a class="btn ghost" href="Cox's Bazar.pdf" target="_blank" rel="noopener">Open project →</a></p>
+          </div></div>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Extracurricular Activities — 4 squares -->
   <section id="activities" class="section">
@@ -649,7 +621,7 @@
     </div>
   </section>
 
-  <!-- Travel (ADDED new section) -->
+  <!-- Travel -->
   <section id="travel" class="section">
     <div class="wrap">
       <h2 class="reveal fx-wipe-l">Lived, Studied, Worked, Traveled</h2>
@@ -661,42 +633,210 @@
   </section>
 
   <!-- Quiz Section -->
-<section id="quiz" class="section">
-  <div class="wrap">
-    <h2>Quick Quiz</h2>
-    <p class="lead">Test your knowledge with 5 tricky questions.</p>
-    <div id="quizBox" class="card"></div>
-  </div>
-</section>
+  <section id="quiz" class="section">
+    <div class="wrap">
+      <h2>Quick Quiz</h2>
+      <p class="lead">Test your knowledge with 5 tricky questions.</p>
+      <div id="quizBox" class="card"></div>
+    </div>
+  </section>
 
-<style>
-  .quiz-question{margin-bottom:20px; font-weight:600; font-size:1.2rem;}
-  .quiz-options{display:flex; flex-wrap:wrap; gap:12px; margin-top:10px}
-  .quiz-option{
-    flex:1 1 calc(25% - 12px);
-    padding:12px;
-    border:2px solid var(--line);
-    border-radius:10px;
-    text-align:center;
-    cursor:pointer;
-    transition:.25s;
-    font-weight:700; /* all options bold */
-    color:inherit;
-  }
-  .quiz-option:hover{background:#f9f9f9}
-  .quiz-option.correct{border:3px solid #22c55e; color:#22c55e;} /* green */
-  .quiz-option.wrong{border:3px solid #ef4444; color:#ef4444;}   /* red */
+  <style>
+    .quiz-question{margin-bottom:20px; font-weight:600; font-size:1.2rem;}
+    .quiz-options{display:flex; flex-wrap:wrap; gap:12px; margin-top:10px}
+    .quiz-option{
+      flex:1 1 calc(25% - 12px);
+      padding:12px;
+      border:2px solid var(--line);
+      border-radius:10px;
+      text-align:center;
+      cursor:pointer;
+      transition:.25s;
+      font-weight:700;
+      color:inherit;
+    }
+    .quiz-option:hover{background:#f9f9f9}
+    .quiz-option.correct{border:3px solid #22c55e; color:#22c55e;}
+    .quiz-option.wrong{border:3px solid #ef4444; color:#ef4444;}
 
-  /* On phones – options appear black initially */
-  @media (max-width:768px){
-    .quiz-option{color:#000;}
-  }
+    @media (max-width:768px){
+      .quiz-option{color:#000;}
+    }
 
-  .quiz-result{margin-top:12px; font-size:1.2rem; font-weight:400;} /* not bold */
-  .quiz-comment{margin-top:6px; font-size:1.1rem; font-weight:500; color:var(--muted);}
-</style>
+    .quiz-result{margin-top:12px; font-size:1.2rem; font-weight:400;}
+    .quiz-comment{margin-top:6px; font-size:1.1rem; font-weight:500; color:var(--muted);}
+  </style>
+</main>
+
+<footer><div class="wrap">© 2025 Bader Suliman</div></footer>
+<a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
+
+<!-- Leaflet JS (needed for the map) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
 
 <script>
+/* Reveal on scroll */
+(function(){
+  const els=[...document.querySelectorAll('.reveal')];
+  if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
+  else{
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{root:null,rootMargin:'0px 0px -10% 0px',threshold:0});
+    els.forEach(e=>io.observe(e));
+  }
+  const kick=()=>els.forEach(e=>{const r=e.getBoundingClientRect(); if(r.top<innerHeight*.9&&r.bottom>0)e.classList.add('in')});
+  requestAnimationFrame(kick); addEventListener('load',kick,{once:true}); addEventListener('resize',kick); addEventListener('orientationchange',kick);
+})();
+
+// Rotating tagline
+const words=["Communications","Data","Mapping","Research"]; let wi=0;
+const rot=document.getElementById("rotate");
+function cycle(){ if(!rot) return; rot.classList.remove('show'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
+if(rot){ rot.classList.add('show'); setInterval(cycle,1800); }
+
+// Back to top
+const toTop=document.getElementById('toTop');
+const toggleTop=()=>{ scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
+addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
+
+// Active nav highlight + progress bar
+const links=[...document.querySelectorAll('nav a')];
+const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
+const secs=ids.map(id=>document.querySelector(id));
+let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
+const onScroll=()=>{
+  const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
+  prog.style.width=(scrolled*100)+'%';
+  let idx=0; secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.top<=innerHeight*0.4) idx=i;});
+  const atBottom=Math.ceil(scrollY+innerHeight)>=document.body.scrollHeight-2; if(atBottom) idx=secs.length-1;
+  links.forEach(a=>a.classList.remove('active')); const active=document.querySelector(`nav a[href="${ids[idx]}"]`); if(active) active.classList.add('active');
+};
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+/* Mobile menu */
+const menuBtn=document.getElementById('menuBtn');
+const nav=document.getElementById('siteNav');
+function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
+function openNav(){ document.body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded','true'); nav.removeAttribute('aria-hidden'); }
+menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
+addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
+
+/* ========= NEW: Build the education cards ========= */
+(function(){
+  const data = [
+    { year:"2026–2027", city:"Berlin, Germany", code:"de", school:"Freie Universität Berlin — OSI", program:"M.A. International Relations", note:"Expected to start 2026. Comparative security focus with modules on EU foreign and defense policies." },
+    { year:"2024–2026", city:"Paris, France", code:"fr", school:"Sciences Po — PSIA", program:"M.A. International Security & Migration", note:"Asylum and migration law, border governance, and humanitarian data analysis; qualitative research design and mapping/data projects." },
+    { year:"2024–2025", city:"Paris, France", code:"fr", school:"INALCO — Eurasian Department", program:"Persian Language & Iranian Studies", note:"Intensive Persian (academic texts, conversation) plus history, society, and politics of Iran and Afghanistan; primary-source analysis, translation practice, and media literacy on the region." },
+    { year:"2023–2024", city:"Tokyo, Japan", code:"jp", school:"Tokyo University of Foreign Studies", program:"Exchange. Asia-Pacific & Japanese Studies", note:"Full-time Japanese intensive alongside Asia-Pacific politics; Japan/ASEAN focus with intercultural fieldwork." },
+    { year:"2022–2023", city:"Menton, France", code:"fr", school:"Sciences Po Campus of Menton", program:"B.A. Major in Politics & Government", note:"Middle Eastern & Mediterranean specialization: comparative politics, constitutional law, and regional history; debate workshops tied to current affairs." },
+    { year:"2021–2022", city:"Nancy, France", code:"fr", school:"Sciences Po Campus of Nancy", program:"B.A. Introduction to social sciences", note:"Multidisciplinary foundations in political science, economics, sociology, law, and history within a trilingual Franco-German track; EU institutions and academic writing." }
+  ];
+
+  const tray = document.getElementById('eduTray');
+  if (!tray) return;
+  tray.innerHTML = data.map(d => `
+    <article class="edu-card" tabindex="0">
+      <div class="meta">
+        <img class="flag-ico" src="https://flagcdn.com/w40/${d.code}.png" alt="${d.city} flag" loading="lazy" width="24" height="16">
+        <span>${d.year} • ${d.city}</span>
+      </div>
+      <div class="school">${d.school}</div>
+      <div class="desc">${d.program}</div>
+      ${d.note ? `<div class="note">${d.note}</div>`:''}
+    </article>
+  `).join('');
+
+  // Drag to scroll
+  let down=false,startX=0,sl=0,pid=null;
+  tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
+  tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
+  tray.addEventListener('pointerup', ()=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
+
+  // Wheel → horizontal
+  tray.addEventListener('wheel', e=>{
+    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
+  }, {passive:false});
+})();
+
+/* ========= NEW: Visited countries map ========= */
+(function(){
+  const el = document.getElementById('visitedMap');
+  if (!el || typeof L === 'undefined') return;
+
+  const map = L.map(el, {
+    scrollWheelZoom: false,
+    zoomControl: true,
+    zoomSnap: 0.5,
+    zoomDelta: 0.5
+  });
+
+  function setEurasiaView(){
+    map.setView([36, 60], 3.0);
+  }
+  setEurasiaView();
+  window.addEventListener('resize', setEurasiaView);
+
+  const visitedNames = [
+    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
+    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
+    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
+    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
+    "Australia"
+  ];
+  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const visited = new Set(visitedNames.map(normalize));
+
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
+  const stroke = '#7a7a7a';
+
+  const SOURCES = [
+    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
+    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+  ];
+
+  function loadWorld(i){
+    return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
+      const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
+      const layer = L.geoJSON(geo, {
+        style: f => {
+          const props = f.properties || {};
+          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
+          const hit  = visited.has(normalize(name));
+          return {
+            fillColor: hit ? accent : 'transparent',
+            color: stroke,
+            weight: hit ? 1.2 : 0.6,
+            fillOpacity: hit ? 0.9 : 0.0,
+            opacity: 0.9
+          };
+        },
+        onEachFeature: (f, l) => {
+          const props = f.properties || {};
+          const name = (props.name || props.ADMIN || '');
+          l.bindTooltip(name, { sticky:true, direction:'top', opacity:0.9 });
+          if (visited.has(normalize(name))) {
+            l.bindPopup(`<strong>${name}</strong>`);
+          }
+          l.on('mouseover', e => {
+            e.target.setStyle({ weight: 2.2 });
+            try { e.target.bringToFront(); } catch {}
+          });
+          l.on('mouseout', e => {
+            try { layer.resetStyle(e.target); } catch {}
+          });
+        }
+      }).addTo(map);
+      setTimeout(setEurasiaView, 0);
+    });
+  }
+  loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
+    console.error('GeoJSON load error:', err);
+    el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
+  });
+})();
+
+/* ========= NEW: Quick Quiz ========= */
 (function(){
   const questions = [
     {
@@ -728,6 +868,7 @@
 
   let current=0, score=0;
   const box=document.getElementById("quizBox");
+  if(!box) return;
 
   function showQuestion(){
     if(current>=questions.length){ return showResult(); }
@@ -785,199 +926,185 @@
 
   showQuestion();
 })();
-</script>
-  
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="wrap reveal fx-from-up">
-      <div class="card reveal fx-zoom">
-        <h2 class="reveal fx-wipe-r">Let’s work together</h2>
-        <p class="lead reveal fx-from-left">Available for research, data, and communications projects.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn primary" href="mailto:badersuliman79@gmail.com">Email me</a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/bader-suliman-845840234" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ghost" href="bs.eng.cv.pdf" target="_blank" rel="noopener">Download CV</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
 
-<footer><div class="wrap">© 2025 Bader Suliman</div></footer>
-<a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
-
-<!-- Leaflet JS (needed for the map) -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
-
-<script>
-/* Reveal on scroll */
+/* ========= NEW: Experience Mind-Map (formatting/visual only, same content) ========= */
 (function(){
-  const els=[...document.querySelectorAll('.reveal')];
-  if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
-  else{
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{root:null,rootMargin:'0px 0px -10% 0px',threshold:0});
-    els.forEach(e=>io.observe(e));
-  }
-  const kick=()=>els.forEach(e=>{const r=e.getBoundingClientRect(); if(r.top<innerHeight*.9&&r.bottom>0)e.classList.add('in')});
-  requestAnimationFrame(kick); addEventListener('load',kick,{once:true}); addEventListener('resize',kick); addEventListener('orientationchange',kick);
-})();
+  const el = document.getElementById('xpMap');
+  if(!el) return;
 
-// Rotating tagline
-const words=["Communications","Data","Mapping","Research"]; let wi=0;
-const rot=document.getElementById("rotate");
-function cycle(){ if(!rot) return; rot.classList.remove('show'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
-if(rot){ rot.classList.add('show'); setInterval(cycle,1800); }
-
-// Back to top
-const toTop=document.getElementById('toTop');
-const toggleTop=()=>{ scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
-addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
-
-// Active nav highlight + progress bar
-const links=[...document.querySelectorAll('nav a')];
-const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
-const secs=ids.map(id=>document.querySelector(id));
-let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
-const onScroll=()=>{
-  const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
-  prog.style.width=(scrolled*100)+'%';
-  let idx=0; secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.top<=innerHeight*0.4) idx=i;});
-  const atBottom=Math.ceil(scrollY+innerHeight)>=document.body.scrollHeight-2; if(atBottom) idx=secs.length-1;
-  links.forEach(a=>a.classList.remove('active')); const active=document.querySelector(`nav a[href="${ids[idx]}"]`); if(active) active.classList.add('active');
-};
-addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-/* Mobile menu */
-const menuBtn=document.getElementById('menuBtn');
-const nav=document.getElementById('siteNav');
-function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
-function openNav(){ document.body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded','true'); nav.removeAttribute('aria-hidden'); }
-menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
-addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
-addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
-
-/* ========= NEW: Build the education cards (from your second code) ========= */
-(function(){
-  const data = [
-    { year:"2026–2027", city:"Berlin, Germany", code:"de", school:"Freie Universität Berlin — OSI", program:"M.A. International Relations", note:"Expected to start 2026. Comparative security focus with modules on EU foreign and defense policies." },
-    { year:"2024–2026", city:"Paris, France", code:"fr", school:"Sciences Po — PSIA", program:"M.A. International Security & Migration", note:"Asylum and migration law, border governance, and humanitarian data analysis; qualitative research design and mapping/data projects." },
-
-    // Added after PSIA
-    { year:"2024–2025", city:"Paris, France", code:"fr", school:"INALCO — Eurasian Department", program:"Persian Language & Iranian Studies", note:"Intensive Persian (academic texts, conversation) plus history, society, and politics of Iran and Afghanistan; primary-source analysis, translation practice, and media literacy on the region." },
-
-    { year:"2023–2024", city:"Tokyo, Japan", code:"jp", school:"Tokyo University of Foreign Studies", program:"Exchange. Asia-Pacific & Japanese Studies", note:"Full-time Japanese intensive alongside Asia-Pacific politics; Japan/ASEAN focus with intercultural fieldwork." },
-    { year:"2022–2023", city:"Menton, France", code:"fr", school:"Sciences Po Campus of Menton", program:"B.A. Major in Politics & Government", note:"Middle Eastern & Mediterranean specialization: comparative politics, constitutional law, and regional history; debate workshops tied to current affairs." },
-    { year:"2021–2022", city:"Nancy, France", code:"fr", school:"Sciences Po Campus of Nancy", program:"B.A. Introduction to social sciences", note:"Multidisciplinary foundations in political science, economics, sociology, law, and history within a trilingual Franco-German track; EU institutions and academic writing." }
-  ];
-
-  const tray = document.getElementById('eduTray');
-  if (!tray) return;
-  tray.innerHTML = data.map(d => `
-    <article class="edu-card" tabindex="0">
-      <div class="meta">
-        <img class="flag-ico" src="https://flagcdn.com/w40/${d.code}.png" alt="${d.city} flag" loading="lazy" width="24" height="16">
-        <span>${d.year} • ${d.city}</span>
-      </div>
-      <div class="school">${d.school}</div>
-      <div class="desc">${d.program}</div>
-      ${d.note ? `<div class="note">${d.note}</div>`:''}
-    </article>
-  `).join('');
-
-  // Drag to scroll
-  let down=false,startX=0,sl=0,pid=null;
-  tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
-  tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
-  tray.addEventListener('pointerup', ()=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
-
-  // Wheel → horizontal
-  tray.addEventListener('wheel', e=>{
-    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
-  }, {passive:false});
-})();
-
-/* ========= NEW: Visited countries map (transparent, polygons only) ========= */
-(function(){
-  const el = document.getElementById('visitedMap');
-  if (!el || typeof L === 'undefined') return;
-
-  const map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5
-  });
-
-  function setEurasiaView(){
-    map.setView([36, 60], 3.0);
-  }
-  setEurasiaView();
-  window.addEventListener('resize', setEurasiaView);
-
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
-  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const visited = new Set(visitedNames.map(normalize));
-
-  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
-  const stroke = '#7a7a7a';
-
-  const SOURCES = [
-    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
-    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
-  ];
-
-  function loadWorld(i){
-    return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
-      const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
-     const layer = L.geoJSON(geo, {
-  style: f => {
-    const props = f.properties || {};
-    const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
-    const hit  = visited.has(normalize(name));
-    return {
-      fillColor: hit ? accent : 'transparent',
-      color: stroke,
-      weight: hit ? 1.2 : 0.6,
-      fillOpacity: hit ? 0.9 : 0.0,
-      opacity: 0.9
-    };
-  },
-  onEachFeature: (f, l) => {
-    const props = f.properties || {};
-    const name = (props.name || props.ADMIN || '');
-
-    l.bindTooltip(name, { sticky:true, direction:'top', opacity:0.9 });
-    if (visited.has(normalize(name))) {
-      l.bindPopup(`<strong>${name}</strong>`);
+  // Original timeline content transformed into data nodes (no copy changes)
+  const CATS = [
+    {
+      id:'intl', title:'International Orgs',
+      items:[
+        {
+          title:'Intern - Project Design and Monitoring, OIF',
+          period:'Paris • 2025',
+          bullets:[
+            'Analyzed project data, maintained structured cooperation databases',
+            'Wrote country briefs; supported M&E for the execution report'
+          ]
+        }
+      ]
+    },
+    {
+      id:'data', title:'Data & Mapping',
+      items:[
+        {
+          title:'Intern - Data Analysis, AQLITY',
+          period:'Remote • 2025',
+          bullets:[
+            'Cleaned and analyzed humanitarian datasets',
+            'Produced GIS maps and visuals to explain trends; report inputs'
+          ]
+        }
+      ]
+    },
+    {
+      id:'ngo', title:'Humanitarian / Legal',
+      items:[
+        {
+          title:'Assistant - Immigration Law, ARDHIS',
+          period:'Paris • 2024 to 2025',
+          bullets:[
+            'Guided asylum seekers during drop-in sessions',
+            'Country conditions research; drafted case notes and briefs for OFPRA/CNDA'
+          ]
+        }
+      ]
+    },
+    {
+      id:'public', title:'Research & Public Affairs',
+      items:[
+        {
+          title:'Intern - Partnerships and Development Dept., Royal Scientific Society',
+          period:'Amman • 2023',
+          bullets:[
+            'Researched climate, water scarcity, and desalination in the Middle East',
+            'Published an article with Konrad Adenauer Stiftung; cross-team collaboration'
+          ]
+        },
+        {
+          title:'Intern - International Relations Department, City Hall',
+          period:'Nancy • 2022',
+          bullets:[
+            'Organized public events and intercultural outreach with twin cities',
+            'Assisted logistics and protocol for official visits'
+          ]
+        }
+      ]
     }
+  ];
 
-    // Hover micro-interaction: thicker stroke + bring to front
-    l.on('mouseover', e => {
-      e.target.setStyle({ weight: 2.2 });
-      try { e.target.bringToFront(); } catch {}
-    });
-    l.on('mouseout', e => {
-      try { layer.resetStyle(e.target); } catch {}
+  const svg = el.querySelector('.xp-svg');
+  const hub = el.querySelector('.xp-center');
+
+  const detailBox = document.getElementById('xpDetail');
+  const detailTitle = document.getElementById('xpDetailTitle');
+  const detailMeta = document.getElementById('xpDetailMeta');
+  const detailList = document.getElementById('xpDetailList');
+  const detailClose = document.getElementById('xpDetailClose');
+  detailClose.addEventListener('click', ()=> detail(null));
+
+  function detail(d){
+    if(!d){ detailBox.hidden = true; return; }
+    detailTitle.textContent = d.title || 'Experience';
+    detailMeta.textContent = d.period || '';
+    detailList.innerHTML = (d.bullets||[]).map(b=>`<li>${b}</li>`).join('');
+    detailBox.hidden = false;
+  }
+
+  const nodes = [];
+  const catRadiusBase = 180;
+  const itemRadius = 110;
+
+  function center(){
+    const r = el.getBoundingClientRect();
+    return { x:r.width/2, y:r.height/2 };
+  }
+  function place(node,x,y){
+    node.style.left = x+'px';
+    node.style.top  = y+'px';
+  }
+  function addLine(x1,y1,x2,y2){
+    const ln = document.createElementNS('http://www.w3.org/2000/svg','line');
+    ln.setAttribute('x1', x1); ln.setAttribute('y1', y1);
+    ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+    ln.setAttribute('stroke', '#e2e8f0');  // var(--line)
+    ln.setAttribute('stroke-width', '2');
+    ln.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(ln);
+  }
+  const catClass = id => ({
+    intl:'xp-cat-intl', data:'xp-cat-data', ngo:'xp-cat-ngo', public:'xp-cat-public'
+  }[id] || '');
+
+  function build(){
+    // clear
+    svg.innerHTML = '';
+    nodes.forEach(n=>n.remove()); nodes.length = 0;
+
+    const C = center();
+    place(hub, C.x, C.y);
+
+    // responsive radius (slightly larger on wide screens)
+    const w = el.getBoundingClientRect().width;
+    const catRadius = Math.min(Math.max(catRadiusBase, w*0.24), 260);
+
+    // categories around the hub
+    CATS.forEach((cat,i)=>{
+      const angle = (i / CATS.length) * Math.PI*2 - Math.PI/2;
+      const cx = C.x + Math.cos(angle)*catRadius;
+      const cy = C.y + Math.sin(angle)*catRadius;
+
+      const catNode = document.createElement('button');
+      catNode.type='button';
+      catNode.className = `xp-node ${catClass(cat.id)}`;
+      catNode.innerHTML = `<div class="xp-title">${cat.title}</div>`;
+      catNode.setAttribute('aria-label', `${cat.title} category`);
+      el.appendChild(catNode);
+      place(catNode, cx, cy);
+      nodes.push(catNode);
+
+      addLine(C.x, C.y, cx, cy);
+
+      // fan items around the category
+      const items = cat.items||[];
+      items.forEach((it,j)=>{
+        const spread = Math.PI/8;
+        const sub = angle + ((j - (items.length-1)/2) * spread);
+        const ix = cx + Math.cos(sub)*itemRadius;
+        const iy = cy + Math.sin(sub)*itemRadius;
+
+        const itemNode = document.createElement('button');
+        itemNode.type='button';
+        itemNode.className='xp-node';
+        itemNode.innerHTML = `
+          <div class="xp-title" style="font-size:.98rem">${it.title}</div>
+          <div class="xp-sub">${it.period||''}</div>
+        `;
+        itemNode.setAttribute('aria-label', it.title);
+        itemNode.addEventListener('click', ()=>detail(it));
+        el.appendChild(itemNode);
+        place(itemNode, ix, iy);
+        nodes.push(itemNode);
+
+        addLine(cx, cy, ix, iy);
+      });
+
+      // click category -> open first item or list
+      catNode.addEventListener('click',()=>{
+        if((cat.items||[]).length){
+          detail({ title: cat.title, period:'', bullets: cat.items.flatMap(it=>[`${it.title} — ${it.period||''}`, ...(it.bullets||[]).map(b=>'• '+b)]) });
+        }
+      });
     });
   }
-}).addTo(map);
-      setTimeout(setEurasiaView, 0);
-    });
-  }
-  loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
-    console.error('GeoJSON load error:', err);
-    el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
-  });
+
+  build();
+  window.addEventListener('resize', build);
 })();
 </script>
 
 </body>
 </html>
-
