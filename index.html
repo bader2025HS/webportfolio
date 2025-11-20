@@ -405,6 +405,71 @@
   box-shadow:0 2px 4px rgba(2,6,23,.08) !important; /* subtle hover, same style */
 }
 
+  /* === Photos landing gallery === */
+
+.photos-hero{
+  /* slightly smaller top margin so photos sit right under the header */
+  margin-top: 18px;
+}
+
+.photos-hero .wrap{
+  max-width: 1100px;        /* a bit wider than text sections */
+}
+
+/* Grid of photos */
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:12px;
+}
+
+/* Base photo card */
+.photo-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  background:#e5e7eb;
+}
+
+/* Images – fill the box, different sizes handled by classes */
+.photo-item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+/* Different size “feel” (you’ll assign these classes manually) */
+.photo-item{
+  aspect-ratio:4/3;         /* default */
+}
+
+.photo-item.photo-wide{
+  aspect-ratio:16/9;
+}
+
+.photo-item.photo-tall{
+  aspect-ratio:3/4;
+}
+
+/* Captions: city, country, year */
+.photo-item figcaption{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  padding:6px 10px;
+  font-size:0.9rem;
+  color:#f9fafb;
+  background:linear-gradient(
+    to top,
+    rgba(15,23,42,0.7),
+    rgba(15,23,42,0.0)
+  );
+  box-sizing:border-box;
+}
+
+  
 </style>
   
 </head>
@@ -437,6 +502,37 @@
 </header>
 
 <main>  
+  <!-- NEW: Photos landing section -->
+  <section id="photos" class="section photos-hero">
+    <div class="wrap">
+      <!-- You can keep or delete this title; if you want ONLY pictures, remove the h2+p -->
+      <!-- <h2 class="reveal fx-wipe-l">Photography</h2>
+      <p class="lead reveal fx-from-right">Travel photography — cities, landscapes, and details.</p> -->
+
+      <div class="photo-grid">
+        <!-- Example 1 -->
+        <figure class="photo-item photo-wide">
+          <img src="images/georgia-2024.jpg" alt="Street in Tbilisi at sunset">
+          <figcaption>Tbilisi, Georgia — 2024</figcaption>
+        </figure>
+
+        <!-- Example 2 -->
+        <figure class="photo-item photo-tall">
+          <img src="images/india-2023.jpg" alt="Train station in India">
+          <figcaption>Jaipur, India — 2023</figcaption>
+        </figure>
+
+        <!-- Example 3 -->
+        <figure class="photo-item">
+          <img src="images/armenia-2024.jpg" alt="Mountains in Armenia">
+          <figcaption>Geghard, Armenia — 2024</figcaption>
+        </figure>
+
+        <!-- Add as many <figure> blocks as you want -->
+      </div>
+    </div>
+  </section>
+    
   <!-- About -->
   <section id="about" class="section">
     <div class="wrap reveal fx-from-down">
