@@ -92,10 +92,12 @@
       object-fit: cover;
       display: block;
       border-radius: 0;
-      transition: transform 0.25s ease-out;
+      filter: brightness(0.6) blur(2px);
+      transition: all 0.35s ease-out;
     }
 
     .gallery-item:hover img {
+      filter: none;
       transform: scale(1.03);
     }
 
