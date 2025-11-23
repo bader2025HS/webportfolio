@@ -99,9 +99,45 @@
       transform: scale(1.03);
     }
 
+      /* Scroll progress bar */
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0;
+      background: #009fa5;
+      z-index: 9999;
+    }
+
+    /* Back to top button */
+    #backToTop {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: none;
+      background: #009fa5;
+      color: #ffffff;
+      font-size: 22px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      z-index: 9999;
+    }
+
+    #backToTop:hover {
+      background: #007c84;
+    }
+
   </style>
 </head>
 <body>
+  <div id="scrollProgress"></div>
   <div class="page">
 
     <header>
@@ -124,13 +160,13 @@
     <main>
       <section class="gallery">
         <a class="gallery-item" href="#">
-          <img src="image1.jpg" alt="Image 1" />
+          <img src="images/img1.jpg" alt="Image 1" />
         </a>
         <a class="gallery-item" href="#">
-          <img src="image2.jpg" alt="Image 2" />
+          <img src="images/img2.jpg" alt="Image 2" />
         </a>
         <a class="gallery-item" href="#">
-          <img src="image3.jpg" alt="Image 3" />
+          <img src="images/img3.jpg" alt="Image 3" />
         </a>
         <a class="gallery-item" href="#">
           <img src="images/img4.jpg" alt="Image 4" />
@@ -145,5 +181,30 @@
     </main>
 
   </div>
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // Update scroll progress bar and toggle back-to-top button
+    window.addEventListener('scroll', function () {
+      const scrollProgress = document.getElementById('scrollProgress');
+      const backToTop = document.getElementById('backToTop');
+
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = scrolled + '%';
+
+      if (scrollTop > 300) {
+        backToTop.style.display = 'flex';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    // Smooth scroll to top
+    document.getElementById('backToTop').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
