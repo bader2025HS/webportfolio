@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +7,14 @@
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin="" />
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin="" />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: "Trebuchet MS", Verdana, sans-serif;
-      background: #ffffff;
-      color: #111;
+      background: #ffffff; color: #111;
     }
 
     /* Container */
@@ -33,7 +30,6 @@
       font-size: 3rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin-bottom: 20px;
     }
 
     nav ul {
@@ -42,16 +38,17 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
+      margin-top: 20px;
       font-size: 1rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     nav a {
-      text-decoration: none;
       padding: 8px 18px;
-      border: 2px solid #d0d7de;
       border-radius: 12px;
+      border: 2px solid #d0d7de;
+      text-decoration: none;
       color: #333;
       transition: 0.25s;
     }
@@ -63,16 +60,27 @@
       color: #009fa5;
     }
 
-    /* ===== EDUCATION MAPS ===== */
-    #education { margin-bottom: 40px; }
+    /* ====== GLOBAL SECTION HANDLING ====== */
+    main section {
+      display: none;          /* default: hidden, JS will show one */
+      margin-top: 20px;
+    }
+
+    main section.active-section {
+      display: block;
+    }
+
+    /* ===========================
+       EDUCATION MAPS + BOXES
+    ============================ */
 
     .education-maps {
-      display: none; /* hidden until Education clicked */
+      display: none; /* made flex only when Education visible & maps init */
       width: 100%;
       justify-content: center;
       align-items: flex-start;
-      gap: 120px;
-      margin-top: 70px;
+      gap: 80px;
+      margin-top: 60px;
     }
 
     .map-column {
@@ -83,33 +91,52 @@
 
     .map-label {
       font-size: 0.9rem;
-      letter-spacing: 0.25em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      letter-spacing: 0.25em;
+      margin-bottom: 14px;
+    }
+
+    .map-box {
+      width: 340px;
+      height: 340px;
+      background: linear-gradient(135deg, #0aa8c7, #009fa5 70%);
+      padding: 12px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .country-map {
-      width: 320px;
-      height: 320px;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      background: #ffffff;
     }
 
     .leaflet-container {
       background: transparent !important;
       border: none !important;
+      box-shadow: none !important;
     }
 
-    /* ===== GALLERY ===== */
+    /* ===========================
+           GALLERY (HOME)
+    ============================ */
+
     .gallery {
+      grid-auto-rows: 200px;
+      grid-auto-flow: dense;
+      margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-auto-rows: 200px;
-      margin-top: 30px;
       gap: 10px;
     }
 
     .gallery-item {
       position: relative;
       overflow: hidden;
+      background: #eee;
     }
 
     .gallery-item img {
@@ -118,16 +145,25 @@
       object-fit: cover;
       filter: grayscale(40%) brightness(0.85);
       opacity: 0.7;
-      transition: 0.35s;
+      transition: all 0.35s ease-out;
+      display: block;
     }
 
     .gallery-item:hover img {
-      filter: none;
       opacity: 1;
+      filter: none;
       transform: scale(1.03);
     }
 
-    /* Progress bar */
+    /* Simple placeholder text for other sections */
+    .placeholder {
+      font-size: 1.1rem;
+      color: #555;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* Scroll progress bar */
     #scrollProgress {
       position: fixed; top: 0; left: 0;
       width: 0; height: 4px;
@@ -146,13 +182,15 @@
       display: none;
       justify-content: center;
       align-items: center;
-      color: white;
-      font-size: 22px;
+      color: white; font-size: 22px;
       cursor: pointer;
       z-index: 9999;
     }
 
-    /* LIGHTBOX */
+    /* ===========================
+           LIGHTBOX
+    ============================ */
+
     .lightbox-overlay {
       position: fixed;
       inset: 0;
@@ -183,24 +221,25 @@
 
     .lightbox-caption {
       margin-top: 8px;
-      color: #444;
+      text-align: center;
       font-size: 0.9rem;
+      color: #444;
     }
 
     .lightbox-counter {
+      margin-top: 4px;
       font-size: 0.8rem;
       color: #777;
     }
 
     .lightbox-close {
       position: absolute;
-      right: 14px;
+      right: 12px;
       bottom: 10px;
-      background: transparent;
-      border: none;
       font-size: 26px;
+      background: none;
+      border: none;
       cursor: pointer;
-      color: #444;
     }
 
     .lightbox-arrow {
@@ -208,20 +247,19 @@
       top: 50%;
       transform: translateY(-50%);
       background: rgba(255,255,255,0.9);
-      border: none;
       width: 38px;
       height: 60px;
+      border: none;
       cursor: pointer;
       font-size: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
-
   </style>
 </head>
 
@@ -230,7 +268,6 @@
   <div id="scrollProgress"></div>
 
   <div class="page">
-
     <header>
       <h1>Bader Suliman</h1>
       <nav>
@@ -249,51 +286,110 @@
 
     <main>
 
-      <!-- EDUCATION MAPS -->
+      <!-- HOME (GALLERY ONLY) -->
+      <section id="home" class="active-section">
+        <section class="gallery">
+          <a class="gallery-item" href="#">
+            <img src="image1.jpg" alt="Image 1"
+                 data-caption="Paris, France – March 2024" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="image2.jpg" alt="Image 2"
+                 data-caption="Valletta, Malta – November 2024" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="image3.jpg" alt="Image 3"
+                 data-caption="Amman, Jordan – July 2023" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="img1.jpg" alt="Image 4"
+                 data-caption="Tbilisi, Georgia – May 2024" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="images/img5.jpg" alt="Image 5"
+                 data-caption="Berlin, Germany – September 2021" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="images/img6.jpg" alt="Image 6"
+                 data-caption="Muscat, Oman – April 2025" />
+          </a>
+        </section>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <p class="placeholder">About section content goes here.</p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <p class="placeholder">Skills section content goes here.</p>
+      </section>
+
+      <!-- EDUCATION (MAPS ONLY) -->
       <section id="education">
         <div class="education-maps">
 
+          <!-- FRANCE -->
           <div class="map-column">
             <div class="map-label">FRANCE</div>
-            <div id="map-france" class="country-map"></div>
+            <div class="map-box">
+              <div id="map-france" class="country-map"></div>
+            </div>
           </div>
 
+          <!-- JAPAN -->
           <div class="map-column">
             <div class="map-label">JAPAN</div>
-            <div id="map-japan" class="country-map"></div>
+            <div class="map-box">
+              <div id="map-japan" class="country-map"></div>
+            </div>
           </div>
 
+          <!-- GERMANY -->
           <div class="map-column">
             <div class="map-label">GERMANY</div>
-            <div id="map-germany" class="country-map"></div>
+            <div class="map-box">
+              <div id="map-germany" class="country-map"></div>
+            </div>
           </div>
 
         </div>
       </section>
 
-      <!-- GALLERY -->
-      <section class="gallery">
-        <a class="gallery-item"><img src="image1.jpg" data-caption="Paris, France – March 2024"></a>
-        <a class="gallery-item"><img src="image2.jpg" data-caption="Valletta, Malta – November 2024"></a>
-        <a class="gallery-item"><img src="image3.jpg" data-caption="Amman, Jordan – July 2023"></a>
-        <a class="gallery-item"><img src="img1.jpg" data-caption="Tbilisi, Georgia – May 2024"></a>
-        <a class="gallery-item"><img src="images/img5.jpg" data-caption="Berlin, Germany – September 2021"></a>
-        <a class="gallery-item"><img src="images/img6.jpg" data-caption="Muscat, Oman – April 2025"></a>
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <p class="placeholder">Experience section content goes here.</p>
+      </section>
+
+      <!-- WORK -->
+      <section id="work">
+        <p class="placeholder">Work section content goes here.</p>
+      </section>
+
+      <!-- ACTIVITIES -->
+      <section id="activities">
+        <p class="placeholder">Activities section content goes here.</p>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <p class="placeholder">Contact section content goes here.</p>
       </section>
 
     </main>
-
   </div>
 
+  <!-- Back to top -->
   <button id="backToTop">↑</button>
 
-  <!-- LIGHTBOX OVERLAY -->
+  <!-- LIGHTBOX -->
   <div id="lightboxOverlay" class="lightbox-overlay">
     <div class="lightbox">
       <button class="lightbox-arrow left" id="lightboxPrev">‹</button>
       <button class="lightbox-arrow right" id="lightboxNext">›</button>
 
-      <img id="lightboxImage" class="lightbox-image" src="" alt="" />
+      <img id="lightboxImage" class="lightbox-image" alt="Gallery large view" />
       <div id="lightboxCaption" class="lightbox-caption"></div>
       <div id="lightboxCounter" class="lightbox-counter"></div>
 
@@ -301,26 +397,29 @@
     </div>
   </div>
 
-  <!-- Leaflet JS -->
+  <!-- LEAFLET JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    /* Progress */
+    /* ===== Scroll progress bar ===== */
     window.addEventListener("scroll", () => {
-      const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      document.getElementById("scrollProgress").style.width = p * 100 + "%";
+      const s = window.scrollY;
+      const d = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById("scrollProgress").style.width = (s / d) * 100 + "%";
     });
 
-    /* Back to top */
+    /* ===== Back to top ===== */
     window.addEventListener("scroll", () => {
       document.getElementById("backToTop").style.display =
         window.scrollY > 300 ? "flex" : "none";
     });
-
     document.getElementById("backToTop").onclick = () =>
       window.scrollTo({ top: 0, behavior: "smooth" });
 
-    /* MAPS */
+    /* ===============================
+       MAPS (EDUCATION)
+    =============================== */
+
     let worldData = null;
     let mapsLoaded = false;
 
@@ -339,16 +438,16 @@
         "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json",
         "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
       ];
-      for (let u of urls) {
+      for (let url of urls) {
         try {
-          const r = await fetch(u);
+          let r = await fetch(url);
           if (r.ok) return (worldData = await r.json());
-        } catch {}
+        } catch (e) {}
       }
     }
 
-    function drawCountry(id, country, center, zoom) {
-      const map = L.map(id, {
+    function drawCountry(containerId, country, center, zoom) {
+      const map = L.map(containerId, {
         zoomControl: false,
         attributionControl: false,
         dragging: false,
@@ -357,12 +456,14 @@
         touchZoom: false,
         keyboard: false
       });
+
       map.setView(center, zoom);
 
       const aliases = COUNTRY_NAMES[country].map(normalize);
 
       L.geoJSON(worldData, {
-        filter: f => aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
+        filter: f =>
+          aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
         style: { color: "#222", weight: 1.8, fillOpacity: 0 }
       }).addTo(map);
     }
@@ -372,77 +473,113 @@
       mapsLoaded = true;
 
       await loadGeoJSON();
-
       document.querySelector(".education-maps").style.display = "flex";
 
       drawCountry("map-france", "france", [46.6, 2.2], 4.0);
-      drawCountry("map-japan", "japan", [37.8, 138.5], 3.5);
+      drawCountry("map-japan", "japan", [37.8, 138.5], 3.7);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.3);
     }
 
-    /* NAVIGATION */
-    document.querySelectorAll("nav a").forEach(link => {
-      link.addEventListener("click", () => {
-        const target = link.getAttribute("href");
+    /* ===============================
+       SINGLE-SECTION NAVIGATION
+    =============================== */
 
-        document.querySelectorAll("nav a")
-          .forEach(a => a.classList.remove("active"));
+    const navLinks = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll("main section");
+
+    function showSection(id) {
+      sections.forEach(sec => {
+        if (sec.id === id) {
+          sec.classList.add("active-section");
+        } else {
+          sec.classList.remove("active-section");
+        }
+      });
+
+      if (id === "education") {
+        initMaps();
+      }
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href").replace("#", "");
+
+        navLinks.forEach(n => n.classList.remove("active"));
         link.classList.add("active");
 
-        const gallery = document.querySelector(".gallery");
-        const maps = document.querySelector(".education-maps");
-
-        if (target === "#education") {
-          gallery.style.display = "none";
-          initMaps();
-        } else {
-          gallery.style.display = "grid";
-          maps.style.display = "none";
-        }
+        showSection(targetId);
       });
     });
 
-    /* LIGHTBOX */
-    const overlay = document.getElementById("lightboxOverlay");
-    const lbImage = document.getElementById("lightboxImage");
-    const lbCaption = document.getElementById("lightboxCaption");
-    const lbCounter = document.getElementById("lightboxCounter");
-    const images = Array.from(document.querySelectorAll(".gallery-item img"));
-    let index = 0;
+    // initial state: home only
+    showSection("home");
 
-    function openLightbox(i) {
-      index = i;
-      lbImage.src = images[i].src;
-      lbCaption.textContent = images[i].dataset.caption || "";
-      lbCounter.textContent = (i + 1) + " / " + images.length;
+    /* ===============================
+       LIGHTBOX FOR GALLERY
+    =============================== */
+
+    const overlay = document.getElementById("lightboxOverlay");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxCounter = document.getElementById("lightboxCounter");
+    const btnPrev = document.getElementById("lightboxPrev");
+    const btnNext = document.getElementById("lightboxNext");
+    const btnClose = document.getElementById("lightboxClose");
+
+    const galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = galleryImages[currentIndex];
+
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt || "";
+      lightboxCaption.textContent = img.dataset.caption || "";
+      lightboxCounter.textContent =
+        (currentIndex + 1) + " / " + galleryImages.length;
+
       overlay.style.display = "flex";
     }
 
-    images.forEach((img, i) =>
-      img.addEventListener("click", () => openLightbox(i))
-    );
+    function closeLightbox() {
+      overlay.style.display = "none";
+    }
 
-    document.getElementById("lightboxClose").onclick =
-      () => overlay.style.display = "none";
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      openLightbox(currentIndex);
+    }
 
-    document.getElementById("lightboxNext").onclick = () =>
-      openLightbox((index + 1) % images.length);
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      openLightbox(currentIndex);
+    }
 
-    document.getElementById("lightboxPrev").onclick = () =>
-      openLightbox((index - 1 + images.length) % images.length);
+    galleryImages.forEach((img, index) => {
+      img.addEventListener("click", e => {
+        e.preventDefault();
+        openLightbox(index);
+      });
+    });
+
+    btnNext.addEventListener("click", showNext);
+    btnPrev.addEventListener("click", showPrev);
+    btnClose.addEventListener("click", closeLightbox);
 
     overlay.addEventListener("click", e => {
-      if (e.target === overlay) overlay.style.display = "none";
+      if (e.target === overlay) closeLightbox();
     });
 
     document.addEventListener("keydown", e => {
       if (overlay.style.display !== "flex") return;
-      if (e.key === "Escape") overlay.style.display = "none";
-      if (e.key === "ArrowRight") openLightbox((index + 1) % images.length);
-      if (e.key === "ArrowLeft") openLightbox((index - 1 + images.length) % images.length);
+
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
     });
-
   </script>
-
 </body>
 </html>
