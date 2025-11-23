@@ -84,14 +84,6 @@
       margin-bottom: 40px;
     }
 
-    #education h2 {
-      font-size: 1.4rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
     .education-maps {
       display: none; /* hidden until Education is clicked */
       flex-wrap: wrap;
@@ -113,8 +105,8 @@
     }
 
     .country-map {
-      width: 260px;
-      height: 260px;
+      width: 220px;
+      height: 220px;
     }
 
     /* Leaflet container: no grey background, no box feel */
@@ -284,8 +276,8 @@
       }
 
       .country-map {
-        width: 220px;
-        height: 220px;
+        width: 200px;
+        height: 200px;
       }
 
       .lightbox-arrow.left {
@@ -322,7 +314,6 @@
 
       <!-- ===== EDUCATION SECTION: 3 STATIC COUNTRY OUTLINE MAPS ===== -->
       <section id="education">
-        <h2>EDUCATION – COUNTRIES</h2>
         <div class="education-maps">
           <div class="map-column">
             <div class="map-label">FRANCE</div>
@@ -418,15 +409,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Active menu switching
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function () {
-        navLinks.forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
     // ========== LIGHTBOX LOGIC ==========
     const overlay = document.getElementById('lightboxOverlay');
     const lightboxImage = document.getElementById('lightboxImage');
@@ -504,6 +486,12 @@
     let educationMapsInitialized = false;
     let worldGeoJSON = null;
 
+    const COUNTRY_ALIASES = {
+      'france': ['france', 'french republic'],
+      'germany': ['germany', 'federal republic of germany'],
+      'japan': ['japan', 'state of japan']
+    };
+
     function normalizeName(s) {
       return s
         ? s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
@@ -559,15 +547,19 @@
         worldGeoJSON.features[0].properties &&
         worldGeoJSON.features[0].properties.ADMIN;
 
+      const key = normalizeName(targetName);
+      const aliases = (COUNTRY_ALIASES[key] || [targetName]).map(normalizeName);
+
       L.geoJSON(worldGeoJSON, {
         filter: f => {
           const props = f.properties || {};
           const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
-          return normalizeName(name) === normalizeName(targetName);
+          const n = normalizeName(name);
+          return aliases.includes(n);
         },
         style: {
           color: '#333333',
-          weight: 1.8,
+          weight: 1.6,
           fillOpacity: 0
         }
       }).addTo(map);
@@ -584,24 +576,43 @@
           if (mapsRow) mapsRow.style.display = 'flex';
 
           // FRANCE
-          createCountryMap('map-france', 'France', [46.5, 2.5], 5.3);
+          createCountryMap('map-france', 'France', [46.5, 2.5], 4.8);
           // GERMANY
-          createCountryMap('map-germany', 'Germany', [51, 10], 5.5);
+          createCountryMap('map-germany', 'Germany', [51, 10], 4.9);
           // JAPAN
-          createCountryMap('map-japan', 'Japan', [36.2, 138.3], 4.8);
+          createCountryMap('map-japan', 'Japan', [36.2, 138.3], 4.3);
         })
         .catch(err => {
           console.error('Failed to load world GeoJSON:', err);
         });
     }
 
-    // Trigger map init ONLY when Education is clicked
-    const educationLink = document.querySelector('nav a[href="#education"]');
-    if (educationLink) {
-      educationLink.addEventListener('click', () => {
-        initEducationMaps();
+    // Active menu switching + view logic
+    const navLinks = document.querySelectorAll('nav a');
+    const gallerySection = document.querySelector('.gallery');
+    const educationSection = document.getElementById('education');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+
+        const target = this.getAttribute('href');
+
+        if (gallerySection && educationSection) {
+          if (target === '#education') {
+            // Education view only
+            gallerySection.style.display = 'none';
+            educationSection.style.display = 'block';
+            initEducationMaps();
+          } else {
+            // Default / other sections: show gallery again
+            gallerySection.style.display = 'grid';
+            educationSection.style.display = 'block';
+          }
+        }
       });
-    }
+    });
   </script>
 </body>
 </html>
