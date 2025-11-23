@@ -70,43 +70,11 @@
       color: #009fa5;
     }
 
-    /* ===== Countries Outlines Section ===== */
-    .countries {
-      margin: 40px 0 10px;
-    }
-
-    .countries-row {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      flex-wrap: wrap;
-    }
-
-    .country {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .country h2 {
-      font-size: 0.9rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .country-outline {
-      max-width: 260px;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
     /* Masonry-style gallery */
     .gallery {
       grid-auto-rows: 200px; /* base height for the grid */
       grid-auto-flow: dense; /* allows mosaïc layout */
-      margin-top: 40px;
+      margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 10px;
@@ -270,8 +238,6 @@
   <div id="scrollProgress"></div>
   <div class="page">
 
-    <!-- ========== HEADER / NAV ==========
-         (Section: overall site navigation) -->
     <header>
       <h1>Bader Suliman</h1>
       <nav>
@@ -288,36 +254,8 @@
       </nav>
     </header>
 
-    <!-- ========== MAIN CONTENT ========== -->
-    <main id="home">
-
-      <!-- ===== Section: Countries Outlines (France / Germany / Japan) ===== -->
-      <section class="countries">
-        <div class="countries-row">
-          <div class="country">
-            <h2>FRANCE</h2>
-            <img src="france-outline.svg"
-                 alt="Outline map of France"
-                 class="country-outline" />
-          </div>
-
-          <div class="country">
-            <h2>GERMANY</h2>
-            <img src="germany-outline.svg"
-                 alt="Outline map of Germany"
-                 class="country-outline" />
-          </div>
-
-          <div class="country">
-            <h2>JAPAN</h2>
-            <img src="japan-outline.svg"
-                 alt="Outline map of Japan"
-                 class="country-outline" />
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== Section: Gallery / Lightbox Images ===== -->
+    <!-- Gallery -->
+    <main>
       <section class="gallery">
         <!-- Just change the text inside data-caption for each image -->
         <a class="gallery-item" href="#">
@@ -351,11 +289,6 @@
                data-caption="Muscat, Oman – April 2025" />
         </a>
       </section>
-
-      <!-- You can later add separate sections for
-           #about, #skills, #education, etc., below here
-           and keep them clearly separated. -->
-
     </main>
 
   </div>
