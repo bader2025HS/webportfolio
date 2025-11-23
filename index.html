@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bader Suliman – Portfolio</title>
-
   <style>
     * {
       margin: 0;
@@ -13,28 +12,29 @@
     }
 
     body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-               "Helvetica Neue", Arial, sans-serif;
-}
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      background: #ffffff;
+      color: #111111;
+    }
 
+    /* Container */
     .page {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 40px 20px;
     }
 
-    /* ---------- HEADER ---------- */
-
+    /* Header */
     header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
 
     header h1 {
-      font-size: 2.6rem;
-      letter-spacing: 0.08em;
+      font-size: 3rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
 
     nav ul {
@@ -42,8 +42,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 16px;
-      font-size: 0.9rem;
+      gap: 20px;
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
@@ -51,34 +51,41 @@
     nav a {
       text-decoration: none;
       color: #333;
+      padding: 8px 18px;
+      border: 2px solid #d0d7de;
+      border-radius: 12px;
+      display: inline-block;
+      transition: all 0.25s ease-out;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      border-color: #009fa5;
+      color: #009fa5;
+      background: #e6f9f9;
     }
 
-    /* ---------- MASONRY GALLERY ---------- */
-
-    .gallery {
-      margin-top: 30px;
+  .gallery {
+      grid-auto-rows: 200px; /* base height for the grid */
+      grid-auto-flow: dense; /* allows mosaïc layout */
+      margin-top: 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      grid-auto-rows: 180px;      /* base row height */
-      grid-auto-flow: dense;      /* pack items tightly like masonry */
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
     }
 
     .gallery-item {
       position: relative;
       overflow: hidden;
       background: #eee;
+    
     }
 
     .gallery-item img {
       width: 100%;
       height: 100%;
-      object-fit: cover;          /* crops image to tile shape */
+      object-fit: cover;
       display: block;
+      border-radius: 0;
       transition: transform 0.25s ease-out;
     }
 
@@ -86,50 +93,11 @@
       transform: scale(1.03);
     }
 
-    /* tile size variations */
-    .gallery-item.wide {
-      grid-column: span 2;
-    }
-
-    .gallery-item.tall {
-      grid-row: span 2;
-    }
-
-    .gallery-item.big {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-
-    @media (max-width: 1024px) {
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      }
-    }
-
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        grid-auto-rows: 160px;
-      }
-
-      header h1 {
-        font-size: 2.1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        grid-auto-rows: 150px;
-      }
-    }
   </style>
 </head>
-
 <body>
   <div class="page">
+
     <header>
       <h1>Bader Suliman</h1>
       <nav>
@@ -145,55 +113,31 @@
       </nav>
     </header>
 
-    <!-- ---------- MASONRY GALLERY ---------- -->
+    <!-- The gallery will go below this line -->
+
     <main>
       <section class="gallery">
-        <!-- Change src paths to your actual images in /images/ -->
-
-        <!-- Big hero tile -->
-        <a class="gallery-item big" href="#">
-          <img src="image1.jpg" alt="Image 1">
-        </a>
-
-        <!-- Wide landscape -->
-        <a class="gallery-item wide" href="#">
-          <img src="image2.jpg" alt="Image 2">
-        </a>
-
-        <!-- Normal tiles -->
         <a class="gallery-item" href="#">
-          <img src="image3.jpg" alt="Image 3">
+          <img src="image1.jpg" alt="Image 1" />
         </a>
-
-        <a class="gallery-item tall" href="#">
-          <img src="images/img4.jpg" alt="Image 4">
-        </a>
-
         <a class="gallery-item" href="#">
-          <img src="images/img5.jpg" alt="Image 5">
+          <img src="image2.jpg" alt="Image 2" />
         </a>
-
-        <a class="gallery-item wide" href="#">
-          <img src="images/img6.jpg" alt="Image 6">
-        </a>
-
         <a class="gallery-item" href="#">
-          <img src="images/img7.jpg" alt="Image 7">
+          <img src="image3.jpg" alt="Image 3" />
         </a>
-
-        <a class="gallery-item tall" href="#">
-          <img src="images/img8.jpg" alt="Image 8">
-        </a>
-
         <a class="gallery-item" href="#">
-          <img src="images/img9.jpg" alt="Image 9">
+          <img src="images/img4.jpg" alt="Image 4" />
         </a>
-
-        <a class="gallery-item wide" href="#">
-          <img src="images/img10.jpg" alt="Image 10">
+        <a class="gallery-item" href="#">
+          <img src="images/img5.jpg" alt="Image 5" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="images/img6.jpg" alt="Image 6" />
         </a>
       </section>
     </main>
+
   </div>
 </body>
 </html>
