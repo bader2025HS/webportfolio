@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bader Suliman – Portfolio</title>
+
+  <!-- Leaflet CSS (for the country outlines) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
+
   <style>
     * {
       margin: 0;
@@ -70,10 +78,56 @@
       color: #009fa5;
     }
 
+    /* ===== EDUCATION SECTION: 3 COUNTRY OUTLINES ===== */
+
+    #education {
+      margin-bottom: 40px;
+    }
+
+    #education h2 {
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .education-maps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .map-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .map-label {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .country-map {
+      width: 260px;
+      height: 260px;
+    }
+
+    /* Leaflet container: remove grey background, no box look */
+    .leaflet-container {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
     /* Masonry-style gallery */
     .gallery {
-      grid-auto-rows: 200px; /* base height for the grid */
-      grid-auto-flow: dense; /* allows mosaïc layout */
+      grid-auto-rows: 200px;
+      grid-auto-flow: dense;
       margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -225,6 +279,15 @@
     }
 
     @media (max-width: 768px) {
+      .education-maps {
+        gap: 20px;
+      }
+
+      .country-map {
+        width: 220px;
+        height: 220px;
+      }
+
       .lightbox-arrow.left {
         left: 6px;
       }
@@ -254,10 +317,30 @@
       </nav>
     </header>
 
-    <!-- Gallery -->
-    <main>
+    <!-- MAIN -->
+    <main id="home">
+
+      <!-- ===== EDUCATION SECTION: 3 COUNTRY OUTLINE MAPS ===== -->
+      <section id="education">
+        <h2>EDUCATION – COUNTRIES</h2>
+        <div class="education-maps">
+          <div class="map-column">
+            <div class="map-label">FRANCE</div>
+            <div id="map-france" class="country-map"></div>
+          </div>
+          <div class="map-column">
+            <div class="map-label">GERMANY</div>
+            <div id="map-germany" class="country-map"></div>
+          </div>
+          <div class="map-column">
+            <div class="map-label">JAPAN</div>
+            <div id="map-japan" class="country-map"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== GALLERY ===== -->
       <section class="gallery">
-        <!-- Just change the text inside data-caption for each image -->
         <a class="gallery-item" href="#">
           <img src="image1.jpg"
                alt="Image 1"
@@ -289,6 +372,7 @@
                data-caption="Muscat, Oman – April 2025" />
         </a>
       </section>
+
     </main>
 
   </div>
@@ -310,6 +394,9 @@
       <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
     </div>
   </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
   <script>
     // Scroll progress bar + Back to top button
@@ -412,6 +499,98 @@
         showPrev();
       }
     });
+
+    // ========== LEAFLET: 3 COUNTRY OUTLINES (FR, DE, JP) ==========
+    let educationMapsInitialized = false;
+    let worldGeoJSON = null;
+
+    function normalizeName(s) {
+      return s
+        ? s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+        : '';
+    }
+
+    function loadWorldGeoJSON() {
+      if (worldGeoJSON) return Promise.resolve(worldGeoJSON);
+
+      const sources = [
+        'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
+        'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+      ];
+
+      function trySource(i) {
+        return fetch(sources[i]).then(r => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        }).catch(err => {
+          if (i + 1 < sources.length) return trySource(i + 1);
+          throw err;
+        });
+      }
+
+      return trySource(0).then(data => {
+        worldGeoJSON = data;
+        return data;
+      });
+    }
+
+    function createCountryMap(containerId, targetName, center, zoom) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+
+      const map = L.map(el, {
+        zoomControl: false,
+        attributionControl: false
+      });
+
+      map.setView(center, zoom);
+
+      const useAdmin =
+        worldGeoJSON &&
+        worldGeoJSON.features &&
+        worldGeoJSON.features[0] &&
+        worldGeoJSON.features[0].properties &&
+        worldGeoJSON.features[0].properties.ADMIN;
+
+      L.geoJSON(worldGeoJSON, {
+        filter: f => {
+          const props = f.properties || {};
+          const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
+          return normalizeName(name) === normalizeName(targetName);
+        },
+        style: {
+          color: '#333333',
+          weight: 1.8,
+          fillOpacity: 0
+        }
+      }).addTo(map);
+    }
+
+    function initEducationMaps() {
+      if (educationMapsInitialized || typeof L === 'undefined') return;
+      educationMapsInitialized = true;
+
+      loadWorldGeoJSON()
+        .then(() => {
+          // FRANCE
+          createCountryMap('map-france', 'France', [46.5, 2.5], 5.3);
+          // GERMANY
+          createCountryMap('map-germany', 'Germany', [51, 10], 5.5);
+          // JAPAN
+          createCountryMap('map-japan', 'Japan', [36.2, 138.3], 4.8);
+        })
+        .catch(err => {
+          console.error('Failed to load world GeoJSON:', err);
+        });
+    }
+
+    // Trigger map init ONLY when Education is clicked
+    const educationLink = document.querySelector('nav a[href="#education"]');
+    if (educationLink) {
+      educationLink.addEventListener('click', () => {
+        initEducationMaps();
+      });
+    }
   </script>
 </body>
 </html>
