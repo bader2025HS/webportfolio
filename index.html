@@ -146,8 +146,8 @@
     .lightbox-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6); /* dim page, not pure black */
-      display: none;                  /* shown via JS */
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
       align-items: center;
       justify-content: center;
       z-index: 10000;
@@ -167,15 +167,22 @@
 
     .lightbox-image {
       max-width: 100%;
-      max-height: 80vh;
+      max-height: 70vh;
       object-fit: contain;
       display: block;
     }
 
-    .lightbox-counter {
-      font-size: 0.85rem;
-      color: #555;
+    .lightbox-caption {
       margin-top: 8px;
+      font-size: 0.9rem;
+      color: #444;
+      text-align: center;
+    }
+
+    .lightbox-counter {
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 4px;
     }
 
     .lightbox-close {
@@ -250,12 +257,37 @@
     <!-- Gallery -->
     <main>
       <section class="gallery">
-        <a class="gallery-item" href="#"><img src="image1.jpg" alt="Image 1" /></a>
-        <a class="gallery-item" href="#"><img src="image2.jpg" alt="Image 2" /></a>
-        <a class="gallery-item" href="#"><img src="image3.jpg" alt="Image 3" /></a>
-        <a class="gallery-item" href="#"><img src="img1.jpg" alt="Image 4" /></a>
-        <a class="gallery-item" href="#"><img src="images/img5.jpg" alt="Image 5" /></a>
-        <a class="gallery-item" href="#"><img src="images/img6.jpg" alt="Image 6" /></a>
+        <!-- Just change the text inside data-caption for each image -->
+        <a class="gallery-item" href="#">
+          <img src="image1.jpg"
+               alt="Image 1"
+               data-caption="Paris, France – March 2024" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="image2.jpg"
+               alt="Image 2"
+               data-caption="Valletta, Malta – November 2024" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="image3.jpg"
+               alt="Image 3"
+               data-caption="Amman, Jordan – July 2023" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="img1.jpg"
+               alt="Image 4"
+               data-caption="Tbilisi, Georgia – May 2024" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="images/img5.jpg"
+               alt="Image 5"
+               data-caption="Berlin, Germany – September 2021" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="images/img6.jpg"
+               alt="Image 6"
+               data-caption="Muscat, Oman – April 2025" />
+        </a>
       </section>
     </main>
 
@@ -272,6 +304,7 @@
 
       <img id="lightboxImage" class="lightbox-image" src="" alt="Gallery image" />
 
+      <div id="lightboxCaption" class="lightbox-caption"></div>
       <div id="lightboxCounter" class="lightbox-counter"></div>
 
       <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
@@ -310,6 +343,7 @@
     // ========== LIGHTBOX LOGIC ==========
     const overlay = document.getElementById('lightboxOverlay');
     const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
     const lightboxCounter = document.getElementById('lightboxCounter');
     const btnClose = document.getElementById('lightboxClose');
     const btnPrev = document.getElementById('lightboxPrev');
@@ -324,6 +358,7 @@
 
       lightboxImage.src = img.src;
       lightboxImage.alt = img.alt || '';
+      lightboxCaption.textContent = img.dataset.caption || '';
       lightboxCounter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
 
       overlay.style.display = 'flex';
