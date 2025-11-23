@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bader Suliman – Portfolio</title>
+
+  <!-- Leaflet CSS for the Education maps -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-o9N1j7kGStG3e2XWQp1rCkUZo2wZlH0h+Hf9g1hKx0k="
+    crossorigin=""
+  />
+
   <style>
     * {
       margin: 0;
@@ -70,7 +79,18 @@
       color: #009fa5;
     }
 
-    /* Masonry-style gallery */
+    /* ---------- VIEW SECTIONS (one visible at a time) ---------- */
+
+    .view-section {
+      display: none;
+      min-height: calc(100vh - 180px); /* fills most of the screen under header */
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    /* Masonry-style gallery (HOME) */
     .gallery {
       grid-auto-rows: 200px; /* base height for the grid */
       grid-auto-flow: dense; /* allows mosaïc layout */
@@ -93,10 +113,8 @@
       object-fit: cover;
       display: block;
       border-radius: 0;
-
       filter: grayscale(40%) brightness(0.85);
       opacity: 0.7;
-
       transition: all 0.35s ease-out;
     }
 
@@ -232,6 +250,63 @@
         right: 6px;
       }
     }
+
+    /* ========== EDUCATION / LEAFLET MAPS ========== */
+
+    #education {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .education-maps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .edu-map-block {
+      flex: 1 1 260px;
+      max-width: 340px;
+      text-align: center;
+    }
+
+    .edu-map-title {
+      font-size: 1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .edu-map {
+      width: 100%;
+      height: 260px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid #d0d7de;
+    }
+
+    /* make the base map very light & border-focused */
+    .edu-map .leaflet-tile {
+      filter: grayscale(100%) brightness(1.2);
+      opacity: 0.6;
+    }
+
+    .edu-map .leaflet-container {
+      background: #ffffff;
+    }
+
+    .edu-map .leaflet-control-container {
+      display: none; /* hide zoom & attribution for a cleaner look */
+    }
+
+    /* style city dots */
+    .edu-city-marker {
+      box-shadow: 0 0 0 2px #009fa5;
+    }
   </style>
 </head>
 <body>
@@ -254,41 +329,69 @@
       </nav>
     </header>
 
-    <!-- Gallery -->
     <main>
-      <section class="gallery">
-        <!-- Just change the text inside data-caption for each image -->
-        <a class="gallery-item" href="#">
-          <img src="image1.jpg"
-               alt="Image 1"
-               data-caption="Paris, France – March 2024" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="image2.jpg"
-               alt="Image 2"
-               data-caption="Valletta, Malta – November 2024" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="image3.jpg"
-               alt="Image 3"
-               data-caption="Amman, Jordan – July 2023" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="img1.jpg"
-               alt="Image 4"
-               data-caption="Tbilisi, Georgia – May 2024" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="img2.jpg"
-               alt="Image 5"
-               data-caption="Berlin, Germany – September 2021" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="images/img6.jpg"
-               alt="Image 6"
-               data-caption="Muscat, Oman – April 2025" />
-        </a>
+      <!-- HOME VIEW -->
+      <section class="view-section active" id="home">
+        <section class="gallery">
+          <!-- Just change the text inside data-caption for each image -->
+          <a class="gallery-item" href="#">
+            <img src="image1.jpg"
+                 alt="Image 1"
+                 data-caption="Paris, France – March 2024" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="image2.jpg"
+                 alt="Image 2"
+                 data-caption="Valletta, Malta – November 2024" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="image3.jpg"
+                 alt="Image 3"
+                 data-caption="Amman, Jordan – July 2023" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="img1.jpg"
+                 alt="Image 4"
+                 data-caption="Tbilisi, Georgia – May 2024" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="img2.jpg"
+                 alt="Image 5"
+                 data-caption="Berlin, Germany – September 2021" />
+          </a>
+          <a class="gallery-item" href="#">
+            <img src="images/img6.jpg"
+                 alt="Image 6"
+                 data-caption="Muscat, Oman – April 2025" />
+          </a>
+        </section>
       </section>
+
+      <!-- EDUCATION VIEW (Leaflet maps) -->
+      <section class="view-section" id="education">
+        <div class="education-maps">
+          <div class="edu-map-block">
+            <div class="edu-map-title">France</div>
+            <div id="map-france" class="edu-map"></div>
+          </div>
+          <div class="edu-map-block">
+            <div class="edu-map-title">Germany</div>
+            <div id="map-germany" class="edu-map"></div>
+          </div>
+          <div class="edu-map-block">
+            <div class="edu-map-title">Japan</div>
+            <div id="map-japan" class="edu-map"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Empty placeholder views for other menu items (for later) -->
+      <section class="view-section" id="about"></section>
+      <section class="view-section" id="skills"></section>
+      <section class="view-section" id="experience"></section>
+      <section class="view-section" id="work"></section>
+      <section class="view-section" id="activities"></section>
+      <section class="view-section" id="contact"></section>
     </main>
 
   </div>
@@ -311,6 +414,13 @@
     </div>
   </div>
 
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-vEOA2E2iGpr0kH8G3pU1cJcF6iJkP4h0C2v3vL0wW68="
+    crossorigin=""
+  ></script>
+
   <script>
     // Scroll progress bar + Back to top button
     window.addEventListener('scroll', function () {
@@ -331,12 +441,35 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Active menu switching
+    // View switching logic (separate screens)
     const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('.view-section');
+
     navLinks.forEach(link => {
-      link.addEventListener('click', function () {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').replace('#', '');
+
+        // update nav active state
         navLinks.forEach(l => l.classList.remove('active'));
         this.classList.add('active');
+
+        // show only the target section
+        sections.forEach(sec => {
+          if (sec.id === targetId) {
+            sec.classList.add('active');
+          } else {
+            sec.classList.remove('active');
+          }
+        });
+
+        // scroll to top when switching views
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+        // lazy init education maps when first entering that view
+        if (targetId === 'education') {
+          initEducationMaps();
+        }
       });
     });
 
@@ -412,6 +545,73 @@
         showPrev();
       }
     });
+
+    // ========== LEAFLET EDUCATION MAPS ==========
+
+    let eduMapsInitialized = false;
+
+    function initEducationMaps() {
+      if (eduMapsInitialized) return;
+      eduMapsInitialized = true;
+
+      // France map
+      const mapFrance = L.map('map-france', {
+        zoomControl: false,
+        attributionControl: false
+      }).setView([46.8, 2.5], 5);
+
+      // Germany map
+      const mapGermany = L.map('map-germany', {
+        zoomControl: false,
+        attributionControl: false
+      }).setView([51.0, 10.0], 5);
+
+      // Japan map
+      const mapJapan = L.map('map-japan', {
+        zoomControl: false,
+        attributionControl: false
+      }).setView([36.5, 138.0], 5);
+
+      const tileOptions = {
+        maxZoom: 8,
+        minZoom: 3
+      };
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tileOptions).addTo(mapFrance);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tileOptions).addTo(mapGermany);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tileOptions).addTo(mapJapan);
+
+      // Helper to create turquoise circle markers
+      function addCity(map, coords, label) {
+        L.circleMarker(coords, {
+          radius: 5,
+          color: '#009fa5',
+          weight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 1
+        })
+          .addTo(map)
+          .bindTooltip(label, { permanent: false, direction: 'right', offset: [8, 0] });
+      }
+
+      // France cities
+      addCity(mapFrance, [48.8566, 2.3522], 'Paris');
+      addCity(mapFrance, [43.7340, 7.4210], 'Menton');
+      addCity(mapFrance, [48.6921, 6.1844], 'Nancy');
+
+      // Germany city
+      addCity(mapGermany, [52.5200, 13.4050], 'Berlin');
+
+      // Japan city
+      addCity(mapJapan, [35.6895, 139.6917], 'Tokyo');
+    }
+
+    // If user lands directly on Education via URL hash, init maps
+    if (window.location.hash === '#education') {
+      // fake a click so view & nav sync
+      const eduLink = document.querySelector('nav a[href="#education"]');
+      if (eduLink) eduLink.click();
+    }
   </script>
 </body>
 </html>
