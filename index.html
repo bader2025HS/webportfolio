@@ -232,93 +232,6 @@
         right: 6px;
       }
     }
-
-    /* ========== EDUCATION MAPS ========== */
-
-    #education {
-      margin-top: 80px;
-      margin-bottom: 80px;
-    }
-
-    .education-map-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .country-block {
-      text-align: center;
-      max-width: 320px;
-    }
-
-    .country-name {
-      font-size: 1rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      color: #444;
-    }
-
-    .country-map {
-      position: relative;
-      width: 260px;
-      aspect-ratio: 4 / 3;
-      margin: 0 auto;
-    }
-
-    .country-outline {
-      width: 100%;
-      height: 100%;
-      fill: none;
-      stroke: #d0d7de;
-      stroke-width: 2;
-      transition: stroke 0.25s ease-out, fill 0.25s ease-out;
-    }
-
-    .country-map:hover .country-outline {
-      stroke: #009fa5;
-      fill: rgba(0, 159, 165, 0.06);
-    }
-
-    .edu-dot {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      border: 2px solid #009fa5;
-      background: #ffffff;
-      transform: translate(-50%, -50%);
-      transition: background 0.25s ease-out, transform 0.25s ease-out;
-    }
-
-    .country-map:hover .edu-dot {
-      background: #009fa5;
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    .edu-dot::after {
-      content: attr(data-label);
-      position: absolute;
-      top: -6px;
-      left: 14px;
-      white-space: nowrap;
-      font-size: 0.75rem;
-      color: #444;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid #e0e0e0;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-      pointer-events: none;
-    }
-
-    .country-map:hover .edu-dot::after {
-      opacity: 1;
-      transform: translateY(0);
-    }
   </style>
 </head>
 <body>
@@ -341,9 +254,9 @@
       </nav>
     </header>
 
-    <!-- Gallery (HOME) -->
+    <!-- Gallery -->
     <main>
-      <section class="gallery" id="home">
+      <section class="gallery">
         <!-- Just change the text inside data-caption for each image -->
         <a class="gallery-item" href="#">
           <img src="image1.jpg"
@@ -375,52 +288,6 @@
                alt="Image 6"
                data-caption="Muscat, Oman – April 2025" />
         </a>
-      </section>
-
-      <!-- Education maps -->
-      <section id="education">
-        <div class="education-map-wrapper">
-          <!-- France -->
-          <div class="country-block">
-            <div class="country-name">France</div>
-            <div class="country-map country-france">
-              <svg class="country-outline" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                <path d="M20 10 L60 8 L80 25 L75 50 L50 70 L25 65 L15 40 Z" />
-              </svg>
-
-              <!-- Rough positions for Paris / Menton / Nancy -->
-              <div class="edu-dot" style="top: 32%; left: 55%;" data-label="Paris"></div>
-              <div class="edu-dot" style="top: 68%; left: 60%;" data-label="Menton"></div>
-              <div class="edu-dot" style="top: 30%; left: 40%;" data-label="Nancy"></div>
-            </div>
-          </div>
-
-          <!-- Germany -->
-          <div class="country-block">
-            <div class="country-name">Germany</div>
-            <div class="country-map country-germany">
-              <svg class="country-outline" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                <path d="M35 8 L65 10 L78 25 L75 55 L60 72 L40 70 L25 55 L22 30 Z" />
-              </svg>
-
-              <!-- Rough position for Berlin -->
-              <div class="edu-dot" style="top: 26%; left: 62%;" data-label="Berlin"></div>
-            </div>
-          </div>
-
-          <!-- Japan -->
-          <div class="country-block">
-            <div class="country-name">Japan</div>
-            <div class="country-map country-japan">
-              <svg class="country-outline" viewBox="0 0 60 120" preserveAspectRatio="xMidYMid meet">
-                <path d="M30 8 L40 20 L35 32 L42 46 L38 62 L44 80 L36 96 L32 110 L24 100 L22 82 L26 64 L20 50 L24 34 L22 20 Z" />
-              </svg>
-
-              <!-- Rough position for Tokyo -->
-              <div class="edu-dot" style="top: 42%; left: 60%;" data-label="Tokyo"></div>
-            </div>
-          </div>
-        </div>
       </section>
     </main>
 
@@ -464,7 +331,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Active menu switching (visual only for now)
+    // Active menu switching
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
       link.addEventListener('click', function () {
