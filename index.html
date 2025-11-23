@@ -206,6 +206,15 @@
     document.getElementById('backToTop').addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+      // Handle active menu highlighting
+    const navLinks = document.querySelectorAll('nav a');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
   </script>
 </body>
 </html>
