@@ -57,34 +57,52 @@
       text-decoration: underline;
     }
 
+  ./* Masonry-style gallery */
+.gallery {
+  column-count: 4;        /* number of columns on large screens */
+  column-gap: 12px;       /* space between columns */
+  margin-top: 20px;
+}
+
+.gallery-item {
+  display: inline-block;  /* needed for column layout */
+  width: 100%;
+  margin-bottom: 12px;    /* vertical gap between images */
+  break-inside: avoid;    /* prevent images from breaking between columns */
+  background: #eee;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;           /* keep original aspect ratio → different heights */
+  display: block;
+  border-radius: 0;
+  transition: transform 0.25s ease-out;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03); /* subtle zoom on hover */
+}
+
+/* Responsive: fewer columns on smaller screens */
+@media (max-width: 1024px) {
   .gallery {
-      grid-auto-rows: 200px; /* base height for the grid */
-      grid-auto-flow: dense; /* allows mosaïc layout */
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 10px;
-    }
+    column-count: 3;
+  }
+}
 
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      background: #eee;
-    
-    }
+@media (max-width: 768px) {
+  .gallery {
+    column-count: 2;
+  }
+}
 
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 0;
-      transition: transform 0.25s ease-out;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.03);
-    }
+@media (max-width: 480px) {
+  .gallery {
+    column-count: 1;
+  }
+}
 
   </style>
 </head>
