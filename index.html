@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bader Suliman – Portfolio</title>
+
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
@@ -17,24 +18,22 @@
       color: #111111;
     }
 
-    /* Container */
     .page {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 20px 80px;
     }
 
-    /* Header */
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
     }
 
     header h1 {
-      font-size: 3rem;
-      letter-spacing: 0.05em;
+      font-size: 2.6rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     nav ul {
@@ -42,8 +41,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      font-size: 1rem;
+      gap: 16px;
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
@@ -57,58 +56,57 @@
       text-decoration: underline;
     }
 
-  ./* Masonry-style gallery */
-.gallery {
-  column-count: 4;        /* number of columns on large screens */
-  column-gap: 12px;       /* space between columns */
-  margin-top: 20px;
-}
+    /* ---------- MASONRY GALLERY ---------- */
 
-.gallery-item {
-  display: inline-block;  /* needed for column layout */
-  width: 100%;
-  margin-bottom: 12px;    /* vertical gap between images */
-  break-inside: avoid;    /* prevent images from breaking between columns */
-  background: #eee;
-  overflow: hidden;
-}
+    .gallery {
+      margin-top: 30px;
+      column-count: 4;       /* number of columns on desktop */
+      column-gap: 12px;      /* space between columns */
+    }
 
-.gallery-item img {
-  width: 100%;
-  height: auto;           /* keep original aspect ratio → different heights */
-  display: block;
-  border-radius: 0;
-  transition: transform 0.25s ease-out;
-}
+    .gallery-item {
+      display: inline-block; /* for column layout */
+      width: 100%;
+      margin-bottom: 12px;   /* vertical gap */
+      break-inside: avoid;   /* prevents breaks across columns */
+      background: #eee;
+      overflow: hidden;
+    }
 
-.gallery-item:hover img {
-  transform: scale(1.03); /* subtle zoom on hover */
-}
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: auto;          /* KEEP natural aspect ratio → different heights */
+      border-radius: 0;
+      transition: transform 0.25s ease-out;
+    }
 
-/* Responsive: fewer columns on smaller screens */
-@media (max-width: 1024px) {
-  .gallery {
-    column-count: 3;
-  }
-}
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
 
-@media (max-width: 768px) {
-  .gallery {
-    column-count: 2;
-  }
-}
+    /* Responsive columns */
+    @media (max-width: 1024px) {
+      .gallery {
+        column-count: 3;
+      }
+    }
 
-@media (max-width: 480px) {
-  .gallery {
-    column-count: 1;
-  }
-}
+    @media (max-width: 768px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
 
+    @media (max-width: 480px) {
+      .gallery {
+        column-count: 1;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
-
     <header>
       <h1>Bader Suliman</h1>
       <nav>
@@ -124,31 +122,30 @@
       </nav>
     </header>
 
-    <!-- The gallery will go below this line -->
-
+    <!-- Masonry gallery -->
     <main>
       <section class="gallery">
         <a class="gallery-item" href="#">
-          <img src="image1.jpg" alt="Image 1" />
+          <img src="image1.jpg" alt="Image 1">
         </a>
         <a class="gallery-item" href="#">
-          <img src="image2.jpg" alt="Image 2" />
+          <img src="image2.jpg" alt="Image 2">
         </a>
         <a class="gallery-item" href="#">
-          <img src="image3.jpg" alt="Image 3" />
+          <img src="image3.jpg" alt="Image 3">
         </a>
         <a class="gallery-item" href="#">
-          <img src="images/img4.jpg" alt="Image 4" />
+          <img src="images/img4.jpg" alt="Image 4">
         </a>
         <a class="gallery-item" href="#">
-          <img src="images/img5.jpg" alt="Image 5" />
+          <img src="images/img5.jpg" alt="Image 5">
         </a>
         <a class="gallery-item" href="#">
-          <img src="images/img6.jpg" alt="Image 6" />
+          <img src="images/img6.jpg" alt="Image 6">
         </a>
+        <!-- add more as needed -->
       </section>
     </main>
-
   </div>
 </body>
 </html>
