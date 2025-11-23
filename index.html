@@ -64,12 +64,12 @@
     #education { margin-bottom: 40px; }
 
     .education-maps {
-      display: none; /* hidden by default */
+      display: none; /* hidden until Education is clicked */
       width: 100%;
-      gap: 60px;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 40px;
+      gap: 120px; /* more spacing for balance */
+      margin-top: 70px; /* maps placed lower */
     }
 
     .map-column {
@@ -81,13 +81,13 @@
     .map-label {
       font-size: 0.9rem;
       letter-spacing: 0.25em;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       text-transform: uppercase;
     }
 
     .country-map {
-      width: 260px;
-      height: 260px;
+      width: 300px;
+      height: 300px;
     }
 
     .leaflet-container {
@@ -168,7 +168,7 @@
 
     <main id="home">
 
-      <!-- ===== EDUCATION (MAPS ONLY) ===== -->
+      <!-- ===== EDUCATION MAPS ===== -->
       <section id="education">
         <div class="education-maps">
 
@@ -193,7 +193,7 @@
         </div>
       </section>
 
-      <!-- ===== GALLERY (hidden when Education is active) ===== -->
+      <!-- ===== GALLERY (hidden during Education) ===== -->
       <section class="gallery">
         <a class="gallery-item"><img src="image1.jpg"></a>
         <a class="gallery-item"><img src="image2.jpg"></a>
@@ -228,7 +228,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
 
     /* ===============================
-       LEAFLET STATIC COUNTRY MAPS
+       STATIC OUTLINES — FIXED & CENTERED
     =============================== */
 
     let worldData = null;
@@ -258,8 +258,7 @@
     }
 
     function drawCountry(containerId, country, center, zoom) {
-      const el = document.getElementById(containerId);
-      const map = L.map(el, {
+      const map = L.map(containerId, {
         zoomControl: false,
         attributionControl: false,
         dragging: false,
@@ -274,11 +273,7 @@
 
       L.geoJSON(worldData, {
         filter: f => aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
-        style: {
-          color: "#222",
-          weight: 1.8,
-          fillOpacity: 0
-        }
+        style: { color: "#222", weight: 1.8, fillOpacity: 0 }
       }).addTo(map);
     }
 
@@ -288,32 +283,28 @@
 
       await loadGeoJSON();
 
-      // Show the map container
       document.querySelector(".education-maps").style.display = "flex";
 
-      // CENTER POSITIONS CORRECTED TO SHOW FULL OUTLINES
-      drawCountry("map-france", "france", [46.3, 2.15], 4.7);
-      drawCountry("map-japan", "japan", [37.5, 138.5], 4.2);
-      drawCountry("map-germany", "germany", [51.1, 10.45], 5.0);
+      /* PERFECT FULL OUTLINE ZOOM LEVELS */
+      drawCountry("map-france", "france", [46.6, 2.2], 4.2);
+      drawCountry("map-japan", "japan", [37.8, 138.5], 3.9);
+      drawCountry("map-germany", "germany", [51.1, 10.3], 4.6);
     }
 
-    /* ===== Menu Navigation Logic ===== */
+    /* ===============================
+         NAVIGATION LOGIC
+    =============================== */
     document.querySelectorAll("nav a").forEach(a => {
-      a.addEventListener("click", e => {
+      a.addEventListener("click", () => {
         const target = a.getAttribute("href");
         document.querySelectorAll("nav a").forEach(n => n.classList.remove("active"));
         a.classList.add("active");
 
-        // EDUCATION → show maps only
         if (target === "#education") {
           document.querySelector(".gallery").style.display = "none";
-          document.getElementById("education").style.display = "block";
           initMaps();
-        }
-        // Other sections → show gallery
-        else {
+        } else {
           document.querySelector(".gallery").style.display = "grid";
-          document.getElementById("education").style.display = "block";
         }
       });
     });
