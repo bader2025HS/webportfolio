@@ -70,9 +70,10 @@
       color: #009fa5;
     }
 
-  .gallery {
-      grid-auto-rows: 200px; /* base height for the grid */
-      grid-auto-flow: dense; /* allows mosaïc layout */
+    /* Masonry layout */
+    .gallery {
+      grid-auto-rows: 200px;
+      grid-auto-flow: dense;
       margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -83,25 +84,30 @@
       position: relative;
       overflow: hidden;
       background: #eee;
-    
     }
 
+    /* === JBJV GREY FADE EFFECT === */
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       border-radius: 0;
-      filter: brightness(0.6) blur(2px);
+
+      /* Fog/grey effect */
+      filter: grayscale(40%) brightness(0.85);
+      opacity: 0.7;
+
       transition: all 0.35s ease-out;
     }
 
     .gallery-item:hover img {
+      opacity: 1;
       filter: none;
       transform: scale(1.03);
     }
 
-      /* Scroll progress bar */
+    /* Scroll progress bar */
     #scrollProgress {
       position: fixed;
       top: 0;
@@ -135,7 +141,6 @@
     #backToTop:hover {
       background: #007c84;
     }
-
   </style>
 </head>
 <body>
@@ -153,41 +158,30 @@
           <li><a href="#experience">Experience</a></li>
           <li><a href="#work">Work</a></li>
           <li><a href="#activities">Activities</a></li>
+          <li><a href="#events">Events</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <!-- The gallery will go below this line -->
-
+    <!-- Gallery -->
     <main>
       <section class="gallery">
-        <a class="gallery-item" href="#">
-          <img src="image1.jpg" alt="Image 1" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="image2.jpg" alt="Image 2" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="image3.jpg" alt="Image 3" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="images/img4.jpg" alt="Image 4" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="images/img5.jpg" alt="Image 5" />
-        </a>
-        <a class="gallery-item" href="#">
-          <img src="images/img6.jpg" alt="Image 6" />
-        </a>
+        <a class="gallery-item" href="#"><img src="image1.jpg" alt="Image 1" /></a>
+        <a class="gallery-item" href="#"><img src="image2.jpg" alt="Image 2" /></a>
+        <a class="gallery-item" href="#"><img src="image3.jpg" alt="Image 3" /></a>
+        <a class="gallery-item" href="#"><img src="images/img4.jpg" alt="Image 4" /></a>
+        <a class="gallery-item" href="#"><img src="images/img5.jpg" alt="Image 5" /></a>
+        <a class="gallery-item" href="#"><img src="images/img6.jpg" alt="Image 6" /></a>
       </section>
     </main>
 
   </div>
+
   <button id="backToTop" aria-label="Back to top">↑</button>
 
   <script>
-    // Update scroll progress bar and toggle back-to-top button
+    // Scroll progress bar + Back to top button
     window.addEventListener('scroll', function () {
       const scrollProgress = document.getElementById('scrollProgress');
       const backToTop = document.getElementById('backToTop');
@@ -195,24 +189,21 @@
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
       scrollProgress.style.width = scrolled + '%';
 
-      if (scrollTop > 300) {
-        backToTop.style.display = 'flex';
-      } else {
-        backToTop.style.display = 'none';
-      }
+      backToTop.style.display = scrollTop > 300 ? 'flex' : 'none';
     });
 
     // Smooth scroll to top
     document.getElementById('backToTop').addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-      // Handle active menu highlighting
-    const navLinks = document.querySelectorAll('nav a');
 
+    // Active menu switching
+    const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', function () {
         navLinks.forEach(l => l.classList.remove('active'));
         this.classList.add('active');
       });
