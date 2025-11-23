@@ -62,10 +62,9 @@
 
     /* ====== GLOBAL SECTION HANDLING ====== */
     main section {
-      display: none;          /* default: hidden, JS will show one */
+      display: none;          /* hidden by default, JS will show one */
       margin-top: 20px;
     }
-
     main section.active-section {
       display: block;
     }
@@ -74,13 +73,15 @@
        EDUCATION MAPS + BOXES
     ============================ */
 
+    #education { margin-top: 30px; }
+
     .education-maps {
-      display: none; /* made flex only when Education visible & maps init */
+      display: none;  /* becomes flex only when Education is shown + maps loaded */
       width: 100%;
-      justify-content: center;
+      justify-content: space-between;   /* align with content edges */
       align-items: flex-start;
-      gap: 80px;
-      margin-top: 60px;
+      gap: 20px;
+      margin-top: 50px;
     }
 
     .map-column {
@@ -96,12 +97,14 @@
       margin-bottom: 14px;
     }
 
+    /* Clean white boxes, same size, no gradient */
     .map-box {
       width: 340px;
       height: 340px;
-      background: linear-gradient(135deg, #0aa8c7, #009fa5 70%);
-      padding: 12px;
+      background: #ffffff;
+      border: 2px solid #d0d7de;
       border-radius: 18px;
+      padding: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -110,8 +113,7 @@
     .country-map {
       width: 100%;
       height: 100%;
-      border-radius: 14px;
-      background: #ffffff;
+      border-radius: 12px;
     }
 
     .leaflet-container {
@@ -260,6 +262,7 @@
 
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
+
   </style>
 </head>
 
