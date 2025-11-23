@@ -1,986 +1,134 @@
-<!-- PORTFOLIO — v31 (desktop menu framed, phone skills fixed) -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Portfolio</title>
-
-  <!-- Favicons (use absolute paths + cache-busting) -->
-<link rel="icon" href='favicon.png'>
-
-  <!-- Viewport (safety) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Viewport (safety) -->
-<script>
-(function(){
-  if(!document.querySelector('meta[name="viewport"]')){
-    const m=document.createElement('meta');
-    m.name='viewport'; m.content='width=device-width, initial-scale=1';
-    document.head.appendChild(m);
-  }
-})();
-</script>
-
-<!-- Leaflet CSS (needed for the map) -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
-
-<style>
-  :root{
-    --header:72px; --maxw:860px;
-    --bg1:#eafaf7; --bg2:#f7fbff; --bg3:#e9f8ff;
-    --text:#0f172a; --muted:#475569; --card:#f8fafc; --line:#e2e8f0;
-    --accent:#0ea5a2; --accent2:#1fbdb9; --gold:#d4af37;
-    --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.07);
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header) + 14px)}
-  body{
-    margin:0; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
-    background:linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
-    background-size:200% 200%; animation:bgShift 22s ease infinite;
-  }
-  @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  body:before{
-    content:""; position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
-    background:
-      repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 26px),
-      repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 26px);
-    mix-blend-mode:soft-light; animation:gridPan 30s linear infinite;
-  }
-  body::after{
-    content:""; position:fixed; inset:0; pointer-events:none; opacity:.18;
-    background:
-      repeating-radial-gradient(circle at 20% 30%, rgba(2,6,23,.08) 0 2px, transparent 2px 18px),
-      repeating-radial-gradient(circle at 75% 60%, rgba(2,6,23,.06) 0 2px, transparent 2px 22px);
-    filter:blur(.2px);
-  }
-  @keyframes gridPan{to{transform:translate3d(-26px,-26px,0)}}
-
-  .wrap{max-width:var(--maxw); margin-inline:auto; padding:clamp(16px,3vw,26px)}
-  .section{margin:clamp(24px,5vw,46px) 0}
-  .section h2{margin:0 0 6px; font-size:clamp(26px,4.2vw,38px)}
-  .section h2 + .lead{margin-top:2px}
-  .lead{color:var(--muted)}
-
-  /* Reveals */
-  .reveal{opacity:0; will-change:transform,filter;
-    transition:opacity .6s cubic-bezier(.2,.7,.2,1),
-               transform .6s cubic-bezier(.2,.7,.2,1),
-               filter .6s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1; transform:none; filter:none}
-  .fx-from-left{transform:translateX(-28px) skewX(-2deg); filter:blur(4px)}
-  .fx-from-right{transform:translateX(28px) skewX(2deg); filter:blur(4px)}
-  .fx-from-up{transform:translateY(-24px); filter:blur(6px)}
-  .fx-from-down{transform:translateY(24px); filter:blur(6px)}
-  .fx-zoom{transform:scale(.94); filter:blur(4px)}
-  .fx-wipe-l,.fx-wipe-r{display:inline-block; will-change:clip-path; transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
-  .fx-wipe-l{clip-path:inset(0 100% 0 0)} .fx-wipe-r{clip-path:inset(0 0 0 100%)}
-  .fx-wipe-l.in,.fx-wipe-r.in{clip-path:inset(0 0 0 0)}
-
-  /* Header */
-  header{
-    position:sticky; top:0; z-index:9999; height:var(--header);
-    background:rgba(255,255,255,.95); border-bottom:1px solid var(--line);
-    backdrop-filter:saturate(120%) blur(10px);
-  }
-  header .inner{max-width:var(--maxw); height:100%; margin:auto; padding:0 16px;
-    display:flex; align-items:center; justify-content:space-between; gap:12px}
-  .brand{display:flex; align-items:center; gap:10px; font-weight:800; white-space:nowrap}
-  .brand span{display:inline-block}
-  .badge{width:34px; height:34px; border-radius:10px; flex:0 0 34px;
-    background:conic-gradient(from 220deg,var(--accent),var(--accent2));
-    box-shadow:0 6px 18px rgba(2,6,23,.06); animation:spin 10s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-
-  /* Navbar links */
-  nav a{
-    color:var(--muted); text-decoration:none; font-weight:600; margin-left:14px; position:relative; padding:6px 0
-  }
-  nav a:hover{color:var(--accent)}
-  nav a.active{color:var(--accent)}
-  nav a:after{display:none !important}
-
-  /* Hamburger + mobile overlay */
-  .menu-toggle{display:none; place-items:center; width:42px; height:42px;
-    border:1px solid var(--line); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
-  .menu-toggle .bar{width:20px; height:2px; background:var(--text); position:relative; transition:transform .25s}
-  .menu-toggle .bar:before,.menu-toggle .bar:after{
-    content:""; position:absolute; left:0; width:20px; height:2px; background:var(--text); transition:.25s}
-  .menu-toggle .bar:before{top:-6px} .menu-toggle .bar:after{top:6px}
-  body.nav-open .menu-toggle .bar{transform:rotate(45deg)}
-  body.nav-open .menu-toggle .bar:before{transform:rotate(-90deg) translateX(-6px); opacity:0}
-  body.nav-open .menu-toggle .bar:after{transform:rotate(-90deg); top:0}
-  body.nav-open{overflow:hidden}
-
-  @media (max-width:760px), (max-device-width:812px){
-    .menu-toggle{display:grid; position:fixed; right:12px; top:12px; z-index:10005}
-    header nav#siteNav{
-      position:fixed; inset:0; z-index:10004; height:100svh;
-      padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 24px;
-      display:flex; flex-direction:column; gap:10px; background:#fff !important;
-      transform:translateY(-100%); opacity:0; visibility:hidden; pointer-events:none;
-      transition:transform .28s ease, opacity .2s ease;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bader Suliman – Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    body.nav-open header nav#siteNav{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
-    header nav a{margin:0; padding:16px 14px; border-radius:12px; font-size:1.12rem; background:#fff; border:1px solid var(--line)}
-    header nav a.active{color:var(--accent); border-color:var(--accent)}
-    #siteNav .mhead{
-      display:flex; align-items:center; gap:10px;
-      position:absolute; left:18px; top:calc(env(safe-area-inset-top,0px) + 18px);
-      font-weight:800;
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #ffffff;
+      color: #111111;
     }
-  }
 
-  #progress{
-  position:fixed; top:0; left:0; height:3px; width:0; z-index:10000;
-  background: var(--accent);
-}
-
-  /* Type / buttons / cards */
-  h1{font-size:clamp(44px,7vw,74px); margin:0 0 6px}
-  .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
-    border:1px solid var(--line); font-weight:700; text-decoration:none; position:relative; overflow:hidden}
-  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
-  .btn.ghost{background:var(--card); color:var(--text)}
-  .btn:hover{transform:translateY(-1px)}
-  .btn:after{content:""; position:absolute; inset:auto; top:0; left:0; width:0; height:100%; background:rgba(255,255,255,.15); transition:width .25s}
-
-  /* Boxes plain white */
-  .card{background:#fff !important; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(14px,2vw,18px); transition:transform .2s, box-shadow .2s}
-  .card:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(2,6,23,.11)}
-  .chip-mini{background:#fff}
-  .lang-pill{background:#fff}
-  .chip{background:#fff}
-
-  /* Strap under name */
-  .strap{margin:6px 0 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
-  .rotator{font-weight:800; letter-spacing:.2px}
-  .fade{opacity:0; transform:translateY(6px); transition:opacity .25s, transform .25s}
-  .fade.show{opacity:1; transform:none}
-  .chips-mini{display:flex; gap:8px; flex-wrap:wrap}
-  .chip-mini{padding:4px 10px; border:1px solid var(--line); border-radius:999px; font-weight:600; font-size:.92rem}
-
-  /* ===== Skills & Languages ===== */
-
-  /* Languages */
-  .lang-card .lang-title{display:block}
-  .lang-wrap{margin-top:6px;}
-  .lang-row{
-    display:flex; gap:10px; align-items:center;
-    overflow-x:auto; padding:8px 4px 10px; scrollbar-gutter:stable; scroll-snap-type:x proximity;
-  }
-  .lang-pill{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:6px 10px; border:1px solid var(--line); border-radius:999px;
-    white-space:nowrap; scroll-snap-align:center; box-shadow:0 1px 2px rgba(2,6,23,.05);
-    font-weight:600;
-  }
-  .flag{
-    display:inline-block; width:20px; height:20px; border-radius:50%; overflow:hidden; flex:0 0 20px;
-    box-shadow:0 0 0 1px var(--line), 0 1px 2px rgba(2,6,23,.12);
-  }
-  .flag img{width:100%; height:100%; object-fit:cover; display:block; image-rendering:auto}
-
-  @media (max-width:780px){
-    .lang-card .lang-title{margin-bottom:6px;}
-    .lang-wrap{margin-top:4px;}
-    .lang-row{overflow:visible; padding:0; gap:8px; display:grid; grid-template-columns:1fr 1fr;}
-    .lang-pill{font-size:.9rem; padding:5px 8px; gap:6px}
-    .flag{width:18px; height:18px; flex:0 0 18px}
-    #skills .wrap > .lang-card{margin-bottom:16px;}
-  }
-
-  /* Skills layout */
-  .skills-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px}
-  .skill-group-title{display:block; font-weight:700}
-
-  .chips{
-    display:grid; grid-template-columns:repeat(2,1fr);
-    gap:8px; margin-top:8px;
-  }
-  .chip{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:4px 8px; border:1px solid var(--line); border-radius:999px;
-    font-weight:600; font-size:.9rem; text-align:center; box-shadow:0 1px 2px rgba(2,6,23,.05);
-    white-space:nowrap;
-  }
-
-  /* === PHONE-ONLY: Soft/Hard skills formatting (only change requested) === */
-  @media (max-width:900px){
-    .skills-2{grid-template-columns:1fr; gap:16px;} /* stack sections */
-    .chips{grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;}
-    .chip{
-      font-size:.84rem; padding:6px 8px;
-      white-space:normal;                /* allow wrapping */
-      line-height:1.2;
-      overflow-wrap:anywhere;            /* break long words if needed */
-      word-break:normal;
-      max-width:100%;
+    /* Container */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
-  }
 
-  /* Projects */
-  .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-  @media (max-width:1000px){.projects{grid-template-columns:1fr}}
-  .project{will-change:transform; transform:translateZ(0); transition:transform .28s, box-shadow .28s}
-  .project:hover{transform:scale(1.12); z-index:6; box-shadow:0 22px 54px rgba(2,6,23,.18)}
-  .thumb{aspect-ratio:16/10; border-radius:14px; border:1px solid var(--line); background:#e6fffb center/cover no-repeat; transition:transform .28s}
-  .project:hover .thumb{transform:scale(1.18)}
-  .project .body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s, opacity .25s; opacity:0}
-  .project:hover .body{grid-template-rows:1fr; opacity:1}
-  .project .body>div{overflow:hidden}
-  @media (hover:none){ .project .body{grid-template-rows:1fr; opacity:1} .project:hover,.project:hover .thumb{transform:none} }
-
-  /* Experience */
-  .timeline{position:relative; margin-top:8px}
-  .timeline:before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent),var(--gold)); opacity:.3}
-  .t{display:grid; grid-template-columns:26px 1fr; gap:12px; margin:14px 0}
-  .dot{width:22px; height:22px; border-radius:50%; border:2px solid var(--accent); background:radial-gradient(circle at 40% 35%, #d4af37, #f3e8c1); box-shadow:0 0 0 3px rgba(14,165,162,.12)}
-  .role{display:flex; align-items:center; justify-content:space-between; gap:12px; white-space:nowrap}
-  @media (max-width:520px){ .role{white-space:normal} }
-  .where{color:var(--muted)}
-  .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
-  .tag{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:.95rem; color:#0b3b3a; background:#e9fbf9}
-
-  /* Education (base styles kept for other cards that may exist) */
-  .edu{display:grid; grid-template-columns:1fr; gap:12px}
-  .edu .item .head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
-  .edu .item strong{display:block}
-  .edu .item .where{color:var(--muted); font-weight:600}
-  .edu .item p{margin:.35rem 0 0}
-
-  /* Activities */
-  .activities-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
-  @media (max-width:900px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:420px){ .activities-grid{grid-template-columns:repeat(2,1fr)} }
-  .activity{aspect-ratio:1/1; display:grid; place-items:center; text-align:center; padding:12px}
-  .activity .title{font-weight:800}
-
-  /* Footer (small) */
-  footer{border-top:1px solid var(--line); color:var(--muted); padding:10px 0; margin-top:24px;
-    background:#fff; backdrop-filter:saturate(120%) blur(10px); font-size:.92rem}
-  .to-top{position:fixed; right:18px; bottom:18px; z-index:9997; opacity:0; pointer-events:none; transition:opacity .2s}
-  .to-top.show{opacity:1; pointer-events:auto}
-
-  /* === Desktop menu framing (mobile untouched) === */
-  @media (min-width:761px){
-    header .brand{padding:0; border:none; border-radius:0; background:transparent; box-shadow:none;}
-    header nav#siteNav{display:flex; align-items:center; gap:8px;}
-    header nav#siteNav a{
-      margin:0; padding:8px 12px; border:1px solid var(--line); border-radius:12px;
-      background:rgba(255,255,255,.9); text-decoration:none; color:var(--muted);
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
     }
-    header nav#siteNav a:hover{border-color:var(--accent); color:var(--accent)}
-    header nav#siteNav a.active{border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 2px rgba(14,165,162,.12) inset}
-    #siteNav .mhead{display:none;}
-  }
 
- /* ====== EXTRA CSS ONLY FOR NEW EDUCATION SCROLLER + MAP ====== */
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
 
-/* Education scroller (hidden scrollbar) */
-#edu-scroll .box{
-  position:relative;
-  background:transparent !important;
-  border:none !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-  padding:0 !important;
-  overflow:visible;
-}
-#edu-scroll .tray-wrap{ position:relative; }
-#edu-scroll .tray{
-  display:flex; gap:12px; align-items:center;
-  overflow-x:auto; overflow-y:hidden;
-  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-  padding:0;
-  scrollbar-width:none; -ms-overflow-style:none;
-}
-#edu-scroll .tray::-webkit-scrollbar{ width:0; height:0; background:transparent; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
 
-#edu-scroll .edu-card{
-  scroll-snap-align:center;
-  flex:0 0 300px;
-  display:grid; grid-template-rows:auto auto 1fr; gap:8px;
-  min-height:240px;
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow) !important;   /* aura */
-  padding:clamp(14px,2vw,18px);
-  transition:transform .2s, box-shadow .2s;
-}
-#edu-scroll .edu-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 36px rgba(2,6,23,.11) !important; /* hover lift */
-}
+    nav a {
+      text-decoration: none;
+      color: #333;
+    }
 
-#edu-scroll .edu-card .meta{
-  display:flex; align-items:center; gap:8px;
-  color:var(--muted); font-size:1rem; white-space:nowrap; word-break:keep-all;
-}
-#edu-scroll .edu-card .flag-ico{
-  width:24px; height:16px; object-fit:cover; border-radius:2px;
-  box-shadow:0 0 0 1px var(--line);
-}
-#edu-scroll .edu-card .school{font-weight:800; font-size:1.14rem; line-height:1.25}
-#edu-scroll .edu-card .desc{font-size:1.02rem; line-height:1.38}
-#edu-scroll .edu-card .note{font-size:.94rem; color:var(--muted)}
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-@media (min-width:1200px){
-  #edu-scroll .edu-card{ flex:0 0 320px; }
-}
-@media (max-width:600px){
-  #edu-scroll .tray{ gap:12px !important; align-items:stretch !important; padding:0 !important; }
-  #edu-scroll .edu-card{ flex:0 0 88vw !important; min-height:unset; padding:12px 12px 14px; }
-  #edu-scroll .edu-card .meta{ white-space:normal; flex-wrap:wrap; gap:6px; font-size:.95rem; }
-  #edu-scroll .edu-card .school{ font-size:1.06rem; }
-}
+  .gallery {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
+    }
 
- /* Softer, more discreet aura for education cards */
-#edu-scroll .edu-card {
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius) !important;
-  box-shadow:0 4px 10px rgba(0,0,0,.06) !important;  /* lighter + softer */
-  transition:transform .2s, box-shadow .2s !important;
-}
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: #eee;
+      height: 280px;
+    }
 
-#edu-scroll .edu-card:hover {
-  transform:translateY(-1px) !important;  /* subtle lift */
-  box-shadow:0 8px 18px rgba(0,0,0,.08) !important; /* gentle hover glow */
-}
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 0;
+      transition: transform 0.25s ease-out;
+    }
 
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
 
-  /* Travel map */
-  .map-card{
-    background:transparent;
-    border:none !important;
-    border-radius:0;
-    box-shadow:none;
-    padding:0;
-    overflow:visible;
-  }
-  #visitedMap{ height:min(60vh, 520px); width:100%; border-radius:14px; }
-  #visitedMap.leaflet-container{ background:transparent !important; }
-
-/* === Country glow micro-interaction (Leaflet SVG paths) === */
-#visitedMap .leaflet-interactive{
-  transition: filter .25s ease, stroke-width .2s ease;
-}
-#visitedMap .leaflet-interactive:hover{
-  /* soft glow around the hovered country */
-  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
-  
-  /* Remove background/shadow from education scroller cards */
-#edu-scroll .edu-card {
-  background: var(--card) !important; /* or transparent if you want totally see-through */
-  box-shadow: none !important;
-}
-#edu-scroll .edu-card {
-  background: #ffffff !important;  /* pure white */
-  box-shadow: none !important;
-}
-/* Education scroller cards — pure white, soft border */
-#edu-scroll .edu-card {
-  background: #ffffff !important;   /* pure white */
-  box-shadow: none !important;      /* no shadow */
-  border: 1px solid #e5e7eb !important; /* light grey border (same tone as line grid) */
-}
-
-/* Education cards — same soft aura as Languages */
-#edu-scroll .edu-card {
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:var(--radius) !important;
-  box-shadow:0 1px 2px rgba(2,6,23,.05) !important;  /* same as .lang-pill */
-  padding:clamp(14px,2vw,18px);
-  transition:transform .2s, box-shadow .2s;
-}
-
-#edu-scroll .edu-card:hover {
-  transform:translateY(-1px);
-  box-shadow:0 2px 4px rgba(2,6,23,.08) !important; /* subtle hover, same style */
-}
-
-</style>
-  
+  </style>
 </head>
-  <body>
+<body>
+  <div class="page">
 
-<div id="progress"></div>
+    <header>
+      <h1>Bader Suliman</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<header>
-  <div class="inner">
-    <div class="brand"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
+    <!-- The gallery will go below this line -->
 
-    <!-- Hamburger -->
-    <button class="menu-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
-      <span class="bar"></span>
-    </button>
+    <main>
+      <section class="gallery">
+        <a class="gallery-item" href="#">
+          <img src="image1.jpg" alt="Image 1" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="image2.jpg" alt="Image 2" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="image3.jpg" alt="Image 3" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="images/img4.jpg" alt="Image 4" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="images/img5.jpg" alt="Image 5" />
+        </a>
+        <a class="gallery-item" href="#">
+          <img src="images/img6.jpg" alt="Image 6" />
+        </a>
+      </section>
+    </main>
 
-    <nav id="siteNav">
-      <div class="mhead"><div class="badge" aria-hidden="true"></div><span>Bader Suliman</span></div>
-
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <!-- Keeping original nav unchanged per your instruction (no Travel link added) -->
-      <a href="#experience">Experience</a>
-      <a href="#work">Work</a>
-      <a href="#activities">Activities</a>
-      <a href="#contact">Contact</a>
-    </nav>
   </div>
-</header>
-
-<main>  
-  <!-- About -->
-  <section id="about" class="section">
-    <div class="wrap reveal fx-from-down">
-      <h1 class="reveal fx-wipe-l">Bader Suliman</h1>
-
-      <div class="strap reveal fx-from-right">
-        <span class="rotator"><span id="rotate" class="fade">Communications</span></span>
-        <div class="chips-mini">
-          <span class="chip-mini">AR EN FR DE</span>
-          <span class="chip-mini">Paris • willing to relocate</span>
-        </div>
-      </div>
-
-      <div class="card reveal fx-zoom">
-        <strong class="reveal fx-wipe-r">About</strong>
-        <p class="lead reveal fx-from-left" style="margin:.4rem 0 0">
-          I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step. I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills & Languages -->
-  <section id="skills" class="section">
-    <div class="wrap">
-      <h2 class="reveal fx-wipe-l">Skills and Languages</h2>
-      <p class="lead reveal fx-from-right">Fluency, methods, and tools.</p>
-
-      <!-- Languages -->
-      <div class="card reveal fx-zoom lang-card">
-        <strong class="lang-title reveal fx-wipe-r">Languages</strong>
-        <div class="lang-wrap reveal fx-from-up">
-          <div class="lang-row">
-            <span class="lang-pill"><span class="flag"><img src="https://flagcdn.com/w40/sa.png" alt="Arabic"/></span><strong>Arabic</strong> (Native)</span>
-            <span class="lang-pill"><span class="flag"><img src="https://flagcdn.com/w40/fr.png" alt="French"/></span><strong>French</strong> (Native)</span>
-            <span class="lang-pill"><span class="flag"><img src="https://flagcdn.com/w40/gb.png" alt="English"/></span><strong>English</strong> (C2)</span>
-            <span class="lang-pill"><span class="flag"><img src="https://flagcdn.com/w40/de.png" alt="German"/></span><strong>German</strong> (C1)</span>
-            <span class="lang-pill"><span class="flag"><img src="https://flagcdn.com/w40/ir.png" alt="Persian"/></span><strong>Persian</strong> (A2)</span>
-            <span class="lang-pill"><span class="flag"><img src="https://flagcdn.com/w40/jp.png" alt="Japanese"/></span><strong>Japanese</strong> (A2)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Skills -->
-      <div class="skills-2">
-        <!-- Soft skills -->
-        <div class="card reveal fx-from-left">
-          <strong class="skill-group-title reveal fx-wipe-l">Soft skills</strong>
-          <div class="chips">
-            <span class="chip">Communications</span>
-            <span class="chip">Analytical synthesis</span>
-            <span class="chip">Press monitoring</span>
-            <span class="chip">Critical thinking</span>
-            <span class="chip">Team facilitation</span>
-            <span class="chip">Stakeholder coord.</span>
-            <span class="chip">Policy briefs</span>
-            <span class="chip">Public speaking</span>
-          </div>
-        </div>
-
-        <!-- Hard skills -->
-        <div class="card reveal fx-from-right">
-          <strong class="skill-group-title reveal fx-wipe-r">Hard skills</strong>
-          <div class="chips">
-            <span class="chip">Data analysis - Excel</span>
-            <span class="chip">Mapping - QGIS</span>
-            <span class="chip">Dashboards &amp; visuals</span>
-            <span class="chip">WordPress &amp; GitHub</span>
-            <span class="chip">Microsoft Office 365</span>
-            <span class="chip">Google Workspace</span>
-            <span class="chip">Video edit - CapCut</span>
-            <span class="chip">Basic programming</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education (REPLACED with the new horizontal scroller) -->
-  <section id="education" class="section">
-    <div class="wrap">
-      <h2 class="reveal fx-wipe-r">Education</h2>
-      <p class="lead reveal fx-from-left" style="margin:.25rem 0 .9rem">
-        Scroll sideways to browse.
-      </p>
-
-      <div id="edu-scroll" class="reveal fx-zoom">
-        <div class="box" role="region" aria-label="Education cards carousel">
-          <div class="tray-wrap">
-            <div class="tray" id="eduTray" tabindex="0"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience -->
-  <section id="experience" class="section">
-    <div class="wrap">
-      <h2 class="reveal fx-wipe-l">Experience</h2>
-    <p class="lead reveal fx-from-right">Communications, humanitarian data, and policy research.</p>
-      <div class="timeline">
-        <div class="t">
-          <div class="dot" aria-hidden="true"></div>
-          <div class="card reveal fx-from-left">
-            <div class="role">
-              <strong>Intern - Project Design and Monitoring, OIF</strong>
-              <span class="where">Paris • 2025</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Analyzed project data, maintained structured cooperation databases, wrote country briefs, and supported monitoring and evaluation for the execution report.</p>
-            <div class="tags"><span class="tag">Data analysis</span><span class="tag">Database design</span><span class="tag">Country briefs</span><span class="tag">Monitoring and evaluation</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-right">
-            <div class="role">
-              <strong>Intern - Data Analysis, AQLITY</strong>
-              <span class="where">Remote • 2025</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends and inform reports.</p>
-            <div class="tags"><span class="tag">Data cleaning</span><span class="tag">GIS and mapping</span><span class="tag">Infographics</span><span class="tag">Reporting</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-left">
-            <div class="role">
-              <strong>Assistant - Immigration Law, ARDHIS</strong>
-              <span class="where">Paris • 2024 to 2025</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Guided asylum seekers during drop in sessions, researched country conditions, and drafted case notes and briefs for OFPRA and the CNDA.</p>
-            <div class="tags"><span class="tag">Legal support</span><span class="tag">Country research</span><span class="tag">Case briefs</span><span class="tag">Interviewing</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-right">
-            <div class="role">
-              <strong>Intern - Partnerships and Development Dept., Royal Scientific Society</strong>
-              <span class="where">Amman • 2023</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Researched climate, water scarcity, and desalination in the Middle East and published an article with the Konrad Adenauer Stiftung while collaborating across research and policy teams.</p>
-            <div class="tags"><span class="tag">Desalination</span><span class="tag">Climate and water</span><span class="tag">Research writing</span><span class="tag">Science diplomacy</span></div>
-          </div>
-        </div>
-        <div class="t">
-          <div class="dot"></div>
-          <div class="card reveal fx-from-left">
-            <div class="role">
-              <strong>Intern - International Relations Department, City Hall</strong>
-              <span class="where">Nancy • 2022</span>
-            </div>
-            <p class="lead" style="margin:.35rem 0 0">Organized public events and intercultural outreach with twin cities and assisted logistics and protocol for official visits.</p>
-            <div class="tags"><span class="tag">Event operations</span><span class="tag">Intercultural outreach</span><span class="tag">Protocol</span><span class="tag">Logistics</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="work" class="section">
-  <div class="wrap">
-    <h2 class="reveal fx-wipe-r">Selected Work</h2>
-    <p class="lead reveal fx-from-left">Case studies blending analysis, design, and impact. Hover a project to see details.</p>
-    <div class="projects">
-      <article class="card project reveal fx-zoom">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1542269766-eed5ddd08721?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <h3 style="margin:10px 0">Human Security - Interactive Module</h3>
-        <div class="body"><div>
-          <p class="lead">Interactive tool introducing key concepts, frameworks, and global governance principles.</p>
-          <p><a class="btn ghost" href="https://bader2025hs.github.io/human-security-final/" target="_blank" rel="noopener">Open project →</a></p>
-        </div></div>
-      </article>
-
-      <!-- Fixed: closing quote after fx-zoom -->
-      <article class="card project reveal fx-zoom">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1649299313612-48cc3493f62e?q=80&w=1819&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <h3 style="margin:10px 0">French ODA in West Africa</h3>
-        <div class="body"><div>
-          <p class="lead">Quantitative study of aid allocation logics shaping development priorities (2003–2023).</p>
-          <p><a class="btn ghost" href="French ODA.pdf" target="_blank" rel="noopener">Open project →</a></p>
-        </div></div>
-      </article>
-
-        <article class="card project reveal fx-zoom">
-        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1721390017771-78b4c67d9334?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <h3 style="margin:10px 0">Urbanization & Refugees: Cox’s Bazar</h3>
-        <div class="body"><div>
-          <p class="lead">Analytical study on urban growth and refugee integration in Bangladesh.</p>
-          <p><a class="btn ghost" href="Cox's Bazar.pdf" target="_blank" rel="noopener">Open project →</a></p>
-        </div></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-  <!-- Extracurricular Activities — 4 squares -->
-  <section id="activities" class="section">
-    <div class="wrap">
-      <h2 class="reveal fx-wipe-l">Extracurricular Activities</h2>
-      <p class="lead reveal fx-from-right">Clubs, volunteering, events, and field exposure.</p>
-
-      <div class="activities-grid">
-        <article class="card activity reveal fx-zoom"><div class="title">Sciences Po Monde Arabe — Communications Director</div></article>
-        <article class="card activity reveal fx-zoom"><div class="title">Tarjimly — Volunteer Translator & Interpreter</div></article>
-        <article class="card activity reveal fx-zoom"><div class="title">Events — Mediterranean of the Future & Paris Peace Forum</div></article>
-        <article class="card activity reveal fx-zoom"><div class="title">MEDMUN — Arabic Committee Director (UNHCR)</div></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Travel (ADDED new section) -->
-  <section id="travel" class="section">
-    <div class="wrap">
-      <h2 class="reveal fx-wipe-l">Lived, Studied, Worked, Traveled</h2>
-      <p class="lead reveal fx-from-right">Hover for names.</p>
-      <div class="map-card reveal fx-from-up">
-        <div id="visitedMap" aria-label="Visited countries map"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quiz Section -->
-<section id="quiz" class="section">
-  <div class="wrap">
-    <h2>Quick Quiz</h2>
-    <p class="lead">Test your knowledge with 5 tricky questions.</p>
-    <div id="quizBox" class="card"></div>
-  </div>
-</section>
-
-<style>
-  .quiz-question{margin-bottom:20px; font-weight:600; font-size:1.2rem;}
-  .quiz-options{display:flex; flex-wrap:wrap; gap:12px; margin-top:10px}
-  .quiz-option{
-    flex:1 1 calc(25% - 12px);
-    padding:12px;
-    border:2px solid var(--line);
-    border-radius:10px;
-    text-align:center;
-    cursor:pointer;
-    transition:.25s;
-    font-weight:700; /* all options bold */
-    color:inherit;
-  }
-  .quiz-option:hover{background:#f9f9f9}
-  .quiz-option.correct{border:3px solid #22c55e; color:#22c55e;} /* green */
-  .quiz-option.wrong{border:3px solid #ef4444; color:#ef4444;}   /* red */
-
-  /* On phones – options appear black initially */
-  @media (max-width:768px){
-    .quiz-option{color:#000;}
-  }
-
-  .quiz-result{margin-top:12px; font-size:1.2rem; font-weight:400;} /* not bold */
-  .quiz-comment{margin-top:6px; font-size:1.1rem; font-weight:500; color:var(--muted);}
-</style>
-
-<script>
-(function(){
-  const questions = [
-    {
-      q:"Around what percentage of the world’s refugees are children? (UNHCR, 2023)",
-      options:["25%","40%","55%","70%"],
-      answer:1
-    },
-    {
-      q:"Beef production is responsible for what share of global livestock emissions? (FAO, 2021)",
-      options:["10%","20%","30%","60%"],
-      answer:3
-    },
-    {
-      q:"Where is the headquarters of the International Atomic Energy Agency (IAEA)? (IAEA.org)",
-      options:["Geneva","Vienna","New York","The Hague"],
-      answer:1
-    },
-    {
-      q:"Persian (Farsi) is written in Arabic script, but what language family does it belong to? (Encyclopaedia Iranica)",
-      options:["Semitic","Turkic","Caucasian","Indo-European"],
-      answer:3
-    },
-    {
-      q:"Roughly what proportion of the world's population are international migrants, living outside their birth country? (UN DESA, 2020)",
-      options:["~3%","~15%","~25%","~40%"],
-      answer:0
-    }
-  ];
-
-  let current=0, score=0;
-  const box=document.getElementById("quizBox");
-
-  function showQuestion(){
-    if(current>=questions.length){ return showResult(); }
-
-    const q=questions[current];
-    box.innerHTML=`
-      <div class="quiz-question">${q.q}</div>
-      <div class="quiz-options">
-        ${q.options.map((opt,i)=>`<div class="quiz-option" data-idx="${i}">${opt}</div>`).join("")}
-      </div>
-    `;
-
-    box.querySelectorAll(".quiz-option").forEach(opt=>{
-      opt.addEventListener("click",()=>{
-        if(opt.classList.contains("correct")||opt.classList.contains("wrong")) return;
-        const idx=parseInt(opt.dataset.idx,10);
-        box.querySelectorAll(".quiz-option").forEach(b=>b.style.pointerEvents="none");
-
-        if(idx===q.answer){
-          opt.classList.add("correct");
-          score++;
-        }else{
-          opt.classList.add("wrong");
-          box.querySelector(`.quiz-option[data-idx="${q.answer}"]`).classList.add("correct");
-        }
-        setTimeout(()=>{ current++; showQuestion(); }, 1200);
-      });
-    });
-  }
-
-  function showResult(){
-    const total = questions.length;
-    let comment = "";
-    const pct = (score/total)*100;
-    if (pct === 100) comment = "Perfect! Expert vibes.";
-    else if (pct >= 80) comment = "Great job — you really know your stuff.";
-    else if (pct >= 60) comment = "Solid — a couple of tricky ones.";
-    else if (pct >= 40) comment = "Not bad — these were tough.";
-    else comment = "Tough set — want to try again?";
-
-    box.innerHTML = `
-      <div class="quiz-result">Your score: ${score}/${total}</div>
-      <div class="quiz-comment">${comment}</div>
-      <div style="margin-top:14px">
-        <button id="playAgainBtn" class="btn primary">Play Again</button>
-      </div>
-    `;
-
-    document.getElementById("playAgainBtn").addEventListener("click", ()=>{
-      current = 0;
-      score = 0;
-      showQuestion();
-    });
-  }
-
-  showQuestion();
-})();
-</script>
-  
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="wrap reveal fx-from-up">
-      <div class="card reveal fx-zoom">
-        <h2 class="reveal fx-wipe-r">Let’s work together</h2>
-        <p class="lead reveal fx-from-left">Available for research, data, and communications projects.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn primary" href="mailto:badersuliman79@gmail.com">Email me</a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/bader-suliman-845840234" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ghost" href="bs.eng.cv.pdf" target="_blank" rel="noopener">Download CV</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer><div class="wrap">© 2025 Bader Suliman</div></footer>
-<a href="#about" class="btn primary to-top" id="toTop">↑ Top</a>
-
-<!-- Leaflet JS (needed for the map) -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
-
-<script>
-/* Reveal on scroll */
-(function(){
-  const els=[...document.querySelectorAll('.reveal')];
-  if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'))}
-  else{
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{root:null,rootMargin:'0px 0px -10% 0px',threshold:0});
-    els.forEach(e=>io.observe(e));
-  }
-  const kick=()=>els.forEach(e=>{const r=e.getBoundingClientRect(); if(r.top<innerHeight*.9&&r.bottom>0)e.classList.add('in')});
-  requestAnimationFrame(kick); addEventListener('load',kick,{once:true}); addEventListener('resize',kick); addEventListener('orientationchange',kick);
-})();
-
-// Rotating tagline
-const words=["Communications","Data","Mapping","Research"]; let wi=0;
-const rot=document.getElementById("rotate");
-function cycle(){ if(!rot) return; rot.classList.remove('show'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.add('show'); },220); }
-if(rot){ rot.classList.add('show'); setInterval(cycle,1800); }
-
-// Back to top
-const toTop=document.getElementById('toTop');
-const toggleTop=()=>{ scrollY>400 ? toTop.classList.add('show') : toTop.classList.remove('show') };
-addEventListener('scroll',toggleTop,{passive:true}); toggleTop();
-
-// Active nav highlight + progress bar
-const links=[...document.querySelectorAll('nav a')];
-const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
-const secs=ids.map(id=>document.querySelector(id));
-let prog=document.getElementById('progress'); if(!prog){prog=document.createElement('div');prog.id='progress';document.body.appendChild(prog);}
-const onScroll=()=>{
-  const h=document.documentElement; const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
-  prog.style.width=(scrolled*100)+'%';
-  let idx=0; secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.top<=innerHeight*0.4) idx=i;});
-  const atBottom=Math.ceil(scrollY+innerHeight)>=document.body.scrollHeight-2; if(atBottom) idx=secs.length-1;
-  links.forEach(a=>a.classList.remove('active')); const active=document.querySelector(`nav a[href="${ids[idx]}"]`); if(active) active.classList.add('active');
-};
-addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-/* Mobile menu */
-const menuBtn=document.getElementById('menuBtn');
-const nav=document.getElementById('siteNav');
-function closeNav(){ document.body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded','false'); nav.setAttribute('aria-hidden','true'); }
-function openNav(){ document.body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded','true'); nav.removeAttribute('aria-hidden'); }
-menuBtn.addEventListener('click',()=>{ document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
-addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
-addEventListener('resize',()=>{ if(innerWidth>760) closeNav(); },{passive:true});
-
-/* ========= NEW: Build the education cards (from your second code) ========= */
-(function(){
-  const data = [
-    { year:"2026–2027", city:"Berlin, Germany", code:"de", school:"Freie Universität Berlin — OSI", program:"M.A. International Relations", note:"Expected to start 2026. Comparative security focus with modules on EU foreign and defense policies." },
-    { year:"2024–2026", city:"Paris, France", code:"fr", school:"Sciences Po — PSIA", program:"M.A. International Security & Migration", note:"Asylum and migration law, border governance, and humanitarian data analysis; qualitative research design and mapping/data projects." },
-
-    // Added after PSIA
-    { year:"2024–2025", city:"Paris, France", code:"fr", school:"INALCO — Eurasian Department", program:"Persian Language & Iranian Studies", note:"Intensive Persian (academic texts, conversation) plus history, society, and politics of Iran and Afghanistan." },
-
-    { year:"2023–2024", city:"Tokyo, Japan", code:"jp", school:"Tokyo University of Foreign Studies", program:"Exchange. Asia-Pacific & Japanese Studies", note:"Full-time Japanese intensive alongside Asia-Pacific politics; Japan/ASEAN focus with intercultural fieldwork." },
-    { year:"2022–2023", city:"Menton, France", code:"fr", school:"Sciences Po Campus of Menton", program:"B.A. Major in Politics & Government", note:"Middle Eastern & Mediterranean specialization: comparative politics, constitutional law, and regional history; debate workshops tied to current affairs." },
-    { year:"2021–2022", city:"Nancy, France", code:"fr", school:"Sciences Po Campus of Nancy", program:"B.A. Introduction to social sciences", note:"Multidisciplinary foundations in political science, economics, sociology, law, and history within a trilingual Franco-German track; EU institutions and academic writing." }
-  ];
-
-  const tray = document.getElementById('eduTray');
-  if (!tray) return;
-  tray.innerHTML = data.map(d => `
-    <article class="edu-card" tabindex="0">
-      <div class="meta">
-        <img class="flag-ico" src="https://flagcdn.com/w40/${d.code}.png" alt="${d.city} flag" loading="lazy" width="24" height="16">
-        <span>${d.year} • ${d.city}</span>
-      </div>
-      <div class="school">${d.school}</div>
-      <div class="desc">${d.program}</div>
-      ${d.note ? `<div class="note">${d.note}</div>`:''}
-    </article>
-  `).join('');
-
-  // Drag to scroll
-  let down=false,startX=0,sl=0,pid=null;
-  tray.addEventListener('pointerdown', e=>{down=true;startX=e.clientX;sl=tray.scrollLeft;pid=e.pointerId;tray.setPointerCapture(pid);});
-  tray.addEventListener('pointermove', e=>{if(!down)return; tray.scrollLeft=sl-(e.clientX-startX);});
-  tray.addEventListener('pointerup', ()=>{down=false; try{tray.releasePointerCapture(pid);}catch{} });
-
-  // Wheel → horizontal
-  tray.addEventListener('wheel', e=>{
-    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ tray.scrollLeft += e.deltaY; e.preventDefault(); }
-  }, {passive:false});
-})();
-
-/* ========= NEW: Visited countries map (transparent, polygons only) ========= */
-(function(){
-  const el = document.getElementById('visitedMap');
-  if (!el || typeof L === 'undefined') return;
-
-  const map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5
-  });
-
-  function setEurasiaView(){
-    map.setView([36, 60], 3.0);
-  }
-  setEurasiaView();
-  window.addEventListener('resize', setEurasiaView);
-
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
-  const normalize = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const visited = new Set(visitedNames.map(normalize));
-
-  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ea5a2';
-  const stroke = '#7a7a7a';
-
-  const SOURCES = [
-    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
-    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
-  ];
-
-  function loadWorld(i){
-    return fetch(SOURCES[i]).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(geo=>{
-      const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
-     const layer = L.geoJSON(geo, {
-  style: f => {
-    const props = f.properties || {};
-    const name = useAdmin ? (props.ADMIN || '') : (props.name || '');
-    const hit  = visited.has(normalize(name));
-    return {
-      fillColor: hit ? accent : 'transparent',
-      color: stroke,
-      weight: hit ? 1.2 : 0.6,
-      fillOpacity: hit ? 0.9 : 0.0,
-      opacity: 0.9
-    };
-  },
-  onEachFeature: (f, l) => {
-    const props = f.properties || {};
-    const name = (props.name || props.ADMIN || '');
-
-    l.bindTooltip(name, { sticky:true, direction:'top', opacity:0.9 });
-    if (visited.has(normalize(name))) {
-      l.bindPopup(`<strong>${name}</strong>`);
-    }
-
-    // Hover micro-interaction: thicker stroke + bring to front
-    l.on('mouseover', e => {
-      e.target.setStyle({ weight: 2.2 });
-      try { e.target.bringToFront(); } catch {}
-    });
-    l.on('mouseout', e => {
-      try { layer.resetStyle(e.target); } catch {}
-    });
-  }
-}).addTo(map);
-      setTimeout(setEurasiaView, 0);
-    });
-  }
-  loadWorld(0).catch(()=>loadWorld(1)).catch(err=>{
-    console.error('GeoJSON load error:', err);
-    el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
-  });
-})();
-</script>
-
 </body>
 </html>
-
-
-
-
