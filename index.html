@@ -242,46 +242,40 @@
 /* ===========================
    BD-STYLE EXPERIENCE PANEL
 =========================== */
-
+    
 .exp-panel {
-  display: none;             /* hidden until clicked */
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;                 /* was 40px – logo & text closer */
-  margin-top: 0;             /* was 30px – panel higher */
-  align-items: flex-start;
+  display: none;
+  grid-template-columns: 0.9fr 1.1fr;   /* logo space ↑ / text space ↓ */
+  gap: 16px;                             /* was 22/40 — now tighter */
+  margin-top: 0;                         /* move panel higher */
+  align-items: center;                   /* vertically align */
+}
+
+/* LEFT SIDE — THE LOGO */
+.exp-panel-left {
+  display: flex;
+  justify-content: center;               /* center horizontally */
+  align-items: center;                   /* center vertically */
 }
 
 .exp-panel-left img {
-  max-width: 320px;
+  max-width: 380px;                      /* bigger (was 320px) */
   width: 100%;
+  transform: translateY(-10px);          /* nudges logo upward */
 }
 
+/* RIGHT SIDE — TEXT TITLES */
 .exp-panel-right h2 {
-  font-size: 1.8rem;
-  margin-bottom: 4px;        /* was 10px */
+  font-size: 1.9rem;
+  margin-bottom: 2px;                    /* reduce spacing */
 }
 
 .exp-panel-right h3 {
-  margin-top: 10px;          /* was 20px */
-  margin-bottom: 4px;        /* was 6px */
+  margin-top: 8px;                       /* was 20px */
+  margin-bottom: 4px;
   font-size: 1.2rem;
 }
 
-.exp-panel-right ul {
-  margin-left: 20px;
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-.exp-back-btn {
-  margin-top: 20px;
-  padding: 8px 14px;
-  background: #009fa5;
-  border: none;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
 
     /* ===========================
