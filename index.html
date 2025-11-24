@@ -239,6 +239,48 @@
   clip-path: inset(0 round 20px);
 }
 
+    /* BD-STYLE EXPERIENCE PANEL */
+.exp-panel {
+  display: none;          /* hidden until clicked */
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 30px;
+  align-items: flex-start;
+}
+
+.exp-panel-left img {
+  max-width: 320px;
+  width: 100%;
+}
+
+.exp-panel-right h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.exp-panel-right h3 {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+}
+
+.exp-panel-right ul {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.exp-back-btn {
+  margin-top: 20px;
+  padding: 8px 14px;
+  background: #009fa5;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
     /* ===========================
        SKILLS SECTION
     ============================ */
@@ -766,6 +808,10 @@
         </div>
       </section>
 
+
+
+
+      
     <!-- EXPERIENCE – LOGO CLOUD ONLY -->
 
 <section id="experience">
@@ -795,6 +841,34 @@
       <div class="experience-logo">
         <img src="spma.png" alt="New organization logo">
       </div>
+
+      <!-- OIF PANEL (hidden by default) -->
+<div id="oif-panel" class="exp-panel">
+  <div class="exp-panel-left">
+    <img src="oif.png" alt="OIF logo">
+  </div>
+
+  <div class="exp-panel-right">
+    <h2>International Organisation of La Francophonie (OIF)</h2>
+
+    <h3>Key Contributions</h3>
+    <ul>
+      <li>Compiled and analysed operational data across 90 member states.</li>
+      <li>Built dashboards and visualisations (Power BI, Excel).</li>
+      <li>Produced 54+ country briefs supporting programme monitoring.</li>
+      <li>Tracked 10+ performance indicators linked to strategic outcomes.</li>
+    </ul>
+
+    <h3>Achievements</h3>
+    <ul>
+      <li>Contributed to the 2025 Implementation Report.</li>
+      <li>Improved internal reporting workflows and data clarity.</li>
+      <li>Created communication visuals and maps for project teams.</li>
+    </ul>
+
+    <button id="oif-back" class="exp-back-btn">← Back</button>
+  </div>
+</div>
 
     </div>
   </div>
@@ -1027,6 +1101,28 @@
 
     // initial state: home only
     showSection("home");
+
+
+    /* ===============================
+   EXPERIENCE — CLICK LOGO
+=============================== */
+
+const oifLogo = document.querySelector('.experience-logo img[src="oif.png"]');
+const oifPanel = document.getElementById("oif-panel");
+const expGrid = document.querySelector(".experience-logo-cloud");
+const oifBack = document.getElementById("oif-back");
+
+// OPEN OIF PANEL
+oifLogo.addEventListener("click", () => {
+  expGrid.style.display = "none";      // hide the 3×2 logos
+  oifPanel.style.display = "grid";     // show BD panel
+});
+
+// BACK BUTTON
+oifBack.addEventListener("click", () => {
+  oifPanel.style.display = "none";     // hide panel
+  expGrid.style.display = "grid";      // show 3×2 logos again
+});
 
     /* ===============================
        EDUCATION POPUP LOGIC
