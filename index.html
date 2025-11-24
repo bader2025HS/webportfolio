@@ -189,16 +189,16 @@
     .edu-close:hover { color: #000; }
 
 /* ===========================
-   EXPERIENCE SECTION – ORGANIC LOGO CLOUD (COMPACT HEIGHT)
+   EXPERIENCE SECTION – ORGANIC LOGO CLOUD
 =========================== */
 
 #experience {
-  margin-top: 30px;   /* slightly less space under the menu */
+  margin-top: 40px;
 }
 
 .experience-layout {
-  max-width: 1200px;
-  margin: 40px auto 40px;  /* smaller top/bottom margin so the section is shorter */
+  max-width: 1300px;
+  margin: 60px auto 80px;
 }
 
 /* FLEX WRAP → logos flow naturally, no rigid grid */
@@ -206,71 +206,72 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px 48px;          /* tighter vertical gap to avoid extra height */
-  padding: 10px 10px 30px; /* less padding, especially at the bottom */
+  gap: 50px 80px;            /* vertical / horizontal spacing */
+  padding: 40px 20px 80px;
 }
 
 /* Base logo style – big and floating, no box */
 .experience-logo img {
-  max-width: 230px;        /* slightly smaller so 2 “rows” fit in one screen */
+  max-width: 280px;          /* ⬅ bigger logos */
   width: 100%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(15, 23, 42, 0.22));
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.22));
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 
 /* Hover lift */
 .experience-logo img:hover {
-  transform: translateY(-6px) scale(1.04);
-  filter: drop-shadow(0 16px 28px rgba(15, 23, 42, 0.32));
+  transform: translateY(-8px) scale(1.04);
+  filter: drop-shadow(0 18px 32px rgba(15, 23, 42, 0.32));
 }
 
-/* “Cloudy” / random feel: slightly different sizes + small vertical offsets */
+/* “Cloudy” / random feel: different sizes + vertical offsets */
 .experience-logo:nth-child(1) img {
-  max-width: 220px;
-  transform: translateY(6px);
+  max-width: 260px;
 }
 
 .experience-logo:nth-child(2) img {
-  max-width: 240px;
-  transform: translateY(10px);
+  max-width: 310px;
+  transform: translateY(16px);
 }
 
 .experience-logo:nth-child(3) img {
-  max-width: 230px;
-  transform: translateY(-8px);
+  max-width: 270px;
+  transform: translateY(-10px);
 }
 
 .experience-logo:nth-child(4) img {
-  max-width: 220px;
-  transform: translateY(4px);
+  max-width: 260px;
+  transform: translateY(8px);
 }
 
 .experience-logo:nth-child(5) img {
-  max-width: 250px;
-  transform: translateY(-4px);
+  max-width: 320px;
+  transform: translateY(-6px);
 }
 
 /* When hovering, override the offset with the hover transform */
-.experience-logo:nth-child(n) img:hover {
-  transform: translateY(-6px) scale(1.04);
+.experience-logo:nth-child(2) img:hover,
+.experience-logo:nth-child(3) img:hover,
+.experience-logo:nth-child(4) img:hover,
+.experience-logo:nth-child(5) img:hover {
+  transform: translateY(-8px) scale(1.04);
 }
 
 /* Mobile tweaks */
 @media (max-width: 900px) {
   .experience-layout {
     max-width: 100%;
-    padding: 0 16px 30px;
+    padding: 0 16px 40px;
   }
 
   .experience-logo-cloud {
-    gap: 24px 24px;
-    padding-bottom: 20px;
+    gap: 32px 32px;
   }
 
   .experience-logo img {
-    max-width: 200px;
+    max-width: 220px;
     filter: drop-shadow(0 8px 16px rgba(15, 23, 42, 0.22));
     transform: none;
   }
@@ -279,7 +280,6 @@
     transform: none;   /* no vertical offsets on small screens */
   }
 }
-
 
 
     /* ===========================
