@@ -259,6 +259,18 @@
   transform: translateY(-8px) scale(1.04);
 }
 
+    /* Remove shadow for AQLITY and ARDHIS ONLY */
+.experience-logo:nth-child(2) img,
+.experience-logo:nth-child(3) img {
+  filter: none !important;
+}
+
+    .experience-logo:nth-child(2) img:hover,
+.experience-logo:nth-child(3) img:hover {
+  filter: none !important;
+}
+
+    
 /* Mobile tweaks */
 @media (max-width: 900px) {
   .experience-layout {
