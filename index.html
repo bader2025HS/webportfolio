@@ -516,6 +516,11 @@
       display: block;
     }
 
+    /* Make the first gallery tile taller */
+.gallery-item:first-child {
+  grid-row: span 2;   /* 2 rows × 200px = 400px tall */
+}
+
     .gallery-item:hover img {
       opacity: 1;
       filter: none;
