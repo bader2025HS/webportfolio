@@ -188,21 +188,187 @@
 
     .edu-close:hover { color: #000; }
 
-experienceDetails.innerHTML = `
-  <div class="experience-logo-box">
-    ${data.logo ? `<img src="${data.logo}" alt="${key} logo">` : ""}
-  </div>
 
-  <div class="experience-details-card">
-    ... all your details here ...
-  </div>
-`;
+/* ===========================
+   EXPERIENCE SECTION
+=========================== */
+
+#experience {
+  margin-top: 40px;
+}
+
+/* Wrapper centered under the menu */
+.experience-layout {
+  max-width: 1150px;      /* roughly same width as nav */
+  margin: 60px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Row of 5 organisation boxes */
+.experience-org-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+/* Each organisation box */
+.experience-org-card {
+  min-width: 190px;
+  padding: 18px 26px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 600;
+
+  /* Center the text perfectly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+  transition: transform 0.22s ease,
+              box-shadow 0.22s ease,
+              filter 0.22s ease,
+              border-color 0.22s ease;
+}
+
+  /* same hover language as lang pills */
+  transition: transform 0.22s ease,
+              box-shadow 0.22s ease,
+              filter 0.22s ease,
+              border-color 0.22s ease;
+}
+
+.experience-org-card:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  filter: saturate(1.08);
+  border-color: #009fa5;
+}
+
+    /* Active (selected) organisation box */
+.experience-org-card.active {
+  background: #009fa5;
+  color: #ffffff;
+  border-color: #009fa5;
+  box-shadow: 0 8px 22px rgba(0, 159, 165, 0.45);
+}
+
+/* Container for the details card */
+.experience-details {
+  max-width: 900px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+/* Details card style */
+.experience-details-card {
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 18px 20px;
+  background: #fdfefe;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+    /* Section labels inside the details card */
+.exp-section-label {
+  margin-top: 14px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+/* Bullet lists (Key contributions, Deliverables) */
+.exp-bullets {
+  margin: 0 0 4px 1.2rem;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.45;
+}
+
+.exp-bullets li {
+  margin-bottom: 4px;
+}
+
+/* Inline lines (Skills, Tools) */
+.exp-inline {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.exp-inline strong {
+  font-weight: 600;
+}
 
 
+/* Reuse the card inner layout (title, description, tags) */
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
 
- /* ===========================
-     SKILLS SECTION
-  ============================ */
+.exp-role {
+  color: #111827;
+}
+
+.exp-location {
+  color: #4b5563;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.exp-desc {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.exp-tag {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e1faf5;
+  border: 1px solid #b3efe2;
+  color: #064e3b;
+  white-space: nowrap;
+}
+
+/* Mobile: allow wrapping into 2–3 lines */
+@media (max-width: 900px) {
+  .experience-layout {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .experience-org-row {
+    flex-wrap: wrap;
+  }
+
+  .experience-org-card {
+    flex: 1 1 45%;
+  }
+}
+
+    /* ===========================
+       SKILLS SECTION
+    ============================ */
 
     #skills {
       margin-top: 40px;
@@ -1139,51 +1305,50 @@ experienceDetails.innerHTML = `
       if (e.key === "ArrowLeft") showPrev();
     });
 
+    /* ===============================
+   EXPERIENCE DETAILS TOGGLE
+=============================== */
+
 /* ===============================
-   EXPERIENCE DETAILS TOGGLE (UPDATED)
+   EXPERIENCE DETAILS TOGGLE
 =============================== */
 
 const experienceData = {
   "International Organization of La Francophonie (OIF)": {
     role: "Intern – Project Design & Monitoring, OIF",
     location: "Paris • 2025",
-    desc:
-      "Analyzed project data for development projects across the Francophonie and supported monitoring and evaluation for the implementation report.",
+    desc: "Analyzed project data for development projects across the Francophonie and supported monitoring and evaluation for the implementation report.",
     contribs: [
       "Compiled and analysed data for 20+ OIF development projects.",
       "Maintained structured cooperation databases covering multiple member states.",
       "Drafted country briefs to feed into performance monitoring.",
       "Contributed inputs and indicators for the execution / implementation report."
     ],
+    skills: "Data analysis • Database design • Monitoring & evaluation • Policy writing",
     tools: "Excel • Power BI • Word • Google Sheets",
     deliverables: [
       "20+ project datasets cleaned and harmonised.",
       "15+ country briefs prepared or updated.",
       "Monitoring tables and charts for the implementation report."
     ],
-    tags: [
-      "Data analysis",
-      "Database design",
-      "Country briefs",
-      "Monitoring and evaluation"
-    ]
+    tags: ["Data analysis", "Database design", "Country briefs", "Monitoring and evaluation"]
   },
 
   "AQLITY Humanitarian Innovation": {
     role: "Intern – Data Analysis, AQLITY",
     location: "Remote • 2024",
-    desc:
-      "Cleaned and analysed humanitarian datasets and produced GIS maps and visual materials to explain trends and support partners.",
+    desc: "Cleaned and analysed humanitarian datasets and produced GIS maps and visual materials to explain trends and support partners.",
     contribs: [
       "Cleaned and structured humanitarian datasets from multiple field partners.",
       "Produced GIS maps of settlements and access to services.",
       "Created visuals and dashboards to communicate trends to non-technical audiences.",
       "Contributed to analytical reports and partner presentations."
     ],
+    skills: "Data cleaning • GIS and mapping • Visual storytelling • Reporting",
     tools: "Excel • Power BI • QGIS • Mapbox • Illustrator",
     deliverables: [
-      "Settlement maps used by field teams.",
-      "Dashboards / visuals for partner briefings.",
+      "Several settlement maps for field teams.",
+      "Dashboards / visuals used in partner briefings.",
       "Summary data tables for internal reports."
     ],
     tags: ["Data cleaning", "GIS and mapping", "Infographics", "Reporting"]
@@ -1192,19 +1357,19 @@ const experienceData = {
   "ARDHIS": {
     role: "Volunteer – Immigration Law Clinic, ARDHIS",
     location: "Paris • 2023–2025",
-    desc:
-      "Support LGBT+ asylum seekers during drop-in sessions and produce country-of-origin research to inform legal strategies and hearings.",
+    desc: "Support LGBT+ asylum seekers during drop-in sessions and produce country-of-origin research to inform legal strategies and hearings.",
     contribs: [
       "Welcomed and oriented asylum seekers during weekly drop-in sessions.",
       "Conducted in-depth country-of-origin research on legal and social contexts.",
       "Drafted memos and notes for lawyers and case workers.",
       "Helped applicants prepare for OFPRA and CNDA interviews."
     ],
-    tools: "Word • Google Docs • Online legal and country-of-origin databases",
+    skills: "Asylum support • Qualitative research • Interview preparation • Legal drafting",
+    tools: "Word • Google Docs • Online legal / country-of-origin databases",
     deliverables: [
       "Country-of-origin research notes and internal briefs.",
       "Preparation outlines for individual hearings.",
-      "Contributions to a longer internal report on several countries."
+      "Contributions to a larger internal report on several countries."
     ],
     tags: ["Asylum support", "Country research", "Interview prep", "Legal briefs"]
   },
@@ -1212,51 +1377,41 @@ const experienceData = {
   "Royal Scientific Society": {
     role: "Research Intern – Science & Policy, Royal Scientific Society",
     location: "Amman • 2023",
-    desc:
-      "Contributed to a project on desalination and water diplomacy, mapping regional initiatives and co-authoring an article with partners.",
+    desc: "Contributed to a project on desalination and water diplomacy, mapping regional initiatives and co-authoring an article with partners.",
     contribs: [
       "Reviewed literature on desalination, water security and regional cooperation.",
       "Mapped regional initiatives and stakeholders in water and energy.",
       "Analysed policy documents and technical reports with a diplomacy angle.",
       "Co-authored a policy-oriented article with project partners."
     ],
-    tools: "Excel • Word • (GIS / mapping tools as relevant)",
+    skills: "Research writing • Policy analysis • Stakeholder mapping • Science diplomacy",
+    tools: "Excel • QGIS (or other mapping tools) • Word • Illustrator",
     deliverables: [
       "Database / mapping of regional desalination and water initiatives.",
       "Co-authored article or policy brief on desalination and diplomacy.",
       "Internal notes for partners and project meetings."
     ],
-    tags: [
-      "Water policy",
-      "Research writing",
-      "Stakeholder mapping",
-      "Science diplomacy"
-    ]
+    tags: ["Water policy", "Research writing", "Stakeholder mapping", "Science diplomacy"]
   },
 
   "City Hall of Nancy": {
     role: "Project Assistant – International Relations, City Hall of Nancy",
     location: "Nancy • 2022",
-    desc:
-      "Helped organise events with twin cities, coordinated visiting delegations and supported communications on the city’s environmental policies.",
+    desc: "Helped organise events with twin cities, coordinated visiting delegations and supported communications on the city’s environmental policies.",
     contribs: [
       "Co-organised visits from delegations of twin cities (e.g. Lviv, Lublin, Newcastle).",
       "Coordinated logistics, cultural activities and museum visits.",
       "Supported a conference on the city’s environmental and climate policies.",
       "Facilitated exchanges between local actors and international guests."
     ],
-    tools: "Office suite • Email and online communication tools",
+    skills: "Event coordination • Intercultural facilitation • Public diplomacy • Communication",
+    tools: "Office suite • Email / online communication tools",
     deliverables: [
       "Programmes and schedules for delegations.",
       "Notes and summaries from meetings and conferences.",
-      "Communication materials linked to visits and events."
+      "Communication materials related to visits and events."
     ],
-    tags: [
-      "Event coordination",
-      "Public diplomacy",
-      "Intercultural facilitation",
-      "Communications"
-    ]
+    tags: ["Event coordination", "Public diplomacy", "Intercultural facilitation", "Communications"]
   }
 };
 
@@ -1286,9 +1441,14 @@ function renderExperienceDetails(key) {
         </ul>
       ` : ""}
 
+      ${data.skills ? `
+        <div class="exp-section-label">Skills used</div>
+        <p class="exp-inline"><strong>Skills:</strong> ${data.skills}</p>
+      ` : ""}
+
       ${data.tools ? `
         <div class="exp-section-label">Tools</div>
-        <p class="exp-inline">${data.tools}</p>
+        <p class="exp-inline"><strong>Tools:</strong> ${data.tools}</p>
       ` : ""}
 
       ${data.deliverables && data.deliverables.length ? `
@@ -1305,23 +1465,17 @@ function renderExperienceDetails(key) {
   `;
 }
 
-// click behaviour
 orgCards.forEach(card => {
   card.addEventListener("click", () => {
+    // remove active from all
     orgCards.forEach(c => c.classList.remove("active"));
+    // activate clicked
     card.classList.add("active");
 
     const key = card.textContent.trim();
     renderExperienceDetails(key);
   });
 });
-
-// optional: show first org by default on page load
-if (orgCards.length > 0) {
-  orgCards[0].classList.add("active");
-  renderExperienceDetails(orgCards[0].textContent.trim());
-}
-
 
   </script>
 </body>
