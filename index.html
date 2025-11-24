@@ -193,12 +193,12 @@
 =========================== */
 
 #experience {
-  margin-top: 0;
+  margin-top: 5px;
 }
 
 .experience-layout {
   max-width: 1300px;
-  margin: 20px auto 30px;
+  margin: 40px auto 80px;
 }
 
 /* FLEX WRAP → logos flow naturally, no rigid grid */
@@ -206,13 +206,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px 60px;            /* vertical / horizontal spacing */
-  padding: 10px 20px 20px;
+  gap: 50px 80px;            /* vertical / horizontal spacing */
+  padding: 40px 20px 80px;
 }
 
 /* Base logo style – big and floating, no box */
 .experience-logo img {
-  max-width: 200px;          /* ⬅ bigger logos */
+  max-width: 220px;          /* ⬅ bigger logos */
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -226,40 +226,30 @@
   filter: drop-shadow(0 18px 32px rgba(15, 23, 42, 0.32));
 }
 
-/* “Cloudy” / random feel: different sizes + vertical offsets
-   (using margin-top so hover transform is identical for all) */
+/* “Cloudy” / random feel: different sizes + vertical offsets */
 .experience-logo:nth-child(1) img {
-  max-width: 220px;
+  max-width: 260px;
 }
 
-.experience-logo:nth-child(2) {
-  margin-top: 16px;
-}
 .experience-logo:nth-child(2) img {
-  max-width: 240px;
+  max-width: 310px;
+  transform: translateY(16px);
 }
 
-.experience-logo:nth-child(3) {
-  margin-top: -10px;
-}
 .experience-logo:nth-child(3) img {
-  max-width: 210px;
+  max-width: 270px;
+  transform: translateY(-10px);
 }
 
-.experience-logo:nth-child(4) {
-  margin-top: 8px;
-}
 .experience-logo:nth-child(4) img {
-  max-width: 220px;
+  max-width: 260px;
+  transform: translateY(8px);
 }
 
-.experience-logo:nth-child(5) {
-  margin-top: -6px;
-}
 .experience-logo:nth-child(5) img {
-  max-width: 240px;
+  max-width: 320px;
+  transform: translateY(-6px);
 }
-
 
 /* When hovering, override the offset with the hover transform */
 .experience-logo:nth-child(2) img:hover,
