@@ -221,9 +221,20 @@
   background: #ffffff;
   font-size: 0.98rem;
   font-weight: 600;
+
+  /* Center the text perfectly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
   cursor: pointer;
+  transition: transform 0.22s ease,
+              box-shadow 0.22s ease,
+              filter 0.22s ease,
+              border-color 0.22s ease;
+}
 
   /* same hover language as lang pills */
   transition: transform 0.22s ease,
