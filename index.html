@@ -495,6 +495,13 @@
     let worldData = null;
     let mapsLoaded = false;
 
+    // Store GeoJSON layers per country so we can recolor them
+    const countryLayers = {
+      france: null,
+      germany: null,
+      japan: null
+    };
+
     const COUNTRY_NAMES = {
       france: ["france"],
       germany: ["germany"],
@@ -503,10 +510,6 @@
 
     const normalize = s =>
       s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-    // NEW: store each country's Leaflet layer so we can recolor
-    const countryLayers = {};
-    const TURQUOISE = "#009fa5";
 
     async function loadGeoJSON() {
       if (worldData) return worldData;
@@ -520,6 +523,23 @@
           if (r.ok) return (worldData = await r.json());
         } catch (e) {}
       }
+    }
+
+    // Highlight helper: turquoise when 'country' is active, transparent otherwise
+    function highlightCountry(country) {
+      Object.keys(countryLayers).forEach(key => {
+        const layer = countryLayers[key];
+        if (!layer) return;
+
+        const isActive = key === country;
+
+        layer.setStyle({
+          color: "#222",
+          weight: 1.8,
+          fillOpacity: isActive ? 0.35 : 0,
+          fillColor: isActive ? "#009fa5" : "transparent"
+        });
+      });
     }
 
     function drawCountry(containerId, country, center, zoom) {
@@ -540,30 +560,13 @@
       const layer = L.geoJSON(worldData, {
         filter: f =>
           aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
-        style: {
-          color: "#222",
-          weight: 1.8,
-          fillOpacity: 0,        // start transparent
-          fillColor: "transparent"
-        }
+        style: { color: "#222", weight: 1.8, fillOpacity: 0, fillColor: "transparent" }
       }).addTo(map);
 
-      // store reference to this country's layer
-      countryLayers[country] = layer;
-    }
-
-    // NEW: highlight clicked country in turquoise, reset others
-    function highlightCountry(country) {
-      Object.keys(countryLayers).forEach(key => {
-        const layer = countryLayers[key];
-        if (!layer) return;
-        layer.setStyle({
-          color: "#222",
-          weight: 1.8,
-          fillOpacity: key === country ? 0.35 : 0,
-          fillColor: key === country ? TURQUOISE : "transparent"
-        });
-      });
+      // Save layer so we can tint it later
+      if (countryLayers.hasOwnProperty(country)) {
+        countryLayers[country] = layer;
+      }
     }
 
     async function initMaps() {
@@ -714,6 +717,8 @@
 
     function closeEduPopup() {
       eduOverlay.style.display = "none";
+      // reset highlight when closing popup
+      highlightCountry(null);
     }
 
     eduClose.addEventListener("click", closeEduPopup);
@@ -728,7 +733,7 @@
     });
 
     /* ===============================
-       LIGHTBOX FOR GALLERY (unchanged)
+       LIGHTBOX FOR GALLERY
     =============================== */
 
     const overlay = document.getElementById("lightboxOverlay");
