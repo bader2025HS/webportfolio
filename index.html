@@ -190,7 +190,7 @@
 
 
 /* ===========================
-   EXPERIENCE SECTION (UPDATED)
+   EXPERIENCE SECTION (WITH LOGO)
 =========================== */
 
 #experience {
@@ -253,16 +253,35 @@
   filter: saturate(1.08);
 }
 
-/* Details wrapper */
+/* ===== Details area: logo + card side by side ===== */
 .experience-details {
   max-width: 1150px;
   margin: 28px auto 0;
   padding: 0 20px;
+
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
 }
 
-/* Details card */
-.experience-details-card {
+/* Left logo column */
+.experience-logo-box {
+  width: 140px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.experience-logo-box img {
   width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Right column: details card */
+.experience-details-card {
+  flex: 1;
   border-radius: 20px;
   border: 1px solid #e2e8f0;
   padding: 26px 28px;
@@ -368,14 +387,23 @@
     max-width: 100%;
     padding: 0 12px;
     margin-top: 24px;
+    flex-direction: column;       /* logo above card on mobile */
+  }
+
+  .experience-logo-box {
+    width: 120px;
+    align-self: center;
   }
 
   .exp-header {
     flex-direction: column;
     align-items: flex-start;
   }
-}
 
+  .exp-location {
+    white-space: normal;
+  }
+}
 
     /* ===========================
        SKILLS SECTION
@@ -908,7 +936,7 @@
 
       <!-- EXPERIENCE -->
 
-    <section id="experience">
+   <section id="experience">
   <div class="experience-layout">
     <div class="experience-org-row">
       <div class="experience-org-card">International Organization of La Francophonie (OIF)</div>
@@ -919,9 +947,10 @@
     </div>
   </div>
 
-  <!-- Details appear here when you click a box -->
+  <!-- details (logo + card) injected here -->
   <div id="experienceDetails" class="experience-details"></div>
 </section>
+
       
       <!-- WORK -->
       <section id="work">
@@ -1317,11 +1346,12 @@
     });
 
 /* ===============================
-   EXPERIENCE DETAILS TOGGLE (UPDATED)
+   EXPERIENCE DETAILS TOGGLE (UPDATED WITH LOGOS)
 =============================== */
 
 const experienceData = {
   "International Organization of La Francophonie (OIF)": {
+    logo: "images/logos/oif.png",
     role: "Intern – Project Design & Monitoring, OIF",
     location: "Paris • 2025",
     desc:
@@ -1347,6 +1377,7 @@ const experienceData = {
   },
 
   "AQLITY Humanitarian Innovation": {
+    logo: "images/logos/aqlity.png",
     role: "Intern – Data Analysis, AQLITY",
     location: "Remote • 2024",
     desc:
@@ -1367,6 +1398,7 @@ const experienceData = {
   },
 
   "ARDHIS": {
+    logo: "images/logos/ardhis.png",
     role: "Volunteer – Immigration Law Clinic, ARDHIS",
     location: "Paris • 2023–2025",
     desc:
@@ -1387,6 +1419,7 @@ const experienceData = {
   },
 
   "Royal Scientific Society": {
+    logo: "images/logos/rss.png",
     role: "Research Intern – Science & Policy, Royal Scientific Society",
     location: "Amman • 2023",
     desc:
@@ -1397,7 +1430,7 @@ const experienceData = {
       "Analysed policy documents and technical reports with a diplomacy angle.",
       "Co-authored a policy-oriented article with project partners."
     ],
-    tools: "Excel • Word • (GIS / mapping tools as relevant)",
+    tools: "Excel • Word",
     deliverables: [
       "Database / mapping of regional desalination and water initiatives.",
       "Co-authored article or policy brief on desalination and diplomacy.",
@@ -1412,6 +1445,7 @@ const experienceData = {
   },
 
   "City Hall of Nancy": {
+    logo: "images/logos/nancy.png",
     role: "Project Assistant – International Relations, City Hall of Nancy",
     location: "Nancy • 2022",
     desc:
@@ -1448,6 +1482,10 @@ function renderExperienceDetails(key) {
   }
 
   experienceDetails.innerHTML = `
+    <div class="experience-logo-box">
+      ${data.logo ? `<img src="${data.logo}" alt="${key} logo">` : ""}
+    </div>
+
     <div class="experience-details-card">
       <div class="exp-header">
         <span class="exp-role">${data.role}</span>
@@ -1456,7 +1494,7 @@ function renderExperienceDetails(key) {
 
       <p class="exp-desc">${data.desc}</p>
 
-      ${data.contribs && data.contribs.length ? `
+      ${data.contribs?.length ? `
         <div class="exp-section-label">Key contributions</div>
         <ul class="exp-bullets">
           ${data.contribs.map(item => `<li>${item}</li>`).join("")}
@@ -1468,7 +1506,7 @@ function renderExperienceDetails(key) {
         <p class="exp-inline">${data.tools}</p>
       ` : ""}
 
-      ${data.deliverables && data.deliverables.length ? `
+      ${data.deliverables?.length ? `
         <div class="exp-section-label">Deliverables</div>
         <ul class="exp-bullets">
           ${data.deliverables.map(item => `<li>${item}</li>`).join("")}
@@ -1482,7 +1520,7 @@ function renderExperienceDetails(key) {
   `;
 }
 
-// click behaviour
+// Click behaviour
 orgCards.forEach(card => {
   card.addEventListener("click", () => {
     orgCards.forEach(c => c.classList.remove("active"));
@@ -1493,11 +1531,12 @@ orgCards.forEach(card => {
   });
 });
 
-// optional: show first org by default on page load
+// Show first experience by default
 if (orgCards.length > 0) {
   orgCards[0].classList.add("active");
   renderExperienceDetails(orgCards[0].textContent.trim());
 }
+
 
 
   </script>
