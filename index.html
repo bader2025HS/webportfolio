@@ -239,6 +239,73 @@
   border-color: #009fa5;
 }
 
+    /* Active (selected) organisation box */
+.experience-org-card.active {
+  background: #009fa5;
+  color: #ffffff;
+  border-color: #009fa5;
+  box-shadow: 0 8px 22px rgba(0, 159, 165, 0.45);
+}
+
+/* Container for the details card */
+.experience-details {
+  max-width: 900px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+/* Details card style */
+.experience-details-card {
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 18px 20px;
+  background: #fdfefe;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+/* Reuse the card inner layout (title, description, tags) */
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.exp-role {
+  color: #111827;
+}
+
+.exp-location {
+  color: #4b5563;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.exp-desc {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.exp-tag {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e1faf5;
+  border: 1px solid #b3efe2;
+  color: #064e3b;
+  white-space: nowrap;
+}
+
 /* Mobile: allow wrapping into 2–3 lines */
 @media (max-width: 900px) {
   .experience-layout {
@@ -789,19 +856,18 @@
     <section id="experience">
   <div class="experience-layout">
     <div class="experience-org-row">
-
       <div class="experience-org-card">OIF</div>
       <div class="experience-org-card">AQLITY</div>
       <div class="experience-org-card">ARDHIS</div>
       <div class="experience-org-card">Royal Scientific Society</div>
       <div class="experience-org-card">City of Nancy</div>
-
     </div>
   </div>
+
+  <!-- Details appear here when you click a box -->
+  <div id="experienceDetails" class="experience-details"></div>
 </section>
-
       
-
       <!-- WORK -->
       <section id="work">
         <p class="placeholder">Work section content goes here.</p>
@@ -1194,6 +1260,80 @@
       if (e.key === "ArrowRight") showNext();
       if (e.key === "ArrowLeft") showPrev();
     });
+
+    /* ===============================
+   EXPERIENCE DETAILS TOGGLE
+=============================== */
+
+const experienceData = {
+  "OIF": {
+    role: "Intern – Project Design & Monitoring, OIF",
+    location: "Paris • 2025",
+    desc: "Analyzed project data, maintained structured cooperation databases, wrote country briefs, and supported monitoring and evaluation for the execution report.",
+    tags: ["Data analysis", "Database design", "Country briefs", "Monitoring and evaluation"]
+  },
+  "AQLITY": {
+    role: "Intern – Data Analysis, AQLITY",
+    location: "Remote • 2024",
+    desc: "Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials to explain trends and inform reports.",
+    tags: ["Data cleaning", "GIS and mapping", "Infographics", "Reporting"]
+  },
+  "ARDHIS": {
+    role: "Volunteer – Immigration Law Clinic, ARDHIS",
+    location: "Paris • 2023–2025",
+    desc: "Support LGBT+ asylum seekers during drop-in sessions and produce country-of-origin research to inform legal strategies and hearings.",
+    tags: ["Asylum support", "Country research", "Interview prep", "Legal briefs"]
+  },
+  "Royal Scientific Society": {
+    role: "Research Intern – Science & Policy, Royal Scientific Society",
+    location: "Amman • 2023",
+    desc: "Contributed to a project on desalination and water diplomacy, mapping regional initiatives and co-authoring an article with partners.",
+    tags: ["Water policy", "Research writing", "Stakeholder mapping", "Science diplomacy"]
+  },
+  "City of Nancy": {
+    role: "Project Assistant – International Relations, City of Nancy",
+    location: "Nancy • 2022",
+    desc: "Helped organise events with twin cities, coordinated visiting delegations and supported communications on the city’s environmental policies.",
+    tags: ["Event coordination", "Public diplomacy", "Intercultural facilitation", "Communications"]
+  }
+};
+
+const orgCards = document.querySelectorAll(".experience-org-card");
+const experienceDetails = document.getElementById("experienceDetails");
+
+function renderExperienceDetails(key) {
+  const data = experienceData[key];
+  if (!data) {
+    experienceDetails.innerHTML = "";
+    return;
+  }
+
+  experienceDetails.innerHTML = `
+    <div class="experience-details-card">
+      <div class="exp-header">
+        <span class="exp-role">${data.role}</span>
+        <span class="exp-location">${data.location}</span>
+      </div>
+      <p class="exp-desc">${data.desc}</p>
+      <div class="exp-tags">
+        ${data.tags.map(tag => `<span class="exp-tag">${tag}</span>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+orgCards.forEach(card => {
+  card.addEventListener("click", () => {
+    // remove active from all
+    orgCards.forEach(c => c.classList.remove("active"));
+    // activate clicked
+    card.classList.add("active");
+
+    const key = card.textContent.trim();
+    renderExperienceDetails(key);
+  });
+});
+
   </script>
 </body>
 </html>
