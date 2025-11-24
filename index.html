@@ -243,55 +243,54 @@
    BD-STYLE EXPERIENCE PANEL
 =========================== */
     
+/* BD-STYLE EXPERIENCE PANEL */
 .exp-panel {
   display: none;
-  grid-template-columns: 1fr 1fr;  /* equal columns = closer */
-  gap: 10px;                       /* smaller gap */
-  margin-top: 0;                    /* remove extra top spacing */
-  align-items: center;
+  grid-template-columns: 0.9fr 1.1fr;  /* bring columns closer */
+  gap: 14px;                           /* smaller space between Logo/Text */
+  margin-top: 0;                       /* remove top gap */
+  align-items: center;                 /* vertically align both sides */
 }
 
-/* Logo size slightly reduced to avoid scrollbar */
+/* Left (Logo) */
 .exp-panel-left img {
-  max-width: 300px;    /* was 340px */
+  max-width: 420px;   /* still big, but fits without scroll */
   width: 100%;
 }
 
-/* Text spacing + slightly tighter layout */
+/* Right (Text) */
+.exp-panel-right {
+  margin-top: -10px;     /* pulls text upward to reduce perceived gap */
+}
+
 .exp-panel-right h2 {
   font-size: 1.8rem;
   margin-bottom: 8px;
 }
 
 .exp-panel-right h3 {
-  margin-top: 14px;
-  margin-bottom: 6px;
-  font-size: 1.15rem;
-}
-
-/* More spacious lines but overall height reduced */
-.exp-panel-right ul {
-  margin-left: 20px;
-  margin-bottom: 6px;
-  line-height: 1.55;    /* nice readable spacing without causing scroll */
-}
-
-/* BACK BUTTON — blue, rounded, no arrow */
-.exp-back-btn {
   margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+}
+
+.exp-panel-right ul {
+  margin-left: 18px;
+  margin-bottom: 10px;
+  line-height: 1.55;  /* already improved */
+}
+
+/* Back button */
+.exp-back-btn {
+  margin-top: 10px;
   padding: 10px 22px;
   background: #009fa5;
   border: none;
   color: white;
-  font-size: 1rem;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 1rem;
 }
-
-.exp-back-btn:hover {
-  background: #007f84;
-}
-
 
     /* ===========================
        SKILLS SECTION
