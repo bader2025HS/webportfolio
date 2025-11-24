@@ -203,38 +203,28 @@
 
 /* FLEX WRAP → logos flow naturally, no rigid grid */
 .experience-logo-cloud {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* Force a full 2-row layout */
-  gap: 20px 20px;
-  justify-items: center;
-  align-items: center;
-  padding: 0;
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px 80px;            /* vertical / horizontal spacing */
+  padding: 40px 20px 80px;
 }
 
-/* Logo size tuned so everything fits without scrolling */
+/* Base logo style – big and floating, no box */
 .experience-logo img {
-  max-width: 190px;
+  max-width: 280px;          /* ⬅ bigger logos */
   width: 100%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.18));
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.22));
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-/* Slight vertical stagger */
-.experience-logo:nth-child(1) { transform: translateY(10px); }
-.experience-logo:nth-child(2) { transform: translateY(-10px); }
-.experience-logo:nth-child(3) { transform: translateY(4px); }
-.experience-logo:nth-child(4) { transform: translateY(-6px); }
-.experience-logo:nth-child(5) { transform: translateY(8px); }
-
-/* Hover effect */
-.experience-logo:hover img {
-  transform: translateY(-6px) scale(1.03);
-  filter: drop-shadow(0 16px 26px rgba(15, 23, 42, 0.26));
+/* Hover lift */
+.experience-logo img:hover {
+  transform: translateY(-8px) scale(1.04);
+  filter: drop-shadow(0 18px 32px rgba(15, 23, 42, 0.32));
 }
-
 
 /* “Cloudy” / random feel: different sizes + vertical offsets */
 .experience-logo:nth-child(1) img {
