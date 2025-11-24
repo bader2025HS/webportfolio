@@ -311,29 +311,48 @@
   max-width: 260px;
 }
 
-    /* === CONTACT SECTION BASE === */
+/* SECTION BACKGROUND */
 .contact-envelope-section {
-  position: relative;
-  padding: 80px 20px 120px;
   background: #e7f4ff;
+  padding: 120px 16px 220px;
   display: flex;
   justify-content: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.contact-wrapper {
+/* Wrapper that holds card + envelope */
+.contact-envelope-block {
   position: relative;
-  z-index: 2;
-  max-width: 640px;
+  max-width: 720px;
   width: 100%;
+}
+
+/* CARD */
+.contact-card {
+  position: relative;
+  z-index: 3;
   background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
   padding: 40px 40px 30px;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.12);
   text-align: center;
 }
 
-/* HEADINGS */
+/* little sheet going down into the envelope (center) */
+.contact-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -55px;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 100px;
+  background: linear-gradient(#ffffff, rgba(255, 255, 255, 0));
+  border-radius: 0 0 60px 60px;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Headings */
 .contact-heading {
   margin: 0;
   font-size: 22px;
@@ -348,7 +367,7 @@
   color: #8c9ab0;
 }
 
-/* FORM LAYOUT */
+/* Form layout */
 .contact-form {
   text-align: left;
 }
@@ -372,7 +391,7 @@
   margin-bottom: 6px;
 }
 
-/* INPUTS */
+/* Inputs */
 .contact-column input,
 .contact-column textarea {
   width: 100%;
@@ -423,7 +442,7 @@
   box-shadow: 0 8px 14px rgba(28, 141, 222, 0.35);
 }
 
-/* FOOTER TEXT */
+/* Footer text */
 .contact-footer-text {
   margin-top: 16px;
   text-align: center;
@@ -431,21 +450,26 @@
   color: #bbc3d3;
 }
 
-/* === ENVELOPE DECORATION === */
+/* ENVELOPE (behind card) */
 .envelope {
   position: absolute;
-  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 520px;
-  max-width: 90%;
-  height: 120px;
-  pointer-events: none;
+  bottom: -165px; /* how far under the card */
+  width: 100%;
+  max-width: 640px;
+  height: 200px;
+  z-index: 1;
 }
 
-.envelope-border {
+/* striped air-mail body */
+.envelope-body {
   position: absolute;
-  inset: 16px 0 0;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 100%;
+  height: 140px;
   background:
     repeating-linear-gradient(
       -45deg,
@@ -454,45 +478,46 @@
       #1c8dde 20px 30px,
       #1c8dde 30px 40px
     );
-  border-radius: 8px 8px 12px 12px;
-  padding: 5px;
+  border-radius: 12px;
+  padding: 6px;
   box-sizing: border-box;
+  box-shadow: 0 26px 40px rgba(0, 0, 0, 0.12);
 }
 
-.envelope-border::before {
+.envelope-body::before {
   content: "";
   position: absolute;
-  inset: 5px;
+  inset: 6px;
   background: #ffffff;
-  border-radius: 6px 6px 10px 10px;
+  border-radius: 8px;
 }
 
 /* top flap */
-.envelope-top {
+.envelope-flap {
   position: absolute;
-  top: 0;
   left: 50%;
-  width: 80%;
-  height: 80px;
+  top: -20px;
   transform: translateX(-50%);
+  width: 86%;
+  height: 130px;
   overflow: hidden;
 }
 
-.envelope-top::before {
+.envelope-flap::before {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -40px;
-  width: 140%;
-  height: 140%;
+  top: -70%;
+  width: 160%;
+  height: 200%;
   background: #ffffff;
   transform: translateX(-50%) rotate(45deg);
-  box-shadow: 0 -12px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 -14px 24px rgba(0, 0, 0, 0.06);
 }
 
-/* === RESPONSIVE === */
+/* Responsive */
 @media (max-width: 600px) {
-  .contact-wrapper {
+  .contact-card {
     padding: 28px 20px 24px;
   }
 
@@ -503,7 +528,13 @@
   .contact-subheading {
     font-size: 13px;
   }
+
+  .contact-envelope-section {
+    padding-bottom: 200px;
+  }
 }
+
+
 
 
     /* ===========================
@@ -1403,50 +1434,57 @@
       </section>
 
       <!-- CONTACT -->
-      <section id="contact" class="contact-envelope-section">
-  <div class="contact-wrapper">
-    <h2 class="contact-heading">SEND ME A MESSAGE</h2>
-    <p class="contact-subheading">
-      Complete the form below and send your message.
-    </p>
+     <section id="contact" class="contact-envelope-section">
+  <div class="contact-envelope-block">
 
-    <form class="contact-form">
-      <div class="contact-columns">
-        <!-- LEFT COLUMN -->
-        <div class="contact-column contact-left">
-          <label class="contact-label">Name</label>
-          <input type="text" name="name" placeholder="Your name" required>
-
-          <label class="contact-label">E-mail</label>
-          <input type="email" name="email" placeholder="you@example.com" required>
-
-          <label class="contact-label">Phone</label>
-          <input type="tel" name="phone" placeholder="+33 6 12 34 56 78">
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="contact-column contact-right">
-          <label class="contact-label">Message</label>
-          <textarea name="message" rows="7" placeholder="Write your message here..." required></textarea>
-        </div>
-      </div>
-
-      <div class="contact-button-row">
-        <button type="submit" class="contact-send-btn">SEND</button>
-      </div>
-
-      <p class="contact-footer-text">
-        I’ll answer you as soon as possible. Thanks for visiting!
+    <!-- CARD WITH FORM -->
+    <div class="contact-card">
+      <h2 class="contact-heading">SEND ME A MESSAGE</h2>
+      <p class="contact-subheading">
+        Complete the form below and send your message.
       </p>
-    </form>
-  </div>
 
-  <!-- ENVELOPE DECORATION -->
-  <div class="envelope">
-    <div class="envelope-border"></div>
-    <div class="envelope-top"></div>
+      <form class="contact-form">
+        <div class="contact-columns">
+          <!-- LEFT COLUMN -->
+          <div class="contact-column contact-left">
+            <label class="contact-label">Name</label>
+            <input type="text" name="name" placeholder="Your name" required>
+
+            <label class="contact-label">E-mail</label>
+            <input type="email" name="email" placeholder="you@example.com" required>
+
+            <label class="contact-label">Phone</label>
+            <input type="tel" name="phone" placeholder="+33 6 12 34 56 78">
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="contact-column contact-right">
+            <label class="contact-label">Message</label>
+            <textarea name="message" rows="7"
+                      placeholder="Write your message here..." required></textarea>
+          </div>
+        </div>
+
+        <div class="contact-button-row">
+          <button type="submit" class="contact-send-btn">SEND</button>
+        </div>
+
+        <p class="contact-footer-text">
+          I’ll answer you as soon as possible. Thanks for visiting!
+        </p>
+      </form>
+    </div>
+
+    <!-- ENVELOPE UNDER THE CARD -->
+    <div class="envelope">
+      <div class="envelope-body"></div>
+      <div class="envelope-flap"></div>
+    </div>
+
   </div>
 </section>
+
 
 
     </main>
