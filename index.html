@@ -245,37 +245,56 @@
     
 .exp-panel {
   display: none;
-  grid-template-columns: 0.9fr 1.1fr;   /* logo space ↑ / text space ↓ */
-  gap: 16px;                             /* was 22/40 — now tighter */
-  margin-top: 0;                         /* move panel higher */
-  align-items: center;                   /* vertically align */
+  grid-template-columns: 0.9fr 1.1fr;  /* tighter gap, logo bigger */
+  align-items: center;
+  gap: 20px;
+  margin-top: 0;
 }
 
-/* LEFT SIDE — THE LOGO */
-.exp-panel-left {
-  display: flex;
-  justify-content: center;               /* center horizontally */
-  align-items: center;                   /* center vertically */
-}
-
+/* Left (logo) */
 .exp-panel-left img {
-  max-width: 380px;                      /* bigger (was 320px) */
+  max-width: 360px;     /* bigger */
   width: 100%;
-  transform: translateY(-10px);          /* nudges logo upward */
+  display: block;
+  margin-left: 20px;     /* slight center push */
 }
 
-/* RIGHT SIDE — TEXT TITLES */
+/* Right (text) */
 .exp-panel-right h2 {
-  font-size: 1.9rem;
-  margin-bottom: 2px;                    /* reduce spacing */
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
 .exp-panel-right h3 {
-  margin-top: 8px;                       /* was 20px */
-  margin-bottom: 4px;
-  font-size: 1.2rem;
+  margin-top: 22px;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
 }
 
+/* MORE SPACING BETWEEN LINES */
+.exp-panel-right ul {
+  margin-left: 20px;
+  margin-bottom: 14px;
+  line-height: 1.65;   /* more spacious */
+  font-size: 1.05rem;
+}
+
+/* BLUE BACK BUTTON (no arrow) */
+.exp-back-btn {
+  margin-top: 25px;
+  padding: 10px 20px;
+  background: #009fa5;   /* same as your theme cyan */
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Hover for back button */
+.exp-back-btn:hover {
+  background: #007d82;
+}
 
 
     /* ===========================
