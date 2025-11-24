@@ -74,16 +74,16 @@
     ============================ */
 
     #education {
-      margin-top: 60px;         /* push maps further down from menu */
+      margin-top: 60px;
     }
 
     .education-maps {
       display: none;            /* becomes flex only when Education is shown + maps loaded */
       width: 100%;
-      justify-content: space-between;   /* align with content edges */
+      justify-content: space-between;
       align-items: flex-start;
       gap: 20px;
-      margin-top: 60px;         /* extra gap between labels and maps */
+      margin-top: 60px;
     }
 
     .map-column {
@@ -93,21 +93,76 @@
     }
 
     .map-label {
-      font-size: 1.1rem;        /* bigger labels */
+      font-size: 1.1rem;
       text-transform: uppercase;
       letter-spacing: 0.28em;
-      margin-bottom: 24px;      /* label a bit lower above the map */
+      margin-bottom: 24px;
     }
 
     .country-map {
-      width: 340px;             /* bigger map canvases */
+      width: 340px;
       height: 340px;
+      cursor: pointer;       /* clickable hint */
     }
-    
+
     .leaflet-container {
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
+    }
+
+    /* ====== EDUCATION DETAILS UNDER MAPS ====== */
+    .education-details {
+      max-width: 900px;
+      margin: 40px auto 0;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 24px;
+      display: none;
+    }
+    .education-details.active {
+      display: block;
+    }
+
+    .edu-country-title {
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .edu-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .edu-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .edu-item-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .edu-item-meta {
+      color: #555;
+      font-size: 0.95rem;
+      margin-top: 2px;
+    }
+
+    .edu-item-program {
+      margin-top: 6px;
+      font-size: 0.98rem;
+    }
+
+    .edu-item-note {
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: #666;
     }
 
     /* ===========================
@@ -317,7 +372,7 @@
         <p class="placeholder">Skills section content goes here.</p>
       </section>
 
-      <!-- EDUCATION (MAPS ONLY) -->
+      <!-- EDUCATION (MAPS + CLICK DETAILS) -->
       <section id="education">
         <div class="education-maps">
 
@@ -340,6 +395,94 @@
           </div>
 
         </div>
+
+        <!-- DETAILS UNDER MAPS -->
+        <div id="details-france" class="education-details">
+          <div class="edu-country-title">France — Studies</div>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-item-header">
+                <span>2024–2026 • Paris</span>
+                <span>Sciences Po — PSIA</span>
+              </div>
+              <div class="edu-item-meta">M.A. International Security &amp; Migration</div>
+              <div class="edu-item-program">
+                Asylum and migration law, border governance, humanitarian data analysis;
+                qualitative research design and mapping/data projects.
+              </div>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-header">
+                <span>2024–2025 • Paris</span>
+                <span>INALCO — Eurasian Dept.</span>
+              </div>
+              <div class="edu-item-meta">Persian Language &amp; Iranian Studies</div>
+              <div class="edu-item-program">
+                Intensive Persian (academic texts &amp; conversation) plus history, society,
+                and politics of Iran and Afghanistan.
+              </div>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-header">
+                <span>2022–2023 • Menton</span>
+                <span>Sciences Po Campus of Menton</span>
+              </div>
+              <div class="edu-item-meta">B.A. Major in Politics &amp; Government</div>
+              <div class="edu-item-program">
+                Middle Eastern &amp; Mediterranean specialization: comparative politics,
+                constitutional law, regional history; debate workshops tied to current affairs.
+              </div>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-header">
+                <span>2021–2022 • Nancy</span>
+                <span>Sciences Po Campus of Nancy</span>
+              </div>
+              <div class="edu-item-meta">B.A. Introduction to Social Sciences</div>
+              <div class="edu-item-program">
+                Multidisciplinary foundations in political science, economics, sociology, law,
+                and history within a trilingual Franco-German track; EU institutions and academic writing.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="details-japan" class="education-details">
+          <div class="edu-country-title">Japan — Studies</div>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-item-header">
+                <span>2023–2024 • Tokyo</span>
+                <span>Tokyo University of Foreign Studies</span>
+              </div>
+              <div class="edu-item-meta">Exchange — Asia-Pacific &amp; Japanese Studies</div>
+              <div class="edu-item-program">
+                Full-time Japanese intensive alongside Asia-Pacific politics; Japan/ASEAN focus
+                with intercultural fieldwork.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="details-germany" class="education-details">
+          <div class="edu-country-title">Germany — Studies</div>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-item-header">
+                <span>2026–2027 • Berlin</span>
+                <span>Freie Universität Berlin — OSI</span>
+              </div>
+              <div class="edu-item-meta">M.A. International Relations (planned)</div>
+              <div class="edu-item-program">
+                Comparative security focus with modules on EU foreign and defence policies.
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- EXPERIENCE -->
@@ -460,10 +603,15 @@
       await loadGeoJSON();
       document.querySelector(".education-maps").style.display = "flex";
 
-      /* France & Germany same visual scale; Japan balanced */
+      // Same visual scale for all three; Japan balanced
       drawCountry("map-france", "france", [46.6, 2.2], 4.5);
       drawCountry("map-japan", "japan", [38.9, 138.2], 4.5);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.5);
+
+      // Make whole canvas clickable to show details
+      document.getElementById("map-france").addEventListener("click", () => showCountryDetails("france"));
+      document.getElementById("map-japan").addEventListener("click", () => showCountryDetails("japan"));
+      document.getElementById("map-germany").addEventListener("click", () => showCountryDetails("germany"));
     }
 
     /* ===============================
@@ -501,6 +649,29 @@
 
     // initial state: home only
     showSection("home");
+
+    /* ===============================
+       SHOW DETAILS ON MAP CLICK
+    =============================== */
+
+    const detailBlocks = {
+      france: document.getElementById("details-france"),
+      japan: document.getElementById("details-japan"),
+      germany: document.getElementById("details-germany")
+    };
+
+    function showCountryDetails(country) {
+      Object.keys(detailBlocks).forEach(c => {
+        if (c === country) {
+          detailBlocks[c].classList.add("active");
+        } else {
+          detailBlocks[c].classList.remove("active");
+        }
+      });
+
+      // optional: scroll so details are nicely in view
+      detailBlocks[country].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
     /* ===============================
        LIGHTBOX FOR GALLERY
