@@ -190,79 +190,88 @@
 
 
 /* ===========================
-   EXPERIENCE SECTION – BIG LOGO GALLERY
+   EXPERIENCE SECTION – LOGO CLOUD
 =========================== */
 
 #experience {
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
-/* Center the gallery under the menu */
+/* Wrapper centered under the menu */
 .experience-layout {
-  max-width: 1000px;
-  margin: 60px auto 0;
-  display: flex;
-  justify-content: center;
+  max-width: 1150px;
+  margin: 60px auto 80px;
 }
 
-/* Grid of big logos */
-.experience-logo-grid {
+/* Floating / masonry-style logo cloud */
+.experience-logo-cloud {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 36px 42px;
   justify-items: center;
-}
-
-/* Each logo “card” */
-.experience-logo-item {
-  width: 240px;
-  height: 240px;
-  border-radius: 26px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
-  transition: transform 0.22s ease,
-              box-shadow 0.22s ease,
-              filter 0.22s ease,
-              border-color 0.22s ease;
+  padding: 10px 10px 40px;
 }
 
-/* Logo image inside */
-.experience-logo-item img {
-  max-width: 100%;
-  max-height: 100%;
+/* Each logo “tile” – but no visible box */
+.experience-logo {
+  position: relative;
+}
+
+/* Actual logo image */
+.experience-logo img {
+  max-width: 230px;
+  width: 100%;
+  height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.18));
+  transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-/* Hover effect (same “language pill” vibe) */
-.experience-logo-item:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
-  border-color: #00a0a5;
-  filter: saturate(1.08);
+/* Gentle floating hover */
+.experience-logo img:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: drop-shadow(0 16px 26px rgba(15, 23, 42, 0.26));
 }
 
-/* Mobile: slightly smaller logos & tighter gaps */
-@media (max-width: 700px) {
+/* Staggered / organic layout using slight vertical offsets */
+.experience-logo:nth-child(2n) img {
+  transform: translateY(8px);
+}
+
+.experience-logo:nth-child(3n) img {
+  transform: translateY(-6px);
+}
+
+.experience-logo:nth-child(5n) img {
+  transform: translateY(4px);
+}
+
+/* Keep hover overriding the base offsets */
+.experience-logo:nth-child(2n) img:hover,
+.experience-logo:nth-child(3n) img:hover,
+.experience-logo:nth-child(5n) img:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+/* Mobile tweaks */
+@media (max-width: 900px) {
   .experience-layout {
     max-width: 100%;
-    padding: 0 16px;
+    padding: 0 16px 40px;
   }
 
-  .experience-logo-grid {
-    gap: 28px;
+  .experience-logo-cloud {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 26px 28px;
   }
 
-  .experience-logo-item {
-    width: 200px;
-    height: 200px;
+  .experience-logo img {
+    max-width: 190px;
+    filter: drop-shadow(0 8px 14px rgba(15, 23, 42, 0.18));
   }
 }
+
 
     /* ===========================
        SKILLS SECTION
@@ -793,35 +802,36 @@
         </div>
       </section>
 
-      <!-- EXPERIENCE -->
+    <!-- EXPERIENCE – LOGO CLOUD ONLY -->
 
 <section id="experience">
   <div class="experience-layout">
-    <div class="experience-logo-grid">
+    <div class="experience-logo-cloud">
 
-      <div class="experience-logo-item">
-        <img src="oif.png" alt="OIF logo">
+      <div class="experience-logo">
+        <img src="oif.jpg" alt="International Organization of La Francophonie (OIF) logo">
       </div>
 
-      <div class="experience-logo-item">
-        <img src="aqlity.png" alt="AQLITY logo">
+      <div class="experience-logo">
+        <img src="aqlity.png" alt="AQLITY Humanitarian Innovation logo">
       </div>
 
-      <div class="experience-logo-item">
+      <div class="experience-logo">
         <img src="ardhis.png" alt="ARDHIS logo">
       </div>
 
-      <div class="experience-logo-item">
-        <img src="rss.jpg" alt="Royal Scientific Society logo">
+      <div class="experience-logo">
+        <img src="rss.png" alt="Royal Scientific Society logo">
       </div>
 
-      <div class="experience-logo-item">
+      <div class="experience-logo">
         <img src="nancy.jpg" alt="City Hall of Nancy logo">
       </div>
 
     </div>
   </div>
 </section>
+
 
       
       <!-- WORK -->
