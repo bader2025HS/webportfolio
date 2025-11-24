@@ -188,21 +188,15 @@
 
     .edu-close:hover { color: #000; }
 
-
-/* ===========================
-   EXPERIENCE SECTION
-=========================== */
-
-
-    /* ===========================
-   EXPERIENCE SECTION
+  /* ===========================
+   EXPERIENCE SECTION (UPDATED)
 =========================== */
 
 #experience {
   margin-top: 40px;
 }
 
-/* Wrapper centered under the menu (same width as org row + details card) */
+/* Wrapper centered under the menu */
 .experience-layout {
   max-width: 1150px;
   margin: 40px auto 0;
@@ -211,24 +205,24 @@
   justify-content: center;
 }
 
-/* Row of organisation boxes */
+/* Organisation row */
 .experience-org-row {
   display: flex;
   gap: 24px;
   justify-content: center;
 }
 
-/* Organisation box */
+/* Organisation selector card */
 .experience-org-card {
   min-width: 200px;
-  padding: 18px 30px;
+  padding: 20px 30px;
   border-radius: 20px;
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  font-size: 0.98rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
 
-  /* perfect centering for multi-line text */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,53 +230,52 @@
 
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
   cursor: pointer;
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    filter 0.22s ease,
-    border-color 0.22s ease;
+  transition: transform 0.22s ease,
+              box-shadow 0.22s ease,
+              filter 0.22s ease,
+              border-color 0.22s ease;
 }
 
-/* Active (selected) organisation */
+/* Selected card */
 .experience-org-card.active {
   background: #009fa5;
   color: #ffffff;
   border-color: #009fa5;
-  box-shadow: 0 10px 26px rgba(0, 159, 165, 0.45);
+  box-shadow: 0 12px 30px rgba(0,159,165,0.40);
 }
 
-/* Hover effect (same language as lang pills) */
+/* Hover effect */
 .experience-org-card:hover {
   transform: translateY(-2px) scale(1.04);
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
-  filter: saturate(1.08);
   border-color: #009fa5;
+  filter: saturate(1.08);
 }
 
-/* Container where the details card is injected */
+/* Details wrapper */
 .experience-details {
-  max-width: 1150px;     /* same as layout so edges align with row */
+  max-width: 1150px;
   margin: 28px auto 0;
   padding: 0 20px;
 }
 
-/* Details card itself */
+/* Details card */
 .experience-details-card {
   width: 100%;
   border-radius: 20px;
   border: 1px solid #e2e8f0;
-  padding: 20px 24px;
+  padding: 26px 28px;
   background: #fdfefe;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
 }
 
-/* Top line: role + location/year */
+/* Header line */
 .exp-header {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 0.98rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
 
 .exp-role {
@@ -291,23 +284,23 @@
 
 .exp-location {
   color: #4b5563;
-  font-size: 0.86rem;
+  font-size: 0.95rem;
   white-space: nowrap;
 }
 
-/* Intro paragraph */
+/* Intro description */
 .exp-desc {
-  margin-top: 8px;
-  font-size: 0.92rem;
+  margin-top: 12px;
+  font-size: 1rem;
   color: #374151;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-/* Section labels inside the details card */
+/* Section titles */
 .exp-section-label {
-  margin-top: 14px;
-  margin-bottom: 4px;
-  font-size: 0.8rem;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #6b7280;
@@ -317,36 +310,36 @@
 .exp-bullets {
   margin: 0 0 4px 1.2rem;
   padding: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #374151;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .exp-bullets li {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
-/* Inline lines (Skills, Tools) */
+/* Inline text (Tools) */
 .exp-inline {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #374151;
 }
 
 .exp-inline strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
-/* Tags row at the bottom */
+/* Pill tags at bottom */
 .exp-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .exp-tag {
-  font-size: 0.8rem;
-  padding: 6px 12px;
+  font-size: 0.85rem;
+  padding: 7px 14px;
   border-radius: 999px;
   background: #e1faf5;
   border: 1px solid #b3efe2;
@@ -354,7 +347,7 @@
   white-space: nowrap;
 }
 
-/* Responsive: let org boxes wrap + details use full width */
+/* Responsive */
 @media (max-width: 900px) {
   .experience-layout {
     max-width: 100%;
@@ -379,10 +372,6 @@
   .exp-header {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .exp-location {
-    white-space: normal;
   }
 }
 
