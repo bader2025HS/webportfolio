@@ -495,13 +495,6 @@
     let worldData = null;
     let mapsLoaded = false;
 
-    // Store GeoJSON layers per country so we can recolor them
-    const countryLayers = {
-      france: null,
-      germany: null,
-      japan: null
-    };
-
     const COUNTRY_NAMES = {
       france: ["france"],
       germany: ["germany"],
@@ -510,6 +503,49 @@
 
     const normalize = s =>
       s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+    // store the Leaflet layers for each country to recolor on click
+    const countryLayers = {};
+
+    const baseStyle = {
+      color: "#222",
+      weight: 1.8,
+      fillOpacity: 0
+    };
+
+    // "Flag-style" selected colors (approximation)
+    const selectedStyles = {
+      france: {
+        color: "#002654",       // French blue stroke
+        weight: 2.2,
+        fillColor: "#0055a4",   // deep blue fill
+        fillOpacity: 0.7
+      },
+      germany: {
+        color: "#000000",       // black border
+        weight: 2.2,
+        fillColor: "#ffce00",   // gold
+        fillOpacity: 0.7
+      },
+      japan: {
+        color: "#bc002d",       // red stroke
+        weight: 2.2,
+        fillColor: "#ffe5e5",   // soft red-tinted white
+        fillOpacity: 0.8
+      }
+    };
+
+    function setCountryFill(countryKey) {
+      // reset all to base
+      Object.keys(countryLayers).forEach(key => {
+        countryLayers[key].setStyle(baseStyle);
+      });
+      // apply selected style to clicked one
+      const layer = countryLayers[countryKey];
+      if (layer) {
+        layer.setStyle(selectedStyles[countryKey] || baseStyle);
+      }
+    }
 
     async function loadGeoJSON() {
       if (worldData) return worldData;
@@ -525,24 +561,7 @@
       }
     }
 
-    // Highlight helper: turquoise when 'country' is active, transparent otherwise
-    function highlightCountry(country) {
-      Object.keys(countryLayers).forEach(key => {
-        const layer = countryLayers[key];
-        if (!layer) return;
-
-        const isActive = key === country;
-
-        layer.setStyle({
-          color: "#222",
-          weight: 1.8,
-          fillOpacity: isActive ? 0.35 : 0,
-          fillColor: isActive ? "#009fa5" : "transparent"
-        });
-      });
-    }
-
-    function drawCountry(containerId, country, center, zoom) {
+    function drawCountry(containerId, countryKey, center, zoom) {
       const map = L.map(containerId, {
         zoomControl: false,
         attributionControl: false,
@@ -555,18 +574,16 @@
 
       map.setView(center, zoom);
 
-      const aliases = COUNTRY_NAMES[country].map(normalize);
+      const aliases = COUNTRY_NAMES[countryKey].map(normalize);
 
       const layer = L.geoJSON(worldData, {
         filter: f =>
           aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
-        style: { color: "#222", weight: 1.8, fillOpacity: 0, fillColor: "transparent" }
+        style: baseStyle
       }).addTo(map);
 
-      // Save layer so we can tint it later
-      if (countryLayers.hasOwnProperty(country)) {
-        countryLayers[country] = layer;
-      }
+      // store for later recoloring
+      countryLayers[countryKey] = layer;
     }
 
     async function initMaps() {
@@ -581,17 +598,17 @@
       drawCountry("map-japan", "japan", [38.9, 138.2], 4.5);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.5);
 
-      // Click maps → highlight + open education popup
+      // Click maps → color in flag colors + open education popup
       document.getElementById("map-france").addEventListener("click", () => {
-        highlightCountry("france");
+        setCountryFill("france");
         openEduPopup("france");
       });
       document.getElementById("map-japan").addEventListener("click", () => {
-        highlightCountry("japan");
+        setCountryFill("japan");
         openEduPopup("japan");
       });
       document.getElementById("map-germany").addEventListener("click", () => {
-        highlightCountry("germany");
+        setCountryFill("germany");
         openEduPopup("germany");
       });
     }
@@ -717,8 +734,6 @@
 
     function closeEduPopup() {
       eduOverlay.style.display = "none";
-      // reset highlight when closing popup
-      highlightCountry(null);
     }
 
     eduClose.addEventListener("click", closeEduPopup);
