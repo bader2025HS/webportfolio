@@ -194,7 +194,7 @@
 
 #experience {
   margin-top: 0;
-  padding: 10px 0 10px;      /* space above + below logos */
+  padding: 0 0 10px;      /* pulled up: no extra space above */
 }
 
 .experience-layout {
@@ -239,12 +239,15 @@
   clip-path: inset(0 round 20px);
 }
 
-    /* BD-STYLE EXPERIENCE PANEL */
+/* ===========================
+   BD-STYLE EXPERIENCE PANEL
+=========================== */
+
 .exp-panel {
-  display: none;          /* hidden until clicked */
+  display: none;             /* hidden until clicked */
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-top: 30px;
+  gap: 22px;                 /* was 40px – logo & text closer */
+  margin-top: 0;             /* was 30px – panel higher */
   align-items: flex-start;
 }
 
@@ -255,12 +258,12 @@
 
 .exp-panel-right h2 {
   font-size: 1.8rem;
-  margin-bottom: 10px;
+  margin-bottom: 4px;        /* was 10px */
 }
 
 .exp-panel-right h3 {
-  margin-top: 20px;
-  margin-bottom: 6px;
+  margin-top: 10px;          /* was 20px */
+  margin-bottom: 4px;        /* was 6px */
   font-size: 1.2rem;
 }
 
