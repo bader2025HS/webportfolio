@@ -193,57 +193,52 @@
 =========================== */
 
 #experience {
-  margin-top: 0px;
-  min-height: calc(100vh - 150px);   /* fits the screen under header */
-  display: flex;
-  align-items: center;
+  margin-top: 0;
+  padding: 60px 0 60px;      /* space above + below logos */
+  display: block;            /* important: no flex, no viewport tricks */
 }
 
 .experience-layout {
-  max-width: 1000px;   /* allow more width = bigger logos */
+  max-width: 1100px;         /* a bit wider so logos can be big */
   margin: 0 auto;
-  padding: 0 10px 10px;     /* very tight padding for height */
+  padding: 0 20px;
 }
 
-/* 3×2 grid taking full width */
+/* 3×2 grid ONLY inside the experience section */
 .experience-logo-cloud {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-items: center;
   align-items: center;
-  gap: 10px 30px;
-  width: 100%;
-  padding: 0;                /* tighter grid */
+  gap: 30px 50px;            /* vertical / horizontal gaps */
 }
 
-
-/* Bigger logos (AUTO-SCALE with viewport) */
+/* Base logo styling (no shadow) */
 .experience-logo img {
-  max-width: min(280px, 24vw);   /* grow but won't overflow */
+  max-width: 260px;          /* big logos */
   width: 100%;
   height: auto;
   object-fit: contain;
-
   filter: none !important;
   transition: transform 0.25s ease;
 }
 
-/* Hover */
+/* Same hover for all */
 .experience-logo img:hover {
   transform: translateY(-6px) scale(1.03);
+  filter: none !important;
 }
 
-/* SPMA slightly smaller proportional */
+/* SPMA – slightly smaller to look balanced */
 .experience-logo:nth-child(6) img {
-  max-width: min(240px, 20vw);
+  max-width: 220px;
 }
 
-/* AQLITY rounded */
+/* AQLITY – rounded yellow pill */
 .experience-logo:nth-child(2) img {
   border-radius: 20px;
   clip-path: inset(0 round 20px);
 }
-
 
     /* ===========================
        SKILLS SECTION
