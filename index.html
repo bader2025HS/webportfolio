@@ -253,7 +253,7 @@
       display: block;
     }
 
-       /* Tools — CSS “icons” */
+    /* Tools — CSS “icons” */
 
     .tools-grid {
       display: flex;
@@ -293,7 +293,6 @@
     }
 
     /* App-specific colors */
-
     .tool-word       { background:#185abd; }   /* Word blue */
     .tool-google     { background:#4285f4; }   /* Google blue */
     .tool-powerpoint { background:#d24726; }   /* PowerPoint orange */
@@ -304,7 +303,36 @@
     .tool-qgis       { background:#589632; }   /* QGIS green */
     .tool-ai         { background:#ff9a00; }   /* Illustrator orange */
     .tool-github     { background:#24292e; }   /* GitHub dark */
-    
+
+    /* Soft Skills */
+
+    .soft-skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .soft-skill {
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: #f4f6f8;
+      border: 1px solid #e4e7eb;
+      font-size: 0.95rem;
+      color: #333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.25s;
+      white-space: nowrap;
+    }
+
+    .soft-skill:hover {
+      background: #e9f7f7;
+      border-color: #00a0a5;
+      color: #00a0a5;
+    }
+
     @media (max-width: 768px) {
       .skills-wrap {
         flex-direction: column;
@@ -314,8 +342,6 @@
       }
     }
 
-    
-    
     /* ===========================
            GALLERY (HOME)
     ============================ */
@@ -518,7 +544,7 @@
         <p class="placeholder">About section content goes here.</p>
       </section>
 
-        <!-- SKILLS -->
+      <!-- SKILLS -->
       <section id="skills">
         <div class="skills-wrap">
           
@@ -571,7 +597,6 @@
           </div>
 
           <!-- Tools -->
-
           <div class="skill-card">
             <h2 class="skills-title">Tools</h2>
             <div class="tools-grid">
@@ -627,14 +652,23 @@
             </div>
           </div>
 
+          <!-- Soft Skills -->
+          <div class="skill-card">
+            <h2 class="skills-title">Soft Skills</h2>
+            <div class="soft-skills-list">
+              <span class="soft-skill">Communications</span>
+              <span class="soft-skill">Analytical synthesis</span>
+              <span class="soft-skill">Press monitoring</span>
+              <span class="soft-skill">Critical thinking</span>
+              <span class="soft-skill">Team facilitation</span>
+              <span class="soft-skill">Stakeholder coord.</span>
+              <span class="soft-skill">Policy briefs</span>
+              <span class="soft-skill">Public speaking</span>
+            </div>
+          </div>
+
         </div>
       </section>
-
-
-
-
-
-      
 
       <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
       <section id="education">
@@ -754,27 +788,27 @@
       fillOpacity: 0
     };
 
-// flag-style color themes (dark border, light fill — *same color family*)
-const selectedStyles = {
-  france: {
-    color: "#003b8e",        // dark blue border
-    weight: 2.4,
-    fillColor: "#b7d4ff",    // light blue fill
-    fillOpacity: 0.65
-  },
-  germany: {
-    color: "#d4a300",        // dark yellow border (golden, richer tone)
-    weight: 2.4,
-    fillColor: "#ffe680",    // light yellow fill
-    fillOpacity: 0.65
-  },
-  japan: {
-    color: "#bc002d",        // dark red border (same as before)
-    weight: 2.4,
-    fillColor: "#ffe5e5",    // light soft red fill (already perfect)
-    fillOpacity: 0.8
-  }
-};
+    // flag-style color themes (dark border, light fill — *same color family*)
+    const selectedStyles = {
+      france: {
+        color: "#003b8e",        // dark blue border
+        weight: 2.4,
+        fillColor: "#b7d4ff",    // light blue fill
+        fillOpacity: 0.65
+      },
+      germany: {
+        color: "#d4a300",        // dark yellow border
+        weight: 2.4,
+        fillColor: "#ffe680",    // light yellow fill
+        fillOpacity: 0.65
+      },
+      japan: {
+        color: "#bc002d",        // dark red border
+        weight: 2.4,
+        fillColor: "#ffe5e5",    // soft red fill
+        fillOpacity: 0.8
+      }
+    };
 
     function resetCountryStyles() {
       Object.keys(countryLayers).forEach(key => {
@@ -979,7 +1013,7 @@ const selectedStyles = {
 
     function closeEduPopup() {
       eduOverlay.style.display = "none";
-      // 🔄 reset map colors when details are closed
+      // reset map colors when details are closed
       resetCountryStyles();
     }
 
