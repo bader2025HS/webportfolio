@@ -513,27 +513,27 @@
       fillOpacity: 0
     };
 
-    // flag-inspired selected styles (border matches fill theme)
-    const selectedStyles = {
-      france: {
-        color: "#002654",       // French blue stroke
-        weight: 2.2,
-        fillColor: "#0055a4",   // deep blue fill
-        fillOpacity: 0.7
-      },
-      germany: {
-        color: "#000000",       // black border
-        weight: 2.2,
-        fillColor: "#ffce00",   // gold
-        fillOpacity: 0.7
-      },
-      japan: {
-        color: "#bc002d",       // red stroke
-        weight: 2.2,
-        fillColor: "#ffe5e5",   // soft red-tinted white
-        fillOpacity: 0.8
-      }
-    };
+    // flag-style color themes (dark border, light fill)
+const selectedStyles = {
+  france: {
+    color: "#002654",        // DARK blue border (flag blue)
+    weight: 2.4,
+    fillColor: "#aac7ff",    // LIGHT desaturated blue fill
+    fillOpacity: 0.65
+  },
+  germany: {
+    color: "#000000",        // DARK border (black)
+    weight: 2.4,
+    fillColor: "#ffe68a",    // LIGHT golden fill (soft yellow)
+    fillOpacity: 0.65
+  },
+  japan: {
+    color: "#bc002d",        // DARK red border
+    weight: 2.4,
+    fillColor: "#ffe5e5",    // LIGHT red-tinted fill (already good)
+    fillOpacity: 0.8
+  }
+};
 
     function resetCountryStyles() {
       Object.keys(countryLayers).forEach(key => {
