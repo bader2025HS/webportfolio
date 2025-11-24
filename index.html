@@ -188,7 +188,8 @@
 
     .edu-close:hover { color: #000; }
 
-    /* ===========================
+
+/* ===========================
    EXPERIENCE SECTION
 =========================== */
 
@@ -198,90 +199,61 @@
 
 /* Wrapper centered under the menu */
 .experience-layout {
-  max-width: 1100px;   /* EXACT width of your nav area */
-  margin: 40px auto 0;
-  padding: 0 20px;     /* matches nav’s side spacing */
-}
-
-/* One vertical column of cards */
-.experience-grid {
+  max-width: 1150px;      /* roughly same width as nav */
+  margin: 60px auto 0;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  justify-content: center;
 }
 
-/* Card styling – keep hover like languages */
-.experience-card {
-  border-radius: 20px;
-  border: 1px solid #e2e8f0;
-  padding: 18px 20px;
-  background: #fdfefe;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+/* Row of 5 organisation boxes */
+.experience-org-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+/* Each organisation box */
+.experience-org-card {
+  min-width: 190px;
+  padding: 18px 26px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+
+  /* same hover language as lang pills */
   transition: transform 0.22s ease,
               box-shadow 0.22s ease,
               filter 0.22s ease,
               border-color 0.22s ease;
 }
 
-.experience-card:hover {
+.experience-org-card:hover {
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.25);
-  filter: saturate(1.12);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  filter: saturate(1.08);
   border-color: #009fa5;
 }
 
-/* Top line: role + location/year */
-.exp-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 0.98rem;
-  font-weight: 600;
-}
-
-.exp-role {
-  color: #111827;
-}
-
-.exp-location {
-  color: #4b5563;
-  font-size: 0.86rem;
-  white-space: nowrap;
-}
-
-/* Description text */
-.exp-desc {
-  margin-top: 8px;
-  font-size: 0.92rem;
-  color: #374151;
-  line-height: 1.5;
-}
-
-/* Tags row – mint pills */
-.exp-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.exp-tag {
-  font-size: 0.8rem;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #e1faf5;
-  border: 1px solid #b3efe2;
-  color: #064e3b;
-  white-space: nowrap;
-}
-
+/* Mobile: allow wrapping into 2–3 lines */
 @media (max-width: 900px) {
   .experience-layout {
     max-width: 100%;
-    padding: 0 10px;
+    padding: 0 16px;
+  }
+
+  .experience-org-row {
+    flex-wrap: wrap;
+  }
+
+  .experience-org-card {
+    flex: 1 1 45%;
   }
 }
-
 
     /* ===========================
        SKILLS SECTION
@@ -816,92 +788,13 @@
 
     <section id="experience">
   <div class="experience-layout">
-    <div class="experience-grid">
+    <div class="experience-org-row">
 
-      <article class="experience-card">
-        <div class="exp-header">
-          <span class="exp-role">Intern – Project Design &amp; Monitoring, OIF</span>
-          <span class="exp-location">Paris • 2025</span>
-        </div>
-        <p class="exp-desc">
-          Analyzed project data, maintained structured cooperation databases, wrote country briefs,
-          and supported monitoring and evaluation for the execution report.
-        </p>
-        <div class="exp-tags">
-          <span class="exp-tag">Data analysis</span>
-          <span class="exp-tag">Database design</span>
-          <span class="exp-tag">Country briefs</span>
-          <span class="exp-tag">Monitoring and evaluation</span>
-        </div>
-      </article>
-
-      <article class="experience-card">
-        <div class="exp-header">
-          <span class="exp-role">Intern – Data Analysis, AQLITY</span>
-          <span class="exp-location">Remote • 2024</span>
-        </div>
-        <p class="exp-desc">
-          Cleaned and analyzed humanitarian datasets and produced GIS maps and visual materials
-          to explain trends and inform reports.
-        </p>
-        <div class="exp-tags">
-          <span class="exp-tag">Data cleaning</span>
-          <span class="exp-tag">GIS and mapping</span>
-          <span class="exp-tag">Infographics</span>
-          <span class="exp-tag">Reporting</span>
-        </div>
-      </article>
-
-      <article class="experience-card">
-        <div class="exp-header">
-          <span class="exp-role">Volunteer – Immigration Law Clinic, ARDHIS</span>
-          <span class="exp-location">Paris • 2023–2025</span>
-        </div>
-        <p class="exp-desc">
-          Support LGBT+ asylum seekers during drop-in sessions and produce country-of-origin research
-          to inform legal strategies and hearings.
-        </p>
-        <div class="exp-tags">
-          <span class="exp-tag">Asylum support</span>
-          <span class="exp-tag">Country research</span>
-          <span class="exp-tag">Interview prep</span>
-          <span class="exp-tag">Legal briefs</span>
-        </div>
-      </article>
-
-      <article class="experience-card">
-        <div class="exp-header">
-          <span class="exp-role">Research Intern – Science &amp; Policy, Royal Scientific Society</span>
-          <span class="exp-location">Amman • 2023</span>
-        </div>
-        <p class="exp-desc">
-          Contributed to a project on desalination and water diplomacy, mapping regional initiatives
-          and co-authoring an article with partners.
-        </p>
-        <div class="exp-tags">
-          <span class="exp-tag">Water policy</span>
-          <span class="exp-tag">Research writing</span>
-          <span class="exp-tag">Stakeholder mapping</span>
-          <span class="exp-tag">Science diplomacy</span>
-        </div>
-      </article>
-
-      <article class="experience-card">
-        <div class="exp-header">
-          <span class="exp-role">Project Assistant – International Relations, City of Nancy</span>
-          <span class="exp-location">Nancy • 2022</span>
-        </div>
-        <p class="exp-desc">
-          Helped organise events with twin cities, coordinated visiting delegations and supported
-          communications on the city’s environmental policies.
-        </p>
-        <div class="exp-tags">
-          <span class="exp-tag">Event coordination</span>
-          <span class="exp-tag">Public diplomacy</span>
-          <span class="exp-tag">Intercultural facilitation</span>
-          <span class="exp-tag">Communications</span>
-        </div>
-      </article>
+      <div class="experience-org-card">OIF</div>
+      <div class="experience-org-card">AQLITY</div>
+      <div class="experience-org-card">ARDHIS</div>
+      <div class="experience-org-card">Royal Scientific Society</div>
+      <div class="experience-org-card">City of Nancy</div>
 
     </div>
   </div>
