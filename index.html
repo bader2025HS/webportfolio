@@ -189,6 +189,135 @@
     .edu-close:hover { color: #000; }
 
     /* ===========================
+       SKILLS SECTION
+    ============================ */
+
+    #skills {
+      margin-top: 40px;
+    }
+
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .skill-card {
+      flex: 1 1 320px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .skills-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    /* Languages */
+
+    .lang-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .lang-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      font-size: 0.9rem;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      white-space: nowrap;
+    }
+
+    .flag {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex: 0 0 20px;
+      box-shadow: 0 0 0 1px #e5e7eb;
+    }
+
+    .flag img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+       /* Tools — CSS “icons” */
+
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    .tool-icon {
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-size: 0.82rem;
+      gap: 6px;
+    }
+
+    .tool-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .tool-icon:hover .tool-logo {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.35);
+      filter: saturate(1.1);
+    }
+
+    /* App-specific colors */
+
+    .tool-word       { background:#185abd; }   /* Word blue */
+    .tool-google     { background:#4285f4; }   /* Google blue */
+    .tool-powerpoint { background:#d24726; }   /* PowerPoint orange */
+    .tool-excel      { background:#107c41; }   /* Excel green */
+    .tool-powerbi    { background:#f2c811; color:#111; } /* yellow, dark text */
+    .tool-canva      { background:#00c4cc; }   /* Canva teal */
+    .tool-mapbox     { background:#4264fb; }   /* Mapbox blue */
+    .tool-qgis       { background:#589632; }   /* QGIS green */
+    .tool-ai         { background:#ff9a00; }   /* Illustrator orange */
+    .tool-github     { background:#24292e; }   /* GitHub dark */
+    
+    @media (max-width: 768px) {
+      .skills-wrap {
+        flex-direction: column;
+      }
+      .tool-icon {
+        width: 70px;
+      }
+    }
+
+
+
+    
+    /* ===========================
            GALLERY (HOME)
     ============================ */
 
@@ -390,10 +519,123 @@
         <p class="placeholder">About section content goes here.</p>
       </section>
 
-      <!-- SKILLS -->
+        <!-- SKILLS -->
       <section id="skills">
-        <p class="placeholder">Skills section content goes here.</p>
+        <div class="skills-wrap">
+          
+          <!-- Languages -->
+          <div class="skill-card">
+            <h2 class="skills-title">Languages</h2>
+            <div class="lang-row">
+              <span class="lang-pill">
+                <span class="flag">
+                  <img src="https://flagcdn.com/w40/sa.png" alt="Arabic flag">
+                </span>
+                <strong>Arabic</strong> — Native
+              </span>
+
+              <span class="lang-pill">
+                <span class="flag">
+                  <img src="https://flagcdn.com/w40/fr.png" alt="French flag">
+                </span>
+                <strong>French</strong> — Native
+              </span>
+
+              <span class="lang-pill">
+                <span class="flag">
+                  <img src="https://flagcdn.com/w40/gb.png" alt="UK flag">
+                </span>
+                <strong>English</strong> — C2
+              </span>
+
+              <span class="lang-pill">
+                <span class="flag">
+                  <img src="https://flagcdn.com/w40/de.png" alt="German flag">
+                </span>
+                <strong>German</strong> — C1
+              </span>
+
+              <span class="lang-pill">
+                <span class="flag">
+                  <img src="https://flagcdn.com/w40/ir.png" alt="Iran flag">
+                </span>
+                <strong>Persian</strong> — A2
+              </span>
+
+              <span class="lang-pill">
+                <span class="flag">
+                  <img src="https://flagcdn.com/w40/jp.png" alt="Japan flag">
+                </span>
+                <strong>Japanese</strong> — A2
+              </span>
+            </div>
+          </div>
+
+          <!-- Tools -->
+
+          <div class="skill-card">
+            <h2 class="skills-title">Tools</h2>
+            <div class="tools-grid">
+              <div class="tool-icon">
+                <div class="tool-logo tool-word">W</div>
+                <span>Word</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-google">G</div>
+                <span>Google Suite</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-powerpoint">P</div>
+                <span>PowerPoint</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-excel">X</div>
+                <span>Excel</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-powerbi">BI</div>
+                <span>Power BI</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-canva">C</div>
+                <span>Canva</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-mapbox">M</div>
+                <span>Mapbox</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-qgis">Q</div>
+                <span>QGIS</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-ai">Ai</div>
+                <span>Illustrator</span>
+              </div>
+
+              <div class="tool-icon">
+                <div class="tool-logo tool-github"></div>
+                <span>GitHub</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </section>
+
+
+
+
+
+      
 
       <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
       <section id="education">
