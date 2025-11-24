@@ -189,6 +189,87 @@
     .edu-close:hover { color: #000; }
 
     /* ===========================
+   EXPERIENCE SECTION
+=========================== */
+
+#experience {
+  margin-top: 40px;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 32px;
+  max-width: 900px;
+  margin: 40px auto 0;
+}
+
+.experience-card {
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 16px 18px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+/* Make last card span both columns → no empty half-row */
+.experience-card:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.exp-role {
+  color: #111;
+}
+
+.exp-location {
+  color: #555;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.exp-desc {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.exp-tag {
+  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f5f7fa;
+  white-space: nowrap;
+}
+
+/* Mobile: single column, still centered */
+@media (max-width: 900px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+  .experience-card:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+    /* ===========================
        SKILLS SECTION
     ============================ */
 
@@ -719,8 +800,94 @@
 
       <!-- EXPERIENCE -->
       <section id="experience">
-        <p class="placeholder">Experience section content goes here.</p>
-      </section>
+  <div class="experience-grid">
+
+    <article class="experience-card">
+      <div class="exp-header">
+        <span class="exp-role">Intern – Project Design & Monitoring, OIF</span>
+        <span class="exp-location">Paris • 2025</span>
+      </div>
+      <p class="exp-desc">
+        Compile and analyse data for 20+ development projects, prepare country briefs and contribute to performance monitoring across the Francophonie.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Data analysis</span>
+        <span class="exp-tag">Database design</span>
+        <span class="exp-tag">Country briefs</span>
+        <span class="exp-tag">Monitoring &amp; evaluation</span>
+      </div>
+    </article>
+
+    <article class="experience-card">
+      <div class="exp-header">
+        <span class="exp-role">Graduate Trainee – Humanitarian Data, AQLITY</span>
+        <span class="exp-location">Remote • 2024</span>
+      </div>
+      <p class="exp-desc">
+        Clean and structure humanitarian datasets, map settlements and support the creation of dashboards and visuals for field partners.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Data cleaning</span>
+        <span class="exp-tag">GIS &amp; mapping</span>
+        <span class="exp-tag">Dashboards</span>
+        <span class="exp-tag">Reporting</span>
+      </div>
+    </article>
+
+    <article class="experience-card">
+      <div class="exp-header">
+        <span class="exp-role">Volunteer – Immigration Law Clinic, ARDHIS</span>
+        <span class="exp-location">Paris • 2023–2025</span>
+      </div>
+      <p class="exp-desc">
+        Support LGBT+ asylum seekers during drop-in sessions and produce country-of-origin research to inform legal strategies and hearings.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Asylum support</span>
+        <span class="exp-tag">Country research</span>
+        <span class="exp-tag">Interview prep</span>
+        <span class="exp-tag">Legal briefs</span>
+      </div>
+    </article>
+
+    <article class="experience-card">
+      <div class="exp-header">
+        <span class="exp-role">Research Intern – Science &amp; Policy, Royal Scientific Society</span>
+        <span class="exp-location">Amman • 2023</span>
+      </div>
+      <p class="exp-desc">
+        Contributed to a project on desalination and water diplomacy, mapping regional initiatives and co-authoring an article with partners.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Water policy</span>
+        <span class="exp-tag">Research writing</span>
+        <span class="exp-tag">Stakeholder mapping</span>
+        <span class="exp-tag">Science diplomacy</span>
+      </div>
+    </article>
+
+    <article class="experience-card">
+      <div class="exp-header">
+        <span class="exp-role">Project Assistant – International Relations, City of Nancy</span>
+        <span class="exp-location">Nancy • 2022</span>
+      </div>
+      <p class="exp-desc">
+        Helped organise events with twin cities, coordinated visiting delegations and supported communications on the city’s environmental policies.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Event coordination</span>
+        <span class="exp-tag">Public diplomacy</span>
+        <span class="exp-tag">Intercultural facilitation</span>
+        <span class="exp-tag">Communications</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+
+      
 
       <!-- WORK -->
       <section id="work">
