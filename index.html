@@ -190,191 +190,80 @@
 
 
 /* ===========================
-   EXPERIENCE SECTION
+   EXPERIENCE SECTION – BIG LOGO GALLERY
 =========================== */
 
 #experience {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
-/* Wrapper centered under the menu */
+/* Center the gallery under the menu */
 .experience-layout {
-  max-width: 1150px;
+  max-width: 1000px;
   margin: 60px auto 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 26px;
-}
-
-/* Row of logo pills */
-.experience-org-row {
-  display: flex;
-  gap: 24px;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
-/* Each organisation pill – now only logo inside */
-.experience-org-card {
-  width: 210px;
-  height: 110px;
-  border-radius: 24px;
+/* Grid of big logos */
+.experience-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Each logo “card” */
+.experience-logo-item {
+  width: 240px;
+  height: 240px;
+  border-radius: 26px;
   border: 1px solid #e5e7eb;
   background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
-  cursor: pointer;
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    filter 0.22s ease,
-    border-color 0.22s ease,
-    background-color 0.22s ease;
+  padding: 24px;
+  transition: transform 0.22s ease,
+              box-shadow 0.22s ease,
+              filter 0.22s ease,
+              border-color 0.22s ease;
 }
 
-.experience-org-card img {
-  max-width: 70%;
-  max-height: 70%;
+/* Logo image inside */
+.experience-logo-item img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  transition: transform 0.22s ease, filter 0.22s ease;
 }
 
-/* Hover + active effect (turquoise fill, same spirit as before) */
-.experience-org-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
-}
-
-.experience-org-card.active {
-  background: #00a0a5;
+/* Hover effect (same “language pill” vibe) */
+.experience-logo-item:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
   border-color: #00a0a5;
-  box-shadow: 0 12px 30px rgba(0, 160, 165, 0.45);
+  filter: saturate(1.08);
 }
 
-.experience-org-card.active img {
-  transform: scale(1.05);
-  filter: saturate(1.15);
-}
-
-/* Details card wrapper */
-.experience-details-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-/* Main details card */
-.experience-details-card {
-  width: 100%;
-  max-width: 1100px;
-  border-radius: 22px;
-  border: 1px solid #e5e7eb;
-  padding: 24px 30px 26px;
-  background: #fdfefe;              /* no gradient */
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-}
-
-/* Header: role + location */
-.exp-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: baseline;
-}
-
-.exp-role {
-  font-weight: 700;
-  font-size: 1.08rem;
-  color: #111827;
-}
-
-.exp-location {
-  font-size: 0.95rem;
-  color: #4b5563;
-  white-space: nowrap;
-}
-
-/* Description */
-.exp-desc {
-  margin-top: 10px;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: #374151;
-}
-
-/* Subsection labels */
-.exp-section-label {
-  margin-top: 18px;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b7280;
-}
-
-/* Bulleted lists */
-.exp-bullets {
-  margin-top: 6px;
-  margin-left: 1.2rem;
-  font-size: 0.96rem;
-  line-height: 1.6;
-  color: #374151;
-}
-
-.exp-bullets li + li {
-  margin-top: 4px;
-}
-
-/* Inline tools line */
-.exp-inline {
-  margin-top: 6px;
-  font-size: 0.96rem;
-  color: #374151;
-}
-
-/* Tags row – mint pills (same style as before) */
-.exp-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.exp-tag {
-  font-size: 0.82rem;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #e1faf5;
-  border: 1px solid #b3efe2;
-  color: #064e3b;
-  white-space: nowrap;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
+/* Mobile: slightly smaller logos & tighter gaps */
+@media (max-width: 700px) {
   .experience-layout {
     max-width: 100%;
     padding: 0 16px;
   }
 
-  .experience-org-card {
-    width: 44%;
-    min-width: 150px;
-    height: 96px;
+  .experience-logo-grid {
+    gap: 28px;
   }
 
-  .exp-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .exp-location {
-    white-space: normal;
+  .experience-logo-item {
+    width: 200px;
+    height: 200px;
   }
 }
+
 
     /* ===========================
        SKILLS SECTION
@@ -907,46 +796,34 @@
 
       <!-- EXPERIENCE -->
 
-  <section id="experience">
+<section id="experience">
   <div class="experience-layout">
+    <div class="experience-logo-grid">
 
-    <!-- Row of org logo pills -->
-    <div class="experience-org-row">
-
-      <div class="experience-org-card"
-           data-org="International Organization of La Francophonie (OIF)">
+      <div class="experience-logo-item">
         <img src="oif.jpg" alt="OIF logo">
       </div>
 
-      <div class="experience-org-card"
-           data-org="AQLITY Humanitarian Innovation">
+      <div class="experience-logo-item">
         <img src="aqlity.png" alt="AQLITY logo">
       </div>
 
-      <div class="experience-org-card"
-           data-org="ARDHIS">
+      <div class="experience-logo-item">
         <img src="images/logos/ardhis.png" alt="ARDHIS logo">
       </div>
 
-      <div class="experience-org-card"
-           data-org="Royal Scientific Society">
+      <div class="experience-logo-item">
         <img src="rss.png" alt="Royal Scientific Society logo">
       </div>
 
-      <div class="experience-org-card"
-           data-org="City Hall of Nancy">
+      <div class="experience-logo-item">
         <img src="images/logos/nancy.png" alt="City Hall of Nancy logo">
       </div>
 
     </div>
-
-    <!-- Details box -->
-    <div class="experience-details-wrapper">
-      <div id="experienceDetails"></div>
-    </div>
-
   </div>
 </section>
+
       
       <!-- WORK -->
       <section id="work">
@@ -1340,194 +1217,6 @@
       if (e.key === "ArrowRight") showNext();
       if (e.key === "ArrowLeft") showPrev();
     });
-
-/* ===============================
-   EXPERIENCE DETAILS TOGGLE (UPDATED WITH LOGOS)
-=============================== */
-
-const experienceData = {
-  "International Organization of La Francophonie (OIF)": {
-    logo: "oif.jpg",
-    role: "Intern – Project Design & Monitoring, OIF",
-    location: "Paris • 2025",
-    desc:
-      "Analyzed project data for development projects across the Francophonie and supported monitoring and evaluation for the implementation report.",
-    contribs: [
-      "Compiled and analysed data for 20+ OIF development projects.",
-      "Maintained structured cooperation databases covering multiple member states.",
-      "Drafted country briefs to feed into performance monitoring.",
-      "Contributed inputs and indicators for the execution / implementation report."
-    ],
-    tools: "Excel • Power BI • Word • Google Sheets",
-    deliverables: [
-      "20+ project datasets cleaned and harmonised.",
-      "15+ country briefs prepared or updated.",
-      "Monitoring tables and charts for the implementation report."
-    ],
-    tags: [
-      "Data analysis",
-      "Database design",
-      "Country briefs",
-      "Monitoring and evaluation"
-    ]
-  },
-
-  "AQLITY Humanitarian Innovation": {
-    logo: "aqlity.png",
-    role: "Intern – Data Analysis, AQLITY",
-    location: "Remote • 2024",
-    desc:
-      "Cleaned and analysed humanitarian datasets and produced GIS maps and visual materials to explain trends and support partners.",
-    contribs: [
-      "Cleaned and structured humanitarian datasets from multiple field partners.",
-      "Produced GIS maps of settlements and access to services.",
-      "Created visuals and dashboards to communicate trends to non-technical audiences.",
-      "Contributed to analytical reports and partner presentations."
-    ],
-    tools: "Excel • Power BI • QGIS • Mapbox • Illustrator",
-    deliverables: [
-      "Settlement maps used by field teams.",
-      "Dashboards / visuals for partner briefings.",
-      "Summary data tables for internal reports."
-    ],
-    tags: ["Data cleaning", "GIS and mapping", "Infographics", "Reporting"]
-  },
-
-  "ARDHIS": {
-    logo: "images/logos/ardhis.png",
-    role: "Volunteer – Immigration Law Clinic, ARDHIS",
-    location: "Paris • 2023–2025",
-    desc:
-      "Support LGBT+ asylum seekers during drop-in sessions and produce country-of-origin research to inform legal strategies and hearings.",
-    contribs: [
-      "Welcomed and oriented asylum seekers during weekly drop-in sessions.",
-      "Conducted in-depth country-of-origin research on legal and social contexts.",
-      "Drafted memos and notes for lawyers and case workers.",
-      "Helped applicants prepare for OFPRA and CNDA interviews."
-    ],
-    tools: "Word • Google Docs • Online legal and country-of-origin databases",
-    deliverables: [
-      "Country-of-origin research notes and internal briefs.",
-      "Preparation outlines for individual hearings.",
-      "Contributions to a longer internal report on several countries."
-    ],
-    tags: ["Asylum support", "Country research", "Interview prep", "Legal briefs"]
-  },
-
-  "Royal Scientific Society": {
-    logo: "rss.png",
-    role: "Research Intern – Science & Policy, Royal Scientific Society",
-    location: "Amman • 2023",
-    desc:
-      "Contributed to a project on desalination and water diplomacy, mapping regional initiatives and co-authoring an article with partners.",
-    contribs: [
-      "Reviewed literature on desalination, water security and regional cooperation.",
-      "Mapped regional initiatives and stakeholders in water and energy.",
-      "Analysed policy documents and technical reports with a diplomacy angle.",
-      "Co-authored a policy-oriented article with project partners."
-    ],
-    tools: "Excel • Word",
-    deliverables: [
-      "Database / mapping of regional desalination and water initiatives.",
-      "Co-authored article or policy brief on desalination and diplomacy.",
-      "Internal notes for partners and project meetings."
-    ],
-    tags: [
-      "Water policy",
-      "Research writing",
-      "Stakeholder mapping",
-      "Science diplomacy"
-    ]
-  },
-
-  "City Hall of Nancy": {
-    logo: "images/logos/nancy.png",
-    role: "Project Assistant – International Relations, City Hall of Nancy",
-    location: "Nancy • 2022",
-    desc:
-      "Helped organise events with twin cities, coordinated visiting delegations and supported communications on the city’s environmental policies.",
-    contribs: [
-      "Co-organised visits from delegations of twin cities (e.g. Lviv, Lublin, Newcastle).",
-      "Coordinated logistics, cultural activities and museum visits.",
-      "Supported a conference on the city’s environmental and climate policies.",
-      "Facilitated exchanges between local actors and international guests."
-    ],
-    tools: "Office suite • Email and online communication tools",
-    deliverables: [
-      "Programmes and schedules for delegations.",
-      "Notes and summaries from meetings and conferences.",
-      "Communication materials linked to visits and events."
-    ],
-    tags: [
-      "Event coordination",
-      "Public diplomacy",
-      "Intercultural facilitation",
-      "Communications"
-    ]
-  }
-};
-
-const orgCards = document.querySelectorAll(".experience-org-card");
-const experienceDetails = document.getElementById("experienceDetails");
-
-function renderExperienceDetails(key) {
-  const data = experienceData[key];
-  if (!data) {
-    experienceDetails.innerHTML = "";
-    return;
-  }
-
-  experienceDetails.innerHTML = `
-    <div class="experience-details-card">
-      <div class="exp-header">
-        <span class="exp-role">${data.role}</span>
-        <span class="exp-location">${data.location}</span>
-      </div>
-
-      <p class="exp-desc">${data.desc}</p>
-
-      ${data.contribs?.length ? `
-        <div class="exp-section-label">Key contributions</div>
-        <ul class="exp-bullets">
-          ${data.contribs.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      ` : ""}
-
-      ${data.tools ? `
-        <div class="exp-section-label">Tools</div>
-        <p class="exp-inline">${data.tools}</p>
-      ` : ""}
-
-      ${data.deliverables?.length ? `
-        <div class="exp-section-label">Deliverables</div>
-        <ul class="exp-bullets">
-          ${data.deliverables.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      ` : ""}
-
-      <div class="exp-tags">
-        ${data.tags.map(tag => `<span class="exp-tag">${tag}</span>`).join("")}
-      </div>
-    </div>
-  `;
-}
-
-// Click behaviour: use data-org instead of text
-orgCards.forEach(card => {
-  card.addEventListener("click", () => {
-    orgCards.forEach(c => c.classList.remove("active"));
-    card.classList.add("active");
-
-    const key = card.dataset.org;
-    renderExperienceDetails(key);
-  });
-});
-
-// Show first org by default
-if (orgCards.length > 0) {
-  orgCards[0].classList.add("active");
-  renderExperienceDetails(orgCards[0].dataset.org);
-}
 
 
   </script>
