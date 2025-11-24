@@ -188,6 +188,218 @@
 
     .edu-close:hover { color: #000; }
 
+    /* ===========================
+   CONTACT SECTION – BD SPEECH BUBBLE + FORM
+=========================== */
+
+#contact {
+  margin-top: 40px;
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* Left side: BD bubble + cards */
+.contact-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Speech bubble */
+.contact-bubble {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid #111827;
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 4px 6px 0 #111827;
+  max-width: 100%;
+}
+
+/* Little tail of speech bubble */
+.contact-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 40px;
+  border-width: 16px 14px 0 0;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+  filter: drop-shadow(2px 3px 0 #111827);
+}
+
+.contact-bubble h2 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-bubble p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.contact-note {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Small cards (email, LinkedIn, location) */
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.contact-card {
+  flex: 1 1 180px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: default;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+  border-color: #009fa5;
+}
+
+.contact-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.contact-card h3 {
+  font-size: 0.96rem;
+  margin-bottom: 2px;
+}
+
+.contact-card p {
+  font-size: 0.88rem;
+  color: #4b5563;
+}
+
+/* Right side: form */
+.contact-form-wrapper {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 18px 20px 20px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+
+.contact-title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #374151;
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  background: #ffffff;
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+  border-color: #009fa5;
+  box-shadow: 0 0 0 1px #009fa5, 0 4px 8px rgba(0, 159, 165, 0.25);
+  transform: translateY(-1px);
+}
+
+.contact-submit {
+  margin-top: 8px;
+  align-self: flex-start;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: none;
+  background: #009fa5;
+  color: #ffffff;
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 159, 165, 0.35);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.contact-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 159, 165, 0.45);
+}
+
+.contact-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 159, 165, 0.35);
+}
+
+.contact-small-note {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contact-wrapper {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-bubble::after {
+    left: 26px;
+  }
+}
+
+
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
 =========================== */
@@ -1209,9 +1421,96 @@
       </section>
 
       <!-- CONTACT -->
-      <section id="contact">
-        <p class="placeholder">Contact section content goes here.</p>
-      </section>
+
+      <!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+
+    <!-- Left: BD-style speech bubble -->
+    <div class="contact-intro">
+      <div class="contact-bubble">
+        <h2>Let’s talk.</h2>
+        <p>
+          Curious about research, fieldwork, data storytelling or the MENA region?<br>
+          I’m happy to read long messages and thoughtful project ideas.
+        </p>
+        <p class="contact-note">
+          ✏️ Bonus: I reply faster if you tell me a bit about your context.
+        </p>
+      </div>
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <span class="contact-icon">📧</span>
+          <div>
+            <h3>Email</h3>
+            <p>For collaborations, opportunities and documents.</p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <span class="contact-icon">💼</span>
+          <div>
+            <h3>LinkedIn</h3>
+            <p>Professional projects, networking and follow-up.</p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <span class="contact-icon">🌍</span>
+          <div>
+            <h3>Where I’m based</h3>
+            <p>Mostly between Paris &amp; Berlin — CET timezone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="contact-form-wrapper">
+      <h2 class="contact-title">Send a message</h2>
+
+      <form class="contact-form">
+        <div class="contact-field">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="name" placeholder="Your name">
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" placeholder="you@example.com">
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-topic">What would you like to talk about?</label>
+          <select id="contact-topic" name="topic">
+            <option value="">Choose a topic…</option>
+            <option>Research / fieldwork</option>
+            <option>Humanitarian / development projects</option>
+            <option>Speaking / teaching</option>
+            <option>Just saying hi</option>
+          </select>
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="4"
+                    placeholder="Share context, ideas, questions…"></textarea>
+        </div>
+
+        <button type="submit" class="contact-submit">
+          Send message
+        </button>
+
+        <p class="contact-small-note">
+          I read every message. If it’s about research or projects, feel free to write in detail.
+        </p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
 
     </main>
   </div>
