@@ -189,30 +189,35 @@
     .edu-close:hover { color: #000; }
 
 /* ===========================
-   EXPERIENCE SECTION – ORGANIC LOGO CLOUD
+   EXPERIENCE SECTION – LOGO GRID (3 TOP / 2 BOTTOM)
 =========================== */
 
 #experience {
   margin-top: 0px;
+  min-height: 100vh;              /* fill viewport height */
+  display: flex;
+  align-items: center;            /* vertically center logos block */
 }
 
 .experience-layout {
   max-width: 1200px;
-  margin: 20px auto 30px;
+  margin: 0 auto;                 /* center within page */
+  padding: 40px 20px;
 }
 
-/* FLEX WRAP → logos flow naturally, no rigid grid */
+/* GRID → 3 top, 2 bottom, fixed layout */
 .experience-logo-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px 80px;            /* vertical / horizontal spacing */
-  padding: 40px 20px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));  /* 3 columns */
+  grid-template-rows: repeat(2, auto);               /* 2 rows */
+  justify-items: center;
+  align-items: center;
+  gap: 40px 80px;                                    /* vertical / horizontal spacing */
 }
 
-/* Base logo style – big and floating, no box */
+/* Base logo style */
 .experience-logo img {
-  max-width: 220px;          /* ⬅ bigger logos */
+  max-width: min(230px, 18vw);    /* responsive, shrinks if viewport is small */
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -220,93 +225,55 @@
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-/* Hover lift */
+/* Hover lift (same for all by default) */
 .experience-logo img:hover {
   transform: translateY(-8px) scale(1.04);
   filter: drop-shadow(0 18px 32px rgba(15, 23, 42, 0.32));
 }
 
-    /* “Cloudy” / random feel: different sizes + vertical offsets
-   (using margin-top so hover transform is identical for all) */
-.experience-logo:nth-child(1) img {
-  max-width: 260px;
-}
+/* ---------- SPECIAL CASES ---------- */
 
-.experience-logo:nth-child(2) {
-  margin-top: 16px;
-}
-.experience-logo:nth-child(2) img {
-  max-width: 310px;
-}
-
-.experience-logo:nth-child(3) {
-  margin-top: -10px;
-}
-.experience-logo:nth-child(3) img {
-  max-width: 270px;
-}
-
-.experience-logo:nth-child(4) {
-  margin-top: 8px;
-}
-.experience-logo:nth-child(4) img {
-  max-width: 260px;
-}
-
-.experience-logo:nth-child(5) {
-  margin-top: -6px;
-}
-.experience-logo:nth-child(5) img {
-  max-width: 320px;
-}
-
-
-/* When hovering, override the offset with the hover transform */
-.experience-logo:nth-child(2) img:hover,
-.experience-logo:nth-child(3) img:hover,
-.experience-logo:nth-child(4) img:hover,
-.experience-logo:nth-child(5) img:hover {
-  transform: translateY(-8px) scale(1.04);
-}
-
-    /* Remove shadow for AQLITY and ARDHIS ONLY */
+/* Remove shadow for AQLITY (2) and ARDHIS (3) ONLY */
 .experience-logo:nth-child(2) img,
 .experience-logo:nth-child(3) img {
   filter: none !important;
 }
 
-    .experience-logo:nth-child(2) img:hover,
+.experience-logo:nth-child(2) img:hover,
 .experience-logo:nth-child(3) img:hover {
   filter: none !important;
 }
 
-    .experience-logo:nth-child(2) img {
+/* Round corners for AQLITY rectangle */
+.experience-logo:nth-child(2) img {
   border-radius: 24px;
 }
 
-    
-/* Mobile tweaks */
+/* ---------- MOBILE ---------- */
 @media (max-width: 900px) {
+  #experience {
+    min-height: auto;             /* allow scroll on small screens */
+    align-items: flex-start;
+  }
+
   .experience-layout {
     max-width: 100%;
-    padding: 0 16px 40px;
+    padding: 20px 16px 40px;
   }
 
   .experience-logo-cloud {
+    display: flex;                /* go back to flex on mobile */
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 32px 32px;
   }
 
   .experience-logo img {
-    max-width: 220px;
+    max-width: 200px;
     filter: drop-shadow(0 8px 16px rgba(15, 23, 42, 0.22));
     transform: none;
   }
-
-  .experience-logo:nth-child(n) img {
-    transform: none;   /* no vertical offsets on small screens */
-  }
 }
-
 
     /* ===========================
        SKILLS SECTION
