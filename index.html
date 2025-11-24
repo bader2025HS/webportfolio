@@ -188,6 +188,239 @@
 
     .edu-close:hover { color: #000; }
 
+
+/* ===========================
+   ABOUT – BD COMIC PAGE
+=========================== */
+
+#about {
+  margin-top: 40px;
+}
+
+.about-comic {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Central map panel */
+
+.about-map-panel {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 14px 16px 26px;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+.about-map-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #4b5563;
+  margin-bottom: 6px;
+}
+
+/* SVG sizing */
+
+.about-map-svg {
+  width: 100%;
+  max-height: 360px;   /* keeps it compact → avoids scroll obsession */
+  display: block;
+}
+
+/* Animated path */
+
+.about-journey-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: about-draw-path 4s ease-in-out forwards;
+}
+
+@keyframes about-draw-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Little stick walker */
+
+.about-walker {
+  transform-origin: center;
+}
+
+/* City markers */
+
+.about-city-marker {
+  cursor: pointer;
+}
+
+.about-city-marker text {
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+}
+
+/* Speech bubble */
+
+.about-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%) translateY(110%);
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  padding: 10px 14px;
+  max-width: 80%;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.about-bubble::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent #d1d5db transparent;
+}
+
+.about-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 1px);
+  transform: translateX(-50%);
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+.about-bubble-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #111827;
+  font-size: 0.92rem;
+}
+
+.about-bubble-text {
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* visible state (when a chapter is active) */
+
+.about-bubble.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Side panels */
+
+.about-panels {
+  display: grid;
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.about-panel {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 7px rgba(15, 23, 42, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+/* halftone / dotted BD texture */
+
+.about-panel::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.about-panel-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: rgba(255, 255, 255, 0.85);
+  margin-bottom: 4px;
+}
+
+.about-panel-title {
+  position: relative;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.about-panel-body {
+  position: relative;
+  font-size: 0.86rem;
+  color: #4b5563;
+  line-height: 1.45;
+}
+
+/* active / hover states */
+
+.about-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.18);
+  border-color: #009fa5;
+}
+
+.about-panel-active {
+  border-color: #009fa5;
+  box-shadow: 0 5px 14px rgba(0, 159, 165, 0.4);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .about-comic {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-map-panel {
+    margin-bottom: 16px;
+  }
+
+  .about-panels {
+    grid-template-rows: none;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .about-map-svg {
+    max-height: 300px;
+  }
+}
+
+
+    
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
 =========================== */
@@ -311,6 +544,7 @@
   max-width: 260px;
 }
 
+    
 
     /* ===========================
        SKILLS SECTION
@@ -822,9 +1056,180 @@
       </section>
 
       <!-- ABOUT -->
-      <section id="about">
-        <p class="placeholder">About section content goes here.</p>
-      </section>
+
+
+<!-- ABOUT – BD COMIC PAGE -->
+<section id="about">
+  <div class="about-comic">
+
+    <!-- CENTRAL MAP / PATH PANEL -->
+    <div class="about-map-panel">
+      <div class="about-map-title">ABOUT — A COMIC JOURNEY</div>
+
+      <!-- Speech bubble (updates when you click a city/panel) -->
+      <div class="about-bubble" id="about-bubble">
+        <div class="about-bubble-title" id="about-bubble-title">Nancy — Chapter 1</div>
+        <div class="about-bubble-text" id="about-bubble-text">
+          Where everything starts: first steps into politics, Europe, and public service.
+        </div>
+      </div>
+
+      <!-- SVG WORLD + PATH + WALKER + MARKERS -->
+      <svg
+        class="about-map-svg"
+        viewBox="0 0 100 60"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- light world “blob” shapes (stylised continents) -->
+        <path d="M5 20 Q 25 5 50 15 T 95 20 Q 80 35 55 40 T 10 35 Z"
+              fill="#f3f4f6" />
+        <path d="M15 45 Q 35 35 55 38 T 90 45 Q 75 55 50 53 T 18 52 Z"
+              fill="#eef2ff" />
+
+        <!-- animated path (journey) -->
+        <path
+          id="about-journey-path"
+          class="about-journey-path"
+          d="
+            M 20 25  /* Nancy */
+            L 25 32  /* Menton */
+            L 65 20  /* Tokyo */
+            L 40 22  /* Paris (back to Europe) */
+            L 55 30  /* Amman */
+            L 70 35  /* Muscat */
+            L 35 18  /* Berlin */
+          "
+          fill="none"
+          stroke="#009fa5"
+          stroke-width="1.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- walking little stick figure (moved by JS along the path) -->
+        <g id="about-walker" class="about-walker">
+          <!-- head -->
+          <circle cx="0" cy="0" r="1.2" fill="#111" />
+          <!-- body -->
+          <line x1="0" y1="1.2" x2="0" y2="4" stroke="#111" stroke-width="0.6" />
+          <!-- arms -->
+          <line x1="-1.5" y1="2.2" x2="1.5" y2="2.0" stroke="#111" stroke-width="0.5" />
+          <!-- legs -->
+          <line x1="0" y1="4" x2="-1.2" y2="6" stroke="#111" stroke-width="0.5" />
+          <line x1="0" y1="4" x2="1.4" y2="6" stroke="#111" stroke-width="0.5" />
+        </g>
+
+        <!-- city markers (clickable) -->
+        <g class="about-city-markers">
+
+          <!-- Nancy -->
+          <g class="about-city-marker" data-chapter="nancy">
+            <circle cx="20" cy="25" r="1.2" fill="#111" />
+            <text x="22" y="24.5" font-size="3" fill="#111">Nancy</text>
+          </g>
+
+          <!-- Menton -->
+          <g class="about-city-marker" data-chapter="menton">
+            <circle cx="25" cy="32" r="1.2" fill="#111" />
+            <text x="27" y="31.5" font-size="3" fill="#111">Menton</text>
+          </g>
+
+          <!-- Tokyo -->
+          <g class="about-city-marker" data-chapter="tokyo">
+            <circle cx="65" cy="20" r="1.2" fill="#111" />
+            <text x="67" y="19.5" font-size="3" fill="#111">Tokyo</text>
+          </g>
+
+          <!-- Paris -->
+          <g class="about-city-marker" data-chapter="paris">
+            <circle cx="40" cy="22" r="1.2" fill="#111" />
+            <text x="42" y="21.5" font-size="3" fill="#111">Paris</text>
+          </g>
+
+          <!-- Amman -->
+          <g class="about-city-marker" data-chapter="amman">
+            <circle cx="55" cy="30" r="1.2" fill="#111" />
+            <text x="57" y="29.5" font-size="3" fill="#111">Amman</text>
+          </g>
+
+          <!-- Muscat -->
+          <g class="about-city-marker" data-chapter="muscat">
+            <circle cx="70" cy="35" r="1.2" fill="#111" />
+            <text x="72" y="34.5" font-size="3" fill="#111">Muscat</text>
+          </g>
+
+          <!-- Berlin -->
+          <g class="about-city-marker" data-chapter="berlin">
+            <circle cx="35" cy="18" r="1.2" fill="#111" />
+            <text x="37" y="17.5" font-size="3" fill="#111">Berlin</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- SIDE COMIC PANELS -->
+    <div class="about-panels">
+
+      <div class="about-panel" data-chapter="nancy">
+        <div class="about-panel-tag">CH. 1</div>
+        <div class="about-panel-title">Nancy</div>
+        <div class="about-panel-body">
+          First political spark, Franco-German campus, early debates about Europe.
+        </div>
+      </div>
+
+      <div class="about-panel" data-chapter="menton">
+        <div class="about-panel-tag">CH. 2</div>
+        <div class="about-panel-title">Menton</div>
+        <div class="about-panel-body">
+          Middle East campus – diplomacy, Arabic, and first steps into the region.
+        </div>
+      </div>
+
+      <div class="about-panel" data-chapter="tokyo">
+        <div class="about-panel-tag">CH. 3</div>
+        <div class="about-panel-title">Tokyo</div>
+        <div class="about-panel-body">
+          Exchange year – Japan, Asia-Pacific politics, language learning and shock.
+        </div>
+      </div>
+
+      <div class="about-panel" data-chapter="paris">
+        <div class="about-panel-tag">CH. 4</div>
+        <div class="about-panel-title">Paris</div>
+        <div class="about-panel-body">
+          PSIA, OIF, ARDHIS, SPMA – where everything converges: migration, data, policy.
+        </div>
+      </div>
+
+      <div class="about-panel" data-chapter="amman">
+        <div class="about-panel-tag">CH. 5</div>
+        <div class="about-panel-title">Amman</div>
+        <div class="about-panel-body">
+          Jordan – research on desalination, water governance and science diplomacy.
+        </div>
+      </div>
+
+      <div class="about-panel" data-chapter="muscat">
+        <div class="about-panel-tag">CH. 6</div>
+        <div class="about-panel-title">Muscat</div>
+        <div class="about-panel-body">
+          Field-project ideas, Oman, and building bridges between students and embassies.
+        </div>
+      </div>
+
+      <div class="about-panel" data-chapter="berlin">
+        <div class="about-panel-tag">CH. 7</div>
+        <div class="about-panel-title">Berlin</div>
+        <div class="about-panel-body">
+          Next chapter – dual degree, security, and a deeper European perspective.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       <!-- SKILLS -->
       <section id="skills">
@@ -1245,6 +1650,9 @@
   <!-- LEAFLET JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+
   <script>
     /* ===== Scroll progress bar ===== */
     window.addEventListener("scroll", () => {
@@ -1628,6 +2036,133 @@ document.querySelectorAll(".exp-back-btn").forEach(btn => {
       if (e.key === "ArrowRight") showNext();
       if (e.key === "ArrowLeft") showPrev();
     });
+
+    /* ===============================
+   ABOUT – BD COMIC LOGIC
+=============================== */
+
+// data for chapters (bubbles)
+const aboutChapters = {
+  nancy: {
+    title: "Nancy — Chapter 1",
+    text:
+      "Where it starts: Franco-German campus, first exposure to European politics and public service."
+  },
+  menton: {
+    title: "Menton — Chapter 2",
+    text:
+      "Middle East campus: Arabic, Mediterranean politics, and early work on migration and diplomacy."
+  },
+  tokyo: {
+    title: "Tokyo — Chapter 3",
+    text:
+      "Exchange year at TUFS: Japan, Asia-Pacific, language learning and navigating a new academic culture."
+  },
+  paris: {
+    title: "Paris — Chapter 4",
+    text:
+      "PSIA, OIF, ARDHIS, SPMA: connecting migration, development, humanitarian data and advocacy."
+  },
+  amman: {
+    title: "Amman — Chapter 5",
+    text:
+      "Internship in Jordan: desalination, water governance and science diplomacy across the MENA region."
+  },
+  muscat: {
+    title: "Muscat — Chapter 6",
+    text:
+      "Field-research ideas and cultural diplomacy: building bridges between students, institutions and Oman."
+  },
+  berlin: {
+    title: "Berlin — Chapter 7",
+    text:
+      "Next step: dual degree, international security and a deeper European / German perspective."
+  }
+};
+
+const aboutBubble = document.getElementById("about-bubble");
+const aboutBubbleTitle = document.getElementById("about-bubble-title");
+const aboutBubbleText = document.getElementById("about-bubble-text");
+const aboutPanels = document.querySelectorAll(".about-panel");
+const aboutCityMarkers = document.querySelectorAll(".about-city-marker");
+
+// helper → update bubble + panel active state
+function showAboutChapter(key) {
+  const data = aboutChapters[key];
+  if (!data) return;
+
+  aboutBubbleTitle.textContent = data.title;
+  aboutBubbleText.textContent = data.text;
+
+  aboutBubble.classList.add("visible");
+
+  aboutPanels.forEach(p => {
+    if (p.dataset.chapter === key) {
+      p.classList.add("about-panel-active");
+    } else {
+      p.classList.remove("about-panel-active");
+    }
+  });
+}
+
+// click on side panels
+aboutPanels.forEach(panel => {
+  panel.addEventListener("click", () => {
+    showAboutChapter(panel.dataset.chapter);
+  });
+});
+
+// click on city markers
+aboutCityMarkers.forEach(marker => {
+  marker.addEventListener("click", () => {
+    showAboutChapter(marker.dataset.chapter);
+  });
+});
+
+// initialise with Nancy active
+showAboutChapter("nancy");
+
+/* Walker animation along the SVG path (GSAP) */
+
+const aboutPath = document.getElementById("about-journey-path");
+const aboutWalker = document.getElementById("about-walker");
+
+if (aboutPath && aboutWalker && window.gsap) {
+  const totalLength = aboutPath.getTotalLength();
+  // ensure dash matches true length
+  aboutPath.style.strokeDasharray = totalLength;
+  aboutPath.style.strokeDashoffset = totalLength;
+
+  const tl = gsap.timeline({
+    repeat: -1,
+    repeatDelay: 0.8
+  });
+
+  // animate stroke drawing
+  tl.to(aboutPath, {
+    strokeDashoffset: 0,
+    duration: 4,
+    ease: "power1.inOut"
+  });
+
+  // dummy tween for 0→1 progress, moving walker along path
+  tl.to(
+    {},
+    {
+      duration: 4,
+      onUpdate: function () {
+        const progress = this.progress();
+        const lengthAt = totalLength * progress;
+        const point = aboutPath.getPointAtLength(lengthAt);
+        aboutWalker.setAttribute(
+          "transform",
+          `translate(${point.x}, ${point.y})`
+        );
+      }
+    },
+    "<" // start at same time as stroke animation
+  );
+}
 
 
   </script>
