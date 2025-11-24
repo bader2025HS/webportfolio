@@ -190,7 +190,7 @@
 
 
 /* ===========================
-   EXPERIENCE SECTION (WITH LOGO)
+   EXPERIENCE SECTION
 =========================== */
 
 #experience {
@@ -200,166 +200,151 @@
 /* Wrapper centered under the menu */
 .experience-layout {
   max-width: 1150px;
-  margin: 40px auto 0;
-  padding: 0 20px;
+  margin: 60px auto 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
 }
 
-/* Organisation row */
+/* Row of logo pills */
 .experience-org-row {
   display: flex;
   gap: 24px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* Organisation selector card */
+/* Each organisation pill – now only logo inside */
 .experience-org-card {
-  min-width: 200px;
-  padding: 20px 30px;
-  border-radius: 20px;
+  width: 210px;
+  height: 110px;
+  border-radius: 24px;
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.3;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
   cursor: pointer;
-  transition: transform 0.22s ease,
-              box-shadow 0.22s ease,
-              filter 0.22s ease,
-              border-color 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
 }
 
-/* Selected card */
-.experience-org-card.active {
-  background: #009fa5;
-  color: #ffffff;
-  border-color: #009fa5;
-  box-shadow: 0 12px 30px rgba(0,159,165,0.40);
+.experience-org-card img {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+  transition: transform 0.22s ease, filter 0.22s ease;
 }
 
-/* Hover effect */
+/* Hover + active effect (turquoise fill, same spirit as before) */
 .experience-org-card:hover {
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
-  border-color: #009fa5;
-  filter: saturate(1.08);
 }
 
-/* ===== Details area: logo + card side by side ===== */
-.experience-details {
-  max-width: 1150px;
-  margin: 28px auto 0;
-  padding: 0 20px;
-
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
+.experience-org-card.active {
+  background: #00a0a5;
+  border-color: #00a0a5;
+  box-shadow: 0 12px 30px rgba(0, 160, 165, 0.45);
 }
 
-/* Left logo column */
-.experience-logo-box {
-  width: 140px;
-  min-height: 140px;
+.experience-org-card.active img {
+  transform: scale(1.05);
+  filter: saturate(1.15);
+}
+
+/* Details card wrapper */
+.experience-details-wrapper {
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.experience-logo-box img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Right column: details card */
+/* Main details card */
 .experience-details-card {
-  flex: 1;
-  border-radius: 20px;
-  border: 1px solid #e2e8f0;
-  padding: 26px 28px;
-  background: #fdfefe;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+  width: 100%;
+  max-width: 1100px;
+  border-radius: 22px;
+  border: 1px solid #e5e7eb;
+  padding: 24px 30px 26px;
+  background: #fdfefe;              /* no gradient */
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
 }
 
-/* Header line */
+/* Header: role + location */
 .exp-header {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
-  font-size: 1.05rem;
-  font-weight: 700;
+  gap: 16px;
+  align-items: baseline;
 }
 
 .exp-role {
+  font-weight: 700;
+  font-size: 1.08rem;
   color: #111827;
 }
 
 .exp-location {
-  color: #4b5563;
   font-size: 0.95rem;
+  color: #4b5563;
   white-space: nowrap;
 }
 
-/* Intro description */
+/* Description */
 .exp-desc {
-  margin-top: 12px;
-  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 0.98rem;
+  line-height: 1.6;
   color: #374151;
-  line-height: 1.55;
 }
 
-/* Section titles */
+/* Subsection labels */
 .exp-section-label {
   margin-top: 18px;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-  text-transform: uppercase;
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #6b7280;
 }
 
-/* Bullet lists (Key contributions, Deliverables) */
+/* Bulleted lists */
 .exp-bullets {
-  margin: 0 0 4px 1.2rem;
-  padding: 0;
-  font-size: 0.95rem;
+  margin-top: 6px;
+  margin-left: 1.2rem;
+  font-size: 0.96rem;
+  line-height: 1.6;
   color: #374151;
-  line-height: 1.5;
 }
 
-.exp-bullets li {
-  margin-bottom: 6px;
+.exp-bullets li + li {
+  margin-top: 4px;
 }
 
-/* Inline text (Tools) */
+/* Inline tools line */
 .exp-inline {
-  font-size: 0.95rem;
+  margin-top: 6px;
+  font-size: 0.96rem;
   color: #374151;
 }
 
-.exp-inline strong {
-  font-weight: 700;
-}
-
-/* Pill tags at bottom */
+/* Tags row – mint pills (same style as before) */
 .exp-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-top: 16px;
 }
 
 .exp-tag {
-  font-size: 0.85rem;
-  padding: 7px 14px;
+  font-size: 0.82rem;
+  padding: 6px 12px;
   border-radius: 999px;
   background: #e1faf5;
   border: 1px solid #b3efe2;
@@ -367,37 +352,23 @@
   white-space: nowrap;
 }
 
-/* Responsive */
+/* Mobile */
 @media (max-width: 900px) {
   .experience-layout {
     max-width: 100%;
-    padding: 0 12px;
-  }
-
-  .experience-org-row {
-    flex-wrap: wrap;
+    padding: 0 16px;
   }
 
   .experience-org-card {
-    flex: 1 1 45%;
-    min-width: 160px;
-  }
-
-  .experience-details {
-    max-width: 100%;
-    padding: 0 12px;
-    margin-top: 24px;
-    flex-direction: column;       /* logo above card on mobile */
-  }
-
-  .experience-logo-box {
-    width: 120px;
-    align-self: center;
+    width: 44%;
+    min-width: 150px;
+    height: 96px;
   }
 
   .exp-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 4px;
   }
 
   .exp-location {
@@ -936,21 +907,46 @@
 
       <!-- EXPERIENCE -->
 
-   <section id="experience">
+  <section id="experience">
   <div class="experience-layout">
+
+    <!-- Row of org logo pills -->
     <div class="experience-org-row">
-      <div class="experience-org-card">International Organization of La Francophonie (OIF)</div>
-      <div class="experience-org-card">AQLITY Humanitarian Innovation</div>
-      <div class="experience-org-card">ARDHIS</div>
-      <div class="experience-org-card">Royal Scientific Society</div>
-      <div class="experience-org-card">City Hall of Nancy</div>
+
+      <div class="experience-org-card"
+           data-org="International Organization of La Francophonie (OIF)">
+        <img src="images/logos/oif.png" alt="OIF logo">
+      </div>
+
+      <div class="experience-org-card"
+           data-org="AQLITY Humanitarian Innovation">
+        <img src="images/logos/aqlity.png" alt="AQLITY logo">
+      </div>
+
+      <div class="experience-org-card"
+           data-org="ARDHIS">
+        <img src="images/logos/ardhis.png" alt="ARDHIS logo">
+      </div>
+
+      <div class="experience-org-card"
+           data-org="Royal Scientific Society">
+        <img src="images/logos/rss.png" alt="Royal Scientific Society logo">
+      </div>
+
+      <div class="experience-org-card"
+           data-org="City Hall of Nancy">
+        <img src="images/logos/nancy.png" alt="City Hall of Nancy logo">
+      </div>
+
     </div>
+
+    <!-- Details box -->
+    <div class="experience-details-wrapper">
+      <div id="experienceDetails"></div>
+    </div>
+
   </div>
-
-  <!-- details (logo + card) injected here -->
-  <div id="experienceDetails" class="experience-details"></div>
 </section>
-
       
       <!-- WORK -->
       <section id="work">
@@ -1482,10 +1478,6 @@ function renderExperienceDetails(key) {
   }
 
   experienceDetails.innerHTML = `
-    <div class="experience-logo-box">
-      ${data.logo ? `<img src="${data.logo}" alt="${key} logo">` : ""}
-    </div>
-
     <div class="experience-details-card">
       <div class="exp-header">
         <span class="exp-role">${data.role}</span>
@@ -1520,23 +1512,22 @@ function renderExperienceDetails(key) {
   `;
 }
 
-// Click behaviour
+// Click behaviour: use data-org instead of text
 orgCards.forEach(card => {
   card.addEventListener("click", () => {
     orgCards.forEach(c => c.classList.remove("active"));
     card.classList.add("active");
 
-    const key = card.textContent.trim();
+    const key = card.dataset.org;
     renderExperienceDetails(key);
   });
 });
 
-// Show first experience by default
+// Show first org by default
 if (orgCards.length > 0) {
   orgCards[0].classList.add("active");
-  renderExperienceDetails(orgCards[0].textContent.trim());
+  renderExperienceDetails(orgCards[0].dataset.org);
 }
-
 
 
   </script>
