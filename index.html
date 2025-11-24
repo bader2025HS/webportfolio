@@ -188,10 +188,6 @@
 
     .edu-close:hover { color: #000; }
 
-    /* ===========================
-   EXPERIENCE SECTION
-=========================== */
-
 /* ===========================
    EXPERIENCE SECTION
 =========================== */
@@ -262,14 +258,19 @@
   padding: 18px 20px;
   background: #fdfefe;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+  transition: transform 0.22s ease,
+              box-shadow 0.22s ease,
+              filter 0.22s ease,
+              border-color 0.22s ease;
 }
 
-/* Hover (optional, subtle) */
 .experience-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.25);
+  filter: saturate(1.12);
+  border-color: #009fa5;
 }
+
 
 /* Top line: role + location/year */
 .exp-header {
