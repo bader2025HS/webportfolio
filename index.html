@@ -194,7 +194,7 @@
 
 #experience {
   margin-top: 0px;
-  min-height: calc(100vh - 180px);   /* fits the screen under header */
+  min-height: calc(100vh - 150px);   /* fits the screen under header */
   display: flex;
   align-items: center;
 }
@@ -202,7 +202,7 @@
 .experience-layout {
   max-width: 1000px;   /* allow more width = bigger logos */
   margin: 0 auto;
-  padding: 0 10px;     /* very tight padding for height */
+  padding: 0 10px 10px;     /* very tight padding for height */
 }
 
 /* 3×2 grid taking full width */
@@ -211,10 +211,11 @@
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-items: center;
-
-  gap: 10px 30px;       /* reduced vertical gap */
+  gap: 10px 30px;
   width: 100%;
+  padding: 0;                /* tighter grid */
 }
+
 
 /* Bigger logos (AUTO-SCALE with viewport) */
 .experience-logo img {
