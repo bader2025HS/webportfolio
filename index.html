@@ -513,7 +513,7 @@
       fillOpacity: 0
     };
 
-    // "Flag-style" selected colors (approximation)
+    // flag-inspired selected styles (border matches fill theme)
     const selectedStyles = {
       france: {
         color: "#002654",       // French blue stroke
@@ -535,11 +535,15 @@
       }
     };
 
-    function setCountryFill(countryKey) {
-      // reset all to base
+    function resetCountryStyles() {
       Object.keys(countryLayers).forEach(key => {
         countryLayers[key].setStyle(baseStyle);
       });
+    }
+
+    function setCountryFill(countryKey) {
+      // reset all to base
+      resetCountryStyles();
       // apply selected style to clicked one
       const layer = countryLayers[countryKey];
       if (layer) {
@@ -598,7 +602,7 @@
       drawCountry("map-japan", "japan", [38.9, 138.2], 4.5);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.5);
 
-      // Click maps → color in flag colors + open education popup
+      // Click maps → color + open education popup
       document.getElementById("map-france").addEventListener("click", () => {
         setCountryFill("france");
         openEduPopup("france");
@@ -734,6 +738,8 @@
 
     function closeEduPopup() {
       eduOverlay.style.display = "none";
+      // 🔄 reset map colors when details are closed
+      resetCountryStyles();
     }
 
     eduClose.addEventListener("click", closeEduPopup);
