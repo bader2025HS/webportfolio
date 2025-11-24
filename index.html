@@ -226,30 +226,40 @@
   filter: drop-shadow(0 18px 32px rgba(15, 23, 42, 0.32));
 }
 
-/* “Cloudy” / random feel: different sizes + vertical offsets */
+/* “Cloudy” / random feel: different sizes + vertical offsets
+   (using margin-top so hover transform is identical for all) */
 .experience-logo:nth-child(1) img {
   max-width: 260px;
 }
 
+.experience-logo:nth-child(2) {
+  margin-top: 16px;
+}
 .experience-logo:nth-child(2) img {
   max-width: 310px;
-  transform: translateY(16px);
 }
 
+.experience-logo:nth-child(3) {
+  margin-top: -10px;
+}
 .experience-logo:nth-child(3) img {
   max-width: 270px;
-  transform: translateY(-10px);
 }
 
+.experience-logo:nth-child(4) {
+  margin-top: 8px;
+}
 .experience-logo:nth-child(4) img {
   max-width: 260px;
-  transform: translateY(8px);
 }
 
+.experience-logo:nth-child(5) {
+  margin-top: -6px;
+}
 .experience-logo:nth-child(5) img {
   max-width: 320px;
-  transform: translateY(-6px);
 }
+
 
 /* When hovering, override the offset with the hover transform */
 .experience-logo:nth-child(2) img:hover,
