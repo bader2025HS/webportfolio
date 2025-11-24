@@ -218,8 +218,6 @@
 
     /* Languages */
 
-/* Languages */
-
 .lang-row {
   display: flex;
   flex-direction: column;
@@ -264,7 +262,18 @@
   width: 100%;
 }
 
+  .lang-pill {
+  transition: transform 0.22s ease, 
+              box-shadow 0.22s ease, 
+              filter 0.22s ease;
+}
 
+.lang-pill:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.25);
+  filter: saturate(1.12);
+  border-color: #009fa5;
+}
     /* Tools — CSS “icons” */
 
     .tools-grid {
