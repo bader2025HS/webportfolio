@@ -188,7 +188,7 @@
 
     .edu-close:hover { color: #000; }
 
-/* ===========================
+    /* ===========================
    EXPERIENCE SECTION
 =========================== */
 
@@ -196,62 +196,20 @@
   margin-top: 40px;
 }
 
-/* Whole layout: timeline + cards, centered under menu */
+/* Wrapper centered under the menu */
 .experience-layout {
-  max-width: 1050px;
-  margin: 40px auto 0;   /* centers under nav */
-  display: flex;
-  gap: 28px;
+  max-width: 900px;
+  margin: 40px auto 0;
 }
 
-/* Left vertical line + dots */
-.exp-timeline {
-  position: relative;
-  width: 70px;
+/* One vertical column of cards */
+.experience-grid {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 10px 0;
+  gap: 24px;
 }
 
-.exp-timeline::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 4px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: linear-gradient(#00a0a5, #f2c811);
-  opacity: 0.75;
-}
-
-.exp-dot {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffe8a3, #f2c811 45%, #00a0a5 80%);
-  border: 4px solid #ffffff;
-  box-shadow: 0 0 0 3px rgba(0, 160, 165, 0.25);
-  z-index: 1;
-  margin: 26px 0;
-}
-
-/* Right: 2-column grid of cards */
-.experience-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 28px;
-}
-
-/* Last card spans full width to avoid empty half row */
-.experience-card:nth-child(5) {
-  grid-column: 1 / -1;
-}
-
-/* Card styling – rounded + soft background like old site */
+/* Card styling – keep hover like languages */
 .experience-card {
   border-radius: 20px;
   border: 1px solid #e2e8f0;
@@ -270,7 +228,6 @@
   filter: saturate(1.12);
   border-color: #009fa5;
 }
-
 
 /* Top line: role + location/year */
 .exp-header {
@@ -299,7 +256,7 @@
   line-height: 1.5;
 }
 
-/* Tags row – mint pills like old portfolio */
+/* Tags row – mint pills */
 .exp-tags {
   display: flex;
   flex-wrap: wrap;
@@ -317,19 +274,10 @@
   white-space: nowrap;
 }
 
-/* Mobile: single column cards, timeline still visible */
 @media (max-width: 900px) {
   .experience-layout {
     max-width: 100%;
     padding: 0 10px;
-  }
-
-  .experience-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .experience-card:nth-child(5) {
-    grid-column: auto;
   }
 }
 
@@ -865,18 +813,8 @@
 
       <!-- EXPERIENCE -->
 
-      <section id="experience">
+    <section id="experience">
   <div class="experience-layout">
-    <!-- Left vertical line + dots -->
-    <div class="exp-timeline">
-      <span class="exp-dot"></span>
-      <span class="exp-dot"></span>
-      <span class="exp-dot"></span>
-      <span class="exp-dot"></span>
-      <span class="exp-dot"></span>
-    </div>
-
-    <!-- Right: cards in 2 columns -->
     <div class="experience-grid">
 
       <article class="experience-card">
@@ -967,6 +905,7 @@
     </div>
   </div>
 </section>
+
       
 
       <!-- WORK -->
