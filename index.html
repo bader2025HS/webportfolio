@@ -504,6 +504,10 @@
     const normalize = s =>
       s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+    // NEW: store each country's Leaflet layer so we can recolor
+    const countryLayers = {};
+    const TURQUOISE = "#009fa5";
+
     async function loadGeoJSON() {
       if (worldData) return worldData;
       const urls = [
@@ -533,11 +537,33 @@
 
       const aliases = COUNTRY_NAMES[country].map(normalize);
 
-      L.geoJSON(worldData, {
+      const layer = L.geoJSON(worldData, {
         filter: f =>
           aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
-        style: { color: "#222", weight: 1.8, fillOpacity: 0 }
+        style: {
+          color: "#222",
+          weight: 1.8,
+          fillOpacity: 0,        // start transparent
+          fillColor: "transparent"
+        }
       }).addTo(map);
+
+      // store reference to this country's layer
+      countryLayers[country] = layer;
+    }
+
+    // NEW: highlight clicked country in turquoise, reset others
+    function highlightCountry(country) {
+      Object.keys(countryLayers).forEach(key => {
+        const layer = countryLayers[key];
+        if (!layer) return;
+        layer.setStyle({
+          color: "#222",
+          weight: 1.8,
+          fillOpacity: key === country ? 0.35 : 0,
+          fillColor: key === country ? TURQUOISE : "transparent"
+        });
+      });
     }
 
     async function initMaps() {
@@ -552,10 +578,19 @@
       drawCountry("map-japan", "japan", [38.9, 138.2], 4.5);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.5);
 
-      // Click maps → open education popup
-      document.getElementById("map-france").addEventListener("click", () => openEduPopup("france"));
-      document.getElementById("map-japan").addEventListener("click", () => openEduPopup("japan"));
-      document.getElementById("map-germany").addEventListener("click", () => openEduPopup("germany"));
+      // Click maps → highlight + open education popup
+      document.getElementById("map-france").addEventListener("click", () => {
+        highlightCountry("france");
+        openEduPopup("france");
+      });
+      document.getElementById("map-japan").addEventListener("click", () => {
+        highlightCountry("japan");
+        openEduPopup("japan");
+      });
+      document.getElementById("map-germany").addEventListener("click", () => {
+        highlightCountry("germany");
+        openEduPopup("germany");
+      });
     }
 
     /* ===============================
