@@ -119,13 +119,12 @@
       box-shadow: none !important;
     }
 
-        /* ====== EDUCATION POPUP (LIGHTBOX) – COLORFUL TIMELINE ====== */
+    /* ====== EDUCATION POPUP (LIGHTBOX) ====== */
 
     .edu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(3px);
+      background: rgba(0,0,0,0.6);
       display: none;
       align-items: center;
       justify-content: center;
@@ -133,155 +132,71 @@
     }
 
     .edu-lightbox {
-      position: relative;
-      padding: 18px 22px 20px;
-      max-width: 780px;
+      background: #ffffff;
+      padding: 20px 22px;
+      max-width: 720px;
       max-height: 80vh;
       overflow-y: auto;
-      border-radius: 18px;
-      box-shadow: 0 18px 40px rgba(15,23,42,0.45);
-      background:
-        radial-gradient(circle at top left, #e6f9f9 0, transparent 52%),
-        radial-gradient(circle at bottom right, #ffe7d5 0, transparent 55%),
-        #ffffff;
-      border: 1px solid #dbeafe;
-    }
-
-    /* Colored top bar */
-
-    .edu-lightbox::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #009fa5, #1d4ed8, #f97316);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      position: relative;
     }
 
     .edu-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.3em;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 10px;
-      color: #0f172a;
+      margin-bottom: 14px;
     }
-
-    /* Small “country chip” feel using the existing title text */
-    .edu-title::before {
-      content: "●";
-      display: inline-block;
-      margin-right: 8px;
-      color: #009fa5;
-    }
-
-    /* Timeline layout */
 
     .edu-list {
-      position: relative;
       display: grid;
-      gap: 12px;
-      margin-top: 6px;
-      padding-left: 18px;
-    }
-
-    /* Vertical line */
-
-    .edu-list::before {
-      content: "";
-      position: absolute;
-      left: 6px;
-      top: 4px;
-      bottom: 6px;
-      width: 2px;
-      background: linear-gradient(to bottom, #009fa5, #1d4ed8);
-      opacity: 0.65;
+      gap: 14px;
     }
 
     .edu-item {
-      position: relative;
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(255,255,255,0.85);
       border: 1px solid #e5e7eb;
-      box-shadow: 0 4px 12px rgba(15,23,42,0.08);
-      backdrop-filter: blur(2px);
+      border-radius: 12px;
+      padding: 12px 14px;
     }
-
-    /* Timeline dot */
-
-    .edu-item::before {
-      content: "";
-      position: absolute;
-      left: -12px;
-      top: 14px;
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      border: 2px solid #ffffff;
-      background: #009fa5;
-      box-shadow: 0 0 0 3px rgba(0,159,165,0.35);
-    }
-
-    /* Alternate dot colors for variety */
-    .edu-item:nth-child(2)::before { background:#1d4ed8; box-shadow:0 0 0 3px rgba(37,99,235,0.35); }
-    .edu-item:nth-child(3)::before { background:#f97316; box-shadow:0 0 0 3px rgba(249,115,22,0.35); }
-    .edu-item:nth-child(4)::before { background:#7c3aed; box-shadow:0 0 0 3px rgba(124,58,237,0.35); }
 
     .edu-item-header {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #0f172a;
-    }
-
-    .edu-item-header span:first-child {
-      color: #0f172a;
-    }
-
-    .edu-item-header span:last-child {
-      text-align: right;
+      font-weight: bold;
+      font-size: 0.96rem;
     }
 
     .edu-item-meta {
-      color: #4b5563;
-      font-size: 0.88rem;
+      color: #555;
+      font-size: 0.92rem;
       margin-top: 2px;
     }
 
     .edu-item-program {
       margin-top: 6px;
-      font-size: 0.9rem;
-      color: #111827;
-      line-height: 1.45;
+      font-size: 0.96rem;
     }
 
     .edu-item-note {
       margin-top: 4px;
-      font-size: 0.85rem;
-      color: #6b7280;
-      font-style: italic;
+      font-size: 0.9rem;
+      color: #666;
     }
 
     .edu-close {
       position: absolute;
       right: 10px;
-      top: 6px;
-      font-size: 22px;
+      top: 8px;
+      font-size: 24px;
       border: none;
       background: transparent;
       cursor: pointer;
-      color: #6b7280;
-      transition: color 0.2s ease, transform 0.2s ease;
+      color: #444;
     }
 
-    .edu-close:hover {
-      color: #111827;
-      transform: scale(1.08);
-    }
-
+    .edu-close:hover { color: #000; }
 
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
