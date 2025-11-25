@@ -119,84 +119,212 @@
       box-shadow: none !important;
     }
 
-    /* ====== EDUCATION POPUP (LIGHTBOX) ====== */
+  /* ====== EDUCATION POPUP (LIGHTBOX) – PASSPORT / TICKET STYLE ====== */
 
-    .edu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10010;
-    }
+.edu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10010;
+}
 
-    .edu-lightbox {
-      background: #ffffff;
-      padding: 20px 22px;
-      max-width: 720px;
-      max-height: 80vh;
-      overflow-y: auto;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      position: relative;
-    }
+/* The "ticket" container */
+.edu-lightbox {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding: 18px 22px 20px;
+  max-width: 840px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 22px;
+  box-shadow: 0 20px 46px rgba(15,23,42,0.5);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #fffdf5 0 12px,
+      #fff9e8 12px 24px
+    );
+  border: 1px solid #fbbf24;
+}
 
-    .edu-title {
-      font-size: 1.5rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+/* Perforated ticket edge on the right */
+.edu-lightbox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 70px;
+  width: 1px;
+  height: 100%;
+  border-right: 1px dashed rgba(148,163,184,0.8);
+}
 
-    .edu-list {
-      display: grid;
-      gap: 14px;
-    }
+/* Close button */
+.edu-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
 
-    .edu-item {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
+.edu-close:hover {
+  color: #111827;
+  transform: scale(1.08);
+}
 
-    .edu-item-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      font-weight: bold;
-      font-size: 0.96rem;
-    }
+/* Left – vertical country strip (re-using edu-title) */
 
-    .edu-item-meta {
-      color: #555;
-      font-size: 0.92rem;
-      margin-top: 2px;
-    }
+.edu-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  background: #111827;
+  color: #f9fafb;
+  padding: 16px 10px;
+  border-radius: 18px;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.45);
+  position: sticky;
+  top: 18px;
+}
 
-    .edu-item-program {
-      margin-top: 6px;
-      font-size: 0.96rem;
-    }
+/* Little "stamp" dot at the top of the strip */
+.edu-title::before {
+  content: "✈";
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
 
-    .edu-item-note {
-      margin-top: 4px;
-      font-size: 0.9rem;
-      color: #666;
-    }
+/* Right – list becomes a column of "stamps" */
 
-    .edu-close {
-      position: absolute;
-      right: 10px;
-      top: 8px;
-      font-size: 24px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      color: #444;
-    }
+.edu-list {
+  flex: 1;
+  display: grid;
+  gap: 14px;
+  margin-left: 4px;
+  padding-right: 36px; /* space before perforation */
+}
 
-    .edu-close:hover { color: #000; }
+/* Individual stamp card */
+
+.edu-item {
+  position: relative;
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(15,23,42,0.14);
+  backdrop-filter: blur(1.5px);
+  transform-origin: left center;
+}
+
+/* Slight alternate tilt for each line, like stickers in a passport */
+.edu-item:nth-child(odd) {
+  transform: rotate(-1.3deg);
+}
+.edu-item:nth-child(even) {
+  transform: rotate(1.1deg);
+}
+
+/* Colored “stamp” circle on the left of each item */
+.edu-item::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #f97316;
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.4);
+}
+
+/* Slight color variation by position */
+.edu-item:nth-child(2)::before {
+  background: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.4);
+}
+.edu-item:nth-child(3)::before {
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.4);
+}
+.edu-item:nth-child(4)::before {
+  background: #a855f7;
+  box-shadow: 0 0 0 3px rgba(168,85,247,0.4);
+}
+
+/* Content inside each stamp */
+
+.edu-item-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.edu-item-header span:first-child {
+  font-variant-numeric: tabular-nums;
+}
+
+.edu-item-header span:last-child {
+  text-align: right;
+}
+
+.edu-item-meta {
+  color: #4b5563;
+  font-size: 0.88rem;
+  margin-top: 2px;
+}
+
+.edu-item-program {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #111827;
+  line-height: 1.45;
+}
+
+/* Optional note line – lighter, almost like a small annotation */
+.edu-item-note {
+  margin-top: 4px;
+  font-size: 0.83rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Make sure it still behaves nicely on smaller screens */
+@media (max-width: 720px) {
+  .edu-lightbox {
+    flex-direction: row;
+    padding-right: 16px;
+  }
+
+  .edu-title {
+    min-height: 220px;
+    font-size: 0.8rem;
+  }
+
+  .edu-list {
+    padding-right: 18px;
+  }
+}
 
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
