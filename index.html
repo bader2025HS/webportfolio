@@ -354,8 +354,8 @@
 
 #contact {
   margin-top: -20px;
-  padding: 0;
-  background: #ffffff;   /* clean white */
+  padding: 0 10px 40px;      /* tiny side padding + room at bottom */
+  background: #ffffff;
 }
 
     .contact-layout {
@@ -372,12 +372,15 @@
   justify-content: flex-start;
 }
 
+/* Envelope container */
 .contact-envelope {
   position: relative;
+  max-width: 1080px;         /* slightly smaller than page */
   width: 100%;
-  padding-top: 10px;
+  margin: 0 auto;            /* center inside page */
+  padding-top: 0;
+  overflow: hidden;          /* NOTHING inside can cause x-scroll */
 }
-
 
 /* Envelope container */
 .contact-envelope {
@@ -392,7 +395,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 420px;             /* bigger flap */
+  width: min(420px, 100%);   /* never wider than the envelope */
   height: 220px;
   transform: translateX(-50%);
   overflow: hidden;
@@ -409,7 +412,7 @@
   transform: translateX(-50%) rotate(45deg);
   box-shadow: none;
 }
-
+    
 /* Envelope body with airmail border */
 .contact-envelope-body {
   position: relative;
@@ -422,17 +425,17 @@
       #1c8dde 42px 56px
     );
   border-radius: 0;
-  padding: 12px;                 /* thick border */
+  padding: 12px;
   box-shadow: none;
-  min-height: auto;             /* large height */
-  overflow: hidden;
+  min-height: auto;
+  overflow: hidden;          /* extra safety */
 }
 
 /* Inner white area */
 .contact-envelope-body::before {
   content: "";
   position: absolute;
-  inset: 12px;   /* wider white margin */
+  inset: 12px;
   background: #ffffff;
   border-radius: 0;
 }
