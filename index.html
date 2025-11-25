@@ -318,6 +318,28 @@
   max-width: 260px;
 }
 
+    .experience-logo img {
+  transition: transform 0.35s ease, opacity 0.3s ease;
+}
+
+.experience-logo img.clicked {
+  transform: scale(1.25);
+  opacity: 0;
+}
+
+.exp-panel {
+  display: none;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.exp-panel.show {
+  display: grid;
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -1835,17 +1857,25 @@ function hideAllExpPanels() {
 // click on any logo → open its panel
 expLogos.forEach(img => {
   img.addEventListener("click", () => {
-    const panelId = img.dataset.panel;
-    if (!panelId) return;
+  const panelId = img.dataset.panel;
+  if (!panelId) return;
+
+  const panel = document.getElementById(panelId);
+
+  // 1. Animate clicked logo
+  img.classList.add("clicked");
+
+  // 2. After animation ends, show panel
+  setTimeout(() => {
+    img.classList.remove("clicked");
 
     hideAllExpPanels();
+
     expGrid.style.display = "none";
 
-    const panel = document.getElementById(panelId);
-    if (panel) {
-      panel.style.display = "grid";
-    }
-  });
+    panel.classList.add("show");   // use animation class instead of display:grid
+  }, 300);
+});
 });
 
 // Back buttons → return to grid
