@@ -119,84 +119,253 @@
       box-shadow: none !important;
     }
 
-    /* ====== EDUCATION POPUP (LIGHTBOX) ====== */
+   /* ====== EDUCATION POPUP (LIGHTBOX) – BOARDING PASS ====== */
 
-    .edu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10010;
-    }
+.edu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10010;
+}
 
-    .edu-lightbox {
-      background: #ffffff;
-      padding: 20px 22px;
-      max-width: 720px;
-      max-height: 80vh;
-      overflow-y: auto;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      position: relative;
-    }
+/* Outer card just handles radius + shadow */
+.edu-lightbox {
+  position: relative;
+  max-width: 860px;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 26px;
+  box-shadow: 0 22px 46px rgba(15,23,42,0.5);
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  background: transparent;
+}
 
-    .edu-title {
-      font-size: 1.5rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+/* LEFT PANEL – blue “flight info” side (we reuse edu-title here) */
 
-    .edu-list {
-      display: grid;
-      gap: 14px;
-    }
+.edu-title {
+  flex: 1.1;
+  margin: 0;
+  padding: 26px 26px 22px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
 
-    .edu-item {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
+/* Top label like “BOARDING PASS” */
+.edu-title::before {
+  content: "EDUCATION BOARDING PASS";
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  opacity: 0.85;
+}
 
-    .edu-item-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      font-weight: bold;
-      font-size: 0.96rem;
-    }
+/* Middle: big “route” text (country name) */
+.edu-title::after {
+  content: "";
+}
 
-    .edu-item-meta {
-      color: #555;
-      font-size: 0.92rem;
-      margin-top: 2px;
-    }
+/* Make the actual title text stand out as the “route” */
+.edu-title {
+  position: relative;
+}
+.edu-title span {
+  /* if you ever wrap text in spans they’ll inherit this, but fine otherwise */
+}
+.edu-title {
+  font-weight: 600;
+}
 
-    .edu-item-program {
-      margin-top: 6px;
-      font-size: 0.96rem;
-    }
+/* We can fake a world-map dot pattern */
+.edu-title {
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(255,255,255,0.12) 0, transparent 55%),
+    radial-gradient(circle at 75% 70%, rgba(255,255,255,0.12) 0, transparent 55%),
+    linear-gradient(135deg, #2563eb, #1d4ed8);
+  background-size: cover;
+}
 
-    .edu-item-note {
-      margin-top: 4px;
-      font-size: 0.9rem;
-      color: #666;
-    }
+/* Small route-style subtext at bottom */
+.edu-title::after {
+  content: "STUDY ROUTE • BOARDING ZONE";
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  opacity: 0.9;
+  margin-top: 18px;
+}
 
-    .edu-close {
-      position: absolute;
-      right: 10px;
-      top: 8px;
-      font-size: 24px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      color: #444;
-    }
+/* RIGHT PANEL – white info side (we reuse edu-list + edu-item) */
 
-    .edu-close:hover { color: #000; }
+.edu-list {
+  flex: 1;
+  background: #ffffff;
+  padding: 18px 20px 16px;
+  display: grid;
+  gap: 10px;
+  position: relative;
+}
+
+/* Vertical perforation line between blue + white sides */
+.edu-list::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px dashed rgba(148,163,184,0.95);
+}
+
+/* Little semi-circles “cut out” on top/bottom like a ticket */
+.edu-list::after {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: 50%;
+  width: 26px;
+  height: 160%;
+  background:
+    radial-gradient(circle at 0 10%, transparent 11px, #ffffff 11px),
+    radial-gradient(circle at 0 90%, transparent 11px, #ffffff 11px);
+}
+
+/* Each study entry row */
+
+.edu-item {
+  border-radius: 10px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* First line: “FROM / TO” style – we reuse header spans */
+.edu-item-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #111827;
+}
+
+.edu-item-header span:first-child {
+  font-variant-numeric: tabular-nums;
+}
+
+.edu-item-header span:last-child {
+  text-align: right;
+}
+
+/* Second line – program meta */
+.edu-item-meta {
+  color: #4b5563;
+  font-size: 0.85rem;
+}
+
+/* Third line – description */
+.edu-item-program {
+  font-size: 0.86rem;
+  color: #111827;
+  line-height: 1.4;
+}
+
+/* Optional note still supported */
+.edu-item-note {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Fake barcode at the bottom of the right panel */
+.edu-list .edu-barcode {
+  margin-top: 6px;
+  height: 40px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #020617,
+    #020617 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* We don’t have a dedicated element in HTML, so we generate it via ::after on the last item */
+.edu-item:last-child {
+  position: relative;
+  padding-bottom: 54px;
+}
+.edu-item:last-child::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 6px;
+  height: 38px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #020617,
+    #020617 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.85;
+}
+
+/* Close button in the top-right corner of the whole card */
+.edu-close {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #e5e7eb;
+  z-index: 2;
+}
+
+.edu-close:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Responsive tweak */
+@media (max-width: 720px) {
+  .edu-lightbox {
+    flex-direction: column;
+    max-height: 85vh;
+  }
+
+  .edu-title {
+    border-radius: 26px 26px 0 0;
+    letter-spacing: 0.18em;
+  }
+
+  .edu-list {
+    border-radius: 0 0 26px 26px;
+    padding-bottom: 18px;
+  }
+
+  .edu-list::before,
+  .edu-list::after {
+    display: none; /* hide perforation on narrow screens */
+  }
+}
+
 
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
