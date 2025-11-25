@@ -249,6 +249,272 @@
   clip-path: inset(0 round 20px);
 }
 
+
+/* ===========================
+   ACTIVITIES – STAMP BOARD
+=========================== */
+
+#activities {
+  margin-top: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+.activities-shell {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 180px); /* roughly header+nav height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Layout: vertical label on left, 2x2 stamp grid on right */
+
+.activities-core {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.activities-side-label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.activities-side-main {
+  font-size: 2.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  color: #111;
+}
+
+.activities-side-sub {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #777;
+  max-width: 120px;
+}
+
+/* Stamp grid */
+
+.activity-stamp-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* Individual stamp */
+
+.activity-stamp {
+  position: relative;
+  border-radius: 16px;
+  border: 2px dashed #cbd5e1;
+  padding: 18px 16px;
+  background: #f9fafb;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(15,23,42,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+              border-color 0.25s ease, background 0.25s ease;
+}
+
+/* Slight different rotations so it feels playful */
+
+.activity-stamp:nth-child(1) { transform: rotate(-2deg); }
+.activity-stamp:nth-child(2) { transform: rotate(1.5deg); }
+.activity-stamp:nth-child(3) { transform: rotate(2.3deg); }
+.activity-stamp:nth-child(4) { transform: rotate(-1.6deg); }
+
+.activity-stamp:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(15,23,42,0.18);
+  border-color: #009fa5;
+  background: #f1fbfb;
+}
+
+/* Small “title + tiny info” only */
+
+.activity-stamp-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.activity-stamp-org {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 2px;
+}
+
+.activity-stamp-meta {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Fake stamp mark */
+
+.activity-stamp-mark {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(0, 159, 165, 0.7);
+  border: 1px solid rgba(0, 159, 165, 0.7);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+/* ===========================
+   ACTIVITIES POPUP
+=========================== */
+
+.act-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10020;
+}
+
+.act-lightbox {
+  background: #ffffff;
+  max-width: 780px;
+  max-height: 80vh;
+  width: 100%;
+  margin: 0 16px;
+  border-radius: 16px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Header */
+
+.act-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.act-title-block {
+  max-width: 70%;
+}
+
+.act-title {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+}
+
+.act-subtitle {
+  font-size: 0.96rem;
+  color: #444;
+}
+
+.act-meta {
+  font-size: 0.82rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 6px;
+}
+
+/* Close button */
+
+.act-close {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+}
+
+.act-close:hover {
+  color: #111;
+}
+
+/* Image */
+
+.act-image-wrap {
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.act-image-wrap img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 260px;
+}
+
+/* Text blocks */
+
+.act-section-title {
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.act-text {
+  font-size: 0.94rem;
+  color: #333;
+  line-height: 1.55;
+}
+
+.act-list {
+  margin-left: 18px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  .activities-core {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activities-side-main {
+    writing-mode: horizontal-tb;
+    transform: none;
+    letter-spacing: 0.22em;
+  }
+
+  .activities-side-sub {
+    max-width: none;
+  }
+
+  .act-title-row {
+    flex-direction: column;
+  }
+
+  .act-title-block {
+    max-width: 100%;
+  }
+}
+
 /* ===========================
    BD-STYLE EXPERIENCE PANEL
 =========================== */
@@ -1461,9 +1727,103 @@
       </section>
 
       <!-- ACTIVITIES -->
+           <!-- ACTIVITIES – STAMP BOARD + POPUP -->
       <section id="activities">
-        <p class="placeholder">Activities section content goes here.</p>
+        <div class="activities-shell">
+          <div class="activities-core">
+
+            <!-- Left label -->
+            <div class="activities-side-label">
+              <div class="activities-side-main">Activities</div>
+              <div class="activities-side-sub">
+                Click on a stamp to reveal more.
+              </div>
+            </div>
+
+            <!-- Right: stamps -->
+            <div class="activity-stamp-grid">
+
+              <!-- SPMA -->
+              <div class="activity-stamp" data-activity="spma">
+                <div class="activity-stamp-title">
+                  Communications Director
+                </div>
+                <div class="activity-stamp-org">
+                  Sciences Po Monde Arabe (SPMA)
+                </div>
+                <div class="activity-stamp-meta">
+                  Paris · 2024–
+                </div>
+                <div class="activity-stamp-mark">SPMA</div>
+              </div>
+
+              <!-- Tarjimly -->
+              <div class="activity-stamp" data-activity="tarjimly">
+                <div class="activity-stamp-title">
+                  Volunteer Translator
+                </div>
+                <div class="activity-stamp-org">
+                  Tarjimly · Arabic ⇄ EN / FR
+                </div>
+                <div class="activity-stamp-meta">
+                  Remote
+                </div>
+                <div class="activity-stamp-mark">Aid</div>
+              </div>
+
+              <!-- Events -->
+              <div class="activity-stamp" data-activity="events">
+                <div class="activity-stamp-title">
+                  Med of the Future &amp; PPF
+                </div>
+                <div class="activity-stamp-org">
+                  Liaison Officer · Speaker
+                </div>
+                <div class="activity-stamp-meta">
+                  Marseille · Paris
+                </div>
+                <div class="activity-stamp-mark">Forum</div>
+              </div>
+
+              <!-- MEDMUN -->
+              <div class="activity-stamp" data-activity="medmun">
+                <div class="activity-stamp-title">
+                  Arabic Committee Director
+                </div>
+                <div class="activity-stamp-org">
+                  MEDMUN – UNHCR
+                </div>
+                <div class="activity-stamp-meta">
+                  Menton · 2022–2023
+                </div>
+                <div class="activity-stamp-mark">UN</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </section>
+
+      <!-- ACTIVITIES POPUP -->
+      <div id="activityOverlay" class="act-overlay">
+        <div class="act-lightbox">
+          <div class="act-title-row">
+            <div class="act-title-block">
+              <div id="actTitle" class="act-title">Title</div>
+              <div id="actSubtitle" class="act-subtitle">Subtitle</div>
+              <div id="actMeta" class="act-meta">Meta</div>
+            </div>
+            <button class="act-close" id="actClose" aria-label="Close activities details">×</button>
+          </div>
+
+          <div id="actImageWrap" class="act-image-wrap"></div>
+
+          <div id="actBody" class="act-body">
+            <!-- JS will inject sections here -->
+          </div>
+        </div>
+      </div>
+
 
       <!-- CONTACT -->
 <section id="contact">
@@ -1970,6 +2330,165 @@ document.querySelectorAll(".exp-back-btn").forEach(btn => {
       if (e.key === "ArrowLeft") showPrev();
     });
 
+/* ===============================
+   ACTIVITIES POPUP LOGIC
+=============================== */
+
+const activityOverlay = document.getElementById("activityOverlay");
+const actClose = document.getElementById("actClose");
+const actTitleEl = document.getElementById("actTitle");
+const actSubtitleEl = document.getElementById("actSubtitle");
+const actMetaEl = document.getElementById("actMeta");
+const actImageWrap = document.getElementById("actImageWrap");
+const actBodyEl = document.getElementById("actBody");
+
+// Data for each activity
+const activityData = {
+  spma: {
+    title: "Communications Director",
+    subtitle: "Sciences Po Monde Arabe (SPMA)",
+    meta: "Sciences Po Paris · 2024–Present",
+    image: "activities-spma.jpg", // change to your real file
+    sections: [
+      {
+        heading: "Role",
+        text: "Lead communications for SPMA’s conferences, talks, and cultural projects on the MENA region."
+      },
+      {
+        heading: "What I do",
+        list: [
+          "Design visuals and narratives for events and social media.",
+          "Coordinate with speakers, partners, and student teams across campuses.",
+          "Contribute to research-culture bridges through public-facing content."
+        ]
+      }
+    ]
+  },
+  tarjimly: {
+    title: "Volunteer Translator & Interpreter",
+    subtitle: "Tarjimly · Arabic ⇄ English / French",
+    meta: "Remote · Humanitarian support",
+    image: "activities-tarjimly.jpg",
+    sections: [
+      {
+        heading: "Role",
+        text: "Provide on-demand interpretation and translation for refugees, asylum seekers, and NGOs."
+      },
+      {
+        heading: "What I do",
+        list: [
+          "Support legal, medical, and social service appointments.",
+          "Translate sensitive narratives with cultural nuance and care.",
+          "Help bridge language gaps in humanitarian contexts."
+        ]
+      }
+    ]
+  },
+  events: {
+    title: "Mediterranean of the Future & Paris Peace Forum",
+    subtitle: "Liaison Officer & Guest Speaker",
+    meta: "Marseille & Paris · 2023–2024",
+    image: "activities-events.jpg",
+    sections: [
+      {
+        heading: "Mediterranean of the Future",
+        list: [
+          "Served as liaison officer for delegations, including Djibouti.",
+          "Facilitated logistics, protocol, and on-site coordination.",
+          "Helped connect stakeholders around food sovereignty and energy security."
+        ]
+      },
+      {
+        heading: "Paris Peace Forum",
+        list: [
+          "Participated as a guest speaker on migration, development, and human security.",
+          "Engaged with policy-makers, practitioners, and civil society representatives."
+        ]
+      }
+    ]
+  },
+  medmun: {
+    title: "Arabic Committee Director (UNHCR)",
+    subtitle: "MEDMUN – Model United Nations",
+    meta: "Sciences Po Menton · 2022–2023",
+    image: "activities-medmun.jpg",
+    sections: [
+      {
+        heading: "Role",
+        text: "Directed the UNHCR Arabic committee, chairing debates fully in Arabic on displacement and asylum."
+      },
+      {
+        heading: "What I did",
+        list: [
+          "Drafted study guides and crisis scenarios for delegates.",
+          "Trained and mentored participants on both content and procedure.",
+          "Led simulations that mirrored real UNHCR challenges."
+        ]
+      }
+    ]
+  }
+};
+
+function openActivityPopup(key) {
+  const data = activityData[key];
+  if (!data) return;
+
+  actTitleEl.textContent = data.title;
+  actSubtitleEl.textContent = data.subtitle;
+  actMetaEl.textContent = data.meta || "";
+
+  // Image
+  if (data.image) {
+    actImageWrap.innerHTML = `
+      <img src="${data.image}" alt="${data.title}">
+    `;
+  } else {
+    actImageWrap.innerHTML = "";
+  }
+
+  // Body
+  actBodyEl.innerHTML = data.sections
+    .map(sec => {
+      let html = `<div class="act-section">
+        <div class="act-section-title">${sec.heading}</div>`;
+      if (sec.text) {
+        html += `<p class="act-text">${sec.text}</p>`;
+      }
+      if (sec.list) {
+        html += `<ul class="act-list">` +
+          sec.list.map(item => `<li>${item}</li>`).join("") +
+          `</ul>`;
+      }
+      html += `</div>`;
+      return html;
+    })
+    .join("");
+
+  activityOverlay.style.display = "flex";
+}
+
+function closeActivityPopup() {
+  activityOverlay.style.display = "none";
+}
+
+// Click on stamps to open popup
+document.querySelectorAll(".activity-stamp").forEach(stamp => {
+  stamp.addEventListener("click", () => {
+    const key = stamp.dataset.activity;
+    openActivityPopup(key);
+  });
+});
+
+// Close actions
+actClose.addEventListener("click", closeActivityPopup);
+activityOverlay.addEventListener("click", e => {
+  if (e.target === activityOverlay) closeActivityPopup();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && activityOverlay.style.display === "flex") {
+    closeActivityPopup();
+  }
+});
 
   </script>
 </body>
