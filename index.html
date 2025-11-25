@@ -17,14 +17,6 @@
       background: #ffffff; color: #111;
     }
 
-    html, body {
-  overflow-x: hidden;   /* Prevent ANY horizontal scrollbar */
-}
-
-.contact-envelope-body {
-  overflow-x: hidden;   /* Prevent envelope from pushing page sideways */
-}
-
     /* Container */
     .page {
       max-width: 1200px;
@@ -326,36 +318,14 @@
   max-width: 260px;
 }
 
-    .experience-logo img {
-  transition: transform 0.35s ease, opacity 0.3s ease;
-}
-
-.experience-logo img.clicked {
-  transform: scale(1.25);
-  opacity: 0;
-}
-
-.exp-panel {
-  display: none;
-  opacity: 0;
-  transform: scale(0.96);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.exp-panel.show {
-  display: grid;
-  opacity: 1;
-  transform: scale(1);
-}
-
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
 
 #contact {
   margin-top: -20px;
-  padding: 0 10px 40px;      /* tiny side padding + room at bottom */
-  background: #ffffff;
+  padding: 0;
+  background: #ffffff;   /* clean white */
 }
 
     .contact-layout {
@@ -372,15 +342,12 @@
   justify-content: flex-start;
 }
 
-/* Envelope container */
 .contact-envelope {
   position: relative;
-  max-width: 1080px;         /* slightly smaller than page */
   width: 100%;
-  margin: 0 auto;            /* center inside page */
-  padding-top: 0;
-  overflow: hidden;          /* NOTHING inside can cause x-scroll */
+  padding-top: 10px;
 }
+
 
 /* Envelope container */
 .contact-envelope {
@@ -395,7 +362,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: min(420px, 100%);   /* never wider than the envelope */
+  width: 420px;             /* bigger flap */
   height: 220px;
   transform: translateX(-50%);
   overflow: hidden;
@@ -412,7 +379,7 @@
   transform: translateX(-50%) rotate(45deg);
   box-shadow: none;
 }
-    
+
 /* Envelope body with airmail border */
 .contact-envelope-body {
   position: relative;
@@ -425,17 +392,17 @@
       #1c8dde 42px 56px
     );
   border-radius: 0;
-  padding: 12px;
+  padding: 12px;                 /* thick border */
   box-shadow: none;
-  min-height: auto;
-  overflow: hidden;          /* extra safety */
+  min-height: auto;             /* large height */
+  overflow: hidden;
 }
 
 /* Inner white area */
 .contact-envelope-body::before {
   content: "";
   position: absolute;
-  inset: 12px;
+  inset: 12px;   /* wider white margin */
   background: #ffffff;
   border-radius: 0;
 }
@@ -565,113 +532,72 @@
   }
 }
 
-    #contact {
-  margin-top: -20px;
-  padding: 0 0 20px;
-  background: #ffffff;
-}
-
-/* Center the big envelope like before */
-.contact-envelope-wrapper {
-  max-width: 1050px;
+/* Whole contact layout: envelope left + socials right */
+.contact-contact-layout {
+  max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 4fr 1fr;   /* 80% / 20% */
+  align-items: start;
+  gap: 24px;
 }
-
-/* Actions row: send + chips, all on the left */
-/* SEND LEFT — SOCIALS RIGHT */
-.contact-envelope-actions.two-sides {
-  margin-top: 20px;
-  padding: 0 40px 24px;
-
+.contact-socials {
+  flex: 1;                  /* ≈20% of width */
   display: flex;
-  justify-content: space-between;   /* LEFT group vs RIGHT group */
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-/* Left group (Send) */
-.contact-envelope-actions.two-sides .left-actions {
-  display: flex;
-  align-items: center;
-}
-
-/* Right group (chips) */
-.contact-envelope-actions.two-sides .right-actions {
-  display: flex;
+  flex-direction: column;
   gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  padding-top: 40px;        /* lines up vertically with envelope */
 }
 
-
-/* Send button – same style as before, just no text-align center needed */
-.contact-envelope-btn {
-  border: none;
-  border-radius: 999px;
-  padding: 14px 38px;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  background: #009fa5;
-  color: #ffffff;
-  cursor: pointer;
-  box-shadow: 0 14px 24px rgba(0, 159, 165, 0.4);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.contact-envelope-btn:hover {
-  background: #00787d;
-  transform: translateY(-2px);
-  box-shadow: 0 18px 30px rgba(0, 159, 165, 0.45);
-}
-
-.contact-envelope-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 10px 18px rgba(0, 159, 165, 0.35);
-}
-
-/* Chip-style links (email / LinkedIn / CV) */
-.contact-chip {
-  display: inline-flex;
-  align-items: center;
+.contact-social-btn {
+  display: flex;
+  align-items: center;      /* <- full word, not "cen" */
   justify-content: center;
-  padding: 10px 18px;
-  border-radius: 999px;
+  padding: 10px 14px;
+  border-radius: 16px;
   background: #f7fafc;
   border: 1px solid #d0d7de;
   font-size: 0.95rem;
   color: #222;
   text-decoration: none;
-  gap: 8px;
   transition: 0.25s ease;
 }
 
-.contact-chip:hover {
+.contact-social-btn:hover {
   background: #e6f9f9;
   border-color: #009fa5;
   color: #009fa5;
 }
 
-.contact-chip-primary {
-  background: #ffffff;
-  border-color: #009fa5;
-  color: #009fa5;
-}
-
-.contact-chip-primary:hover {
+.contact-social-btn.primary {
   background: #009fa5;
-  color: #ffffff;
+  color: #fff;
+  border-color: #009fa5;
 }
 
-/* Mobile: make them wrap nicely */
-@media (max-width: 640px) {
-  .contact-envelope-actions {
-    padding: 0 24px 24px;
+.contact-social-btn.primary:hover {
+  background: #00787d;
+  border-color: #00787d;
+  color: #fff;
+}
+
+    @media (max-width: 900px) {
+  .contact-layout {
+    flex-direction: column;
+  }
+
+  .contact-socials {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+  }
+
+  .contact-social-btn {
+    min-width: 150px;
   }
 }
+
 
 /* Make it stack on small screens */
 @media (max-width: 900px) {
@@ -1585,78 +1511,77 @@
 
       <!-- CONTACT -->
 
-         <section id="contact">
-  <div class="contact-envelope-wrapper">
-    <div class="contact-envelope">
+           <section id="contact">
+  <div class="contact-layout">
 
-      <!-- Top flap -->
-      <div class="contact-envelope-flap"></div>
+    <!-- LEFT: envelope -->
+    <div class="contact-envelope-wrapper">
+      <div class="contact-envelope">
 
-      <!-- Body with airmail border + form -->
-      <div class="contact-envelope-body">
-        <h2 class="contact-envelope-title">Get in touch</h2>
-        <p class="contact-envelope-subtitle">
-          I’ll get back to you as soon as I can.
-        </p>
+        <!-- Top flap -->
+        <div class="contact-envelope-flap"></div>
 
-        <form class="contact-envelope-form">
-          <div class="contact-envelope-row">
-            <div class="contact-envelope-field">
-              <label for="contact-name">Name</label>
-              <input id="contact-name" name="name" type="text"
-                     placeholder="Your name" required />
+        <!-- Body with airmail border + form -->
+        <div class="contact-envelope-body">
+          <h2 class="contact-envelope-title">Get in touch</h2>
+          <p class="contact-envelope-subtitle">
+            I’ll get back to you as soon as I can.
+          </p>
+
+          <form class="contact-envelope-form">
+            <div class="contact-envelope-row">
+              <div class="contact-envelope-field">
+                <label for="contact-name">Name</label>
+                <input id="contact-name" name="name" type="text"
+                       placeholder="Your name" required />
+              </div>
+
+              <div class="contact-envelope-field">
+                <label for="contact-email">E-mail</label>
+                <input id="contact-email" name="email" type="email"
+                       placeholder="you@example.com" required />
+              </div>
             </div>
 
-            <div class="contact-envelope-field">
-              <label for="contact-email">E-mail</label>
-              <input id="contact-email" name="email" type="email"
-                     placeholder="you@example.com" required />
+            <div class="contact-envelope-row contact-envelope-row-full">
+              <div class="contact-envelope-field">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="5"
+                          placeholder="Write your message here..." required></textarea>
+              </div>
             </div>
-          </div>
 
-          <div class="contact-envelope-row contact-envelope-row-full">
-            <div class="contact-envelope-field">
-              <label for="contact-message">Message</label>
-              <textarea id="contact-message" name="message" rows="5"
-                        placeholder="Write your message here..." required></textarea>
+            <div class="contact-envelope-actions">
+              <button type="submit" class="contact-envelope-btn">
+                Send
+              </button>
             </div>
-          </div>
+          </form>
+        </div>
 
-         <div class="contact-envelope-actions two-sides">
-
-  <!-- LEFT SIDE -->
-  <div class="left-actions">
-    <button type="submit" class="contact-envelope-btn">
-      Send
-    </button>
-  </div>
-
-  <!-- RIGHT SIDE -->
-  <div class="right-actions">
-    <a href="mailto:your@email.com"
-       class="contact-chip contact-chip-primary">
-      ✉ Email me
-    </a>
-
-    <a href="https://www.linkedin.com/in/your-profile"
-       target="_blank" rel="noopener"
-       class="contact-chip">
-      🔗 LinkedIn
-    </a>
-
-    <a href="cv-bader.pdf"
-       target="_blank" rel="noopener"
-       class="contact-chip">
-      📄 Download CV
-    </a>
-  </div>
-
-</div>
-
-        </form>
       </div>
-
     </div>
+
+    <!-- RIGHT: socials / CV -->
+    <div class="contact-socials">
+      <a href="mailto:your@email.com"
+         class="contact-social-btn primary">
+        ✉️ Email me
+      </a>
+
+      <a href="https://www.linkedin.com/in/your-profile"
+         target="_blank" rel="noopener"
+         class="contact-social-btn">
+        🔗 LinkedIn
+      </a>
+
+      <a href="cv-bader.pdf"
+         target="_blank" rel="noopener"
+         class="contact-social-btn">
+        📄 Download CV
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -1904,43 +1829,32 @@ const expLogos = document.querySelectorAll(".experience-logo img");
 
 // helper: hide all panels
 function hideAllExpPanels() {
-  expPanels.forEach(p => {
-    p.classList.remove("show");
-  });
+  expPanels.forEach(p => p.style.display = "none");
 }
 
 // click on any logo → open its panel
 expLogos.forEach(img => {
   img.addEventListener("click", () => {
-  const panelId = img.dataset.panel;
-  if (!panelId) return;
-
-  const panel = document.getElementById(panelId);
-
-  // 1. Animate clicked logo
-  img.classList.add("clicked");
-
-  // 2. After animation ends, show panel
-  setTimeout(() => {
-    img.classList.remove("clicked");
+    const panelId = img.dataset.panel;
+    if (!panelId) return;
 
     hideAllExpPanels();
-
     expGrid.style.display = "none";
 
-    panel.classList.add("show");   // use animation class instead of display:grid
-  }, 300);
-});
+    const panel = document.getElementById(panelId);
+    if (panel) {
+      panel.style.display = "grid";
+    }
+  });
 });
 
 // Back buttons → return to grid
 document.querySelectorAll(".exp-back-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    hideAllExpPanels();            // removes .show from all panels
+    hideAllExpPanels();
     expGrid.style.display = "grid";
   });
 });
-
 
     /* ===============================
        EDUCATION POPUP LOGIC
