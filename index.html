@@ -119,84 +119,282 @@
       box-shadow: none !important;
     }
 
-    /* ====== EDUCATION POPUP (LIGHTBOX) ====== */
+ /* ====== EDUCATION POPUP – BOARDING PASS ====== */
 
-    .edu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10010;
-    }
+.edu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10010;
+}
 
-    .edu-lightbox {
-      background: #ffffff;
-      padding: 20px 22px;
-      max-width: 720px;
-      max-height: 80vh;
-      overflow-y: auto;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      position: relative;
-    }
+.edu-lightbox {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 22px 46px rgba(15,23,42,0.5);
+  display: flex;
+  background: transparent;
+}
 
-    .edu-title {
-      font-size: 1.5rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+/* Close button */
+.edu-close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  font-size: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #e5e7eb;
+  z-index: 5;
+}
+.edu-close:hover {
+  color: #ffffff;
+  transform: scale(1.06);
+}
 
-    .edu-list {
-      display: grid;
-      gap: 14px;
-    }
+/* LEFT BLUE PANEL */
 
-    .edu-item {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
+.edu-ticket-left {
+  flex: 1.4;
+  padding: 24px 26px 22px;
+  background: #2563eb;
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
 
-    .edu-item-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      font-weight: bold;
-      font-size: 0.96rem;
-    }
+/* dotted world-map vibe */
+.edu-ticket-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0, transparent 55%),
+    radial-gradient(circle at 75% 70%, rgba(255,255,255,0.15) 0, transparent 55%);
+  opacity: 0.6;
+  pointer-events: none;
+}
 
-    .edu-item-meta {
-      color: #555;
-      font-size: 0.92rem;
-      margin-top: 2px;
-    }
+.edu-left-top,
+.edu-left-bottom {
+  position: relative;
+  z-index: 1;
+}
 
-    .edu-item-program {
-      margin-top: 6px;
-      font-size: 0.96rem;
-    }
+.edu-left-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
 
-    .edu-item-note {
-      margin-top: 4px;
-      font-size: 0.9rem;
-      color: #666;
-    }
+/* FROM / TO blocks */
 
-    .edu-close {
-      position: absolute;
-      right: 10px;
-      top: 8px;
-      font-size: 24px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      color: #444;
-    }
+.edu-from-block,
+.edu-to-block {
+  text-align: left;
+}
 
-    .edu-close:hover { color: #000; }
+.edu-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.9;
+}
+
+.edu-year {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.edu-month {
+  margin-top: 2px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Plane + arrow */
+
+.edu-plane-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.edu-plane-icon {
+  font-size: 1.9rem;
+  transform: rotate(8deg);
+}
+
+.edu-plane-arrow {
+  width: 80px;
+  height: 2px;
+  background: #f9fafb;
+  position: relative;
+}
+.edu-plane-arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -4px;
+  border-width: 5px 0 5px 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f9fafb;
+}
+
+/* Bottom row (Passenger / Seat / Gate / Terminal) */
+
+.edu-left-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 26px;
+  font-size: 0.78rem;
+}
+
+.edu-bottom-item {
+  flex: 1;
+}
+
+.edu-bottom-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.85;
+}
+
+.edu-bottom-value {
+  font-weight: 600;
+  margin-top: 2px;
+  font-size: 0.9rem;
+}
+
+/* RIGHT WHITE PANEL */
+
+.edu-ticket-right {
+  flex: 1.1;
+  background: #ffffff;
+  padding: 18px 20px 16px;
+  position: relative;
+}
+
+/* dashed perforation line */
+.edu-ticket-right::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px dashed rgba(148,163,184,0.9);
+}
+
+/* header: BOARDING PASS + country */
+
+.edu-right-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.edu-right-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #111827;
+}
+
+.edu-right-country {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #2563eb;
+}
+
+/* rows */
+
+.edu-right-body {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.edu-right-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.edu-right-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+}
+
+.edu-right-value {
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+/* bullet list of details */
+
+.edu-right-list {
+  margin-top: 8px;
+  padding-left: 16px;
+  font-size: 0.86rem;
+  color: #374151;
+  line-height: 1.45;
+}
+
+/* fake barcode at bottom */
+
+.edu-right-barcode {
+  margin-top: 16px;
+  height: 40px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #020617,
+    #020617 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.9;
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+  .edu-lightbox {
+    flex-direction: column;
+    max-height: 85vh;
+  }
+
+  .edu-ticket-left,
+  .edu-ticket-right {
+    padding: 18px 18px 16px;
+  }
+
+  .edu-ticket-right::before {
+    display: none;
+  }
+}
+
 
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
@@ -1234,8 +1432,6 @@
       </section>
 
       
-    <!-- EXPERIENCE – LOGO CLOUD ONLY -->
-
 <!-- EXPERIENCE – LOGO CLOUD + BD PANELS -->
 
 <section id="experience">
@@ -1555,14 +1751,87 @@
     </div>
   </div>
 
-  <!-- EDUCATION LIGHTBOX (NEW) -->
-  <div id="eduOverlay" class="edu-overlay">
-    <div class="edu-lightbox">
-      <button class="edu-close" id="eduClose" aria-label="Close education details">×</button>
-      <h2 id="eduTitle" class="edu-title">France — Studies</h2>
-      <div id="eduBody" class="edu-list"></div>
+ <!-- ================= EDUCATION LIGHTBOX – BOARDING PASS ================ -->
+<div id="eduOverlay" class="edu-overlay">
+  <div class="edu-lightbox">
+    <button class="edu-close" id="eduClose" aria-label="Close education details">×</button>
+
+    <!-- LEFT BLUE PANEL -->
+    <div class="edu-ticket-left">
+      <div class="edu-left-top">
+        <div class="edu-from-block">
+          <div class="edu-label">FROM</div>
+          <div class="edu-year" id="eduFromYear">2023</div>
+          <div class="edu-month" id="eduFromMonth">SEPTEMBER</div>
+        </div>
+
+        <div class="edu-plane-block">
+          <div class="edu-plane-icon">✈</div>
+          <div class="edu-plane-arrow"></div>
+        </div>
+
+        <div class="edu-to-block">
+          <div class="edu-label">TO</div>
+          <div class="edu-year" id="eduToYear">2024</div>
+          <div class="edu-month" id="eduToMonth">JULY</div>
+        </div>
+      </div>
+
+      <div class="edu-left-bottom">
+        <div class="edu-bottom-item">
+          <div class="edu-bottom-label">Passenger</div>
+          <div class="edu-bottom-value" id="eduPassenger">TUFS</div>
+        </div>
+        <div class="edu-bottom-item">
+          <div class="edu-bottom-label">Seat</div>
+          <div class="edu-bottom-value" id="eduSeat">Tokyo</div>
+        </div>
+        <div class="edu-bottom-item">
+          <div class="edu-bottom-label">Gate</div>
+          <div class="edu-bottom-value" id="eduGate">Exchange</div>
+        </div>
+        <div class="edu-bottom-item">
+          <div class="edu-bottom-label">Terminal</div>
+          <div class="edu-bottom-value" id="eduTerminal">Studies</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT WHITE PANEL -->
+    <div class="edu-ticket-right">
+      <div class="edu-right-header">
+        <div class="edu-right-title">BOARDING PASS</div>
+        <div class="edu-right-country" id="eduCountry">JAPAN</div>
+      </div>
+
+      <div class="edu-right-body">
+        <div class="edu-right-row">
+          <div class="edu-right-label">University</div>
+          <div class="edu-right-value" id="eduUniversity">
+            Tokyo University of Foreign Studies (TUFS)
+          </div>
+        </div>
+
+        <div class="edu-right-row">
+          <div class="edu-right-label">Programme</div>
+          <div class="edu-right-value" id="eduProgramme">
+            Exchange – Asia-Pacific & Japanese Studies
+          </div>
+        </div>
+
+        <ul class="edu-right-list" id="eduDetailsList">
+          <!-- JS will inject bullet points -->
+        </ul>
+      </div>
+
+      <div class="edu-right-barcode"></div>
     </div>
   </div>
+</div>
+
+  
+<!-- ================= END EDUCATION LIGHTBOX ================= -->
+
 
   <!-- LEAFLET JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -1804,68 +2073,129 @@ document.querySelectorAll(".exp-back-btn").forEach(btn => {
   });
 });
 
-    /* ===============================
-       EDUCATION POPUP LOGIC
-    =============================== */
+ /* ===============================
+   EDUCATION POPUP – BOARDING PASS LOGIC
+=============================== */
 
-    const eduOverlay = document.getElementById("eduOverlay");
-    const eduTitle = document.getElementById("eduTitle");
-    const eduBody = document.getElementById("eduBody");
-    const eduClose = document.getElementById("eduClose");
+const eduOverlay = document.getElementById("eduOverlay");
+const eduClose = document.getElementById("eduClose");
 
-    const eduData = {
-      france: {
-        title: "France — Studies",
-        items: [
-          {
-            yearCity: "2024–2026 • Paris",
-            school: "Sciences Po — PSIA",
-            meta: "M.A. International Security & Migration",
-            program: "Asylum and migration law, border governance, humanitarian data analysis; qualitative research design and mapping/data projects."
-          },
-          {
-            yearCity: "2024–2025 • Paris",
-            school: "INALCO — Eurasian Department",
-            meta: "Persian Language & Iranian Studies",
-            program: "Intensive Persian (academic texts & conversation) plus history, society, and politics of Iran and Afghanistan."
-          },
-          {
-            yearCity: "2022–2023 • Menton",
-            school: "Sciences Po Campus of Menton",
-            meta: "B.A. Major in Politics & Government",
-            program: "Middle Eastern & Mediterranean specialization: comparative politics, constitutional law, regional history; debate workshops tied to current affairs."
-          },
-          {
-            yearCity: "2021–2022 • Nancy",
-            school: "Sciences Po Campus of Nancy",
-            meta: "B.A. Introduction to Social Sciences",
-            program: "Multidisciplinary foundations in political science, economics, sociology, law, and history within a trilingual Franco-German track; EU institutions and academic writing."
-          }
-        ]
-      },
-      japan: {
-        title: "Japan — Studies",
-        items: [
-          {
-            yearCity: "2023–2024 • Tokyo",
-            school: "Tokyo University of Foreign Studies",
-            meta: "Exchange – Asia-Pacific & Japanese Studies",
-            program: "Full-time Japanese intensive alongside Asia-Pacific politics; Japan/ASEAN focus with intercultural fieldwork."
-          }
-        ]
-      },
-      germany: {
-        title: "Germany — Studies",
-        items: [
-          {
-            yearCity: "2026–2027 • Berlin",
-            school: "Freie Universität Berlin — OSI",
-            meta: "M.A. International Relations (planned)",
-            program: "Comparative security focus with modules on EU foreign and defence policies."
-          }
-        ]
-      }
-    };
+const eduFromYearEl = document.getElementById("eduFromYear");
+const eduFromMonthEl = document.getElementById("eduFromMonth");
+const eduToYearEl   = document.getElementById("eduToYear");
+const eduToMonthEl  = document.getElementById("eduToMonth");
+
+const eduPassengerEl  = document.getElementById("eduPassenger");
+const eduSeatEl       = document.getElementById("eduSeat");
+const eduGateEl       = document.getElementById("eduGate");
+const eduTerminalEl   = document.getElementById("eduTerminal");
+
+const eduCountryEl    = document.getElementById("eduCountry");
+const eduUniversityEl = document.getElementById("eduUniversity");
+const eduProgrammeEl  = document.getElementById("eduProgramme");
+const eduDetailsList  = document.getElementById("eduDetailsList");
+
+/* One card per country */
+const eduTicketData = {
+  france: {
+    fromYear: "2021",
+    fromMonth: "SEPTEMBER",
+    toYear: "2026",
+    toMonth: "JUNE",
+    passenger: "Sciences Po Paris",
+    seat: "Menton / Paris",
+    gate: "B.A. + M.A.",
+    terminal: "International Security",
+    country: "FRANCE",
+    university: "Sciences Po Paris",
+    programme: "B.A. Politics & Government + M.A. International Security",
+    details: [
+      "Undergraduate years at Sciences Po (Nancy & Menton campuses) with a focus on Middle East & EU politics.",
+      "Graduate studies at PSIA in International Security with a migration / humanitarian focus.",
+      "Coursework in migration law, border governance, data for development, and regional politics."
+    ]
+  },
+  japan: {
+    fromYear: "2023",
+    fromMonth: "SEPTEMBER",
+    toYear: "2024",
+    toMonth: "JULY",
+    passenger: "Tokyo University of Foreign Studies",
+    seat: "Tokyo",
+    gate: "Exchange",
+    terminal: "Asia-Pacific",
+    country: "JAPAN",
+    university: "Tokyo University of Foreign Studies (TUFS)",
+    programme: "Exchange – Asia-Pacific & Japanese Studies",
+    details: [
+      "Full-time Japanese language study combined with Asia-Pacific politics modules.",
+      "Focus on Japan–ASEAN relations and regional security questions.",
+      "Fieldwork and intercultural activities with Japanese and international students."
+    ]
+  },
+  germany: {
+    fromYear: "2026",
+    fromMonth: "OCTOBER",
+    toYear: "2027",
+    toMonth: "SEPTEMBER",
+    passenger: "Freie Universität Berlin",
+    seat: "Berlin",
+    gate: "Dual degree",
+    terminal: "IR Track",
+    country: "GERMANY",
+    university: "Freie Universität Berlin – Otto-Suhr-Institut",
+    programme: "Planned M.A. International Relations (dual degree)",
+    details: [
+      "Future year in Berlin as part of the dual Master with PSIA.",
+      "Planned focus on EU foreign policy, security, and comparative politics.",
+      "Complementary perspective on international security from a German / EU lens."
+    ]
+  }
+};
+
+function openEduPopup(countryKey) {
+  const data = eduTicketData[countryKey];
+  if (!data) return;
+
+  // Fill left side
+  eduFromYearEl.textContent  = data.fromYear;
+  eduFromMonthEl.textContent = data.fromMonth;
+  eduToYearEl.textContent    = data.toYear;
+  eduToMonthEl.textContent   = data.toMonth;
+
+  eduPassengerEl.textContent = data.passenger;
+  eduSeatEl.textContent      = data.seat;
+  eduGateEl.textContent      = data.gate;
+  eduTerminalEl.textContent  = data.terminal;
+
+  // Right side
+  eduCountryEl.textContent   = data.country;
+  eduUniversityEl.textContent= data.university;
+  eduProgrammeEl.textContent = data.programme;
+
+  eduDetailsList.innerHTML = data.details
+    .map(item => `<li>${item}</li>`)
+    .join("");
+
+  eduOverlay.style.display = "flex";
+}
+
+function closeEduPopup() {
+  eduOverlay.style.display = "none";
+  lockedCountry = null;     // keep your existing variable
+  resetCountryStyles();     // resets the map colors
+}
+
+eduClose.addEventListener("click", closeEduPopup);
+eduOverlay.addEventListener("click", e => {
+  if (e.target === eduOverlay) closeEduPopup();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && eduOverlay.style.display === "flex") {
+    closeEduPopup();
+  }
+});
+
 
     function openEduPopup(country) {
       const data = eduData[country];
