@@ -1851,7 +1851,9 @@ const expLogos = document.querySelectorAll(".experience-logo img");
 
 // helper: hide all panels
 function hideAllExpPanels() {
-  expPanels.forEach(p => p.style.display = "none");
+  expPanels.forEach(p => {
+    p.classList.remove("show");
+  });
 }
 
 // click on any logo → open its panel
@@ -1881,10 +1883,11 @@ expLogos.forEach(img => {
 // Back buttons → return to grid
 document.querySelectorAll(".exp-back-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    hideAllExpPanels();
+    hideAllExpPanels();            // removes .show from all panels
     expGrid.style.display = "grid";
   });
 });
+
 
     /* ===============================
        EDUCATION POPUP LOGIC
