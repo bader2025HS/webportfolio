@@ -2122,8 +2122,6 @@ const eduTicketData = {
     terminal: "International Security",
     country: "FRANCE",
     university: "Sciences Po Paris",
-    color1: "#003b8e",
-    color2: "#b7d4ff"
     programme: "B.A. Politics & Government + M.A. International Security",
     details: [
       "Undergraduate years at Sciences Po (Nancy & Menton campuses) with a focus on Middle East & EU politics.",
@@ -2143,8 +2141,6 @@ const eduTicketData = {
     country: "JAPAN",
     university: "Tokyo University of Foreign Studies (TUFS)",
     programme: "Exchange – Asia-Pacific & Japanese Studies",
-    color1: "#bc002d",
-    color2: "#ffe5e5"
     details: [
       "Full-time Japanese language study combined with Asia-Pacific politics modules.",
       "Focus on Japan–ASEAN relations and regional security questions.",
@@ -2163,8 +2159,6 @@ const eduTicketData = {
     country: "GERMANY",
     university: "Freie Universität Berlin – Otto-Suhr-Institut",
     programme: "Planned M.A. International Relations (dual degree)",
-    color1: "#d4a300",
-    color2: "#ffe680"
     details: [
       "Future year in Berlin as part of the dual Master with PSIA.",
       "Planned focus on EU foreign policy, security, and comparative politics.",
@@ -2197,10 +2191,6 @@ function openEduPopup(countryKey) {
     .map(item => `<li>${item}</li>`)
     .join("");
 
-  // ★ Dynamic gradient color
-  document.querySelector(".edu-ticket-left").style.background =
-    `linear-gradient(135deg, ${data.color1}, ${data.color2})`;
-  
   eduOverlay.style.display = "flex";
 }
 
