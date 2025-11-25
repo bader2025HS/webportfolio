@@ -207,23 +207,23 @@
 }
 
 .edu-label {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  opacity: 0.9;
+  letter-spacing: 0.2em;
+  opacity: 0.95;
 }
 
 .edu-year {
-  font-size: 2.4rem;
+  font-size: 3.4rem;       /* bigger year */
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.02;
 }
 
 .edu-month {
-  margin-top: 2px;
-  font-size: 0.85rem;
+  margin-top: 4px;
+  font-size: 0.95rem;      /* a bit bigger */
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.22em;
 }
 
 /* Plane + arrow */
@@ -232,17 +232,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 10px;               /* slightly more space */
+  transform: translateY(-4px);
 }
 
 .edu-plane-icon {
-  font-size: 1.9rem;
+  font-size: 2.6rem;       /* bigger plane */
   transform: rotate(8deg);
 }
 
 .edu-plane-arrow {
-  width: 80px;
-  height: 2px;
+  width: 120px;            /* longer arrow */
+  height: 3px;
   background: #f9fafb;
   position: relative;
 }
@@ -250,11 +251,12 @@
   content: "";
   position: absolute;
   right: 0;
-  top: -4px;
-  border-width: 5px 0 5px 8px;
+  top: -5px;
+  border-width: 6px 0 6px 9px;
   border-style: solid;
   border-color: transparent transparent transparent #f9fafb;
 }
+
 
 /* Bottom row (Passenger / Seat / Gate / Terminal) */
 
@@ -392,6 +394,18 @@
 
   .edu-ticket-right::before {
     display: none;
+  }
+}
+@media (max-width: 720px) {
+  .edu-year {
+    font-size: 2.5rem;
+  }
+  .edu-plane-icon {
+    font-size: 2.1rem;
+  }
+  .edu-plane-arrow {
+    width: 90px;
+    height: 2px;
   }
 }
 
