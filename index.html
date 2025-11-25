@@ -2197,44 +2197,6 @@ document.addEventListener("keydown", e => {
 });
 
 
-    function openEduPopup(country) {
-      const data = eduData[country];
-      if (!data) return;
-
-      eduTitle.textContent = data.title;
-      eduBody.innerHTML = data.items.map(item => `
-        <div class="edu-item">
-          <div class="edu-item-header">
-            <span>${item.yearCity}</span>
-            <span>${item.school}</span>
-          </div>
-          <div class="edu-item-meta">${item.meta || ""}</div>
-          <div class="edu-item-program">${item.program || ""}</div>
-          ${item.note ? `<div class="edu-item-note">${item.note}</div>` : ""}
-        </div>
-      `).join("");
-
-      eduOverlay.style.display = "flex";
-    }
-
-   function closeEduPopup() {
-  eduOverlay.style.display = "none";
-  lockedCountry = null;     // remove the “locked” active country
-  resetCountryStyles();     // reset map colors
-}
-
-
-    eduClose.addEventListener("click", closeEduPopup);
-    eduOverlay.addEventListener("click", e => {
-      if (e.target === eduOverlay) closeEduPopup();
-    });
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && eduOverlay.style.display === "flex") {
-        closeEduPopup();
-      }
-    });
-
     /* ===============================
        LIGHTBOX FOR GALLERY
     =============================== */
