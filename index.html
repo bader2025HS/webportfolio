@@ -569,15 +569,31 @@
 }
 
 /* Actions row: send + chips, all on the left */
-.contact-envelope-actions {
+/* SEND LEFT — SOCIALS RIGHT */
+.contact-envelope-actions.two-sides {
   margin-top: 20px;
   padding: 0 40px 24px;
+
   display: flex;
+  justify-content: space-between;   /* LEFT group vs RIGHT group */
+  align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
+}
+
+/* Left group (Send) */
+.contact-envelope-actions.two-sides .left-actions {
+  display: flex;
   align-items: center;
 }
+
+/* Right group (chips) */
+.contact-envelope-actions.two-sides .right-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 
 /* Send button – same style as before, just no text-align center needed */
 .contact-envelope-btn {
@@ -645,8 +661,6 @@
     padding: 0 24px 24px;
   }
 }
-
-
 
 /* Make it stack on small screens */
 @media (max-width: 900px) {
@@ -1597,29 +1611,37 @@
             </div>
           </div>
 
-          <!-- BUTTON + CHIPS (all left-aligned) -->
-          <div class="contact-envelope-actions">
-            <button type="submit" class="contact-envelope-btn">
-              Send
-            </button>
+         <div class="contact-envelope-actions two-sides">
 
-            <a href="mailto:your@email.com"
-               class="contact-chip contact-chip-primary">
-              ✉ Email me
-            </a>
+  <!-- LEFT SIDE -->
+  <div class="left-actions">
+    <button type="submit" class="contact-envelope-btn">
+      Send
+    </button>
+  </div>
 
-            <a href="https://www.linkedin.com/in/your-profile"
-               target="_blank" rel="noopener"
-               class="contact-chip">
-              🔗 LinkedIn
-            </a>
+  <!-- RIGHT SIDE -->
+  <div class="right-actions">
+    <a href="mailto:your@email.com"
+       class="contact-chip contact-chip-primary">
+      ✉ Email me
+    </a>
 
-            <a href="cv-bader.pdf"
-               target="_blank" rel="noopener"
-               class="contact-chip">
-              📄 Download CV
-            </a>
-          </div>
+    <a href="https://www.linkedin.com/in/your-profile"
+       target="_blank" rel="noopener"
+       class="contact-chip">
+      🔗 LinkedIn
+    </a>
+
+    <a href="cv-bader.pdf"
+       target="_blank" rel="noopener"
+       class="contact-chip">
+      📄 Download CV
+    </a>
+  </div>
+
+</div>
+
         </form>
       </div>
 
