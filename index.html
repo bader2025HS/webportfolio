@@ -517,6 +517,70 @@
   }
 }
 
+/* Whole contact layout: envelope left + socials right */
+.contact-contact-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4fr 1fr;   /* 80% / 20% */
+  align-items: start;
+  gap: 24px;
+}
+
+/* Right column (socials) */
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 20px;
+}
+
+/* Buttons on the right */
+.contact-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #f7fafc;
+  border: 2px solid #d0d7de;
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.contact-social-btn:hover {
+  background: #e6f9f9;
+  border-color: #009fa5;
+  color: #009fa5;
+}
+
+/* Special highlight for the email button */
+.contact-social-btn.primary {
+  background: #009fa5;
+  color: white;
+  border-color: #009fa5;
+}
+
+.contact-social-btn.primary:hover {
+  background: #00787d;
+  border-color: #00787d;
+  color: white;
+}
+
+/* Make it stack on small screens */
+@media (max-width: 900px) {
+  .contact-contact-layout {
+    grid-template-columns: 1fr; /* stack vertically */
+  }
+
+  .contact-socials {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
 
 
     /* ===========================
@@ -1418,9 +1482,14 @@
       <!-- CONTACT -->
 
             <!-- CONTACT -->
-      <section id="contact">
-        <div class="contact-envelope-wrapper">
-          <div class="contact-envelope">
+     <section id="contact">
+
+  <div class="contact-contact-layout">
+
+    <!-- LEFT: Envelope (80%) -->
+    <div class="contact-envelope-wrapper">
+      <div class="contact-envelope">
+
 
             <!-- Top flap -->
             <div class="contact-envelope-flap"></div>
@@ -1465,6 +1534,34 @@
 
           </div>
         </div>
+
+        </div> <!-- end left envelope -->
+
+    <!-- RIGHT: Socials (20%) -->
+    <div class="contact-socials">
+
+      <a href="mailto:your@email.com" class="contact-social-btn primary">
+        ✉️ Email me
+      </a>
+
+      <a href="https://www.linkedin.com/in/yourprofile"
+         target="_blank"
+         class="contact-social-btn">
+        🔗 LinkedIn
+      </a>
+
+      <a href="cv-bader.pdf"
+         target="_blank"
+         class="contact-social-btn">
+        📄 Download CV
+      </a>
+
+    </div>
+
+  </div> <!-- end flex layout -->
+
+</section>
+
       </section>
 
 
