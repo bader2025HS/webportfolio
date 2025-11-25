@@ -173,6 +173,19 @@
   justify-content: space-between;
   position: relative;
 }
+    /* default style stays, this only overrides background */
+.edu-ticket-left--france {
+  background: #b7d4ff;   /* same blue as France map fill */
+}
+
+.edu-ticket-left--japan {
+  background: #bc002d;   /* Japan red */
+}
+
+.edu-ticket-left--germany {
+  background: #ffe680;   /* Germany yellow */
+}
+
 
 /* dotted world-map vibe */
 .edu-ticket-left::before {
@@ -2170,6 +2183,14 @@ const eduTicketData = {
 function openEduPopup(countryKey) {
   const data = eduTicketData[countryKey];
   if (!data) return;
+
+    const ticketLeft = document.querySelector(".edu-ticket-left");
+  ticketLeft.classList.remove(
+    "edu-ticket-left--france",
+    "edu-ticket-left--japan",
+    "edu-ticket-left--germany"
+  );
+  ticketLeft.classList.add(`edu-ticket-left--${countryKey}`);
 
   // Fill left side
   eduFromYearEl.textContent  = data.fromYear;
