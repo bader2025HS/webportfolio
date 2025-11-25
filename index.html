@@ -98,10 +98,17 @@
     }
 
     .country-map {
-      width: 340px;
-      height: 340px;
-      cursor: pointer;       /* clickable hint */
-    }
+  width: 340px;
+  height: 340px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.country-map:hover {
+  transform: scale(1.06); /* "zoom" effect */
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+}
+
 
     .leaflet-container {
       background: transparent !important;
@@ -1525,8 +1532,9 @@
     const normalize = s =>
       s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-    // store the Leaflet layers for each country to recolor on click
-    const countryLayers = {};
+    // store the Leaflet layers for each country to recolor
+const countryLayers = {};
+let lockedCountry = null;   // last clicked country (stays colored)
 
     const baseStyle = {
       color: "#222",
@@ -1623,19 +1631,36 @@
       drawCountry("map-japan", "japan", [38.9, 138.2], 4.5);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.5);
 
-      // Click maps → color + open education popup
-      document.getElementById("map-france").addEventListener("click", () => {
-        setCountryFill("france");
-        openEduPopup("france");
-      });
-      document.getElementById("map-japan").addEventListener("click", () => {
-        setCountryFill("japan");
-        openEduPopup("japan");
-      });
-      document.getElementById("map-germany").addEventListener("click", () => {
-        setCountryFill("germany");
-        openEduPopup("germany");
-      });
+      // Click maps → lock color + open education popup
+document.getElementById("map-france").addEventListener("click", () => {
+  lockedCountry = "france";
+  setCountryFill("france");
+  openEduPopup("france");
+});
+document.getElementById("map-japan").addEventListener("click", () => {
+  lockedCountry = "japan";
+  setCountryFill("japan");
+  openEduPopup("japan");
+});
+document.getElementById("map-germany").addEventListener("click", () => {
+  lockedCountry = "germany";
+  setCountryFill("germany");
+  openEduPopup("germany");
+});
+      // Hover → temporary highlight + respect last clicked country
+["france", "japan", "germany"].forEach(key => {
+  const el = document.getElementById("map-" + key);
+  el.addEventListener("mouseenter", () => {
+    setCountryFill(key);  // highlight hovered country
+  });
+  el.addEventListener("mouseleave", () => {
+    if (lockedCountry) {
+      setCountryFill(lockedCountry);  // go back to last clicked
+    } else {
+      resetCountryStyles();           // nothing selected → clear all
+    }
+  });
+});
     }
 
     /* ===============================
@@ -1795,11 +1820,12 @@ document.querySelectorAll(".exp-back-btn").forEach(btn => {
       eduOverlay.style.display = "flex";
     }
 
-    function closeEduPopup() {
-      eduOverlay.style.display = "none";
-      // reset map colors when details are closed
-      resetCountryStyles();
-    }
+   function closeEduPopup() {
+  eduOverlay.style.display = "none";
+  lockedCountry = null;     // remove the “locked” active country
+  resetCountryStyles();     // reset map colors
+}
+
 
     eduClose.addEventListener("click", closeEduPopup);
     eduOverlay.addEventListener("click", e => {
