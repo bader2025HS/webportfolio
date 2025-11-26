@@ -1099,6 +1099,12 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 6px 12px;  /* row-gap / column-gap */
 }
+/* Parallax base */
+.skills-terminal {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  perspective: 900px;
+}
 
     /* ===========================
            GALLERY (HOME)
@@ -2605,6 +2611,22 @@ document.addEventListener("keydown", e => {
       if (e.key === "ArrowRight") showNext();
       if (e.key === "ArrowLeft") showPrev();
     });
+/* Terminal parallax tilt */
+const terminal = document.querySelector(".skills-terminal");
+
+terminal.addEventListener("mousemove", (e) => {
+  const rect = terminal.getBoundingClientRect();
+  const x = e.clientX - rect.left - rect.width / 2;
+  const y = e.clientY - rect.top - rect.height / 2;
+  const rotateX = (y / rect.height) * -4; // tilt up/down
+  const rotateY = (x / rect.width) * 4;   // tilt left/right
+
+  terminal.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+terminal.addEventListener("mouseleave", () => {
+  terminal.style.transform = "rotateX(0deg) rotateY(0deg)";
+});
 
 
   </script>
