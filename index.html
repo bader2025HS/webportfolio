@@ -750,6 +750,45 @@
   color: var(--exp-accent);
 }
 
+    /* ===== EXPERIENCE – EXPANDING FLIPPED CARDS (overlay, no stretching) ===== */
+
+.exp-card--expanded {
+  z-index: 5;                 /* sit above neighbours */
+}
+
+/* allow the faces + content to overflow outside the original tile */
+.exp-card--expanded .exp-card-face {
+  overflow: visible;
+}
+
+.exp-card--expanded .exp-card-back-inner {
+  max-height: none;
+  overflow: visible;
+}
+
+/* All three expandable cards: allow overflow */
+.exp-card--io.exp-card--expanded,
+.exp-card--research.exp-card--expanded,
+.exp-card--assoc.exp-card--expanded {
+  overflow: visible;
+}
+
+/* OIF + Water/Energy: grow downward over the tile below */
+.exp-card--io.exp-card--expanded .exp-card-back,
+.exp-card--research.exp-card--expanded .exp-card-back {
+  top: 0;
+  bottom: auto;          /* override inset: 0; */
+  height: 210%;          /* roughly 2 rows high */
+}
+
+/* Student-led: grow upward over Water/Energy */
+.exp-card--assoc.exp-card--expanded .exp-card-back {
+  top: -110%;            /* move up */
+  bottom: auto;
+  height: 210%;
+}
+
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2528,22 +2567,47 @@ document.getElementById("map-germany").addEventListener("click", () => {
     showSection("home");
 
 
- /* ===============================
-   EXPERIENCE — FLIP CARDS
+
+
+
+    /* ===============================
+   EXPERIENCE — FLIP + EXPAND
 =============================== */
 
 const expCards = document.querySelectorAll(".exp-card");
 
+function clearExperienceState() {
+  expCards.forEach(c => {
+    c.classList.remove("is-flipped", "exp-card--expanded");
+  });
+}
+
 expCards.forEach(card => {
   card.addEventListener("click", () => {
-    // close others
-    expCards.forEach(c => {
-      if (c !== card) c.classList.remove("is-flipped");
-    });
-    // toggle current
-    card.classList.toggle("is-flipped");
+    const alreadyFlipped = card.classList.contains("is-flipped");
+
+    // reset everything first
+    clearExperienceState();
+
+    // if it was already open, we just close all and stop
+    if (alreadyFlipped) return;
+
+    // otherwise flip this one
+    card.classList.add("is-flipped");
+
+    // only these three should *expand* over neighbours
+    if (
+      card.classList.contains("exp-card--io") ||
+      card.classList.contains("exp-card--research") ||
+      card.classList.contains("exp-card--assoc")
+    ) {
+      card.classList.add("exp-card--expanded");
+    }
   });
 });
+
+
+    
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
