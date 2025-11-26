@@ -453,21 +453,22 @@
   gap: 30px 50px;            /* vertical / horizontal gaps */
 }
 
-/* Base logo styling (no shadow) */
+/* Base logo styling */
 .experience-logo img {
   max-width: 260px;          /* big logos */
   width: 100%;
   height: auto;
   object-fit: contain;
   filter: none !important;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Same hover for all */
+/* Hover = same effect as maps */
 .experience-logo img:hover {
-  transform: translateY(-6px) scale(1.03);
-  filter: none !important;
+  transform: scale(1.06); /* zoom like the maps */
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
 }
+
 
 /* SPMA – slightly smaller to look balanced */
 .experience-logo:nth-child(6) img {
