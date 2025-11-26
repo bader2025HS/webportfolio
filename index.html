@@ -2480,6 +2480,14 @@ const expTiles = document.querySelectorAll("#experience .exp-card");
 
 expTiles.forEach(tile => {
   tile.addEventListener("mousemove", e => {
+
+    // If tile is flipped → NO tooltip
+    if (tile.classList.contains("flipped")) {
+      expTooltip.style.opacity = "0";
+      return;
+    }
+
+    // Show tooltip only on front
     expTooltip.style.opacity = "1";
     expTooltip.style.left = (e.clientX + 12) + "px";
     expTooltip.style.top = (e.clientY + 12) + "px";
