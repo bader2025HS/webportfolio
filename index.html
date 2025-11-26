@@ -106,6 +106,10 @@
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+    #map-japan.country-map {
+  width: 360px;
+  height: 480px; /* taller box so Japan can grow */
+}
 
 .country-map:hover {
   transform: scale(1.06); /* "zoom" effect */
@@ -2299,7 +2303,7 @@ let lockedCountry = null;   // last clicked country (stays colored)
 
       // Same visual scale for all three; Japan balanced
       drawCountry("map-france", "france", [46.6, 2.2], 4.5);
-      drawCountry("map-japan", "japan", [38.9, 138.2], 4.48);
+      drawCountry("map-japan", "japan", [38.9, 138.2], 4.5);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
 
       // Click maps → lock color + open education popup
