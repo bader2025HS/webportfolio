@@ -1100,6 +1100,36 @@
   gap: 6px 12px;  /* row-gap / column-gap */
 }
 
+    /* Whole terminal – LCD glow & micro flicker */
+.skills-terminal {
+  position: relative;
+  isolation: isolate;
+}
+
+.skills-terminal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34,197,235,0.15), transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(249,115,22,0.08), transparent 70%);
+  opacity: 0.6;
+
+  animation: terminalFlicker 4.5s infinite ease-in-out;
+}
+
+@keyframes terminalFlicker {
+  0%   { opacity: 0.50; }
+  10%  { opacity: 0.62; }
+  22%  { opacity: 0.56; }
+  35%  { opacity: 0.68; }
+  55%  { opacity: 0.52; }
+  75%  { opacity: 0.60; }
+  100% { opacity: 0.50; }
+}
+
     /* ===========================
            GALLERY (HOME)
     ============================ */
