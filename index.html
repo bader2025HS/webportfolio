@@ -750,6 +750,29 @@
   color: var(--exp-accent);
 }
 
+    /* ===== EXPANDED STATE FOR EXPERIENCE CARDS ===== */
+
+.exp-card.is-expanded {
+  grid-column: 1 / -1;   /* span all columns */
+  grid-row: 1 / -1;      /* span all rows */
+  z-index: 5;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+}
+
+/* When one card is expanded, dim the others */
+.exp-mosaic.exp-has-expanded .exp-card:not(.is-expanded) {
+  opacity: 0.15;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* Expanded back: no internal scroll, more padding */
+.exp-card.is-expanded .exp-card-back-inner {
+  max-height: none;
+  overflow-y: visible;
+  padding: 20px 22px 18px;
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2528,22 +2551,31 @@ document.getElementById("map-germany").addEventListener("click", () => {
     showSection("home");
 
 
- /* ===============================
-   EXPERIENCE — FLIP CARDS
+/* ===============================
+   EXPERIENCE — FLIP + EXPAND CARDS
 =============================== */
 
 const expCards = document.querySelectorAll(".exp-card");
+const expMosaic = document.querySelector(".exp-mosaic");
 
 expCards.forEach(card => {
   card.addEventListener("click", () => {
-    // close others
+    const alreadyExpanded = card.classList.contains("is-expanded");
+
+    // reset all cards
     expCards.forEach(c => {
-      if (c !== card) c.classList.remove("is-flipped");
+      c.classList.remove("is-flipped", "is-expanded");
     });
-    // toggle current
-    card.classList.toggle("is-flipped");
+    expMosaic.classList.remove("exp-has-expanded");
+
+    // if it wasn’t expanded, expand+flip it now
+    if (!alreadyExpanded) {
+      card.classList.add("is-flipped", "is-expanded");
+      expMosaic.classList.add("exp-has-expanded");
+    }
   });
 });
+
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
