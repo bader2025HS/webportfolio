@@ -466,10 +466,16 @@
    - width limited by 1050px, viewport width AND height
    - aspect-ratio keeps it perfectly square
 */
-.exp-mosaic {
-  width: 1050px;         
-  max-width: 100%;        
-  aspect-ratio: 1 / 1;
+
+    .exp-mosaic {
+  /* size of the square is the MIN of:
+     - 1050px
+     - viewport width minus a bit of margin
+     - viewport height minus space for navbar + padding (~220px)
+  */
+  width: min(1050px, 100vw - 40px, calc(100vh - 220px));
+  aspect-ratio: 1 / 1; /* keeps it perfectly square */
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -480,6 +486,7 @@
   gap: 14px;
   perspective: 1200px;
 }
+
 
 /* cards */
 
