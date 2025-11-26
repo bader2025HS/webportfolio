@@ -658,20 +658,6 @@
   }
 }
 
-/* ========= GLOBAL TOOLTIP FOR EXP + EDU ========= */
-#expTooltip {
-  position: fixed;
-  padding: 6px 10px;
-  background: #111;
-  color: #fff;
-  font-size: 0.78rem;
-  border-radius: 6px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  z-index: 999999;
-}
-
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2465,23 +2451,6 @@ expCards.forEach(card => {
   });
 });
 
-/* ===============================
-   EXPERIENCE — FLIP CARDS
-=============================== */
-
-const expCards = document.querySelectorAll(".exp-card");
-
-expCards.forEach(card => {
-  card.addEventListener("click", () => {
-    // close others
-    expCards.forEach(c => {
-      if (c !== card) c.classList.remove("is-flipped");
-    });
-    // toggle current
-    card.classList.toggle("is-flipped");
-  });
-});
-
 
  /* ===============================
    EDUCATION POPUP – BOARDING PASS LOGIC
@@ -2564,7 +2533,6 @@ const eduTicketData = {
 };
 
 function openEduPopup(countryKey) {
-  expTooltip.style.opacity = "0";   // hide tooltip when popup opens
   const data = eduTicketData[countryKey];
   if (!data) return;
 
@@ -2615,60 +2583,6 @@ document.addEventListener("keydown", e => {
   }
 });
 
-/* ===============================
-   TOOLTIP FOR EXPERIENCE + EDUCATION
-=============================== */
-
-const expTooltip = document.getElementById("expTooltip");
-
-/* ---- EXPERIENCE: "Click to flip" (front only) ---- */
-
-const expFrontFaces = document.querySelectorAll("#experience .exp-card-front");
-
-expFrontFaces.forEach(front => {
-  front.addEventListener("mousemove", e => {
-    const card = front.closest(".exp-card");
-
-    // If card is flipped → no tooltip
-    if (card.classList.contains("is-flipped")) {
-      expTooltip.style.opacity = "0";
-      return;
-    }
-
-    expTooltip.textContent = "Click to flip";
-    expTooltip.style.opacity = "1";
-    expTooltip.style.left = (e.clientX + 12) + "px";
-    expTooltip.style.top  = (e.clientY + 12) + "px";
-  });
-
-  front.addEventListener("mouseleave", () => {
-    expTooltip.style.opacity = "0";
-  });
-});
-
-
-/* ---- EDUCATION MAPS: "Show education pass" ---- */
-
-const eduMaps = document.querySelectorAll("#education .country-map");
-
-eduMaps.forEach(map => {
-  map.addEventListener("mousemove", e => {
-    // If popup open → hide tooltip
-    if (eduOverlay.style.display === "flex") {
-      expTooltip.style.opacity = "0";
-      return;
-    }
-
-    expTooltip.textContent = "Show education pass";
-    expTooltip.style.opacity = "1";
-    expTooltip.style.left = (e.clientX + 12) + "px";
-    expTooltip.style.top  = (e.clientY + 12) + "px";
-  });
-
-  map.addEventListener("mouseleave", () => {
-    expTooltip.style.opacity = "0";
-  });
-});
 
     /* ===============================
        LIGHTBOX FOR GALLERY
@@ -2737,8 +2651,5 @@ eduMaps.forEach(map => {
 
 
   </script>
-
-    <div id="expTooltip"></div>
-
 </body>
 </html>
