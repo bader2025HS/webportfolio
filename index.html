@@ -674,6 +674,52 @@
   }
 }
 
+    /* ===== EXPERIENCE – EXPANDING FLIPPED CARDS (overlay) ===== */
+
+/* when a card is expanded, let it sit above neighbours */
+.exp-card--expanded {
+  z-index: 5;
+}
+
+/* allow content to overflow outside the tile */
+.exp-card--expanded .exp-card-face {
+  overflow: visible;
+}
+
+.exp-card--expanded .exp-card-back-inner {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+/* these three cards are allowed to overflow their grid cell */
+.exp-card--io,
+.exp-card--research,
+.exp-card--assoc {
+  overflow: visible;
+}
+
+/* OIF: expand downward over "Water, energy & MENA" */
+.exp-card--io.exp-card--expanded .exp-card-back {
+  top: 0;
+  bottom: auto;
+  height: 210%;              /* ~2 rows high; tweak if needed */
+}
+
+/* Water, energy & MENA: expand downward over "Student-led" */
+.exp-card--research.exp-card--expanded .exp-card-back {
+  top: 0;
+  bottom: auto;
+  height: 210%;
+}
+
+/* Student-led: expand upward over "Water, energy & MENA" */
+.exp-card--assoc.exp-card--expanded .exp-card-back {
+  top: -110%;                /* move up over the tile above */
+  bottom: auto;
+  height: 210%;
+}
+
     /* -------- EXPERIENCE ACCENT COLORS -------- */
 
 /* one accent per category */
@@ -2528,22 +2574,42 @@ document.getElementById("map-germany").addEventListener("click", () => {
     showSection("home");
 
 
- /* ===============================
-   EXPERIENCE — FLIP CARDS
+/* ===============================
+   EXPERIENCE — FLIP + EXPAND
 =============================== */
 
 const expCards = document.querySelectorAll(".exp-card");
 
+function resetExperienceCards() {
+  expCards.forEach(c => {
+    c.classList.remove("is-flipped", "exp-card--expanded");
+  });
+}
+
 expCards.forEach(card => {
   card.addEventListener("click", () => {
-    // close others
-    expCards.forEach(c => {
-      if (c !== card) c.classList.remove("is-flipped");
-    });
-    // toggle current
-    card.classList.toggle("is-flipped");
+    const alreadyFlipped = card.classList.contains("is-flipped");
+
+    // close everything first
+    resetExperienceCards();
+
+    // if it was already open, just close all
+    if (alreadyFlipped) return;
+
+    // flip this one
+    card.classList.add("is-flipped");
+
+    // only these three get the big expansion across rows
+    if (
+      card.classList.contains("exp-card--io") ||
+      card.classList.contains("exp-card--research") ||
+      card.classList.contains("exp-card--assoc")
+    ) {
+      card.classList.add("exp-card--expanded");
+    }
   });
 });
+
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
