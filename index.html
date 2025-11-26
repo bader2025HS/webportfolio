@@ -2276,6 +2276,7 @@ let lockedCountry = null;   // last clicked country (stays colored)
     keyboard: false
   });
 
+  // initial view (what you had before)
   map.setView(center, zoom);
 
   const aliases = COUNTRY_NAMES[countryKey].map(normalize);
@@ -2286,8 +2287,13 @@ let lockedCountry = null;   // last clicked country (stays colored)
     style: baseStyle
   }).addTo(map);
 
-  // Make the whole country fit in the 360×380 box
-  map.fitBounds(layer.getBounds(), { padding: [15, 15] });
+  // ✅ keep this so hover/click highlighting works
+  countryLayers[countryKey] = layer;
+
+  // ✅ only auto-fit JAPAN so it doesn’t get cropped
+  if (countryKey === "japan") {
+    map.fitBounds(layer.getBounds(), { padding: [15, 15] });
+  }
 }
 
 
