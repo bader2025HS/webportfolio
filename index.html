@@ -456,21 +456,20 @@
   position: relative;
   z-index: 1;
   max-width: 1050px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: -20px auto 0;   
+  padding: 0;             
+  display: block;         
 }
+
 
 /* Big square container
    - width limited by 1050px, viewport width AND height
    - aspect-ratio keeps it perfectly square
 */
 .exp-mosaic {
-  width: min(1050px, 90vw, 80vh);
-  aspect-ratio: 1 / 1; /* perfect square */
+  width: 1050px;         
+  max-width: 100%;        
+  aspect-ratio: 1 / 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
