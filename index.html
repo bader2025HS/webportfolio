@@ -996,40 +996,6 @@
   }
 }
 
-    /* ===== EXPERIENCE – EXPANDING FLIPPED CARDS (overlay only) ===== */
-
-.exp-card--expanded {
-  z-index: 3;               /* float over neighbours */
-}
-
-/* OIF → stretches downward over Water/Energy */
-.exp-card--io.exp-card--expanded .exp-card-inner {
-  transform: rotateY(180deg) scaleY(1.9);
-  transform-origin: top center;
-}
-
-/* Water/Energy → stretches downward over Student-led */
-.exp-card--research.exp-card--expanded .exp-card-inner {
-  transform: rotateY(180deg) scaleY(1.9);
-  transform-origin: top center;
-}
-
-/* Student-led → stretches upward over Water/Energy */
-.exp-card--assoc.exp-card--expanded .exp-card-inner {
-  transform: rotateY(180deg) scaleY(1.9);
-  transform-origin: bottom center;
-}
-
-/* When expanded, let the content breathe outside the tile */
-.exp-card--expanded .exp-card-face {
-  overflow: visible;
-}
-
-.exp-card--expanded .exp-card-back-inner {
-  max-height: none;
-  overflow: visible;
-}
-
   /* ===========================
        SKILLS SECTION – AIRPORT TERMINAL
    ============================ */
@@ -2562,42 +2528,22 @@ document.getElementById("map-germany").addEventListener("click", () => {
     showSection("home");
 
 
-/* ===============================
-   EXPERIENCE — FLIP + EXPAND
+ /* ===============================
+   EXPERIENCE — FLIP CARDS
 =============================== */
 
 const expCards = document.querySelectorAll(".exp-card");
 
-function clearExperienceState() {
-  expCards.forEach(c => {
-    c.classList.remove("is-flipped", "exp-card--expanded");
-  });
-}
-
 expCards.forEach(card => {
   card.addEventListener("click", () => {
-    const alreadyFlipped = card.classList.contains("is-flipped");
-
-    // reset everything first
-    clearExperienceState();
-
-    // if it was already open, we just close all and stop
-    if (alreadyFlipped) return;
-
-    // otherwise flip this one
-    card.classList.add("is-flipped");
-
-    // only these three should *expand* over neighbours
-    if (
-      card.classList.contains("exp-card--io") ||
-      card.classList.contains("exp-card--research") ||
-      card.classList.contains("exp-card--assoc")
-    ) {
-      card.classList.add("exp-card--expanded");
-    }
+    // close others
+    expCards.forEach(c => {
+      if (c !== card) c.classList.remove("is-flipped");
+    });
+    // toggle current
+    card.classList.toggle("is-flipped");
   });
 });
-
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
