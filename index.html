@@ -72,6 +72,22 @@
       display: block;
     }
 
+    /* ===== GLOBAL TOOLTIP ===== */
+#ui-tooltip {
+  position: fixed;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 11px;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -120%);
+  transition: opacity 0.12s ease;
+  z-index: 99999;
+  white-space: nowrap;
+}
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
@@ -2451,6 +2467,62 @@ expCards.forEach(card => {
   });
 });
 
+    /* ===============================
+   TOOLTIP (EXP + EDUCATION MAPS)
+=============================== */
+
+const tooltip = document.getElementById("ui-tooltip");
+
+function showTooltip(text, x, y) {
+  tooltip.textContent = text;
+  tooltip.style.left = x + "px";
+  tooltip.style.top = y + "px";
+  tooltip.style.opacity = 1;
+}
+
+function hideTooltip() {
+  tooltip.style.opacity = 0;
+}
+
+/* ---- EXPERIENCE CARDS: "Click to flip" (only on FRONT) ---- */
+
+expCards.forEach(card => {
+  card.addEventListener("mousemove", e => {
+    // if card is flipped, no tooltip
+    if (card.classList.contains("is-flipped")) {
+      hideTooltip();
+      return;
+    }
+    showTooltip("Click to flip", e.clientX, e.clientY);
+  });
+
+  card.addEventListener("mouseleave", () => {
+    hideTooltip();
+  });
+
+  card.addEventListener("click", () => {
+    // hide immediately after click
+    hideTooltip();
+  });
+});
+
+/* ---- EDUCATION MAPS: "Show education pass" ---- */
+
+document.querySelectorAll(".country-map").forEach(mapEl => {
+  mapEl.addEventListener("mousemove", e => {
+    showTooltip("Show education pass", e.clientX, e.clientY);
+  });
+
+  mapEl.addEventListener("mouseleave", () => {
+    hideTooltip();
+  });
+
+  mapEl.addEventListener("click", () => {
+    hideTooltip(); // optional: hide when popup opens
+  });
+});
+
+
 
  /* ===============================
    EDUCATION POPUP – BOARDING PASS LOGIC
@@ -2651,5 +2723,8 @@ document.addEventListener("keydown", e => {
 
 
   </script>
+
+  <div id="ui-tooltip"></div>
+
 </body>
 </html>
