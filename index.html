@@ -2266,29 +2266,30 @@ let lockedCountry = null;   // last clicked country (stays colored)
     }
 
     function drawCountry(containerId, countryKey, center, zoom) {
-      const map = L.map(containerId, {
-        zoomControl: false,
-        attributionControl: false,
-        dragging: false,
-        scrollWheelZoom: false,
-        doubleClickZoom: false,
-        touchZoom: false,
-        keyboard: false
-      });
+  const map = L.map(containerId, {
+    zoomControl: false,
+    attributionControl: false,
+    dragging: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    touchZoom: false,
+    keyboard: false
+  });
 
-      map.setView(center, zoom);
+  map.setView(center, zoom);
 
-      const aliases = COUNTRY_NAMES[countryKey].map(normalize);
+  const aliases = COUNTRY_NAMES[countryKey].map(normalize);
 
-      const layer = L.geoJSON(worldData, {
-        filter: f =>
-          aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
-        style: baseStyle
-      }).addTo(map);
+  const layer = L.geoJSON(worldData, {
+    filter: f =>
+      aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
+    style: baseStyle
+  }).addTo(map);
 
-      // store for later recoloring
-      countryLayers[countryKey] = layer;
-    }
+  // Make the whole country fit in the 360×380 box
+  map.fitBounds(layer.getBounds(), { padding: [15, 15] });
+}
+
 
     async function initMaps() {
       if (mapsLoaded) return;
