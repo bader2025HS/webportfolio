@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bader Suliman – Portfolio</title>
+  <title>Portfolio</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet"
@@ -1098,30 +1098,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 6px 12px;  /* row-gap / column-gap */
-}
-
-    /* Sweep refresh line across the terminal */
-.skills-terminal::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255,255,255,0.10) 50%,
-    transparent 100%
-  );
-
-  transform: translateY(-120%);
-  animation: terminalSweep 6.5s linear infinite;
-  mix-blend-mode: overlay;
-}
-
-@keyframes terminalSweep {
-  0%   { transform: translateY(-120%); }
-  100% { transform: translateY(140%); }
 }
 
     /* ===========================
