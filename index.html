@@ -2472,22 +2472,20 @@ expCards.forEach(card => {
 });
 
 /* ===============================
-   EXPERIENCE — TOOLTIP "Click to flip"
+   EXPERIENCE — Tooltip "Click to flip"
 =============================== */
-
-const expTooltip = document.getElementById("expTooltip");
-const expTiles = document.querySelectorAll("#experience .exp-card");
 
 expTiles.forEach(tile => {
   tile.addEventListener("mousemove", e => {
 
-    // If tile is flipped → NO tooltip
+    // Only show when NOT flipped
     if (tile.classList.contains("flipped")) {
       expTooltip.style.opacity = "0";
       return;
     }
 
-    // Show tooltip only on front
+    expTooltip.textContent = "Click to flip";   // FORCE EXP message
+
     expTooltip.style.opacity = "1";
     expTooltip.style.left = (e.clientX + 12) + "px";
     expTooltip.style.top = (e.clientY + 12) + "px";
