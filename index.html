@@ -430,7 +430,7 @@
 
 
 /* ===========================
-   EXPERIENCE – SQUARE FLIP GRID
+   EXPERIENCE – MOSAIC SQUARE
 =========================== */
 
 #experience {
@@ -439,7 +439,7 @@
   position: relative;
 }
 
-/* abstract grid background */
+/* subtle grid background */
 #experience::before {
   content: "";
   position: absolute;
@@ -455,7 +455,7 @@
 .experience-layout {
   position: relative;
   z-index: 1;
-  max-width: 960px;
+  max-width: 1050px;
   margin: 0 auto;
   padding: 0 20px;
 
@@ -464,19 +464,24 @@
   align-items: center;
 }
 
-/* Square container of tiles */
-.exp-grid {
+/* The big square container */
+.exp-mosaic {
   width: 100%;
-  max-width: 720px;
-  aspect-ratio: 1 / 1; /* perfect square */
+  max-width: 1050px;
+  aspect-ratio: 1 / 1;                /* perfect square */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "big big top"
+    "big big mid"
+    "bottomL bottomL bottomR";
   gap: 14px;
   perspective: 1200px;
 }
 
-/* each card */
+/* cards */
+
 .exp-card {
   position: relative;
   cursor: pointer;
@@ -495,7 +500,7 @@
   transform: rotateY(180deg);
 }
 
-/* card faces */
+/* faces */
 
 .exp-card-face {
   position: absolute;
@@ -532,11 +537,11 @@
   margin-top: 10px;
   font-size: 1.35rem;
   font-weight: 600;
-  max-width: 12ch;
+  max-width: 14ch;
   line-height: 1.15;
 }
 
-/* BACK – details & logos */
+/* BACK – details with logos */
 
 .exp-card-back {
   background: #ffffff;
@@ -562,7 +567,7 @@
   color: #009fa5;
 }
 
-/* org block inside back */
+/* one org block */
 
 .exp-org {
   display: grid;
@@ -613,24 +618,23 @@
   color: #9ca3af;
 }
 
-/* Responsive */
+/* assign cards to mosaic areas */
+
+.exp-card--io       { grid-area: big; }
+.exp-card--ngo      { grid-area: top; }
+.exp-card--research { grid-area: mid; }
+.exp-card--gov      { grid-area: bottomL; }
+.exp-card--assoc    { grid-area: bottomR; }
+
+/* Responsive – stack on mobile */
 
 @media (max-width: 800px) {
-  .exp-grid {
-    max-width: 540px;
-    gap: 10px;
-  }
-}
-
-@media (max-width: 640px) {
-  .experience-layout {
-    align-items: stretch;
-  }
-
-  .exp-grid {
+  .exp-mosaic {
     aspect-ratio: auto;
+    grid-template-areas: none;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+    gap: 12px;
   }
 
   .exp-card {
@@ -646,8 +650,6 @@
     height: 52px;
   }
 }
-
-
 
 /* ===========================
    CONTACT – ENVELOPE STYLE
@@ -1830,23 +1832,21 @@
         </div>
       </section>
 
-      <!-- EXPERIENCE – SQUARE FLIP GRID -->
+     <!-- EXPERIENCE – MOSAIC SQUARE -->
 <section id="experience">
   <div class="experience-layout">
 
-    <div class="exp-grid">
+    <div class="exp-mosaic">
 
-      <!-- 1. INTERNATIONAL ORGANISATION -->
-      <div class="exp-card">
+      <!-- BIG TILE – INTERNATIONAL ORG -->
+      <div class="exp-card exp-card--io">
         <div class="exp-card-inner">
 
-          <!-- FRONT -->
           <div class="exp-card-face exp-card-front">
             <div class="exp-front-main">International organisation</div>
             <div class="exp-front-sub">Multilateral &amp; Francophonie</div>
           </div>
 
-          <!-- BACK -->
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
               <div class="exp-back-label">International organisation</div>
@@ -1875,17 +1875,15 @@
         </div>
       </div>
 
-      <!-- 2. NGO / HUMANITARIAN -->
-      <div class="exp-card">
+      <!-- TOP RIGHT – NGO / HUMANITARIAN -->
+      <div class="exp-card exp-card--ngo">
         <div class="exp-card-inner">
 
-          <!-- FRONT -->
           <div class="exp-card-face exp-card-front">
             <div class="exp-front-main">NGO &amp; humanitarian</div>
             <div class="exp-front-sub">Data, protection &amp; field support</div>
           </div>
 
-          <!-- BACK -->
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
               <div class="exp-back-label">NGO &amp; humanitarian</div>
@@ -1933,17 +1931,15 @@
         </div>
       </div>
 
-      <!-- 3. RESEARCH / SCIENCE-POLICY -->
-      <div class="exp-card">
+      <!-- MIDDLE RIGHT – RESEARCH / SCIENCE POLICY -->
+      <div class="exp-card exp-card--research">
         <div class="exp-card-inner">
 
-          <!-- FRONT -->
           <div class="exp-card-face exp-card-front">
             <div class="exp-front-main">Research &amp; science-policy</div>
             <div class="exp-front-sub">Water, energy &amp; MENA</div>
           </div>
 
-          <!-- BACK -->
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
               <div class="exp-back-label">Research / science-policy</div>
@@ -1972,17 +1968,15 @@
         </div>
       </div>
 
-      <!-- 4. GOVERNMENT / CITY -->
-      <div class="exp-card">
+      <!-- BOTTOM LEFT – GOVERNMENT / CITY -->
+      <div class="exp-card exp-card--gov">
         <div class="exp-card-inner">
 
-          <!-- FRONT -->
           <div class="exp-card-face exp-card-front">
             <div class="exp-front-main">Government &amp; city</div>
             <div class="exp-front-sub">Municipal &amp; twinning</div>
           </div>
 
-          <!-- BACK -->
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
               <div class="exp-back-label">Government / city diplomacy</div>
@@ -2011,17 +2005,15 @@
         </div>
       </div>
 
-      <!-- 5. ASSOCIATION / LEADERSHIP -->
-      <div class="exp-card">
+      <!-- BOTTOM RIGHT – ASSOCIATION / LEADERSHIP -->
+      <div class="exp-card exp-card--assoc">
         <div class="exp-card-inner">
 
-          <!-- FRONT -->
           <div class="exp-card-face exp-card-front">
             <div class="exp-front-main">Association &amp; leadership</div>
             <div class="exp-front-sub">Student-led MENA projects</div>
           </div>
 
-          <!-- BACK -->
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
               <div class="exp-back-label">Association / student leadership</div>
@@ -2050,9 +2042,7 @@
         </div>
       </div>
 
-      <!-- (optional) you can add a 6th empty tile or future sector if you want a perfect 3×2 fill -->
-
-    </div> <!-- /exp-grid -->
+    </div><!-- /exp-mosaic -->
 
   </div>
 </section>
@@ -2444,7 +2434,7 @@ document.getElementById("map-germany").addEventListener("click", () => {
     showSection("home");
 
 
-   /* ===============================
+  /* ===============================
    EXPERIENCE — FLIP CARDS
 =============================== */
 
@@ -2452,14 +2442,15 @@ const expCards = document.querySelectorAll(".exp-card");
 
 expCards.forEach(card => {
   card.addEventListener("click", () => {
-    // close other cards
+    // close others
     expCards.forEach(c => {
       if (c !== card) c.classList.remove("is-flipped");
     });
-    // toggle this one
+    // toggle current
     card.classList.toggle("is-flipped");
   });
 });
+
 
 
  /* ===============================
