@@ -468,14 +468,12 @@
 */
 
     .exp-mosaic {
-  /* size of the square is the MIN of:
-     - 1050px
-     - viewport width minus a bit of margin
-     - viewport height minus space for navbar + padding (~220px)
-  */
-  width: min(1050px, 100vw - 40px, calc(100vh - 220px));
-  aspect-ratio: 1 / 1; /* keeps it perfectly square */
-
+ .exp-mosaic {
+  width: 1050px;                    /* ALWAYS 1050px width */
+  max-width: calc(100vw - 40px);    /* fallback on small screens */
+  height: calc(100vh - 220px);      /* PERFECT height you liked */
+  max-height: calc(100vh - 220px);  /* prevents vertical overflow */
+  aspect-ratio: auto;               /* we don't force square now */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
