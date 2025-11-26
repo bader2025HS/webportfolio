@@ -720,6 +720,33 @@
   height: 210%;
 }
 
+    /* ------- EXPANSION STATES (keep grid layout) ------- */
+
+/* OIF covers RSS (rows 1+2 of right column) */
+.exp-card--io.exp-expanded {
+  grid-area: unset;
+  grid-column: 3 / 4;
+  grid-row: 1 / span 2;
+  z-index: 2;
+}
+
+/* RSS covers Student-led (rows 2+3 of right column) */
+.exp-card--research.exp-expanded {
+  grid-area: unset;
+  grid-column: 3 / 4;
+  grid-row: 2 / span 2;
+  z-index: 2;
+}
+
+/* Student-led covers RSS (rows 2+3 of right column) */
+.exp-card--assoc.exp-expanded {
+  grid-area: unset;
+  grid-column: 3 / 4;
+  grid-row: 2 / span 2;
+  z-index: 2;
+}
+
+    
     /* -------- EXPERIENCE ACCENT COLORS -------- */
 
 /* one accent per category */
@@ -2575,14 +2602,21 @@ document.getElementById("map-germany").addEventListener("click", () => {
 
 
 /* ===============================
-   EXPERIENCE — FLIP + EXPAND
+   EXPERIENCE — FLIP CARDS + EXPANSION
 =============================== */
 
 const expCards = document.querySelectorAll(".exp-card");
 
-function resetExperienceCards() {
+const ioCard       = document.querySelector(".exp-card--io");
+const researchCard = document.querySelector(".exp-card--research");
+const assocCard    = document.querySelector(".exp-card--assoc");
+
+function resetExpLayout() {
+  // reset flip + expansion classes
   expCards.forEach(c => {
-    c.classList.remove("is-flipped", "exp-card--expanded");
+    c.classList.remove("is-flipped");
+    c.classList.remove("exp-expanded");
+    c.style.display = "block";
   });
 }
 
@@ -2590,22 +2624,28 @@ expCards.forEach(card => {
   card.addEventListener("click", () => {
     const alreadyFlipped = card.classList.contains("is-flipped");
 
-    // close everything first
-    resetExperienceCards();
+    // reset everything first
+    resetExpLayout();
 
-    // if it was already open, just close all
+    // if it was open, we just closed it
     if (alreadyFlipped) return;
 
-    // flip this one
+    // flip clicked card
     card.classList.add("is-flipped");
 
-    // only these three get the big expansion across rows
-    if (
-      card.classList.contains("exp-card--io") ||
-      card.classList.contains("exp-card--research") ||
-      card.classList.contains("exp-card--assoc")
-    ) {
-      card.classList.add("exp-card--expanded");
+    // handle who expands over whom
+    if (card === ioCard) {
+      // OIF covers RSS
+      ioCard.classList.add("exp-expanded");
+      researchCard.style.display = "none";
+    } else if (card === researchCard) {
+      // RSS covers Student-led
+      researchCard.classList.add("exp-expanded");
+      assocCard.style.display = "none";
+    } else if (card === assocCard) {
+      // Student-led covers RSS (but not OIF)
+      assocCard.classList.add("exp-expanded");
+      researchCard.style.display = "none";
     }
   });
 });
