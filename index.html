@@ -464,11 +464,13 @@
   align-items: center;
 }
 
-/* The big square container */
+/* Big square container
+   - width limited by 1050px, viewport width AND height
+   - aspect-ratio keeps it perfectly square
+*/
 .exp-mosaic {
-  width: 100%;
-  max-width: 1050px;
-  aspect-ratio: 1 / 1;                /* perfect square */
+  width: min(1050px, 90vw, 80vh);
+  aspect-ratio: 1 / 1; /* perfect square */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -505,7 +507,7 @@
 .exp-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 22px;
+  border-radius: 0;  /* ⬅ no rounded corners */
   overflow: hidden;
   backface-visibility: hidden;
   border: 1px solid rgba(148, 163, 184, 0.5);
@@ -557,7 +559,7 @@
   flex-direction: column;
   gap: 10px;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: auto;   /* if bullets are really long */
 }
 
 .exp-back-label {
@@ -566,8 +568,6 @@
   letter-spacing: 0.18em;
   color: #009fa5;
 }
-
-/* one org block */
 
 .exp-org {
   display: grid;
@@ -579,7 +579,7 @@
 .exp-org-logo {
   width: 60px;
   height: 60px;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
   padding: 6px;
   background: #f3f4f6;
@@ -618,10 +618,12 @@
   color: #9ca3af;
 }
 
-/* assign cards to mosaic areas */
+/* assign cards to mosaic areas
+   ⬅ NGO is now the BIG tile
+*/
 
-.exp-card--io       { grid-area: big; }
-.exp-card--ngo      { grid-area: top; }
+.exp-card--ngo      { grid-area: big; }
+.exp-card--io       { grid-area: top; }
 .exp-card--research { grid-area: mid; }
 .exp-card--gov      { grid-area: bottomL; }
 .exp-card--assoc    { grid-area: bottomR; }
@@ -630,6 +632,13 @@
 
 @media (max-width: 800px) {
   .exp-mosaic {
+    width: min(100vw - 40px, 80vh);
+  }
+}
+
+@media (max-width: 640px) {
+  .exp-mosaic {
+    width: 100%;
     aspect-ratio: auto;
     grid-template-areas: none;
     grid-template-columns: 1fr;
@@ -650,6 +659,7 @@
     height: 52px;
   }
 }
+
 
 /* ===========================
    CONTACT – ENVELOPE STYLE
