@@ -2265,7 +2265,7 @@ let lockedCountry = null;   // last clicked country (stays colored)
       }
     }
 
- function drawCountry(containerId, countryKey, center, zoom) {
+function drawCountry(containerId, countryKey, center, zoom) {
   const map = L.map(containerId, {
     zoomControl: false,
     attributionControl: false,
@@ -2276,6 +2276,8 @@ let lockedCountry = null;   // last clicked country (stays colored)
     keyboard: false
   });
 
+  map.setView(center, zoom);   // <-- no fitBounds, no extra tricks
+
   const aliases = COUNTRY_NAMES[countryKey].map(normalize);
 
   const layer = L.geoJSON(worldData, {
@@ -2284,21 +2286,9 @@ let lockedCountry = null;   // last clicked country (stays colored)
     style: baseStyle
   }).addTo(map);
 
-  // 1) Fit any country into the box first
-  const bounds = layer.getBounds();
-  map.fitBounds(bounds, { padding: [15, 15] });
-
-  // 2) Japan-specific size correction: zoom in further
-  if (countryKey === "japan") {
-    const centerJP = bounds.getCenter();
-    const boostedZoom = map.getZoom() + 0.8;  // Adjust if needed: 0.7–0.9
-    map.setView(centerJP, boostedZoom);
-  }
-
-  // Keep hover/click behaviour working
+  // keep color-change logic working
   countryLayers[countryKey] = layer;
 }
-
 
 
     async function initMaps() {
@@ -2310,7 +2300,7 @@ let lockedCountry = null;   // last clicked country (stays colored)
 
       // Same visual scale for all three; Japan balanced
       drawCountry("map-france", "france", [46.6, 2.2], 4.5);
-      drawCountry("map-japan", "japan", [38.9, 138.2], 5.2);
+      drawCountry("map-japan", "japan", [38.5, 138.5], 4.3);
       drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
 
       // Click maps → lock color + open education popup
