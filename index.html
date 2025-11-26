@@ -2579,6 +2579,7 @@ const eduTicketData = {
 };
 
 function openEduPopup(countryKey) {
+  expTooltip.style.opacity = "0";
   const data = eduTicketData[countryKey];
   if (!data) return;
 
@@ -2589,7 +2590,7 @@ function openEduPopup(countryKey) {
     "edu-ticket-left--germany"
   );
   ticketLeft.classList.add(`edu-ticket-left--${countryKey}`);
-
+  
   // Fill left side
   eduFromYearEl.textContent  = data.fromYear;
   eduFromMonthEl.textContent = data.fromMonth;
@@ -2629,6 +2630,31 @@ document.addEventListener("keydown", e => {
   }
 });
 
+/* ===============================
+   EDUCATION — Tooltip "Show Education pass"
+=============================== */
+
+const eduMaps = document.querySelectorAll("#education .country-map");
+
+eduMaps.forEach(map => {
+  map.addEventListener("mousemove", e => {
+    
+    // If popup is open → NO tooltip
+    if (eduOverlay.style.display === "flex") {
+      expTooltip.style.opacity = "0";
+      return;
+    }
+
+    expTooltip.textContent = "Show Education pass";  // change message
+    expTooltip.style.opacity = "1";
+    expTooltip.style.left = (e.clientX + 12) + "px";
+    expTooltip.style.top = (e.clientY + 12) + "px";
+  });
+
+  map.addEventListener("mouseleave", () => {
+    expTooltip.style.opacity = "0";
+  });
+});
 
     /* ===============================
        LIGHTBOX FOR GALLERY
