@@ -481,6 +481,34 @@
   clip-path: inset(0 round 20px);
 }
 
+    /* ============================================
+   EXPERIENCE LOGOS — REMOVE SQUARE HOVER BOX
+   Make all behave like SPMA & AQLITY
+============================================= */
+
+/* Base logo settings */
+.experience-logo img {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+  /* REMOVE all unwanted effects */
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
+  transition: transform 0.25s ease !important;
+}
+
+/* Hover effect — ONLY lift + scale */
+.experience-logo img:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: none !important;
+  background: none !important;
+}
+
 /* ===========================
    BD-STYLE EXPERIENCE PANEL
 =========================== */
