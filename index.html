@@ -428,31 +428,6 @@
   }
 }
 
-/* Tooltip for education maps */
-#education .map-column {
-  position: relative;
-}
-
-#education .map-column::after {
-  content: "Show education pass";
-  position: absolute;
-  bottom: -22px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.78rem;
-  color: #6b7280;
-  background: #ffffff;
-  padding: 3px 8px;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease;
-}
-
-#education .map-column:hover::after {
-  opacity: 1;
-}
 
 /* ===========================
    EXPERIENCE – MOSAIC SQUARE
@@ -479,8 +454,8 @@
 }
 
   .exp-card-back {
-  background: #ffffff;   /* always grey */
-  color: #111;
+  background: #ffffff;    /* always grey */
+  color: #111 !important;
 }
 
 
@@ -683,32 +658,6 @@
   }
 }
 
-    /* Tooltip for experience FRONT tiles */
-#experience .exp-card-front {
-  position: relative;
-}
-
-#experience .exp-card-front::after {
-  content: "Click to flip";
-  position: absolute;
-  bottom: 14px;
-  right: 16px;
-  font-size: 0.78rem;
-  color: #9ca3af;
-  background: rgba(255,255,255,0.95);
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease;
-}
-
-#experience .exp-card-front:hover::after {
-  opacity: 1;
-}
-
-    
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
