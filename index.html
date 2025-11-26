@@ -483,7 +483,6 @@
 
     /* ============================================
    EXPERIENCE LOGOS — REMOVE SQUARE HOVER BOX
-   Make all behave like SPMA & AQLITY
 ============================================= */
 
 /* Base logo settings */
@@ -579,6 +578,19 @@
 
 #spma-panel .exp-panel-left img {
   max-width: 260px;
+}
+
+    /* Panel closed state */
+.exp-panel {
+  opacity: 0;
+  transform: translateX(40px) scale(0.96);
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+/* When visible */
+.exp-panel.exp-open {
+  opacity: 1;
+  transform: translateX(0) scale(1);
 }
 
 /* ===========================
@@ -2396,7 +2408,12 @@ expLogos.forEach(img => {
 
     const panel = document.getElementById(panelId);
     if (panel) {
-      panel.style.display = "grid";
+panel.style.display = "grid";
+requestAnimationFrame(() => {
+  panel.classList.add("exp-open");
+});
+      panel.classList.remove("exp-open");
+
     }
   });
 });
