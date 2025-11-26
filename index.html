@@ -428,59 +428,6 @@
   }
 }
 
-    /* ===========================
-   EXPERIENCE POPUP CARD BOX
-=========================== */
-
-.exp-panel {
-  background: rgba(255,255,255,0.92);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
-  position: relative;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0,0,0,0.08);
-
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* Optional glowing frame */
-.exp-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg,
-    rgba(0,159,165,0.45),
-    rgba(251,191,36,0.35),
-    rgba(0,159,165,0.45)
-  );
-  -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-  mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* Optional subtle animation for luxury feel */
-.exp-panel {
-  opacity: 0;
-  transform: scale(0.96);
-  transition: opacity 0.3s ease-out, transform 0.32s ease-out;
-}
-
-.exp-panel.exp-open {
-  opacity: 1;
-  transform: scale(1);
-}
-
 
 /* ===========================
    EXPERIENCE SECTION – LOGO GRID
@@ -536,6 +483,7 @@
 
     /* ============================================
    EXPERIENCE LOGOS — REMOVE SQUARE HOVER BOX
+   Make all behave like SPMA & AQLITY
 ============================================= */
 
 /* Base logo settings */
@@ -631,19 +579,6 @@
 
 #spma-panel .exp-panel-left img {
   max-width: 260px;
-}
-
-    /* Panel closed state */
-.exp-panel {
-  opacity: 0;
-  transform: translateX(40px) scale(0.96);
-  transition: opacity 0.35s ease, transform 0.4s ease;
-}
-
-/* When visible */
-.exp-panel.exp-open {
-  opacity: 1;
-  transform: translateX(0) scale(1);
 }
 
 /* ===========================
@@ -2461,9 +2396,7 @@ expLogos.forEach(img => {
 
     const panel = document.getElementById(panelId);
     if (panel) {
-panel.style.display = "grid";
-requestAnimationFrame(() => panel.classList.add("exp-open"));
-      panel.classList.remove("exp-open");
+      panel.style.display = "grid";
     }
   });
 });
