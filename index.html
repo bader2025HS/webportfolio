@@ -456,21 +456,21 @@
   position: relative;
   z-index: 1;
   max-width: 1050px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: -20px auto 0;   /* ⬅ top -20px + centered page layout */
+  padding: 0;             /* ⬅ remove side padding to align perfectly */
+  display: block;         /* ⬅ no flex, no centering */
 }
+
 
 /* Big square container
    - width limited by 1050px, viewport width AND height
    - aspect-ratio keeps it perfectly square
 */
 .exp-mosaic {
-  width: min(1050px, 90vw, 80vh);
-  aspect-ratio: 1 / 1; /* perfect square */
+  .exp-mosaic {
+  width: 1050px;          /* ⬅ exact width, no centering */
+  max-width: 100%;        /* ⬅ responsive fallback */
+  aspect-ratio: 1 / 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
