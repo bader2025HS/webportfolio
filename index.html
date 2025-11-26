@@ -674,6 +674,82 @@
   }
 }
 
+    /* -------- EXPERIENCE ACCENT COLORS -------- */
+
+/* one accent per category */
+.exp-card--ngo {
+  --exp-accent: #009fa5;                  /* teal */
+  --exp-accent-soft: rgba(0,159,165,0.06);
+}
+
+.exp-card--io {
+  --exp-accent: #2563eb;                  /* blue */
+  --exp-accent-soft: rgba(37,99,235,0.06);
+}
+
+.exp-card--research {
+  --exp-accent: #0f766e;                  /* deep green-teal */
+  --exp-accent-soft: rgba(15,118,110,0.06);
+}
+
+.exp-card--gov {
+  --exp-accent: #f59e0b;                  /* amber */
+  --exp-accent-soft: rgba(245,158,11,0.06);
+}
+
+.exp-card--assoc {
+  --exp-accent: #ec4899;                  /* pink */
+  --exp-accent-soft: rgba(236,72,153,0.06);
+}
+
+/* default if ever needed */
+.exp-card {
+  --exp-accent: #009fa5;
+  --exp-accent-soft: rgba(0,159,165,0.06);
+}
+
+/* colored vertical stripe on the left of each card */
+.exp-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--exp-accent);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* color the small top line text */
+.exp-card .exp-front-main {
+  color: #6b7280; /* fallback */
+}
+
+.exp-card--ngo .exp-front-main,
+.exp-card--io .exp-front-main,
+.exp-card--research .exp-front-main,
+.exp-card--gov .exp-front-main,
+.exp-card--assoc .exp-front-main {
+  color: var(--exp-accent);
+}
+
+/* make hover a bit more “alive” but still clean */
+.exp-card:hover .exp-card-front {
+  background: linear-gradient(135deg, var(--exp-accent-soft), #ffffff);
+  border-color: var(--exp-accent);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.14);
+}
+
+/* on the back: just tint the meta line slightly */
+.exp-card--ngo .exp-org-meta,
+.exp-card--io .exp-org-meta,
+.exp-card--research .exp-org-meta,
+.exp-card--gov .exp-org-meta,
+.exp-card--assoc .exp-org-meta {
+  color: var(--exp-accent);
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
