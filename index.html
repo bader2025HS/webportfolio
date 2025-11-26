@@ -1100,6 +1100,36 @@
   gap: 6px 12px;  /* row-gap / column-gap */
 }
 
+/* Active flight / skill highlight */
+#skills .terminal-row-active {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.65);
+  background: radial-gradient(circle at 0% 50%,
+              rgba(34, 197, 94, 0.22) 0,
+              rgba(15,23,42,1) 65%);
+}
+
+/* Tiny blinking dot on the right for the active one */
+#skills .terminal-row-active::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+  animation: activeDotBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes activeDotBlink {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+
+    
     /* ===========================
            GALLERY (HOME)
     ============================ */
@@ -2606,6 +2636,31 @@ document.addEventListener("keydown", e => {
       if (e.key === "ArrowLeft") showPrev();
     });
 
+/* ===============================
+   SKILLS TERMINAL – ROTATING ACTIVE ROW
+=============================== */
+
+const skillRows = Array.from(document.querySelectorAll('#skills .terminal-row'));
+let activeSkillIndex = -1;
+
+function rotateActiveSkill() {
+  if (!skillRows.length) return;
+
+  // remove previous active
+  if (activeSkillIndex >= 0) {
+    skillRows[activeSkillIndex].classList.remove('terminal-row-active');
+  }
+
+  // pick next row
+  activeSkillIndex = (activeSkillIndex + 1) % skillRows.length;
+  skillRows[activeSkillIndex].classList.add('terminal-row-active');
+}
+
+// start after a short delay so the entrance animation finishes
+setTimeout(() => {
+  rotateActiveSkill();
+  setInterval(rotateActiveSkill, 3500); // every 3.5s
+}, 1200);
 
   </script>
 </body>
