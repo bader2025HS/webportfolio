@@ -1100,6 +1100,50 @@
   gap: 6px 12px;  /* row-gap / column-gap */
 }
 
+    /* Rows slide in on load like flights appearing */
+#skills .terminal-row {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: rowEnter 0.45s ease-out forwards;
+}
+
+@keyframes rowEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger the delays – languages */
+.terminal-languages-grid .terminal-row:nth-child(1) { animation-delay: 0.05s; }
+.terminal-languages-grid .terminal-row:nth-child(2) { animation-delay: 0.10s; }
+.terminal-languages-grid .terminal-row:nth-child(3) { animation-delay: 0.15s; }
+.terminal-languages-grid .terminal-row:nth-child(4) { animation-delay: 0.20s; }
+.terminal-languages-grid .terminal-row:nth-child(5) { animation-delay: 0.25s; }
+.terminal-languages-grid .terminal-row:nth-child(6) { animation-delay: 0.30s; }
+
+/* Tools column */
+.terminal-column.tools .terminal-row:nth-child(1) { animation-delay: 0.10s; }
+.terminal-column.tools .terminal-row:nth-child(2) { animation-delay: 0.15s; }
+.terminal-column.tools .terminal-row:nth-child(3) { animation-delay: 0.20s; }
+.terminal-column.tools .terminal-row:nth-child(4) { animation-delay: 0.25s; }
+.terminal-column.tools .terminal-row:nth-child(5) { animation-delay: 0.30s; }
+.terminal-column.tools .terminal-row:nth-child(6) { animation-delay: 0.35s; }
+.terminal-column.tools .terminal-row:nth-child(7) { animation-delay: 0.40s; }
+.terminal-column.tools .terminal-row:nth-child(8) { animation-delay: 0.45s; }
+.terminal-column.tools .terminal-row:nth-child(9) { animation-delay: 0.50s; }
+.terminal-column.tools .terminal-row:nth-child(10){ animation-delay: 0.55s; }
+
+/* Soft skills column */
+.terminal-column.softskills .terminal-row:nth-child(1) { animation-delay: 0.20s; }
+.terminal-column.softskills .terminal-row:nth-child(2) { animation-delay: 0.25s; }
+.terminal-column.softskills .terminal-row:nth-child(3) { animation-delay: 0.30s; }
+.terminal-column.softskills .terminal-row:nth-child(4) { animation-delay: 0.35s; }
+.terminal-column.softskills .terminal-row:nth-child(5) { animation-delay: 0.40s; }
+.terminal-column.softskills .terminal-row:nth-child(6) { animation-delay: 0.45s; }
+.terminal-column.softskills .terminal-row:nth-child(7) { animation-delay: 0.50s; }
+.terminal-column.softskills .terminal-row:nth-child(8) { animation-delay: 0.55s; }
+
     /* ===========================
            GALLERY (HOME)
     ============================ */
