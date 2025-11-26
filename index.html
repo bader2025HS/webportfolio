@@ -1065,6 +1065,14 @@
   }
 }
 
+    /* Make Tools + Soft Skills use 2 columns, same formatting */
+.terminal-column.tools .terminal-rows,
+.terminal-column.softskills .terminal-rows {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 12px;  /* row-gap / column-gap */
+}
+
     /* ===========================
            GALLERY (HOME)
     ============================ */
@@ -1507,9 +1515,9 @@
       <div class="terminal-grid">
 
         <!-- COLUMN 1 – TOOLS -->
-        <div class="terminal-column">
-          <div class="terminal-column-title">Tools</div>
-          <div class="terminal-rows">
+        <div class="terminal-column tools">
+  <div class="terminal-column-title">Tools</div>
+  <div class="terminal-rows">
 
             <div class="terminal-row">
               <div class="terminal-cell-main">
@@ -1615,9 +1623,10 @@
         </div>
 
         <!-- COLUMN 2 – SOFT SKILLS -->
-        <div class="terminal-column">
-          <div class="terminal-column-title">Soft skills</div>
-          <div class="terminal-rows">
+       <div class="terminal-column softskills">
+  <div class="terminal-column-title">Soft skills</div>
+  <div class="terminal-rows">
+
 
             <div class="terminal-row">
               <div class="terminal-cell-main">
