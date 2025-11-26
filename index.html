@@ -878,8 +878,41 @@
 
 .terminal-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1.1fr 1.1fr;
+  grid-template-columns: 1.1fr 1.1fr;   /* was 3 columns before */
   gap: 18px;
+}
+
+    /* Languages at top: 2 rows × 3 columns */
+
+.terminal-languages {
+  margin-bottom: 14px;
+}
+
+.terminal-languages-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #fbbf24;
+  margin-bottom: 6px;
+}
+
+/* grid of 6 terminal rows */
+.terminal-languages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 10px;
+}
+
+/* responsive: stack better on smaller screens */
+@media (max-width: 900px) {
+  .terminal-languages-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .terminal-languages-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Column headers */
@@ -1383,89 +1416,95 @@
 
       <div class="terminal-divider"></div>
 
-      <div class="terminal-grid">
+      <!-- TOP: LANGUAGES 2×3 GRID -->
+      <div class="terminal-languages">
+        <div class="terminal-languages-title">Languages</div>
 
-        <!-- COLUMN 1 – LANGUAGES -->
-        <div class="terminal-column">
-          <div class="terminal-column-title">Languages</div>
-          <div class="terminal-rows">
-
-            <div class="terminal-row">
-              <div class="terminal-cell-main">
-                <span class="terminal-flag">
-                  <img src="https://flagcdn.com/w40/sa.png" alt="Arabic flag">
-                </span>
-                <span>Arabic</span>
-              </div>
-              <div class="terminal-cell-meta">
-                Native
-              </div>
+        <div class="terminal-languages-grid">
+          <!-- Arabic -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/sa.png" alt="Arabic flag">
+              </span>
+              <span>Arabic</span>
             </div>
-
-            <div class="terminal-row">
-              <div class="terminal-cell-main">
-                <span class="terminal-flag">
-                  <img src="https://flagcdn.com/w40/fr.png" alt="French flag">
-                </span>
-                <span>French</span>
-              </div>
-              <div class="terminal-cell-meta">
-                Native
-              </div>
+            <div class="terminal-cell-meta">
+              Native
             </div>
+          </div>
 
-            <div class="terminal-row">
-              <div class="terminal-cell-main">
-                <span class="terminal-flag">
-                  <img src="https://flagcdn.com/w40/gb.png" alt="UK flag">
-                </span>
-                <span>English</span>
-              </div>
-              <div class="terminal-cell-meta">
-                C2
-              </div>
+          <!-- French -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/fr.png" alt="French flag">
+              </span>
+              <span>French</span>
             </div>
-
-            <div class="terminal-row">
-              <div class="terminal-cell-main">
-                <span class="terminal-flag">
-                  <img src="https://flagcdn.com/w40/de.png" alt="German flag">
-                </span>
-                <span>German</span>
-              </div>
-              <div class="terminal-cell-meta">
-                C1
-              </div>
+            <div class="terminal-cell-meta">
+              Native
             </div>
+          </div>
 
-            <div class="terminal-row">
-              <div class="terminal-cell-main">
-                <span class="terminal-flag">
-                  <img src="https://flagcdn.com/w40/ir.png" alt="Iran flag">
-                </span>
-                <span>Persian</span>
-              </div>
-              <div class="terminal-cell-meta">
-                A2
-              </div>
+          <!-- English -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/gb.png" alt="UK flag">
+              </span>
+              <span>English</span>
             </div>
-
-            <div class="terminal-row">
-              <div class="terminal-cell-main">
-                <span class="terminal-flag">
-                  <img src="https://flagcdn.com/w40/jp.png" alt="Japan flag">
-                </span>
-                <span>Japanese</span>
-              </div>
-              <div class="terminal-cell-meta">
-                A2
-              </div>
+            <div class="terminal-cell-meta">
+              C2
             </div>
+          </div>
 
+          <!-- German -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/de.png" alt="German flag">
+              </span>
+              <span>German</span>
+            </div>
+            <div class="terminal-cell-meta">
+              C1
+            </div>
+          </div>
+
+          <!-- Persian -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/ir.png" alt="Iran flag">
+              </span>
+              <span>Persian</span>
+            </div>
+            <div class="terminal-cell-meta">
+              A2
+            </div>
+          </div>
+
+          <!-- Japanese -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/jp.png" alt="Japan flag">
+              </span>
+              <span>Japanese</span>
+            </div>
+            <div class="terminal-cell-meta">
+              A2
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- COLUMN 2 – TOOLS -->
+      <!-- BOTTOM: 2-COLUMN GRID (TOOLS + SOFT SKILLS) -->
+      <div class="terminal-grid">
+
+        <!-- COLUMN 1 – TOOLS -->
         <div class="terminal-column">
           <div class="terminal-column-title">Tools</div>
           <div class="terminal-rows">
@@ -1476,7 +1515,7 @@
                 <span>Word</span>
               </div>
               <div class="terminal-cell-meta">
-                Reporting & drafting
+                Reporting &amp; drafting
               </div>
             </div>
 
@@ -1486,7 +1525,7 @@
                 <span>Google Suite</span>
               </div>
               <div class="terminal-cell-meta">
-                Collab & forms
+                Collab &amp; forms
               </div>
             </div>
 
@@ -1496,7 +1535,7 @@
                 <span>PowerPoint</span>
               </div>
               <div class="terminal-cell-meta">
-                Decks & briefs
+                Decks &amp; briefs
               </div>
             </div>
 
@@ -1573,7 +1612,7 @@
           </div>
         </div>
 
-        <!-- COLUMN 3 – SOFT SKILLS -->
+        <!-- COLUMN 2 – SOFT SKILLS -->
         <div class="terminal-column">
           <div class="terminal-column-title">Soft skills</div>
           <div class="terminal-rows">
@@ -1583,7 +1622,7 @@
                 <span class="terminal-soft-label">Communication</span>
               </div>
               <div class="terminal-cell-meta">
-                Briefings & panels
+                Briefings &amp; panels
               </div>
             </div>
 
@@ -1592,7 +1631,7 @@
                 <span class="terminal-soft-label">Analytical synthesis</span>
               </div>
               <div class="terminal-cell-meta">
-                Reports & notes
+                Reports &amp; notes
               </div>
             </div>
 
@@ -1601,7 +1640,7 @@
                 <span class="terminal-soft-label">Press monitoring</span>
               </div>
               <div class="terminal-cell-meta">
-                Watch & alerts
+                Watch &amp; alerts
               </div>
             </div>
 
@@ -1653,11 +1692,12 @@
           </div>
         </div>
 
-      </div>
+      </div> <!-- /terminal-grid -->
 
     </div>
   </div>
 </section>
+
 
       <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
       <section id="education">
