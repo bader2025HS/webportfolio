@@ -658,6 +658,25 @@
   }
 }
 
+    /* Tooltip (hidden by default) */
+#expTooltip {
+  position: fixed;
+  padding: 6px 10px;
+  background: #111;
+  color: #fff;
+  font-size: 0.78rem;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 999999;
+}
+
+/* Make sure only EXP tiles trigger it */
+#experience .exp-card {
+  position: relative;
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2041,6 +2060,7 @@
   </div>
 </section>
 
+<div id="expTooltip">Click to flip</div>
 
 
 
@@ -2451,6 +2471,24 @@ expCards.forEach(card => {
   });
 });
 
+/* ===============================
+   EXPERIENCE — TOOLTIP "Click to flip"
+=============================== */
+
+const expTooltip = document.getElementById("expTooltip");
+const expTiles = document.querySelectorAll("#experience .exp-card");
+
+expTiles.forEach(tile => {
+  tile.addEventListener("mousemove", e => {
+    expTooltip.style.opacity = "1";
+    expTooltip.style.left = (e.clientX + 12) + "px";
+    expTooltip.style.top = (e.clientY + 12) + "px";
+  });
+
+  tile.addEventListener("mouseleave", () => {
+    expTooltip.style.opacity = "0";
+  });
+});
 
  /* ===============================
    EDUCATION POPUP – BOARDING PASS LOGIC
