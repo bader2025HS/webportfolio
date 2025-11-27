@@ -867,188 +867,161 @@
   color: var(--exp-accent);
 }
 
-
- /* ===========================
-   WORK – LUGGAGE TAG WALL
+/* ===========================
+   WORK — REAL LUGGAGE TAGS
 =========================== */
 
 #work {
-  margin-top: -10px;        /* same feeling as experience */
-  padding: 10px 0 40px;
-  position: relative;
+  margin-top: -10px;
+  padding: 20px 0 60px;
 }
 
 .work-layout {
-  position: relative;
-  z-index: 1;
-  max-width: 1050px;        /* align with skills / experience */
-  margin: -10px auto 0;
-  padding: 0;
+  max-width: 1050px;
+  margin: 0 auto;
 }
 
-/* Grid of tags */
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
 }
 
-/* Single tag = luggage tag card */
+/* REAL TAG SHAPE */
 .work-tag {
   position: relative;
-  background: #fdf7f0;              /* cream paper */
-  border-radius: 22px;
-  padding: 26px 18px 20px;
-  border: 1px solid #e2d5c4;
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+  width: 100%;
+  background: #fdf8ee;
+  border: 2px dashed #d8d3c8;
+  border-radius: 28px;
+  padding: 26px 18px 0;
+  padding-top: 70px; /* leave space for hole */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 360px;
+  clip-path: polygon(
+    50% 0%,  /* top point arch */
+    100% 18%, 100% 100%,
+    0 100%, 0 18%
+  );
+  box-shadow: 0 12px 34px rgba(0,0,0,0.15);
   overflow: hidden;
 }
 
-/* Top “ring” like the metal loop */
+/* HOLE RING (outer black circle) */
 .work-tag::before {
   content: "";
   position: absolute;
-  top: 8px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: #111827;
-  box-shadow: 0 0 0 4px #fdf7f0;
+  background: #111;
+  box-shadow: 0 0 0 5px #fdf8ee;
+  z-index: 3;
 }
 
+/* inner hole (light circle) */
 .work-tag::after {
   content: "";
   position: absolute;
-  top: 18px;
+  top: 28px;
   left: 50%;
   transform: translateX(-50%);
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: #fdf7f0;
+  background: #fdf8ee;
+  z-index: 4;
 }
 
-/* Inner content sits a bit lower (because of the ring) */
+/* Content area */
 .work-tag-inner {
-  position: relative;
-  z-index: 1;
-  margin-top: 22px;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  padding: 0 6px;
 }
 
-/* Small airline label */
+/* Top small text */
 .work-tag-airport {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
   color: #6b7280;
 }
 
-/* Project title */
+/* Title */
 .work-tag-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  line-height: 1.25;
-  text-transform: none;
-  color: #111827;
+  line-height: 1.22;
+  color: #111;
 }
 
-/* Little horizontal rule like stitching */
+/* Stitched divider */
 .work-tag-divider {
   height: 1px;
   background: repeating-linear-gradient(
     to right,
-    rgba(148, 163, 184, 0.7),
-    rgba(148, 163, 184, 0.7) 4px,
-    transparent 4px,
-    transparent 8px
+    #b9b2a6 0 4px,
+    transparent 4px 8px
   );
-  margin: 4px 0;
 }
 
-/* Two tags row (category chips) */
+/* Chips */
 .work-tag-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  font-size: 0.72rem;
 }
 
 .work-chip {
-  padding: 4px 9px 3px;
+  font-size: 0.7rem;
+  padding: 4px 10px 3px;
   border-radius: 999px;
-  border: 1px solid #d1d5db;
+  background: #fff;
+  border: 1px solid #d0d7de;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  background: #ffffff;
-  color: #4b5563;
+  color: #555;
 }
 
-/* Bottom color band with big 3-letter code */
+/* BOTTOM COLORED BAND */
 .work-tag-footer {
-  margin-top: 10px;
-  padding: 10px 12px 8px;
-  border-radius: 14px;
-  color: #f9fafb;
+  margin-top: auto;
+  padding: 16px 14px 12px;
+  color: white;
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-}
-
-/* Big airport code */
-.work-tag-code {
-  font-size: 2.1rem;
+  align-items: baseline;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-/* Small city label */
+/* Big 3-letter code */
+.work-tag-code {
+  font-size: 2rem;
+  letter-spacing: 0.14em;
+}
+
+/* City */
 .work-tag-city {
   font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  opacity: 0.9;
 }
 
-/* Color themes per project */
-.work-tag--interactive .work-tag-footer {
-  background: #0ea5e9;
-}
-.work-tag--quant .work-tag-footer {
-  background: #f97316;
-}
-.work-tag--field .work-tag-footer {
-  background: #22c55e;
-}
-.work-tag--visuals .work-tag-footer {
-  background: #ec4899;
-}
-.work-tag--brief .work-tag-footer {
-  background: #6366f1;
-}
-.work-tag--extra .work-tag-footer {
-  background: #0f766e;
-}
+/* COLORS PER CATEGORY */
+.work-tag--interactive .work-tag-footer { background: #0ea5e9; }
+.work-tag--quant       .work-tag-footer { background: #f97316; }
+.work-tag--field       .work-tag-footer { background: #22c55e; }
+.work-tag--visuals     .work-tag-footer { background: #ec4899; }
+.work-tag--brief       .work-tag-footer { background: #6366f1; }
+.work-tag--extra       .work-tag-footer { background: #0f766e; }
 
-/* Hover: lift like a physical tag */
-.work-tag:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.25);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-/* Mobile tweak */
-@media (max-width: 640px) {
-  .work-layout {
-    margin: 0 auto 0;
-  }
-}
 
 
 /* ===========================
