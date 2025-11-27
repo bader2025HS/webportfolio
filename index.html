@@ -1048,11 +1048,11 @@
   font-size: 0.75rem;
 }
 
-/* RIGHT STRIPS – brighter pastel colors */
-.work-strip--hsq { background: #e8f3ff; } /* bright baby blue */
-.work-strip--oda { background: #fff3e0; } /* bright peach */
-.work-strip--cox { background: #e9fff1; } /* bright mint */
-.work-strip--vsl { background: #ffe9f1; } /* bright rose pink */
+/* very light pastel colors */
+.work-strip--hsq { background: #dbeafe; } /* light blue  */
+.work-strip--oda { background: #ffedd5; } /* light orange */
+.work-strip--cox { background: #dcfce7; } /* light green  */
+.work-strip--vsl { background: #ffe4e6; } /* light pink   */
 
 
 /* inactive strips a bit dimmed */
@@ -2537,7 +2537,7 @@
     <div class="work-shell">
 
       <!-- LEFT PANEL -->
-      <div class="work-main">
+<div class="work-main work-board-left">
 
         <!-- HSQ detail -->
         <article class="work-detail is-active" data-project="hsq">
@@ -2677,28 +2677,38 @@
 
       </div>
 
-      <!-- RIGHT STRIPS -->
-      <div class="work-strips">
-        <button class="work-strip work-strip--hsq is-active" data-project="hsq">
-          <span class="work-strip-plus">+</span>
-          <span class="work-strip-label">Human security Twine</span>
-        </button>
+   <div class="work-strips">
 
-        <button class="work-strip work-strip--oda" data-project="oda">
-          <span class="work-strip-plus">+</span>
-          <span class="work-strip-label">French ODA &amp; renewables</span>
-        </button>
+  <button class="work-strip work-strip--hsq is-active"
+          data-project="hsq"
+          data-panel-color="#1e3a8a">
+    <span class="work-strip-label">Human security Twine</span>
+    <span class="work-strip-caption"></span>
+  </button>
 
-        <button class="work-strip work-strip--cox" data-project="cox">
-          <span class="work-strip-plus">+</span>
-          <span class="work-strip-label">Cox’s Bazar brief</span>
-        </button>
+  <button class="work-strip work-strip--oda"
+          data-project="oda"
+          data-panel-color="#c2410c">
+    <span class="work-strip-label">French ODA &amp; renewables</span>
+    <span class="work-strip-caption"></span>
+  </button>
 
-        <button class="work-strip work-strip--vsl" data-project="vsl">
-          <span class="work-strip-plus">+</span>
-          <span class="work-strip-label">Visuals &amp; infographics</span>
-        </button>
-      </div>
+  <button class="work-strip work-strip--cox"
+          data-project="cox"
+          data-panel-color="#15803d">
+    <span class="work-strip-label">Cox’s Bazar brief</span>
+    <span class="work-strip-caption"></span>
+  </button>
+
+  <button class="work-strip work-strip--vsl"
+          data-project="vsl"
+          data-panel-color="#be123c">
+    <span class="work-strip-label">Visuals &amp; infographics</span>
+    <span class="work-strip-caption"></span>
+  </button>
+
+</div>
+
 
     </div>
   </div>
@@ -3401,28 +3411,70 @@ document.addEventListener("keydown", e => {
     });
 
 
-
 /* ===============================
-   WORK – VERTICAL STRIPS LOGIC
+   WORK – STRIPS INTERACTION + COLOR SYNC
 =============================== */
 
-const workStrips  = document.querySelectorAll(".work-strip");
-const workDetails = document.querySelectorAll(".work-detail");
+const workStrips      = document.querySelectorAll(".work-strip");
+const workDetails     = document.querySelectorAll(".work-detail");
+const workPanelLeft   = document.querySelector(".work-board-left");
+const workPanelRight  = document.querySelector(".work-strips"); // dark column background
 
+// helper: darken hex by a factor
+function darkenColor(hex, amount) {
+  let c = hex.replace("#", "");
+  if (c.length === 3) {
+    c = c.split("").map(x => x + x).join("");
+  }
+  const num = parseInt(c, 16);
+  let r = (num >> 16) & 255;
+  let g = (num >> 8) & 255;
+  let b = num & 255;
+
+  const factor = 1 - amount;
+  r = Math.round(r * factor);
+  g = Math.round(g * factor);
+  b = Math.round(b * factor);
+
+  return "#" + [r, g, b].map(v => v.toString(16).padStart(2,"0")).join("");
+}
+
+function setActiveWork(project) {
+  // toggle content
+  workDetails.forEach(d => {
+    d.classList.toggle("is-active", d.dataset.project === project);
+  });
+
+  // toggle strips & recolor panels
+  workStrips.forEach(strip => {
+    const active = strip.dataset.project === project;
+    strip.classList.toggle("is-active", active);
+
+    if (active) {
+      const baseColor = strip.dataset.panelColor;
+
+      // LEFT PANEL = medium-darker shade
+      const leftColor = darkenColor(baseColor, 0.40);
+
+      // RIGHT PANEL = even darker
+      const rightColor = darkenColor(baseColor, 0.60);
+
+      workPanelLeft.style.background = leftColor;
+      workPanelRight.style.background = rightColor;
+    }
+  });
+}
+
+// add click listeners
 workStrips.forEach(strip => {
   strip.addEventListener("click", () => {
-    const target = strip.dataset.project;
-
-    // activate strip
-    workStrips.forEach(s => s.classList.remove("is-active"));
-    strip.classList.add("is-active");
-
-    // show matching detail panel
-    workDetails.forEach(d => {
-      d.classList.toggle("is-active", d.dataset.project === target);
-    });
+    setActiveWork(strip.dataset.project);
   });
 });
+
+// initialize the first active one
+const initial = document.querySelector(".work-strip.is-active");
+if (initial) setActiveWork(initial.dataset.project);
 
 
   </script>
