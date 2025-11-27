@@ -1145,19 +1145,14 @@
   gap: 12px;
 }
 
-/* Let the outer shell handle ALL rounding */
-.work-shell {
-  border-radius: 26px;
-  overflow: hidden;   /* you already have this, but keep it */
-}
-
-/* Inner panels are square – no own radii */
+/* --- Work card: let only the shell be rounded --- */
 .work-board-left,
 .work-strips,
 .work-strip:first-child,
 .work-strip:last-child {
   border-radius: 0 !important;
 }
+
 
 /* ===========================
    CONTACT – ENVELOPE STYLE
