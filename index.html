@@ -869,124 +869,186 @@
 
 
  /* ===========================
-   WORK – DRIBBBLE GRID
+   WORK – LUGGAGE TAG WALL
 =========================== */
 
 #work {
-  margin-top: -10px;      /* same as #experience */
-  padding: 10px 0 0;      /* same as #experience */
+  margin-top: -10px;        /* same feeling as experience */
+  padding: 10px 0 40px;
   position: relative;
 }
 
 .work-layout {
   position: relative;
   z-index: 1;
-  max-width: 1050px;      /* same width frame as experience-layout */
-  margin: -20px auto 0;   /* same margin as .experience-layout */
+  max-width: 1050px;        /* align with skills / experience */
+  margin: -10px auto 0;
   padding: 0;
-  display: block;
 }
 
-/* big grid uses same “viewport minus header” height as .exp-mosaic */
+/* Grid of tags */
 .work-grid {
-  width: 1050px;
-  max-width: 100%;
-
-  /* shorter so everything fits without page scroll */
-  height: calc(100vh - 280px);
-  max-height: calc(100vh - 280px);
-
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 16px;   /* a tiny bit less gap also helps */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
 }
 
-
-/* cards */
-
-.work-card {
-  background: #f9fafb;
-  border-radius: 10px;
-  padding: 8px 8px 6px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 14px 30px rgba(15,23,42,0.11);
+/* Single tag = luggage tag card */
+.work-tag {
+  position: relative;
+  background: #fdf7f0;              /* cream paper */
+  border-radius: 22px;
+  padding: 26px 18px 20px;
+  border: 1px solid #e2d5c4;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.work-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 36px rgba(15,23,42,0.16);
-}
-
-/* image frame */
-
-.work-card-thumb {
-  width: 100%;
-  aspect-ratio: 3 / 2;           /* Dribbble-like rectangle */
-  border-radius: 8px;
-  background: #e5e7eb;
   overflow: hidden;
 }
 
-.work-card-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+/* Top “ring” like the metal loop */
+.work-tag::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #111827;
+  box-shadow: 0 0 0 4px #fdf7f0;
 }
 
-/* tags under image */
+.work-tag::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fdf7f0;
+}
 
-.work-card-tags {
+/* Inner content sits a bit lower (because of the ring) */
+.work-tag-inner {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Small airline label */
+.work-tag-airport {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+}
+
+/* Project title */
+.work-tag-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: none;
+  color: #111827;
+}
+
+/* Little horizontal rule like stitching */
+.work-tag-divider {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(148, 163, 184, 0.7),
+    rgba(148, 163, 184, 0.7) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  margin: 4px 0;
+}
+
+/* Two tags row (category chips) */
+.work-tag-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 6px;
+  font-size: 0.72rem;
 }
 
-.work-tag {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  padding: 5px 10px 4px;
+.work-chip {
+  padding: 4px 9px 3px;
   border-radius: 999px;
-  border: 1px solid #d0d7de;
+  border: 1px solid #d1d5db;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   background: #ffffff;
-  color: #374151;
+  color: #4b5563;
 }
 
-/* a few accent colors if you want them */
-.work-tag--blue   { border-color:#38bdf8; color:#0369a1; }
-.work-tag--orange { border-color:#fdba74; color:#c2410c; }
-.work-tag--green  { border-color:#86efac; color:#166534; }
-.work-tag--pink   { border-color:#f9a8d4; color:#9d174d; }
-.work-tag--violet { border-color:#c4b5fd; color:#5b21b6; }
-
-/* responsive: same idea as exp-mosaic → relax height and change cols */
-
-@media (max-width: 900px) {
-  .work-grid {
-    height: auto;
-    max-height: none;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+/* Bottom color band with big 3-letter code */
+.work-tag-footer {
+  margin-top: 10px;
+  padding: 10px 12px 8px;
+  border-radius: 14px;
+  color: #f9fafb;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
+/* Big airport code */
+.work-tag-code {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+/* Small city label */
+.work-tag-city {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Color themes per project */
+.work-tag--interactive .work-tag-footer {
+  background: #0ea5e9;
+}
+.work-tag--quant .work-tag-footer {
+  background: #f97316;
+}
+.work-tag--field .work-tag-footer {
+  background: #22c55e;
+}
+.work-tag--visuals .work-tag-footer {
+  background: #ec4899;
+}
+.work-tag--brief .work-tag-footer {
+  background: #6366f1;
+}
+.work-tag--extra .work-tag-footer {
+  background: #0f766e;
+}
+
+/* Hover: lift like a physical tag */
+.work-tag:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Mobile tweak */
 @media (max-width: 640px) {
   .work-layout {
     margin: 0 auto 0;
   }
-
-  .work-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
 }
-
 
 
 /* ===========================
@@ -2412,79 +2474,129 @@
 
       <!-- WORK -->
 
-   <section id="work">
+   <!-- WORK – LUGGAGE TAG WALL -->
+<section id="work">
   <div class="work-layout">
     <div class="work-grid">
 
-      <!-- 1 – Human Security / Twine -->
-      <article class="work-card">
-        <div class="work-card-thumb">
-          <img src="work-twine.jpg" alt="Human Security Twine project">
+      <!-- 1 – Human Security Twine -->
+      <article class="work-tag work-tag--interactive">
+        <div class="work-tag-inner">
+          <div class="work-tag-airport">HUMAN SECURITY · INTERACTIVE</div>
+          <div class="work-tag-title">
+            Human Security Twine project
+          </div>
+          <div class="work-tag-divider"></div>
+          <div class="work-tag-meta">
+            <span class="work-chip">Interactive</span>
+            <span class="work-chip">Human security</span>
+          </div>
         </div>
-        <div class="work-card-tags">
-          <span class="work-tag work-tag--blue">Interactive</span>
-          <span class="work-tag">Human security</span>
+        <div class="work-tag-footer">
+          <span class="work-tag-code">HSQ</span>
+          <span class="work-tag-city">PARIS</span>
         </div>
       </article>
 
       <!-- 2 – French ODA & renewables -->
-      <article class="work-card">
-        <div class="work-card-thumb">
-          <img src="work-oda.jpg" alt="French ODA & renewables">
+      <article class="work-tag work-tag--quant">
+        <div class="work-tag-inner">
+          <div class="work-tag-airport">QUANT · ENERGY &amp; ODA</div>
+          <div class="work-tag-title">
+            French ODA &amp; renewables dataset
+          </div>
+          <div class="work-tag-divider"></div>
+          <div class="work-tag-meta">
+            <span class="work-chip">Quant</span>
+            <span class="work-chip">Energy</span>
+          </div>
         </div>
-        <div class="work-card-tags">
-          <span class="work-tag work-tag--orange">Quant</span>
-          <span class="work-tag">Energy</span>
+        <div class="work-tag-footer">
+          <span class="work-tag-code">ODA</span>
+          <span class="work-tag-city">WEST AFRICA</span>
         </div>
       </article>
 
       <!-- 3 – Cox’s Bazar note -->
-      <article class="work-card">
-        <div class="work-card-thumb">
-          <img src="work-cox.jpg" alt="Cox's Bazar note">
+      <article class="work-tag work-tag--field">
+        <div class="work-tag-inner">
+          <div class="work-tag-airport">FIELD · PROTECTION NOTE</div>
+          <div class="work-tag-title">
+            Cox’s Bazar humanitarian brief
+          </div>
+          <div class="work-tag-divider"></div>
+          <div class="work-tag-meta">
+            <span class="work-chip">Field</span>
+            <span class="work-chip">Protection</span>
+          </div>
         </div>
-        <div class="work-card-tags">
-          <span class="work-tag work-tag--green">Field</span>
-          <span class="work-tag">Protection</span>
+        <div class="work-tag-footer">
+          <span class="work-tag-code">COX</span>
+          <span class="work-tag-city">BANGLADESH</span>
         </div>
       </article>
 
       <!-- 4 – Humanitarian visuals -->
-      <article class="work-card">
-        <div class="work-card-thumb">
-          <img src="work-visuals.jpg" alt="Humanitarian visuals">
+      <article class="work-tag work-tag--visuals">
+        <div class="work-tag-inner">
+          <div class="work-tag-airport">VISUALS · COMMUNICATION</div>
+          <div class="work-tag-title">
+            Humanitarian visuals &amp; infographics
+          </div>
+          <div class="work-tag-divider"></div>
+          <div class="work-tag-meta">
+            <span class="work-chip">Visuals</span>
+            <span class="work-chip">MENA</span>
+          </div>
         </div>
-        <div class="work-card-tags">
-          <span class="work-tag work-tag--pink">Visuals</span>
-          <span class="work-tag">MENA</span>
+        <div class="work-tag-footer">
+          <span class="work-tag-code">VSL</span>
+          <span class="work-tag-city">MENA</span>
         </div>
       </article>
 
       <!-- 5 – OIF implementation note -->
-      <article class="work-card">
-        <div class="work-card-thumb">
-          <img src="work-oif.jpg" alt="OIF implementation note">
+      <article class="work-tag work-tag--brief">
+        <div class="work-tag-inner">
+          <div class="work-tag-airport">BRIEF · FRANCOPHONIE</div>
+          <div class="work-tag-title">
+            OIF implementation note &amp; dashboards
+          </div>
+          <div class="work-tag-divider"></div>
+          <div class="work-tag-meta">
+            <span class="work-chip">Brief</span>
+            <span class="work-chip">Implementation</span>
+          </div>
         </div>
-        <div class="work-card-tags">
-          <span class="work-tag work-tag--violet">Brief</span>
-          <span class="work-tag">Implementation</span>
+        <div class="work-tag-footer">
+          <span class="work-tag-code">OIF</span>
+          <span class="work-tag-city">PARIS</span>
         </div>
       </article>
 
       <!-- 6 – Extra project -->
-      <article class="work-card">
-        <div class="work-card-thumb">
-          <img src="work-extra.jpg" alt="Extra project">
+      <article class="work-tag work-tag--extra">
+        <div class="work-tag-inner">
+          <div class="work-tag-airport">EXTRA · SIDE PROJECT</div>
+          <div class="work-tag-title">
+            Extra project slot
+          </div>
+          <div class="work-tag-divider"></div>
+          <div class="work-tag-meta">
+            <span class="work-chip">Extra</span>
+            <span class="work-chip">Project</span>
+          </div>
         </div>
-        <div class="work-card-tags">
-          <span class="work-tag">Extra</span>
-          <span class="work-tag">Project</span>
+        <div class="work-tag-footer">
+          <span class="work-tag-code">XTR</span>
+          <span class="work-tag-city">TBD</span>
         </div>
       </article>
 
     </div>
   </div>
 </section>
+
 
       <!-- ACTIVITIES -->
       <section id="activities">
