@@ -1087,6 +1087,18 @@
   font-size: 0.9rem;
 }
 
+    /* Make strips overlap the left panel cleanly */
+.work-strip {
+  position: relative;
+  z-index: 3;             /* sits on top of the left panel */
+}
+
+/* Give rounded strips a solid background (same as their color) */
+.work-strip:first-child {
+  background-clip: padding-box;
+  z-index: 4;
+}
+
 
 /* Responsive */
 
