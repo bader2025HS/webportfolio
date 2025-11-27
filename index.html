@@ -868,205 +868,292 @@
 }
 
 /* ===========================
-   WORK – SIDE TABS LAYOUT
+   WORK – LUGGAGE TAGS (FRONT/BACK)
 =========================== */
 
 #work {
   margin-top: -10px;
-  padding: 10px 0 0;
-  position: relative;
+  padding: 20px 0 60px;
 }
 
-.work-shell {
+.work-layout {
   max-width: 1050px;
   margin: 0 auto;
-  border-radius: 26px;
-  overflow: hidden;
+}
+
+.work-grid {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) auto;
-  background: #071b1b;          /* dark green background */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
 }
 
-/* left part: black panel + stacked list */
-.work-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
-  background: #050708;
-  color: #f9fafb;
+/* Outer container: perspective + hanging swing */
+
+.work-tag {
+  position: relative;
+  height: 360px;
+  cursor: pointer;
+  perspective: 1000px;
+  transform-origin: top center;
 }
 
-/* big description block */
-.work-main {
-  padding: 32px 34px 30px;
-  border-right: 1px solid rgba(148, 163, 184, 0.35);
+/* Hanging swing on hover */
+.work-tag:hover {
+  animation: tagSwing 0.9s ease-in-out infinite alternate;
 }
 
-.work-main-label {
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #9ca3af;
-  margin-bottom: 10px;
+@keyframes tagSwing {
+  0%   { transform: rotateZ(0deg); }
+  50%  { transform: rotateZ(2.8deg); }
+  100% { transform: rotateZ(-2.8deg); }
 }
 
-.work-main-title {
-  font-size: 1.7rem;
-  line-height: 1.2;
-  margin-bottom: 16px;
+/* Metal cable above tag */
+
+.work-tag::before {
+  content: "";
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  width: 130px;
+  height: 70px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  border: 2px solid #9ca3af;
+  border-bottom: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  background: linear-gradient(
+    to right,
+    #9ca3af,
+    #e5e7eb,
+    #9ca3af
+  );
+  z-index: 0;
 }
 
-.work-main-text {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #e5e7eb;
-  margin-bottom: 18px;
+/* Flipping inner block */
+
+.work-tag-inner-outer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.25, 1);
+  z-index: 1;
 }
 
-.work-main-meta {
+/* when clicked */
+.work-tag.is-flipped .work-tag-inner-outer {
+  transform: rotateY(180deg);
+}
+
+/* FRONT & BACK FACES */
+
+.work-tag-face {
+  position: absolute;
+  inset: 0;
+  background: #fdf8ee;
+  border: 2px dashed #d8d3c8;
+  border-radius: 28px;
+  padding: 26px 18px 0;
+  padding-top: 70px; /* space for hole */
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-  margin-bottom: 14px;
+  justify-content: space-between;
+  clip-path: polygon(
+    50% 0%,
+    100% 18%, 100% 100%,
+    0 100%, 0 18%
+  );
+  box-shadow: 0 12px 34px rgba(0,0,0,0.15);
+  backface-visibility: hidden;
 }
 
-.work-main-tags {
+/* back side rotated */
+.work-tag-face--back {
+  transform: rotateY(180deg);
+}
+
+/* HOLE (same on both faces) */
+
+.work-tag-hole {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #111;
+  box-shadow:
+    0 0 0 5px #fdf8ee,
+    0 4px 8px rgba(0,0,0,0.3);
+  z-index: 3;
+}
+
+.work-tag-hole::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: #fdf8ee;
+}
+
+/* FRONT CONTENT */
+
+.work-tag-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 6px;
+}
+
+.work-tag-airport {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.work-tag-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.22;
+  color: #111;
+}
+
+.work-tag-divider {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #b9b2a6 0 4px,
+    transparent 4px 8px
+  );
+}
+
+.work-tag-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
-.work-main-tag {
+.work-chip {
   font-size: 0.7rem;
+  padding: 4px 10px 3px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #d0d7de;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  padding: 5px 10px 4px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #555;
 }
 
-/* right column inside left part: vertical list */
+/* BOTTOM COLOR BAND */
 
-.work-list {
-  padding: 18px 20px 18px;
-  background: #0b1720;
+.work-tag-footer {
+  margin-top: auto;
+  padding: 16px 14px 12px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.work-tag-code {
+  font-size: 2rem;
+  letter-spacing: 0.14em;
+}
+
+.work-tag-city {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+/* BACK CONTENT */
+
+.work-tag-back-inner {
+  padding: 10px 16px 18px;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.work-list-item {
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: transparent;
-  color: #e5e7eb;
-  border-radius: 14px;
-  padding: 8px 10px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 8px;
-  row-gap: 2px;
-  cursor: pointer;
-  font-size: 0.86rem;
-  transition: background 0.18s ease, transform 0.18s ease;
-}
-
-.work-list-item:hover {
-  background: rgba(15, 23, 42, 0.95);
-  transform: translateY(-1px);
-}
-
-.work-list-item.is-active {
-  background: rgba(34, 197, 94, 0.16);
-}
-
-.work-list-plus {
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-size: 1rem;
-  opacity: 0.7;
-}
-
-.work-list-title {
-  font-weight: 500;
-}
-
-.work-list-sub {
-  font-size: 0.78rem;
-  color: #9ca3af;
-}
-
-/* rightmost coloured vertical tabs */
-
-.work-tabs {
-  display: grid;
-  grid-auto-flow: row;
-  grid-auto-rows: 1fr;
-  min-width: 140px;
-}
-
-.work-tab {
-  border: none;
-  background: #5f9f98;      /* default teal */
-  color: #050708;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
+.work-tag-back-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.20em;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.75rem;
-  padding: 26px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px solid rgba(15, 23, 42, 0.5);
-  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  color: #6b7280;
 }
 
-.work-tab--blue   { background: #d7f2ff; }
-.work-tab--peach  { background: #ffd8c2; }
-.work-tab--pink   { background: #fbd1ec; }
-
-.work-tab:hover {
-  transform: translateX(-2px);
+.work-tag-back-title {
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-.work-tab.is-active {
-  background: #ffffff;
-  color: #020617;
+.work-tag-back-text {
+  font-size: 0.8rem;
+  color: #4b5563;
 }
 
-/* mobile / tablet */
+.work-tag-back-list {
+  margin: 4px 0 0 16px;
+  padding: 0;
+  font-size: 0.78rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
 
-@media (max-width: 900px) {
-  .work-shell {
-    grid-template-columns: 1fr;
-  }
+/* same colored footer on back */
+.work-tag-back-footer {
+  margin-top: auto;
+  padding: 10px 14px 12px;
+  color: #fefce8;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
 
-  .work-panel {
-    grid-template-columns: 1fr;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.7);
-  }
+/* COLOR VARIANTS */
 
-  .work-main {
-    border-right: none;
-  }
+.work-tag--interactive .work-tag-footer,
+.work-tag--interactive .work-tag-back-footer {
+  background: #0ea5e9;
+}
 
-  .work-tabs {
-    grid-auto-flow: column;
-    grid-auto-rows: auto;
-    grid-auto-columns: 1fr;
-  }
+.work-tag--quant .work-tag-footer,
+.work-tag--quant .work-tag-back-footer {
+  background: #f97316;
+}
 
-  .work-tab {
-    writing-mode: horizontal-tb;
-    padding: 12px 10px;
-    font-size: 0.78rem;
+.work-tag--field .work-tag-footer,
+.work-tag--field .work-tag-back-footer {
+  background: #22c55e;
+}
+
+.work-tag--visuals .work-tag-footer,
+.work-tag--visuals .work-tag-back-footer {
+  background: #ec4899;
+}
+
+.work-tag--brief .work-tag-footer,
+.work-tag--brief .work-tag-back-footer {
+  background: #6366f1;
+}
+
+.work-tag--extra .work-tag-footer,
+.work-tag--extra .work-tag-back-footer {
+  background: #0f766e;
+}
+
+/* Responsive tweak */
+@media (max-width: 640px) {
+  .work-grid {
+    gap: 22px;
   }
 }
+
 
 /* ===========================
    CONTACT – ENVELOPE STYLE
@@ -2488,89 +2575,227 @@
 
 
 
-<!-- WORK – SIDE TABS LAYOUT -->
+
+      <!-- WORK -->
+
+ <!-- WORK – LUGGAGE TAGS -->
 <section id="work">
-  <div class="work-shell">
-    <div class="work-panel">
+  <div class="work-layout">
+    <div class="work-grid">
 
-      <!-- left big black panel -->
-      <div class="work-main">
-        <div class="work-main-label">Selected work</div>
-        <h2 class="work-main-title" id="workMainTitle">
-          Human Security Twine project
-        </h2>
+      <!-- 1 – Human Security / Twine -->
+      <article class="work-tag work-tag--interactive">
+        <div class="work-tag-inner-outer">
 
-        <p class="work-main-text" id="workMainText">
-          Interactive Twine experience used to teach Human Security
-          (3 freedoms, 7 securities, R2P, radicalisation) with
-          branching paths, quizzes and visual storytelling.
-        </p>
+          <!-- FRONT -->
+          <div class="work-tag-face work-tag-face--front">
+            <div class="work-tag-hole"></div>
 
-        <div class="work-main-meta" id="workMainMeta">
-          <span>Type · Interactive / Teaching tool</span>
-          <span>Context · Sciences Po · 2025</span>
-          <span>Focus · Human security, migration, protection</span>
+            <div class="work-tag-inner">
+              <div class="work-tag-airport">
+                Human security · Interactive
+              </div>
+              <h3 class="work-tag-title">
+                Human Security Twine project
+              </h3>
+              <div class="work-tag-divider"></div>
+              <div class="work-tag-meta">
+                <span class="work-chip">Interactive</span>
+                <span class="work-chip">Human security</span>
+              </div>
+            </div>
+
+            <div class="work-tag-footer">
+              <span class="work-tag-code">HSQ</span>
+              <span class="work-tag-city">Paris</span>
+            </div>
+          </div>
+
+          <!-- BACK -->
+          <div class="work-tag-face work-tag-face--back">
+            <div class="work-tag-hole"></div>
+            <div class="work-tag-back-inner">
+              <div class="work-tag-back-label">Project</div>
+              <div class="work-tag-back-title">
+                Human Security interactive module
+              </div>
+              <p class="work-tag-back-text">
+                Twine-based narrative exploring the 7 securities and key
+                human-security principles.
+              </p>
+              <ul class="work-tag-back-list">
+                <li>Scenario design &amp; storytelling</li>
+                <li>Pedagogical quiz integration</li>
+                <li>Full English interface</li>
+              </ul>
+            </div>
+            <div class="work-tag-back-footer">
+              Click to flip back
+            </div>
+          </div>
+
         </div>
+      </article>
 
-        <div class="work-main-tags" id="workMainTags">
-          <span class="work-main-tag">Twine</span>
-          <span class="work-main-tag">Pedagogy</span>
-          <span class="work-main-tag">Scenario design</span>
+      <!-- 2 – French ODA & renewables -->
+      <article class="work-tag work-tag--quant">
+        <div class="work-tag-inner-outer">
+
+          <div class="work-tag-face work-tag-face--front">
+            <div class="work-tag-hole"></div>
+
+            <div class="work-tag-inner">
+              <div class="work-tag-airport">
+                Quant · Energy &amp; ODA
+              </div>
+              <h3 class="work-tag-title">
+                French ODA &amp; renewables dataset
+              </h3>
+              <div class="work-tag-divider"></div>
+              <div class="work-tag-meta">
+                <span class="work-chip">Quant</span>
+                <span class="work-chip">Energy</span>
+              </div>
+            </div>
+
+            <div class="work-tag-footer">
+              <span class="work-tag-code">ODA</span>
+              <span class="work-tag-city">West Africa</span>
+            </div>
+          </div>
+
+          <div class="work-tag-face work-tag-face--back">
+            <div class="work-tag-hole"></div>
+            <div class="work-tag-back-inner">
+              <div class="work-tag-back-label">Dataset</div>
+              <div class="work-tag-back-title">
+                Renewable energy projects 2000–2024
+              </div>
+              <p class="work-tag-back-text">
+                Cleaning and structuring French ODA data for solar, wind,
+                and hydro projects.
+              </p>
+              <ul class="work-tag-back-list">
+                <li>Excel &amp; Power BI dashboards</li>
+                <li>Country-level indicators</li>
+                <li>Visual outputs for reports</li>
+              </ul>
+            </div>
+            <div class="work-tag-back-footer">
+              Data &amp; visualisation
+            </div>
+          </div>
+
         </div>
-      </div>
+      </article>
 
-      <!-- inner list of sub-projects (like the stacked cards) -->
-      <div class="work-list">
-        <button class="work-list-item is-active"
-                data-work="twine">
-          <span class="work-list-plus">+</span>
-          <span class="work-list-title">Human Security Twine project</span>
-          <span class="work-list-sub">Interactive · human security</span>
-        </button>
+      <!-- 3 – Cox’s Bazar note -->
+      <article class="work-tag work-tag--field">
+        <div class="work-tag-inner-outer">
 
-        <button class="work-list-item"
-                data-work="oda">
-          <span class="work-list-plus">+</span>
-          <span class="work-list-title">French ODA &amp; renewables dataset</span>
-          <span class="work-list-sub">Quant · energy &amp; climate</span>
-        </button>
+          <div class="work-tag-face work-tag-face--front">
+            <div class="work-tag-hole"></div>
 
-        <button class="work-list-item"
-                data-work="cox">
-          <span class="work-list-plus">+</span>
-          <span class="work-list-title">Cox’s Bazar humanitarian brief</span>
-          <span class="work-list-sub">Field · protection note</span>
-        </button>
+            <div class="work-tag-inner">
+              <div class="work-tag-airport">
+                Field · Protection note
+              </div>
+              <h3 class="work-tag-title">
+                Cox’s Bazar humanitarian brief
+              </h3>
+              <div class="work-tag-divider"></div>
+              <div class="work-tag-meta">
+                <span class="work-chip">Field</span>
+                <span class="work-chip">Protection</span>
+              </div>
+            </div>
 
-        <button class="work-list-item"
-                data-work="visuals">
-          <span class="work-list-plus">+</span>
-          <span class="work-list-title">Humanitarian visuals &amp; infographics</span>
-          <span class="work-list-sub">Visuals · communication</span>
-        </button>
+            <div class="work-tag-footer">
+              <span class="work-tag-code">COX</span>
+              <span class="work-tag-city">Bangladesh</span>
+            </div>
+          </div>
 
-        <!-- you can add more buttons here if you want -->
-      </div>
-    </div>
+          <div class="work-tag-face work-tag-face--back">
+            <div class="work-tag-hole"></div>
+            <div class="work-tag-back-inner">
+              <div class="work-tag-back-label">Briefing note</div>
+              <div class="work-tag-back-title">
+                Protection &amp; coordination snapshot
+              </div>
+              <p class="work-tag-back-text">
+                Short analytical note on camp dynamics, service access,
+                and protection gaps.
+              </p>
+              <ul class="work-tag-back-list">
+                <li>Context &amp; key figures</li>
+                <li>Risks &amp; operational constraints</li>
+                <li>2–3 policy recommendations</li>
+              </ul>
+            </div>
+            <div class="work-tag-back-footer">
+              Humanitarian analysis
+            </div>
+          </div>
 
-    <!-- right coloured vertical tabs -->
-    <div class="work-tabs">
-      <button class="work-tab is-active" data-work="twine">
-        <span class="work-tab-label">Human security</span>
-      </button>
-      <button class="work-tab work-tab--blue" data-work="oda">
-        <span class="work-tab-label">Quant &amp; energy</span>
-      </button>
-      <button class="work-tab work-tab--peach" data-work="cox">
-        <span class="work-tab-label">Field &amp; protection</span>
-      </button>
-      <button class="work-tab work-tab--pink" data-work="visuals">
-        <span class="work-tab-label">Visuals &amp; comms</span>
-      </button>
+        </div>
+      </article>
+
+      <!-- 4 – Humanitarian visuals -->
+      <article class="work-tag work-tag--visuals">
+        <div class="work-tag-inner-outer">
+
+          <div class="work-tag-face work-tag-face--front">
+            <div class="work-tag-hole"></div>
+
+            <div class="work-tag-inner">
+              <div class="work-tag-airport">
+                Visuals · Communication
+              </div>
+              <h3 class="work-tag-title">
+                Humanitarian visuals &amp; infographics
+              </h3>
+              <div class="work-tag-divider"></div>
+              <div class="work-tag-meta">
+                <span class="work-chip">Visuals</span>
+                <span class="work-chip">MENA</span>
+              </div>
+            </div>
+
+            <div class="work-tag-footer">
+              <span class="work-tag-code">VSL</span>
+              <span class="work-tag-city">MENA</span>
+            </div>
+          </div>
+
+          <div class="work-tag-face work-tag-face--back">
+            <div class="work-tag-hole"></div>
+            <div class="work-tag-back-inner">
+              <div class="work-tag-back-label">Design work</div>
+              <div class="work-tag-back-title">
+                Maps, one-pagers &amp; social visuals
+              </div>
+              <p class="work-tag-back-text">
+                Visual communication pieces for humanitarian and
+                policy audiences.
+              </p>
+              <ul class="work-tag-back-list">
+                <li>Mapbox &amp; QGIS exports</li>
+                <li>Canva / Illustrator layouts</li>
+                <li>Social-media friendly formats</li>
+              </ul>
+            </div>
+            <div class="work-tag-back-footer">
+              Visual communication
+            </div>
+          </div>
+
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
-
 
 
       <!-- ACTIVITIES -->
@@ -3291,95 +3516,18 @@ document.addEventListener("keydown", e => {
       if (e.key === "ArrowLeft") showPrev();
     });
 
-<script>
-  // DATA for the work items
-  const workData = {
-    twine: {
-      title: "Human Security Twine project",
-      text:
-        "Interactive Twine experience used to teach Human Security with branching paths, dilemmas and quizzes. Built for a Sciences Po human security course.",
-      meta: [
-        "Type · Interactive / Teaching tool",
-        "Context · Sciences Po · 2025",
-        "Focus · Human security, migration, protection"
-      ],
-      tags: ["Twine", "Pedagogy", "Scenario design"]
-    },
-    oda: {
-      title: "French ODA & renewables dataset",
-      text:
-        "Quantitative project cleaning and analysing French ODA flows toward renewable energy in West Africa, 2000–2024, with dashboards and visuals.",
-      meta: [
-        "Type · Quantitative analysis",
-        "Context · Research / coursework",
-        "Focus · ODA, climate, energy"
-      ],
-      tags: ["Excel", "Power BI", "Energy"]
-    },
-    cox: {
-      title: "Cox’s Bazar humanitarian brief",
-      text:
-        "4-page analytical note summarising protection issues in Cox’s Bazar, Bangladesh, for refugees and host communities, with recommendations.",
-      meta: [
-        "Type · Humanitarian brief",
-        "Context · Protection / field analysis",
-        "Focus · Displacement, protection, Bangladesh"
-      ],
-      tags: ["Protection", "Policy brief", "Field context"]
-    },
-    visuals: {
-      title: "Humanitarian visuals & infographics",
-      text:
-        "Set of visuals and infographics for humanitarian / development actors, combining maps, charts and clean layouts in Canva and Illustrator.",
-      meta: [
-        "Type · Visual communication",
-        "Context · NGO & course projects",
-        "Focus · Storytelling, MENA, data-viz"
-      ],
-      tags: ["Canva", "Illustrator", "Data-viz"]
-    }
-  };
+    /* ===============================
+   WORK – FLIP LUGGAGE TAGS
+=============================== */
 
-  const workMainTitle = document.getElementById("workMainTitle");
-  const workMainText  = document.getElementById("workMainText");
-  const workMainMeta  = document.getElementById("workMainMeta");
-  const workMainTags  = document.getElementById("workMainTags");
+const workTags = document.querySelectorAll(".work-tag");
 
-  const workTabs      = document.querySelectorAll(".work-tab");
-  const workListItems = document.querySelectorAll(".work-list-item");
-
-  function setWork(key) {
-    const data = workData[key];
-    if (!data) return;
-
-    workMainTitle.textContent = data.title;
-    workMainText.textContent  = data.text;
-
-    workMainMeta.innerHTML = data.meta
-      .map(line => `<span>${line}</span>`)
-      .join("");
-
-    workMainTags.innerHTML = data.tags
-      .map(tag => `<span class="work-main-tag">${tag}</span>`)
-      .join("");
-
-    // update active states
-    workTabs.forEach(t => {
-      t.classList.toggle("is-active", t.dataset.work === key);
-    });
-    workListItems.forEach(i => {
-      i.classList.toggle("is-active", i.dataset.work === key);
-    });
-  }
-
-  workTabs.forEach(tab => {
-    tab.addEventListener("click", () => setWork(tab.dataset.work));
+workTags.forEach(tag => {
+  tag.addEventListener("click", () => {
+    tag.classList.toggle("is-flipped");
   });
+});
 
-  workListItems.forEach(item => {
-    item.addEventListener("click", () => setWork(item.dataset.work));
-  });
-</script>
 
   </script>
 
