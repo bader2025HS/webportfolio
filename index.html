@@ -892,21 +892,28 @@
   position: relative;
   width: 380px;
   height: 400px;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #7b0815, #b01224); /* deep passport red */
+  border-radius: 16px;
+  background: linear-gradient(145deg, #7b0815, #b01224);
   color: #fefce8;
   box-shadow:
     0 18px 38px rgba(15,23,42,0.45),
     inset 0 0 0 1px rgba(248,250,252,0.12);
-  padding: 28px 24px 22px;
+
+  /* center everything */
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
+
+  padding: 30px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  gap: 12px;
+
   transform: translateY(0);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 
 /* tiny “spine” illusion on the left */
 
@@ -933,69 +940,78 @@
 
 /* emblem */
 
-.work-passport-emblem-circle {
-  width: 74px;
-  height: 74px;
+    .work-passport-emblem-circle {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 2px solid rgba(254,250,199,0.85);
+  border: 3px solid rgba(254,250,199,0.9);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: 20px;
   position: relative;
 }
 
 .work-passport-emblem-circle::before {
   content: "";
   position: absolute;
-  inset: 8px;
+  inset: 12px;
   border-radius: 50%;
   border: 1px dashed rgba(254,249,195,0.7);
 }
 
 .work-passport-emblem-inner {
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   transform: rotate(-10deg);
 }
+
 
 /* text */
 
 .work-passport-country {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.24em;
-  margin-top: 6px;
   opacity: 0.9;
 }
 
 .work-passport-title {
-  font-size: 1.1rem;
+  font-size: 1.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.26em;
-  margin-top: 8px;
-  text-align: center;
+  letter-spacing: 0.28em;
+  margin-top: 6px;
 }
 
 .work-passport-sub {
-  font-size: 0.75rem;
-  opacity: 0.85;
-  margin-top: 4px;
-  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-top: 6px;
 }
+
 
 /* responsive */
 
 @media (max-width: 600px) {
   .work-passport-shell {
-    min-height: 220px;
+    min-height: 260px;
   }
 
   .work-passport-cover {
-    width: 300px;
-    height: 200px;
-    padding: 24px 20px 18px;
+    width: 320px;
+    height: 300px;
+    padding: 24px;
+  }
+
+  .work-passport-emblem-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .work-passport-emblem-inner {
+    font-size: 2rem;
   }
 }
+
 
 
 
