@@ -996,8 +996,11 @@
 .work-strips {
   flex: 1.1;
   display: flex;
-  align-self: stretch;      /* make the strip column match panel height */
+  align-self: stretch;
+  border-radius: 0 26px 26px 0;  /* ⬅ rounded top-right & bottom-right */
+  overflow: hidden;              /* ⬅ keeps the inner strips clipped to the curve */
 }
+
 
 .work-strip {
   position: relative;
@@ -1140,8 +1143,6 @@
   margin-top: 12px; 
   gap: 12px;
 }
-
-
 
 
 /* ===========================
