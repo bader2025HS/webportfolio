@@ -985,29 +985,41 @@
 /* RIGHT SIDE – vertical strips */
 
 .work-strips {
-  flex: 1.4;
+  flex: 1.1;
   display: flex;
-  height: 100%;
+  align-self: stretch;      /* make the strip column match panel height */
 }
 
 .work-strip {
   position: relative;
-  flex: 1;
+  flex: 0 0 70px;           /* narrower base width */
   border: none;
   cursor: pointer;
-  padding: 18px 0 24px;
-  background: #0f172a;
+  padding: 20px 0 16px;     /* less bottom padding = no empty space */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
   color: #020617;
+  height: 100%;             /* fill the dark panel height */
   transition:
-    flex-grow 0.3s ease,
-    filter 0.2s ease,
+    flex-basis 0.3s ease,
     opacity 0.2s ease;
 }
+
+/* active strip just a bit wider */
+.work-strip.is-active {
+  flex-basis: 82px;
+  opacity: 1;
+  box-shadow: -4px 0 18px rgba(15,23,42,0.35);
+}
+
+/* hide the old + icon */
+.work-strip-plus {
+  display: none;
+}
+
 
 /* rounded outer corners only */
 
@@ -1038,10 +1050,11 @@
 
 /* colors per project */
 
-.work-strip--hsq   { background: #0ea5e9; }
-.work-strip--oda   { background: #f97316; }
-.work-strip--cox   { background: #22c55e; }
-.work-strip--vsl   { background: #ec4899; }
+.work-strip--hsq   { background: #38bdf8; }  /* lighter sky blue */
+.work-strip--oda   { background: #fdba74; }  /* light orange */
+.work-strip--cox   { background: #4ade80; }  /* light green */
+.work-strip--vsl   { background: #fb7185; }  /* light pink/red */
+
 
 /* inactive strips a bit dimmed */
 
@@ -1058,15 +1071,21 @@
 /* tiny caption at bottom of strip */
 
 .work-strip-caption {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  opacity: 0.75;
+  opacity: 0.8;
+  text-align: center;
 }
+
+/* add the little "<" above the code at the bottom */
+.work-strip-caption::before {
+  content: "‹";
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.9rem;
+}
+
 
 /* Responsive */
 
