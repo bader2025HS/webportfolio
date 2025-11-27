@@ -884,14 +884,24 @@
   justify-content: center;
   align-items: center;
   min-height: 260px;
+  perspective: 1600px;   /* NEW: needed for 3D flip */
 }
+
 
 /* closed passport cover */
 
-.work-passport-cover {
+
+    .work-passport-book {
   position: relative;
   width: 380px;
   height: 400px;
+  transform-style: preserve-3d;
+  cursor: pointer;     /* click anywhere to open/close */
+}
+
+.work-passport-cover {
+  position: absolute;           /* was: relative */
+  inset: 0;                     /* fill the book */
   border-radius: 16px;
   background: linear-gradient(145deg, #7b0815, #b01224);
   color: #fefce8;
@@ -899,7 +909,6 @@
     0 18px 38px rgba(15,23,42,0.45),
     inset 0 0 0 1px rgba(248,250,252,0.12);
 
-  /* center everything */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -910,9 +919,12 @@
   letter-spacing: 0.06em;
   gap: 12px;
 
-  transform: translateY(0);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 2;
 }
+
 
 
 /* tiny “spine” illusion on the left */
@@ -963,6 +975,115 @@
 .work-passport-emblem-inner {
   font-size: 2.4rem;
   transform: rotate(-10deg);
+}
+
+    .work-passport-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: #f5f5f4;
+  box-shadow:
+    0 18px 38px rgba(15,23,42,0.35),
+    inset 0 0 0 1px rgba(148,163,184,0.4);
+  padding: 26px 26px 22px;
+  overflow: hidden;
+
+  transform-origin: left center;
+  transform: rotateY(-180deg);   /* hidden behind cover */
+  backface-visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.work-passport-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+/* header inside page */
+.wp-page-header {
+  border-bottom: 1px dashed rgba(148,163,184,0.7);
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+}
+
+.wp-page-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #b01224;
+}
+
+.wp-page-sub {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* list of "stamps" / works */
+.wp-stamp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.wp-stamp-item {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(248,250,252,0.9);
+  border: 1px dashed rgba(148,163,184,0.7);
+}
+
+.wp-stamp-tag {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #b01224;
+  margin-bottom: 4px;
+}
+
+.wp-stamp-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.wp-stamp-meta {
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.wp-stamp-desc {
+  font-size: 0.86rem;
+  color: #374151;
+}
+
+/* flip states */
+.work-passport-book.is-open .work-passport-cover {
+  transform: rotateY(-180deg);
+}
+
+.work-passport-book.is-open .work-passport-inner {
+  transform: rotateY(0deg);
+}
+
+/* responsive tweaks */
+@media (max-width: 600px) {
+  .work-passport-shell {
+    min-height: 260px;
+  }
+
+  .work-passport-book {
+    width: 320px;
+    height: 300px;
+  }
+
+  .work-passport-inner {
+    padding: 20px 18px 18px;
+  }
 }
 
 
@@ -2437,21 +2558,75 @@
 
 
       <!-- WORK -->
-      <!-- WORK – PASSPORT COVER ONLY -->
+<!-- WORK – PASSPORT WITH INSIDE PAGE -->
 <section id="work">
   <div class="work-passport-shell">
-    <div class="work-passport-cover">
-      <div class="work-passport-emblem-circle">
-        <div class="work-passport-emblem-inner">✈</div>
+    <div class="work-passport-book">
+      
+      <!-- FRONT COVER -->
+      <div class="work-passport-cover">
+        <div class="work-passport-emblem-circle">
+          <div class="work-passport-emblem-inner">✈</div>
+        </div>
+        <div class="work-passport-country">REPUBLIC OF PROJECTS</div>
+        <div class="work-passport-title">WORK PASSPORT</div>
+        <div class="work-passport-sub">
+          stamps of research · writing · visuals
+        </div>
       </div>
-      <div class="work-passport-country">REPUBLIC OF PROJECTS</div>
-      <div class="work-passport-title">WORK PASSPORT</div>
-      <div class="work-passport-sub">
-        stamps of research · writing · visuals
+
+      <!-- INSIDE PAGE (shown when open) -->
+      <div class="work-passport-inner">
+        <div class="work-passport-page">
+
+          <div class="wp-page-header">
+            <div class="wp-page-label">Work stamps</div>
+            <div class="wp-page-sub">
+              A few things I’ve been working on lately.
+            </div>
+          </div>
+
+          <div class="wp-stamp-list">
+            <div class="wp-stamp-item">
+              <div class="wp-stamp-tag">Interactive project</div>
+              <div class="wp-stamp-title">Human Security – Twine journey</div>
+              <div class="wp-stamp-meta">Sciences Po · Human Security</div>
+              <div class="wp-stamp-desc">
+                An interactive Twine story explaining the 3 freedoms, 7 securities,
+                R2P and radicalisation through choices and paths.
+              </div>
+            </div>
+
+            <div class="wp-stamp-item">
+              <div class="wp-stamp-tag">Research paper</div>
+              <div class="wp-stamp-title">
+                French ODA &amp; renewables in West Africa
+              </div>
+              <div class="wp-stamp-meta">Quantitative paper · 2000–2024</div>
+              <div class="wp-stamp-desc">
+                Empirical work on how French official development assistance
+                relates to renewable energy capacity in selected West African states.
+              </div>
+            </div>
+
+            <div class="wp-stamp-item">
+              <div class="wp-stamp-tag">Visual communication</div>
+              <div class="wp-stamp-title">Humanitarian &amp; MENA visuals</div>
+              <div class="wp-stamp-meta">Instagram &amp; presentation assets</div>
+              <div class="wp-stamp-desc">
+                Small series of carousels and slides on migration, humanitarian data
+                and MENA topics for talks and social media.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
+
     </div>
   </div>
 </section>
+
 
 
       <!-- ACTIVITIES -->
@@ -3324,6 +3499,17 @@ document.addEventListener("keydown", e => {
       if (e.key === "ArrowLeft") showPrev();
     });
 
+/* ===============================
+   WORK – PASSPORT FLIP ON CLICK
+=============================== */
+
+const workPassportBook = document.querySelector(".work-passport-book");
+
+if (workPassportBook) {
+  workPassportBook.addEventListener("click", () => {
+    workPassportBook.classList.toggle("is-open");
+  });
+}
 
   </script>
 
