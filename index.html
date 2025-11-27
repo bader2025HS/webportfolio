@@ -536,12 +536,20 @@
   color: #111111;
   transition: background 0.2s ease;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 26px;
+  gap: 14px;
 }
 
+/* left side (category + subtitle) */
+.exp-front-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* existing text */
 .exp-front-main {
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -556,6 +564,42 @@
   max-width: 14ch;
   line-height: 1.15;
 }
+
+/* right side gate block */
+
+.exp-gate {
+  text-align: right;
+  min-width: 90px;
+}
+
+.exp-gate-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #9ca3af;
+}
+
+.exp-gate-code {
+  margin-top: 4px;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--exp-accent);
+}
+
+/* mobile: stack text + gate vertically */
+
+@media (max-width: 640px) {
+  .exp-card-front {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .exp-gate {
+    text-align: left;
+    min-width: 0;
+  }
+}
+
 
 /* BACK – details with logos */
 
@@ -2016,10 +2060,17 @@
       <div class="exp-card exp-card--io">
         <div class="exp-card-inner">
 
-          <div class="exp-card-face exp-card-front">
-            <div class="exp-front-main">International organisation</div>
-            <div class="exp-front-sub">Multilateral &amp; Francophonie</div>
-          </div>
+       <div class="exp-card-face exp-card-front">
+  <div class="exp-front-left">
+    <div class="exp-front-main">International organisation</div>
+    <div class="exp-front-sub">Multilateral &amp; Francophonie</div>
+  </div>
+  <div class="exp-gate">
+    <div class="exp-gate-label">Gate</div>
+    <div class="exp-gate-code">F90</div>
+  </div>
+</div>
+
 
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
@@ -2050,10 +2101,17 @@
       <div class="exp-card exp-card--ngo">
         <div class="exp-card-inner">
 
-          <div class="exp-card-face exp-card-front">
-            <div class="exp-front-main">NGO &amp; humanitarian</div>
-            <div class="exp-front-sub">Data, protection &amp; field support</div>
-          </div>
+       <div class="exp-card-face exp-card-front">
+  <div class="exp-front-left">
+    <div class="exp-front-main">NGO &amp; humanitarian</div>
+    <div class="exp-front-sub">Data, protection &amp; field support</div>
+  </div>
+  <div class="exp-gate">
+    <div class="exp-gate-label">Gate</div>
+    <div class="exp-gate-code">H12</div>
+  </div>
+</div>
+
 
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
@@ -2103,10 +2161,17 @@
       <div class="exp-card exp-card--research">
         <div class="exp-card-inner">
 
-          <div class="exp-card-face exp-card-front">
-            <div class="exp-front-main">Research &amp; science-policy</div>
-            <div class="exp-front-sub">Water, energy &amp; MENA</div>
-          </div>
+         <div class="exp-card-face exp-card-front">
+  <div class="exp-front-left">
+    <div class="exp-front-main">Research &amp; science-policy</div>
+    <div class="exp-front-sub">Water, energy &amp; MENA</div>
+  </div>
+  <div class="exp-gate">
+    <div class="exp-gate-label">Gate</div>
+    <div class="exp-gate-code">W04</div>
+  </div>
+</div>
+
 
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
@@ -2137,10 +2202,17 @@
       <div class="exp-card exp-card--gov">
         <div class="exp-card-inner">
 
-          <div class="exp-card-face exp-card-front">
-            <div class="exp-front-main">Government &amp; city</div>
-            <div class="exp-front-sub">Municipal &amp; twinning</div>
-          </div>
+        <div class="exp-card-face exp-card-front">
+  <div class="exp-front-left">
+    <div class="exp-front-main">Government &amp; city</div>
+    <div class="exp-front-sub">Municipal &amp; twinning</div>
+  </div>
+  <div class="exp-gate">
+    <div class="exp-gate-label">Gate</div>
+    <div class="exp-gate-code">C08</div>
+  </div>
+</div>
+
 
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
@@ -2171,10 +2243,17 @@
       <div class="exp-card exp-card--assoc">
         <div class="exp-card-inner">
 
-          <div class="exp-card-face exp-card-front">
-            <div class="exp-front-main">Association &amp; leadership</div>
-            <div class="exp-front-sub">Student-led MENA projects</div>
-          </div>
+         <div class="exp-card-face exp-card-front">
+  <div class="exp-front-left">
+    <div class="exp-front-main">Association &amp; leadership</div>
+    <div class="exp-front-sub">Student-led MENA projects</div>
+  </div>
+  <div class="exp-gate">
+    <div class="exp-gate-label">Gate</div>
+    <div class="exp-gate-code">S19</div>
+  </div>
+</div>
+
 
           <div class="exp-card-face exp-card-back">
             <div class="exp-card-back-inner">
