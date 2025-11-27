@@ -2863,7 +2863,7 @@ function initSkillsAnimation() {
   });
 }
 
-function scrambleTextOnce(el, finalText, duration = 600, step = 40) {
+function scrambleTextOnce(el, finalText, duration = 2600, step = 70) {
   const length = finalText.length;
   const start = performance.now();
 
@@ -2901,13 +2901,14 @@ function triggerSkillsAnimation() {
 
   const skillEls = Array.from(document.querySelectorAll('#skills [data-skill-animate]'));
 
-  skillEls.forEach((el, index) => {
+  // All scramble simultaneously, slower
+  skillEls.forEach((el) => {
     const finalText = el.dataset.finalText || el.textContent.trim();
-    // small stagger so they don’t all resolve at once
-    setTimeout(() => {
-      scrambleTextOnce(el, finalText, 650, 35);
-    }, index * 40);
+    scrambleTextOnce(el, finalText, 1800, 60);
   });
+}
+
+
 }
 
 // prepare data-finalText as soon as DOM & script loaded
