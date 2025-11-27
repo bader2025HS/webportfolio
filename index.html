@@ -868,57 +868,65 @@
 }
 
 
-  /* ===========================
+ /* ===========================
    WORK – DRIBBBLE GRID
 =========================== */
 
 #work {
-  margin-top: -30px;
-  padding: 10px 0 40px;
+  margin-top: -10px;      /* same as #experience */
+  padding: 10px 0 0;      /* same as #experience */
+  position: relative;
 }
 
-.work-wrapper {
-  max-width: 1050px;
-  width: 100%;
-  margin: 0 auto;
-  padding-top: 40px; /* pushes cards below menu */
-  padding-bottom: 40px;
+.work-layout {
+  position: relative;
+  z-index: 1;
+  max-width: 1050px;      /* same width frame as experience-layout */
+  margin: -20px auto 0;   /* same margin as .experience-layout */
+  padding: 0;
+  display: block;
 }
 
+/* big grid uses same “viewport minus header” height as .exp-mosaic */
 .work-grid {
-  width: 100%;
+  width: 1050px;
+  max-width: 100%;
+  height: calc(100vh - 230px);
+  max-height: calc(100vh - 230px);
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);   /* 3 columns still */
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 18px;
 }
 
-
-/* card frame */
+/* cards */
 
 .work-card {
   background: #f9fafb;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 10px 8px;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 12px 26px rgba(15,23,42,0.12);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.11);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .work-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 34px rgba(15,23,42,0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(15,23,42,0.16);
 }
 
-/* image */
+/* image frame */
 
 .work-card-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;           /* Dribbble-like rectangle */
+  border-radius: 8px;
   background: #e5e7eb;
-  border-radius: 6px;
   overflow: hidden;
-  aspect-ratio: 1 / 1;       /* Dribbble-like square-ish shot */
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .work-card-thumb img {
@@ -928,43 +936,53 @@
   display: block;
 }
 
-/* 2 tags under the image */
+/* tags under image */
 
 .work-card-tags {
-  margin-top: 8px;
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .work-tag {
-  padding: 2px 9px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  padding: 5px 10px 4px;
   border-radius: 999px;
   border: 1px solid #d0d7de;
-  font-size: 0.7rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: #6b7280;
+  background: #ffffff;
+  color: #374151;
 }
 
-/* responsive */
+/* a few accent colors if you want them */
+.work-tag--blue   { border-color:#38bdf8; color:#0369a1; }
+.work-tag--orange { border-color:#fdba74; color:#c2410c; }
+.work-tag--green  { border-color:#86efac; color:#166534; }
+.work-tag--pink   { border-color:#f9a8d4; color:#9d174d; }
+.work-tag--violet { border-color:#c4b5fd; color:#5b21b6; }
+
+/* responsive: same idea as exp-mosaic → relax height and change cols */
 
 @media (max-width: 900px) {
-  .work-wrapper {
-    height: auto;                  /* let it grow on smaller screens */
-    padding-top: 10px;
-  }
   .work-grid {
+    height: auto;
+    max-height: none;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
+  .work-layout {
+    margin: 0 auto 0;
+  }
+
   .work-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 }
-
 
 
 
@@ -2391,82 +2409,79 @@
 
       <!-- WORK -->
 
-    <section id="work">
-  <div class="work-wrapper">
+   <section id="work">
+  <div class="work-layout">
     <div class="work-grid">
 
-      <!-- CARD 1 -->
+      <!-- 1 – Human Security / Twine -->
       <article class="work-card">
         <div class="work-card-thumb">
-          <img src="work-hs-twine.jpg" alt="Human Security Twine project">
+          <img src="work-twine.jpg" alt="Human Security Twine project">
         </div>
         <div class="work-card-tags">
-          <span class="work-tag">Interactive</span>
+          <span class="work-tag work-tag--blue">Interactive</span>
           <span class="work-tag">Human security</span>
         </div>
       </article>
 
-      <!-- CARD 2 -->
+      <!-- 2 – French ODA & renewables -->
       <article class="work-card">
         <div class="work-card-thumb">
-          <img src="work-oda-renewables.jpg" alt="French ODA & renewables">
+          <img src="work-oda.jpg" alt="French ODA & renewables">
         </div>
         <div class="work-card-tags">
-          <span class="work-tag">Quant</span>
+          <span class="work-tag work-tag--orange">Quant</span>
           <span class="work-tag">Energy</span>
         </div>
       </article>
 
-      <!-- CARD 3 -->
+      <!-- 3 – Cox’s Bazar note -->
       <article class="work-card">
         <div class="work-card-thumb">
-          <img src="work-coxs-bazar.jpg" alt="Cox's Bazar note">
+          <img src="work-cox.jpg" alt="Cox's Bazar note">
         </div>
         <div class="work-card-tags">
-          <span class="work-tag">Field</span>
+          <span class="work-tag work-tag--green">Field</span>
           <span class="work-tag">Protection</span>
         </div>
       </article>
 
-      <!-- CARD 4 -->
+      <!-- 4 – Humanitarian visuals -->
       <article class="work-card">
         <div class="work-card-thumb">
-          <img src="work-humanitarian-visuals.jpg" alt="Humanitarian visuals">
+          <img src="work-visuals.jpg" alt="Humanitarian visuals">
         </div>
         <div class="work-card-tags">
-          <span class="work-tag">Visuals</span>
+          <span class="work-tag work-tag--pink">Visuals</span>
           <span class="work-tag">MENA</span>
         </div>
       </article>
 
-      <!-- CARD 5 -->
+      <!-- 5 – OIF implementation note -->
       <article class="work-card">
         <div class="work-card-thumb">
-          <img src="work-oif-brief.jpg" alt="OIF implementation note">
+          <img src="work-oif.jpg" alt="OIF implementation note">
         </div>
         <div class="work-card-tags">
-          <span class="work-tag">Brief</span>
-          <span class="work-tag">OIF</span>
+          <span class="work-tag work-tag--violet">Brief</span>
+          <span class="work-tag">Implementation</span>
         </div>
       </article>
 
-      <!-- CARD 6 -->
+      <!-- 6 – Extra project -->
       <article class="work-card">
         <div class="work-card-thumb">
           <img src="work-extra.jpg" alt="Extra project">
         </div>
         <div class="work-card-tags">
-          <span class="work-tag">Research</span>
-          <span class="work-tag">MENA</span>
+          <span class="work-tag">Extra</span>
+          <span class="work-tag">Project</span>
         </div>
       </article>
 
     </div>
   </div>
 </section>
-
-
-
 
       <!-- ACTIVITIES -->
       <section id="activities">
