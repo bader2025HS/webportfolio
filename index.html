@@ -953,20 +953,37 @@
   position: absolute;
   inset: 0;
   background: #fdf8ee;
-  border: 2px dashed #d8d3c8;
-  border-radius: 28px;
-  padding: 26px 18px 0;
-  padding-top: 70px; /* space for hole */
+  padding: 70px 18px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  backface-visibility: hidden;
+
+  /* tag shape */
   clip-path: polygon(
     50% 0%,
     100% 18%, 100% 100%,
-    0 100%, 0 18%
+    0% 100%, 0% 18%
   );
+
   box-shadow: 0 12px 34px rgba(0,0,0,0.15);
-  backface-visibility: hidden;
+}
+
+    /* FULL-STITCHED BORDER AROUND THE TAG SHAPE */
+.work-tag-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  /* dashed line */
+  border: 2px dashed #d8d3c8;
+
+  /* match the shape so border follows triangle too */
+  clip-path: inherit;
+
+  /* sit behind content */
+  z-index: -1;
 }
 
 /* back side rotated */
