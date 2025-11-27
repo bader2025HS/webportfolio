@@ -869,205 +869,250 @@
 
 
 /* ===========================
-   WORK – VERTICAL STRIPS PANEL
-   replaces old luggage-tag styles
+   WORK – VERTICAL STRIPS
 =========================== */
 
 #work {
-  margin-top: -10px;
-  padding: 30px 0 60px;
+  margin-top: 0;
+  padding: 30px 0 70px;
 }
 
-.work-board {
+.work-layout {
   max-width: 1050px;
   margin: 0 auto;
-  background: #020617;
-  border-radius: 32px;
-  box-shadow: 0 26px 45px rgba(15, 23, 42, 0.45);
+}
+
+.work-shell {
   display: flex;
+  background: #020617;
+  border-radius: 26px;
   overflow: hidden;
+  box-shadow: 0 24px 55px rgba(15,23,42,0.7);
+  min-height: 320px;
 }
 
-/* LEFT SIDE – SELECTED PROJECT TEXT */
+/* LEFT PANEL (text) */
 
-.work-board-left {
-  flex: 1;
-  padding: 32px 34px 26px;
-  color: #e5e7eb;
+.work-main {
+  flex: 3;
+  padding: 32px 40px 34px;
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
 }
 
-.work-selected-label {
+.work-main-label {
   font-size: 0.8rem;
-  letter-spacing: 0.28em;
   text-transform: uppercase;
+  letter-spacing: 0.18em;
   color: #9ca3af;
-  margin-bottom: 10px;
 }
 
-.work-detail-title {
-  font-size: 2.1rem;
-  font-weight: 700;
-  margin-bottom: 14px;
+.work-main-title {
+  font-size: 2rem;
+  line-height: 1.2;
 }
 
-.work-detail-lead {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 18px;
-  color: #d1d5db;
+.work-main-desc {
+  font-size: 0.98rem;
+  max-width: 38rem;
+  color: #e5e7eb;
 }
 
 /* meta rows */
 
-.work-detail-meta {
+.work-main-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 10px 30px;
   font-size: 0.85rem;
+  color: #e5e7eb;
+}
+
+.work-meta-item {
+  display: flex;
+  gap: 6px;
+}
+
+.work-meta-label {
   text-transform: uppercase;
   letter-spacing: 0.16em;
+  font-size: 0.75rem;
   color: #9ca3af;
-  margin-bottom: 14px;
 }
 
-.work-detail-meta span strong {
-  color: #e5e7eb;
-  font-weight: 600;
-}
+/* chips */
 
-.work-detail-chips {
+.work-main-chips {
+  margin-top: 4px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.work-detail-chip {
+.work-chip-pill {
+  font-size: 0.78rem;
   padding: 6px 12px 5px;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  border: 1px solid rgba(148,163,184,0.6);
+  background: rgba(15,23,42,0.9);
 }
 
-/* hide/show articles */
+/* slide-in animation when project changes */
 
 .work-detail {
   display: none;
+  animation: workSlideIn 0.35s ease-out;
 }
 
 .work-detail.is-active {
   display: block;
 }
 
-/* RIGHT SIDE – STRIPS CONTAINER */
-
-.work-board-right {
-  width: 260px;
-  padding: 0;
-  /* will be overridden by JS with a darkened strip color */
-  background: #0f172a;
-  transition: background 0.25s ease;
-  display: flex;
+@keyframes workSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
+/* RIGHT SIDE – vertical strips */
 
 .work-strips {
+  flex: 1.1;
   display: flex;
-  width: 100%;
-  height: 100%;
+  align-self: stretch;      /* make the strip column match panel height */
 }
 
-/* STRIP BUTTONS */
-
 .work-strip {
-  all: unset;
+  position: relative;
+  flex: 0 0 70px;           /* narrower base width */
+  border: none;
   cursor: pointer;
-
-  /* 👉 “pan to the left” effect: one strip gets wider */
-  flex: 0 0 55px;                 /* default width */
+  padding: 20px 0 16px;     /* less bottom padding = no empty space */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 6px 12px;
-  border-left: 1px solid rgba(15, 23, 42, 0.07);
-  position: relative;
+  gap: 12px;
+  color: #020617;
+  height: 100%;             /* fill the dark panel height */
   transition:
-    flex-basis 0.22s ease,
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.18s ease;
+    flex-basis 0.3s ease,
+    opacity 0.2s ease;
 }
 
-/* very light pastel colors */
-.work-strip--hsq { background: #dbeafe; } /* light blue  */
-.work-strip--oda { background: #ffedd5; } /* light orange */
-.work-strip--cox { background: #dcfce7; } /* light green  */
-.work-strip--vsl { background: #ffe4e6; } /* light pink   */
+/* active strip just a bit wider */
+.work-strip.is-active {
+  flex-basis: 82px;
+  opacity: 1;
+  box-shadow: -4px 0 18px rgba(15,23,42,0.35);
+}
+
+/* hide the old + icon */
+.work-strip-plus {
+  display: none;
+}
+
+
+/* rounded outer corners only */
+
+.work-strip:first-child {
+  border-radius: 0 0 0 26px;
+}
+
+.work-strip:last-child {
+  border-radius: 0 26px 26px 0;
+}
+
+/* small + icon */
+
+.work-strip-plus {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* vertical label */
 
 .work-strip-label {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-size: 0.82rem;
-  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #111827;
-  white-space: nowrap;
-  margin-bottom: 12px;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
 }
 
-/* bottom arrow "<" stays */
-.work-strip-arrow {
-  font-size: 1.2rem;
-  margin-bottom: 2px;
-  color: rgba(15, 23, 42, 0.75);
-}
+/* colors per project */
 
-/* 👉 ACTIVE = wider strip + slight shift */
+.work-strip--hsq   { background: #38bdf8; }  /* lighter sky blue */
+.work-strip--oda   { background: #fdba74; }  /* light orange */
+.work-strip--cox   { background: #4ade80; }  /* light green */
+.work-strip--vsl   { background: #fb7185; }  /* light pink/red */
+
+
+/* inactive strips a bit dimmed */
+
+.work-strip {
+  opacity: 0.7;
+}
 
 .work-strip.is-active {
-  flex-basis: 95px;               /* strip “pans” left */
-  transform: translateX(-5px);
-  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.35) inset;
+  flex-grow: 1.3;
+  opacity: 1;
+  box-shadow: -4px 0 18px rgba(15,23,42,0.55);
 }
 
-/* hover only if not active */
+/* tiny caption at bottom of strip */
 
-.work-strip:not(.is-active):hover {
-  flex-basis: 60px;
-  transform: translateX(-3px);
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.3) inset;
+.work-strip-caption {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.8;
+  text-align: center;
+}
+
+/* add the little "<" above the code at the bottom */
+.work-strip-caption::before {
+  content: "‹";
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.9rem;
 }
 
 
-/* responsive */
+/* Responsive */
 
-@media (max-width: 900px) {
-  .work-board {
+@media (max-width: 840px) {
+  .work-shell {
     flex-direction: column-reverse;
   }
-
-  .work-board-right {
-    width: 100%;
-    height: 120px;
+  .work-main {
+    padding: 24px 22px 26px;
   }
-
   .work-strips {
-    height: 100%;
+    min-height: 120px;
   }
-
-  .work-board-left {
-    padding: 26px 22px 24px;
+  .work-strip-label {
+    writing-mode: horizontal-tb;
   }
 }
 
-@media (max-width: 640px) {
-  .work-detail-title {
+@media (max-width: 540px) {
+  .work-main-title {
     font-size: 1.6rem;
   }
+  .work-main-desc {
+    font-size: 0.9rem;
+  }
 }
 
-    
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2487,137 +2532,183 @@
 </section>
 
 
-<!-- WORK – VERTICAL STRIPS PANEL -->
-
-      
+<!-- WORK – VERTICAL STRIPS -->
 <section id="work">
-  <div class="work-board">
+  <div class="work-layout">
+    <div class="work-shell">
 
-    <!-- LEFT: SELECTED PROJECT CONTENT -->
-    <div class="work-board-left">
-      <div class="work-selected-label">Selected work</div>
+      <!-- LEFT PANEL -->
+      <div class="work-main">
 
-      <!-- Human Security Twine -->
-      <article class="work-detail is-active" data-work="hsq">
-        <h2 class="work-detail-title">Human Security Twine project</h2>
-        <p class="work-detail-lead">
-          Interactive Twine module exploring human security, with scenarios,
-          the seven securities and key principles translated into a narrative format.
-        </p>
+        <!-- HSQ detail -->
+        <article class="work-detail is-active" data-project="hsq">
+          <div class="work-main-label">Selected work</div>
+          <h2 class="work-main-title">
+            Human Security Twine project
+          </h2>
+          <p class="work-main-desc">
+            Interactive Twine module exploring Human Security:
+            the 7 securities, core principles, and Responsibility
+            to Protect through branching scenarios and quizzes.
+          </p>
 
-        <div class="work-detail-meta">
-          <span><strong>Type</strong> · Interactive project</span>
-          <span><strong>Context</strong> · Course &amp; personal</span>
-          <span><strong>Focus</strong> · Human security pedagogy</span>
-        </div>
+          <div class="work-main-meta">
+            <div class="work-meta-item">
+              <span class="work-meta-label">Type</span>
+              <span>Interactive learning</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Context</span>
+              <span>Course project, PSIA</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Focus</span>
+              <span>Pedagogy, Human Security</span>
+            </div>
+          </div>
 
-        <div class="work-detail-chips">
-          <span class="work-detail-chip">Twine</span>
-          <span class="work-detail-chip">Scenarios</span>
-          <span class="work-detail-chip">Quiz</span>
-        </div>
-      </article>
+          <div class="work-main-chips">
+            <span class="work-chip-pill">Twine</span>
+            <span class="work-chip-pill">Scenario design</span>
+            <span class="work-chip-pill">Human Security</span>
+          </div>
+        </article>
 
-      <!-- French ODA dataset -->
-      <article class="work-detail" data-work="oda">
-        <h2 class="work-detail-title">French ODA &amp; renewables dataset</h2>
-        <p class="work-detail-lead">
-          Quantitative dataset of French ODA for renewable energy in West Africa,
-          cleaned and structured for analysis, dashboards and policy insights.
-        </p>
+        <!-- ODA detail -->
+        <article class="work-detail" data-project="oda">
+          <div class="work-main-label">Selected work</div>
+          <h2 class="work-main-title">
+            French ODA &amp; renewables dataset
+          </h2>
+          <p class="work-main-desc">
+            Quantitative dataset of French ODA for renewable
+            energy (2000–2024) in West Africa, cleaned and
+            structured for analysis and dashboarding.
+          </p>
 
-        <div class="work-detail-meta">
-          <span><strong>Type</strong> · Quant &amp; energy</span>
-          <span><strong>Context</strong> · Independent research</span>
-          <span><strong>Focus</strong> · Renewables &amp; development finance</span>
-        </div>
+          <div class="work-main-meta">
+            <div class="work-meta-item">
+              <span class="work-meta-label">Type</span>
+              <span>Quant &amp; energy</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Context</span>
+              <span>Independent research</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Focus</span>
+              <span>Renewables, development finance</span>
+            </div>
+          </div>
 
-        <div class="work-detail-chips">
-          <span class="work-detail-chip">Excel</span>
-          <span class="work-detail-chip">Power BI</span>
-          <span class="work-detail-chip">Energy &amp; ODA</span>
-        </div>
-      </article>
+          <div class="work-main-chips">
+            <span class="work-chip-pill">Excel</span>
+            <span class="work-chip-pill">Power BI</span>
+            <span class="work-chip-pill">Energy &amp; ODA</span>
+          </div>
+        </article>
 
-      <!-- Cox's Bazar note -->
-      <article class="work-detail" data-work="cox">
-        <h2 class="work-detail-title">Cox’s Bazar humanitarian brief</h2>
-        <p class="work-detail-lead">
-          Short analytical note on camp dynamics, access to services and
-          protection gaps for Rohingya refugees in Cox’s Bazar.
-        </p>
+        <!-- COX detail -->
+        <article class="work-detail" data-project="cox">
+          <div class="work-main-label">Selected work</div>
+          <h2 class="work-main-title">
+            Cox’s Bazar humanitarian brief
+          </h2>
+          <p class="work-main-desc">
+            Short analytical note on protection risks, service
+            access and coordination in the Rohingya camps,
+            written as a field-style briefing.
+          </p>
 
-        <div class="work-detail-meta">
-          <span><strong>Type</strong> · Field &amp; protection note</span>
-          <span><strong>Context</strong> · Humanitarian coursework</span>
-          <span><strong>Focus</strong> · Risks &amp; coordination</span>
-        </div>
+          <div class="work-main-meta">
+            <div class="work-meta-item">
+              <span class="work-meta-label">Type</span>
+              <span>Field · protection note</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Context</span>
+              <span>Course assignment</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Focus</span>
+              <span>Protection, coordination</span>
+            </div>
+          </div>
 
-        <div class="work-detail-chips">
-          <span class="work-detail-chip">Protection</span>
-          <span class="work-detail-chip">Field analysis</span>
-        </div>
-      </article>
+          <div class="work-main-chips">
+            <span class="work-chip-pill">Humanitarian</span>
+            <span class="work-chip-pill">Protection</span>
+            <span class="work-chip-pill">Briefing note</span>
+          </div>
+        </article>
 
-      <!-- Humanitarian visuals -->
-      <article class="work-detail" data-work="vsl">
-        <h2 class="work-detail-title">Humanitarian visuals &amp; infographics</h2>
-        <p class="work-detail-lead">
-          Set of visuals and infographics for humanitarian / development actors,
-          combining mapping, charts and clean layouts for briefings.
-        </p>
+        <!-- VSL detail -->
+        <article class="work-detail" data-project="vsl">
+          <div class="work-main-label">Selected work</div>
+          <h2 class="work-main-title">
+            Humanitarian visuals &amp; infographics
+          </h2>
+          <p class="work-main-desc">
+            Set of maps, charts and layouts for humanitarian
+            and development actors, combining Mapbox / QGIS
+            exports with clean Canva and Illustrator designs.
+          </p>
 
-        <div class="work-detail-meta">
-          <span><strong>Type</strong> · Visual communication</span>
-          <span><strong>Context</strong> · NGO &amp; course projects</span>
-          <span><strong>Focus</strong> · Storytelling, MENA, data-viz</span>
-        </div>
+          <div class="work-main-meta">
+            <div class="work-meta-item">
+              <span class="work-meta-label">Type</span>
+              <span>Visual communication</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Context</span>
+              <span>NGO &amp; course projects</span>
+            </div>
+            <div class="work-meta-item">
+              <span class="work-meta-label">Focus</span>
+              <span>Storytelling, MENA, data-viz</span>
+            </div>
+          </div>
 
-        <div class="work-detail-chips">
-          <span class="work-detail-chip">Canva</span>
-          <span class="work-detail-chip">Illustrator</span>
-          <span class="work-detail-chip">Data-viz</span>
-        </div>
-      </article>
-    </div>
-
-    <!-- RIGHT: STRIPS -->
-    <div class="work-board-right">
-      <div class="work-strips">
-
-        <button class="work-strip work-strip--hsq is-active"
-                data-work="hsq"
-                data-panel-color="#0369a1">
-          <span class="work-strip-label">Human Security Twine</span>
-          <span class="work-strip-arrow">&lt;</span>
-        </button>
-
-        <button class="work-strip work-strip--oda"
-                data-work="oda"
-                data-panel-color="#b45309">
-          <span class="work-strip-label">French ODA &amp; renewables</span>
-          <span class="work-strip-arrow">&lt;</span>
-        </button>
-
-        <button class="work-strip work-strip--cox"
-                data-work="cox"
-                data-panel-color="#15803d">
-          <span class="work-strip-label">Cox’s Bazar brief</span>
-          <span class="work-strip-arrow">&lt;</span>
-        </button>
-
-        <button class="work-strip work-strip--vsl"
-                data-work="vsl"
-                data-panel-color="#be123c">
-          <span class="work-strip-label">Visuals &amp; infographics</span>
-          <span class="work-strip-arrow">&lt;</span>
-        </button>
+          <div class="work-main-chips">
+            <span class="work-chip-pill">Canva</span>
+            <span class="work-chip-pill">Illustrator</span>
+            <span class="work-chip-pill">Data-viz</span>
+          </div>
+        </article>
 
       </div>
-    </div>
 
+      <!-- RIGHT STRIPS -->
+      <div class="work-strips">
+        <button class="work-strip work-strip--hsq is-active" data-project="hsq">
+          <span class="work-strip-plus">+</span>
+          <span class="work-strip-label">Human security Twine</span>
+          <span class="work-strip-caption">HSQ</span>
+        </button>
+
+        <button class="work-strip work-strip--oda" data-project="oda">
+          <span class="work-strip-plus">+</span>
+          <span class="work-strip-label">French ODA &amp; renewables</span>
+          <span class="work-strip-caption">ODA</span>
+        </button>
+
+        <button class="work-strip work-strip--cox" data-project="cox">
+          <span class="work-strip-plus">+</span>
+          <span class="work-strip-label">Cox’s Bazar brief</span>
+          <span class="work-strip-caption">COX</span>
+        </button>
+
+        <button class="work-strip work-strip--vsl" data-project="vsl">
+          <span class="work-strip-plus">+</span>
+          <span class="work-strip-label">Visuals &amp; infographics</span>
+          <span class="work-strip-caption">VSL</span>
+        </button>
+      </div>
+
+    </div>
   </div>
 </section>
+
 
 
 
@@ -3315,72 +3406,29 @@ document.addEventListener("keydown", e => {
     });
 
 
+
 /* ===============================
-   WORK – STRIPS INTERACTION
+   WORK – VERTICAL STRIPS LOGIC
 =============================== */
 
-const workStrips      = document.querySelectorAll(".work-strip");
-const workDetails     = document.querySelectorAll(".work-detail");
-const workPanelRight  = document.querySelector(".work-board-right");
+const workStrips  = document.querySelectorAll(".work-strip");
+const workDetails = document.querySelectorAll(".work-detail");
 
-/* helper: darken a hex color by `amount` (0–1) */
-function darkenColor(hex, amount) {
-  if (!hex) return "#0f172a";
-  let c = hex.replace("#", "");
-  if (c.length === 3) {
-    c = c.split("").map(ch => ch + ch).join("");
-  }
-  const num = parseInt(c, 16);
-  let r = (num >> 16) & 255;
-  let g = (num >> 8) & 255;
-  let b = num & 255;
-
-  const factor = 1 - amount; // e.g. 0.65
-  r = Math.round(r * factor);
-  g = Math.round(g * factor);
-  b = Math.round(b * factor);
-
-  return (
-    "#" +
-    [r, g, b]
-      .map(v => v.toString(16).padStart(2, "0"))
-      .join("")
-  );
-}
-
-function setActiveWork(key) {
-  // switch content on the left
-  workDetails.forEach(card => {
-    card.classList.toggle("is-active", card.dataset.work === key);
-  });
-
-  // update strips + dark panel color
-  workStrips.forEach(strip => {
-    const isTarget = strip.dataset.work === key;
-    strip.classList.toggle("is-active", isTarget);
-
-    if (isTarget && workPanelRight) {
-      const baseColor = strip.dataset.panelColor; // medium tone
-      if (baseColor) {
-        const darker = darkenColor(baseColor, 0.4); // 👉 much darker version
-        workPanelRight.style.background = darker;
-      }
-    }
-  });
-}
-
-// click behaviour
 workStrips.forEach(strip => {
   strip.addEventListener("click", () => {
-    setActiveWork(strip.dataset.work);
+    const target = strip.dataset.project;
+
+    // activate strip
+    workStrips.forEach(s => s.classList.remove("is-active"));
+    strip.classList.add("is-active");
+
+    // show matching detail panel
+    workDetails.forEach(d => {
+      d.classList.toggle("is-active", d.dataset.project === target);
+    });
   });
 });
 
-// initial state: match the strip that already has .is-active
-const initialActiveStrip = document.querySelector(".work-strip.is-active");
-if (initialActiveStrip) {
-  setActiveWork(initialActiveStrip.dataset.work);
-}
 
   </script>
 
