@@ -884,7 +884,15 @@
   justify-content: center;
   align-items: center;
   min-height: 260px;
-  perspective: 1600px;   /* NEW: needed for 3D flip */
+  perspective: 1600px;  /* NEW: 3D perspective for flip */
+}
+
+    .work-passport-book {
+  position: relative;
+  width: 420px;
+  height: 320px;
+  transform-style: preserve-3d;
+  cursor: pointer; /* click anywhere */
 }
 
 
@@ -900,9 +908,12 @@
 }
 
 .work-passport-cover {
-  position: absolute;           /* was: relative */
-  inset: 0;                     /* fill the book */
-  border-radius: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210px;              /* front cover = left half of the book */
+  height: 100%;
+  border-radius: 16px 0 0 16px;
   background: linear-gradient(145deg, #7b0815, #b01224);
   color: #fefce8;
   box-shadow:
@@ -914,16 +925,18 @@
   justify-content: center;
   align-items: center;
 
-  padding: 30px;
+  padding: 24px;
   text-align: center;
   letter-spacing: 0.06em;
-  gap: 12px;
+  gap: 10px;
 
-  transform-origin: left center;
+  transform-origin: left center;       /* hinge on the spine */
   backface-visibility: hidden;
-  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+              box-shadow 0.3s ease;
   z-index: 2;
 }
+
 
 
 
@@ -1134,6 +1147,81 @@
 }
 
 
+/* double-page spread behind the cover */
+.work-passport-inner-spread {
+  position: absolute;
+  inset: 0;
+  margin-left: 10px;      /* tiny offset so pages look bound */
+  border-radius: 16px;
+  background: #f5f5f4;
+  box-shadow:
+    0 18px 38px rgba(15,23,42,0.35),
+    inset 0 0 0 1px rgba(148,163,184,0.4);
+  display: flex;
+  overflow: hidden;
+  padding: 18px 18px 18px 18px;
+}
+
+/* left & right pages */
+.passport-page {
+  flex: 1;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.passport-page-left {
+  border-right: 1px dashed rgba(148,163,184,0.75);
+}
+
+.passport-page-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #b01224;
+}
+
+.passport-page-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.passport-page-list {
+  padding-left: 16px;
+  line-height: 1.4;
+}
+
+/* OPEN STATE – cover swings to the left side */
+.work-passport-book.is-open .work-passport-cover {
+  transform: rotateY(-170deg) translateX(-12px); /* hinge + slight slide */
+  box-shadow:
+    -8px 10px 26px rgba(15,23,42,0.45);         /* shadow now on left */
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .work-passport-book {
+    width: 340px;
+    height: 260px;
+  }
+
+  .work-passport-cover {
+    width: 180px;
+    padding: 18px;
+  }
+
+  .work-passport-inner-spread {
+    padding: 14px;
+  }
+
+  .passport-page {
+    font-size: 0.82rem;
+  }
+}
 
 
 /* ===========================
@@ -2558,7 +2646,7 @@
 
 
       <!-- WORK -->
-<!-- WORK – PASSPORT WITH INSIDE PAGE -->
+<!-- WORK – PASSPORT COVER + DOUBLE PAGE -->
 <section id="work">
   <div class="work-passport-shell">
     <div class="work-passport-book">
@@ -2575,57 +2663,33 @@
         </div>
       </div>
 
-      <!-- INSIDE PAGE (shown when open) -->
-      <div class="work-passport-inner">
-        <div class="work-passport-page">
+      <!-- DOUBLE PAGE SPREAD (behind the cover) -->
+      <div class="work-passport-inner-spread">
+        <div class="passport-page passport-page-left">
+          <div class="passport-page-label">Left page</div>
+          <div class="passport-page-title">Recent work</div>
+          <ul class="passport-page-list">
+            <li>Human Security Twine – interactive journey (Sciences Po).</li>
+            <li>French ODA &amp; renewables in West Africa – quant paper.</li>
+            <li>Desalination &amp; water–energy projects – MENA focus.</li>
+          </ul>
+        </div>
 
-          <div class="wp-page-header">
-            <div class="wp-page-label">Work stamps</div>
-            <div class="wp-page-sub">
-              A few things I’ve been working on lately.
-            </div>
-          </div>
-
-          <div class="wp-stamp-list">
-            <div class="wp-stamp-item">
-              <div class="wp-stamp-tag">Interactive project</div>
-              <div class="wp-stamp-title">Human Security – Twine journey</div>
-              <div class="wp-stamp-meta">Sciences Po · Human Security</div>
-              <div class="wp-stamp-desc">
-                An interactive Twine story explaining the 3 freedoms, 7 securities,
-                R2P and radicalisation through choices and paths.
-              </div>
-            </div>
-
-            <div class="wp-stamp-item">
-              <div class="wp-stamp-tag">Research paper</div>
-              <div class="wp-stamp-title">
-                French ODA &amp; renewables in West Africa
-              </div>
-              <div class="wp-stamp-meta">Quantitative paper · 2000–2024</div>
-              <div class="wp-stamp-desc">
-                Empirical work on how French official development assistance
-                relates to renewable energy capacity in selected West African states.
-              </div>
-            </div>
-
-            <div class="wp-stamp-item">
-              <div class="wp-stamp-tag">Visual communication</div>
-              <div class="wp-stamp-title">Humanitarian &amp; MENA visuals</div>
-              <div class="wp-stamp-meta">Instagram &amp; presentation assets</div>
-              <div class="wp-stamp-desc">
-                Small series of carousels and slides on migration, humanitarian data
-                and MENA topics for talks and social media.
-              </div>
-            </div>
-          </div>
-
+        <div class="passport-page passport-page-right">
+          <div class="passport-page-label">Right page</div>
+          <div class="passport-page-title">Visuals &amp; briefs</div>
+          <ul class="passport-page-list">
+            <li>Humanitarian &amp; MENA visuals (social + slides).</li>
+            <li>OIF internal-style implementation brief (sample).</li>
+            <li>Fieldwork / refugee protection notes &amp; summaries.</li>
+          </ul>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
 
 
 
@@ -3500,7 +3564,7 @@ document.addEventListener("keydown", e => {
     });
 
 /* ===============================
-   WORK – PASSPORT FLIP ON CLICK
+   WORK – PASSPORT FLIP BOOK
 =============================== */
 
 const workPassportBook = document.querySelector(".work-passport-book");
