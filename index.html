@@ -877,41 +877,77 @@
   padding: 10px 0 40px;
 }
 
-.work-passport-shell {
+    .work-passport-shell {
   max-width: 1050px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 260px;
+  perspective: 1600px; /* NEW: needed for 3D flip */
 }
+
+    .work-passport-book {
+  position: relative;
+  width: 380px;
+  height: 400px;
+  transform-style: preserve-3d;
+  cursor: pointer; /* click anywhere to open/close */
+}
+
 
 /* closed passport cover */
 
 .work-passport-cover {
-  position: relative;
-  width: 380px;
-  height: 400px;
-  border-radius: 16px;
-  background: linear-gradient(145deg, #7b0815, #b01224);
+  position: absolute;           /* changed: was relative */
+  inset: 0;                     /* full size of the book */
+  border-radius: 10px;
+  background: linear-gradient(145deg, #7b0815, #b01224); /* deep passport red */
   color: #fefce8;
   box-shadow:
     0 18px 38px rgba(15,23,42,0.45),
     inset 0 0 0 1px rgba(248,250,252,0.12);
-
-  /* center everything */
+  padding: 28px 24px 22px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  padding: 30px;
-  text-align: center;
-  letter-spacing: 0.06em;
-  gap: 12px;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 2;
+}
 
-  transform: translateY(0);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .work-passport-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: #f5f5f4; /* light paper */
+  box-shadow:
+    0 18px 38px rgba(15,23,42,0.25),
+    inset 0 0 0 1px rgba(15,23,42,0.08);
+  padding: 28px 24px 22px;
+  overflow: hidden;
+
+  transform-origin: left center;
+  transform: rotateY(-180deg);  /* hidden behind the cover at start */
+  backface-visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.work-passport-page {
+  height: 100%;
+  overflow-y: auto;
+}
+
+    /* When the book is "open" */
+.work-passport-book.is-open .work-passport-cover {
+  transform: rotateY(-180deg);
+}
+
+.work-passport-book.is-open .work-passport-inner {
+  transform: rotateY(0deg);
 }
 
 
@@ -2438,20 +2474,34 @@
 
       <!-- WORK -->
       <!-- WORK – PASSPORT COVER ONLY -->
-<section id="work">
+
+      <section id="work">
   <div class="work-passport-shell">
-    <div class="work-passport-cover">
-      <div class="work-passport-emblem-circle">
-        <div class="work-passport-emblem-inner">✈</div>
+    
+    <div class="work-passport-book">
+      
+      <!-- COVER (what you already have styled) -->
+      <div class="work-passport-cover">
+        <!-- your logo, title, etc. -->
+        <div class="work-passport-emblem">MM</div>
+        <h2 class="work-passport-title">Work Experience</h2>
+        <!-- ... -->
       </div>
-      <div class="work-passport-country">REPUBLIC OF PROJECTS</div>
-      <div class="work-passport-title">WORK PASSPORT</div>
-      <div class="work-passport-sub">
-        stamps of research · writing · visuals
+
+      <!-- INSIDE PAGE(S) – appears when open -->
+      <div class="work-passport-inner">
+        <!-- put your current content/cards/timeline here -->
+        <div class="work-passport-page">
+          <!-- example -->
+          <h3>Organisation internationale de la Francophonie (OIF)</h3>
+          <p>Project Design & Monitoring – Data analysis, dashboards, etc.</p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
+
 
 
       <!-- ACTIVITIES -->
@@ -3326,6 +3376,17 @@ document.addEventListener("keydown", e => {
 
 
   </script>
+  
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const book = document.querySelector('.work-passport-book');
+  if (book) {
+    book.addEventListener('click', function () {
+      this.classList.toggle('is-open');
+    });
+  }
+});
+</script>
 
 </body>
 </html>
