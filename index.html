@@ -869,349 +869,134 @@
 
 
     /* ===========================
-   WORK – PASSPORT BOOK
+   WORK – PASSPORT COVER ONLY
 =========================== */
 
 #work {
   margin-top: -10px;
-  padding: 0 0 20px;
+  padding: 10px 0 40px;
 }
 
-.passport-shell {
+.work-passport-shell {
   max-width: 1050px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+}
+
+/* closed passport cover */
+
+.work-passport-cover {
   position: relative;
-  padding: 10px 0 30px;
+  width: 340px;
+  height: 220px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #7b0815, #b01224); /* deep passport red */
+  color: #fefce8;
+  box-shadow:
+    0 18px 38px rgba(15,23,42,0.45),
+    inset 0 0 0 1px rgba(248,250,252,0.12);
+  padding: 28px 24px 22px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  transform: translateY(0);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.passport-header-eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.8rem;
-  color: #6b7280;
+/* tiny “spine” illusion on the left */
+
+.work-passport-cover::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.55);
+  opacity: 0.65;
 }
 
-.passport-header-title {
-  font-size: 1.6rem;
+/* subtle hover = like picking the passport up */
+
+.work-passport-cover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 24px 48px rgba(15,23,42,0.6),
+    inset 0 0 0 1px rgba(248,250,252,0.16);
+}
+
+/* emblem */
+
+.work-passport-emblem-circle {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 2px solid rgba(254,250,199,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.work-passport-emblem-circle::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(254,249,195,0.7);
+}
+
+.work-passport-emblem-inner {
+  font-size: 1.8rem;
+  transform: rotate(-10deg);
+}
+
+/* text */
+
+.work-passport-country {
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.24em;
-  margin-top: 4px;
-}
-
-.passport-header-sub {
-  font-size: 0.9rem;
-  color: #6b7280;
   margin-top: 6px;
+  opacity: 0.9;
 }
 
-/* Book container */
-
-.passport-book {
-  position: relative;
-  background: radial-gradient(circle at 0% 0%,
-              rgba(209, 213, 219, 0.5) 0,
-              transparent 55%),
-              radial-gradient(circle at 100% 100%,
-              rgba(148, 163, 184, 0.35) 0,
-              transparent 55%),
-              #e5e7eb;
-  border-radius: 18px;
-  padding: 26px 56px 32px;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  overflow: visible;
-  transform-origin: center center;
-}
-
-.passport-shell {
-  perspective: 1400px;
-}
-
-/* subtle spine in the middle */
-
-.passport-spine-shadow {
-  position: absolute;
-  top: 18px;
-  bottom: 22px;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    to bottom,
-    rgba(15,23,42,0.35),
-    rgba(15,23,42,0.05),
-    rgba(15,23,42,0.35)
-  );
-  box-shadow:
-    0 0 0 1px rgba(148, 163, 184, 0.35),
-    0 0 18px rgba(15, 23, 42, 0.45);
-}
-
-/* Pages */
-
-.passport-page {
-  position: relative;
-  padding: 0 6px;
-}
-
-.passport-page-inner {
-  position: relative;
-  background:
-    linear-gradient(135deg, rgba(148, 163, 184, 0.08), transparent 40%),
-    #fdf7ec;
-  border-radius: 14px;
-  padding: 18px 18px 20px;
-  box-shadow:
-    inset 0 0 0 1px rgba(209, 213, 219, 0.9),
-    0 14px 24px rgba(15, 23, 42, 0.18);
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* little corner page label (like passport page number) */
-
-.passport-page-label {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 0.65rem;
+.work-passport-title {
+  font-size: 1.1rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #9ca3af;
-}
-
-/* Stamps */
-
-.passport-stamp {
-  position: absolute;
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  border: 2px dashed rgba(148, 163, 184, 0.9);
-  top: 18px;
-  left: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-12deg);
-  opacity: 0.75;
-}
-
-.passport-stamp::before {
-  content: attr(data-label);
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.26em;
+  margin-top: 8px;
   text-align: center;
-  color: #4b5563;
 }
 
-/* Color variations */
-
-.passport-stamp--entry {
-  border-color: rgba(37, 99, 235, 0.8);
-  color: #1d4ed8;
-}
-
-.passport-stamp--exit {
-  border-color: rgba(220, 38, 38, 0.85);
-  color: #b91c1c;
-}
-
-.passport-stamp--transfer {
-  border-color: rgba(0, 159, 165, 0.9);
-  color: #047c80;
-}
-
-/* Text on page */
-
-.passport-work-tag {
-  margin-left: 100px; /* clears the stamp */
+.work-passport-sub {
   font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #6b7280;
+  opacity: 0.85;
+  margin-top: 4px;
+  text-align: center;
 }
 
-.passport-work-title {
-  margin-left: 100px;
-  font-size: 1.05rem;
-  margin-top: 2px;
-}
+/* responsive */
 
-.passport-work-meta {
-  margin-left: 100px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-.passport-work-desc {
-  margin-left: 100px;
-  font-size: 0.82rem;
-  color: #4b5563;
-  margin-top: 6px;
-}
-
-.passport-work-link {
-  margin-left: 100px;
-  margin-top: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #009fa5;
-  border-bottom: 1px solid rgba(0, 159, 165, 0.35);
-  padding-bottom: 2px;
-}
-
-.passport-work-link:hover {
-  color: #00787d;
-  border-bottom-color: rgba(0, 120, 125, 0.7);
-}
-
-/* NAV BUTTONS */
-
-.passport-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 34px;
-  height: 70px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(15, 23, 42, 0.85);
-  color: #f9fafb;
-  cursor: pointer;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 12px 22px rgba(15, 23, 42, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  z-index: 4;
-}
-
-.passport-nav--prev { left: 12px; }
-.passport-nav--next { right: 12px; }
-
-.passport-nav:hover {
-  background: #0b1120;
-  transform: translateY(-50%) translateY(-2px);
-  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.45);
-}
-
-/* Bottom status */
-
-.passport-status {
-  grid-column: 1 / span 2;
-  margin-top: 14px;
-  font-size: 0.78rem;
-  display: flex;
-  justify-content: space-between;
-  color: #6b7280;
-}
-
-.passport-status-pages {
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-}
-
-.passport-status-hint {
-  font-style: italic;
-}
-
-/* Flip animation on the whole book */
-
-.passport-book--turning-right {
-  animation: passportTurnRight 0.4s ease;
-}
-
-.passport-book--turning-left {
-  animation: passportTurnLeft 0.4s ease;
-}
-
-@keyframes passportTurnRight {
-  0% {
-    transform: rotateY(0deg);
+@media (max-width: 600px) {
+  .work-passport-shell {
+    min-height: 220px;
   }
-  45% {
-    transform: rotateY(-14deg);
-    box-shadow: 0 24px 46px rgba(15, 23, 42, 0.4);
-  }
-  100% {
-    transform: rotateY(0deg);
+
+  .work-passport-cover {
+    width: 300px;
+    height: 200px;
+    padding: 24px 20px 18px;
   }
 }
 
-@keyframes passportTurnLeft {
-  0% {
-    transform: rotateY(0deg);
-  }
-  45% {
-    transform: rotateY(14deg);
-    box-shadow: 0 24px 46px rgba(15, 23, 42, 0.4);
-  }
-  100% {
-    transform: rotateY(0deg);
-  }
-}
-
-/* Responsive */
-
-@media (max-width: 900px) {
-  .passport-book {
-    padding: 22px 46px 26px;
-  }
-
-  .passport-page-inner {
-    min-height: 210px;
-  }
-
-  .passport-work-title {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 720px) {
-  .passport-book {
-    grid-template-columns: 1fr;
-    padding: 22px 30px 26px;
-  }
-
-  .passport-spine-shadow {
-    display: none;
-  }
-
-  .passport-page {
-    padding: 0;
-  }
-
-  .passport-page--left {
-    margin-bottom: 12px;
-  }
-
-  .passport-nav--prev {
-    left: 8px;
-  }
-  .passport-nav--next {
-    right: 8px;
-  }
-
-  .passport-status {
-    flex-direction: column;
-    gap: 4px;
-  }
-}
 
 
 /* ===========================
@@ -2636,94 +2421,17 @@
 
 
       <!-- WORK -->
-      <!-- WORK – PASSPORT BOOK -->
+      <!-- WORK – PASSPORT COVER ONLY -->
 <section id="work">
-  <div class="passport-shell">
-    <div class="passport-header">
-      <div class="passport-header-eyebrow">Selected work</div>
-      <div class="passport-header-title">Project passport</div>
-      <div class="passport-header-sub">
-        Flip through a few stamps from research, writing & visual projects.
+  <div class="work-passport-shell">
+    <div class="work-passport-cover">
+      <div class="work-passport-emblem-circle">
+        <div class="work-passport-emblem-inner">✈</div>
       </div>
-    </div>
-
-    <div class="passport-book" id="passportBook">
-      <div class="passport-spine-shadow"></div>
-
-      <!-- LEFT PAGE -->
-      <div class="passport-page passport-page--left">
-        <div class="passport-page-inner">
-          <div class="passport-page-label">PAGE L</div>
-          <div class="passport-stamp passport-stamp--entry"
-               id="pw-left-stamp"
-               data-label="ENTRY VISA"></div>
-
-          <div class="passport-work-tag" id="pw-left-tag">Research</div>
-          <h3 class="passport-work-title" id="pw-left-title">
-            Human Security – Twine
-          </h3>
-          <p class="passport-work-meta" id="pw-left-meta">
-            Sciences Po · Interactive course project
-          </p>
-          <p class="passport-work-desc" id="pw-left-desc">
-            Short interactive narrative built in Twine to explore the 3 freedoms,
-            7 securities and R2P in a human security framework.
-          </p>
-          <a class="passport-work-link"
-             id="pw-left-link"
-             href="#"
-             target="_blank"
-             rel="noopener">
-            Open project ↗
-          </a>
-        </div>
-      </div>
-
-      <!-- RIGHT PAGE -->
-      <div class="passport-page passport-page--right">
-        <div class="passport-page-inner">
-          <div class="passport-page-label">PAGE R</div>
-          <div class="passport-stamp passport-stamp--exit"
-               id="pw-right-stamp"
-               data-label="EXIT STAMP"></div>
-
-          <div class="passport-work-tag" id="pw-right-tag">Paper</div>
-          <h3 class="passport-work-title" id="pw-right-title">
-            ODA & renewables in West Africa
-          </h3>
-          <p class="passport-work-meta" id="pw-right-meta">
-            Research paper · 2000–2024 dataset
-          </p>
-          <p class="passport-work-desc" id="pw-right-desc">
-            Quantitative analysis of how French ODA relates to installed
-            renewable energy capacity in West African countries.
-          </p>
-          <a class="passport-work-link"
-             id="pw-right-link"
-             href="#"
-             target="_blank"
-             rel="noopener">
-            View PDF ↗
-          </a>
-        </div>
-      </div>
-
-      <!-- NAV BUTTONS -->
-      <button class="passport-nav passport-nav--prev" id="passportPrev" aria-label="Previous pages">
-        ‹
-      </button>
-      <button class="passport-nav passport-nav--next" id="passportNext" aria-label="Next pages">
-        ›
-      </button>
-
-      <!-- BOTTOM STATUS -->
-      <div class="passport-status">
-        <span class="passport-status-pages">
-          Spread <span id="passportSpreadIndex">1</span>/<span id="passportSpreadTotal">3</span>
-        </span>
-        <span class="passport-status-hint">
-          Click arrows to flip pages.
-        </span>
+      <div class="work-passport-country">REPUBLIC OF PROJECTS</div>
+      <div class="work-passport-title">WORK PASSPORT</div>
+      <div class="work-passport-sub">
+        stamps of research · writing · visuals
       </div>
     </div>
   </div>
