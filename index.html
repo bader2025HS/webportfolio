@@ -867,6 +867,288 @@
   color: var(--exp-accent);
 }
 
+
+
+
+    /* ===========================
+   WORK – PASSPORT PAGE
+=========================== */
+
+#work {
+  margin-top: 10px;
+}
+
+.work-passport {
+  max-width: 1050px;
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  background: #fdfbf7; /* slightly off-white like passport paper */
+  padding: 24px 28px 26px;
+  position: relative;
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+/* vertical fold like an open passport */
+.work-passport::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(148, 163, 184, 0),
+    rgba(148, 163, 184, 0.8),
+    rgba(148, 163, 184, 0)
+  );
+}
+
+/* subtle security pattern background */
+.work-passport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 0 0, rgba(0, 159, 165, 0.04), transparent 55%),
+                    radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.04), transparent 55%);
+  pointer-events: none;
+}
+
+.work-passport-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* header small line */
+
+.work-passport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.work-passport-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #6b7280;
+}
+
+.work-passport-subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* layout: left stamps, right details */
+
+.work-passport-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 22px;
+}
+
+/* left = stamps "page" */
+
+.work-stamp-page {
+  position: relative;
+  padding: 10px 6px 4px;
+}
+
+/* faint guidelines like passport lines */
+.work-stamp-page::before {
+  content: "";
+  position: absolute;
+  inset: 8px 4px;
+  border-radius: 14px;
+  border: 1px dashed rgba(209, 213, 219, 0.7);
+  pointer-events: none;
+}
+
+/* grid for stamps, then each stamp slightly rotated */
+
+.work-stamp-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 16px 16px 10px;
+}
+
+/* each stamp */
+
+.work-stamp {
+  position: relative;
+  padding: 10px 10px 8px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0f766e;
+  background: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+/* different colours per stamp type */
+
+.work-stamp--hs {
+  color: #2563eb;
+}
+
+.work-stamp--oda {
+  color: #b45309;
+}
+
+.work-stamp--cox {
+  color: #047857;
+}
+
+.work-stamp--oif {
+  color: #7c3aed;
+}
+
+.work-stamp--ig {
+  color: #db2777;
+}
+
+/* stamp text bits */
+
+.work-stamp-label {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+.work-stamp-main {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.work-stamp-meta {
+  font-size: 0.65rem;
+  opacity: 0.85;
+}
+
+/* little star / circle mark */
+
+.work-stamp-mark {
+  font-size: 0.7rem;
+  margin-top: 2px;
+}
+
+/* slight random rotation feel */
+.work-stamp:nth-child(1) { transform: rotate(-6deg); }
+.work-stamp:nth-child(2) { transform: rotate(4deg); }
+.work-stamp:nth-child(3) { transform: rotate(2deg); }
+.work-stamp:nth-child(4) { transform: rotate(-3deg); }
+.work-stamp:nth-child(5) { transform: rotate(5deg); }
+
+/* hover brings stamp forward */
+
+.work-stamp:hover {
+  transform: translateY(-2px) scale(1.02) rotate(0deg);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+  background: #ffffff;
+}
+
+/* active stamp state */
+
+.work-stamp.is-active {
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.22);
+}
+
+/* right = details "entry page" */
+
+.work-details-page {
+  border-radius: 14px;
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.work-details-placeholder {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+.work-details-type {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+}
+
+.work-details-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.work-details-meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.work-details-list {
+  margin: 6px 0 2px;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  color: #374151;
+  line-height: 1.45;
+}
+
+.work-details-link {
+  margin-top: 8px;
+}
+
+.work-details-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid #009fa5;
+  color: #009fa5;
+  text-decoration: none;
+  background: #f0fdfa;
+  transition: 0.2s ease;
+}
+
+.work-details-link a:hover {
+  background: #009fa5;
+  color: #ffffff;
+}
+
+/* responsive */
+
+@media (max-width: 800px) {
+  .work-passport-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .work-passport::before {
+    left: 0;       /* hide vertical fold on small screens */
+    width: 0;
+  }
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2289,9 +2571,85 @@
 
 
       <!-- WORK -->
-      <section id="work">
-        <p class="placeholder">Work section content goes here.</p>
-      </section>
+      <!-- WORK – PASSPORT PAGE -->
+<section id="work">
+  <div class="work-passport">
+    <div class="work-passport-inner">
+
+      <div class="work-passport-header">
+        <span class="work-passport-title">Portfolio – Selected work</span>
+        <span class="work-passport-subtitle">
+          Click a stamp to open the page.
+        </span>
+      </div>
+
+      <div class="work-passport-layout">
+        <!-- LEFT: STAMPS -->
+        <div class="work-stamp-page">
+          <div class="work-stamp-grid">
+
+            <!-- Human Security Twine -->
+            <button class="work-stamp work-stamp--hs"
+                    data-work-id="hs">
+              <span class="work-stamp-label">Transit visa</span>
+              <span class="work-stamp-main">Human Security Twine</span>
+              <span class="work-stamp-meta">Interactive project</span>
+              <span class="work-stamp-mark">✧ HS-01</span>
+            </button>
+
+            <!-- ODA research paper -->
+            <button class="work-stamp work-stamp--oda"
+                    data-work-id="oda">
+              <span class="work-stamp-label">Entry stamp</span>
+              <span class="work-stamp-main">ODA &amp; renewables</span>
+              <span class="work-stamp-meta">Quantitative paper</span>
+              <span class="work-stamp-mark">✦ OD-24</span>
+            </button>
+
+            <!-- Refugees in Cox Bazar -->
+            <button class="work-stamp work-stamp--cox"
+                    data-work-id="cox">
+              <span class="work-stamp-label">Arrival</span>
+              <span class="work-stamp-main">Cox’s Bazar refugees</span>
+              <span class="work-stamp-meta">Policy memo</span>
+              <span class="work-stamp-mark">✺ CB-19</span>
+            </button>
+
+            <!-- OIF brief note -->
+            <button class="work-stamp work-stamp--oif"
+                    data-work-id="oif">
+              <span class="work-stamp-label">Mission</span>
+              <span class="work-stamp-main">OIF project brief</span>
+              <span class="work-stamp-meta">Internal note</span>
+              <span class="work-stamp-mark">✸ FR-90</span>
+            </button>
+
+            <!-- Instagram posts -->
+            <button class="work-stamp work-stamp--ig"
+                    data-work-id="ig">
+              <span class="work-stamp-label">Souvenir</span>
+              <span class="work-stamp-main">Instagram visuals</span>
+              <span class="work-stamp-meta">Comms posts</span>
+              <span class="work-stamp-mark">✺ IG-04</span>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: DETAILS PAGE -->
+        <div class="work-details-page" id="workDetails">
+          <div class="work-details-placeholder">
+            This spread is almost blank – just like the first page of a new passport.
+            <br />
+            <strong>Tap a stamp on the left</strong> to open a project page with a short summary and a link.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <!-- ACTIVITIES -->
       <section id="activities">
@@ -2726,6 +3084,117 @@ expCards.forEach(card => {
       assocCard.classList.add("exp-expanded");
       researchCard.style.display = "none";
     }
+  });
+});
+
+    /* ===============================
+   WORK – PASSPORT STAMPS
+=============================== */
+
+const workDetailsEl = document.getElementById("workDetails");
+const workStamps = document.querySelectorAll(".work-stamp");
+
+/* content for each stamp */
+const WORK_ITEMS = {
+  hs: {
+    type: "Interactive project · Human Security course",
+    title: "Human Security – Twine narrative & quiz",
+    meta: "Sciences Po · 2025",
+    bullets: [
+      "Built a fully interactive Twine story covering key Human Security concepts (3 Freedoms, 7 Securities, R2P, radicalisation).",
+      "Mixed scenario-based choices, short explanations and quiz passages to test understanding.",
+      "Designed a clean visual style so it can be used as a teaching support or portfolio piece."
+    ],
+    link: "https://…",          // 👉 put your Twine URL here
+    linkLabel: "Open Twine project"
+  },
+  oda: {
+    type: "Research paper · Quantitative analysis",
+    title: "Official Development Assistance & renewable capacity",
+    meta: "Independent research · 2024",
+    bullets: [
+      "Explored the relationship between French ODA and renewable energy capacity in West Africa (2000–2024).",
+      "Cleaned and merged multiple datasets, then ran descriptive and regression analysis.",
+      "Discussed limitations and policy implications for future climate & energy programming."
+    ],
+    link: "oda-paper.pdf",     // 👉 path to your PDF
+    linkLabel: "Download paper (PDF)"
+  },
+  cox: {
+    type: "Policy memo · Forced displacement",
+    title: "Protecting refugees in Cox’s Bazar, Bangladesh",
+    meta: "Course assignment · 2023",
+    bullets: [
+      "Analysed protection challenges for Rohingya refugees in Cox’s Bazar.",
+      "Mapped key stakeholders and constraints on durable solutions.",
+      "Proposed operational recommendations for humanitarian actors and donors."
+    ],
+    link: "cox-bazar-memo.pdf",  // 👉 path to your PDF
+    linkLabel: "Download memo (PDF)"
+  },
+  oif: {
+    type: "Internal brief · Monitoring & evaluation",
+    title: "OIF – Project implementation snapshot",
+    meta: "OIF · Project Design & Monitoring Unit · 2024",
+    bullets: [
+      "Produced a concise note on progress of selected development projects across Francophonie countries.",
+      "Summarised key indicators and challenges using operational data from field teams.",
+      "Contributed to the evidence base for the 2025 Implementation Report."
+    ],
+    link: "oif-brief.pdf",      // 👉 path to your brief (if you can share)
+    linkLabel: "View brief (PDF)"
+  },
+  ig: {
+    type: "Visual communication · Social media",
+    title: "Instagram posts – projects & fieldwork",
+    meta: "Selection of 3–4 posts",
+    bullets: [
+      "Designed carousel posts combining photos, short captions and key figures.",
+      "Highlighted field experiences, association projects and research work.",
+      "Adapted visuals for readability on mobile and consistency with existing branding."
+    ],
+    link: "https://instagram.com/…",  // 👉 or a Notion / drive folder
+    linkLabel: "View posts"
+  }
+};
+
+function renderWorkDetails(id) {
+  const item = WORK_ITEMS[id];
+  if (!item) return;
+
+  const bulletsHtml = item.bullets
+    .map(b => `<li>${b}</li>`)
+    .join("");
+
+  workDetailsEl.innerHTML = `
+    <div class="work-details-type">${item.type}</div>
+    <div class="work-details-title">${item.title}</div>
+    <div class="work-details-meta">${item.meta}</div>
+    <ul class="work-details-list">
+      ${bulletsHtml}
+    </ul>
+    ${
+      item.link
+        ? `<div class="work-details-link">
+             <a href="${item.link}" target="_blank" rel="noopener">
+               <span>Open file</span> <span>↗</span>
+             </a>
+           </div>`
+        : ""
+    }
+  `;
+}
+
+/* interactions */
+
+workStamps.forEach(stamp => {
+  stamp.addEventListener("click", () => {
+    const id = stamp.getAttribute("data-work-id");
+    // active state
+    workStamps.forEach(s => s.classList.remove("is-active"));
+    stamp.classList.add("is-active");
+    // update panel
+    renderWorkDetails(id);
   });
 });
 
