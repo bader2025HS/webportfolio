@@ -823,6 +823,216 @@
   color: var(--exp-accent);
 }
 
+
+    /* ===========================
+   WORK – RUNWAY GRID
+=========================== */
+
+#work {
+  margin-top: -10px;
+  padding: 10px 0 50px;
+}
+
+.work-runway {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 40px 10px 40px;
+  position: relative;
+}
+
+/* central dashed runway line */
+.work-runway::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  bottom: 16px;
+  width: 2px;
+  transform: translateX(-50%);
+  background-image: linear-gradient(
+    to bottom,
+    #d4d4d8 0 10px,
+    transparent 10px 20px
+  );
+  opacity: 0.7;
+}
+
+/* small header */
+.work-heading {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 26px;
+}
+
+/* each item = one gate off the runway */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 26px;
+}
+
+.work-item {
+  position: relative;
+}
+
+/* gate button (very minimal info) */
+
+.work-gate {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  transition: border 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* little connector from gate to runway */
+
+.work-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 1px;
+  background: #d4d4d8;
+}
+
+.work-item--left::before {
+  right: -22px;
+}
+
+.work-item--right::before {
+  left: -22px;
+}
+
+/* gate label pieces */
+
+.work-gate-code {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.work-gate-title {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.work-gate-tag {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #009fa5;
+}
+
+/* hover + active */
+
+.work-gate:hover {
+  border-color: #009fa5;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
+  transform: translateY(-1px);
+}
+
+.work-item.is-open .work-gate {
+  border-color: #009fa5;
+  background: #e6f9f9;
+}
+
+/* hidden details panel */
+
+.work-details {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+  padding: 0 14px;
+}
+
+.work-item.is-open .work-details {
+  max-height: 260px; /* enough for text + buttons */
+  opacity: 1;
+  padding-top: 10px;
+}
+
+/* inside panel */
+
+.work-details-inner {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 14px 16px 12px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.work-details-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.work-details-meta {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+/* buttons */
+
+.work-links {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.work-link-btn {
+  border-radius: 999px;
+  border: 1px solid #d0d7de;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: #111;
+  background: #f9fafb;
+  transition: 0.2s;
+}
+
+.work-link-btn:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
+
+/* responsive */
+
+@media (max-width: 720px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+  .work-runway::before {
+    left: 12px;
+  }
+  .work-item--left::before,
+  .work-item--right::before {
+    display: none;
+  }
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -2210,9 +2420,125 @@
 
 
       <!-- WORK -->
-      <section id="work">
-        <p class="placeholder">Work section content goes here.</p>
-      </section>
+      <!-- WORK – RUNWAY VIEW -->
+<section id="work">
+  <div class="work-runway">
+    <div class="work-heading">Selected work – follow the gates</div>
+
+    <div class="work-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="work-item work-item--left">
+        <button class="work-gate" type="button" data-work="hs">
+          <span class="work-gate-code">Gate A12</span>
+          <span class="work-gate-title">Human Security – Twine</span>
+          <span class="work-gate-tag">Interactive</span>
+        </button>
+        <div class="work-details">
+          <div class="work-details-inner">
+            <div class="work-details-title">Human Security – Interactive Twine project</div>
+            <div class="work-details-meta">Course project · 2024</div>
+            <p>
+              Non-linear interactive story explaining core Human Security concepts
+              (3 freedoms, 7 securities, R2P, radicalisation, IOs) with quizzes.
+            </p>
+            <div class="work-links">
+              <a href="LINK_TO_TWINE" target="_blank" class="work-link-btn">Open project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item work-item--right">
+        <button class="work-gate" type="button" data-work="oda">
+          <span class="work-gate-code">Gate B05</span>
+          <span class="work-gate-title">ODA &amp; renewables</span>
+          <span class="work-gate-tag">Research</span>
+        </button>
+        <div class="work-details">
+          <div class="work-details-inner">
+            <div class="work-details-title">Official Development Assistance &amp; renewable energy</div>
+            <div class="work-details-meta">Research paper · PDF</div>
+            <p>
+              Quantitative study of the impact of French ODA on renewable energy
+              capacity in West Africa (2000–2024).
+            </p>
+            <div class="work-links">
+              <a href="ODA_PAPER.pdf" target="_blank" class="work-link-btn">View PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item work-item--left">
+        <button class="work-gate" type="button" data-work="cox">
+          <span class="work-gate-code">Gate C07</span>
+          <span class="work-gate-title">Refugees in Cox’s Bazar</span>
+          <span class="work-gate-tag">Essay</span>
+        </button>
+        <div class="work-details">
+          <div class="work-details-inner">
+            <div class="work-details-title">Humanitarian response in Cox’s Bazar</div>
+            <div class="work-details-meta">Analytical paper · PDF</div>
+            <p>
+              Critical analysis of protection, governance and service delivery in the
+              Rohingya refugee camps of Cox’s Bazar.
+            </p>
+            <div class="work-links">
+              <a href="COXS_BAZAR_PAPER.pdf" target="_blank" class="work-link-btn">View PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item work-item--right">
+        <button class="work-gate" type="button" data-work="oif">
+          <span class="work-gate-code">Gate D10</span>
+          <span class="work-gate-title">OIF brief note</span>
+          <span class="work-gate-tag">Internal</span>
+        </button>
+        <div class="work-details">
+          <div class="work-details-inner">
+            <div class="work-details-title">Project Design &amp; Monitoring – note</div>
+            <div class="work-details-meta">OIF · 2024</div>
+            <p>
+              Short note summarising indicators and trends from operational data
+              across Francophonie member states.
+            </p>
+            <div class="work-links">
+              <a href="OIF_NOTE.pdf" target="_blank" class="work-link-btn">View PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item work-item--left">
+        <button class="work-gate" type="button" data-work="insta">
+          <span class="work-gate-code">Gate E03</span>
+          <span class="work-gate-title">Instagram visuals</span>
+          <span class="work-gate-tag">Comms</span>
+        </button>
+        <div class="work-details">
+          <div class="work-details-inner">
+            <div class="work-details-title">Instagram posts &amp; visual communication</div>
+            <div class="work-details-meta">Selection of 3–4 posts</div>
+            <p>
+              Social media visuals designed for projects and associations
+              (layout, colours, messaging).
+            </p>
+            <div class="work-links">
+              <a href="LINK_TO_INSTAGRAM_OR_DRIVE" target="_blank" class="work-link-btn">
+                View posts
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       <!-- ACTIVITIES -->
       <section id="activities">
@@ -2650,6 +2976,25 @@ expCards.forEach(card => {
   });
 });
 
+/* ===============================
+   WORK – RUNWAY TOGGLE
+=============================== */
+
+const workItems = document.querySelectorAll(".work-item");
+const workGates = document.querySelectorAll(".work-gate");
+
+workGates.forEach(gate => {
+  gate.addEventListener("click", () => {
+    const parent = gate.closest(".work-item");
+    const isOpen = parent.classList.contains("is-open");
+
+    // close others
+    workItems.forEach(it => it.classList.remove("is-open"));
+
+    // toggle current
+    if (!isOpen) parent.classList.add("is-open");
+  });
+});
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
