@@ -868,150 +868,241 @@
 }
 
 
-    /* ===========================
-   WORK – PASSPORT COVER ONLY
+  /* ===========================
+   WORK – GRID BOARD
+   (Dribbble-style)
 =========================== */
 
 #work {
-  margin-top: -20px;
-  padding: 10px 0 40px;
+  margin-top: -10px;
+  padding: 10px 0 0;
+  position: relative;
 }
 
-.work-passport-shell {
+/* main board container */
+.work-board {
   max-width: 1050px;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 260px;
-}
-
-/* closed passport cover */
-
-.work-passport-cover {
-  position: relative;
-  width: 380px;
-  height: 400px;
-  border-radius: 16px;
-  background: linear-gradient(145deg, #7b0815, #b01224);
-  color: #fefce8;
-  box-shadow:
-    0 18px 38px rgba(15,23,42,0.45),
-    inset 0 0 0 1px rgba(248,250,252,0.12);
-
-  /* center everything */
+  height: calc(100vh - 230px);      /* fills viewport like Experience */
+  max-height: calc(100vh - 230px);
+  background: #f9fafb;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 42px rgba(15,23,42,0.12);
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 30px;
-  text-align: center;
-  letter-spacing: 0.06em;
-  gap: 12px;
-
-  transform: translateY(0);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-/* tiny “spine” illusion on the left */
-
-.work-passport-cover::before {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 10px;
-  bottom: 10px;
-  width: 3px;
-  border-radius: 999px;
-  background: rgba(15,23,42,0.55);
-  opacity: 0.65;
-}
-
-/* subtle hover = like picking the passport up */
-
-.work-passport-cover:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 24px 48px rgba(15,23,42,0.6),
-    inset 0 0 0 1px rgba(248,250,252,0.16);
-}
-
-/* emblem */
-
-    .work-passport-emblem-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid rgba(254,250,199,0.9);
+/* top toolbar (small, minimal) */
+.work-toolbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  position: relative;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
-.work-passport-emblem-circle::before {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border-radius: 50%;
-  border: 1px dashed rgba(254,249,195,0.7);
-}
-
-.work-passport-emblem-inner {
-  font-size: 2.4rem;
-  transform: rotate(-10deg);
-}
-
-
-/* text */
-
-.work-passport-country {
-  font-size: 0.9rem;
+.work-toolbar-title {
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.24em;
-  opacity: 0.9;
+  color: #6b7280;
 }
 
-.work-passport-title {
-  font-size: 1.7rem;
+.work-toolbar-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.work-filter-pill {
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 6px 12px;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
-  margin-top: 6px;
+  letter-spacing: 0.16em;
+  background: #ffffff;
+  color: #6b7280;
+  cursor: pointer;
+  transition: 0.18s ease;
 }
 
-.work-passport-sub {
+.work-filter-pill.is-active,
+.work-filter-pill:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
+
+/* grid of tiles */
+
+.work-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 14px;
+}
+
+/* Dribbble-style tiles: abstract first, details on hover */
+
+.work-tile {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #e5e7eb;
+  cursor: pointer;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.work-tile-thumb {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(40%) brightness(0.92);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+/* category colored “thumbs” – abstract shapes */
+
+.work-thumb--interactive {
+  background-image:
+    radial-gradient(circle at 0% 0%, #e0f2fe 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, #22c55e 0, transparent 55%),
+    linear-gradient(135deg, #0ea5e9, #22c55e);
+}
+
+.work-thumb--quant {
+  background-image:
+    radial-gradient(circle at 0% 100%, #fef3c7 0, transparent 55%),
+    radial-gradient(circle at 120% -10%, #f97316 0, transparent 45%),
+    linear-gradient(135deg, #facc15, #f97316);
+}
+
+.work-thumb--field {
+  background-image:
+    radial-gradient(circle at 0% 0%, #dcfce7 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, #22c55e 0, transparent 45%),
+    linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.work-thumb--visuals {
+  background-image:
+    radial-gradient(circle at 0% 100%, #fce7f3 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, #a855f7 0, transparent 55%),
+    linear-gradient(135deg, #ec4899, #8b5cf6);
+}
+
+.work-thumb--brief {
+  background-image:
+    radial-gradient(circle at 0% 0%, #e0e7ff 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, #4f46e5 0, transparent 55%),
+    linear-gradient(135deg, #6366f1, #0ea5e9);
+}
+
+/* small chip – visible even before hover (minimal text) */
+
+.work-tile-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #111827;
+  box-shadow: 0 6px 14px rgba(15,23,42,0.15);
+}
+
+/* hover overlay with actual info */
+
+.work-tile-overlay {
+  position: absolute;
+  inset: 10px;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: linear-gradient(
+    to bottom,
+    rgba(15,23,42,0.0),
+    rgba(15,23,42,0.80)
+  );
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.work-tile-title {
   font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.work-tile-meta {
+  font-size: 0.78rem;
   opacity: 0.9;
+}
+
+/* subtle “stats” line – like Dribbble, but small */
+
+.work-tile-stats {
   margin-top: 6px;
+  font-size: 0.72rem;
+  opacity: 0.75;
 }
 
+/* hover effects */
 
-/* responsive */
+.work-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgba(15,23,42,0.20);
+}
 
-@media (max-width: 600px) {
-  .work-passport-shell {
-    min-height: 260px;
-  }
+.work-tile:hover .work-tile-thumb {
+  transform: scale(1.04);
+  filter: grayscale(0%) brightness(1);
+}
 
-  .work-passport-cover {
-    width: 320px;
-    height: 300px;
-    padding: 24px;
-  }
+.work-tile:hover .work-tile-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  .work-passport-emblem-circle {
-    width: 90px;
-    height: 90px;
-  }
+/* When filtered out – just fade them, keep layout so no scroll changes */
 
-  .work-passport-emblem-inner {
-    font-size: 2rem;
+.work-tile--dimmed {
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* responsive – more vertical on small screens */
+
+@media (max-width: 900px) {
+  .work-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
+@media (max-width: 640px) {
+  .work-board {
+    height: auto;
+    max-height: none;    /* allow scroll on small screens */
+  }
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 4px;
+  }
+}
 
 
 
@@ -2437,21 +2528,115 @@
 
 
       <!-- WORK -->
-      <!-- WORK – PASSPORT COVER ONLY -->
+
+      <!-- WORK – DRIBBBLE-STYLE GRID -->
 <section id="work">
-  <div class="work-passport-shell">
-    <div class="work-passport-cover">
-      <div class="work-passport-emblem-circle">
-        <div class="work-passport-emblem-inner">✈</div>
-      </div>
-      <div class="work-passport-country">REPUBLIC OF PROJECTS</div>
-      <div class="work-passport-title">WORK PASSPORT</div>
-      <div class="work-passport-sub">
-        stamps of research · writing · visuals
+  <div class="work-board">
+
+    <div class="work-toolbar">
+      <span class="work-toolbar-title">Work board</span>
+      <div class="work-toolbar-filters">
+        <button class="work-filter-pill is-active" data-filter="all">All</button>
+        <button class="work-filter-pill" data-filter="interactive">Interactive</button>
+        <button class="work-filter-pill" data-filter="quant">Quant / Energy</button>
+        <button class="work-filter-pill" data-filter="field">Field / Protection</button>
+        <button class="work-filter-pill" data-filter="visuals">Visuals</button>
+        <button class="work-filter-pill" data-filter="brief">Brief</button>
       </div>
     </div>
+
+    <div class="work-grid">
+      <!-- Interactive – Twine -->
+      <div class="work-tile" data-type="interactive">
+        <div class="work-tile-thumb work-thumb--interactive"></div>
+        <div class="work-tile-tag">Interactive</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">Human Security / Twine</div>
+          <div class="work-tile-meta">Interactive journey through 3 freedoms, 7 securities &amp; R2P.</div>
+          <div class="work-tile-stats">Teaching tool · 2025</div>
+        </div>
+      </div>
+
+      <!-- Quant / energy paper -->
+      <div class="work-tile" data-type="quant">
+        <div class="work-tile-thumb work-thumb--quant"></div>
+        <div class="work-tile-tag">Quant / energy</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">French ODA &amp; renewables</div>
+          <div class="work-tile-meta">2000–2024 dataset on West African renewable capacity.</div>
+          <div class="work-tile-stats">Quant paper · 2024</div>
+        </div>
+      </div>
+
+      <!-- Field / protection note -->
+      <div class="work-tile" data-type="field">
+        <div class="work-tile-thumb work-thumb--field"></div>
+        <div class="work-tile-tag">Field / protection</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">Cox’s Bazar – refugee note</div>
+          <div class="work-tile-meta">Protection challenges &amp; camp life trade-offs.</div>
+          <div class="work-tile-stats">Policy note</div>
+        </div>
+      </div>
+
+      <!-- Visual posts -->
+      <div class="work-tile" data-type="visuals">
+        <div class="work-tile-thumb work-thumb--visuals"></div>
+        <div class="work-tile-tag">Visuals</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">Humanitarian / MENA visuals</div>
+          <div class="work-tile-meta">Carousel posts on migration, data and stories.</div>
+          <div class="work-tile-stats">Social assets</div>
+        </div>
+      </div>
+
+      <!-- OIF brief -->
+      <div class="work-tile" data-type="brief">
+        <div class="work-tile-thumb work-thumb--brief"></div>
+        <div class="work-tile-tag">Brief</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">OIF implementation note</div>
+          <div class="work-tile-meta">Short internal-style note from dashboards &amp; country fiches.</div>
+          <div class="work-tile-stats">OIF · 2024</div>
+        </div>
+      </div>
+
+      <!-- Extra tiles (optional placeholders to fill grid aesthetically) -->
+      <div class="work-tile" data-type="interactive">
+        <div class="work-tile-thumb work-thumb--interactive"></div>
+        <div class="work-tile-tag">Interactive</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">Future project slot</div>
+          <div class="work-tile-meta">Reserved for upcoming work.</div>
+          <div class="work-tile-stats">Coming soon</div>
+        </div>
+      </div>
+
+      <div class="work-tile" data-type="visuals">
+        <div class="work-tile-thumb work-thumb--visuals"></div>
+        <div class="work-tile-tag">Visuals</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">Poster / infographic</div>
+          <div class="work-tile-meta">Space for a future visual communication piece.</div>
+          <div class="work-tile-stats">Coming soon</div>
+        </div>
+      </div>
+
+      <div class="work-tile" data-type="brief">
+        <div class="work-tile-thumb work-thumb--brief"></div>
+        <div class="work-tile-tag">Brief</div>
+        <div class="work-tile-overlay">
+          <div class="work-tile-title">Policy brief slot</div>
+          <div class="work-tile-meta">Placeholder for next 2–4 page note.</div>
+          <div class="work-tile-stats">Coming soon</div>
+        </div>
+      </div>
+
+    </div><!-- /work-grid -->
+
   </div>
 </section>
+
 
 
       <!-- ACTIVITIES -->
@@ -2891,184 +3076,32 @@ expCards.forEach(card => {
 });
 
 /* ===============================
-   WORK – PASSPORT SPREADS
+   WORK – FILTER LOGIC
 =============================== */
 
-/* 5 works → grouped into spreads of 2 (left/right pages) */
-const passportWorks = [
-  {
-    sideStampType: "entry",
-    tag: "Interactive project",
-    title: "Human Security – Twine",
-    meta: "Sciences Po · Human Security course",
-    desc: "Twine-based interactive journey unpacking the 3 freedoms, 7 securities, R2P and radicalisation.",
-    linkLabel: "Open Twine project",
-    linkHref: "#" // TODO: add real link
-  },
-  {
-    sideStampType: "exit",
-    tag: "Research paper",
-    title: "French ODA & renewables in West Africa",
-    meta: "Quantitative paper · 2000–2024 dataset",
-    desc: "Empirical look at the relationship between French ODA and renewable capacity in West African countries.",
-    linkLabel: "View PDF",
-    linkHref: "#" // TODO: add real link
-  },
-  {
-    sideStampType: "entry",
-    tag: "Field research",
-    title: "Refugees in Cox’s Bazar",
-    meta: "Policy note · Protection & camp life",
-    desc: "Short paper on protection challenges, living conditions and policy trade-offs in the Cox’s Bazar refugee camps.",
-    linkLabel: "View PDF",
-    linkHref: "#" // TODO: add real link
-  },
-  {
-    sideStampType: "transfer",
-    tag: "Visual communication",
-    title: "Humanitarian & MENA visual posts",
-    meta: "Instagram · 3–4 social assets",
-    desc: "Carousel posts designed around humanitarian data, migration stories and MENA-related topics.",
-    linkLabel: "View posts",
-    linkHref: "#" // TODO: add link/IG highlight
-  },
-  {
-    sideStampType: "exit",
-    tag: "Internal brief",
-    title: "OIF – Project design implementation note",
-    meta: "OIF · Project Design & Monitoring Unit",
-    desc: "Short internal-style note drawing on dashboards, indicators and country fiches prepared at OIF.",
-    linkLabel: "Sample brief (PDF)",
-    linkHref: "#" // TODO: add sample / redacted version
-  }
-];
+const workFilterButtons = document.querySelectorAll(".work-filter-pill");
+const workTiles = document.querySelectorAll(".work-tile");
 
-const passportBookEl = document.getElementById("passportBook");
-const passportPrevBtn = document.getElementById("passportPrev");
-const passportNextBtn = document.getElementById("passportNext");
+workFilterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const filter = btn.dataset.filter;
 
-const pwLeft = {
-  stamp: document.getElementById("pw-left-stamp"),
-  tag: document.getElementById("pw-left-tag"),
-  title: document.getElementById("pw-left-title"),
-  meta: document.getElementById("pw-left-meta"),
-  desc: document.getElementById("pw-left-desc"),
-  link: document.getElementById("pw-left-link")
-};
+    // update active pill
+    workFilterButtons.forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
 
-const pwRight = {
-  stamp: document.getElementById("pw-right-stamp"),
-  tag: document.getElementById("pw-right-tag"),
-  title: document.getElementById("pw-right-title"),
-  meta: document.getElementById("pw-right-meta"),
-  desc: document.getElementById("pw-right-desc"),
-  link: document.getElementById("pw-right-link")
-};
-
-const passportSpreadIndexEl = document.getElementById("passportSpreadIndex");
-const passportSpreadTotalEl = document.getElementById("passportSpreadTotal");
-
-const passportSpreads = Math.ceil(passportWorks.length / 2);
-let currentSpread = 0;
-
-if (passportSpreadTotalEl) {
-  passportSpreadTotalEl.textContent = passportSpreads;
-}
-
-/* helper: assign stamp color class */
-function setStampClass(stampEl, type) {
-  stampEl.classList.remove(
-    "passport-stamp--entry",
-    "passport-stamp--exit",
-    "passport-stamp--transfer"
-  );
-  if (type === "entry") {
-    stampEl.classList.add("passport-stamp--entry");
-    stampEl.setAttribute("data-label", "ENTRY VISA");
-  } else if (type === "exit") {
-    stampEl.classList.add("passport-stamp--exit");
-    stampEl.setAttribute("data-label", "EXIT STAMP");
-  } else {
-    stampEl.classList.add("passport-stamp--transfer");
-    stampEl.setAttribute("data-label", "TRANSIT");
-  }
-}
-
-/* render a single page; work can be null for blank page */
-function renderPassportPage(target, work) {
-  if (!work) {
-    target.stamp.style.display = "none";
-    target.tag.textContent = "";
-    target.title.textContent = "";
-    target.meta.textContent = "";
-    target.desc.textContent = "";
-    target.link.style.display = "none";
-    return;
-  }
-
-  target.stamp.style.display = "flex";
-  setStampClass(target.stamp, work.sideStampType || "entry");
-
-  target.tag.textContent = work.tag || "";
-  target.title.textContent = work.title || "";
-  target.meta.textContent = work.meta || "";
-  target.desc.textContent = work.desc || "";
-
-  target.link.style.display = "inline-flex";
-  target.link.textContent = work.linkLabel || "View work";
-  target.link.href = work.linkHref || "#";
-}
-
-/* render both pages of a spread */
-function renderPassportSpread() {
-  const leftWorkIndex = currentSpread * 2;
-  const rightWorkIndex = leftWorkIndex + 1;
-
-  const leftWork = passportWorks[leftWorkIndex] || null;
-  const rightWork = passportWorks[rightWorkIndex] || null;
-
-  renderPassportPage(pwLeft, leftWork);
-  renderPassportPage(pwRight, rightWork);
-
-  if (passportSpreadIndexEl) {
-    passportSpreadIndexEl.textContent = currentSpread + 1;
-  }
-}
-
-/* flip with animation */
-function flipPassport(direction) {
-  if (!passportBookEl) return;
-
-  const turnClass =
-    direction === "next"
-      ? "passport-book--turning-right"
-      : "passport-book--turning-left";
-
-  passportBookEl.classList.add(turnClass);
-
-  setTimeout(() => {
-    if (direction === "next") {
-      currentSpread = (currentSpread + 1) % passportSpreads;
-    } else {
-      currentSpread = (currentSpread - 1 + passportSpreads) % passportSpreads;
-    }
-    renderPassportSpread();
-    passportBookEl.classList.remove(turnClass);
-  }, 230); // slightly less than animation duration
-}
-
-/* init */
-if (passportBookEl) {
-  renderPassportSpread();
-
-  passportNextBtn.addEventListener("click", () => {
-    flipPassport("next");
+    // dim / undim tiles (keep layout = no scrollbar jumps)
+    workTiles.forEach(tile => {
+      const type = tile.dataset.type;
+      if (filter === "all" || filter === type) {
+        tile.classList.remove("work-tile--dimmed");
+      } else {
+        tile.classList.add("work-tile--dimmed");
+      }
+    });
   });
+});
 
-  passportPrevBtn.addEventListener("click", () => {
-    flipPassport("prev");
-  });
-}
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
