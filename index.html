@@ -965,7 +965,8 @@
 .work-board-right {
   width: 260px;
   padding: 0;
-  background: #0f172a;         /* initial, will be overridden via JS */
+  /* will be overridden by JS with a darkened strip color */
+  background: #0f172a;
   transition: background 0.25s ease;
   display: flex;
 }
@@ -981,7 +982,9 @@
 .work-strip {
   all: unset;
   cursor: pointer;
-  flex: 1;
+
+  /* 👉 “pan to the left” effect: one strip gets wider */
+  flex: 0 0 55px;                 /* default width */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -990,16 +993,17 @@
   border-left: 1px solid rgba(15, 23, 42, 0.07);
   position: relative;
   transition:
+    flex-basis 0.22s ease,
     transform 0.18s ease,
     box-shadow 0.18s ease,
     background 0.18s ease;
 }
 
 /* very light pastel colors */
-.work-strip--hsq { background: #dbeafe; } /* light blue */
+.work-strip--hsq { background: #dbeafe; } /* light blue  */
 .work-strip--oda { background: #ffedd5; } /* light orange */
-.work-strip--cox { background: #dcfce7; } /* light green */
-.work-strip--vsl { background: #ffe4e6; } /* light pink */
+.work-strip--cox { background: #dcfce7; } /* light green  */
+.work-strip--vsl { background: #ffe4e6; } /* light pink   */
 
 .work-strip-label {
   writing-mode: vertical-rl;
@@ -1012,25 +1016,29 @@
   margin-bottom: 12px;
 }
 
-/* bottom arrow "<" */
-
+/* bottom arrow "<" stays */
 .work-strip-arrow {
   font-size: 1.2rem;
   margin-bottom: 2px;
   color: rgba(15, 23, 42, 0.75);
 }
 
-/* active/hover state */
+/* 👉 ACTIVE = wider strip + slight shift */
 
 .work-strip.is-active {
+  flex-basis: 95px;               /* strip “pans” left */
   transform: translateX(-5px);
   box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.35) inset;
 }
 
+/* hover only if not active */
+
 .work-strip:not(.is-active):hover {
+  flex-basis: 60px;
   transform: translateX(-3px);
   box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.3) inset;
 }
+
 
 /* responsive */
 
@@ -3315,21 +3323,47 @@ const workStrips      = document.querySelectorAll(".work-strip");
 const workDetails     = document.querySelectorAll(".work-detail");
 const workPanelRight  = document.querySelector(".work-board-right");
 
+/* helper: darken a hex color by `amount` (0–1) */
+function darkenColor(hex, amount) {
+  if (!hex) return "#0f172a";
+  let c = hex.replace("#", "");
+  if (c.length === 3) {
+    c = c.split("").map(ch => ch + ch).join("");
+  }
+  const num = parseInt(c, 16);
+  let r = (num >> 16) & 255;
+  let g = (num >> 8) & 255;
+  let b = num & 255;
+
+  const factor = 1 - amount; // e.g. 0.65
+  r = Math.round(r * factor);
+  g = Math.round(g * factor);
+  b = Math.round(b * factor);
+
+  return (
+    "#" +
+    [r, g, b]
+      .map(v => v.toString(16).padStart(2, "0"))
+      .join("")
+  );
+}
+
 function setActiveWork(key) {
-  // update detail cards
+  // switch content on the left
   workDetails.forEach(card => {
     card.classList.toggle("is-active", card.dataset.work === key);
   });
 
-  // update strips + panel color
+  // update strips + dark panel color
   workStrips.forEach(strip => {
     const isTarget = strip.dataset.work === key;
     strip.classList.toggle("is-active", isTarget);
 
     if (isTarget && workPanelRight) {
-      const panelColor = strip.dataset.panelColor;
-      if (panelColor) {
-        workPanelRight.style.background = panelColor;
+      const baseColor = strip.dataset.panelColor; // medium tone
+      if (baseColor) {
+        const darker = darkenColor(baseColor, 0.4); // 👉 much darker version
+        workPanelRight.style.background = darker;
       }
     }
   });
@@ -3342,13 +3376,10 @@ workStrips.forEach(strip => {
   });
 });
 
-// initial panel color matches the initially active strip
+// initial state: match the strip that already has .is-active
 const initialActiveStrip = document.querySelector(".work-strip.is-active");
-if (initialActiveStrip && workPanelRight) {
-  const initialColor = initialActiveStrip.dataset.panelColor;
-  if (initialColor) {
-    workPanelRight.style.background = initialColor;
-  }
+if (initialActiveStrip) {
+  setActiveWork(initialActiveStrip.dataset.work);
 }
 
   </script>
