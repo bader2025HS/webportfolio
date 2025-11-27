@@ -867,9 +867,8 @@
   color: var(--exp-accent);
 }
 
-
-  /* ===========================
-   WORK – FULL-WIDTH WORK LOG
+/* ===========================
+   WORK – MINIMAL WORK LOG
 =========================== */
 
 #work {
@@ -887,28 +886,12 @@
   overflow: hidden;
 }
 
-.work-board-header {
-  padding: 14px 20px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: #6b7280;
-}
-
-.work-board-subtitle {
-  padding: 0 20px 14px;
-  font-size: 0.9rem;
-  color: #4b5563;
-}
-
 /* Each row = one project */
 
 .work-row {
   border-top: 1px solid #f1f5f9;
   cursor: pointer;
-  transition: background 0.16s ease, transform 0.1s ease;
+  transition: background 0.16s ease;
 }
 
 .work-row:first-of-type {
@@ -923,11 +906,11 @@
   background: #f1f5f9;
 }
 
-/* main line */
+/* main line: very minimal */
 
 .work-row-main {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 2.2fr) auto;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 2.4fr) auto;
   align-items: center;
   gap: 14px;
   padding: 14px 20px;
@@ -976,16 +959,14 @@
   background: rgba(99,102,241,0.08);
 }
 
-.work-title {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
+/* the only text you see at first */
 
-.work-meta {
-  margin-top: 2px;
-  font-size: 0.85rem;
-  color: #6b7280;
+.work-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111827;
 }
 
 /* right-hand chevron */
@@ -1015,18 +996,24 @@
 }
 
 .work-row.is-open .work-details {
-  max-height: 220px;         /* enough for a short paragraph */
+  max-height: 260px;
   padding-top: 0;
   padding-bottom: 16px;
 }
 
 .work-details p {
-  margin-top: 4px;
+  margin-top: 6px;
+}
+
+.work-details .work-meta {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280;
 }
 
 .work-link {
   display: inline-flex;
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 0.86rem;
   text-decoration: none;
   color: #009fa5;
@@ -1042,13 +1029,14 @@
   .work-row-main {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: auto auto;
-    row-gap: 6px;
+    row-gap: 4px;
   }
 
   .work-main-middle {
     grid-column: 1 / 3;
   }
 }
+
 
 /* ===========================
    CONTACT – ENVELOPE STYLE
@@ -2473,17 +2461,9 @@
 
       <!-- WORK -->
 
-      <!-- WORK – FULL-WIDTH WORK LOG -->
+   <!-- WORK – MINIMAL WORK LOG -->
 <section id="work">
   <div class="work-board">
-    <div class="work-board-header">
-      Work log
-    </div>
-    <div class="work-board-subtitle">
-      A compact list of projects I refer to most: interactive teaching tools,
-      quantitative work, refugee protection notes, visual communication and briefs.
-      Click a line to reveal more.
-    </div>
 
     <!-- Row 1 – Twine -->
     <div class="work-row">
@@ -2492,18 +2472,18 @@
           <span class="work-tag work-tag--interactive">Interactive</span>
         </div>
         <div class="work-main-middle">
-          <div class="work-title">Human Security – Twine journey</div>
-          <div class="work-meta">
-            Sciences Po · Human Security course
-          </div>
+          <div class="work-title">Human security / twine</div>
         </div>
         <div class="work-chevron">›</div>
       </div>
       <div class="work-details">
+        <span class="work-meta">
+          Sciences Po · Human Security course
+        </span>
         <p>
-          An interactive Twine story guiding students through the three freedoms,
-          the seven securities, R2P and radicalisation, with small quizzes and
-          branching scenarios designed for class use.
+          Interactive Twine journey exploring the three freedoms, seven
+          securities, R2P and radicalisation, with small quizzes and branching
+          scenarios.
         </p>
         <a class="work-link" href="#" target="_blank" rel="noopener">
           Open the Twine project →
@@ -2518,20 +2498,18 @@
           <span class="work-tag work-tag--quant">Quant / energy</span>
         </div>
         <div class="work-main-middle">
-          <div class="work-title">
-            French ODA &amp; renewable capacity in West Africa
-          </div>
-          <div class="work-meta">
-            2000–2024 dataset · empirical paper
-          </div>
+          <div class="work-title">French ODA / renewables</div>
         </div>
         <div class="work-chevron">›</div>
       </div>
       <div class="work-details">
+        <span class="work-meta">
+          2000–2024 dataset · West Africa
+        </span>
         <p>
-          Empirical analysis of how French official development assistance relates
-          to renewable energy capacity across West African countries, using
-          country-level time series and simple econometric techniques.
+          Empirical paper on the relationship between French ODA and renewable
+          energy capacity in West African countries, using country-level time
+          series and simple econometric tools.
         </p>
         <a class="work-link" href="#" target="_blank" rel="noopener">
           View the paper (PDF) →
@@ -2546,20 +2524,17 @@
           <span class="work-tag work-tag--field">Field / protection</span>
         </div>
         <div class="work-main-middle">
-          <div class="work-title">
-            Protection in Cox’s Bazar refugee camps
-          </div>
-          <div class="work-meta">
-            Short policy note · camp life &amp; trade-offs
-          </div>
+          <div class="work-title">Cox’s Bazar / note</div>
         </div>
         <div class="work-chevron">›</div>
       </div>
       <div class="work-details">
+        <span class="work-meta">
+          Refugee camps · protection &amp; living conditions
+        </span>
         <p>
-          A concise note on living conditions, service access and protection
-          dilemmas in Cox’s Bazar, written in a policy-brief format for
-          humanitarian practitioners.
+          Short policy-style note on camp life, service access and protection
+          dilemmas in Cox’s Bazar, geared towards humanitarian practitioners.
         </p>
         <a class="work-link" href="#" target="_blank" rel="noopener">
           View the note (PDF) →
@@ -2574,20 +2549,18 @@
           <span class="work-tag work-tag--visual">Visuals</span>
         </div>
         <div class="work-main-middle">
-          <div class="work-title">
-            Humanitarian &amp; MENA visual posts
-          </div>
-          <div class="work-meta">
-            Social media carousels · Illustrator &amp; Canva
-          </div>
+          <div class="work-title">Humanitarian / MENA visuals</div>
         </div>
         <div class="work-chevron">›</div>
       </div>
       <div class="work-details">
+        <span class="work-meta">
+          Illustrator &amp; Canva · social carousels
+        </span>
         <p>
-          A small series of carousel posts around humanitarian data, migration
-          stories and MENA topics, blending simple data visualisation with short,
-          accessible copy.
+          A set of social media posts around humanitarian data, migration
+          stories and MENA topics, mixing simple data viz with concise
+          storytelling.
         </p>
         <a class="work-link" href="#" target="_blank" rel="noopener">
           View selected posts →
@@ -2602,20 +2575,18 @@
           <span class="work-tag work-tag--brief">Brief</span>
         </div>
         <div class="work-main-middle">
-          <div class="work-title">
-            OIF – Project design implementation note
-          </div>
-          <div class="work-meta">
-            OIF · Project Design &amp; Monitoring Unit
-          </div>
+          <div class="work-title">OIF / implementation note</div>
         </div>
         <div class="work-chevron">›</div>
       </div>
       <div class="work-details">
+        <span class="work-meta">
+          OIF · Project Design &amp; Monitoring Unit
+        </span>
         <p>
-          A short internal-style note drawing on dashboards, indicators and
-          country fiches prepared at OIF, summarising lessons for project
-          design and monitoring.
+          Internal-style note drawing on dashboards, indicators and country
+          fiches prepared at OIF, summarising lessons for project design and
+          monitoring practice.
         </p>
         <a class="work-link" href="#" target="_blank" rel="noopener">
           Sample brief (redacted) →
@@ -2625,7 +2596,6 @@
 
   </div>
 </section>
-
 
 
       <!-- ACTIVITIES -->
