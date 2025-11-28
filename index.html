@@ -676,21 +676,39 @@
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
 }
 
-/* TOP LEFT (NGO) → expand DOWN over RESEARCH */
+/* TOP ROW (NGO + IO) → expand DOWN over the card below */
 .exp-card--ngo.exp-card--expanded .exp-card-back {
   top: 0;
-  bottom: auto;
-  height: 220%;             /* overlaps downward into research */
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+  height: calc(200% + 18px);  /* its own row + gap + row below */
 }
 
-/* BOTTOM LEFT (RESEARCH) → expand UP over NGO */
+
+/* BOTTOM ROW (Research + Assoc) → expand UP over the card above */
 .exp-card--research.exp-card--expanded .exp-card-back {
-  top: -120%;               /* moves up over NGO */
-  bottom: auto;
-  height: 220%;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+  top: calc(-100% - 18px);    /* move up by one row + gap */
+  height: calc(200% + 18px);  /* 2 rows total */
 }
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+    
 
 /* RIGHT COLUMN (OIF + SPMA) → expand LEFT over the left column
    - OIF expands over NGO
