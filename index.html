@@ -730,58 +730,29 @@
   overflow: visible;
 }
 
-/* these three cards are allowed to overflow their grid cell */
+/* all four cards can overflow their grid cell */
+.exp-card--ngo,
 .exp-card--io,
 .exp-card--research,
 .exp-card--assoc {
   overflow: visible;
 }
 
-/* OIF: expand downward over "Water, energy & MENA" */
+
+/* TOP ROW (NGO + IO) → expand downward over bottom row */
+.exp-card--ngo.exp-card--expanded .exp-card-back,
 .exp-card--io.exp-card--expanded .exp-card-back {
   top: 0;
   bottom: auto;
-  height: 210%;              /* ~2 rows high; tweak if needed */
+  height: 210%;     /* how much it overlaps downward */
 }
 
-/* Water, energy & MENA: expand downward over "Student-led" */
-.exp-card--research.exp-card--expanded .exp-card-back {
-  top: 0;
-  bottom: auto;
-  height: 210%;
-}
-
-/* Student-led: expand upward over "Water, energy & MENA" */
+/* BOTTOM ROW (Research + Assoc) → expand upward over top row */
+.exp-card--research.exp-card--expanded .exp-card-back,
 .exp-card--assoc.exp-card--expanded .exp-card-back {
-  top: -110%;                /* move up over the tile above */
+  top: -110%;       /* how far it moves up over the card above */
   bottom: auto;
   height: 210%;
-}
-
-    /* ------- EXPANSION STATES (keep grid layout) ------- */
-
-/* OIF covers RSS (rows 1+2 of right column) */
-.exp-card--io.exp-expanded {
-  grid-area: unset;
-  grid-column: 3 / 4;
-  grid-row: 1 / span 2;
-  z-index: 2;
-}
-
-/* RSS covers Student-led (rows 2+3 of right column) */
-.exp-card--research.exp-expanded {
-  grid-area: unset;
-  grid-column: 3 / 4;
-  grid-row: 2 / span 2;
-  z-index: 2;
-}
-
-/* Student-led covers RSS (rows 2+3 of right column) */
-.exp-card--assoc.exp-expanded {
-  grid-area: unset;
-  grid-column: 3 / 4;
-  grid-row: 2 / span 2;
-  z-index: 2;
 }
 
     
