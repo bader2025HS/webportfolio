@@ -668,23 +668,23 @@
   overflow: visible;
 }
 
-/* TOP ROW (NGO + IO) → expand DOWN over bottom row */
+/* TOP ROW (NGO + IO) → expand DOWN only until bottom row ends */
 .exp-card--ngo.exp-card--expanded .exp-card-back,
 .exp-card--io.exp-card--expanded .exp-card-back {
   top: 0;
-  bottom: auto;
-  height: 220%;             /* how much it overlaps downward */
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+  height: calc(200% + var(--exp-gap));  /* 2 rows exactly */
+  max-height: calc(200% + var(--exp-gap));
 }
 
-/* BOTTOM ROW (Research + Assoc) → expand UP over top row */
+/* BOTTOM ROW (RESEARCH + ASSOC) → expand UP only until top row begins */
 .exp-card--research.exp-card--expanded .exp-card-back,
 .exp-card--assoc.exp-card--expanded .exp-card-back {
-  top: -120%;               /* move up over the card above */
-  bottom: auto;
-  height: 220%;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+  bottom: 0;
+  height: calc(200% + var(--exp-gap));
+  max-height: calc(200% + var(--exp-gap));
+  top: auto;
 }
+
 
 /* --------- COLORS & HOVER --------- */
 
