@@ -759,6 +759,18 @@
   color: var(--exp-accent);
 }
 
+    /* dim all non-flipped cards when one is expanded */
+.exp-mosaic.dim-others .exp-card {
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+}
+
+/* keep the expanded card bright */
+.exp-mosaic.dim-others .exp-card.exp-card--expanded {
+  opacity: 1;
+}
+
+
 /* --------- RESPONSIVE --------- */
 
 @media (max-width: 800px) {
@@ -3520,12 +3532,16 @@ const ngoCard     = document.querySelector(".exp-card--ngo");
 const ioCard      = document.querySelector(".exp-card--io");
 const researchCard= document.querySelector(".exp-card--research");
 const assocCard   = document.querySelector(".exp-card--assoc");
+const expMosaic   = document.querySelector(".exp-mosaic"); // NEW
 
 function resetExpLayout() {
   expCards.forEach(card => {
     card.classList.remove("is-flipped");
     card.classList.remove("exp-card--expanded"); // match CSS name
   });
+  if (expMosaic) {
+    expMosaic.classList.remove("dim-others");    // NEW
+  }
 }
 
 expCards.forEach(card => {
@@ -3541,8 +3557,13 @@ expCards.forEach(card => {
     // flip + expand clicked card
     card.classList.add("is-flipped");
     card.classList.add("exp-card--expanded");
+
+    if (expMosaic) {
+      expMosaic.classList.add("dim-others");     // NEW
+    }
   });
 });
+
 
 
     /* ===============================
