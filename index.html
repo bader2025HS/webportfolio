@@ -824,12 +824,13 @@
 
 .work-shell {
   display: flex;
-  background: #020617;
+  /* background is now controlled by JS */
   border-radius: 26px;
   overflow: hidden;
   box-shadow: none;
   min-height: 320px;
 }
+
 
 /* LEFT PANEL (text) */
 
@@ -3875,6 +3876,7 @@ const workStrips      = document.querySelectorAll(".work-strip");
 const workDetails     = document.querySelectorAll(".work-detail");
 const workPanelLeft   = document.querySelector(".work-board-left");
 const workPanelRight  = document.querySelector(".work-strips"); // dark column background
+const workShell       = document.querySelector(".work-shell");
 
 // helper: darken hex by a factor
 function darkenColor(hex, amount) {
@@ -3895,7 +3897,7 @@ function darkenColor(hex, amount) {
   return "#" + [r, g, b].map(v => v.toString(16).padStart(2,"0")).join("");
 }
 
-function setActiveWork(project) {
+    function setActiveWork(project) {
   // toggle content
   workDetails.forEach(d => {
     d.classList.toggle("is-active", d.dataset.project === project);
@@ -3910,13 +3912,17 @@ function setActiveWork(project) {
       const baseColor = strip.dataset.panelColor;
 
       // LEFT PANEL = medium-darker shade
-      const leftColor = darkenColor(baseColor, 0.40);
-
+      const leftColor  = darkenColor(baseColor, 0.40);
       // RIGHT PANEL = even darker
       const rightColor = darkenColor(baseColor, 0.60);
 
-      workPanelLeft.style.background = leftColor;
+      workPanelLeft.style.background  = leftColor;
       workPanelRight.style.background = rightColor;
+
+      // 👇 NEW: make the rounded container corners match the left panel
+      if (workShell) {
+        workShell.style.background = leftColor;
+      }
     }
   });
 }
