@@ -446,7 +446,7 @@
 
 
 /* ===========================
-   EXPERIENCE – MOSAIC 2×2
+   EXPERIENCE — MOSAIC 2×2
 =========================== */
 
 #experience {
@@ -456,194 +456,139 @@
 }
 
 .experience-layout {
-  position: relative;
-  z-index: 1;
   max-width: 1050px;
-  margin: -20px auto 0;
-  padding: 0;
+  margin: 0 auto;
 }
 
-/* 2×2 grid, all equal size */
 .exp-mosaic {
   --exp-gap: 18px;
-  --exp-height: 520px;          /* 🔧 overall height of the experience area */
+  --exp-height: 520px;
 
-  width: 1050px;
-  max-width: 100%;
-  height: var(--exp-height);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, 1fr);
+  width: 100%;
+  height: var(--exp-height);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: var(--exp-gap);
-  perspective: 1200px;
   position: relative;
+  perspective: 1200px;
 }
 
 .exp-card {
   position: relative;
   cursor: pointer;
-  height: 100%;                 /* each card fills its cell */
-  overflow: visible;            /* so expanded back can overflow cell */
+  height: 100%;
+  overflow: visible;
 }
 
 .exp-card-inner {
-  position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.25, 1);
+  transition: transform .55s cubic-bezier(.2,.8,.25,1);
 }
 
-/* flip state */
 .exp-card.is-flipped .exp-card-inner {
   transform: rotateY(180deg);
 }
 
-/* faces */
-
 .exp-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 0;
-  overflow: hidden;
   backface-visibility: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  box-shadow: none;
+  border: 1px solid rgba(148,163,184,0.5);
+  background: #fff;
 }
 
-/* FRONT */
+/* -------- FRONT -------- */
 
 .exp-card-front {
-  background: #ffffff;
-  color: #111111;
-  transition: background 0.2s ease;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 24px 26px;
-  gap: 14px;
+  align-items: center;
+  padding: 22px 24px;
 }
 
 .exp-card-front:hover {
-  background: linear-gradient(135deg, var(--exp-accent-soft), #ffffff);
+  background: linear-gradient(135deg, var(--exp-accent-soft), #fff);
   border-color: var(--exp-accent);
   box-shadow: 0 14px 30px rgba(15,23,42,0.14);
 }
 
-/* left side (category + subtitle) */
 .exp-front-left {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .exp-front-main {
+  font-size: .8rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.8rem;
-  opacity: 0.9;
+  letter-spacing: .18em;
+  color: var(--exp-accent);
 }
 
 .exp-front-sub {
   margin-top: 10px;
-  font-size: 1.35rem;
+  font-size: 1.32rem;
   font-weight: 600;
-  max-width: 14ch;
-  line-height: 1.15;
+  max-width: 15ch;
 }
 
-/* right side gate block */
-
-.exp-gate {
-  text-align: right;
-  min-width: 90px;
-}
-
-.exp-gate-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #9ca3af;
-}
-
-.exp-gate-code {
-  margin-top: 4px;
-  font-size: 2.1rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: var(--exp-accent);
-}
-
-/* BACK */
+/* -------- BACK -------- */
 
 .exp-card-back {
-  background: #ffffff;
-  color: #111827;
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
+  background: #fff;
 }
 
-/* when expanded, let the back float over neighbours
-   without changing the grid height */
+/* expanded overlay */
 .exp-card--expanded .exp-card-back {
   position: absolute;
   left: 0;
   right: 0;
-  box-shadow: 0 22px 46px rgba(15,23,42,0.35);
+  z-index: 10;
+  box-shadow: 0 22px 46px rgba(15,23,42,0.40);
 }
 
-/* TOP ROW cards expand downward over bottom row */
-.exp-card--ngo.exp-card--expanded .exp-card-back,
-.exp-card--io.exp-card--expanded .exp-card-back {
+/* TOP ROW (IO + NGO) expands DOWN */
+.exp-card--io.exp-card--expanded .exp-card-back,
+.exp-card--ngo.exp-card--expanded .exp-card-back {
   top: 0;
-  height: calc(200% + var(--exp-gap));   /* 2 rows + gap */
+  height: calc(200% + var(--exp-gap));
 }
 
-/* BOTTOM ROW cards expand upward over top row */
+/* BOTTOM ROW (RESEARCH + ASSOC) expands UP */
 .exp-card--research.exp-card--expanded .exp-card-back,
 .exp-card--assoc.exp-card--expanded .exp-card-back {
   bottom: 0;
   height: calc(200% + var(--exp-gap));
 }
 
-/* inner content */
 .exp-card-back-inner {
-  padding: 14px 14px 10px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   height: 100%;
-  overflow-y: auto;   /* scroll normally for unexpanded */
-}
-
-/* constrain content when expanded so it never pushes layout */
-.exp-card--expanded .exp-card-back-inner {
-  max-height: calc(100% - 24px);
   overflow-y: auto;
 }
 
-.exp-back-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #009fa5;
-}
+/* ---------- ORG BLOCKS ---------- */
 
 .exp-org {
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
 }
 
 .exp-org-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  overflow: hidden;
-  padding: 6px;
+  width: 58px;
+  height: 58px;
   background: #f3f4f6;
+  border-radius: 12px;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -652,101 +597,40 @@
 .exp-org-logo img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
-}
-
-.exp-org-text h3 {
-  font-size: 0.95rem;
-  margin-bottom: 2px;
 }
 
 .exp-org-meta {
-  font-size: 0.78rem;
+  font-size: .78rem;
   color: #6b7280;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .exp-org-list {
-  font-size: 0.82rem;
+  font-size: .82rem;
   margin-left: 16px;
-  margin-bottom: 2px;
   line-height: 1.4;
 }
 
-.exp-card-back-hint {
-  margin-top: 2px;
-  font-size: 0.75rem;
-  color: #9ca3af;
-}
-
-/* 2×2 grid mapping */
-.exp-card--ngo      { grid-area: ngo; }
-.exp-card--io       { grid-area: io; }
-.exp-card--research { grid-area: research; }
-.exp-card--assoc    { grid-area: assoc; }
-
-/* Responsive – stack on mobile */
-
-@media (max-width: 800px) {
-  .exp-mosaic {
-    width: min(100vw - 40px, 80vh);
-    height: auto;                         /* let it grow on small screens */
-  }
-}
-
-@media (max-width: 640px) {
-  .exp-mosaic {
-    width: 100%;
-    aspect-ratio: auto;
-    grid-template-areas: none;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 12px;
-  }
-
-  .exp-card {
-    min-height: 180px;
-  }
-
-  .exp-org {
-    grid-template-columns: 1fr;
-  }
-
-  .exp-org-logo {
-    width: 52px;
-    height: 52px;
-  }
-}
-
-/* -------- EXPERIENCE ACCENT COLORS -------- */
-
-.exp-card--ngo {
-  --exp-accent: #009fa5;
-  --exp-accent-soft: rgba(0,159,165,0.06);
-}
+/* -------- COLORS -------- */
 
 .exp-card--io {
   --exp-accent: #2563eb;
-  --exp-accent-soft: rgba(37,99,235,0.06);
+  --exp-accent-soft: rgba(37, 99, 235, .06);
 }
-
+.exp-card--ngo {
+  --exp-accent: #009fa5;
+  --exp-accent-soft: rgba(0, 159, 165, .06);
+}
 .exp-card--research {
   --exp-accent: #0f766e;
-  --exp-accent-soft: rgba(15,118,110,0.06);
+  --exp-accent-soft: rgba(15, 118, 110, .06);
 }
-
 .exp-card--assoc {
   --exp-accent: #ec4899;
-  --exp-accent-soft: rgba(236,72,153,0.06);
+  --exp-accent-soft: rgba(236, 72, 153, .08);
 }
 
-/* default if ever needed */
-.exp-card {
-  --exp-accent: #009fa5;
-  --exp-accent-soft: rgba(0,159,165,0.06);
-}
-
-/* colored vertical stripe on the left of each card */
+/* accent stripe */
 .exp-card::before {
   content: "";
   position: absolute;
@@ -755,20 +639,20 @@
   bottom: 0;
   width: 6px;
   background: var(--exp-accent);
-  opacity: 0.95;
+  opacity: .95;
   pointer-events: none;
 }
 
-/* color the small top line text */
-.exp-card .exp-front-main {
-  color: #6b7280; /* fallback */
-}
-
-.exp-card--ngo .exp-front-main,
-.exp-card--io .exp-front-main,
-.exp-card--research .exp-front-main,
-.exp-card--assoc .exp-front-main {
-  color: var(--exp-accent);
+/* MOBILE */
+@media(max-width: 760px) {
+  .exp-mosaic {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+  .exp-card {
+    height: 220px;
+  }
 }
 
 
