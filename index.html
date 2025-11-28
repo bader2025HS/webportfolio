@@ -650,35 +650,41 @@
 .exp-card--research { grid-area: research; }
 .exp-card--assoc    { grid-area: assoc; }
 
-/* --------- EXPANSION BEHAVIOUR --------- */
+/* FIRST: allow card to be an anchor for expansion */
+.exp-card {
+  position: relative;
+  overflow: visible;
+}
 
-/* when a card is expanded, bring it to the front */
+/* ALL expanded cards float above the grid */
 .exp-card--expanded {
-  z-index: 10;
+  z-index: 999; /* MUST be large */
 }
 
-/* allow its faces to overflow */
-.exp-card--expanded .exp-card-face {
-  overflow: visible;
-}
-
-.exp-card--expanded .exp-card-back-inner {
-  height: auto;
-  max-height: none;
-  overflow: visible;
-}
-
-/* ALL expanded cards fill the ENTIRE 2-row mosaic height */
+/* THE MAGIC: expanded back face ESCAPES its cell */
 .exp-card--expanded .exp-card-back {
   position: absolute;
-  top: 0;
   left: 0;
   right: 0;
-  height: calc(200% + var(--exp-gap)); /* exactly 2 row-heights */
-  z-index: 10;
+  z-index: 1000;
   box-shadow: 0 22px 46px rgba(15,23,42,0.40);
 }
 
+/* TOP ROW → push down */
+.exp-card--ngo.exp-card--expanded .exp-card-back,
+.exp-card--io.exp-card--expanded .exp-card-back {
+  top: 0;
+  transform: translateY(0);
+  height: calc(100% + var(--exp-gap) + 100%);
+}
+
+/* BOTTOM ROW → pull up */
+.exp-card--research.exp-card--expanded .exp-card-back,
+.exp-card--assoc.exp-card--expanded .exp-card-back {
+  bottom: 0;
+  transform: translateY(0);
+  height: calc(100% + var(--exp-gap) + 100%);
+}
 
 
 /* --------- COLORS & HOVER --------- */
