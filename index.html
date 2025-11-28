@@ -931,6 +931,57 @@
   color: #e5e7eb;
 }
 
+    /* Make sure we can layer stuff behind the content */
+.work-main {
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft abstract gradient blobs */
+.work-main::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at 0% 0%,
+      rgba(255,255,255,0.14) 0,
+      transparent 55%),
+    radial-gradient(circle at 120% 20%,
+      rgba(56,189,248,0.18) 0,
+      transparent 60%),
+    radial-gradient(circle at 20% 120%,
+      rgba(251,191,36,0.18) 0,
+      transparent 60%);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* subtle concentric circles on the right side */
+.work-main::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -140px;
+  top: -120px;
+  border-radius: 50%;
+  border: 1px solid rgba(248,250,252,0.18);
+  box-shadow:
+    0 0 0 18px rgba(15,23,42,0.35),
+    0 0 0 40px rgba(15,23,42,0.2);
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ensure actual content stays above the abstract shapes */
+.work-board-left > * {
+  position: relative;
+  z-index: 1;
+}
+
 .work-meta-item {
   display: flex;
   gap: 6px;
@@ -980,6 +1031,24 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+    .work-main-title {
+  position: relative;
+}
+
+/* huge faded word behind the title */
+.work-main-title::before {
+  content: "PROJECT";
+  position: absolute;
+  left: -6px;
+  top: -46px;
+  font-size: 4.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.08;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* RIGHT SIDE – vertical strips */
@@ -1140,6 +1209,64 @@
   border-color: #ffffff;
   transform: translateY(-1px);
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.4);
+}
+
+    /* style the main work button a bit more “special” */
+.work-main .work-chip-button,
+.work-main .work-cta-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+/* if your button is currently just a <button>, target it directly */
+.work-main .work-chip-pill,
+.work-main .work-main-chips + .work-cta-btn {}
+
+/* orbiting ring around the button */
+.work-main .work-cta-btn::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 999px;
+  border: 1px dashed rgba(248,250,252,0.45);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* tiny moving dot */
+.work-main .work-cta-btn::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #f9fafb;
+  top: 50%;
+  right: 14px;
+  transform: translate(0,-50%);
+  box-shadow: 0 0 8px rgba(248,250,252,0.9);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* animate on hover */
+.work-main .work-cta-btn:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.work-main .work-cta-btn:hover::after {
+  opacity: 1;
+  animation: workOrbitDot 1.4s linear infinite;
+}
+
+@keyframes workOrbitDot {
+  0%   { transform: translate(0, -50%); }
+  25%  { transform: translate(-25%, -130%); }
+  50%  { transform: translate(-50%, -50%); }
+  75%  { transform: translate(-25%, 30%); }
+  100% { transform: translate(0, -50%); }
 }
 
 /* Responsive */
