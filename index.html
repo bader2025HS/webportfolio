@@ -867,6 +867,57 @@
   color: var(--exp-accent);
 }
 
+/* ===========================
+   EXPERIENCE – abstract apron background
+   (cards stay exactly the same)
+=========================== */
+
+#experience {
+  position: relative;
+  padding: 10px 0 70px;   /* same top padding you already use + a bit bottom */
+}
+
+/* soft abstract blobs + faint grid behind the mosaic */
+#experience::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1100px;          /* roughly your mosaic width */
+  height: 100%;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 10% 15%,
+      rgba(56,189,248,0.17) 0,
+      transparent 55%),
+    radial-gradient(circle at 85% 80%,
+      rgba(244,114,182,0.16) 0,
+      transparent 55%),
+    radial-gradient(circle at 50% 105%,
+      rgba(34,197,94,0.10) 0,
+      transparent 60%),
+    /* faint “runway grid” */
+    repeating-linear-gradient(
+      to right,
+      rgba(148,163,184,0.09) 0 1px,
+      transparent 1px 28px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(148,163,184,0.06) 0 1px,
+      transparent 1px 24px
+    );
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* keep the mosaic + cards above the abstract layer */
+.experience-layout {
+  position: relative;
+  z-index: 1;
+}
 
 /* ===========================
    WORK – VERTICAL STRIPS
