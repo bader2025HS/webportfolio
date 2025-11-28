@@ -3789,8 +3789,22 @@ document.addEventListener("keydown", e => {
     const btnNext = document.getElementById("lightboxNext");
     const btnClose = document.getElementById("lightboxClose");
 
-    const galleryImages = Array.from(document.querySelectorAll(".gallery-item img, .film-cell img"));
+    const galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+    const activityImages = Array.from(document.querySelectorAll(".film-cell img"));
+    let currentGroup = "gallery";  // or "activities"
     let currentIndex = 0;
+
+    function updateCounter() {
+  const total =
+    currentGroup === "gallery"
+      ? galleryImages.length
+      : activityImages.length;
+
+  const number = currentIndex + 1;
+
+  lightboxCounter.textContent = `${number} / ${total}`;
+}
+
 
     function openLightbox(index) {
       currentIndex = index;
@@ -3799,10 +3813,9 @@ document.addEventListener("keydown", e => {
       lightboxImage.src = img.src;
       lightboxImage.alt = img.alt || "";
       lightboxCaption.textContent = img.dataset.caption || "";
-      lightboxCounter.textContent =
-        (currentIndex + 1) + " / " + galleryImages.length;
-
+      lightboxCounter.textContent = (currentIndex + 1) + " / " + galleryImages.length;
       overlay.style.display = "flex";
+      updateCounter();
     }
 
     function closeLightbox() {
@@ -3810,21 +3823,51 @@ document.addEventListener("keydown", e => {
     }
 
     function showNext() {
-      currentIndex = (currentIndex + 1) % galleryImages.length;
-      openLightbox(currentIndex);
-    }
+  if (currentGroup === "gallery") {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    const img = galleryImages[currentIndex];
+    openLightbox(img.src, img.dataset.caption || img.alt);
+  } else {
+    currentIndex = (currentIndex + 1) % activityImages.length;
+    const img = activityImages[currentIndex];
+    openLightbox(img.src, img.dataset.caption || img.alt);
+  }
+}
 
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-      openLightbox(currentIndex);
-    }
+function showPrev() {
+  if (currentGroup === "gallery") {
+    currentIndex =
+      (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    const img = galleryImages[currentIndex];
+    openLightbox(img.src, img.dataset.caption || img.alt);
+  } else {
+    currentIndex =
+      (currentIndex - 1 + activityImages.length) % activityImages.length;
+    const img = activityImages[currentIndex];
+    openLightbox(img.src, img.dataset.caption || img.alt);
+  }
+}
 
-    galleryImages.forEach((img, index) => {
-      img.addEventListener("click", e => {
-        e.preventDefault();
-        openLightbox(index);
-      });
-    });
+
+    // CLICK — HOME GALLERY IMAGES
+galleryImages.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentGroup = "gallery";
+    currentIndex = index;
+
+    openLightbox(img.src, img.dataset.caption || img.alt);
+  });
+});
+
+    // CLICK — ACTIVITIES FILMSTRIP IMAGES
+activityImages.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentGroup = "activities";
+    currentIndex = index;
+
+    openLightbox(img.src, img.dataset.caption || img.alt);
+  });
+});
 
     btnNext.addEventListener("click", showNext);
     btnPrev.addEventListener("click", showPrev);
