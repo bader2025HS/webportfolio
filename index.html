@@ -88,6 +88,43 @@
   white-space: nowrap;
 }
 
+
+      /* ===========================
+       ABOUT STATS
+    ============================ */
+    .about-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.about-stat {
+  min-width: 160px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: 1px solid #d0d7de;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.about-stat-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #009fa5;
+}
+
+.about-stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+}
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
@@ -2355,9 +2392,23 @@ margin-bottom: 6px;
       </section>
 
       <!-- ABOUT -->
-      <section id="about">
-        <p class="placeholder">About section content goes here.</p>
-      </section>
+   <section id="about">
+  <div class="about-stats">
+    <div class="about-stat">
+      <span class="about-stat-number">30</span>
+      <span class="about-stat-label">countries visited</span>
+    </div>
+    <div class="about-stat">
+      <span class="about-stat-number">12</span>
+      <span class="about-stat-label">cities lived in</span>
+    </div>
+    <div class="about-stat">
+      <span class="about-stat-number">5</span>
+      <span class="about-stat-label">languages studied</span>
+    </div>
+  </div>
+</section>
+
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
