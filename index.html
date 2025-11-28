@@ -446,7 +446,7 @@
 
 
 /* ===========================
-   EXPERIENCE – MOSAIC SQUARE
+   EXPERIENCE – 2×2 GRID
 =========================== */
 
 #experience {
@@ -459,46 +459,32 @@
   position: relative;
   z-index: 1;
   max-width: 1050px;
-  margin: -20px auto 0;   
-  padding: 0;             
-  display: block;         
+  margin: -20px auto 0;
+  padding: 0;
 }
 
-.exp-card-front:hover {
-  background: #f5f5f5;   /* light grey hover */
-  cursor: pointer;
-}
-
-  .exp-card-back {
-  background: #ffffff;    /* always grey */
-  color: #111 !important;
-}
-
-
-/* Big square container
-   - width limited by 1050px, viewport width AND height
-   - aspect-ratio keeps it perfectly square
-*/
-
-  /* 2×2 grid, all equal size */
+/* 2×2 grid, all cards same size */
 .exp-mosaic {
+  position: relative;
   width: 1050px;
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(220px, 1fr)); /* height of each row */
+  grid-auto-rows: minmax(220px, 1fr);
   grid-template-areas:
     "ngo io"
     "research assoc";
   gap: 18px;
   perspective: 1200px;
+  overflow: visible;  /* allow expanded cards to overflow the grid */
 }
 
-/* cards */
+/* --------- CARDS BASE --------- */
 
 .exp-card {
   position: relative;
   cursor: pointer;
+  overflow: visible;   /* so the expanded back can spill out */
 }
 
 .exp-card-inner {
@@ -519,14 +505,14 @@
 .exp-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 0;  /* ⬅ no rounded corners */
+  border-radius: 0;
   overflow: hidden;
   backface-visibility: hidden;
   border: 1px solid rgba(148, 163, 184, 0.5);
   box-shadow: none;
 }
 
-/* FRONT – only two lines of text */
+/* FRONT */
 
 .exp-card-front {
   background: #ffffff;
@@ -539,14 +525,12 @@
   gap: 14px;
 }
 
-/* left side (category + subtitle) */
 .exp-front-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* existing text */
 .exp-front-main {
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -584,21 +568,7 @@
   color: var(--exp-accent);
 }
 
-/* mobile: stack text + gate vertically */
-
-@media (max-width: 640px) {
-  .exp-card-front {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .exp-gate {
-    text-align: left;
-    min-width: 0;
-  }
-}
-
-
-/* BACK – details with logos */
+/* BACK */
 
 .exp-card-back {
   background: #ffffff;
@@ -673,53 +643,21 @@
   color: #9ca3af;
 }
 
-/* 2×2 grid mapping */
+/* mapping into the 2×2 grid */
 
 .exp-card--ngo      { grid-area: ngo; }
 .exp-card--io       { grid-area: io; }
 .exp-card--research { grid-area: research; }
 .exp-card--assoc    { grid-area: assoc; }
 
-/* Responsive – stack on mobile */
+/* --------- EXPANSION BEHAVIOUR --------- */
 
-@media (max-width: 800px) {
-  .exp-mosaic {
-    width: min(100vw - 40px, 80vh);
-  }
-}
-
-@media (max-width: 640px) {
-  .exp-mosaic {
-    width: 100%;
-    aspect-ratio: auto;
-    grid-template-areas: none;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 12px;
-  }
-
-  .exp-card {
-    min-height: 180px;
-  }
-
-  .exp-org {
-    grid-template-columns: 1fr;
-  }
-
-  .exp-org-logo {
-    width: 52px;
-    height: 52px;
-  }
-}
-
-    /* ===== EXPERIENCE – EXPANDING FLIPPED CARDS (overlay) ===== */
-
-/* when a card is expanded, let it sit above neighbours */
+/* when a card is expanded, bring it to the front */
 .exp-card--expanded {
-  z-index: 5;
+  z-index: 10;
 }
 
-/* allow content to overflow outside the tile */
+/* allow its faces to overflow */
 .exp-card--expanded .exp-card-face {
   overflow: visible;
 }
@@ -730,33 +668,25 @@
   overflow: visible;
 }
 
-/* all four cards can overflow their grid cell */
-.exp-card--ngo,
-.exp-card--io,
-.exp-card--research,
-.exp-card--assoc {
-  overflow: visible;
-}
-
-
-/* TOP ROW (NGO + IO) → expand downward over bottom row */
+/* TOP ROW (NGO + IO) → expand DOWN over bottom row */
 .exp-card--ngo.exp-card--expanded .exp-card-back,
 .exp-card--io.exp-card--expanded .exp-card-back {
   top: 0;
   bottom: auto;
-  height: 210%;     /* how much it overlaps downward */
+  height: 220%;             /* how much it overlaps downward */
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
 }
 
-/* BOTTOM ROW (Research + Assoc) → expand upward over top row */
+/* BOTTOM ROW (Research + Assoc) → expand UP over top row */
 .exp-card--research.exp-card--expanded .exp-card-back,
 .exp-card--assoc.exp-card--expanded .exp-card-back {
-  top: -110%;       /* how far it moves up over the card above */
+  top: -120%;               /* move up over the card above */
   bottom: auto;
-  height: 210%;
+  height: 220%;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
 }
 
-    
-    /* -------- EXPERIENCE ACCENT COLORS -------- */
+/* --------- COLORS & HOVER --------- */
 
 /* one accent per category */
 .exp-card--ngo {
@@ -806,7 +736,6 @@
 .exp-card--ngo .exp-front-main,
 .exp-card--io .exp-front-main,
 .exp-card--research .exp-front-main,
-.exp-card--gov .exp-front-main,
 .exp-card--assoc .exp-front-main {
   color: var(--exp-accent);
 }
@@ -818,15 +747,51 @@
   box-shadow: 0 14px 30px rgba(15,23,42,0.14);
 }
 
-/* on the back: just tint the meta line slightly */
+/* on the back: tint the meta line slightly */
 .exp-card--ngo .exp-org-meta,
 .exp-card--io .exp-org-meta,
 .exp-card--research .exp-org-meta,
-.exp-card--gov .exp-org-meta,
 .exp-card--assoc .exp-org-meta {
   color: var(--exp-accent);
 }
 
+/* --------- RESPONSIVE --------- */
+
+@media (max-width: 800px) {
+  .exp-mosaic {
+    width: min(100vw - 40px, 80vh);
+  }
+}
+
+@media (max-width: 640px) {
+  .exp-mosaic {
+    width: 100%;
+    grid-template-areas: none;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 12px;
+  }
+
+  .exp-card {
+    min-height: 180px;
+  }
+
+  .exp-org {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-org-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  /* on mobile just expand downwards (simpler) */
+  .exp-card--research.exp-card--expanded .exp-card-back,
+  .exp-card--assoc.exp-card--expanded .exp-card-back {
+    top: 0;
+    height: 200%;
+  }
+}
 
 /* ===========================
    WORK – VERTICAL STRIPS
@@ -3546,18 +3511,16 @@ document.getElementById("map-germany").addEventListener("click", () => {
    EXPERIENCE — FLIP CARDS + EXPANSION
 =============================== */
 
-const expCards = document.querySelectorAll(".exp-card");
-
-const ioCard       = document.querySelector(".exp-card--io");
-const researchCard = document.querySelector(".exp-card--research");
-const assocCard    = document.querySelector(".exp-card--assoc");
+const expCards    = document.querySelectorAll(".exp-card");
+const ngoCard     = document.querySelector(".exp-card--ngo");
+const ioCard      = document.querySelector(".exp-card--io");
+const researchCard= document.querySelector(".exp-card--research");
+const assocCard   = document.querySelector(".exp-card--assoc");
 
 function resetExpLayout() {
-  // reset flip + expansion classes
-  expCards.forEach(c => {
-    c.classList.remove("is-flipped");
-    c.classList.remove("exp-expanded");
-    c.style.display = "block";
+  expCards.forEach(card => {
+    card.classList.remove("is-flipped");
+    card.classList.remove("exp-card--expanded"); // match CSS name
   });
 }
 
@@ -3571,27 +3534,11 @@ expCards.forEach(card => {
     // if it was open, we just closed it
     if (alreadyFlipped) return;
 
-    // flip clicked card
+    // flip + expand clicked card
     card.classList.add("is-flipped");
-
-    // handle who expands over whom
-    if (card === ioCard) {
-      // OIF covers RSS
-      ioCard.classList.add("exp-expanded");
-      researchCard.style.display = "none";
-    } else if (card === researchCard) {
-      // RSS covers Student-led
-      researchCard.classList.add("exp-expanded");
-      assocCard.style.display = "none";
-    } else if (card === assocCard) {
-      // Student-led covers RSS (but not OIF)
-      assocCard.classList.add("exp-expanded");
-      researchCard.style.display = "none";
-    }
+    card.classList.add("exp-card--expanded");
   });
 });
-
-
 
 
     /* ===============================
