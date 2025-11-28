@@ -1488,6 +1488,15 @@ margin-bottom: 6px;
   100% { transform: translateX(-50%); }
 }
 
+    .fullwidth-filmstrip {
+  width: 100vw;           /* full screen width */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;     /* break out of the .page container */
+  margin-right: -50vw;
+}
+
 /* ===========================
    CONTACT – ENVELOPE STYLE
 =========================== */
@@ -3061,7 +3070,7 @@ margin-bottom: 6px;
 
 
 
-      <!-- ACTIVITIES -->
+<!-- ACTIVITIES -->
 <section id="activities">
 
   <div class="activities-row">
@@ -3084,74 +3093,71 @@ margin-bottom: 6px;
   </div>
 
   <!-- 🔻 Auto-scrolling horizontal picture strip -->
-<!-- 🔻 Auto-scrolling horizontal picture strip -->
-<div class="filmstrip-wrapper">
-  <div class="filmstrip-track">
+  <div class="filmstrip-wrapper fullwidth-filmstrip">
+    <div class="filmstrip-track">
 
-    <!-- FIRST GROUP -->
-    <div class="filmstrip-group">
-      <div class="film-cell">
-        <img src="img5.jpg"
-             alt="Tarjimly"
-             data-caption="Tarjimly — volunteering as a translator & interpreter">
+      <!-- FIRST GROUP -->
+      <div class="filmstrip-group">
+        <div class="film-cell">
+          <img src="img5.jpg"
+               alt="Tarjimly"
+               data-caption="Tarjimly — volunteering as a translator & interpreter">
+        </div>
+        <div class="film-cell">
+          <img src="img2.jpg"
+               alt="Mediterranean of the Future"
+               data-caption="Mediterranean of the Future — liaison officer for Djibouti">
+        </div>
+        <div class="film-cell">
+          <img src="img1.jpg"
+               alt="Paris Peace Forum"
+               data-caption="Paris Peace Forum — guest speaker & participant">
+        </div>
+        <div class="film-cell">
+          <img src="image1.jpg"
+               alt="MEDMUN"
+               data-caption="MEDMUN — Arabic UNHCR Committee Director">
+        </div>
+        <div class="film-cell">
+          <img src="image2.jpg"
+               alt="Institutional events"
+               data-caption="Institutional events & conferences">
+        </div>
       </div>
-      <div class="film-cell">
-        <img src="img2.jpg"
-             alt="Mediterranean of the Future"
-             data-caption="Mediterranean of the Future — liaison officer for Djibouti">
+
+      <!-- SECOND GROUP (same images for seamless loop) -->
+      <div class="filmstrip-group">
+        <div class="film-cell">
+          <img src="img5.jpg"
+               alt="Tarjimly"
+               data-caption="Tarjimly — volunteering as a translator & interpreter">
+        </div>
+        <div class="film-cell">
+          <img src="img2.jpg"
+               alt="Mediterranean of the Future"
+               data-caption="Mediterranean of the Future — liaison officer for Djibouti">
+        </div>
+        <div class="film-cell">
+          <img src="img1.jpg"
+               alt="Paris Peace Forum"
+               data-caption="Paris Peace Forum — guest speaker & participant">
+        </div>
+        <div class="film-cell">
+          <img src="image1.jpg"
+               alt="MEDMUN"
+               data-caption="MEDMUN — Arabic UNHCR Committee Director">
+        </div>
+        <div class="film-cell">
+          <img src="image2.jpg"
+               alt="Institutional events"
+               data-caption="Institutional events & conferences">
+        </div>
       </div>
-      <div class="film-cell">
-        <img src="img1.jpg"
-             alt="Paris Peace Forum"
-             data-caption="Paris Peace Forum — guest speaker & participant">
-      </div>
-      <div class="film-cell">
-        <img src="image1.jpg"
-             alt="MEDMUN"
-             data-caption="MEDMUN — Arabic UNHCR Committee Director">
-      </div>
-      <div class="film-cell">
-        <img src="image2.jpg"
-             alt="Institutional events"
-             data-caption="Institutional events & conferences">
-      </div>
+
     </div>
-
-    <!-- SECOND GROUP (same images for seamless loop) -->
-    <div class="filmstrip-group">
-      <div class="film-cell">
-        <img src="img5.jpg"
-             alt="Tarjimly"
-             data-caption="Tarjimly — volunteering as a translator & interpreter">
-      </div>
-      <div class="film-cell">
-        <img src="img2.jpg"
-             alt="Mediterranean of the Future"
-             data-caption="Mediterranean of the Future — liaison officer for Djibouti">
-      </div>
-      <div class="film-cell">
-        <img src="img1.jpg"
-             alt="Paris Peace Forum"
-             data-caption="Paris Peace Forum — guest speaker & participant">
-      </div>
-      <div class="film-cell">
-        <img src="image1.jpg"
-             alt="MEDMUN"
-             data-caption="MEDMUN — Arabic UNHCR Committee Director">
-      </div>
-      <div class="film-cell">
-        <img src="image2.jpg"
-             alt="Institutional events"
-             data-caption="Institutional events & conferences">
-      </div>
-    </div>
-
   </div>
-</div>
-
 
 </section>
-
 
 
       <!-- CONTACT -->
