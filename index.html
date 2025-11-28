@@ -904,8 +904,8 @@
   position: absolute;
   width: 420px;
   height: 420px;
-  right: -140px;
-  top: -120px;
+  left: -140px;           /* was right:-140px */
+  top: -120px;            /* stays similar, now top-left */
   border-radius: 50%;
   border: 1px solid rgba(248,250,252,0.18);
   box-shadow:
@@ -915,6 +915,7 @@
   pointer-events: none;
   z-index: 0;
 }
+
 
 /* ensure actual content stays above the abstract shapes */
 .work-board-left > * {
@@ -2906,7 +2907,6 @@ margin-bottom: 6px;
 
         <!-- HSQ detail -->
         <article class="work-detail is-active" data-project="hsq">
-          <div class="work-main-label">Selected work</div>
           <h2 class="work-main-title">
             Human Security Twine project
           </h2>
@@ -2932,7 +2932,6 @@ margin-bottom: 6px;
 
         <!-- ODA detail -->
         <article class="work-detail" data-project="oda">
-          <div class="work-main-label">Selected work</div>
           <h2 class="work-main-title">
             French ODA &amp; renewables dataset
           </h2>
@@ -2958,7 +2957,6 @@ margin-bottom: 6px;
 
         <!-- COX detail -->
         <article class="work-detail" data-project="cox">
-          <div class="work-main-label">Selected work</div>
           <h2 class="work-main-title">
             Cox’s Bazar humanitarian brief
           </h2>
@@ -2984,7 +2982,6 @@ margin-bottom: 6px;
 
         <!-- VSL detail -->
         <article class="work-detail" data-project="vsl">
-          <div class="work-main-label">Selected work</div>
           <h2 class="work-main-title">
             Humanitarian visuals &amp; infographics
           </h2>
