@@ -573,12 +573,10 @@
 .exp-card-back {
   background: #ffffff;
   color: #111827;
-  transform: rotateY(180deg) translateY(0);   /* base position */
-  transition: transform 0.35s ease;          /* slide animation */
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
 }
-
 
 .exp-card-back-inner {
   padding: 14px 14px 10px;
@@ -692,18 +690,6 @@
   height: calc(200% + 18px);  /* 2 rows total */
 }
 
-    /* slight slide: top row down, bottom row up */
-.exp-card--ngo.exp-card--expanded .exp-card-back,
-.exp-card--io.exp-card--expanded .exp-card-back {
-  transform: rotateY(180deg) translateY(8px);
-}
-
-.exp-card--research.exp-card--expanded .exp-card-back,
-.exp-card--assoc.exp-card--expanded .exp-card-back {
-  transform: rotateY(180deg) translateY(-8px);
-}
-
-
 /* --------- COLORS & HOVER --------- */
 
 /* one accent per category */
@@ -771,19 +757,6 @@
 .exp-card--research .exp-org-meta,
 .exp-card--assoc .exp-org-meta {
   color: var(--exp-accent);
-}
-
-    /* dim non-active cards when one is expanded */
-.exp-mosaic.exp-mosaic--has-active .exp-card {
-  opacity: 0.35;
-  filter: grayscale(0.15);
-  transition: opacity 0.2s ease, filter 0.2s ease;
-}
-
-/* keep the expanded one bright */
-.exp-mosaic.exp-mosaic--has-active .exp-card.exp-card--expanded {
-  opacity: 1;
-  filter: none;
 }
 
 /* --------- RESPONSIVE --------- */
@@ -3547,16 +3520,12 @@ const ngoCard     = document.querySelector(".exp-card--ngo");
 const ioCard      = document.querySelector(".exp-card--io");
 const researchCard= document.querySelector(".exp-card--research");
 const assocCard   = document.querySelector(".exp-card--assoc");
-const expMosaic   = document.querySelector(".exp-mosaic");  // NEW
 
 function resetExpLayout() {
   expCards.forEach(card => {
     card.classList.remove("is-flipped");
-    card.classList.remove("exp-card--expanded");
+    card.classList.remove("exp-card--expanded"); // match CSS name
   });
-  if (expMosaic) {
-    expMosaic.classList.remove("exp-mosaic--has-active");   // NEW
-  }
 }
 
 expCards.forEach(card => {
@@ -3572,11 +3541,6 @@ expCards.forEach(card => {
     // flip + expand clicked card
     card.classList.add("is-flipped");
     card.classList.add("exp-card--expanded");
-
-    // dim other cards
-    if (expMosaic) {
-      expMosaic.classList.add("exp-mosaic--has-active");    // NEW
-    }
   });
 });
 
