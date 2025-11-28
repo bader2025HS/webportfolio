@@ -3778,112 +3778,119 @@ document.addEventListener("keydown", e => {
 
 
     /* ===============================
-       LIGHTBOX FOR GALLERY
-    =============================== */
+   LIGHTBOX FOR GALLERY + ACTIVITIES
+=============================== */
 
-    const overlay = document.getElementById("lightboxOverlay");
-    const lightboxImage = document.getElementById("lightboxImage");
-    const lightboxCaption = document.getElementById("lightboxCaption");
-    const lightboxCounter = document.getElementById("lightboxCounter");
-    const btnPrev = document.getElementById("lightboxPrev");
-    const btnNext = document.getElementById("lightboxNext");
-    const btnClose = document.getElementById("lightboxClose");
+const overlay = document.getElementById("lightboxOverlay");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxCaption = document.getElementById("lightboxCaption");
+const lightboxCounter = document.getElementById("lightboxCounter");
+const btnPrev = document.getElementById("lightboxPrev");
+const btnNext = document.getElementById("lightboxNext");
+const btnClose = document.getElementById("lightboxClose");
 
-    const galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
-    const activityImages = Array.from(document.querySelectorAll(".film-cell img"));
-    let currentGroup = "gallery";  // or "activities"
-    let currentIndex = 0;
+const galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+const activityImages = Array.from(document.querySelectorAll(".film-cell img"));
 
-    function updateCounter() {
+let currentGroup = "gallery";  // "gallery" or "activities"
+let currentIndex = 0;
+
+/* counter: restart from 1 within each group */
+function updateCounter() {
   const total =
     currentGroup === "gallery"
       ? galleryImages.length
       : activityImages.length;
 
   const number = currentIndex + 1;
-
   lightboxCounter.textContent = `${number} / ${total}`;
 }
 
+/* one source of truth to open the lightbox */
+function openLightbox(index) {
+  currentIndex = index;
 
-    function openLightbox(index) {
-      currentIndex = index;
-      const img = galleryImages[currentIndex];
+  const images =
+    currentGroup === "gallery"
+      ? galleryImages
+      : activityImages;
 
-      lightboxImage.src = img.src;
-      lightboxImage.alt = img.alt || "";
-      lightboxCaption.textContent = img.dataset.caption || "";
-      lightboxCounter.textContent = (currentIndex + 1) + " / " + galleryImages.length;
-      overlay.style.display = "flex";
-      updateCounter();
-    }
+  const img = images[currentIndex];
 
-    function closeLightbox() {
-      overlay.style.display = "none";
-    }
+  if (!img) return; // safety
 
-    function showNext() {
-  if (currentGroup === "gallery") {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    const img = galleryImages[currentIndex];
-    openLightbox(img.src, img.dataset.caption || img.alt);
-  } else {
-    currentIndex = (currentIndex + 1) % activityImages.length;
-    const img = activityImages[currentIndex];
-    openLightbox(img.src, img.dataset.caption || img.alt);
-  }
+  lightboxImage.src = img.src;
+  lightboxImage.alt = img.alt || "";
+  lightboxCaption.textContent = img.dataset.caption || img.alt || "";
+  overlay.style.display = "flex";
+
+  updateCounter();
+}
+
+function closeLightbox() {
+  overlay.style.display = "none";
+}
+
+/* next / prev use currentGroup + currentIndex */
+function showNext() {
+  const images =
+    currentGroup === "gallery"
+      ? galleryImages
+      : activityImages;
+
+  if (!images.length) return;
+
+  currentIndex = (currentIndex + 1) % images.length;
+  openLightbox(currentIndex);
 }
 
 function showPrev() {
-  if (currentGroup === "gallery") {
-    currentIndex =
-      (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    const img = galleryImages[currentIndex];
-    openLightbox(img.src, img.dataset.caption || img.alt);
-  } else {
-    currentIndex =
-      (currentIndex - 1 + activityImages.length) % activityImages.length;
-    const img = activityImages[currentIndex];
-    openLightbox(img.src, img.dataset.caption || img.alt);
-  }
+  const images =
+    currentGroup === "gallery"
+      ? galleryImages
+      : activityImages;
+
+  if (!images.length) return;
+
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  openLightbox(currentIndex);
 }
 
-
-    // CLICK — HOME GALLERY IMAGES
+/* CLICK — HOME GALLERY IMAGES */
 galleryImages.forEach((img, index) => {
   img.addEventListener("click", () => {
     currentGroup = "gallery";
-    currentIndex = index;
-
-    openLightbox(img.src, img.dataset.caption || img.alt);
+    openLightbox(index);
   });
 });
 
-    // CLICK — ACTIVITIES FILMSTRIP IMAGES
+/* CLICK — ACTIVITIES FILMSTRIP IMAGES */
 activityImages.forEach((img, index) => {
   img.addEventListener("click", () => {
     currentGroup = "activities";
-    currentIndex = index;
-
-    openLightbox(img.src, img.dataset.caption || img.alt);
+    openLightbox(index);
   });
 });
 
-    btnNext.addEventListener("click", showNext);
-    btnPrev.addEventListener("click", showPrev);
-    btnClose.addEventListener("click", closeLightbox);
+/* BUTTONS */
+btnNext.addEventListener("click", showNext);
+btnPrev.addEventListener("click", showPrev);
+btnClose.addEventListener("click", closeLightbox);
 
-    overlay.addEventListener("click", e => {
-      if (e.target === overlay) closeLightbox();
-    });
+/* CLICK OUTSIDE TO CLOSE */
+overlay.addEventListener("click", e => {
+  if (e.target === overlay) closeLightbox();
+});
 
-    document.addEventListener("keydown", e => {
-      if (overlay.style.display !== "flex") return;
+/* KEYBOARD NAV */
+document.addEventListener("keydown", e => {
+  if (overlay.style.display !== "flex") return;
 
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") showNext();
-      if (e.key === "ArrowLeft") showPrev();
-    });
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") showNext();
+  if (e.key === "ArrowLeft") showPrev();
+});
+
 
 
 /* ===============================
