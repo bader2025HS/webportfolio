@@ -1420,7 +1420,7 @@ margin-bottom: 6px;
   overflow: hidden;
   width: 100%;
   background: #000;
-  padding: 18px 0;           /* top & bottom black frame */
+  padding: 28px 0;      /* was 18px */
   position: relative;
 }
 
@@ -1438,11 +1438,11 @@ margin-bottom: 6px;
 
 /* Each photo cell */
 .film-cell {
-  width: 220px;             /* adjust size */
-  height: 140px;
-  background: white;        /* cell interior */
-  margin: 0 6px;            /* space between cells */
-  border: 4px solid black;  /* outer box border */
+  width: 280px;        /* was 220px */
+  height: 180px;       /* was 140px */
+  background: white;
+  margin: 0 8px;       /* slightly bigger spacing */
+  border: 4px solid black;
   box-sizing: border-box;
 }
 
@@ -1461,16 +1461,17 @@ margin-bottom: 6px;
   position: absolute;
   left: 0;
   right: 0;
-  height: 12px;
+  height: 14px;        /* was 12px */
   background-image:
     repeating-linear-gradient(
       to right,
       transparent 0,
-      transparent 8px,
-      white 8px,
-      white 16px
+      transparent 10px,  /* was 8px */
+      white 10px,
+      white 20px         /* was 16px */
     );
 }
+
 
 .filmstrip-wrapper:before {
   top: 0;
