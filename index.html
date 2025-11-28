@@ -99,16 +99,14 @@
 
 .about-shell {
   max-width: 900px;
-  margin: 0 auto 40px;
+  margin: 0 auto 30px;
 }
-
-/* layout */
 
 .about-main {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 28px;
+  gap: 40px;                 /* brings columns closer */
   align-items: center;
 }
 
@@ -154,18 +152,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
-  gap: 4px;
+  flex-direction: column;    /* stacked: 30 + countries */
+  gap: 2px;
 }
 
 .about-donut-number .main {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 700;
 }
 
 .about-donut-number .sub {
-  font-size: 1rem;
-  opacity: 0.6;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+}
+
+.about-donut-caption {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 
 /* ---------- METRICS ---------- */
@@ -179,12 +185,20 @@
 
 .about-metric {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 14px;                 /* number + label close together */
 }
 
-.about-metric-number {
-  font-size: 2.2rem;
+.about-metric-pill {
+  min-width: 96px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #f4f5f7;
+  text-align: center;
+}
+
+.about-metric-pill span {
+  font-size: 1.3rem;
   font-weight: 700;
   color: #111;
 }
@@ -192,8 +206,6 @@
 .about-metric-text {
   font-size: 1rem;
   color: #333;
-  text-align: right;
-  max-width: 50%;
 }
 
 /* mobile */
@@ -204,12 +216,14 @@
     align-items: center;
   }
 
-  .about-metric-text {
-    max-width: 100%;
-    text-align: left;
+  .about-metrics {
+    width: 100%;
+  }
+
+  .about-metric {
+    justify-content: center;
   }
 }
-
 
     /* ===========================
        EDUCATION MAPS
@@ -2480,10 +2494,9 @@ margin-bottom: 6px;
       <!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
-
     <div class="about-main">
 
-      <!-- LEFT: DONUT 30 / 193 -->
+      <!-- LEFT: DONUT -->
       <div class="about-donut-block">
         <div class="about-donut-circle">
           <svg viewBox="0 0 120 120" class="about-donut-svg">
@@ -2494,31 +2507,34 @@ margin-bottom: 6px;
 
           <div class="about-donut-number">
             <span class="main">30</span>
-            <span class="sub">/ 193</span>
+            <span class="sub">countries</span>
           </div>
+        </div>
+        <div class="about-donut-caption">
+          30 of 193 countries
         </div>
       </div>
 
-      <!-- RIGHT: JUST PURE NUMBERS -->
+      <!-- RIGHT: PILLS -->
       <div class="about-metrics">
 
         <div class="about-metric">
-          <div class="about-metric-number">100+</div>
+          <div class="about-metric-pill"><span>100+</span></div>
           <div class="about-metric-text">Translation sessions</div>
         </div>
 
         <div class="about-metric">
-          <div class="about-metric-number">200+</div>
+          <div class="about-metric-pill"><span>200+</span></div>
           <div class="about-metric-text">Refugees supported</div>
         </div>
 
         <div class="about-metric">
-          <div class="about-metric-number">5</div>
+          <div class="about-metric-pill"><span>5</span></div>
           <div class="about-metric-text">Languages spoken</div>
         </div>
 
         <div class="about-metric">
-          <div class="about-metric-number">7</div>
+          <div class="about-metric-pill"><span>7</span></div>
           <div class="about-metric-text">Cities lived in</div>
         </div>
 
@@ -2527,7 +2543,6 @@ margin-bottom: 6px;
     </div>
   </div>
 </section>
-
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
