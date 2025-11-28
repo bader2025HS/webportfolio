@@ -125,6 +125,41 @@
   color: #6b7280;
 }
 
+    .travel-bars {
+  max-width: 480px;
+  margin: 30px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.travel-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.travel-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.travel-bar-fill {
+  --pct: 30; /* default */
+  height: 100%;
+  width: calc(var(--pct) * 1%);
+  background: linear-gradient(90deg, #009fa5, #22c55e);
+  border-radius: inherit;
+  transition: width 0.4s ease-out;
+}
+
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
@@ -2407,6 +2442,30 @@ margin-bottom: 6px;
       <span class="about-stat-label">languages studied</span>
     </div>
   </div>
+
+
+     <div class="travel-bars">
+  <div class="travel-bar">
+    <div class="travel-bar-header">
+      <span>Countries visited</span>
+      <span>30 / 195</span>
+    </div>
+    <div class="travel-bar-track">
+      <div class="travel-bar-fill" style="--pct: 15;"></div>
+    </div>
+  </div>
+
+  <div class="travel-bar">
+    <div class="travel-bar-header">
+      <span>MENA countries</span>
+      <span>10 / 19</span>
+    </div>
+    <div class="travel-bar-track">
+      <div class="travel-bar-fill" style="--pct: 53;"></div>
+    </div>
+  </div>
+</div>
+
 </section>
 
 
