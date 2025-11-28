@@ -650,42 +650,45 @@
 .exp-card--research { grid-area: research; }
 .exp-card--assoc    { grid-area: assoc; }
 
-/* FIRST: allow card to be an anchor for expansion */
+/* --------- EXPANSION BEHAVIOUR --------- */
+
+/* keep each grid item one row high, but let its content overflow */
 .exp-card {
   position: relative;
   overflow: visible;
 }
 
-/* ALL expanded cards float above the grid */
+/* expanded card sits above neighbours */
 .exp-card--expanded {
-  z-index: 999; /* MUST be large */
+  z-index: 20;
 }
 
-/* THE MAGIC: expanded back face ESCAPES its cell */
+/* faces may overflow when expanded */
+.exp-card--expanded .exp-card-face {
+  overflow: visible;
+}
+
+/* make the BACK face span exactly 2 rows in its column */
 .exp-card--expanded .exp-card-back {
   position: absolute;
   left: 0;
   right: 0;
-  z-index: 1000;
-  box-shadow: 0 22px 46px rgba(15,23,42,0.40);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
 }
 
-/* TOP ROW → push down */
+/* TOP ROW (NGO + IO) → expand DOWN over the card below */
 .exp-card--ngo.exp-card--expanded .exp-card-back,
 .exp-card--io.exp-card--expanded .exp-card-back {
   top: 0;
-  transform: translateY(0);
-  height: calc(100% + var(--exp-gap) + 100%);
+  height: calc(200% + 18px);  /* its own row + gap + row below */
 }
 
-/* BOTTOM ROW → pull up */
+/* BOTTOM ROW (Research + Assoc) → expand UP over the card above */
 .exp-card--research.exp-card--expanded .exp-card-back,
 .exp-card--assoc.exp-card--expanded .exp-card-back {
-  bottom: 0;
-  transform: translateY(0);
-  height: calc(100% + var(--exp-gap) + 100%);
+  top: calc(-100% - 18px);    /* move up by one row + gap */
+  height: calc(200% + 18px);  /* 2 rows total */
 }
-
 
 /* --------- COLORS & HOVER --------- */
 
