@@ -1099,6 +1099,48 @@
   z-index: 4;
 }
 
+/* ---------------------------------
+   WORK – per-project file button
+----------------------------------*/
+
+.work-main-links {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.work-main-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.85);
+  background: transparent;
+  color: #f9fafb;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.work-main-link-btn span.icon {
+  font-size: 1.05rem;
+}
+
+.work-main-link-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.4);
+}
 
 /* Responsive */
 
@@ -2618,6 +2660,13 @@
             <span class="work-chip-pill">Scenario design</span>
             <span class="work-chip-pill">Human Security</span>
           </div>
+          <div class="work-main-links">
+    <a class="work-main-link-btn"
+       href="files/human-security-twine.html" target="_blank">
+      <span class="icon">↗</span>
+      <span>Open Twine module</span>
+    </a>
+  </div>
         </article>
 
         <!-- ODA detail -->
@@ -2652,6 +2701,13 @@
             <span class="work-chip-pill">Power BI</span>
             <span class="work-chip-pill">Energy &amp; ODA</span>
           </div>
+          <div class="work-main-links">
+    <a class="work-main-link-btn"
+       href="files/french-oda-renewables.xlsx" target="_blank">
+      <span class="icon">↗</span>
+      <span>Open dataset (Excel)</span>
+    </a>
+  </div>
         </article>
 
         <!-- COX detail -->
@@ -2686,6 +2742,13 @@
             <span class="work-chip-pill">Protection</span>
             <span class="work-chip-pill">Briefing note</span>
           </div>
+           <div class="work-main-links">
+    <a class="work-main-link-btn"
+       href="files/cox-bazar-brief.pdf" target="_blank">
+      <span class="icon">↗</span>
+      <span>Read brief (PDF)</span>
+    </a>
+  </div>
         </article>
 
         <!-- VSL detail -->
@@ -2720,6 +2783,13 @@
             <span class="work-chip-pill">Illustrator</span>
             <span class="work-chip-pill">Data-viz</span>
           </div>
+          <div class="work-main-links">
+    <a class="work-main-link-btn"
+       href="files/humanitarian-visuals-portfolio.pdf" target="_blank">
+      <span class="icon">↗</span>
+      <span>View visuals (PDF)</span>
+    </a>
+  </div>
         </article>
 
       </div>
