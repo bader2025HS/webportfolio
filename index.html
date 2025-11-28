@@ -446,7 +446,7 @@
 
 
 /* ===========================
-   EXPERIENCE – 2×2 GRID
+   EXPERIENCE – MOSAIC 2×2
 =========================== */
 
 #experience {
@@ -463,28 +463,27 @@
   padding: 0;
 }
 
-/* 2×2 grid, all cards same size */
+/* 2×2 grid, all equal size */
 .exp-mosaic {
-  position: relative;
+  --exp-gap: 18px;
+  --exp-height: 520px;          /* 🔧 overall height of the experience area */
+
   width: 1050px;
   max-width: 100%;
+  height: var(--exp-height);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(220px, 1fr);
-  grid-template-areas:
-    "ngo io"
-    "research assoc";
-  gap: 18px;
+  grid-template-rows: repeat(2, 1fr);
+  gap: var(--exp-gap);
   perspective: 1200px;
-  overflow: visible;  /* allow expanded cards to overflow the grid */
+  position: relative;
 }
-
-/* --------- CARDS BASE --------- */
 
 .exp-card {
   position: relative;
   cursor: pointer;
-  overflow: visible;   /* so the expanded back can spill out */
+  height: 100%;                 /* each card fills its cell */
+  overflow: visible;            /* so expanded back can overflow cell */
 }
 
 .exp-card-inner {
@@ -525,6 +524,13 @@
   gap: 14px;
 }
 
+.exp-card-front:hover {
+  background: linear-gradient(135deg, var(--exp-accent-soft), #ffffff);
+  border-color: var(--exp-accent);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.14);
+}
+
+/* left side (category + subtitle) */
 .exp-front-left {
   display: flex;
   flex-direction: column;
@@ -578,13 +584,43 @@
   flex-direction: column;
 }
 
+/* when expanded, let the back float over neighbours
+   without changing the grid height */
+.exp-card--expanded .exp-card-back {
+  position: absolute;
+  left: 0;
+  right: 0;
+  box-shadow: 0 22px 46px rgba(15,23,42,0.35);
+}
+
+/* TOP ROW cards expand downward over bottom row */
+.exp-card--ngo.exp-card--expanded .exp-card-back,
+.exp-card--io.exp-card--expanded .exp-card-back {
+  top: 0;
+  height: calc(200% + var(--exp-gap));   /* 2 rows + gap */
+}
+
+/* BOTTOM ROW cards expand upward over top row */
+.exp-card--research.exp-card--expanded .exp-card-back,
+.exp-card--assoc.exp-card--expanded .exp-card-back {
+  bottom: 0;
+  height: calc(200% + var(--exp-gap));
+}
+
+/* inner content */
 .exp-card-back-inner {
   padding: 14px 14px 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   height: 100%;
-  overflow-y: auto;   /* if bullets are really long */
+  overflow-y: auto;   /* scroll normally for unexpanded */
+}
+
+/* constrain content when expanded so it never pushes layout */
+.exp-card--expanded .exp-card-back-inner {
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
 }
 
 .exp-back-label {
@@ -643,69 +679,64 @@
   color: #9ca3af;
 }
 
-/* mapping into the 2×2 grid */
-
+/* 2×2 grid mapping */
 .exp-card--ngo      { grid-area: ngo; }
 .exp-card--io       { grid-area: io; }
 .exp-card--research { grid-area: research; }
 .exp-card--assoc    { grid-area: assoc; }
 
-/* --------- EXPANSION BEHAVIOUR --------- */
+/* Responsive – stack on mobile */
 
-/* when a card is expanded, bring it to the front */
-.exp-card--expanded {
-  z-index: 10;
+@media (max-width: 800px) {
+  .exp-mosaic {
+    width: min(100vw - 40px, 80vh);
+    height: auto;                         /* let it grow on small screens */
+  }
 }
 
-/* allow its faces to overflow */
-.exp-card--expanded .exp-card-face {
-  overflow: visible;
+@media (max-width: 640px) {
+  .exp-mosaic {
+    width: 100%;
+    aspect-ratio: auto;
+    grid-template-areas: none;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+
+  .exp-card {
+    min-height: 180px;
+  }
+
+  .exp-org {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-org-logo {
+    width: 52px;
+    height: 52px;
+  }
 }
 
-.exp-card--expanded .exp-card-back-inner {
-  height: auto;
-  max-height: none;
-  overflow: visible;
-}
+/* -------- EXPERIENCE ACCENT COLORS -------- */
 
-/* TOP ROW (NGO + IO) → expand DOWN over bottom row */
-.exp-card--ngo.exp-card--expanded .exp-card-back,
-.exp-card--io.exp-card--expanded .exp-card-back {
-  top: 0;
-  bottom: auto;
-  height: 220%;             /* how much it overlaps downward */
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
-}
-
-/* BOTTOM ROW (Research + Assoc) → expand UP over top row */
-.exp-card--research.exp-card--expanded .exp-card-back,
-.exp-card--assoc.exp-card--expanded .exp-card-back {
-  top: -120%;               /* move up over the card above */
-  bottom: auto;
-  height: 220%;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
-}
-
-/* --------- COLORS & HOVER --------- */
-
-/* one accent per category */
 .exp-card--ngo {
-  --exp-accent: #009fa5;                  /* teal */
+  --exp-accent: #009fa5;
   --exp-accent-soft: rgba(0,159,165,0.06);
 }
 
 .exp-card--io {
-  --exp-accent: #2563eb;                  /* blue */
+  --exp-accent: #2563eb;
   --exp-accent-soft: rgba(37,99,235,0.06);
 }
 
 .exp-card--research {
-  --exp-accent: #0f766e;                  /* deep green-teal */
+  --exp-accent: #0f766e;
   --exp-accent-soft: rgba(15,118,110,0.06);
 }
 
 .exp-card--assoc {
-  --exp-accent: #ec4899;                  /* pink */
+  --exp-accent: #ec4899;
   --exp-accent-soft: rgba(236,72,153,0.06);
 }
 
@@ -740,58 +771,6 @@
   color: var(--exp-accent);
 }
 
-/* make hover a bit more “alive” but still clean */
-.exp-card:hover .exp-card-front {
-  background: linear-gradient(135deg, var(--exp-accent-soft), #ffffff);
-  border-color: var(--exp-accent);
-  box-shadow: 0 14px 30px rgba(15,23,42,0.14);
-}
-
-/* on the back: tint the meta line slightly */
-.exp-card--ngo .exp-org-meta,
-.exp-card--io .exp-org-meta,
-.exp-card--research .exp-org-meta,
-.exp-card--assoc .exp-org-meta {
-  color: var(--exp-accent);
-}
-
-/* --------- RESPONSIVE --------- */
-
-@media (max-width: 800px) {
-  .exp-mosaic {
-    width: min(100vw - 40px, 80vh);
-  }
-}
-
-@media (max-width: 640px) {
-  .exp-mosaic {
-    width: 100%;
-    grid-template-areas: none;
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    gap: 12px;
-  }
-
-  .exp-card {
-    min-height: 180px;
-  }
-
-  .exp-org {
-    grid-template-columns: 1fr;
-  }
-
-  .exp-org-logo {
-    width: 52px;
-    height: 52px;
-  }
-
-  /* on mobile just expand downwards (simpler) */
-  .exp-card--research.exp-card--expanded .exp-card-back,
-  .exp-card--assoc.exp-card--expanded .exp-card-back {
-    top: 0;
-    height: 200%;
-  }
-}
 
 /* ===========================
    WORK – VERTICAL STRIPS
@@ -3508,19 +3487,14 @@ document.getElementById("map-germany").addEventListener("click", () => {
 
 
 /* ===============================
-   EXPERIENCE — FLIP CARDS + EXPANSION
+   EXPERIENCE — FLIP + OVERLAY
 =============================== */
 
-const expCards    = document.querySelectorAll(".exp-card");
-const ngoCard     = document.querySelector(".exp-card--ngo");
-const ioCard      = document.querySelector(".exp-card--io");
-const researchCard= document.querySelector(".exp-card--research");
-const assocCard   = document.querySelector(".exp-card--assoc");
+const expCards = document.querySelectorAll(".exp-card");
 
 function resetExpLayout() {
-  expCards.forEach(card => {
-    card.classList.remove("is-flipped");
-    card.classList.remove("exp-card--expanded"); // match CSS name
+  expCards.forEach(c => {
+    c.classList.remove("is-flipped", "exp-card--expanded");
   });
 }
 
@@ -3528,18 +3502,15 @@ expCards.forEach(card => {
   card.addEventListener("click", () => {
     const alreadyFlipped = card.classList.contains("is-flipped");
 
-    // reset everything first
+    // close everything
     resetExpLayout();
 
-    // if it was open, we just closed it
-    if (alreadyFlipped) return;
-
-    // flip + expand clicked card
-    card.classList.add("is-flipped");
-    card.classList.add("exp-card--expanded");
+    // if it was open, just close; if not, open + expand
+    if (!alreadyFlipped) {
+      card.classList.add("is-flipped", "exp-card--expanded");
+    }
   });
 });
-
 
     /* ===============================
    TOOLTIP (EXP + EDUCATION MAPS)
