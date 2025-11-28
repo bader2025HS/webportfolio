@@ -867,6 +867,112 @@
   color: var(--exp-accent);
 }
 
+/* EXPERIENCE – new visual style */
+
+.exp-card {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.exp-card-face {
+  border-radius: 16px;           /* rounded corners */
+  box-shadow: 0 10px 26px rgba(15,23,42,0.10);
+}
+
+/* lift on hover (only when not flipped) */
+.exp-card:not(.is-flipped):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(15,23,42,0.18);
+}
+
+    /* front = subtle color wash + white, using your existing accents */
+
+.exp-card-front {
+  position: relative;
+  background: #ffffff;
+}
+
+/* NGO & humanitarian */
+.exp-card--ngo .exp-card-front {
+  background: radial-gradient(circle at 0% 0%, var(--exp-accent-soft) 0, #ffffff 58%);
+}
+
+/* International org (OIF) */
+.exp-card--io .exp-card-front {
+  background: radial-gradient(circle at 100% 0%, var(--exp-accent-soft) 0, #ffffff 58%);
+}
+
+/* Research & science-policy */
+.exp-card--research .exp-card-front {
+  background: radial-gradient(circle at 0% 100%, var(--exp-accent-soft) 0, #ffffff 58%);
+}
+
+/* Government & city */
+.exp-card--gov .exp-card-front {
+  background: radial-gradient(circle at 100% 100%, var(--exp-accent-soft) 0, #ffffff 58%);
+}
+
+/* Association & leadership */
+.exp-card--assoc .exp-card-front {
+  background: radial-gradient(circle at 50% 0%, var(--exp-accent-soft) 0, #ffffff 60%);
+}
+
+    /* soft diagonal band across each front – abstract but subtle */
+.exp-card-front::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: linear-gradient(
+    135deg,
+    transparent 0 38%,
+    rgba(15, 23, 42, 0.03) 38% 60%,
+    transparent 60% 100%
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+    /* keep gate text above decorations */
+.exp-gate {
+  position: relative;
+  z-index: 1;
+}
+
+/* circular “waypoints” behind the gate code */
+.exp-gate::after {
+  content: "";
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid rgba(148,163,184,0.6);
+  box-shadow:
+    0 0 0 10px rgba(148,163,184,0.14),
+    0 0 0 22px rgba(148,163,184,0.06);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* tint those circles with each card’s accent */
+.exp-card--ngo .exp-gate::after       { border-color: var(--exp-accent); }
+.exp-card--io .exp-gate::after        { border-color: var(--exp-accent); }
+.exp-card--research .exp-gate::after  { border-color: var(--exp-accent); }
+.exp-card--gov .exp-gate::after       { border-color: var(--exp-accent); }
+.exp-card--assoc .exp-gate::after     { border-color: var(--exp-accent); }
+
+    /* a bit bolder / tighter typography on the front */
+
+.exp-front-main {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+}
+
+.exp-front-sub {
+  font-size: 1.32rem;
+  line-height: 1.12;
+}
 
 /* ===========================
    WORK – VERTICAL STRIPS
