@@ -668,22 +668,17 @@
   overflow: visible;
 }
 
-/* TOP ROW (NGO + IO) → expand DOWN only until bottom row ends */
-.exp-card--ngo.exp-card--expanded .exp-card-back,
-.exp-card--io.exp-card--expanded .exp-card-back {
+/* ALL expanded cards fill the ENTIRE 2-row mosaic height */
+.exp-card--expanded .exp-card-back {
+  position: absolute;
   top: 0;
-  height: calc(200% + var(--exp-gap));  /* 2 rows exactly */
-  max-height: calc(200% + var(--exp-gap));
+  left: 0;
+  right: 0;
+  height: calc(200% + var(--exp-gap)); /* exactly 2 row-heights */
+  z-index: 10;
+  box-shadow: 0 22px 46px rgba(15,23,42,0.40);
 }
 
-/* BOTTOM ROW (RESEARCH + ASSOC) → expand UP only until top row begins */
-.exp-card--research.exp-card--expanded .exp-card-back,
-.exp-card--assoc.exp-card--expanded .exp-card-back {
-  bottom: 0;
-  height: calc(200% + var(--exp-gap));
-  max-height: calc(200% + var(--exp-gap));
-  top: auto;
-}
 
 
 /* --------- COLORS & HOVER --------- */
