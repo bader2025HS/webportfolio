@@ -89,8 +89,8 @@
 }
 
 
-      /* ===========================
-   ABOUT – DONUT STATS
+     /* ===========================
+   ABOUT – DONUT + METRICS
 =========================== */
 
 #about {
@@ -102,118 +102,111 @@
   margin: 0 auto 40px;
 }
 
-.about-header-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #9ca3af;
-  margin-bottom: 8px;
-}
+/* layout */
 
-.about-header-title {
-  font-size: 1.9rem;
-  margin-bottom: 10px;
-}
-
-.about-header-text {
-  font-size: 0.98rem;
-  color: #4b5563;
-  max-width: 40rem;
-}
-
-/* Donut stats layout */
-
-.about-stats-grid {
-  margin-top: 26px;
+.about-main {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 22px;
-  justify-content: center;
+  gap: 28px;
+  align-items: center;
 }
 
-.about-stat {
-  width: 150px;
+/* ---------- DONUT ---------- */
+
+.about-donut-block {
+  flex: 0 0 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.85rem;
 }
 
-/* Donut circle */
-
-.about-stat-circle {
+.about-donut-circle {
   position: relative;
-  width: 120px;
+  width: 180px;
   aspect-ratio: 1;
-  margin-bottom: 8px;
 }
 
-.about-stat-svg {
+.about-donut-svg {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg);   /* start at top */
+  transform: rotate(-90deg);
 }
 
-/* circle styling */
 .about-donut-bg {
   fill: none;
-  stroke: rgba(148,163,184,0.35);
-  stroke-width: 10;
+  stroke: rgba(148,163,184,0.3);
+  stroke-width: 12;
 }
 
 .about-donut-value {
   fill: none;
-  stroke-width: 10;
+  stroke-width: 12;
   stroke-linecap: round;
-  stroke-dasharray: 289;  /* ≈ 2πr for r=46 */
-  stroke-dashoffset: calc(289 * (1 - var(--progress, 0.75)));
-  transition: stroke-dashoffset 0.4s ease-out;
+  stroke: #009fa5;
+  stroke-dasharray: 289;
+  stroke-dashoffset: calc(289 * (1 - var(--progress, 0.16)));
 }
 
-/* different accents per stat */
-.about-stat--countries  .about-donut-value { stroke: #009fa5; }
-.about-stat--translation .about-donut-value { stroke: #2563eb; }
-.about-stat--refugees   .about-donut-value { stroke: #16a34a; }
-.about-stat--languages  .about-donut-value { stroke: #f97316; }
-.about-stat--cities     .about-donut-value { stroke: #ec4899; }
-
-/* number + label inside donut */
-
-.about-stat-number {
+.about-donut-number {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 4px;
 }
 
-.about-stat-number span.value {
-  font-size: 1.25rem;
+.about-donut-number .main {
+  font-size: 2.2rem;
   font-weight: 700;
 }
 
-.about-stat-number span.unit {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
+.about-donut-number .sub {
+  font-size: 1rem;
+  opacity: 0.6;
 }
 
-.about-stat-label {
-  text-align: center;
-  font-size: 0.8rem;
-  color: #374151;
+/* ---------- METRICS ---------- */
+
+.about-metrics {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* smaller on mobile */
+.about-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-@media (max-width: 640px) {
-  .about-stat {
-    width: 130px;
+.about-metric-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.about-metric-text {
+  font-size: 1rem;
+  color: #333;
+  text-align: right;
+  max-width: 50%;
+}
+
+/* mobile */
+
+@media (max-width: 720px) {
+  .about-main {
+    flex-direction: column;
+    align-items: center;
   }
-  .about-stat-circle {
-    width: 100px;
+
+  .about-metric-text {
+    max-width: 100%;
+    text-align: left;
   }
 }
 
@@ -2487,102 +2480,53 @@ margin-bottom: 6px;
       <!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
-    <div class="about-header">
-      <div class="about-header-label">About</div>
-      <h2 class="about-header-title">Between field, data and borders.</h2>
-      <p class="about-header-text">
-        I move between humanitarian work, data for development and migration policy —
-        often somewhere between the Middle East, Europe and new places I am still
-        discovering. A few numbers say it better than a long paragraph:
-      </p>
-    </div>
 
-    <div class="about-stats-grid">
+    <div class="about-main">
 
-      <!-- 30 countries -->
-      <div class="about-stat about-stat--countries">
-        <div class="about-stat-circle">
-          <svg viewBox="0 0 120 120" class="about-stat-svg">
+      <!-- LEFT: DONUT 30 / 193 -->
+      <div class="about-donut-block">
+        <div class="about-donut-circle">
+          <svg viewBox="0 0 120 120" class="about-donut-svg">
             <circle class="about-donut-bg" cx="60" cy="60" r="46"></circle>
             <circle class="about-donut-value" cx="60" cy="60" r="46"
-                    style="--progress: 0.90;"></circle>
+                    style="--progress: 0.16;"></circle>
           </svg>
-          <div class="about-stat-number">
-            <span class="value">30</span>
-            <span class="unit">Countries</span>
+
+          <div class="about-donut-number">
+            <span class="main">30</span>
+            <span class="sub">/ 193</span>
           </div>
         </div>
-        <div class="about-stat-label">Countries visited</div>
       </div>
 
-      <!-- 100+ translation sessions -->
-      <div class="about-stat about-stat--translation">
-        <div class="about-stat-circle">
-          <svg viewBox="0 0 120 120" class="about-stat-svg">
-            <circle class="about-donut-bg" cx="60" cy="60" r="46"></circle>
-            <circle class="about-donut-value" cx="60" cy="60" r="46"
-                    style="--progress: 0.75;"></circle>
-          </svg>
-          <div class="about-stat-number">
-            <span class="value">100+</span>
-            <span class="unit">Sessions</span>
-          </div>
-        </div>
-        <div class="about-stat-label">Translation sessions</div>
-      </div>
+      <!-- RIGHT: JUST PURE NUMBERS -->
+      <div class="about-metrics">
 
-      <!-- 200+ refugees supported -->
-      <div class="about-stat about-stat--refugees">
-        <div class="about-stat-circle">
-          <svg viewBox="0 0 120 120" class="about-stat-svg">
-            <circle class="about-donut-bg" cx="60" cy="60" r="46"></circle>
-            <circle class="about-donut-value" cx="60" cy="60" r="46"
-                    style="--progress: 0.82;"></circle>
-          </svg>
-          <div class="about-stat-number">
-            <span class="value">200+</span>
-            <span class="unit">People</span>
-          </div>
+        <div class="about-metric">
+          <div class="about-metric-number">100+</div>
+          <div class="about-metric-text">Translation sessions</div>
         </div>
-        <div class="about-stat-label">Refugees supported</div>
-      </div>
 
-      <!-- 5 languages spoken -->
-      <div class="about-stat about-stat--languages">
-        <div class="about-stat-circle">
-          <svg viewBox="0 0 120 120" class="about-stat-svg">
-            <circle class="about-donut-bg" cx="60" cy="60" r="46"></circle>
-            <circle class="about-donut-value" cx="60" cy="60" r="46"
-                    style="--progress: 0.60;"></circle>
-          </svg>
-          <div class="about-stat-number">
-            <span class="value">5</span>
-            <span class="unit">Languages</span>
-          </div>
+        <div class="about-metric">
+          <div class="about-metric-number">200+</div>
+          <div class="about-metric-text">Refugees supported</div>
         </div>
-        <div class="about-stat-label">Languages spoken</div>
-      </div>
 
-      <!-- 7 cities lived in -->
-      <div class="about-stat about-stat--cities">
-        <div class="about-stat-circle">
-          <svg viewBox="0 0 120 120" class="about-stat-svg">
-            <circle class="about-donut-bg" cx="60" cy="60" r="46"></circle>
-            <circle class="about-donut-value" cx="60" cy="60" r="46"
-                    style="--progress: 0.55;"></circle>
-          </svg>
-          <div class="about-stat-number">
-            <span class="value">7</span>
-            <span class="unit">Cities</span>
-          </div>
+        <div class="about-metric">
+          <div class="about-metric-number">5</div>
+          <div class="about-metric-text">Languages spoken</div>
         </div>
-        <div class="about-stat-label">Cities lived in</div>
+
+        <div class="about-metric">
+          <div class="about-metric-number">7</div>
+          <div class="about-metric-text">Cities lived in</div>
+        </div>
+
       </div>
 
     </div>
   </div>
 </section>
-
 
 
      <!-- SKILLS – AIRPORT TERMINAL -->
