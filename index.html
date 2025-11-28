@@ -1476,6 +1476,38 @@ margin-bottom: 6px;
   transform: scale(1);
 }
 
+    /* Small zoom "+" badge for HOME GALLERY */
+.gallery-item {
+  position: relative;
+}
+
+.gallery-item::after {
+  content: "+";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none; /* icon does not block clicking */
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
 
 /* Image inside the cell */
 .film-cell img {
