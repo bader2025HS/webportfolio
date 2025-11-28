@@ -89,7 +89,7 @@
 }
 
 
-   /* ===========================
+/* ===========================
    ABOUT – VERTICAL STATS COLUMN
 =========================== */
 
@@ -99,63 +99,98 @@
 
 .about-shell {
   max-width: 1050px;
-  margin: 10px auto 40px;
+  margin: 6px auto 24px;    /* less vertical space */
   display: flex;
   justify-content: flex-start;
 }
 
-/* left column with all stats */
+/* compact vertical stack */
 .about-stats-column {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;                 /* smaller gap = less height */
 }
 
-/* each stat block */
+/* one stat */
 .about-stat {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 4px 0 4px 18px;  /* small left padding for the accent line */
+  cursor: default;
+}
+
+/* thin accent line on the left */
+.about-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 999px;
+  background: rgba(0, 159, 165, 0.25);
+  transform-origin: top;
+  transform: scaleY(0.7);
+  transition: transform 0.22s ease, background 0.22s ease, opacity 0.22s ease;
+  opacity: 0.6;
 }
 
 /* big number */
 .about-stat-number {
-  font-size: 3rem;          /* big but still safe in viewport */
+  font-size: 2.6rem;        /* slightly smaller than before */
   font-weight: 700;
   line-height: 1;
+  transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
 }
 
-/* label below */
+/* label */
 .about-stat-label {
-  margin-top: 2px;
-  font-size: 0.85rem;
+  margin-top: 1px;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: #6b7280;
 }
 
-/* subtle separator between items */
+/* subtle divider (very light) */
 .about-stat + .about-stat {
-  padding-top: 8px;
-  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  border-top: 1px solid rgba(148, 163, 184, 0.28);
 }
 
-/* mobile – shrink a bit more so it never forces scroll just for ABOUT */
+/* HOVER EFFECTS */
+.about-stat:hover::before {
+  transform: scaleY(1);
+  background: rgba(0, 159, 165, 0.75);
+  opacity: 1;
+}
+
+.about-stat:hover .about-stat-number {
+  transform: translateX(3px);
+  color: #009fa5;
+  text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+
+/* MOBILE – even more compact so it never causes extra scrolling */
 @media (max-width: 640px) {
   .about-shell {
-    margin: 6px auto 30px;
+    margin: 4px auto 18px;
   }
 
   .about-stat-number {
-    font-size: 2.4rem;
+    font-size: 2.1rem;
   }
 
   .about-stat-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: 0.14em;
   }
-}
 
+  .about-stat {
+    padding: 2px 0 2px 14px;
+  }
+}
 
     /* ===========================
        EDUCATION MAPS
