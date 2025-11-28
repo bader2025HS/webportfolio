@@ -94,7 +94,7 @@
 =========================== */
 
 #about {
-  margin-top: -5px;
+  margin-top: -10px;
 }
 
 .about-shell {
@@ -154,10 +154,20 @@
   color: #6b7280;
 }
 
-/* subtle divider (very light) */
-.about-stat + .about-stat {
-  border-top: 1px solid rgba(148, 163, 184, 0.18);
+    /* centered divider line between stats */
+.about-stat:not(:first-child)::after {
+  content: "";
+  position: absolute;
+  left: 18px;  /* start where the number column begins */
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.18);
+  transform: translateY(-50%); /* half above, half below the top edge */
+  pointer-events: none;
 }
+
+
 
 
 /* HOVER EFFECTS */
