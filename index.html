@@ -480,22 +480,19 @@
    - aspect-ratio keeps it perfectly square
 */
 
-  .exp-mosaic {
-  width: 1050px;                 /* keep your width EXACTLY */
-  max-width: 100%;               /* fallback for small screens */
-  height: calc(100vh - 230px);   /* <<< FIXED HEIGHT — fits in viewport */
-  max-height: calc(100vh - 230px);
+  /* 2×2 grid, all equal size */
+.exp-mosaic {
+  width: 1050px;
+  max-width: 100%;
   display: grid;
-  grid-template-columns: 0.7fr 0.7fr 1.3fr;
-  grid-template-rows: 0.9fr 0.8fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(220px, 1fr)); /* height of each row */
   grid-template-areas:
-    "big big top"
-    "big big mid"
-    "bottomL bottomL bottomR";
-  gap: 14px;
+    "ngo io"
+    "research assoc";
+  gap: 18px;
   perspective: 1200px;
 }
-
 
 /* cards */
 
@@ -676,15 +673,12 @@
   color: #9ca3af;
 }
 
-/* assign cards to mosaic areas
-   ⬅ NGO is now the BIG tile
-*/
+/* 2×2 grid mapping */
 
-.exp-card--ngo      { grid-area: big; }
-.exp-card--io       { grid-area: top; }
-.exp-card--research { grid-area: mid; }
-.exp-card--gov      { grid-area: bottomL; }
-.exp-card--assoc    { grid-area: bottomR; }
+.exp-card--ngo      { grid-area: ngo; }
+.exp-card--io       { grid-area: io; }
+.exp-card--research { grid-area: research; }
+.exp-card--assoc    { grid-area: assoc; }
 
 /* Responsive – stack on mobile */
 
