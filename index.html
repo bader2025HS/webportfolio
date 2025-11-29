@@ -189,6 +189,111 @@
 }
 
     /* ===========================
+   ABOUT – FOCUS TAGS + TIMELINE
+=========================== */
+
+/* right-hand column next to the stats */
+.about-main {
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* label above the tags */
+.about-focus-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* tag pills row */
+.about-focus-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.focus-tag {
+  font-size: 0.8rem;
+  padding: 6px 12px 5px;
+  border-radius: 999px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  color: #111827;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* subtle turquoise accent on hover */
+.focus-tag:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
+
+/* vertical mini-timeline */
+.about-timeline {
+  margin-top: 6px;
+  border-left: 2px solid rgba(148, 163, 184, 0.7);
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about-timeline-item {
+  position: relative;
+  padding-left: 4px;
+}
+
+/* circular dot on the line */
+.about-timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: 4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: #009fa5;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.7);
+}
+
+/* year label */
+.about-timeline-year {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+/* description */
+.about-timeline-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #111827;
+}
+
+/* mobile: stack stats + right column */
+@media (max-width: 800px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-main {
+    margin-left: 0;
+  }
+}
+
+
+    /* ===========================
        EDUCATION MAPS
     ============================ */
 
@@ -2455,8 +2560,10 @@ margin-bottom: 6px;
       </section>
 
       <!-- ABOUT -->
+<!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
+    <!-- LEFT: STATS COLUMN (unchanged) -->
     <div class="about-stats-column">
 
       <div class="about-stat">
@@ -2485,9 +2592,52 @@ margin-bottom: 6px;
       </div>
 
     </div>
+
+    <!-- RIGHT: FOCUS TAGS + MINI TIMELINE -->
+    <div class="about-main">
+
+      <!-- Focus areas -->
+      <div class="about-focus">
+        <div class="about-focus-label">Focus areas</div>
+        <div class="about-focus-tags">
+          <span class="focus-tag">Human security</span>
+          <span class="focus-tag">Migration &amp; refugees</span>
+          <span class="focus-tag">Development data</span>
+          <span class="focus-tag">Climate &amp; water</span>
+          <span class="focus-tag">Middle East &amp; MENA</span>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="about-timeline">
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2025</div>
+          <div class="about-timeline-text">
+            Project design &amp; monitoring at OIF · building dashboards,
+            country briefs and visuals for development programmes.
+          </div>
+        </div>
+
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2023–2024</div>
+          <div class="about-timeline-text">
+            Research &amp; science-policy work in Jordan on desalination,
+            water &amp; energy · field travels across MENA and the Caucasus.
+          </div>
+        </div>
+
+        <div class="about-timeline-item">
+          <div class="about-timeline-year">2021–2022</div>
+          <div class="about-timeline-text">
+            BA years at Sciences Po (Nancy &amp; Menton), elections work in
+            Berlin and first experiences supporting refugees &amp; NGOs.
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
-
 
 
      <!-- SKILLS – AIRPORT TERMINAL -->
