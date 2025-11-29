@@ -197,50 +197,101 @@
 }
 
 /* ===========================
-   ABOUT – ROAD TIMELINE
+   ABOUT – ROADMAP ONLY
 =========================== */
+
+#about {
+  margin-top: -10px;
+}
+
+.about-shell {
+  max-width: 1050px;
+  margin: 20px auto 40px;
+}
+
+/* CARD CONTAINER */
 
 .about-roadmap {
   position: relative;
-  padding: 24px 26px 30px;
-  border-radius: 18px;
+  padding: 26px 30px 34px;
+  border-radius: 26px;
   background: #ffffff;
   border: 1px solid #d0d7de;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.10);
   overflow: hidden;
 }
 
-.about-roadmap-title {
-  font-size: 0.9rem;
+/* Header */
+
+.about-roadmap-label {
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #6b7280;
-  margin-bottom: 10px;
+  letter-spacing: 0.20em;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.about-roadmap-title {
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
 .about-roadmap-sub {
   font-size: 0.9rem;
   color: #4b5563;
-  margin-bottom: 14px;
+  max-width: 40rem;
+  margin-bottom: 18px;
 }
 
-/* wrapper for SVG + stops */
+/* ROAD AREA */
 
 .road-inner {
   position: relative;
   width: 100%;
-  min-height: 210px;
+  min-height: 230px;
 }
 
-/* the road itself */
+/* subtle background gradient & dots like your other sections */
+.about-roadmap::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 0% 0%,
+      rgba(34, 197, 235, 0.10) 0,
+      transparent 55%),
+    radial-gradient(circle at 100% 100%,
+      rgba(251, 191, 36, 0.10) 0,
+      transparent 60%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ROAD SVG */
 
 .road-svg {
   width: 100%;
-  height: 210px;
+  height: 220px;
   display: block;
 }
 
-/* pins + cards */
+/* asphalt */
+.road-path {
+  fill: #4b5563;
+}
+
+/* dashed center line */
+.road-line {
+  fill: none;
+  stroke: #e5e7eb;
+  stroke-width: 6;
+  stroke-dasharray: 18 12;
+  stroke-linecap: round;
+}
+
+/* STOPS */
 
 .road-stop {
   position: absolute;
@@ -249,161 +300,123 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  pointer-events: none; /* make the hover feel “soft” */
+  pointer-events: none;
 }
 
+/* pin */
+
 .road-pin {
-  width: 26px;
-  height: 36px;
+  width: 28px;
+  height: 40px;
   border-radius: 999px 999px 999px 0;
   transform: rotate(45deg);
   background: #009fa5;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .road-pin-inner {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 999px;
   background: #ffffff;
 }
 
+/* card */
+
 .road-card {
   pointer-events: auto;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.95);
+  padding: 11px 14px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.97);
   border: 1px solid #e5e7eb;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
-  min-width: 150px;
-  max-width: 210px;
-  transform: translateY(2px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+  min-width: 170px;
+  max-width: 225px;
+  transform: translateY(4px);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.road-card-title {
-  font-size: 0.78rem;
+.road-card-kicker {
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
+  letter-spacing: 0.18em;
+  color: #9ca3af;
   margin-bottom: 4px;
 }
 
 .road-card h4 {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   margin-bottom: 4px;
 }
 
 .road-card p {
   font-size: 0.82rem;
   color: #4b5563;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-/* subtle hover on cards */
+/* little tags inside some cards */
 
-.road-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.18);
-}
-
-/* each stop position – tuned to look like the example */
-
-.road-stop--1 { top: 30%;  left: 12%; }
-.road-stop--2 { top: 76%;  left: 28%; }
-.road-stop--3 { top: 26%;  left: 48%; }
-.road-stop--4 { top: 75%;  left: 68%; }
-.road-stop--5 { top: 32%;  left: 88%; }
-
-/* ===========================
-   ABOUT – FOCUS TAGS & WORK
-=========================== */
-
-.about-focus-area h3,
-.about-projects h3 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 8px;
-}
-
-.about-focus-grid {
+.road-tags {
+  margin-top: 6px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 6px;
 }
 
-.focus-card {
-  padding: 7px 12px;
+.road-tag {
+  font-size: 0.72rem;
+  padding: 3px 8px 4px;
   border-radius: 999px;
-  border: 1px solid #d0d7de;
-  background: #f7faf9;
-  font-size: 0.78rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+/* hover */
+
+.road-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.26);
+}
+
+/* POSITIONS – tuned to resemble your reference image */
+
+.road-stop--1 { top: 26%; left: 14%; }
+.road-stop--2 { top: 76%; left: 30%; }
+.road-stop--3 { top: 24%; left: 50%; }
+.road-stop--4 { top: 76%; left: 70%; }
+.road-stop--5 { top: 30%; left: 88%; }
+
+/* arrow label at the very end */
+
+.road-arrow-label {
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.16em;
+  color: #9ca3af;
 }
 
-.focus-card:hover {
-  border-color: #009fa5;
-  background: #e6f9f9;
-  color: #009fa5;
-}
+/* MOBILE */
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-}
-
-.project-card {
-  padding: 16px 18px;
-  border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.project-card h4 {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-}
-
-.project-card p {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: #374151;
-}
-
-/* MOBILE – stack columns */
-
-@media (max-width: 640px) {
-  .about-shell {
-    flex-direction: column;
-    margin: 4px auto 18px;
+@media (max-width: 700px) {
+  .about-roadmap {
+    padding: 20px 16px 24px;
   }
-
-  .about-stat-number {
-    font-size: 2.1rem;
-  }
-
-  .about-stat-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-  }
-
-  .about-stat {
-    padding: 2px 0 2px 14px;
-  }
-
   .road-inner {
-    min-height: 260px;
+    min-height: 320px;
   }
+  .road-stop--1 { top: 22%; left: 18%; }
+  .road-stop--2 { top: 72%; left: 32%; }
+  .road-stop--3 { top: 26%; left: 52%; }
+  .road-stop--4 { top: 75%; left: 68%; }
+  .road-stop--5 { top: 32%; left: 86%; }
 }
-
 
     /* ===========================
        EDUCATION MAPS
@@ -2671,231 +2684,161 @@ margin-bottom: 6px;
         </section>
       </section>
 
-      <!-- ABOUT -->
-
-  <section id="about">
+    <section id="about">
   <div class="about-shell">
+    <div class="about-roadmap">
 
-    <!-- LEFT: STATS COLUMN -->
-    <div class="about-stats-column">
-      <div class="about-stat">
-        <div class="about-stat-number">30</div>
-        <div class="about-stat-label">countries visited</div>
+      <div class="about-roadmap-label">About</div>
+      <div class="about-roadmap-title">My route so far</div>
+      <div class="about-roadmap-sub">
+        A winding road through <strong>human security, migration, and data</strong> —
+        the key stops that shaped how I work today.
       </div>
 
-      <div class="about-stat">
-        <div class="about-stat-number">100+</div>
-        <div class="about-stat-label">translation sessions</div>
-      </div>
+      <div class="road-inner">
 
-      <div class="about-stat">
-        <div class="about-stat-number">200+</div>
-        <div class="about-stat-label">refugees supported</div>
-      </div>
+        <!-- ROAD GRAPHIC -->
+        <svg class="road-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+          <!-- asphalt -->
+          <path class="road-path"
+            d="M40 220
+               L260 220
+               Q320 220 320 170
+               L320 140
+               Q320 90 380 90
+               L560 90
+               Q620 90 620 140
+               L620 170
+               Q620 220 680 220
+               L870 220
+               L930 220
+               L980 200
+               L980 240
+               L930 260
+               L870 260
+               L680 260
+               Q600 260 600 200
+               L600 160
+               Q600 120 560 120
+               L380 120
+               Q340 120 340 160
+               L340 190
+               Q340 260 260 260
+               L40 260 Z" />
+          <!-- dashed line -->
+          <path class="road-line"
+            d="M60 240
+               L250 240
+               Q290 240 290 190
+               L290 150
+               Q290 110 360 110
+               L550 110
+               Q610 110 610 150
+               L610 190
+               Q610 240 660 240
+               L960 240" />
+        </svg>
 
-      <div class="about-stat">
-        <div class="about-stat-number">5</div>
-        <div class="about-stat-label">languages spoken</div>
-      </div>
+        <!-- STOP 1 -->
+        <div class="road-stop road-stop--1">
+          <div class="road-pin">
+            <div class="road-pin-inner"></div>
+          </div>
+          <div class="road-card">
+            <div class="road-card-kicker">01 · Origins</div>
+            <h4>Middle East & multilingual roots</h4>
+            <p>
+              Grew up between languages and regions, which later shaped how I listen,
+              translate and move between communities.
+            </p>
+            <div class="road-tags">
+              <span class="road-tag">Arabic / French / English</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="about-stat">
-        <div class="about-stat-number">7</div>
-        <div class="about-stat-label">cities lived in</div>
+        <!-- STOP 2 -->
+        <div class="road-stop road-stop--2">
+          <div class="road-pin">
+            <div class="road-pin-inner"></div>
+          </div>
+          <div class="road-card">
+            <div class="road-card-kicker">02 · Field support</div>
+            <h4>Refugees & community work</h4>
+            <p>
+              100+ translation sessions and case support for over <strong>200</strong> refugees,
+              including LGBT+ asylum seekers in France.
+            </p>
+            <div class="road-tags">
+              <span class="road-tag">Protection</span>
+              <span class="road-tag">Narratives</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STOP 3 -->
+        <div class="road-stop road-stop--3">
+          <div class="road-pin">
+            <div class="road-pin-inner"></div>
+          </div>
+          <div class="road-card">
+            <div class="road-card-kicker">03 · Studies</div>
+            <h4>Human Security & migration</h4>
+            <p>
+              Sciences Po & partner universities — focusing on human security,
+              migration governance and conflict in the MENA region.
+            </p>
+            <div class="road-tags">
+              <span class="road-tag">Human security</span>
+              <span class="road-tag">Migration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STOP 4 -->
+        <div class="road-stop road-stop--4">
+          <div class="road-pin">
+            <div class="road-pin-inner"></div>
+          </div>
+          <div class="road-card">
+            <div class="road-card-kicker">04 · Data & research</div>
+            <h4>Water, climate & dashboards</h4>
+            <p>
+              Quantitative work on French ODA, desalination and climate —
+              turning messy spreadsheets into usable dashboards.
+            </p>
+            <div class="road-tags">
+              <span class="road-tag">Power BI</span>
+              <span class="road-tag">Excel</span>
+              <span class="road-tag">Water / climate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STOP 5 -->
+        <div class="road-stop road-stop--5">
+          <div class="road-pin">
+            <div class="road-pin-inner"></div>
+          </div>
+          <div class="road-card">
+            <div class="road-card-kicker">05 · Present</div>
+            <h4>Cultural diplomacy & projects</h4>
+            <p>
+              Designing field trips, exhibitions and interactive tools that connect
+              research, policy and lived experience across 30+ countries.
+            </p>
+            <div class="road-tags">
+              <span class="road-tag">Cultural diplomacy</span>
+              <span class="road-tag">Storytelling</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="road-arrow-label">Next stop · what we build together</div>
       </div>
     </div>
-
-    <!-- RIGHT: ABOUT CONTENT -->
-    <div class="about-main">
-
-      <!-- MICRO BIO -->
-      <div class="about-intro-text">
-        <div class="about-section-label">Who I am</div>
-        <p>
-          I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by clarity,
-          dignity, and the stories behind movement and resilience.
-        </p>
-      </div>
-
-      <!-- ROAD TIMELINE -->
-      <div class="about-roadmap">
-        <div class="about-roadmap-title">My route so far</div>
-        <div class="about-roadmap-sub">
-          A winding road through languages, regions and projects — the stops that shaped how I work today.
-        </div>
-
-        <div class="road-inner">
-          <!-- The road graphic -->
-          <svg class="road-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
-            <!-- asphalt -->
-            <path
-              d="M40 220
-                 L260 220
-                 Q320 220 320 170
-                 L320 140
-                 Q320 90 380 90
-                 L560 90
-                 Q620 90 620 140
-                 L620 170
-                 Q620 220 680 220
-                 L870 220
-                 L930 220
-                 L980 200
-                 L980 240
-                 L930 260
-                 L870 260
-                 L680 260
-                 Q600 260 600 200
-                 L600 160
-                 Q600 120 560 120
-                 L380 120
-                 Q340 120 340 160
-                 L340 190
-                 Q340 260 260 260
-                 L40 260 Z"
-              fill="#4b5563"
-            ></path>
-
-            <!-- dashed center line -->
-            <path
-              d="M60 240
-                 L250 240
-                 Q290 240 290 190
-                 L290 150
-                 Q290 110 360 110
-                 L550 110
-                 Q610 110 610 150
-                 L610 190
-                 Q610 240 660 240
-                 L960 240"
-              fill="none"
-              stroke="#e5e7eb"
-              stroke-width="6"
-              stroke-dasharray="18 12"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-
-          <!-- STOP 1 -->
-          <div class="road-stop road-stop--1">
-            <div class="road-pin">
-              <div class="road-pin-inner"></div>
-            </div>
-            <div class="road-card">
-              <div class="road-card-title">01 · Origins</div>
-              <h4>Middle East & multilingual roots</h4>
-              <p>
-                Grew up between languages and cultures, which later shaped how I listen to and translate stories.
-              </p>
-            </div>
-          </div>
-
-          <!-- STOP 2 -->
-          <div class="road-stop road-stop--2">
-            <div class="road-pin">
-              <div class="road-pin-inner"></div>
-            </div>
-            <div class="road-card">
-              <div class="road-card-title">02 · Field support</div>
-              <h4>Refugees & community work</h4>
-              <p>
-                Volunteer work and case support with asylum seekers, including LGBT+ people and Arabic-speaking refugees.
-              </p>
-            </div>
-          </div>
-
-          <!-- STOP 3 -->
-          <div class="road-stop road-stop--3">
-            <div class="road-pin">
-              <div class="road-pin-inner"></div>
-            </div>
-            <div class="road-card">
-              <div class="road-card-title">03 · Studies</div>
-              <h4>Sciences Po & Human Security</h4>
-              <p>
-                Training in international security, migration, and humanitarian policy with a strong regional focus.
-              </p>
-            </div>
-          </div>
-
-          <!-- STOP 4 -->
-          <div class="road-stop road-stop--4">
-            <div class="road-pin">
-              <div class="road-pin-inner"></div>
-            </div>
-            <div class="road-card">
-              <div class="road-card-title">04 · Data & research</div>
-              <h4>Water, climate & dashboards</h4>
-              <p>
-                Quantitative projects on ODA, desalination and climate, turning datasets into tools people can actually use.
-              </p>
-            </div>
-          </div>
-
-          <!-- STOP 5 -->
-          <div class="road-stop road-stop--5">
-            <div class="road-pin">
-              <div class="road-pin-inner"></div>
-            </div>
-            <div class="road-card">
-              <div class="road-card-title">05 · Present</div>
-              <h4>Cultural diplomacy & projects</h4>
-              <p>
-                Designing field trips, exhibitions and interactive tools that connect research, policy and lived experience.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FOCUS AREAS -->
-      <div class="about-focus-area">
-        <h3>Focus areas</h3>
-        <div class="about-focus-grid">
-          <div class="focus-card">Human security</div>
-          <div class="focus-card">Migration</div>
-          <div class="focus-card">Humanitarian action</div>
-          <div class="focus-card">Development data</div>
-          <div class="focus-card">Water & climate</div>
-          <div class="focus-card">Cultural diplomacy</div>
-        </div>
-      </div>
-
-      <!-- CURRENT WORK -->
-      <div class="about-projects">
-        <h3>Current work</h3>
-        <div class="projects-grid">
-          <div class="project-card">
-            <h4>Oman research & cultural diplomacy</h4>
-            <p>
-              Leading a multi-partner initiative integrating field research,
-              photography and cultural exchange across institutions.
-            </p>
-          </div>
-
-          <div class="project-card">
-            <h4>Human Security interactive tool</h4>
-            <p>
-              Building an accessible digital experience that reframes core
-              security concepts through storytelling and systems thinking.
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /about-main -->
-  </div><!-- /about-shell -->
+  </div>
 </section>
-
-
-
-
-
-
-
-
-
-
 
 
 
