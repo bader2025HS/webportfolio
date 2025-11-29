@@ -93,40 +93,44 @@
    ABOUT – ROAD BANNER ONLY
 =========================== */
 
+/* Make the ABOUT section road span the entire screen */
 #about {
-  margin-top: -10px;
-}
-
-.about-road-banner {
-  position: relative;
-  max-width: 1050px;      /* same content width as other sections */
-  margin: 40px auto 80px; /* centers it & gives vertical breathing room */
-}
-
-/* SVG fills the banner horizontally like the Activities hero image */
-.about-road-svg {
+  margin-top: 40px;
   width: 100%;
-  height: 260px;          /* adjust if you want taller/shorter road */
+}
+
+/* Full-width container */
+.road-fullwidth-wrapper {
+  width: 100vw;           /* span the whole viewport */
+  margin-left: 50%;
+  transform: translateX(-50%);  /* ensures perfect centering */
+  overflow: hidden;       /* hide any overflow so edges look clean */
+}
+
+/* SVG scales to the full screen */
+.road-fullwidth-svg {
+  width: 100%;
+  height: 260px;
   display: block;
 }
 
-/* dark road body */
+/* Road body */
 .road-body {
   fill: none;
-  stroke: #020617;        /* very dark navy/black */
-  stroke-width: 80;       /* road thickness */
+  stroke: #010617;        /* deep navy/black */
+  stroke-width: 90;       /* thicker road */
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* thin dashed white line inside road */
+/* Center dashed line (thin) */
 .road-center {
   fill: none;
-  stroke: #f9fafb;
-  stroke-width: 8;        /* thinner than before */
+  stroke: #f9fafb;        /* soft white */
+  stroke-width: 10;
+  stroke-dasharray: 30 28; /* slimmer & smoother */
   stroke-linecap: round;
-  stroke-dasharray: 26 22;
 }
-
 
     /* ===========================
        EDUCATION MAPS
@@ -2398,25 +2402,30 @@ margin-bottom: 6px;
         <!-- ABOUT -->
 
 <section id="about">
-  <div class="about-road-banner">
-    <svg class="about-road-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
-      <!-- road body -->
+  <div class="road-fullwidth-wrapper">
+    <svg class="road-fullwidth-svg"
+         viewBox="0 0 1400 260"
+         preserveAspectRatio="none">
+
+      <!-- Road Body (black/navy) -->
       <path class="road-body"
             d="M0 180
-               Q 125 60 250 180
-               T 500 180
-               T 750 180
-               T 1000 180" />
-      <!-- dashed center line -->
+               Q 200 60 400 180
+               T 800 180
+               T 1200 180
+               T 1600 180" />
+
+      <!-- Center Dashed Line -->
       <path class="road-center"
             d="M0 180
-               Q 125 60 250 180
-               T 500 180
-               T 750 180
-               T 1000 180" />
+               Q 200 60 400 180
+               T 800 180
+               T 1200 180
+               T 1600 180" />
     </svg>
   </div>
 </section>
+
 
 
 
