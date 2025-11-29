@@ -93,7 +93,6 @@
    ABOUT – ROAD BANNER ONLY
 =========================== */
 
-/* Make the ABOUT section road span the entire screen */
 #about {
   margin-top: 40px;
   width: 100%;
@@ -101,36 +100,36 @@
 
 /* Full-width container */
 .road-fullwidth-wrapper {
-  width: 100vw;           /* span the whole viewport */
+  width: 100vw;
   margin-left: 50%;
-  transform: translateX(-50%);  /* ensures perfect centering */
-  overflow: hidden;       /* hide any overflow so edges look clean */
+  transform: translateX(-50%);
+  overflow: hidden;
 }
 
-/* SVG scales to the full screen */
 .road-fullwidth-svg {
   width: 100%;
   height: 260px;
   display: block;
 }
 
-/* Road body */
+/* ROAD – now a stroked line so top & bottom are rounded */
 .road-body {
-  fill: none;
-  stroke: #010617;        /* deep navy/black */
-  stroke-width: 90;       /* thicker road */
-  stroke-linecap: round;
+  fill: none;                 /* IMPORTANT: no fill */
+  stroke: #010617;            /* deep navy/black */
+  stroke-width: 100;          /* thickness of the road */
+  stroke-linecap: round;      /* rounded ends */
   stroke-linejoin: round;
 }
 
-/* Center dashed line (thin) */
+/* Center dashed line (thin & clean) */
 .road-center {
   fill: none;
-  stroke: #f9fafb;        /* soft white */
+  stroke: #f9fafb;            /* soft white */
   stroke-width: 10;
-  stroke-dasharray: 30 28; /* slimmer & smoother */
+  stroke-dasharray: 30 28;
   stroke-linecap: round;
 }
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2404,27 +2403,34 @@ margin-bottom: 6px;
 <section id="about">
   <div class="road-fullwidth-wrapper">
     <svg class="road-fullwidth-svg"
-         viewBox="0 0 1400 260"
+         viewBox="0 0 1800 260"
          preserveAspectRatio="none">
 
-      <!-- Road Body (black/navy) -->
+      <!-- Snaky road body -->
       <path class="road-body"
-            d="M0 180
-               Q 200 60 400 180
-               T 800 180
-               T 1200 180
-               T 1600 180" />
+            d="M -100 160
+               Q   50  40  200 160
+               T  500 160
+               T  800 160
+               T 1100 160
+               T 1400 160
+               T 1700 160
+               T 1900 160" />
 
-      <!-- Center Dashed Line -->
+      <!-- Same path for the dashed center line -->
       <path class="road-center"
-            d="M0 180
-               Q 200 60 400 180
-               T 800 180
-               T 1200 180
-               T 1600 180" />
+            d="M -100 160
+               Q   50  40  200 160
+               T  500 160
+               T  800 160
+               T 1100 160
+               T 1400 160
+               T 1700 160
+               T 1900 160" />
     </svg>
   </div>
 </section>
+
 
 
 
