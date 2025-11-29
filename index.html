@@ -385,37 +385,6 @@
   }
 }
 
-    /* ====== ABOUT – TRAVEL MAP ====== */
-
-.map-card{
-  background: transparent;
-  border: none !important;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  overflow: visible;
-  max-width: 1050px;
-  margin: 24px auto 0;  /* centers under About */
-}
-
-#visitedMap{
-  height: min(60vh, 520px);
-  width: 100%;
-  border-radius: 14px;
-}
-
-#visitedMap.leaflet-container{
-  background: transparent !important;
-}
-
-/* Country glow micro-interaction (Leaflet SVG paths) */
-#visitedMap .leaflet-interactive{
-  transition: filter .25s ease, stroke-width .2s ease;
-}
-#visitedMap .leaflet-interactive:hover{
-  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
-
 
     /* ===========================
        EDUCATION MAPS
@@ -2684,6 +2653,7 @@ margin-bottom: 6px;
       </section>
 
       <!-- ABOUT -->
+<!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
     <!-- LEFT: STATS COLUMN (unchanged) -->
@@ -2789,12 +2759,6 @@ margin-bottom: 6px;
       </div>
 
   </div>
-
-    <!-- Travel / visited countries map -->
-  <div class="map-card">
-    <div id="visitedMap" aria-label="Visited countries map"></div>
-  </div>
-    
 </section>
 
 
@@ -3851,99 +3815,6 @@ let lockedCountry = null;   // last clicked country (stays colored)
         } catch (e) {}
       }
     }
-/* ========= Visited countries map in ABOUT ========= */
-
-let visitedMapInitialized = false;
-
-async function initVisitedMap() {
-  if (visitedMapInitialized) return;
-  visitedMapInitialized = true;
-
-  const el = document.getElementById("visitedMap");
-  if (!el || typeof L === "undefined") return;
-
-  const map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5
-  });
-
-  function setEurasiaView() {
-    map.setView([36, 60], 3.0);
-  }
-  setEurasiaView();
-  window.addEventListener("resize", setEurasiaView);
-
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
-
-  const normalizeName = s =>
-    s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-  const visited = new Set(visitedNames.map(normalizeName));
-
-  const accent = getComputedStyle(document.documentElement)
-    .getPropertyValue("--accent")
-    ?.trim() || "#0ea5a2";
-  const stroke = "#7a7a7a";
-
-  try {
-    const geo = await loadGeoJSON();   // reuse your existing worldData loader
-
-    const useAdmin =
-      !!(geo.features && geo.features[0]?.properties?.ADMIN);
-
-    const layer = L.geoJSON(geo, {
-      style: f => {
-        const props = f.properties || {};
-        const name  = useAdmin ? (props.ADMIN || "") : (props.name || "");
-        const hit   = visited.has(normalizeName(name));
-        return {
-          fillColor: hit ? accent : "transparent",
-          color: stroke,
-          weight: hit ? 1.2 : 0.6,
-          fillOpacity: hit ? 0.9 : 0.0,
-          opacity: 0.9
-        };
-      },
-      onEachFeature: (f, l) => {
-        const props = f.properties || {};
-        const name  = (props.name || props.ADMIN || "");
-
-        l.bindTooltip(name, {
-          sticky: true,
-          direction: "top",
-          opacity: 0.9
-        });
-
-        if (visited.has(normalizeName(name))) {
-          l.bindPopup(`<strong>${name}</strong>`);
-        }
-
-        l.on("mouseover", e => {
-          e.target.setStyle({ weight: 2.2 });
-          try { e.target.bringToFront(); } catch {}
-        });
-
-        l.on("mouseout", e => {
-          try { layer.resetStyle(e.target); } catch {}
-        });
-      }
-    }).addTo(map);
-
-    setTimeout(setEurasiaView, 0);
-  } catch (err) {
-    console.error("GeoJSON load error for visited map:", err);
-    el.innerHTML =
-      "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
-  }
-}
 
 function drawCountry(containerId, countryKey, center, zoom) {
   const map = L.map(containerId, {
@@ -4022,24 +3893,19 @@ document.getElementById("map-germany").addEventListener("click", () => {
     const navLinks = document.querySelectorAll("nav a");
     const sections = document.querySelectorAll("main section");
 
- function showSection(id) {
-  sections.forEach(sec => {
-    if (sec.id === id) {
-      sec.classList.add("active-section");
-    } else {
-      sec.classList.remove("active-section");
+    function showSection(id) {
+      sections.forEach(sec => {
+        if (sec.id === id) {
+          sec.classList.add("active-section");
+        } else {
+          sec.classList.remove("active-section");
+        }
+      });
+
+      if (id === "education") {
+        initMaps();
+      }
     }
-  });
-
-  if (id === "education") {
-    initMaps();
-  }
-
-  if (id === "about") {
-    initVisitedMap();    // ⬅️ this is the key line
-  }
-}
-
 
     navLinks.forEach(link => {
       link.addEventListener("click", e => {
@@ -4475,103 +4341,6 @@ workStrips.forEach(strip => {
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
-
-    /* ========= Visited countries map in ABOUT ========= */
-(function(){
-  const el = document.getElementById('visitedMap');
-  if (!el || typeof L === 'undefined') return;
-
-  const map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5
-  });
-
-  function setEurasiaView(){
-    map.setView([36, 60], 3.0);
-  }
-  setEurasiaView();
-  window.addEventListener('resize', setEurasiaView);
-
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
-
-  const normalize = s =>
-    s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-
-  const visited = new Set(visitedNames.map(normalize));
-
-  const accent = getComputedStyle(document.documentElement)
-    .getPropertyValue('--accent')
-    ?.trim() || '#0ea5a2';
-
-  const stroke = '#7a7a7a';
-
-  const SOURCES = [
-    'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json',
-    'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
-  ];
-
-  function loadWorld(i){
-    return fetch(SOURCES[i])
-      .then(r => {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
-      .then(geo => {
-        const useAdmin = !!(geo.features && geo.features[0]?.properties?.ADMIN);
-
-        const layer = L.geoJSON(geo, {
-          style: f => {
-            const props = f.properties || {};
-            const name  = useAdmin ? (props.ADMIN || '') : (props.name || '');
-            const hit   = visited.has(normalize(name));
-            return {
-              fillColor: hit ? accent : 'transparent',
-              color: stroke,
-              weight: hit ? 1.2 : 0.6,
-              fillOpacity: hit ? 0.9 : 0.0,
-              opacity: 0.9
-            };
-          },
-          onEachFeature: (f, l) => {
-            const props = f.properties || {};
-            const name  = (props.name || props.ADMIN || '');
-
-            l.bindTooltip(name, { sticky:true, direction:'top', opacity:0.9 });
-
-            if (visited.has(normalize(name))) {
-              l.bindPopup(`<strong>${name}</strong>`);
-            }
-
-            l.on('mouseover', e => {
-              e.target.setStyle({ weight: 2.2 });
-              try { e.target.bringToFront(); } catch {}
-            });
-
-            l.on('mouseout', e => {
-              try { layer.resetStyle(e.target); } catch {}
-            });
-          }
-        }).addTo(map);
-
-        setTimeout(setEurasiaView, 0);
-      });
-  }
-
-  loadWorld(0)
-    .catch(() => loadWorld(1))
-    .catch(err => {
-      console.error('GeoJSON load error:', err);
-      el.innerHTML = "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
-    });
-})();
 
   </script>
 
