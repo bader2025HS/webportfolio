@@ -228,59 +228,125 @@
   text-transform: uppercase;
 }
 
-/* subtle turquoise accent on hover */
 .focus-tag:hover {
   border-color: #009fa5;
   background: #e6f9f9;
   color: #009fa5;
 }
 
-/* vertical mini-timeline */
+/* ===== TIMELINE (alternating, like your example) ===== */
+
 .about-timeline {
-  margin-top: 6px;
-  border-left: 2px solid rgba(148, 163, 184, 0.7);
-  padding-left: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  margin-top: 20px;
 }
 
-.about-timeline-item {
-  position: relative;
-  padding-left: 4px;
-}
-
-/* circular dot on the line */
-.about-timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -13px;
-  top: 4px;
-  width: 11px;
-  height: 11px;
-  border-radius: 999px;
-  background: #009fa5;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.7);
-}
-
-/* year label */
-.about-timeline-year {
+.about-timeline-title {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: #6b7280;
-  margin-bottom: 2px;
 }
 
-/* description */
-.about-timeline-text {
-  font-size: 0.9rem;
-  line-height: 1.4;
+/* central rail */
+.about-timeline-track {
+  position: relative;
+  margin-top: 16px;
+  padding: 6px 0 4px;
+}
+
+.about-timeline-track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(148, 163, 184, 0.7);
+}
+
+/* one step */
+.about-timeline-item {
+  position: relative;
+  min-height: 90px;
+  margin-bottom: 26px;
+}
+
+/* turquoise dot on the rail */
+.about-timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #009fa5;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.5);
+}
+
+/* year pill */
+.about-timeline-year {
+  position: absolute;
+  top: -2px;
+  padding: 6px 14px 5px;
+  border-radius: 999px;
+  background: #e6f9f9;
+  border: 1px solid #d0d7de;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* description card */
+.about-timeline-card {
+  position: absolute;
+  top: 32px;
+  width: 46%;
+  max-width: 260px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 14px 10px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  font-size: 0.85rem;
+  line-height: 1.45;
   color: #111827;
 }
 
-/* mobile: stack stats + right column */
+.about-timeline-role {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  margin-bottom: 4px;
+}
+
+/* odd items: left side */
+.about-timeline-item:nth-child(odd) .about-timeline-year {
+  left: 50%;
+  transform: translateX(-150%);
+}
+
+.about-timeline-item:nth-child(odd) .about-timeline-card {
+  left: 0;
+  text-align: left;
+  padding-right: 22px;
+}
+
+/* even items: right side */
+.about-timeline-item:nth-child(even) .about-timeline-year {
+  left: 50%;
+  transform: translateX(50%);
+}
+
+.about-timeline-item:nth-child(even) .about-timeline-card {
+  right: 0;
+  text-align: left;
+  padding-left: 22px;
+}
+
+/* mobile: stack everything on the left like a simple timeline */
 @media (max-width: 800px) {
   .about-shell {
     flex-direction: column;
@@ -289,6 +355,33 @@
 
   .about-main {
     margin-left: 0;
+  }
+
+  .about-timeline-track::before {
+    left: 10px;
+    transform: none;
+  }
+
+  .about-timeline-dot {
+    left: 10px;
+    transform: none;
+  }
+
+  .about-timeline-year {
+    position: relative;
+    left: 32px;
+    top: 0;
+    transform: none;
+    margin-bottom: 4px;
+  }
+
+  .about-timeline-card {
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-width: none;
+    margin-left: 32px;
+    padding: 10px 12px;
   }
 }
 
@@ -2596,7 +2689,7 @@ margin-bottom: 6px;
     <!-- RIGHT: FOCUS TAGS + MINI TIMELINE -->
     <div class="about-main">
 
-      <!-- Focus areas -->
+         <!-- Focus areas -->
       <div class="about-focus">
         <div class="about-focus-label">Focus areas</div>
         <div class="about-focus-tags">
@@ -2608,34 +2701,63 @@ margin-bottom: 6px;
         </div>
       </div>
 
-      <!-- Timeline -->
+      <!-- Timeline, alternating left/right like the mockup -->
       <div class="about-timeline">
-        <div class="about-timeline-item">
-          <div class="about-timeline-year">2025</div>
-          <div class="about-timeline-text">
-            Project design &amp; monitoring at OIF · building dashboards,
-            country briefs and visuals for development programmes.
-          </div>
-        </div>
+        <div class="about-timeline-title">Career timeline</div>
 
-        <div class="about-timeline-item">
-          <div class="about-timeline-year">2023–2024</div>
-          <div class="about-timeline-text">
-            Research &amp; science-policy work in Jordan on desalination,
-            water &amp; energy · field travels across MENA and the Caucasus.
-          </div>
-        </div>
+        <div class="about-timeline-track">
 
-        <div class="about-timeline-item">
-          <div class="about-timeline-year">2021–2022</div>
-          <div class="about-timeline-text">
-            BA years at Sciences Po (Nancy &amp; Menton), elections work in
-            Berlin and first experiences supporting refugees &amp; NGOs.
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-year">2021</div>
+            <div class="about-timeline-card">
+              <div class="about-timeline-role">Elections staff · Berlin</div>
+              <div class="about-timeline-text">
+                First experience in institutional work, supporting the German
+                federal elections and learning how large operations are run.
+              </div>
+            </div>
           </div>
+
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-year">2023</div>
+            <div class="about-timeline-card">
+              <div class="about-timeline-role">Humanitarian trainee</div>
+              <div class="about-timeline-text">
+                Graduate trainee work on humanitarian data, mapping settlements
+                and translating operational needs into dashboards and visuals.
+              </div>
+            </div>
+          </div>
+
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-year">2024</div>
+            <div class="about-timeline-card">
+              <div class="about-timeline-role">Project design &amp; monitoring</div>
+              <div class="about-timeline-text">
+                Work at an international organisation, compiling indicators,
+                building Power BI views and drafting country notes for reports.
+              </div>
+            </div>
+          </div>
+
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-year">2025</div>
+            <div class="about-timeline-card">
+              <div class="about-timeline-role">Field research &amp; leadership</div>
+              <div class="about-timeline-text">
+                Leading student research initiatives in the MENA region and
+                combining human security, culture and climate themes.
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-    </div>
   </div>
 </section>
 
