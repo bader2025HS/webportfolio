@@ -2293,6 +2293,206 @@ margin-bottom: 6px;
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
 
+
+    /* ===========================
+   LANDING HERO (inspired by Colin-style)
+=========================== */
+
+#landing-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 80px; /* top padding to clear navbar */
+}
+
+.landing-inner {
+  position: relative;
+  max-width: 1050px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* main block */
+
+.landing-main {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.landing-kicker {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.landing-title {
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.landing-subtitle {
+  max-width: 42rem;
+  margin: 0 auto 18px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.landing-subtitle span {
+  font-weight: 600;
+}
+
+.landing-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.landing-tag {
+  padding: 6px 12px 7px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.landing-now {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* floating cards */
+
+.landing-card {
+  position: absolute;
+  width: 230px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  z-index: 1;
+  animation: float-card 10s ease-in-out infinite;
+}
+
+.landing-card--left {
+  left: -10px;
+  top: 48%;
+  transform: translateY(-50%);
+  animation-delay: -2s;
+}
+
+.landing-card--right {
+  right: -10px;
+  top: 34%;
+  transform: translateY(-50%);
+  animation-delay: -5s;
+}
+
+.landing-card-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.landing-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.landing-card-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+/* subtle blobs behind */
+
+.hero-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(12px);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.hero-blob--tl {
+  width: 260px;
+  height: 260px;
+  top: -40px;
+  left: -80px;
+  background: radial-gradient(circle at 30% 30%, rgba(0, 159, 165, 0.25), transparent 65%);
+}
+
+.hero-blob--tr {
+  width: 220px;
+  height: 220px;
+  top: -60px;
+  right: -60px;
+  background: radial-gradient(circle at 70% 20%, rgba(59, 130, 246, 0.18), transparent 65%);
+}
+
+.hero-blob--br {
+  width: 280px;
+  height: 280px;
+  bottom: -80px;
+  right: 10%;
+  background: radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.23), transparent 70%);
+}
+
+/* float animation */
+
+@keyframes float-card {
+  0%, 100% {
+    transform: translateY(-50%) translateY(0);
+  }
+  50% {
+    transform: translateY(-50%) translateY(-10px);
+  }
+}
+
+/* responsive tweaks */
+
+@media (max-width: 900px) {
+  .landing-card--left {
+    left: 0;
+    top: 78%;
+  }
+  .landing-card--right {
+    right: 0;
+    top: 18%;
+  }
+}
+
+@media (max-width: 640px) {
+  #landing-hero {
+    padding-top: 110px;
+  }
+
+  .landing-card {
+    display: none; /* if you want ultra-clean mobile, hide side cards */
+  }
+
+  .hero-blob--tl,
+  .hero-blob--tr,
+  .hero-blob--br {
+    opacity: 0.35;
+  }
+}
+
   </style>
 </head>
 
@@ -2316,6 +2516,59 @@ margin-bottom: 6px;
         </ul>
       </nav>
     </header>
+
+    <!-- HERO / LANDING SECTION -->
+<section id="landing-hero">
+  <div class="landing-inner">
+    <!-- Background blobs -->
+    <div class="hero-blob hero-blob--tl"></div>
+    <div class="hero-blob hero-blob--tr"></div>
+    <div class="hero-blob hero-blob--br"></div>
+
+    <!-- Main text block -->
+    <div class="landing-main">
+      <p class="landing-kicker">Portfolio of</p>
+      <h1 class="landing-title">Bader Suliman</h1>
+
+      <p class="landing-subtitle">
+        Human security, mobility, and development data — connecting people,
+        regions, and stories across <span>Europe</span>, the <span>Middle East</span>,
+        and <span>Asia</span>.
+      </p>
+
+      <div class="landing-tags">
+        <span class="landing-tag">Human Security</span>
+        <span class="landing-tag">Migration & Asylum</span>
+        <span class="landing-tag">Development Data</span>
+        <span class="landing-tag">Water & Climate</span>
+      </div>
+
+      <p class="landing-now">
+        Currently: Master’s in International Security at PSIA &nbsp;•&nbsp;
+        Data & research projects across OIF, RSS, AQLITY, ARDHIS.
+      </p>
+    </div>
+
+    <!-- Floating cards (left / right) -->
+    <div class="landing-card landing-card--left">
+      <p class="landing-card-label">Fieldwork & culture</p>
+      <p class="landing-card-title">From Menton to Muscat</p>
+      <p class="landing-card-text">
+        Built projects and research trips across France, Jordan, Oman,
+        Georgia, and more.
+      </p>
+    </div>
+
+    <div class="landing-card landing-card--right">
+      <p class="landing-card-label">Data & storytelling</p>
+      <p class="landing-card-title">Turning datasets into stories</p>
+      <p class="landing-card-text">
+        Dashboards, maps, and narratives that make policy, climate,
+        and migration work readable.
+      </p>
+    </div>
+  </div>
+</section>
 
     <main>
 
