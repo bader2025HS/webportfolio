@@ -103,9 +103,27 @@
   display: flex;
   align-items: flex-start;
   gap: 40px;
+  position: relative;
 }
 
-/* left stats column (unchanged) */
+/* subtle abstract squiggle behind the whole block */
+.about-shell::after {
+  content: "";
+  position: absolute;
+  left: -60px;
+  bottom: -40px;
+  width: 260px;
+  height: 120px;
+  border-radius: 999px;
+  border: 1px dashed rgba(148,163,184,0.6);
+  border-top: none;
+  transform: rotate(-6deg);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* left stats column */
+
 .about-stats-column {
   display: flex;
   flex-direction: column;
@@ -153,7 +171,7 @@
 
 .about-stat:hover::before {
   transform: scaleY(1);
-  background: rgba(0, 159, 165, 0.75);
+  background: rgba(0, 159, 165, 0.85);
   opacity: 1;
 }
 
@@ -163,51 +181,79 @@
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
 
-@media (max-width: 640px) {
-  .about-shell {
-    margin: 4px auto 18px;
-    flex-direction: column;
-    gap: 20px;
-  }
-}
-
-/* ====== RIGHT SIDE – PROFILE BOARDING CARD ====== */
+/* right side */
 
 .about-main {
   flex: 1;
 }
 
+/* main abstract card */
+
 .about-main-card {
   position: relative;
-  padding: 22px 26px 26px;
-  border-radius: 20px;
+  padding: 22px 26px 24px;
+  border-radius: 24px;
   border: 1px solid #e5e7eb;
-  background: #ffffff;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56,189,248,0.12) 0, transparent 55%),
+    radial-gradient(circle at 100% 120%, rgba(251,191,36,0.14) 0, transparent 60%),
+    #ffffff;
+  box-shadow: 0 22px 40px rgba(15,23,42,0.08);
   overflow: hidden;
 }
 
-/* big faint “ABOUT” in the background */
+/* big ghost word in the back */
+
 .about-main-card::before {
-  content: "ABOUT";
+  content: "PROFILE";
   position: absolute;
-  right: 12px;
-  bottom: -8px;
-  font-size: 4.2rem;
-  letter-spacing: 0.28em;
+  right: 8px;
+  top: -30px;
+  font-size: 4.4rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: #e5e7eb;
-  opacity: 0.5;
+  opacity: 0.6;
   pointer-events: none;
 }
 
-/* pills at the top */
+/* tiny moving dot orbit */
 
-.about-tagline-row {
+.about-main-card::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #009fa5;
+  box-shadow: 0 0 12px rgba(34,211,238,0.9);
+  top: 16px;
+  right: 60px;
+  animation: aboutOrbit 5s linear infinite;
+}
+
+@keyframes aboutOrbit {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(-18px,8px); }
+  50%  { transform: translate(-10px,26px); }
+  75%  { transform: translate(8px,18px); }
+  100% { transform: translate(0,0); }
+}
+
+/* top row */
+
+.about-top-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.about-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 10px;
 }
 
 .about-pill {
@@ -226,14 +272,52 @@
   color: #009fa5;
 }
 
-/* text */
+/* route chip */
+
+.about-route-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px 4px;
+  border-radius: 999px;
+  border: 1px dashed #cbd5f5;
+  background: #f9fafb;
+  font-size: 0.72rem;
+}
+
+.route-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+.route-dot-me {
+  box-shadow: 0 0 0 4px rgba(16,185,129,0.2);
+}
+
+.route-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+}
+
+.route-arrow {
+  opacity: 0.7;
+}
+
+/* story */
+
+.about-story {
+  margin-top: 4px;
+}
 
 .about-heading {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: #6b7280;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .about-text {
@@ -242,139 +326,87 @@
   max-width: 40rem;
 }
 
-/* route line (Middle East – Europe – Asia) */
+/* strips (3 roles) */
 
-.about-route {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #f9fafb;
-  border: 1px dashed #d0d7de;
-}
-
-.route-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.route-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #cbd5f5;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.route-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #64748b;
-}
-
-.route-line {
-  height: 1px;
-  width: 26px;
-  background: linear-gradient(to right, #d0d7de, #94a3b8);
-}
-
-/* little hover pulse per segment */
-.route-item:hover .route-dot {
-  background: #009fa5;
-  transform: scale(1.3);
-}
-
-/* focus areas */
-
-.about-focus-area {
-  margin-top: 22px;
-}
-
-.about-subheading {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 10px;
-}
-
-.about-focus-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.focus-card {
-  padding: 7px 12px 6px;
-  border-radius: 999px;
-  border: 1px solid #d0d7de;
-  background: #f7faf9;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease,
-              box-shadow 0.2s ease;
-}
-
-.focus-card:hover {
-  border-color: #009fa5;
-  background: #e6f9f9;
-  color: #009fa5;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
-}
-
-/* projects as mini boarding cards */
-
-.about-projects {
-  margin-top: 24px;
-}
-
-.projects-grid {
+.about-strips {
+  margin-top: 18px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
-.project-card {
+.about-strip {
   position: relative;
   display: flex;
+  gap: 10px;
+  padding: 10px 12px;
   border-radius: 16px;
-  overflow: hidden;
-  background: #ffffff;
+  background: rgba(248,250,252,0.95);
   border: 1px solid #e5e7eb;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 24px rgba(15,23,42,0.06);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.project-accent {
-  width: 6px;
+/* tiny coloured stripe on the left */
+
+.about-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
   background: linear-gradient(to bottom, #009fa5, #22c55e);
+  opacity: 0.9;
 }
 
-.project-body {
-  padding: 14px 16px 14px 14px;
+.strip-icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
 }
 
-.project-body h5 {
-  font-size: 0.98rem;
-  margin-bottom: 6px;
+.strip-body h4 {
+  font-size: 0.9rem;
+  margin-bottom: 3px;
 }
 
-.project-body p {
-  font-size: 0.85rem;
+.strip-body p {
+  font-size: 0.82rem;
   color: #374151;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
-.project-card:hover {
+.about-strip:hover {
   transform: translateY(-3px);
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 18px 32px rgba(15,23,42,0.12);
+  border-color: #009fa5;
+}
+
+/* responsive */
+
+@media (max-width: 860px) {
+  .about-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 22px;
+    margin: 4px auto 18px;
+  }
+
+  .about-main-card {
+    padding: 18px 18px 20px;
+  }
+
+  .about-main-card::before {
+    font-size: 3.4rem;
+    right: 0;
+  }
 }
 
 /* ====== MAP UNDER ABOUT ====== */
@@ -404,7 +436,7 @@
   transition: filter 0.25s ease, stroke-width 0.2s ease;
 }
 #visitedMap .leaflet-interactive:hover {
-  filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.55));
+  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
 }
 
 
@@ -2708,81 +2740,65 @@ margin-bottom: 6px;
       </div>
     </div>
 
-    <!-- RIGHT: PROFILE BOARDING CARD -->
+    <!-- RIGHT: ABSTRACT PROFILE CARD -->
     <div class="about-main">
       <div class="about-main-card">
-        <!-- tiny label + chips -->
-        <div class="about-tagline-row">
-          <span class="about-pill about-pill-main">Human security · Mobility · Data</span>
-          <span class="about-pill">MENA–Europe–Asia</span>
-        </div>
 
-        <h3 class="about-heading">Who I am</h3>
-        <p class="about-text">
-          I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by
-          clarity, dignity, and the stories behind movement and resilience.
-        </p>
+        <!-- top strip with pills + mini "route" -->
+        <div class="about-top-row">
+          <div class="about-pills">
+            <span class="about-pill about-pill-main">Human security</span>
+            <span class="about-pill">Mobility</span>
+            <span class="about-pill">Data &amp; visuals</span>
+          </div>
 
-        <!-- route line -->
-        <div class="about-route">
-          <div class="route-item">
-            <span class="route-dot"></span>
+          <div class="about-route-chip">
+            <span class="route-dot route-dot-me"></span>
             <span class="route-label">Middle East</span>
-          </div>
-          <div class="route-line"></div>
-          <div class="route-item">
-            <span class="route-dot"></span>
+            <span class="route-arrow">⟶</span>
             <span class="route-label">Europe</span>
-          </div>
-          <div class="route-line"></div>
-          <div class="route-item">
-            <span class="route-dot"></span>
+            <span class="route-arrow">⟶</span>
             <span class="route-label">Asia</span>
           </div>
         </div>
 
-        <!-- focus areas -->
-        <div class="about-focus-area">
-          <h4 class="about-subheading">Focus areas</h4>
-          <div class="about-focus-grid">
-            <button class="focus-card">Human Security</button>
-            <button class="focus-card">Migration</button>
-            <button class="focus-card">Humanitarian Action</button>
-            <button class="focus-card">Development Data</button>
-            <button class="focus-card">Water &amp; Climate</button>
-            <button class="focus-card">Cultural Diplomacy</button>
-          </div>
+        <!-- main text block -->
+        <div class="about-story">
+          <h3 class="about-heading">Who I am</h3>
+          <p class="about-text">
+            I move between <strong>field stories</strong>, <strong>policy rooms</strong> and
+            <strong>data dashboards</strong>, trying to keep people at the centre.
+            My work sits where human security, migration and evidence meet.
+          </p>
         </div>
 
-        <!-- current work as mini boarding cards -->
-        <div class="about-projects">
-          <h4 class="about-subheading">Current work</h4>
-          <div class="projects-grid">
-            <article class="project-card">
-              <div class="project-accent"></div>
-              <div class="project-body">
-                <h5>Oman research &amp; cultural diplomacy</h5>
-                <p>
-                  Leading a multi-partner initiative that blends field research,
-                  photography, and cultural programming with institutions in Oman
-                  and France.
-                </p>
-              </div>
-            </article>
+        <!-- three abstract "roles" strips -->
+        <div class="about-strips">
+          <article class="about-strip">
+            <div class="strip-icon">✈️</div>
+            <div class="strip-body">
+              <h4>On the ground</h4>
+              <p>Supporting refugees, listening to narratives, translating procedures into something human.</p>
+            </div>
+          </article>
 
-            <article class="project-card">
-              <div class="project-accent"></div>
-              <div class="project-body">
-                <h5>Human security interactive tool</h5>
-                <p>
-                  Designing a Twine-based experience that makes the 7 securities,
-                  R2P and radicalisation lenses tangible for students and practitioners.
-                </p>
-              </div>
-            </article>
-          </div>
+          <article class="about-strip">
+            <div class="strip-icon">📊</div>
+            <div class="strip-body">
+              <h4>With the data</h4>
+              <p>Cleaning messy spreadsheets, turning indicators into dashboards that actually answer questions.</p>
+            </div>
+          </article>
+
+          <article class="about-strip">
+            <div class="strip-icon">🤝</div>
+            <div class="strip-body">
+              <h4>Between actors</h4>
+              <p>Bridging students, NGOs and institutions through projects, workshops and cultural events.</p>
+            </div>
+          </article>
         </div>
+
       </div>
     </div><!-- /.about-main -->
   </div><!-- /.about-shell -->
@@ -2792,7 +2808,6 @@ margin-bottom: 6px;
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
 </section>
-
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
