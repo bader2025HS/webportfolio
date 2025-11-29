@@ -90,7 +90,7 @@
 
 
 /* ===========================
-   ABOUT – VERTICAL STATS COLUMN
+   ABOUT – LAYOUT
 =========================== */
 
 #about {
@@ -99,16 +99,19 @@
 
 .about-shell {
   max-width: 1050px;
-  margin: 6px auto 24px;    /* less vertical space */
+  margin: 6px auto 24px;
   display: flex;
-  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 40px;
 }
 
-/* compact vertical stack */
+/* LEFT COLUMN – NUMBERS */
+
 .about-stats-column {
   display: flex;
   flex-direction: column;
-  gap: 12px;                 /* smaller gap = less height */
+  gap: 12px;
+  min-width: 160px;
 }
 
 /* one stat */
@@ -117,7 +120,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 0 10px 18px;  /* small left padding for the accent line */
+  padding: 10px 0 10px 18px;
   cursor: default;
 }
 
@@ -139,7 +142,7 @@
 
 /* big number */
 .about-stat-number {
-  font-size: 2.6rem;        /* slightly smaller than before */
+  font-size: 2.6rem;
   font-weight: 700;
   line-height: 1;
   transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
@@ -154,7 +157,6 @@
   color: #6b7280;
 }
 
-
 /* HOVER EFFECTS */
 .about-stat:hover::before {
   transform: scaleY(1);
@@ -168,185 +170,17 @@
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
 
-/* MOBILE – even more compact so it never causes extra scrolling */
-@media (max-width: 640px) {
-  .about-shell {
-    margin: 4px auto 18px;
-  }
-
-  .about-stat-number {
-    font-size: 2.1rem;
-  }
-
-  .about-stat-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-  }
-
-  .about-stat {
-    padding: 2px 0 2px 14px;
-  }
-}
-
-    /* ====== ABOUT – TRAVEL MAP ====== */
-
-.map-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  overflow: visible;
-  max-width: 1050px;
-  margin: 24px auto 0;  /* centers under About */
-}
-
-#visitedMap {
-  height: min(60vh, 520px);
-  width: 100%;
-  border-radius: 14px;
-}
-
-/* make Leaflet background transparent inside About */
-#visitedMap.leaflet-container {
-  background: transparent !important;
-}
-
-/* micro glow when hovering country polygons */
-#visitedMap .leaflet-interactive {
-  transition: filter .25s ease, stroke-width .2s ease;
-}
-#visitedMap .leaflet-interactive:hover {
-  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
-
-    /* ======== ABOUT – IDENTITY BLOCK ======== */
-
-.about-identity {
-  max-width: 1050px;
-  margin: 40px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-/* Portrait + Micro-Bio */
-.about-identity-top {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.about-portrait img {
-  width: 120px;
-  height: 120px;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
-
-.about-intro-text h3 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 6px;
-}
-
-.about-intro-text p {
-  font-size: 1rem;
-  max-width: 38rem;
-  line-height: 1.55;
-}
-
-/* Focus Areas Grid */
-.about-focus-area h3,
-.about-languages h3,
-.about-projects h3 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 12px;
-}
-
-.about-focus-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.focus-card {
-  padding: 8px 14px;
-  border-radius: 12px;
-  border: 1px solid #d0d7de;
-  background: #f7faf9;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.focus-card:hover {
-  border-color: #009fa5;
-  color: #009fa5;
-  background: #e6f9f9;
-}
-
-/* Languages */
-.lang-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 0.95rem;
-}
-
-.lang-caption {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-/* Projects Grid */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.project-card {
-  padding: 18px 20px;
-  border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-.project-card h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: #111827;
-}
-
-.project-card p {
-  font-size: 0.9rem;
-  color: #374151;
-  line-height: 1.4;
-}
-
-/* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
+/* RIGHT SIDE – MAIN CONTENT */
 
 .about-main {
-  margin-left: 40px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 26px;
 }
 
-/* Identity Block */
-.about-identity-small h3,
-.about-focus-area h3,
-.about-projects h3 {
+/* small overline title */
+.about-section-label {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -354,13 +188,149 @@
   margin-bottom: 6px;
 }
 
-.about-identity-small p {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  max-width: 40rem;
+/* intro text */
+
+.about-intro-text p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 42rem;
 }
 
-/* Focus Areas Grid */
+/* ===========================
+   ABOUT – ROAD TIMELINE
+=========================== */
+
+.about-roadmap {
+  position: relative;
+  padding: 24px 26px 30px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+.about-roadmap-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.about-roadmap-sub {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+/* wrapper for SVG + stops */
+
+.road-inner {
+  position: relative;
+  width: 100%;
+  min-height: 210px;
+}
+
+/* the road itself */
+
+.road-svg {
+  width: 100%;
+  height: 210px;
+  display: block;
+}
+
+/* pins + cards */
+
+.road-stop {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none; /* make the hover feel “soft” */
+}
+
+.road-pin {
+  width: 26px;
+  height: 36px;
+  border-radius: 999px 999px 999px 0;
+  transform: rotate(45deg);
+  background: #009fa5;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.road-pin-inner {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.road-card {
+  pointer-events: auto;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+  min-width: 150px;
+  max-width: 210px;
+  transform: translateY(2px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.road-card-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.road-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.road-card p {
+  font-size: 0.82rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+/* subtle hover on cards */
+
+.road-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.18);
+}
+
+/* each stop position – tuned to look like the example */
+
+.road-stop--1 { top: 30%;  left: 12%; }
+.road-stop--2 { top: 76%;  left: 28%; }
+.road-stop--3 { top: 26%;  left: 48%; }
+.road-stop--4 { top: 75%;  left: 68%; }
+.road-stop--5 { top: 32%;  left: 88%; }
+
+/* ===========================
+   ABOUT – FOCUS TAGS & WORK
+=========================== */
+
+.about-focus-area h3,
+.about-projects h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
 .about-focus-grid {
   display: flex;
   flex-wrap: wrap;
@@ -369,7 +339,7 @@
 
 .focus-card {
   padding: 7px 12px;
-  border-radius: 12px;
+  border-radius: 999px;
   border: 1px solid #d0d7de;
   background: #f7faf9;
   font-size: 0.78rem;
@@ -383,7 +353,6 @@
   color: #009fa5;
 }
 
-/* Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -407,6 +376,32 @@
   font-size: 0.85rem;
   line-height: 1.4;
   color: #374151;
+}
+
+/* MOBILE – stack columns */
+
+@media (max-width: 640px) {
+  .about-shell {
+    flex-direction: column;
+    margin: 4px auto 18px;
+  }
+
+  .about-stat-number {
+    font-size: 2.1rem;
+  }
+
+  .about-stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  .about-stat {
+    padding: 2px 0 2px 14px;
+  }
+
+  .road-inner {
+    min-height: 260px;
+  }
 }
 
 
@@ -2678,12 +2673,11 @@ margin-bottom: 6px;
 
       <!-- ABOUT -->
 
-   <!-- ABOUT -->
-<section id="about">
+  <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN (unchanged) -->
-    <div class="about-stats-column">
 
+    <!-- LEFT: STATS COLUMN -->
+    <div class="about-stats-column">
       <div class="about-stat">
         <div class="about-stat-number">30</div>
         <div class="about-stat-label">countries visited</div>
@@ -2708,51 +2702,179 @@ margin-bottom: 6px;
         <div class="about-stat-number">7</div>
         <div class="about-stat-label">cities lived in</div>
       </div>
-
     </div>
 
-    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
+    <!-- RIGHT: ABOUT CONTENT -->
     <div class="about-main">
 
-      <!-- Identity Block -->
-      <div class="about-identity-small">
-        <h3>Who I Am</h3>
+      <!-- MICRO BIO -->
+      <div class="about-intro-text">
+        <div class="about-section-label">Who I am</div>
         <p>
           I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by
-          clarity, dignity, and the stories behind movement and resilience.
+          My background spans the Middle East, Europe, and Asia, and I’m driven by clarity,
+          dignity, and the stories behind movement and resilience.
         </p>
       </div>
 
-      <!-- Focus Areas Grid -->
-      <div class="about-focus-area">
-        <h3>Focus Areas</h3>
+      <!-- ROAD TIMELINE -->
+      <div class="about-roadmap">
+        <div class="about-roadmap-title">My route so far</div>
+        <div class="about-roadmap-sub">
+          A winding road through languages, regions and projects — the stops that shaped how I work today.
+        </div>
 
-        <div class="about-focus-grid">
-          <div class="focus-card">Human Security</div>
-          <div class="focus-card">Migration</div>
-          <div class="focus-card">Humanitarian Action</div>
-          <div class="focus-card">Development Data</div>
-          <div class="focus-card">Water &amp; Climate</div>
-          <div class="focus-card">Cultural Diplomacy</div>
+        <div class="road-inner">
+          <!-- The road graphic -->
+          <svg class="road-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+            <!-- asphalt -->
+            <path
+              d="M40 220
+                 L260 220
+                 Q320 220 320 170
+                 L320 140
+                 Q320 90 380 90
+                 L560 90
+                 Q620 90 620 140
+                 L620 170
+                 Q620 220 680 220
+                 L870 220
+                 L930 220
+                 L980 200
+                 L980 240
+                 L930 260
+                 L870 260
+                 L680 260
+                 Q600 260 600 200
+                 L600 160
+                 Q600 120 560 120
+                 L380 120
+                 Q340 120 340 160
+                 L340 190
+                 Q340 260 260 260
+                 L40 260 Z"
+              fill="#4b5563"
+            ></path>
+
+            <!-- dashed center line -->
+            <path
+              d="M60 240
+                 L250 240
+                 Q290 240 290 190
+                 L290 150
+                 Q290 110 360 110
+                 L550 110
+                 Q610 110 610 150
+                 L610 190
+                 Q610 240 660 240
+                 L960 240"
+              fill="none"
+              stroke="#e5e7eb"
+              stroke-width="6"
+              stroke-dasharray="18 12"
+              stroke-linecap="round"
+            ></path>
+          </svg>
+
+          <!-- STOP 1 -->
+          <div class="road-stop road-stop--1">
+            <div class="road-pin">
+              <div class="road-pin-inner"></div>
+            </div>
+            <div class="road-card">
+              <div class="road-card-title">01 · Origins</div>
+              <h4>Middle East & multilingual roots</h4>
+              <p>
+                Grew up between languages and cultures, which later shaped how I listen to and translate stories.
+              </p>
+            </div>
+          </div>
+
+          <!-- STOP 2 -->
+          <div class="road-stop road-stop--2">
+            <div class="road-pin">
+              <div class="road-pin-inner"></div>
+            </div>
+            <div class="road-card">
+              <div class="road-card-title">02 · Field support</div>
+              <h4>Refugees & community work</h4>
+              <p>
+                Volunteer work and case support with asylum seekers, including LGBT+ people and Arabic-speaking refugees.
+              </p>
+            </div>
+          </div>
+
+          <!-- STOP 3 -->
+          <div class="road-stop road-stop--3">
+            <div class="road-pin">
+              <div class="road-pin-inner"></div>
+            </div>
+            <div class="road-card">
+              <div class="road-card-title">03 · Studies</div>
+              <h4>Sciences Po & Human Security</h4>
+              <p>
+                Training in international security, migration, and humanitarian policy with a strong regional focus.
+              </p>
+            </div>
+          </div>
+
+          <!-- STOP 4 -->
+          <div class="road-stop road-stop--4">
+            <div class="road-pin">
+              <div class="road-pin-inner"></div>
+            </div>
+            <div class="road-card">
+              <div class="road-card-title">04 · Data & research</div>
+              <h4>Water, climate & dashboards</h4>
+              <p>
+                Quantitative projects on ODA, desalination and climate, turning datasets into tools people can actually use.
+              </p>
+            </div>
+          </div>
+
+          <!-- STOP 5 -->
+          <div class="road-stop road-stop--5">
+            <div class="road-pin">
+              <div class="road-pin-inner"></div>
+            </div>
+            <div class="road-card">
+              <div class="road-card-title">05 · Present</div>
+              <h4>Cultural diplomacy & projects</h4>
+              <p>
+                Designing field trips, exhibitions and interactive tools that connect research, policy and lived experience.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Current Projects -->
-      <div class="about-projects">
-        <h3>Current Work</h3>
+      <!-- FOCUS AREAS -->
+      <div class="about-focus-area">
+        <h3>Focus areas</h3>
+        <div class="about-focus-grid">
+          <div class="focus-card">Human security</div>
+          <div class="focus-card">Migration</div>
+          <div class="focus-card">Humanitarian action</div>
+          <div class="focus-card">Development data</div>
+          <div class="focus-card">Water & climate</div>
+          <div class="focus-card">Cultural diplomacy</div>
+        </div>
+      </div>
 
+      <!-- CURRENT WORK -->
+      <div class="about-projects">
+        <h3>Current work</h3>
         <div class="projects-grid">
           <div class="project-card">
-            <h4>Oman Research &amp; Cultural Diplomacy</h4>
+            <h4>Oman research & cultural diplomacy</h4>
             <p>
               Leading a multi-partner initiative integrating field research,
-              photography, and cultural exchange across institutions.
+              photography and cultural exchange across institutions.
             </p>
           </div>
 
           <div class="project-card">
-            <h4>Human Security Interactive Tool</h4>
+            <h4>Human Security interactive tool</h4>
             <p>
               Building an accessible digital experience that reframes core
               security concepts through storytelling and systems thinking.
@@ -2761,15 +2883,30 @@ margin-bottom: 6px;
         </div>
       </div>
 
-    </div> <!-- /.about-main -->
-
-  </div> <!-- /.about-shell -->
-
-  <!-- Travel / visited countries map (full width under the two columns) -->
-  <div class="map-card">
-    <div id="visitedMap" aria-label="Visited countries map"></div>
-  </div>
+    </div><!-- /about-main -->
+  </div><!-- /about-shell -->
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 
 
