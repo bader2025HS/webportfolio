@@ -220,6 +220,120 @@
   filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
 }
 
+    /* ======== ABOUT – IDENTITY BLOCK ======== */
+
+.about-identity {
+  max-width: 1050px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Portrait + Micro-Bio */
+.about-identity-top {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.about-portrait img {
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.about-intro-text h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-intro-text p {
+  font-size: 1rem;
+  max-width: 38rem;
+  line-height: 1.55;
+}
+
+/* Focus Areas Grid */
+.about-focus-area h3,
+.about-languages h3,
+.about-projects h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.about-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-card {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.focus-card:hover {
+  border-color: #009fa5;
+  color: #009fa5;
+  background: #e6f9f9;
+}
+
+/* Languages */
+.lang-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.lang-caption {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.project-card h4 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2527,6 +2641,78 @@ margin-bottom: 6px;
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
+
+  <!-- ABOUT – IDENTITY BLOCK (clean + balanced) -->
+<div class="about-identity">
+
+  <!-- Portrait + Micro-Bio -->
+  <div class="about-identity-top">
+    <div class="about-portrait">
+      <!-- Add your photo here -->
+      <img src="your-photo.jpg" alt="Portrait" />
+    </div>
+
+    <div class="about-intro-text">
+      <h3>Who I Am</h3>
+      <p>
+        I work at the intersection of <strong>human security, mobility, and data</strong>,
+        building bridges between people, institutions, and stories.  
+        My path is shaped by multiple cultures, languages, and experiences across Europe,
+        the Middle East, and Asia.
+      </p>
+    </div>
+  </div>
+
+  <!-- Focus Areas Grid -->
+  <div class="about-focus-area">
+    <h3>Focus Areas</h3>
+
+    <div class="about-focus-grid">
+      <div class="focus-card">Human Security</div>
+      <div class="focus-card">Migration & Mobility</div>
+      <div class="focus-card">Humanitarian Action</div>
+      <div class="focus-card">Development Data</div>
+      <div class="focus-card">Water & Climate</div>
+      <div class="focus-card">Cultural Diplomacy</div>
+    </div>
+  </div>
+
+  <!-- Multilingual Identity -->
+  <div class="about-languages">
+    <h3>Languages</h3>
+    <div class="lang-row">
+      <span>🇸🇦 Arabic</span>
+      <span>🇫🇷 French</span>
+      <span>🇬🇧 English</span>
+      <span>🇮🇷 Persian</span>
+      <span>🇯🇵 Japanese</span>
+    </div>
+    <p class="lang-caption">
+      Languages shape how I interpret the world and connect with people.
+    </p>
+  </div>
+
+  <!-- Current Projects -->
+  <div class="about-projects">
+    <h3>Currently Working On</h3>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <h4>Oman Field Research & Cultural Diplomacy</h4>
+        <p>Leading a multi-partner initiative combining research,
+        photography, and cultural exchange.</p>
+      </div>
+
+      <div class="project-card">
+        <h4>Human Security Interactive Tool</h4>
+        <p>Designing an accessible digital project to rethink the way
+        students engage with security concepts.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 </section>
 
 
