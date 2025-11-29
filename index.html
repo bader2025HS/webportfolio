@@ -2295,15 +2295,14 @@ margin-bottom: 6px;
 
 
 
-
-
-    /* ============================
+/* ============================
    HERO – COLIN-MOY STYLE
 ============================ */
 
 #hero-bader {
-  min-height: 100vh;              /* full screen */
-  background: #f3c66b;            /* Colin-like yellow */
+  min-height: 100vh;              /* full screen height */
+  width: 100%;                    /* full screen width */
+  background: #009fa5;            /* your turquoise signature */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2332,7 +2331,7 @@ margin-bottom: 6px;
 }
 
 .hero-row-bottom {
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 /* static letters (B, A, E, R, S, L...) */
@@ -2340,7 +2339,7 @@ margin-bottom: 6px;
   font-size: clamp(4rem, 9vw, 7rem);
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: #050608;
+  color: #050608; /* deep nearly-black */
 }
 
 /* white pills that the circles slide inside */
@@ -2366,14 +2365,13 @@ margin-bottom: 6px;
   align-items: center;
   justify-content: center;
   transform: translate(-50%, -50%);
-  /* animation defined below */
 }
 
 /* letter inside the circle (D / U) */
 .hero-letter-circle {
   font-size: clamp(3.8rem, 6vw, 5rem);
   font-weight: 800;
-  color: #f3c66b;  /* same as background so it feels "cut out" */
+  color: #009fa5;  /* same turquoise as background = "cut out" effect */
   text-transform: uppercase;
 }
 
@@ -2382,7 +2380,7 @@ margin-bottom: 6px;
   animation: heroSlide 6s ease-in-out infinite alternate;
 }
 
-/* U animation (bottom pill – offset so they’re not synced) */
+/* U animation (bottom pill – offset) */
 .hero-circle-u {
   animation: heroSlide 6s ease-in-out infinite alternate;
   animation-delay: 1.4s;
@@ -2394,9 +2392,8 @@ margin-bottom: 6px;
   100% { left: 80%; }
 }
 
-/* tagline bar like Colin's black strip */
+/* tagline strip BETWEEN the names */
 .hero-tagline-bar {
-  margin-top: clamp(40px, 7vh, 60px);
   display: flex;
   justify-content: center;
 }
@@ -2405,17 +2402,17 @@ margin-bottom: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 38px;
+  padding: 12px 34px;
   border-radius: 999px;
-  background: #050608;
-  color: #f3c66b;
+  background: #050608;   /* dark strip */
+  color: #ffffff;        /* white text */
   font-size: 0.9rem;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* RESPONSIVE – shrink a bit on small screens */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   #hero-bader {
     padding-top: 80px;
@@ -2431,11 +2428,12 @@ margin-bottom: 6px;
   }
 
   .hero-tagline-bar span {
-    padding: 10px 22px;
+    padding: 10px 20px;
     letter-spacing: 0.18em;
     font-size: 0.78rem;
   }
 }
+
 
   </style>
 </head>
@@ -2447,6 +2445,7 @@ margin-bottom: 6px;
   <div class="page">
 
      <!-- HERO / LANDING SECTION -->
+<!-- HERO / LANDING SECTION -->
 <section id="hero-bader">
   <div class="hero-inner">
 
@@ -2463,6 +2462,11 @@ margin-bottom: 6px;
       <span class="hero-letter-static">A</span>
       <span class="hero-letter-static">E</span>
       <span class="hero-letter-static">R</span>
+    </div>
+
+    <!-- STRIP IN THE MIDDLE -->
+    <div class="hero-tagline-bar">
+      <span>HUMAN SECURITY · MIGRATION · DATA · WATER &amp; CLIMATE</span>
     </div>
 
     <!-- LAST NAME ROW -->
@@ -2482,13 +2486,9 @@ margin-bottom: 6px;
       <span class="hero-letter-static">N</span>
     </div>
 
-    <!-- OPTIONAL TAGLINE BAR (you can delete if you hate it) -->
-    <div class="hero-tagline-bar">
-      <span>HUMAN SECURITY · MIGRATION · DATA · WATER & CLIMATE</span>
-    </div>
-
   </div>
 </section>
+
 
     <header>
       <h1>Bader Suliman</h1>
