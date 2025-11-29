@@ -2295,18 +2295,22 @@ margin-bottom: 6px;
 
 
 
-/* ============================
-   HERO – COLIN-MOY STYLE
-============================ */
+/* make sure the page has no white margin and uses turquoise */
+body {
+  margin: 0;
+  background: #009fa5; /* if you only want the hero turquoise, remove this line */
+}
+
+/* HERO */
 
 #hero-bader {
-  min-height: 100vh;              /* full screen height */
-  width: 100%;                    /* full screen width */
-  background: #009fa5;            /* your turquoise signature */
+  min-height: 100vh;
+  width: 100%;
+  background: #009fa5;              /* turquoise everywhere */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 5vw;
+  padding: 60px 5vw 70px;           /* a bit of breathing room */
   box-sizing: border-box;
 }
 
@@ -2315,7 +2319,8 @@ margin-bottom: 6px;
   max-width: 1200px;
 }
 
-/* rows with giant letters */
+/* rows & letters unchanged except we keep them here for clarity */
+
 .hero-row {
   display: flex;
   align-items: center;
@@ -2326,33 +2331,27 @@ margin-bottom: 6px;
   text-transform: uppercase;
 }
 
-.hero-row-top {
-  margin-bottom: 30px;
-}
+.hero-row-top  { margin-bottom: 40px; }
+.hero-row-bottom { margin-top: 40px; }
 
-.hero-row-bottom {
-  margin-top: 30px;
-}
-
-/* static letters (B, A, E, R, S, L...) */
 .hero-letter-static {
   font-size: clamp(4rem, 9vw, 7rem);
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: #050608; /* deep nearly-black */
+  color: #050608;
 }
 
-/* white pills that the circles slide inside */
+/* pills */
+
 .hero-pill {
   position: relative;
-  flex: 0 0 clamp(230px, 35vw, 420px);
-  height: clamp(130px, 18vw, 190px);
+  flex: 0 0 clamp(260px, 38vw, 450px);
+  height: clamp(140px, 19vw, 200px);
   border-radius: 999px;
   background: #ffffff;
   overflow: hidden;
 }
 
-/* black moving circles */
 .hero-pill-circle {
   position: absolute;
   top: 50%;
@@ -2367,32 +2366,30 @@ margin-bottom: 6px;
   transform: translate(-50%, -50%);
 }
 
-/* letter inside the circle (D / U) */
 .hero-letter-circle {
   font-size: clamp(3.8rem, 6vw, 5rem);
   font-weight: 800;
-  color: #009fa5;  /* same turquoise as background = "cut out" effect */
-  text-transform: uppercase;
+  color: #009fa5;   /* cutout effect */
 }
 
-/* D animation (top pill) */
-.hero-circle-d {
+/* A animations */
+
+.hero-circle-a-top {
   animation: heroSlide 6s ease-in-out infinite alternate;
 }
 
-/* U animation (bottom pill – offset) */
-.hero-circle-u {
+.hero-circle-a-bottom {
   animation: heroSlide 6s ease-in-out infinite alternate;
-  animation-delay: 1.4s;
+  animation-delay: 1.4s;  /* offset so they don't move together */
 }
 
-/* slide from left to right inside pill */
 @keyframes heroSlide {
   0%   { left: 20%; }
   100% { left: 80%; }
 }
 
-/* tagline strip BETWEEN the names */
+/* BIGGER STRIP BETWEEN NAMES */
+
 .hero-tagline-bar {
   display: flex;
   justify-content: center;
@@ -2402,25 +2399,24 @@ margin-bottom: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 34px;
+  padding: 16px 48px;               /* bigger pill */
   border-radius: 999px;
-  background: #050608;   /* dark strip */
-  color: #ffffff;        /* white text */
-  font-size: 0.9rem;
-  letter-spacing: 0.22em;
+  background: #050608;
+  color: #ffffff;
+  font-size: 1rem;                  /* bigger text */
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* RESPONSIVE */
+/* responsive tweaks */
+
 @media (max-width: 768px) {
   #hero-bader {
-    padding-top: 80px;
+    padding: 80px 4vw 60px;
   }
 
-  .hero-row {
-    gap: 14px;
-  }
+  .hero-row { gap: 14px; }
 
   .hero-pill {
     flex-basis: 260px;
@@ -2428,9 +2424,9 @@ margin-bottom: 6px;
   }
 
   .hero-tagline-bar span {
-    padding: 10px 20px;
-    letter-spacing: 0.18em;
-    font-size: 0.78rem;
+    padding: 12px 28px;
+    font-size: 0.82rem;
+    letter-spacing: 0.19em;
   }
 }
 
@@ -2449,20 +2445,37 @@ margin-bottom: 6px;
 <section id="hero-bader">
   <div class="hero-inner">
 
-    <!-- FIRST NAME ROW -->
-    <div class="hero-row hero-row-top">
-      <span class="hero-letter-static">B</span>
+ <!-- FIRST NAME ROW -->
+<div class="hero-row hero-row-top">
+  <span class="hero-letter-static">B</span>
 
-      <div class="hero-pill hero-pill-top">
-        <div class="hero-pill-circle hero-circle-d">
-          <span class="hero-letter-circle">D</span>
-        </div>
-      </div>
-
-      <span class="hero-letter-static">A</span>
-      <span class="hero-letter-static">E</span>
-      <span class="hero-letter-static">R</span>
+  <div class="hero-pill hero-pill-top">
+    <div class="hero-pill-circle hero-circle-a-top">
+      <span class="hero-letter-circle">A</span>
     </div>
+  </div>
+
+  <span class="hero-letter-static">D</span>
+  <span class="hero-letter-static">E</span>
+  <span class="hero-letter-static">R</span>
+</div>
+
+<!-- LAST NAME ROW -->
+<div class="hero-row hero-row-bottom">
+  <span class="hero-letter-static">S</span>
+
+  <div class="hero-pill hero-pill-bottom">
+    <div class="hero-pill-circle hero-circle-a-bottom">
+      <span class="hero-letter-circle">A</span>
+    </div>
+  </div>
+
+  <span class="hero-letter-static">L</span>
+  <span class="hero-letter-static">I</span>
+  <span class="hero-letter-static">M</span>
+  <span class="hero-letter-static">N</span>
+</div>
+
 
     <!-- STRIP IN THE MIDDLE -->
     <div class="hero-tagline-bar">
