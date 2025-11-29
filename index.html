@@ -90,7 +90,7 @@
 
 
 /* ===========================
-   ABOUT – LAYOUT + STATS
+   ABOUT – VERTICAL STATS COLUMN
 =========================== */
 
 #about {
@@ -99,46 +99,29 @@
 
 .about-shell {
   max-width: 1050px;
-  margin: 6px auto 24px;
+  margin: 6px auto 24px;    /* less vertical space */
   display: flex;
-  align-items: flex-start;
-  gap: 40px;
-  position: relative;
+  justify-content: flex-start;
 }
 
-/* abstract squiggle behind block */
-.about-shell::after {
-  content: "";
-  position: absolute;
-  left: -60px;
-  bottom: -40px;
-  width: 260px;
-  height: 120px;
-  border-radius: 999px;
-  border: 1px dashed rgba(148,163,184,0.6);
-  border-top: none;
-  transform: rotate(-6deg);
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-/* left stats column */
-
+/* compact vertical stack */
 .about-stats-column {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px;                 /* smaller gap = less height */
 }
 
+/* one stat */
 .about-stat {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 0 10px 18px;
+  padding: 10px 0 10px 18px;  /* small left padding for the accent line */
   cursor: default;
 }
 
+/* thin accent line on the left */
 .about-stat::before {
   content: "";
   position: absolute;
@@ -154,13 +137,15 @@
   opacity: 0.6;
 }
 
+/* big number */
 .about-stat-number {
-  font-size: 2.6rem;
+  font-size: 2.6rem;        /* slightly smaller than before */
   font-weight: 700;
   line-height: 1;
   transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
 }
 
+/* label */
 .about-stat-label {
   margin-top: 1px;
   font-size: 0.8rem;
@@ -169,9 +154,11 @@
   color: #6b7280;
 }
 
+
+/* HOVER EFFECTS */
 .about-stat:hover::before {
   transform: scaleY(1);
-  background: rgba(0, 159, 165, 0.85);
+  background: rgba(0, 159, 165, 0.75);
   opacity: 1;
 }
 
@@ -181,272 +168,27 @@
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
 
-/* right side */
-
-.about-main {
-  flex: 1;
-}
-
-/* main abstract card */
-
-.about-main-card {
-  position: relative;
-  padding: 22px 26px 24px;
-  border-radius: 24px;
-  border: 1px solid #e5e7eb;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(56,189,248,0.12) 0, transparent 55%),
-    radial-gradient(circle at 100% 120%, rgba(251,191,36,0.14) 0, transparent 60%),
-    #ffffff;
-  box-shadow: 0 22px 40px rgba(15,23,42,0.08);
-  overflow: hidden;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-}
-
-/* big ghost word in the back */
-
-.about-main-card::before {
-  content: "PROFILE";
-  position: absolute;
-  right: 8px;
-  top: -30px;
-  font-size: 4.4rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: #e5e7eb;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-/* scanning bar */
-
-.about-main-card::after {
-  content: "";
-  position: absolute;
-  left: -40%;
-  right: -40%;
-  top: 0;
-  height: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.6),
-    rgba(255,255,255,0)
-  );
-  opacity: 0;
-  pointer-events: none;
-}
-
-.about-main-card.about-card-scan::after {
-  height: 120%;
-  animation: aboutScan 0.7s ease-out;
-}
-
-@keyframes aboutScan {
-  0%   { transform: translateY(-80%); opacity: 0; }
-  10%  { opacity: 1; }
-  100% { transform: translateY(40%); opacity: 0; }
-}
-
-/* theming based on active focus */
-
-.about-main-card[data-theme="human"] {
-  border-color: rgba(34,197,94,0.7);
-}
-.about-main-card[data-theme="migration"] {
-  border-color: rgba(59,130,246,0.8);
-}
-.about-main-card[data-theme="data"] {
-  border-color: rgba(234,179,8,0.9);
-}
-.about-main-card[data-theme="culture"] {
-  border-color: rgba(236,72,153,0.9);
-}
-
-/* top row */
-
-.about-top-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-
-.about-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.about-pill {
-  padding: 5px 10px 4px;
-  border-radius: 999px;
-  border: 1px solid #d0d7de;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: #f9fafb;
-}
-
-.about-pill-main {
-  background: #e6f9f9;
-  border-color: #009fa5;
-  color: #009fa5;
-}
-
-/* route chip */
-
-.about-route-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 10px 4px;
-  border-radius: 999px;
-  border: 1px dashed #cbd5f5;
-  background: #f9fafb;
-  font-size: 0.72rem;
-}
-
-.route-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #22c55e;
-}
-
-.route-dot-me {
-  box-shadow: 0 0 0 4px rgba(16,185,129,0.2);
-}
-
-.route-label {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #64748b;
-}
-
-.route-arrow {
-  opacity: 0.7;
-}
-
-/* story */
-
-.about-story {
-  margin-top: 4px;
-}
-
-.about-heading,
-.about-subtitle {
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.about-text {
-  font-size: 0.96rem;
-  line-height: 1.6;
-  max-width: 40rem;
-}
-
-/* focus chips */
-
-.about-focus-area {
-  margin-top: 18px;
-}
-
-.about-focus-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.focus-card {
-  padding: 7px 12px 6px;
-  border-radius: 999px;
-  border: 1px solid #d0d7de;
-  background: #f9fafb;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease;
-}
-
-.focus-card span {
-  pointer-events: none;
-}
-
-.focus-card:hover {
-  transform: translateY(-1px);
-  border-color: #009fa5;
-  background: #e6f9f9;
-  color: #009fa5;
-}
-
-.focus-card.is-active {
-  border-color: #009fa5;
-  background: #009fa5;
-  color: #ffffff;
-}
-
-/* detail panel */
-
-.about-focus-detail {
-  margin-top: 16px;
-  padding: 10px 14px;
-  border-radius: 16px;
-  background: rgba(248,250,252,0.96);
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 10px 24px rgba(15,23,42,0.06);
-}
-
-.focus-tagline {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #4b5563;
-  margin-bottom: 6px;
-}
-
-.focus-text {
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: #374151;
-}
-
-/* responsive */
-
-@media (max-width: 860px) {
-  .about-top-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
+/* MOBILE – even more compact so it never causes extra scrolling */
 @media (max-width: 640px) {
   .about-shell {
-    flex-direction: column;
-    gap: 22px;
     margin: 4px auto 18px;
   }
 
-  .about-main-card {
-    padding: 18px 18px 20px;
+  .about-stat-number {
+    font-size: 2.1rem;
   }
 
-  .about-main-card::before {
-    font-size: 3.4rem;
-    right: 0;
+  .about-stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  .about-stat {
+    padding: 2px 0 2px 14px;
   }
 }
 
-/* ====== MAP UNDER ABOUT ====== */
+    /* ====== ABOUT – TRAVEL MAP ====== */
 
 .map-card {
   background: transparent;
@@ -456,7 +198,7 @@
   padding: 0;
   overflow: visible;
   max-width: 1050px;
-  margin: 24px auto 0;
+  margin: 24px auto 0;  /* centers under About */
 }
 
 #visitedMap {
@@ -465,16 +207,208 @@
   border-radius: 14px;
 }
 
+/* make Leaflet background transparent inside About */
 #visitedMap.leaflet-container {
   background: transparent !important;
 }
 
+/* micro glow when hovering country polygons */
 #visitedMap .leaflet-interactive {
-  transition: filter 0.25s ease, stroke-width 0.2s ease;
+  transition: filter .25s ease, stroke-width .2s ease;
 }
 #visitedMap .leaflet-interactive:hover {
   filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
 }
+
+    /* ======== ABOUT – IDENTITY BLOCK ======== */
+
+.about-identity {
+  max-width: 1050px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Portrait + Micro-Bio */
+.about-identity-top {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.about-portrait img {
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.about-intro-text h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-intro-text p {
+  font-size: 1rem;
+  max-width: 38rem;
+  line-height: 1.55;
+}
+
+/* Focus Areas Grid */
+.about-focus-area h3,
+.about-languages h3,
+.about-projects h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.about-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-card {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.focus-card:hover {
+  border-color: #009fa5;
+  color: #009fa5;
+  background: #e6f9f9;
+}
+
+/* Languages */
+.lang-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.lang-caption {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.project-card h4 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+/* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
+
+.about-main {
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Identity Block */
+.about-identity-small h3,
+.about-focus-area h3,
+.about-projects h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-identity-small p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 40rem;
+}
+
+/* Focus Areas Grid */
+.about-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-card {
+  padding: 7px 12px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.focus-card:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.project-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.project-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.project-card p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #374151;
+}
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2745,11 +2679,11 @@ margin-bottom: 6px;
       <!-- ABOUT -->
 
    <!-- ABOUT -->
-<!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN -->
+    <!-- LEFT: STATS COLUMN (unchanged) -->
     <div class="about-stats-column">
+
       <div class="about-stat">
         <div class="about-stat-number">30</div>
         <div class="about-stat-label">countries visited</div>
@@ -2774,103 +2708,70 @@ margin-bottom: 6px;
         <div class="about-stat-number">7</div>
         <div class="about-stat-label">cities lived in</div>
       </div>
+
     </div>
 
-    <!-- RIGHT: INTERACTIVE PROFILE CARD -->
+    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
     <div class="about-main">
-      <div class="about-main-card" data-theme="human">
-        <!-- top row: pills + route -->
-        <div class="about-top-row">
-          <div class="about-pills">
-            <span class="about-pill about-pill-main">Human security</span>
-            <span class="about-pill">Mobility</span>
-            <span class="about-pill">Data &amp; visuals</span>
-          </div>
 
-          <div class="about-route-chip">
-            <span class="route-dot route-dot-me"></span>
-            <span class="route-label">Middle East</span>
-            <span class="route-arrow">⟶</span>
-            <span class="route-label">Europe</span>
-            <span class="route-arrow">⟶</span>
-            <span class="route-label">Asia</span>
-          </div>
-        </div>
+      <!-- Identity Block -->
+      <div class="about-identity-small">
+        <h3>Who I Am</h3>
+        <p>
+          I work at the intersection of <strong>human security, mobility, and data</strong>.
+          My background spans the Middle East, Europe, and Asia, and I’m driven by
+          clarity, dignity, and the stories behind movement and resilience.
+        </p>
+      </div>
 
-        <!-- main story -->
-        <div class="about-story">
-          <h3 class="about-heading">Who I am</h3>
-          <p class="about-text">
-            I move between <strong>field stories</strong>, <strong>policy rooms</strong> and
-            <strong>data dashboards</strong>, trying to keep people at the centre.
-            This card is a small “control panel” of the work I come back to most.
-          </p>
-        </div>
+      <!-- Focus Areas Grid -->
+      <div class="about-focus-area">
+        <h3>Focus Areas</h3>
 
-        <!-- focus chips (CLICKABLE) -->
-        <div class="about-focus-area">
-          <h3 class="about-subtitle">Focus areas</h3>
-
-          <div class="about-focus-grid">
-            <button class="focus-card is-active" data-focus="human">
-              <span>Human security</span>
-            </button>
-            <button class="focus-card" data-focus="migration">
-              <span>Migration &amp; asylum</span>
-            </button>
-            <button class="focus-card" data-focus="data">
-              <span>Data for impact</span>
-            </button>
-            <button class="focus-card" data-focus="culture">
-              <span>Cultural diplomacy</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- dynamic panel changed by chips -->
-        <div class="about-focus-detail">
-          <div class="focus-tagline" id="focusTitle">
-            Human security in practice
-          </div>
-          <p class="focus-text" id="focusText">
-            Mapping risks, protections and everyday needs — from water and shelter
-            to dignity and voice — and turning them into concrete projects and tools.
-          </p>
+        <div class="about-focus-grid">
+          <div class="focus-card">Human Security</div>
+          <div class="focus-card">Migration</div>
+          <div class="focus-card">Humanitarian Action</div>
+          <div class="focus-card">Development Data</div>
+          <div class="focus-card">Water &amp; Climate</div>
+          <div class="focus-card">Cultural Diplomacy</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- MAP UNDER BOTH COLUMNS -->
+      <!-- Current Projects -->
+      <div class="about-projects">
+        <h3>Current Work</h3>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <h4>Oman Research &amp; Cultural Diplomacy</h4>
+            <p>
+              Leading a multi-partner initiative integrating field research,
+              photography, and cultural exchange across institutions.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h4>Human Security Interactive Tool</h4>
+            <p>
+              Building an accessible digital experience that reframes core
+              security concepts through storytelling and systems thinking.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /.about-main -->
+
+  </div> <!-- /.about-shell -->
+
+  <!-- Travel / visited countries map (full width under the two columns) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
@@ -4548,61 +4449,6 @@ workStrips.forEach(strip => {
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
-/* ===============================
-   ABOUT – FOCUS CHIP INTERACTION
-=============================== */
-
-const aboutCard      = document.querySelector(".about-main-card");
-const focusCards     = document.querySelectorAll(".focus-card");
-const focusTitleEl   = document.getElementById("focusTitle");
-const focusTextEl    = document.getElementById("focusText");
-
-const focusData = {
-  human: {
-    title: "Human security in practice",
-    text: "Mapping risks, protections and everyday needs — from water and shelter to dignity and voice — and turning them into concrete projects and tools.",
-    theme: "human"
-  },
-  migration: {
-    title: "Migration & asylum",
-    text: "Working with refugees and institutions to make procedures legible, narratives credible and decisions grounded in context instead of stereotypes.",
-    theme: "migration"
-  },
-  data: {
-    title: "Data for impact",
-    text: "Cleaning messy spreadsheets, building dashboards and visuals that surface what matters for programmes, not just what is easy to measure.",
-    theme: "data"
-  },
-  culture: {
-    title: "Cultural diplomacy",
-    text: "Co-creating projects that mix research, photography and workshops to make regions like the MENA more visible beyond headlines.",
-    theme: "culture"
-  }
-};
-
-focusCards.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const key = btn.dataset.focus;
-    const cfg = focusData[key];
-    if (!cfg || !aboutCard) return;
-
-    // active state on chips
-    focusCards.forEach(b => b.classList.remove("is-active"));
-    btn.classList.add("is-active");
-
-    // update text
-    focusTitleEl.textContent = cfg.title;
-    focusTextEl.textContent  = cfg.text;
-
-    // theme color on card
-    aboutCard.setAttribute("data-theme", cfg.theme);
-
-    // retrigger scan animation
-    aboutCard.classList.remove("about-card-scan");
-    void aboutCard.offsetWidth;    // force reflow
-    aboutCard.classList.add("about-card-scan");
-  });
-});
 
   </script>
 
