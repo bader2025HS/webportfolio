@@ -90,7 +90,7 @@
 
 
 /* ===========================
-   ABOUT – ROADMAP ONLY
+   ABOUT – ROAD IN THE MIDDLE
 =========================== */
 
 #about {
@@ -102,37 +102,13 @@
   margin: 0 auto 60px;
 }
 
-/* Wrapper */
+/* simple wrapper, no frame */
 .about-roadmap {
   position: relative;
-  padding: 0 0 40px;
+  padding-bottom: 40px;
   background: transparent;
   border: none;
   box-shadow: none;
-  overflow: visible;
-}
-
-/* Header */
-.about-roadmap-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.20em;
-  color: #9ca3af;
-  margin-bottom: 6px;
-}
-
-.about-roadmap-title {
-  font-size: 1.6rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.about-roadmap-sub {
-  font-size: 0.95rem;
-  color: #4b5563;
-  max-width: 40rem;
-  margin-bottom: 20px;
 }
 
 /* ===========================
@@ -142,17 +118,17 @@
 .road-inner {
   position: relative;
   width: 100%;
-  height: 260px;           /* fixed band */
+  height: 340px;              /* band + space for cards */
 }
 
-/* SVG road sits as a band in the middle */
+/* SVG road centered vertically */
 .road-svg {
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 100%;
-  height: 180px;
+  height: 160px;
   display: block;
   z-index: 1;
   pointer-events: none;
@@ -178,19 +154,20 @@
 
 .road-stop {
   position: absolute;
+  top: 50%;                     /* pins anchored on the road */
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   pointer-events: none;
-  z-index: 2;        /* ABOVE the road */
+  z-index: 2;                   /* above road, below cards */
 }
 
-/* teal pin */
+/* teal pin on the road */
 .road-pin {
-  width: 28px;
-  height: 40px;
+  width: 26px;
+  height: 36px;
   border-radius: 999px 999px 999px 0;
   transform: rotate(45deg);
   background: #009fa5;
@@ -201,13 +178,13 @@
 }
 
 .road-pin-inner {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
   background: #ffffff;
 }
 
-/* card itself */
+/* card (sits away from the road) */
 .road-card {
   pointer-events: auto;
   padding: 11px 14px 12px;
@@ -215,12 +192,12 @@
   background: rgba(255, 255, 255, 0.97);
   border: 1px solid #e5e7eb;
   box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
-  min-width: 180px;
-  max-width: 240px;
-  transform: translateY(4px);
+  min-width: 190px;
+  max-width: 260px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* text */
 .road-card-kicker {
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -240,7 +217,7 @@
   line-height: 1.45;
 }
 
-/* tags in cards */
+/* tags */
 .road-tags {
   margin-top: 6px;
   display: flex;
@@ -258,18 +235,36 @@
 
 /* hover */
 .road-card:hover {
-  transform: translateY(-6px) rotate(-0.5deg);
+  transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.26);
 }
 
-/* STOP POSITIONS (top / bottom like your template) */
-.road-stop--1 { top: 22%; left: 13%; }  /* top-left */
-.road-stop--2 { top: 78%; left: 30%; }  /* bottom-left */
-.road-stop--3 { top: 24%; left: 50%; }  /* top-middle */
-.road-stop--4 { top: 78%; left: 70%; }  /* bottom-right */
-.road-stop--5 { top: 26%; left: 88%; }  /* top-right end */
+/* ===========================
+   POSITIONS
+   (cards OUTSIDE the road band)
+=========================== */
 
-/* tiny label at the arrow */
+/* left → right positions of the pins */
+.road-stop--1 { left: 13%; }
+.road-stop--2 { left: 30%; }
+.road-stop--3 { left: 50%; }
+.road-stop--4 { left: 70%; }
+.road-stop--5 { left: 88%; }
+
+/* TOP row cards (1,3,5) – push them above the road */
+.road-stop--1 .road-card,
+.road-stop--3 .road-card,
+.road-stop--5 .road-card {
+  transform: translateY(-170px);   /* only card moves, pin stays on road */
+}
+
+/* BOTTOM row cards (2,4) – push them below the road */
+.road-stop--2 .road-card,
+.road-stop--4 .road-card {
+  transform: translateY(70px);
+}
+
+/* tiny label at the arrow end */
 .road-arrow-label {
   position: absolute;
   right: 10px;
@@ -283,16 +278,28 @@
 /* MOBILE */
 @media (max-width: 700px) {
   .road-inner {
-    height: 340px;
+    height: 380px;
   }
   .road-svg {
-    height: 220px;
+    height: 190px;
   }
-  .road-stop--1 { top: 20%; left: 18%; }
-  .road-stop--2 { top: 78%; left: 30%; }
-  .road-stop--3 { top: 26%; left: 50%; }
-  .road-stop--4 { top: 80%; left: 68%; }
-  .road-stop--5 { top: 30%; left: 86%; }
+
+  .road-stop--1 { left: 18%; }
+  .road-stop--2 { left: 32%; }
+  .road-stop--3 { left: 50%; }
+  .road-stop--4 { left: 68%; }
+  .road-stop--5 { left: 86%; }
+
+  .road-stop--1 .road-card,
+  .road-stop--3 .road-card,
+  .road-stop--5 .road-card {
+    transform: translateY(-160px);
+  }
+
+  .road-stop--2 .road-card,
+  .road-stop--4 .road-card {
+    transform: translateY(80px);
+  }
 }
 
     /* ===========================
@@ -2565,24 +2572,16 @@ margin-bottom: 6px;
 
 
       
-   <section id="about">
+<section id="about">
   <div class="about-shell">
     <div class="about-roadmap">
-      <div class="about-roadmap-label">About</div>
-      <h2 class="about-roadmap-title">My route so far</h2>
-      <p class="about-roadmap-sub">
-        A winding road through <strong>human security, migration, and data</strong> –
-        key stops that shaped how I work today.
-      </p>
-
       <div class="road-inner">
-        <!-- ROAD SVG BAND -->
+        <!-- ROAD SVG -->
         <svg
           class="road-svg"
           viewBox="0 0 1200 260"
           preserveAspectRatio="none"
         >
-          <!-- grey asphalt -->
           <path
             class="road-path"
             d="M0,200
@@ -2594,10 +2593,7 @@ margin-bottom: 6px;
                C900,200 900,120 960,120
                H1150
                L1200,120"
-            stroke="none"
-            stroke-width="0"
           />
-          <!-- dashed center line -->
           <path
             class="road-line"
             d="M0,190
@@ -2611,7 +2607,7 @@ margin-bottom: 6px;
           />
         </svg>
 
-        <!-- STOP 1 -->
+        <!-- STOP 1 (top) -->
         <div class="road-stop road-stop--1">
           <div class="road-pin"><div class="road-pin-inner"></div></div>
           <div class="road-card">
@@ -2627,7 +2623,7 @@ margin-bottom: 6px;
           </div>
         </div>
 
-        <!-- STOP 2 -->
+        <!-- STOP 2 (bottom) -->
         <div class="road-stop road-stop--2">
           <div class="road-pin"><div class="road-pin-inner"></div></div>
           <div class="road-card">
@@ -2644,7 +2640,7 @@ margin-bottom: 6px;
           </div>
         </div>
 
-        <!-- STOP 3 -->
+        <!-- STOP 3 (top) -->
         <div class="road-stop road-stop--3">
           <div class="road-pin"><div class="road-pin-inner"></div></div>
           <div class="road-card">
@@ -2661,7 +2657,7 @@ margin-bottom: 6px;
           </div>
         </div>
 
-        <!-- STOP 4 -->
+        <!-- STOP 4 (bottom) -->
         <div class="road-stop road-stop--4">
           <div class="road-pin"><div class="road-pin-inner"></div></div>
           <div class="road-card">
@@ -2678,7 +2674,7 @@ margin-bottom: 6px;
           </div>
         </div>
 
-        <!-- STOP 5 -->
+        <!-- STOP 5 (top) -->
         <div class="road-stop road-stop--5">
           <div class="road-pin"><div class="road-pin-inner"></div></div>
           <div class="road-card">
@@ -2700,7 +2696,6 @@ margin-bottom: 6px;
     </div>
   </div>
 </section>
-
 
 
 
