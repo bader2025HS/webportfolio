@@ -90,7 +90,7 @@
 
 
 /* ===========================
-   ABOUT – ROAD IN THE MIDDLE
+   ABOUT – ROAD ONLY
 =========================== */
 
 #about {
@@ -99,29 +99,17 @@
 
 .about-shell {
   max-width: 1050px;
-  margin: 0 auto 60px;
+  margin: 0 auto 80px;
 }
 
-/* simple wrapper, no frame */
-.about-roadmap {
-  position: relative;
-  padding-bottom: 40px;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-/* ===========================
-   ROAD BAND
-=========================== */
-
+/* ROAD AREA ONLY */
 .road-inner {
   position: relative;
   width: 100%;
-  height: 340px;              /* band + space for cards */
+  height: 260px; /* space to center road vertically */
 }
 
-/* SVG road centered vertically */
+/* center road in the middle of that space */
 .road-svg {
   position: absolute;
   left: 0;
@@ -130,8 +118,8 @@
   width: 100%;
   height: 160px;
   display: block;
-  z-index: 1;
   pointer-events: none;
+  z-index: 1;
 }
 
 /* asphalt */
@@ -148,159 +136,6 @@
   stroke-linecap: round;
 }
 
-/* ===========================
-   STOPS (pin + card)
-=========================== */
-
-.road-stop {
-  position: absolute;
-  top: 50%;                     /* pins anchored on the road */
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  pointer-events: none;
-  z-index: 2;                   /* above road, below cards */
-}
-
-/* teal pin on the road */
-.road-pin {
-  width: 26px;
-  height: 36px;
-  border-radius: 999px 999px 999px 0;
-  transform: rotate(45deg);
-  background: #009fa5;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.road-pin-inner {
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background: #ffffff;
-}
-
-/* card (sits away from the road) */
-.road-card {
-  pointer-events: auto;
-  padding: 11px 14px 12px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.97);
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
-  min-width: 190px;
-  max-width: 260px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* text */
-.road-card-kicker {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #9ca3af;
-  margin-bottom: 4px;
-}
-
-.road-card h4 {
-  font-size: 0.98rem;
-  margin-bottom: 4px;
-}
-
-.road-card p {
-  font-size: 0.82rem;
-  color: #4b5563;
-  line-height: 1.45;
-}
-
-/* tags */
-.road-tags {
-  margin-top: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.road-tag {
-  font-size: 0.72rem;
-  padding: 3px 8px 4px;
-  border-radius: 999px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-}
-
-/* hover */
-.road-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.26);
-}
-
-/* ===========================
-   POSITIONS
-   (cards OUTSIDE the road band)
-=========================== */
-
-/* left → right positions of the pins */
-.road-stop--1 { left: 13%; }
-.road-stop--2 { left: 30%; }
-.road-stop--3 { left: 50%; }
-.road-stop--4 { left: 70%; }
-.road-stop--5 { left: 88%; }
-
-/* TOP row cards (1,3,5) – push them above the road */
-.road-stop--1 .road-card,
-.road-stop--3 .road-card,
-.road-stop--5 .road-card {
-  transform: translateY(-170px);   /* only card moves, pin stays on road */
-}
-
-/* BOTTOM row cards (2,4) – push them below the road */
-.road-stop--2 .road-card,
-.road-stop--4 .road-card {
-  transform: translateY(70px);
-}
-
-/* tiny label at the arrow end */
-.road-arrow-label {
-  position: absolute;
-  right: 10px;
-  bottom: 4px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #9ca3af;
-}
-
-/* MOBILE */
-@media (max-width: 700px) {
-  .road-inner {
-    height: 380px;
-  }
-  .road-svg {
-    height: 190px;
-  }
-
-  .road-stop--1 { left: 18%; }
-  .road-stop--2 { left: 32%; }
-  .road-stop--3 { left: 50%; }
-  .road-stop--4 { left: 68%; }
-  .road-stop--5 { left: 86%; }
-
-  .road-stop--1 .road-card,
-  .road-stop--3 .road-card,
-  .road-stop--5 .road-card {
-    transform: translateY(-160px);
-  }
-
-  .road-stop--2 .road-card,
-  .road-stop--4 .road-card {
-    transform: translateY(80px);
-  }
-}
 
     /* ===========================
        EDUCATION MAPS
@@ -2571,131 +2406,40 @@ margin-bottom: 6px;
 
 
 
-      
-<section id="about">
+      <section id="about">
   <div class="about-shell">
-    <div class="about-roadmap">
-      <div class="road-inner">
-        <!-- ROAD SVG -->
-        <svg
-          class="road-svg"
-          viewBox="0 0 1200 260"
-          preserveAspectRatio="none"
-        >
-          <path
-            class="road-path"
-            d="M0,200
-               H200
-               C260,200 260,120 320,120
-               H520
-               C580,120 580,200 640,200
-               H840
-               C900,200 900,120 960,120
-               H1150
-               L1200,120"
-          />
-          <path
-            class="road-line"
-            d="M0,190
-               H200
-               C260,190 260,130 320,130
-               H520
-               C580,130 580,190 640,190
-               H840
-               C900,190 900,130 960,130
-               H1200"
-          />
-        </svg>
-
-        <!-- STOP 1 (top) -->
-        <div class="road-stop road-stop--1">
-          <div class="road-pin"><div class="road-pin-inner"></div></div>
-          <div class="road-card">
-            <div class="road-card-kicker">01 · Origins</div>
-            <h4>Middle East &amp; multilingual roots</h4>
-            <p>
-              Grew up between languages and regions, which later shaped how I
-              listen, translate and move between communities.
-            </p>
-            <div class="road-tags">
-              <span class="road-tag">Arabic / French / English</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- STOP 2 (bottom) -->
-        <div class="road-stop road-stop--2">
-          <div class="road-pin"><div class="road-pin-inner"></div></div>
-          <div class="road-card">
-            <div class="road-card-kicker">02 · Field support</div>
-            <h4>Refugees &amp; community work</h4>
-            <p>
-              100+ translation sessions and case support for asylum seekers,
-              including LGBT+ people in France.
-            </p>
-            <div class="road-tags">
-              <span class="road-tag">Protection</span>
-              <span class="road-tag">Casework</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- STOP 3 (top) -->
-        <div class="road-stop road-stop--3">
-          <div class="road-pin"><div class="road-pin-inner"></div></div>
-          <div class="road-card">
-            <div class="road-card-kicker">03 · Studies</div>
-            <h4>Human Security &amp; migration</h4>
-            <p>
-              Sciences Po &amp; partner universities – focusing on human
-              security, migration governance and conflicts in the MENA region.
-            </p>
-            <div class="road-tags">
-              <span class="road-tag">Human security</span>
-              <span class="road-tag">Migration</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- STOP 4 (bottom) -->
-        <div class="road-stop road-stop--4">
-          <div class="road-pin"><div class="road-pin-inner"></div></div>
-          <div class="road-card">
-            <div class="road-card-kicker">04 · Data &amp; research</div>
-            <h4>Water, climate &amp; dashboards</h4>
-            <p>
-              Quantitative work on French ODA, desalination and climate,
-              turning messy spreadsheets into usable dashboards.
-            </p>
-            <div class="road-tags">
-              <span class="road-tag">Power BI</span>
-              <span class="road-tag">Excel</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- STOP 5 (top) -->
-        <div class="road-stop road-stop--5">
-          <div class="road-pin"><div class="road-pin-inner"></div></div>
-          <div class="road-card">
-            <div class="road-card-kicker">05 · Present</div>
-            <h4>Cultural diplomacy &amp; projects</h4>
-            <p>
-              Designing field trips, exhibitions and interactive tools that
-              connect research, policy and lived experience.
-            </p>
-            <div class="road-tags">
-              <span class="road-tag">Cultural diplomacy</span>
-              <span class="road-tag">Storytelling</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="road-arrow-label">Next stop →</div>
-      </div>
+    <div class="road-inner">
+      <svg class="road-svg" viewBox="0 0 1200 260" preserveAspectRatio="none">
+        <!-- asphalt -->
+        <path
+          class="road-path"
+          d="M0,200
+             H200
+             C260,200 260,120 320,120
+             H520
+             C580,120 580,200 640,200
+             H840
+             C900,200 900,120 960,120
+             H1150
+             L1200,120"
+        />
+        <!-- dashed center line -->
+        <path
+          class="road-line"
+          d="M0,190
+             H200
+             C260,190 260,130 320,130
+             H520
+             C580,130 580,190 640,190
+             H840
+             C900,190 900,130 960,130
+             H1200"
+        />
+      </svg>
     </div>
   </div>
 </section>
+
 
 
 
