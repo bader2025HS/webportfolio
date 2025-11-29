@@ -2293,6 +2293,150 @@ margin-bottom: 6px;
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
 
+
+
+
+
+    /* ============================
+   HERO – COLIN-MOY STYLE
+============================ */
+
+#hero-bader {
+  min-height: 100vh;              /* full screen */
+  background: #f3c66b;            /* Colin-like yellow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 5vw;
+  box-sizing: border-box;
+}
+
+.hero-inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* rows with giant letters */
+.hero-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "Trebuchet MS", sans-serif;
+  text-transform: uppercase;
+}
+
+.hero-row-top {
+  margin-bottom: 30px;
+}
+
+.hero-row-bottom {
+  margin-top: 10px;
+}
+
+/* static letters (B, A, E, R, S, L...) */
+.hero-letter-static {
+  font-size: clamp(4rem, 9vw, 7rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #050608;
+}
+
+/* white pills that the circles slide inside */
+.hero-pill {
+  position: relative;
+  flex: 0 0 clamp(230px, 35vw, 420px);
+  height: clamp(130px, 18vw, 190px);
+  border-radius: 999px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* black moving circles */
+.hero-pill-circle {
+  position: absolute;
+  top: 50%;
+  width: 140%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #050608;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  /* animation defined below */
+}
+
+/* letter inside the circle (D / U) */
+.hero-letter-circle {
+  font-size: clamp(3.8rem, 6vw, 5rem);
+  font-weight: 800;
+  color: #f3c66b;  /* same as background so it feels "cut out" */
+  text-transform: uppercase;
+}
+
+/* D animation (top pill) */
+.hero-circle-d {
+  animation: heroSlide 6s ease-in-out infinite alternate;
+}
+
+/* U animation (bottom pill – offset so they’re not synced) */
+.hero-circle-u {
+  animation: heroSlide 6s ease-in-out infinite alternate;
+  animation-delay: 1.4s;
+}
+
+/* slide from left to right inside pill */
+@keyframes heroSlide {
+  0%   { left: 20%; }
+  100% { left: 80%; }
+}
+
+/* tagline bar like Colin's black strip */
+.hero-tagline-bar {
+  margin-top: clamp(40px, 7vh, 60px);
+  display: flex;
+  justify-content: center;
+}
+
+.hero-tagline-bar span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 38px;
+  border-radius: 999px;
+  background: #050608;
+  color: #f3c66b;
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* RESPONSIVE – shrink a bit on small screens */
+@media (max-width: 768px) {
+  #hero-bader {
+    padding-top: 80px;
+  }
+
+  .hero-row {
+    gap: 14px;
+  }
+
+  .hero-pill {
+    flex-basis: 260px;
+    height: 140px;
+  }
+
+  .hero-tagline-bar span {
+    padding: 10px 22px;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+  }
+}
+
   </style>
 </head>
 
@@ -2316,6 +2460,51 @@ margin-bottom: 6px;
         </ul>
       </nav>
     </header>
+
+
+    <!-- HERO / LANDING SECTION -->
+<section id="hero-bader">
+  <div class="hero-inner">
+
+    <!-- FIRST NAME ROW -->
+    <div class="hero-row hero-row-top">
+      <span class="hero-letter-static">B</span>
+
+      <div class="hero-pill hero-pill-top">
+        <div class="hero-pill-circle hero-circle-d">
+          <span class="hero-letter-circle">D</span>
+        </div>
+      </div>
+
+      <span class="hero-letter-static">A</span>
+      <span class="hero-letter-static">E</span>
+      <span class="hero-letter-static">R</span>
+    </div>
+
+    <!-- LAST NAME ROW -->
+    <div class="hero-row hero-row-bottom">
+      <span class="hero-letter-static">S</span>
+
+      <div class="hero-pill hero-pill-bottom">
+        <div class="hero-pill-circle hero-circle-u">
+          <span class="hero-letter-circle">U</span>
+        </div>
+      </div>
+
+      <span class="hero-letter-static">L</span>
+      <span class="hero-letter-static">I</span>
+      <span class="hero-letter-static">M</span>
+      <span class="hero-letter-static">A</span>
+      <span class="hero-letter-static">N</span>
+    </div>
+
+    <!-- OPTIONAL TAGLINE BAR (you can delete if you hate it) -->
+    <div class="hero-tagline-bar">
+      <span>HUMAN SECURITY · MIGRATION · DATA · WATER & CLIMATE</span>
+    </div>
+
+  </div>
+</section>
 
     <main>
 
