@@ -90,62 +90,171 @@
 
 
 /* ===========================
-   ABOUT – ROAD ONLY
+   ABOUT – ROADMAP ONLY
 =========================== */
 
 #about {
-  margin-top: 30px;
+  margin-top: -10px;
 }
 
-.about-shell {
-  max-width: 1050px;
-  margin: 0 auto 80px;
-}
-
-/* area that holds the road */
-.road-inner {
+.about-roadmap {
   position: relative;
-  width: 100%;
-  height: 260px;          /* vertical space for the road */
+  max-width: 1050px;
+  margin: 40px auto 80px;
+  padding: 140px 0 130px;      /* space above & below the road for text */
 }
 
-/* SVG centered in that area */
-.road-svg {
+/* ROAD SVG */
+
+.about-road-svg {
   position: absolute;
-  inset: 0;
+  inset: 50% 0 auto 0;
+  transform: translateY(-50%);
   width: 100%;
-  height: 100%;
-  display: block;
+  height: 220px;
   pointer-events: none;
 }
 
-/* asphalt */
-.road-asphalt {
+/* road body */
+.road-body {
   fill: none;
-  stroke: #4b5563;        /* dark grey */
-  stroke-width: 52;
+  stroke: #111827;            /* dark, almost black */
+  stroke-width: 70;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 10px 18px rgba(15,23,42,0.25));
+}
+
+/* inner grey edge to soften sides */
+.road-body::before {
+  content: "";
 }
 
 /* center dashed line */
-.road-centerline {
+.road-center {
   fill: none;
-  stroke: #e5e7eb;        /* light grey */
-  stroke-width: 10;
+  stroke: #f9fafb;
+  stroke-width: 14;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 26 18;
-  opacity: 0.95;
+  stroke-dasharray: 26 16;
 }
 
-/* optional: shrink height a bit on small screens */
-@media (max-width: 700px) {
-  .road-inner {
-    height: 200px;
-  }
+/* STEPS */
+
+.road-step {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  font-size: 0.9rem;
 }
+
+/* marker pin */
+
+.road-marker {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px 999px 999px 0;
+  transform: rotate(45deg);
+  background: #f97316;        /* default orange, overridden per step */
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+.road-marker-inner {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-45deg);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* different colors like the template */
+
+.road-marker--1 { background: #ec4899; }  /* pink   */
+.road-marker--2 { background: #10b981; }  /* green  */
+.road-marker--3 { background: #8b5cf6; }  /* purple */
+.road-marker--4 { background: #f97316; }  /* orange */
+.road-marker--5 { background: #0ea5e9; }  /* blue   */
+
+/* text below pin */
+
+.road-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.road-step-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #4b5563;
+}
+
+/* POSITIONS – tuned to sit on peaks / valleys of the wave */
+
+.road-step--1 {
+  left: 6%;
+  top: 68%;    /* valley */
+}
+
+.road-step--2 {
+  left: 27%;
+  top: 30%;    /* peak */
+}
+
+.road-step--3 {
+  left: 49%;
+  top: 70%;    /* valley */
+}
+
+.road-step--4 {
+  left: 71%;
+  top: 30%;    /* peak */
+}
+
+.road-step--5 {
+  right: 4%;
+  top: 68%;    /* valley */
+}
+
+/* basic responsiveness */
+
+@media (max-width: 800px) {
+  .about-roadmap {
+    padding: 120px 0 120px;
+  }
+  .road-step {
+    width: 160px;
+    font-size: 0.85rem;
+  }
+  .road-step--1 { left: 4%;  top: 68%; }
+  .road-step--2 { left: 22%; top: 28%; }
+  .road-step--3 { left: 46%; top: 70%; }
+  .road-step--4 { left: 68%; top: 28%; }
+  .road-step--5 { left: 84%; top: 68%; }
+}
+
+@media (max-width: 560px) {
+  .about-roadmap {
+    padding: 170px 0 150px;
+  }
+  .road-step {
+    width: 45%;
+  }
+  /* stack a bit more vertically on very small screens */
+  .road-step--1 { left: 5%;  top: 68%; }
+  .road-step--2 { left: 52%; top: 32%; }
+  .road-step--3 { left: 5%;  top: 18%; }
+  .road-step--4 { left: 52%; top: 70%; }
+  .road-step--5 { left: 5%;  top: 120%; }
+}
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2416,37 +2525,82 @@ margin-bottom: 6px;
 
         <!-- ABOUT -->
 
-
 <section id="about">
-  <div class="about-shell">
-    <div class="road-inner">
-      <svg class="road-svg"
-           viewBox="-40 0 1280 240"
-           preserveAspectRatio="xMidYMid slice">
+  <div class="about-roadmap">
+    <!-- ROAD SVG -->
+    <svg class="about-road-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+      <!-- road body -->
+      <path class="road-body"
+            d="M0 170
+               Q 125 60 250 170
+               T 500 170
+               T 750 170
+               T 1000 170" />
+      <!-- dashed center line -->
+      <path class="road-center"
+            d="M0 170
+               Q 125 60 250 170
+               T 500 170
+               T 750 170
+               T 1000 170" />
+    </svg>
 
-        <!-- Road (asphalt) -->
-        <path class="road-asphalt"
-              d="M -40 120
-                 C 100 120 140 40 260 40
-                 S 420 200 540 200
-                 S 700 40 820 40
-                 S 980 200 1140 200
-                 S 1300 120 1360 120" />
+    <!-- STEP 1 -->
+    <div class="road-step road-step--1">
+      <div class="road-marker road-marker--1">
+        <div class="road-marker-inner">1</div>
+      </div>
+      <div class="road-step-title">Brief</div>
+      <div class="road-step-text">
+        Short description here.
+      </div>
+    </div>
 
-        <!-- Center dashed line -->
-        <path class="road-centerline"
-              d="M -40 120
-                 C 100 120 140 40 260 40
-                 S 420 200 540 200
-                 S 700 40 820 40
-                 S 980 200 1140 200
-                 S 1300 120 1360 120" />
-      </svg>
+    <!-- STEP 2 -->
+    <div class="road-step road-step--2">
+      <div class="road-marker road-marker--2">
+        <div class="road-marker-inner">2</div>
+      </div>
+      <div class="road-step-title">Sketch</div>
+      <div class="road-step-text">
+        Short description here.
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="road-step road-step--3">
+      <div class="road-marker road-marker--3">
+        <div class="road-marker-inner">3</div>
+      </div>
+      <div class="road-step-title">Solution</div>
+      <div class="road-step-text">
+        Short description here.
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="road-step road-step--4">
+      <div class="road-marker road-marker--4">
+        <div class="road-marker-inner">4</div>
+      </div>
+      <div class="road-step-title">Design</div>
+      <div class="road-step-text">
+        Short description here.
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="road-step road-step--5">
+      <div class="road-marker road-marker--5">
+        <div class="road-marker-inner">5</div>
+      </div>
+      <div class="road-step-title">Revision</div>
+      <div class="road-step-text">
+        Short description here.
+      </div>
     </div>
   </div>
 </section>
-
-
 
 
 
