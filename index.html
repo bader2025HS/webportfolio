@@ -3827,7 +3827,7 @@ let lockedCountry = null;   // last clicked country (stays colored)
       }
     }
 
-function drawCountry(containerId, countryKey, center, zoom) {
+function drawCountry(containerId, countryKey) {
   const map = L.map(containerId, {
     zoomControl: false,
     attributionControl: false,
@@ -3837,8 +3837,6 @@ function drawCountry(containerId, countryKey, center, zoom) {
     touchZoom: false,
     keyboard: false
   });
-
-  map.setView(center, zoom);   // <-- no fitBounds, no extra tricks
 
   const aliases = COUNTRY_NAMES[countryKey].map(normalize);
 
@@ -3850,7 +3848,14 @@ function drawCountry(containerId, countryKey, center, zoom) {
 
   // keep color-change logic working
   countryLayers[countryKey] = layer;
+
+  // 🔑 fit the whole country nicely inside the 340x340 map "box"
+  const bounds = layer.getBounds();
+  map.fitBounds(bounds, {
+    padding: [20, 20]   // adjust if you want more/less white space
+  });
 }
+
 
     /* ========= Visited countries map in ABOUT ========= */
 
