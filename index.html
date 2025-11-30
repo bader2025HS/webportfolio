@@ -93,13 +93,17 @@
    ABOUT – VERTICAL STATS COLUMN
 =========================== */
 
+/* ===========================
+   ABOUT – VERTICAL STATS COLUMN
+=========================== */
+
 #about {
   margin-top: -10px;
 }
 
 .about-shell {
   max-width: 1050px;
-  margin: 6px auto 24px;    /* less vertical space */
+  margin: 6px auto 24px;
   display: flex;
   justify-content: flex-start;
 }
@@ -108,7 +112,7 @@
 .about-stats-column {
   display: flex;
   flex-direction: column;
-  gap: 12px;                 /* smaller gap = less height */
+  gap: 12px;
 }
 
 /* one stat */
@@ -117,11 +121,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 0 10px 18px;  /* small left padding for the accent line */
+  padding: 10px 0 10px 18px;
   cursor: default;
 }
 
-/* thin accent line on the left */
+/* thin accent line */
 .about-stat::before {
   content: "";
   position: absolute;
@@ -139,7 +143,7 @@
 
 /* big number */
 .about-stat-number {
-  font-size: 2.6rem;        /* slightly smaller than before */
+  font-size: 2.6rem;
   font-weight: 700;
   line-height: 1;
   transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
@@ -154,8 +158,7 @@
   color: #6b7280;
 }
 
-
-/* HOVER EFFECTS */
+/* hover effects */
 .about-stat:hover::before {
   transform: scaleY(1);
   background: rgba(0, 159, 165, 0.75);
@@ -168,10 +171,11 @@
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
 
-/* MOBILE – even more compact so it never causes extra scrolling */
+/* MOBILE – more compact */
 @media (max-width: 640px) {
   .about-shell {
     margin: 4px auto 18px;
+    flex-direction: column;
   }
 
   .about-stat-number {
@@ -188,7 +192,7 @@
   }
 }
 
-    /* ====== ABOUT – TRAVEL MAP ====== */
+/* ====== ABOUT – TRAVEL MAP ====== */
 
 .map-card {
   background: transparent;
@@ -214,123 +218,10 @@
 
 /* micro glow when hovering country polygons */
 #visitedMap .leaflet-interactive {
-  transition: filter .25s ease, stroke-width .2s ease;
+  transition: filter 0.25s ease, stroke-width 0.2s ease;
 }
 #visitedMap .leaflet-interactive:hover {
   filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
-
-    /* ======== ABOUT – IDENTITY BLOCK ======== */
-
-.about-identity {
-  max-width: 1050px;
-  margin: 40px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-/* Portrait + Micro-Bio */
-.about-identity-top {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.about-portrait img {
-  width: 120px;
-  height: 120px;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
-
-.about-intro-text h3 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 6px;
-}
-
-.about-intro-text p {
-  font-size: 1rem;
-  max-width: 38rem;
-  line-height: 1.55;
-}
-
-/* Focus Areas Grid */
-.about-focus-area h3,
-.about-languages h3,
-.about-projects h3 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 12px;
-}
-
-.about-focus-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.focus-card {
-  padding: 8px 14px;
-  border-radius: 12px;
-  border: 1px solid #d0d7de;
-  background: #f7faf9;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.focus-card:hover {
-  border-color: #009fa5;
-  color: #009fa5;
-  background: #e6f9f9;
-}
-
-/* Languages */
-.lang-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 0.95rem;
-}
-
-.lang-caption {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-/* Projects Grid */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.project-card {
-  padding: 18px 20px;
-  border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-.project-card h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: #111827;
-}
-
-.project-card p {
-  font-size: 0.9rem;
-  color: #374151;
-  line-height: 1.4;
 }
 
 /* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
@@ -343,10 +234,24 @@
   gap: 32px;
 }
 
+/* on smaller screens, stack under stats */
+@media (max-width: 900px) {
+  .about-shell {
+    flex-direction: column;
+  }
+
+  .about-main {
+    margin-left: 0;
+    margin-top: 24px;
+  }
+}
+
 /* Identity Block */
 .about-identity-small h3,
 .about-focus-area h3,
-.about-projects h3 {
+.about-projects h3,
+.about-timeline h3,
+.about-values h3 {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -360,83 +265,85 @@
   max-width: 40rem;
 }
 
-/* Focus Areas Grid */
-.about-focus-grid {
+/* ===== HORIZONTAL TIMELINE (bold style) ===== */
+
+.about-timeline {
+  margin-top: 4px;
+}
+
+.timeline-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 18px;
+  border-top: 2px solid #009fa5;       /* bold teal line */
+  padding-top: 18px;
+  margin-top: 10px;
+  position: relative;
 }
 
-.focus-card {
-  padding: 7px 12px;
-  border-radius: 12px;
-  border: 1px solid #d0d7de;
-  background: #f7faf9;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.focus-card:hover {
-  border-color: #009fa5;
-  background: #e6f9f9;
-  color: #009fa5;
-}
-
-/* Projects Grid */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-}
-
-.project-card {
-  padding: 16px 18px;
-  border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.project-card h4 {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-}
-
-.project-card p {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: #374151;
-}
-
-    /* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
-
-.about-main {
-  margin-left: 40px;
+.timeline-item {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  position: relative;
+  padding-top: 4px;
 }
 
-/* Identity Block */
-.about-identity-small h3,
-.about-focus-area h3,
-.about-projects h3 {
-  font-size: 0.8rem;
+/* teal dot on the line */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: -11px;           /* sits on the border-top line */
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #009fa5;
+  box-shadow: 0 0 12px rgba(0, 159, 165, 0.7);  /* glow (style B) */
+}
+
+/* year, place, description */
+.timeline-year {
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6b7280;
-  margin-bottom: 6px;
+  letter-spacing: 0.1em;
+  color: #0f172a;
+  margin-bottom: 2px;
 }
 
-.about-identity-small p {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  max-width: 40rem;
+.timeline-place {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
 }
 
-/* Focus Areas Grid */
+.timeline-desc {
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* tighter on mobile: timeline becomes 2 rows */
+@media (max-width: 900px) {
+  .timeline-row {
+    flex-wrap: wrap;
+  }
+  .timeline-item {
+    flex: 1 1 45%;
+  }
+}
+
+/* XS screens: stack vertically */
+@media (max-width: 600px) {
+  .timeline-row {
+    border-top-width: 1px;
+  }
+  .timeline-item {
+    flex: 1 1 100%;
+  }
+}
+
+/* ===== Focus Areas Grid (chips) ===== */
+
 .about-focus-grid {
   display: flex;
   flex-wrap: wrap;
@@ -459,7 +366,8 @@
   color: #009fa5;
 }
 
-/* Projects Grid */
+/* ===== Projects Grid ===== */
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -485,6 +393,35 @@
   color: #374151;
 }
 
+/* ===== Values (pills) ===== */
+
+.about-values {
+  margin-bottom: 4px;
+}
+
+.values-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.value-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px dashed #d0d7de;
+  background: #f9fafb;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.value-pill:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
 
 
     /* ===========================
@@ -2755,7 +2692,7 @@ margin-bottom: 6px;
 
       <!-- ABOUT -->
 
-   <!-- ABOUT -->
+  <!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
     <!-- LEFT: STATS COLUMN (unchanged) -->
@@ -2788,7 +2725,7 @@ margin-bottom: 6px;
 
     </div>
 
-      <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
+    <!-- RIGHT: ABOUT MAIN CONTENT -->
     <div class="about-main">
 
       <!-- Identity Block -->
@@ -2801,54 +2738,54 @@ margin-bottom: 6px;
         </p>
       </div>
 
-      <!-- Journey / Timeline -->
-      <section class="about-timeline-block">
+      <!-- Horizontal Journey Timeline -->
+      <div class="about-timeline">
         <h3>Journey</h3>
-        <div class="timeline">
+        <div class="timeline-row">
           <div class="timeline-item">
-            <div class="timeline-years">2021–2022</div>
-            <div class="timeline-content">
-              <h4>Sciences Po Nancy</h4>
-              <p>Franco-German campus · European affairs foundation.</p>
-            </div>
+            <div class="timeline-year">2021–2022</div>
+            <div class="timeline-place">Sciences Po Nancy</div>
+            <p class="timeline-desc">
+              Franco-German campus · European affairs foundation.
+            </p>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-years">2022–2023</div>
-            <div class="timeline-content">
-              <h4>Sciences Po Menton</h4>
-              <p>Middle East campus · Regional specialization.</p>
-            </div>
+            <div class="timeline-year">2022–2023</div>
+            <div class="timeline-place">Sciences Po Menton</div>
+            <p class="timeline-desc">
+              Middle East campus · Regional specialization.
+            </p>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-years">2023–2024</div>
-            <div class="timeline-content">
-              <h4>Tokyo University of Foreign Studies</h4>
-              <p>Exchange · Languages &amp; area studies.</p>
-            </div>
+            <div class="timeline-year">2023–2024</div>
+            <div class="timeline-place">Tokyo University of Foreign Studies</div>
+            <p class="timeline-desc">
+              Exchange year · Languages &amp; area studies.
+            </p>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-years">2024–2026</div>
-            <div class="timeline-content">
-              <h4>Sciences Po Paris (PSIA)</h4>
-              <p>International Security · Migration · Development.</p>
-            </div>
+            <div class="timeline-year">2024–2026</div>
+            <div class="timeline-place">Sciences Po Paris (PSIA)</div>
+            <p class="timeline-desc">
+              International Security · Migration · Development.
+            </p>
           </div>
 
           <div class="timeline-item">
-            <div class="timeline-years">2026–2027</div>
-            <div class="timeline-content">
-              <h4>Freie Universität Berlin</h4>
-              <p>Otto-Suhr-Institut · Political science &amp; IR.</p>
-            </div>
+            <div class="timeline-year">2026–2027</div>
+            <div class="timeline-place">Freie Universität Berlin</div>
+            <p class="timeline-desc">
+              Otto-Suhr-Institut · Political science &amp; IR.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Focus Areas (chips/pills) -->
-      <section class="about-focus-area">
+      <!-- Focus Areas Grid -->
+      <div class="about-focus-area">
         <h3>Focus areas</h3>
 
         <div class="about-focus-grid">
@@ -2862,10 +2799,10 @@ margin-bottom: 6px;
           <div class="focus-card">Field Research</div>
           <div class="focus-card">Data Visualization</div>
         </div>
-      </section>
+      </div>
 
       <!-- Current Projects -->
-      <section class="about-projects">
+      <div class="about-projects">
         <h3>Current projects</h3>
 
         <div class="projects-grid">
@@ -2909,10 +2846,10 @@ margin-bottom: 6px;
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
       <!-- Values -->
-      <section class="about-values">
+      <div class="about-values">
         <h3>Values I work with</h3>
         <div class="values-row">
           <span class="value-pill">Clarity</span>
@@ -2921,10 +2858,9 @@ margin-bottom: 6px;
           <span class="value-pill">Curiosity</span>
           <span class="value-pill">Human-centered design</span>
         </div>
-      </section>
+      </div>
 
     </div> <!-- /.about-main -->
-
 
   </div> <!-- /.about-shell -->
 
@@ -2933,8 +2869,6 @@ margin-bottom: 6px;
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
 </section>
-
-
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
