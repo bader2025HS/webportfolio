@@ -221,6 +221,47 @@
   filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
 }
 
+    /* ===== RIGHT SIDE ABOUT TEXT ===== */
+
+.about-main {
+  flex: 1;
+  max-width: 520px;
+}
+
+.about-role {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.about-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.about-text {
+  font-size: 0.97rem;
+  line-height: 1.6;
+  max-width: 34rem;
+}
+
+/* stack nicely on small screens */
+@media (max-width: 640px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .about-main {
+    max-width: 100%;
+  }
+}
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
@@ -2490,8 +2531,10 @@ margin-bottom: 6px;
       <!-- ABOUT -->
 
    <!-- ABOUT -->
+<!-- ABOUT -->
 <section id="about">
-  
+
+  <div class="about-shell">
     <!-- LEFT: STATS COLUMN (unchanged) -->
     <div class="about-stats-column">
 
@@ -2522,6 +2565,19 @@ margin-bottom: 6px;
 
     </div>
 
+    <!-- RIGHT: ABOUT TEXT FROM OLD PORTFOLIO -->
+    <div class="about-main">
+      <div class="about-role">Communications</div>
+      <div class="about-meta">AR · EN · FR · DE &nbsp;•&nbsp; Paris · willing to relocate</div>
+
+      <p class="about-text">
+        I make sense first, then make it simple. Think press reviews that highlight what matters,
+        maps that you can read in five seconds, and short briefs that help a team decide the next step.
+        I also enjoy research the practical way, from digging through datasets and field notes to
+        speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
+      </p>
+    </div>
+  </div>
 
   <!-- Travel / visited countries map (full width under the two columns) -->
   <div class="map-card">
