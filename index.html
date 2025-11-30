@@ -2484,35 +2484,6 @@ margin-bottom: 6px;
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
 
-
-
-
-    /* HANDWRITING POEM BLOCK */
-.about-poem-wrapper {
-  margin: 30px 0 0 0;
-  max-width: 600px;
-  position: relative;
-}
-
-.about-poem {
-  font-family: "Reenie Beanie", cursive;
-  font-size: 1.8rem;
-  line-height: 1.35;
-  white-space: pre-line;
-  color: #111;
-  min-height: 200px;
-}
-
-/* the animated hand */
-.hand-writer {
-  position: absolute;
-  width: 70px;
-  bottom: -10px;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.2s ease;
-}
-
   </style>
 </head>
 
@@ -2737,18 +2708,63 @@ margin-bottom: 6px;
         <div class="about-stat-number">7</div>
         <div class="about-stat-label">cities lived in</div>
       </div>
+
     </div>
+
+    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
+    <div class="about-main">
+
+      <!-- Identity Block -->
+      <div class="about-identity-small">
+        <h3>Who I Am</h3>
+        <p>
+          I work at the intersection of <strong>human security, mobility, and data</strong>.
+          My background spans the Middle East, Europe, and Asia, and I’m driven by
+          clarity, dignity, and the stories behind movement and resilience.
+        </p>
+      </div>
+
+      <!-- Focus Areas Grid -->
+      <div class="about-focus-area">
+        <h3>Focus Areas</h3>
+
+        <div class="about-focus-grid">
+          <div class="focus-card">Human Security</div>
+          <div class="focus-card">Migration</div>
+          <div class="focus-card">Humanitarian Action</div>
+          <div class="focus-card">Development Data</div>
+          <div class="focus-card">Water &amp; Climate</div>
+          <div class="focus-card">Cultural Diplomacy</div>
+        </div>
+      </div>
+
+      <!-- Current Projects -->
+      <div class="about-projects">
+        <h3>Current Work</h3>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <h4>Oman Research &amp; Cultural Diplomacy</h4>
+            <p>
+              Leading a multi-partner initiative integrating field research,
+              photography, and cultural exchange across institutions.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h4>Human Security Interactive Tool</h4>
+            <p>
+              Building an accessible digital experience that reframes core
+              security concepts through storytelling and systems thinking.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /.about-main -->
+
   </div> <!-- /.about-shell -->
 
-
-
-  <div class="about-poem-wrapper">
-  <div class="about-poem" id="about-poem"></div>
-  <img src="hand-write.svg" class="hand-writer" id="hand-writer" alt="">
-</div>
-
-
-  
   <!-- Travel / visited countries map (full width under the two columns) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
@@ -4435,57 +4451,6 @@ if (initial) setActiveWork(initial.dataset.project);
 
 
   </script>
-
-  
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const poem = `I travel to understand how places think,
-I write to understand how I think,
-and I photograph to remember what thinking felt like.
-
-What I make—texts, images, ideas—
-comes from trying to see what stays constant
-when everything else moves.
-
-I am made of fragments:
-a sentence from a stranger,
-a mountain road at dusk,
-a map drawn from memory,
-a city I left too early.
-
-Everything I build is an attempt
-to weave those fragments into meaning.`;
-
-  const poemEl = document.getElementById("about-poem");
-  const hand = document.getElementById("hand-writer");
-
-  let index = 0;
-
-  function write() {
-    if (index === 0) {
-      hand.style.opacity = 1;
-    }
-
-    poemEl.textContent = poem.slice(0, index);
-
-    // move hand
-    const width = poemEl.offsetWidth;
-    hand.style.transform = `translateX(${width * 0.02}px)`; 
-
-    index++;
-
-    if (index <= poem.length) {
-      setTimeout(write, 22);
-    } else {
-      // finished → fade hand out
-      setTimeout(() => hand.style.opacity = 0, 500);
-    }
-  }
-
-  write();
-});
-</script>
 
 </body>
 </html>
