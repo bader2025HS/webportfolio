@@ -3187,6 +3187,38 @@ margin-bottom: 6px;
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
 
+
+    /* === Circles for A letters === */
+
+.hero-name .circleA {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #009fa5;
+  border-radius: 50%;
+  font-size: 0.8em;
+  margin: 0 2px;
+  position: relative;
+  animation: floatA 3s ease-in-out infinite;
+}
+
+/* horizontal floating animation like you had */
+@keyframes floatA {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+/* reduce movement on small screens */
+@media (max-width: 600px) {
+  .hero-name .circleA {
+    animation: floatA 3s ease-in-out infinite;
+    transform: scale(0.9);
+  }
+}
+
   </style>
 </head>
 
@@ -3196,7 +3228,11 @@ margin-bottom: 6px;
 
   <div class="page">
     <header>
-      <h1>Bader Suliman</h1>
+     <h1 class="hero-name">
+  B<span class="circleA">A</span>der 
+  Sulim<span class="circleA">A</span>n
+</h1>
+
       <nav>
         <ul>
           <li><a href="#home" class="active">Home</a></li>
