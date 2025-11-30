@@ -10,9 +10,6 @@
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         crossorigin="" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
-
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -410,22 +407,6 @@
   font-size: 0.85rem;
   line-height: 1.4;
   color: #374151;
-}
-
-
-    /* ===== ABOUT – HANDWRITTEN POEM TYPE EFFECT ===== */
-
-.about-poem-wrapper {
-  margin-top: 18px;
-  max-width: 520px;
-}
-
-.about-poem {
-  font-family: "Reenie Beanie", cursive;
-  font-size: 1.5rem;
-  line-height: 1.4;
-  white-space: pre-wrap;  /* keep line breaks from JS */
-  color: #111827;
 }
 
 
@@ -2780,11 +2761,6 @@ margin-bottom: 6px;
         </div>
       </div>
 
-       <!-- Poem block (handwriting typed effect) -->
-      <div class="about-poem-wrapper">
-        <div id="about-poem" class="about-poem"></div>
-      </div>
-
     </div> <!-- /.about-main -->
 
   </div> <!-- /.about-shell -->
@@ -4473,44 +4449,6 @@ workStrips.forEach(strip => {
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const poemElement = document.getElementById("about-poem");
-  if (!poemElement) return;
-
-  const poemText = `I travel to understand how places think,
-I write to understand how I think,
-and I photograph to remember what thinking felt like.
-
-What I make—texts, images, ideas—
-comes from trying to see what stays constant
-when everything else moves.
-
-I am made of fragments:
-a sentence from a stranger,
-a mountain road at dusk,
-a map drawn from memory,
-a city I left too early.
-
-Everything I build is an attempt
-to weave those fragments into meaning.`;
-
-  let index = 0;
-
-  function typeNextChar() {
-    if (index > poemText.length) return;
-
-    // reveal text character by character
-    poemElement.textContent = poemText.slice(0, index);
-
-    index++;
-    const delay = 18; // speed in ms (lower = faster)
-    setTimeout(typeNextChar, delay);
-  }
-
-  typeNextChar();
-});
-</script>
 
   </script>
 
