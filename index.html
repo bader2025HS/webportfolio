@@ -222,15 +222,17 @@
 
 /* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
 
+/* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
+
 .about-main {
   margin-left: 40px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
-/* on smaller screens, stack under stats */
+/* stack on smaller screens */
 @media (max-width: 900px) {
   .about-shell {
     flex-direction: column;
@@ -261,18 +263,42 @@
   max-width: 40rem;
 }
 
-/* ===== HORIZONTAL TIMELINE (bold style) ===== */
-
-.about-timeline {
-  margin-top: 4px;
-}
-
-.timeline-row {
+/* row of two cards: Journey | Current projects */
+.about-row-two {
   display: flex;
   gap: 18px;
-  border-top: 2px solid #009fa5;       /* bold teal line */
-  padding-top: 18px;
-  margin-top: 10px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .about-row-two {
+    flex-direction: column;
+  }
+}
+
+/* generic card for right side */
+.about-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  padding: 14px 16px 16px;
+}
+
+/* tighten headings inside cards */
+.about-card h3 {
+  margin-bottom: 10px;
+}
+
+/* ===== HORIZONTAL TIMELINE (inside card) ===== */
+
+.about-timeline-card .timeline-row {
+  display: flex;
+  gap: 18px;
+  border-top: 2px solid #009fa5;
+  padding-top: 16px;
+  margin-top: 4px;
   position: relative;
 }
 
@@ -282,20 +308,18 @@
   padding-top: 4px;
 }
 
-/* teal dot on the line */
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: -11px;           /* sits on the border-top line */
+  top: -11px;         /* on the line */
   left: 0;
   width: 12px;
   height: 12px;
   border-radius: 999px;
   background: #009fa5;
-  box-shadow: 0 0 12px rgba(0, 159, 165, 0.7);  /* glow (style B) */
+  box-shadow: 0 0 12px rgba(0, 159, 165, 0.7);
 }
 
-/* year, place, description */
 .timeline-year {
   font-size: 0.78rem;
   font-weight: 700;
@@ -309,18 +333,10 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 2px;
 }
 
-.timeline-desc {
-  font-size: 0.8rem;
-  color: #4b5563;
-  margin: 0;
-}
-
-/* tighter on mobile: timeline becomes 2 rows */
 @media (max-width: 900px) {
-  .timeline-row {
+  .about-timeline-card .timeline-row {
     flex-wrap: wrap;
   }
   .timeline-item {
@@ -328,9 +344,8 @@
   }
 }
 
-/* XS screens: stack vertically */
 @media (max-width: 600px) {
-  .timeline-row {
+  .about-timeline-card .timeline-row {
     border-top-width: 1px;
   }
   .timeline-item {
@@ -338,7 +353,7 @@
   }
 }
 
-/* ===== Focus Areas Grid (chips) ===== */
+/* ===== Focus Areas Grid ===== */
 
 .about-focus-grid {
   display: flex;
@@ -348,7 +363,7 @@
 
 .focus-card {
   padding: 7px 12px;
-  border-radius: 12px;
+  border-radius: 999px;
   border: 1px solid #d0d7de;
   background: #f7faf9;
   font-size: 0.78rem;
@@ -366,26 +381,26 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 .project-card {
-  padding: 16px 18px;
-  border-radius: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
   background: #ffffff;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
 .project-card h4 {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
 }
 
 .project-card p {
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: #374151;
 }
 
@@ -418,6 +433,7 @@
   background: #e6f9f9;
   color: #009fa5;
 }
+
 
     /* === About info grid (right side layout) === */
 
@@ -2757,6 +2773,7 @@ margin-bottom: 6px;
 
     <!-- RIGHT: ABOUT MAIN CONTENT -->
        <!-- RIGHT: ABOUT MAIN CONTENT -->
+      <!-- RIGHT: ABOUT MAIN CONTENT -->
     <div class="about-main">
 
       <!-- Identity Block -->
@@ -2769,13 +2786,11 @@ margin-bottom: 6px;
         </p>
       </div>
 
-      <!-- 2-column info grid -->
-      <div class="about-grid">
+      <!-- Row: Journey | Current projects -->
+      <div class="about-row-two">
 
-        <!-- LEFT: Journey + Focus -->
-        <div class="about-grid-left">
-
-          <!-- Horizontal Journey Timeline -->
+        <!-- Journey card -->
+        <div class="about-card about-timeline-card">
           <div class="about-timeline">
             <h3>Journey</h3>
             <div class="timeline-row">
@@ -2805,26 +2820,10 @@ margin-bottom: 6px;
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Focus Areas -->
-          <div class="about-focus-area">
-            <h3>Focus areas</h3>
-
-            <div class="about-focus-grid">
-              <div class="focus-card">Migration &amp; Asylum</div>
-              <div class="focus-card">Development Policy</div>
-              <div class="focus-card">Humanitarian Data</div>
-              <div class="focus-card">Middle East Politics</div>
-              <div class="focus-card">Data Visualization</div>
-            </div>
-          </div>
-
-        </div> <!-- /.about-grid-left -->
-
-        <!-- RIGHT: Projects + Values -->
-        <div class="about-grid-right">
-
-          <!-- Current Projects -->
+        <!-- Current projects card -->
+        <div class="about-card">
           <div class="about-projects">
             <h3>Current projects</h3>
 
@@ -2846,24 +2845,37 @@ margin-bottom: 6px;
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Values -->
-          <div class="about-values">
-            <h3>Values I work with</h3>
-            <div class="values-row">
-              <span class="value-pill">Clarity</span>
-              <span class="value-pill">Rigor</span>
-              <span class="value-pill">Empathy</span>
-              <span class="value-pill">Curiosity</span>
-              <span class="value-pill">Human-centered design</span>
-            </div>
-          </div>
+      </div> <!-- /.about-row-two -->
 
-        </div> <!-- /.about-grid-right -->
+      <!-- Focus areas (full width under cards) -->
+      <div class="about-focus-area">
+        <h3>Focus areas</h3>
 
-      </div> <!-- /.about-grid -->
+        <div class="about-focus-grid">
+          <div class="focus-card">Migration &amp; Asylum</div>
+          <div class="focus-card">Development Policy</div>
+          <div class="focus-card">Humanitarian Data</div>
+          <div class="focus-card">Middle East Politics</div>
+          <div class="focus-card">Data Visualization</div>
+        </div>
+      </div>
+
+      <!-- Values (full width) -->
+      <div class="about-values">
+        <h3>Values I work with</h3>
+        <div class="values-row">
+          <span class="value-pill">Clarity</span>
+          <span class="value-pill">Rigor</span>
+          <span class="value-pill">Empathy</span>
+          <span class="value-pill">Curiosity</span>
+          <span class="value-pill">Human-centered design</span>
+        </div>
+      </div>
 
     </div> <!-- /.about-main -->
+
 
   </div> <!-- /.about-shell -->
 
