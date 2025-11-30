@@ -766,6 +766,67 @@
   }
 }
 
+    /* === EDUCATION MAPS – BORDER DRAW ANIMATION === */
+
+.country-map {
+  position: relative; /* needed for the pseudo-element */
+}
+
+/* invisible pseudo-border that we animate */
+.country-map::before {
+  content: "";
+  position: absolute;
+  inset: -4px;                    /* slightly outside the map */
+  border-radius: 18px;            /* match the vibe of your design */
+  pointer-events: none;
+  background:
+    /* top */
+    linear-gradient(#2563eb 0 0) 0 0 / 0 2px no-repeat,
+    /* right */
+    linear-gradient(#2563eb 0 0) 100% 0 / 2px 0 no-repeat,
+    /* bottom */
+    linear-gradient(#2563eb 0 0) 100% 100% / 0 2px no-repeat,
+    /* left */
+    linear-gradient(#2563eb 0 0) 0 100% / 2px 0 no-repeat;
+  opacity: 1;
+}
+
+/* when this class is added, the border "draws" */
+.country-map.edu-border-draw::before {
+  animation: eduBorderDraw 1.4s ease-out forwards;
+}
+
+@keyframes eduBorderDraw {
+  0% {
+    background-size:
+      0 2px,   /* top    */
+      2px 0,   /* right  */
+      0 2px,   /* bottom */
+      2px 0;   /* left   */
+  }
+  40% {
+    background-size:
+      100% 2px,
+      2px 0,
+      0 2px,
+      2px 0;
+  }
+  70% {
+    background-size:
+      100% 2px,
+      2px 100%,
+      0 2px,
+      2px 0;
+  }
+  100% {
+    background-size:
+      100% 2px,
+      2px 100%,
+      100% 2px,
+      2px 100%;
+  }
+}
+
 
 /* ===========================
    EXPERIENCE – 2×2 GRID
@@ -3851,6 +3912,33 @@ function drawCountry(containerId, countryKey, center, zoom) {
   // keep color-change logic working
   countryLayers[countryKey] = layer;
 }
+
+    // ===============================
+// EDUCATION MAP BORDER ANIMATION
+// ===============================
+document.addEventListener('DOMContentLoaded', function () {
+  const eduSection = document.querySelector('#education');
+  const countryMaps = document.querySelectorAll('.country-map');
+
+  if (!eduSection || !countryMaps.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countryMaps.forEach(map => {
+          map.classList.add('edu-border-draw');
+        });
+        // trigger only once
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.25   // adjust if too early/late
+  });
+
+  observer.observe(eduSection);
+});
+
 
     /* ========= Visited countries map in ABOUT ========= */
 
