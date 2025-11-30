@@ -3958,9 +3958,10 @@ async function initVisitedMap() {
       document.querySelector(".education-maps").style.display = "flex";
 
       // Same visual scale for all three; Japan balanced
-      drawCountry("map-france", "france", [46.6, 2.2], 4.5);
-      drawCountry("map-japan", "japan", [38.5, 138.5], 4.5);
-      drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
+     drawCountry("map-france", "france");
+drawCountry("map-japan", "japan");
+drawCountry("map-germany", "germany");
+
 
       // Click maps → lock color + open education popup
 document.getElementById("map-france").addEventListener("click", () => {
