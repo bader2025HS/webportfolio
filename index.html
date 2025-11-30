@@ -138,121 +138,109 @@
   left: -60px;
 }
 
-    /* ===========================
-   LUGGAGE TAG STATS
-=========================== */
+  
 
 /* ===========================
    REALISTIC LUGGAGE TAGS
 =========================== */
 
+/* ===========================
+   REALISTIC LUGGAGE TAGS (CLEAN VERSION)
+=========================== */
+
 .real-tags {
   max-width: 1100px;
-  margin: 30px auto 40px;
+  margin: 10px auto 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
+  gap: 20px;
   justify-content: flex-start;
 }
 
 /* entire tag */
 .tag {
-  width: 160px;
-  background: #fff;
+  width: 135px;                    /* smaller */
+  background: #ffffff;
   border: 2px solid #111;
   border-radius: 6px;
   position: relative;
-  padding-top: 24px;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15));
-  transform: rotate(-1deg);
-  transition: transform 0.2s ease;
+  padding-top: 22px;
+  transform: rotate(-0.6deg);      /* subtle tilt */
+  transition: transform 0.15s ease;
+  box-shadow: none !important;     /* remove shadows */
 }
 
-/* angled luggage tag cut at the top */
-.tag::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-top: 14px solid #fff;
-  border-right: 80px solid transparent;
-}
+/* angled luggage tag cuts */
+.tag::before,
 .tag::after {
   content: "";
   position: absolute;
   top: 0;
-  right: 0;
-  border-top: 14px solid #fff;
-  border-left: 80px solid transparent;
+  border-top: 12px solid #fff;
 }
 
-/* hole + reinforcement ring */
+.tag::before {
+  left: 0;
+  border-right: 70px solid transparent;
+}
+
+.tag::after {
+  right: 0;
+  border-left: 70px solid transparent;
+}
+
+/* hole reinforcement ring */
 .tag-hole {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background: #fff;
-  border: 3px solid #000;
+  border: 2px solid #000;
   border-radius: 50%;
   position: absolute;
-  top: -4px;
-  left: calc(50% - 7px);
+  top: -3px;
+  left: calc(50% - 6px);
   z-index: 3;
 }
 
 /* string */
 .tag-string {
   position: absolute;
-  top: -24px;
+  top: -20px;
   left: 50%;
   width: 2px;
-  height: 24px;
-  background: #444;
+  height: 20px;
+  background: #333;
   transform: translateX(-50%);
 }
 
-/* body */
+/* body of tag */
 .tag-body {
-  padding: 18px 14px 14px;
+  padding: 14px 10px 10px;
   text-align: center;
   font-family: "Inter", sans-serif;
 }
 
 /* number */
 .tag-number {
-  font-size: 2rem;
+  font-size: 1.6rem;          /* smaller */
   font-weight: 800;
   letter-spacing: 0.02em;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   color: #111;
 }
 
 /* label */
 .tag-label {
-  font-size: 0.7rem;
+  font-size: 0.62rem;         /* smaller */
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   color: #444;
-  margin-bottom: 12px;
 }
 
-/* fake barcode */
-.tag-barcode {
-  height: 26px;
-  background: repeating-linear-gradient(
-    to right,
-    #000 0 2px,
-    transparent 2px 4px
-  );
-  opacity: 0.45;
-  border-radius: 2px;
-}
-
-/* hover tilt */
+/* hover effect: lightweight */
 .tag:hover {
-  transform: translateY(-4px) rotate(0deg);
-  filter: drop-shadow(0 14px 22px rgba(0,0,0,0.22));
+  transform: translateY(-2px) rotate(0deg);
 }
-
 
 /*==========================
    ABOUT – MAP (unchanged)
