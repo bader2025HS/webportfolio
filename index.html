@@ -3849,12 +3849,25 @@ function drawCountry(containerId, countryKey) {
   // keep color-change logic working
   countryLayers[countryKey] = layer;
 
-  // 🔑 fit the whole country nicely inside the 340x340 map "box"
   const bounds = layer.getBounds();
-  map.fitBounds(bounds, {
-    padding: [20, 20]   // adjust if you want more/less white space
-  });
+
+  // first: fit whole country in the box
+  map.fitBounds(bounds, { padding: [20, 20] });
+
+  // then: tweak zoom per country so sizes look similar
+  const zoomBoost = {
+    france: 0.6,
+    japan: 0.6,
+    germany: 0          // leave as is
+  };
+
+  const extra = zoomBoost[countryKey] || 0;
+  if (extra !== 0) {
+    map.setZoom(map.getZoom() + extra);
+    map.panTo(bounds.getCenter());
+  }
 }
+
 
 
     /* ========= Visited countries map in ABOUT ========= */
