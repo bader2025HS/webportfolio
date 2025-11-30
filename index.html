@@ -33,37 +33,52 @@ header {
   margin-bottom: 50px;
 }
 
-/* Colin Moy–style pill with moving circle */
-.name-banner {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    /* Header title remains centered */
+header {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.name-pill {
-  position: relative;
+header h1.hero-name {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Moving circle for the letter A */
+.hero-name .letterA {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 40px;
-  border-radius: 999px;
-  background: #ffffff;
-  border: 2px solid #111111;
-  overflow: hidden;
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 2px;
+  border-radius: 50%;
+  background: #111;          /* black circle (Colin Moy vibe) */
+  color: #ffffff;            /* white A inside */
+  font-weight: 600;
+  animation: floatA 3s ease-in-out infinite;
 }
 
-/* black circle moving inside the pill */
-.name-circle {
-  position: absolute;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: #111111;
-  top: 50%;
-  left: 0;
-  transform: translate(-35%, -50%);
-  animation: nameCircleSlide 6s ease-in-out infinite;
+/* Horizontal float – ONLY the circle moves, text layout stays put */
+@keyframes floatA {
+  0%   { transform: translateX(-4px); }
+  50%  { transform: translateX(4px); }
+  100% { transform: translateX(-4px); }
 }
+
+/* Slightly smaller on mobile */
+@media (max-width: 600px) {
+  header h1.hero-name {
+    font-size: 2.4rem;
+  }
+
+  .hero-name .letterA {
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
+
 
 /* name text on top of the circle */
 .name-text {
@@ -3292,12 +3307,10 @@ margin-bottom: 6px;
 
   <div class="page">
     <header>
-      <div class="name-banner">
-    <div class="name-pill">
-      <div class="name-circle"></div>
-      <span class="name-text">BADER&nbsp;SULIMAN</span>
-    </div>
-  </div>
+      <h1 class="hero-name">
+    B<span class="letterA">A</span>DER SULIM
+    <span class="letterA">A</span>N
+  </h1>
 
       <nav>
         <ul>
