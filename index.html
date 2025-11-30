@@ -409,6 +409,236 @@
   color: #374151;
 }
 
+/* ABOUT SECTION 2.0 */
+
+.about {
+  padding: 6rem 10vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft background glow */
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0, 255, 200, 0.08), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(0, 180, 255, 0.09), transparent 55%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+/* glass cards */
+
+.about-stats-card,
+.about-map-card {
+  backdrop-filter: blur(24px);
+  background: rgba(6, 12, 20, 0.8);
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.01);
+  padding: 2rem 2.25rem;
+}
+
+/* subtle floating animation */
+.about-stats-card {
+  animation: floatLeft 16s ease-in-out infinite;
+}
+.about-map-card {
+  animation: floatRight 19s ease-in-out infinite;
+}
+
+@keyframes floatLeft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes floatRight {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.about-title {
+  font-size: 1rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 0.75rem;
+}
+
+.about-subtitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.75rem;
+}
+
+/* stats grid */
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #42e4d0; /* replace with your accent color if different */
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* poetic lines */
+
+.about-line {
+  margin: 0.15rem 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.about-line:nth-child(odd) {
+  opacity: 0.8;
+}
+
+/* MAP CARD */
+
+.about-map-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.map-pill {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.map-caption {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.about-map-wrapper {
+  position: relative;
+  border-radius: 1.3rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(circle at 15% 10%, rgba(0, 255, 200, 0.1), transparent 60%);
+}
+
+.about-map-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* glowing pins */
+
+.map-pin {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #42e4d0;
+  box-shadow:
+    0 0 0 0 rgba(66, 228, 208, 0.9),
+    0 0 16px rgba(66, 228, 208, 0.9);
+  transform: translate(-50%, -50%);
+  animation: pulsePin 2.4s ease-out infinite;
+}
+
+/* adjust these to sit where you like on the map image */
+.map-pin-1 {
+  top: 58%;
+  left: 47%;
+}
+
+.map-pin-2 {
+  top: 35%;
+  left: 62%;
+  animation-delay: 0.7s;
+}
+
+@keyframes pulsePin {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(66, 228, 208, 0.75),
+      0 0 16px rgba(66, 228, 208, 0.9);
+  }
+  100% {
+    box-shadow:
+      0 0 0 22px rgba(66, 228, 208, 0),
+      0 0 8px rgba(66, 228, 208, 0.5);
+  }
+}
+
+/* map tags */
+
+.map-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+}
+
+/* responsive */
+
+@media (max-width: 900px) {
+  .about-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .about-stats-card,
+  .about-map-card {
+    padding: 1.6rem 1.5rem;
+  }
+  .about {
+    padding: 4.5rem 1.5rem;
+  }
+}
 
     /* ===========================
        EDUCATION MAPS
@@ -2679,95 +2909,67 @@ margin-bottom: 6px;
       <!-- ABOUT -->
 
    <!-- ABOUT -->
-<section id="about">
-  <div class="about-shell">
-    <!-- LEFT: STATS COLUMN (unchanged) -->
-    <div class="about-stats-column">
+<section id="about" class="about">
+  <div class="about-inner">
+    <!-- LEFT: STATS -->
+    <div class="about-stats-card">
+      <h2 class="about-title">About</h2>
+      <p class="about-subtitle">What stays constant when everything else moves.</p>
 
-      <div class="about-stat">
-        <div class="about-stat-number">30</div>
-        <div class="about-stat-label">countries visited</div>
+      <div class="about-stats-grid">
+        <div class="stat">
+          <span class="stat-number">25+</span>
+          <span class="stat-label">countries walked</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">5</span>
+          <span class="stat-label">languages lived in</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100k+</span>
+          <span class="stat-label">words & images</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">maps redrawn</span>
+        </div>
       </div>
 
-      <div class="about-stat">
-        <div class="about-stat-number">100+</div>
-        <div class="about-stat-label">translation sessions</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">200+</div>
-        <div class="about-stat-label">refugees supported</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">5</div>
-        <div class="about-stat-label">languages spoken</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">7</div>
-        <div class="about-stat-label">cities lived in</div>
-      </div>
-
+      <p class="about-line">
+        I travel to understand how places think,
+      </p>
+      <p class="about-line">
+        I write to understand how I think,
+      </p>
+      <p class="about-line">
+        and I photograph to remember what thinking felt like.
+      </p>
     </div>
 
-    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
-    <div class="about-main">
-
-      <!-- Identity Block -->
-      <div class="about-identity-small">
-        <h3>Who I Am</h3>
-        <p>
-          I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by
-          clarity, dignity, and the stories behind movement and resilience.
-        </p>
+    <!-- RIGHT: MAP -->
+    <div class="about-map-card">
+      <div class="about-map-header">
+        <span class="map-pill">worldlines</span>
+        <span class="map-caption">Cities that changed how I think</span>
       </div>
 
-      <!-- Focus Areas Grid -->
-      <div class="about-focus-area">
-        <h3>Focus Areas</h3>
+      <div class="about-map-wrapper">
+        <!-- use your own map image here -->
+        <img src="image1.jpg" alt="Map of places" class="about-map-img">
 
-        <div class="about-focus-grid">
-          <div class="focus-card">Human Security</div>
-          <div class="focus-card">Migration</div>
-          <div class="focus-card">Humanitarian Action</div>
-          <div class="focus-card">Development Data</div>
-          <div class="focus-card">Water &amp; Climate</div>
-          <div class="focus-card">Cultural Diplomacy</div>
-        </div>
+        <!-- glowing pin -->
+        <div class="map-pin map-pin-1"></div>
+        <div class="map-pin map-pin-2"></div>
       </div>
 
-      <!-- Current Projects -->
-      <div class="about-projects">
-        <h3>Current Work</h3>
-
-        <div class="projects-grid">
-          <div class="project-card">
-            <h4>Oman Research &amp; Cultural Diplomacy</h4>
-            <p>
-              Leading a multi-partner initiative integrating field research,
-              photography, and cultural exchange across institutions.
-            </p>
-          </div>
-
-          <div class="project-card">
-            <h4>Human Security Interactive Tool</h4>
-            <p>
-              Building an accessible digital experience that reframes core
-              security concepts through storytelling and systems thinking.
-            </p>
-          </div>
-        </div>
+      <div class="map-tags">
+        <span class="tag">Abu Dhabi</span>
+        <span class="tag">Amman</span>
+        <span class="tag">Tokyo</span>
+        <span class="tag">Paris</span>
+        <span class="tag">Berlin</span>
       </div>
-
-    </div> <!-- /.about-main -->
-
-  </div> <!-- /.about-shell -->
-
-  <!-- Travel / visited countries map (full width under the two columns) -->
-  <div class="map-card">
-    <div id="visitedMap" aria-label="Visited countries map"></div>
+    </div>
   </div>
 </section>
 
