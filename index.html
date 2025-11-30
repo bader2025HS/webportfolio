@@ -138,6 +138,79 @@
   left: -60px;
 }
 
+    /* ===========================
+   LUGGAGE TAG STATS
+=========================== */
+
+.about-tags {
+  max-width: 1100px;
+  margin: 20px auto 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.luggage-tag {
+  position: relative;
+  padding: 14px 20px 16px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 6px 18px rgba(20, 32, 50, 0.1);
+  min-width: 160px;
+  cursor: default;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* top strap */
+.luggage-tag::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 24px;
+  width: 38px;
+  height: 14px;
+  border-radius: 999px;
+  background: #009fa5;
+  box-shadow: 0 4px 10px rgba(0, 159, 165, 0.5);
+}
+
+/* hole */
+.luggage-tag::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 40px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid rgba(0,0,0,0.3);
+}
+
+/* text */
+.tag-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 2px;
+  color: #111827;
+}
+
+.tag-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6b7280;
+}
+
+/* hover */
+.luggage-tag:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 0 10px 24px rgba(20, 32, 50, 0.18);
+}
+
+
 /* layout on smaller screens */
 @media (max-width: 900px) {
   .about-shell {
@@ -2450,6 +2523,34 @@ margin-bottom: 6px;
   <!-- ABOUT -->
 <section id="about">
   
+
+
+  <div class="about-tags">
+  <div class="luggage-tag">
+    <div class="tag-number">30</div>
+    <div class="tag-label">countries visited</div>
+  </div>
+
+  <div class="luggage-tag">
+    <div class="tag-number">100+</div>
+    <div class="tag-label">translation sessions</div>
+  </div>
+
+  <div class="luggage-tag">
+    <div class="tag-number">200+</div>
+    <div class="tag-label">refugees supported</div>
+  </div>
+
+  <div class="luggage-tag">
+    <div class="tag-number">5</div>
+    <div class="tag-label">languages spoken</div>
+  </div>
+
+  <div class="luggage-tag">
+    <div class="tag-number">7</div>
+    <div class="tag-label">cities lived in</div>
+  </div>
+</div>
 
   <!-- Travel / visited countries map (kept exactly as before) -->
   <div class="map-card">
