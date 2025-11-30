@@ -150,12 +150,14 @@
    ABOUT – LEFT: STATS
 =========================== */
 
+/* ===========================
+   ABOUT – LEFT: LUGGAGE TAG STATS
+=========================== */
+
 .about-left {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .about-stats-header {
@@ -166,36 +168,51 @@
 }
 
 .about-stats-column {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* one stat as a pill card */
+/* one stat = luggage tag */
 .about-stat {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 999px;
-  background: rgba(248, 250, 252, 0.9);
-  border: 1px solid rgba(209, 213, 219, 0.85);
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.06);
+  position: relative;
+  padding: 12px 16px 14px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
   cursor: default;
+  transform-origin: center;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-/* small colored dot */
+/* strap at the top of the tag */
 .about-stat::before {
   content: "";
-  width: 10px;
-  height: 10px;
+  position: absolute;
+  top: -18px;
+  left: 26px;
+  width: 36px;
+  height: 14px;
   border-radius: 999px;
   background: #009fa5;
-  box-shadow: 0 0 10px rgba(0, 159, 165, 0.7);
+  box-shadow: 0 4px 10px rgba(0, 159, 165, 0.55);
 }
 
-/* number + label */
+/* punched hole */
+.about-stat::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 40px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid rgba(15, 23, 42, 0.25);
+}
+
+/* number + label layout */
 .about-stat-main {
   display: flex;
   flex-direction: column;
@@ -208,25 +225,33 @@
 }
 
 .about-stat-label {
+  margin-top: 3px;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: #6b7280;
 }
 
-/* hover */
+/* slight playful hover */
 .about-stat:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.10);
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
   border-color: #009fa5;
 }
 
-/* tighter on mobile */
+/* mobile: tags in two columns */
 @media (max-width: 640px) {
   .about-stats-column {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .about-stat {
+    flex: 1 1 calc(50% - 10px);
   }
 }
+
 
 /* ===========================
    ABOUT – RIGHT SIDE
