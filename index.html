@@ -93,10 +93,6 @@
    ABOUT – VERTICAL STATS COLUMN
 =========================== */
 
-/* ===========================
-   ABOUT – VERTICAL STATS COLUMN
-=========================== */
-
 #about {
   margin-top: -10px;
 }
@@ -421,6 +417,40 @@
   border-color: #009fa5;
   background: #e6f9f9;
   color: #009fa5;
+}
+
+    /* === About info grid (right side layout) === */
+
+.about-main {
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* grid for journey/focus vs projects/values */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* allow stacking on smaller screens */
+@media (max-width: 900px) {
+  .about-shell {
+    flex-direction: column;
+  }
+
+  .about-main {
+    margin-left: 0;
+    margin-top: 24px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -2726,6 +2756,7 @@ margin-bottom: 6px;
     </div>
 
     <!-- RIGHT: ABOUT MAIN CONTENT -->
+       <!-- RIGHT: ABOUT MAIN CONTENT -->
     <div class="about-main">
 
       <!-- Identity Block -->
@@ -2738,86 +2769,99 @@ margin-bottom: 6px;
         </p>
       </div>
 
-      <!-- Horizontal Journey Timeline -->
-    <div class="about-timeline">
-  <h3>Journey</h3>
-  <div class="timeline-row">
-    <div class="timeline-item">
-      <div class="timeline-year">2021–2022</div>
-      <div class="timeline-place">Nancy</div>
-    </div>
+      <!-- 2-column info grid -->
+      <div class="about-grid">
 
-    <div class="timeline-item">
-      <div class="timeline-year">2022–2023</div>
-      <div class="timeline-place">Menton</div>
-    </div>
+        <!-- LEFT: Journey + Focus -->
+        <div class="about-grid-left">
 
-    <div class="timeline-item">
-      <div class="timeline-year">2023–2024</div>
-      <div class="timeline-place">Tokyo</div>
-    </div>
+          <!-- Horizontal Journey Timeline -->
+          <div class="about-timeline">
+            <h3>Journey</h3>
+            <div class="timeline-row">
+              <div class="timeline-item">
+                <div class="timeline-year">2021–2022</div>
+                <div class="timeline-place">Nancy</div>
+              </div>
 
-    <div class="timeline-item">
-      <div class="timeline-year">2024–2026</div>
-      <div class="timeline-place">Paris</div>
-    </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2022–2023</div>
+                <div class="timeline-place">Menton</div>
+              </div>
 
-    <div class="timeline-item">
-      <div class="timeline-year">2026–2027</div>
-      <div class="timeline-place">Berlin</div>
-    </div>
-  </div>
-</div>
+              <div class="timeline-item">
+                <div class="timeline-year">2023–2024</div>
+                <div class="timeline-place">Tokyo</div>
+              </div>
 
+              <div class="timeline-item">
+                <div class="timeline-year">2024–2026</div>
+                <div class="timeline-place">Paris</div>
+              </div>
 
-      <!-- Focus Areas Grid -->
-      <div class="about-focus-area">
-        <h3>Focus areas</h3>
+              <div class="timeline-item">
+                <div class="timeline-year">2026–2027</div>
+                <div class="timeline-place">Berlin</div>
+              </div>
+            </div>
+          </div>
 
-        <div class="about-focus-grid">
-          <div class="focus-card">Migration &amp; Asylum</div>
-          <div class="focus-card">Development Policy</div>
-          <div class="focus-card">Humanitarian Data</div>
-          <div class="focus-card">Middle East Politics</div>
-          <div class="focus-card">Data Visualization</div>
-        </div>
-      </div>
+          <!-- Focus Areas -->
+          <div class="about-focus-area">
+            <h3>Focus areas</h3>
 
-      <!-- Current Projects -->
-   <div class="about-projects">
-  <h3>Current projects</h3>
+            <div class="about-focus-grid">
+              <div class="focus-card">Migration &amp; Asylum</div>
+              <div class="focus-card">Development Policy</div>
+              <div class="focus-card">Humanitarian Data</div>
+              <div class="focus-card">Middle East Politics</div>
+              <div class="focus-card">Data Visualization</div>
+            </div>
+          </div>
 
-  <div class="projects-grid">
-    <div class="project-card">
-      <h4>Oman Cultural Diplomacy Project</h4>
-      <p>
-        SPMA-led field research, photography, and cultural programming
-        between Paris and Oman.
-      </p>
-    </div>
+        </div> <!-- /.about-grid-left -->
 
-    <div class="project-card">
-      <h4>OIF Development Data</h4>
-      <p>
-        Project design &amp; monitoring for 90+ member states:
-        indicators, dashboards, and implementation reports.
-      </p>
-    </div>
-  </div>
-</div>
+        <!-- RIGHT: Projects + Values -->
+        <div class="about-grid-right">
 
+          <!-- Current Projects -->
+          <div class="about-projects">
+            <h3>Current projects</h3>
 
-      <!-- Values -->
-      <div class="about-values">
-        <h3>Values I work with</h3>
-        <div class="values-row">
-          <span class="value-pill">Clarity</span>
-          <span class="value-pill">Rigor</span>
-          <span class="value-pill">Empathy</span>
-          <span class="value-pill">Curiosity</span>
-          <span class="value-pill">Human-centered design</span>
-        </div>
-      </div>
+            <div class="projects-grid">
+              <div class="project-card">
+                <h4>Oman Cultural Diplomacy Project</h4>
+                <p>
+                  SPMA-led field research, photography, and cultural programming
+                  between Paris and Oman.
+                </p>
+              </div>
+
+              <div class="project-card">
+                <h4>OIF Development Data</h4>
+                <p>
+                  Project design &amp; monitoring for 90+ member states:
+                  indicators, dashboards, and implementation reports.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Values -->
+          <div class="about-values">
+            <h3>Values I work with</h3>
+            <div class="values-row">
+              <span class="value-pill">Clarity</span>
+              <span class="value-pill">Rigor</span>
+              <span class="value-pill">Empathy</span>
+              <span class="value-pill">Curiosity</span>
+              <span class="value-pill">Human-centered design</span>
+            </div>
+          </div>
+
+        </div> <!-- /.about-grid-right -->
+
+      </div> <!-- /.about-grid -->
 
     </div> <!-- /.about-main -->
 
