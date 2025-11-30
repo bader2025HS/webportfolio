@@ -138,12 +138,6 @@
   left: -60px;
 }
 
-  
-
-/* ===========================
-   REALISTIC LUGGAGE TAGS
-=========================== */
-
 /* ===========================
    REALISTIC LUGGAGE TAGS (CLEAN VERSION)
 =========================== */
@@ -151,24 +145,27 @@
 .real-tags {
   max-width: 1100px;
   margin: 10px auto 30px;
+  padding-left: 20px;      /* adjust this number to align perfectly */
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
 }
 
+
 /* entire tag */
 .tag {
-  width: 135px;                    /* smaller */
+  width: 135px;
   background: #ffffff;
   border: 2px solid #111;
   border-radius: 6px;
   position: relative;
-  padding-top: 22px;
-  transform: rotate(-0.6deg);      /* subtle tilt */
+  padding-top: 8px;     /* MUCH tighter */
+  transform: rotate(-0.6deg);
   transition: transform 0.15s ease;
-  box-shadow: none !important;     /* remove shadows */
+  box-shadow: none !important;
 }
+
 
 /* angled luggage tag cuts */
 .tag::before,
