@@ -409,6 +409,83 @@
   color: #374151;
 }
 
+    /* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
+
+.about-main {
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Identity Block */
+.about-identity-small h3,
+.about-focus-area h3,
+.about-projects h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-identity-small p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 40rem;
+}
+
+/* Focus Areas Grid */
+.about-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-card {
+  padding: 7px 12px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.focus-card:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.project-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.project-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.project-card p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #374151;
+}
+
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2711,57 +2788,143 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
+      <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
     <div class="about-main">
 
       <!-- Identity Block -->
       <div class="about-identity-small">
-        <h3>Who I Am</h3>
+        <h3>Who I am</h3>
         <p>
-          I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by
-          clarity, dignity, and the stories behind movement and resilience.
+          I work at the intersection of <strong>human security, mobility, and data</strong>,
+          moving between the Middle East, Europe, and Asia. I’m interested in how
+          numbers, maps, and stories can make policy more human.
         </p>
       </div>
 
-      <!-- Focus Areas Grid -->
-      <div class="about-focus-area">
-        <h3>Focus Areas</h3>
+      <!-- Journey / Timeline -->
+      <section class="about-timeline-block">
+        <h3>Journey</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-years">2021–2022</div>
+            <div class="timeline-content">
+              <h4>Sciences Po Nancy</h4>
+              <p>Franco-German campus · European affairs foundation.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-years">2022–2023</div>
+            <div class="timeline-content">
+              <h4>Sciences Po Menton</h4>
+              <p>Middle East campus · Regional specialization.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-years">2023–2024</div>
+            <div class="timeline-content">
+              <h4>Tokyo University of Foreign Studies</h4>
+              <p>Exchange · Languages &amp; area studies.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-years">2024–2026</div>
+            <div class="timeline-content">
+              <h4>Sciences Po Paris (PSIA)</h4>
+              <p>International Security · Migration · Development.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-years">2026–2027</div>
+            <div class="timeline-content">
+              <h4>Freie Universität Berlin</h4>
+              <p>Otto-Suhr-Institut · Political science &amp; IR.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Focus Areas (chips/pills) -->
+      <section class="about-focus-area">
+        <h3>Focus areas</h3>
 
         <div class="about-focus-grid">
           <div class="focus-card">Human Security</div>
-          <div class="focus-card">Migration</div>
-          <div class="focus-card">Humanitarian Action</div>
-          <div class="focus-card">Development Data</div>
-          <div class="focus-card">Water &amp; Climate</div>
-          <div class="focus-card">Cultural Diplomacy</div>
+          <div class="focus-card">Water &amp; Conflict</div>
+          <div class="focus-card">Migration &amp; Asylum</div>
+          <div class="focus-card">Development Policy</div>
+          <div class="focus-card">Political Ecology</div>
+          <div class="focus-card">Humanitarian Data</div>
+          <div class="focus-card">Middle East Politics</div>
+          <div class="focus-card">Field Research</div>
+          <div class="focus-card">Data Visualization</div>
         </div>
-      </div>
+      </section>
 
       <!-- Current Projects -->
-      <div class="about-projects">
-        <h3>Current Work</h3>
+      <section class="about-projects">
+        <h3>Current projects</h3>
 
         <div class="projects-grid">
           <div class="project-card">
-            <h4>Oman Research &amp; Cultural Diplomacy</h4>
+            <h4>Oman Cultural Diplomacy Project</h4>
             <p>
-              Leading a multi-partner initiative integrating field research,
-              photography, and cultural exchange across institutions.
+              SPMA-led field research, photography, and cultural programming
+              between Paris and Oman.
             </p>
           </div>
 
           <div class="project-card">
-            <h4>Human Security Interactive Tool</h4>
+            <h4>OIF Development Data</h4>
             <p>
-              Building an accessible digital experience that reframes core
-              security concepts through storytelling and systems thinking.
+              Project design &amp; monitoring for 90+ member states:
+              indicators, dashboards, and implementation reports.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h4>Sport for Peace</h4>
+            <p>
+              Exploring how sport and storytelling can support peacebuilding
+              and social cohesion.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h4>Water &amp; Education Study</h4>
+            <p>
+              Research on rural water access and girls’ schooling in African
+              contexts with high water–education tradeoffs.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h4>ARDHIS Casework</h4>
+            <p>
+              Supporting LGBT asylum seekers with narrative building and
+              in-depth country of origin research.
             </p>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Values -->
+      <section class="about-values">
+        <h3>Values I work with</h3>
+        <div class="values-row">
+          <span class="value-pill">Clarity</span>
+          <span class="value-pill">Rigor</span>
+          <span class="value-pill">Empathy</span>
+          <span class="value-pill">Curiosity</span>
+          <span class="value-pill">Human-centered design</span>
+        </div>
+      </section>
 
     </div> <!-- /.about-main -->
+
 
   </div> <!-- /.about-shell -->
 
