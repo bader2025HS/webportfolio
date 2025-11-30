@@ -90,7 +90,7 @@
 
 
 /* ===========================
-   ABOUT – VERTICAL STATS COLUMN
+   ABOUT – CONTAINER
 =========================== */
 
 #about {
@@ -98,157 +98,153 @@
 }
 
 .about-shell {
-  max-width: 1050px;
-  margin: 6px auto 24px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* compact vertical stack */
-.about-stats-column {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* one stat */
-.about-stat {
+  max-width: 1100px;
+  margin: 24px auto 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 32px;
+  padding: 26px 28px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.10);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px 0 10px 18px;
-  cursor: default;
+  overflow: hidden;
 }
 
-/* thin accent line */
-.about-stat::before {
+/* soft abstract shapes */
+.about-shell::before,
+.about-shell::after {
   content: "";
   position: absolute;
-  left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 3px;
   border-radius: 999px;
-  background: rgba(0, 159, 165, 0.25);
-  transform-origin: top;
-  transform: scaleY(0.7);
-  transition: transform 0.22s ease, background 0.22s ease, opacity 0.22s ease;
-  opacity: 0.6;
+  filter: blur(26px);
+  opacity: 0.45;
+  pointer-events: none;
 }
 
-/* big number */
-.about-stat-number {
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 1;
-  transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
+.about-shell::before {
+  width: 220px;
+  height: 220px;
+  background: rgba(0, 159, 165, 0.20);
+  top: -80px;
+  right: -40px;
 }
 
-/* label */
-.about-stat-label {
-  margin-top: 1px;
+.about-shell::after {
+  width: 180px;
+  height: 180px;
+  background: rgba(148, 163, 184, 0.20);
+  bottom: -90px;
+  left: -60px;
+}
+
+/* layout on smaller screens */
+@media (max-width: 900px) {
+  .about-shell {
+    grid-template-columns: 1fr;
+    padding: 22px 18px;
+  }
+}
+
+/* ===========================
+   ABOUT – LEFT: STATS
+=========================== */
+
+.about-left {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.about-stats-header {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: #6b7280;
 }
 
-/* hover effects */
-.about-stat:hover::before {
-  transform: scaleY(1);
-  background: rgba(0, 159, 165, 0.75);
-  opacity: 1;
+.about-stats-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
-.about-stat:hover .about-stat-number {
-  transform: translateX(3px);
-  color: #009fa5;
-  text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+/* one stat as a pill card */
+.about-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid rgba(209, 213, 219, 0.85);
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.06);
+  cursor: default;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-/* MOBILE – more compact */
-@media (max-width: 640px) {
-  .about-shell {
-    margin: 4px auto 18px;
-    flex-direction: column;
-  }
-
-  .about-stat-number {
-    font-size: 2.1rem;
-  }
-
-  .about-stat-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-  }
-
-  .about-stat {
-    padding: 2px 0 2px 14px;
-  }
+/* small colored dot */
+.about-stat::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #009fa5;
+  box-shadow: 0 0 10px rgba(0, 159, 165, 0.7);
 }
 
-/* ====== ABOUT – TRAVEL MAP ====== */
-
-.map-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  overflow: visible;
-  max-width: 1050px;
-  margin: 24px auto 0;  /* centers under About */
-}
-
-#visitedMap {
-  height: min(60vh, 520px);
-  width: 100%;
-  border-radius: 14px;
-}
-
-/* make Leaflet background transparent inside About */
-#visitedMap.leaflet-container {
-  background: transparent !important;
-}
-
-/* micro glow when hovering country polygons */
-#visitedMap .leaflet-interactive {
-  transition: filter 0.25s ease, stroke-width 0.2s ease;
-}
-#visitedMap .leaflet-interactive:hover {
-  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
-
-/* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
-
-/* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
-
-.about-main {
-  margin-left: 40px;
-  flex: 1;
+/* number + label */
+.about-stat-main {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  line-height: 1.1;
 }
 
-/* stack on smaller screens */
-@media (max-width: 900px) {
-  .about-shell {
-    flex-direction: column;
-  }
+.about-stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
-  .about-main {
-    margin-left: 0;
-    margin-top: 24px;
+.about-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+}
+
+/* hover */
+.about-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.10);
+  border-color: #009fa5;
+}
+
+/* tighter on mobile */
+@media (max-width: 640px) {
+  .about-stats-column {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Identity Block */
+/* ===========================
+   ABOUT – RIGHT SIDE
+=========================== */
+
+.about-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* section headings on right */
 .about-identity-small h3,
+.about-timeline h3,
 .about-focus-area h3,
 .about-projects h3,
-.about-timeline h3,
 .about-values h3 {
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -257,47 +253,47 @@
   margin-bottom: 6px;
 }
 
+/* identity text */
 .about-identity-small p {
   font-size: 0.95rem;
   line-height: 1.55;
   max-width: 40rem;
 }
 
-/* row of two cards: Journey | Current projects */
-.about-row-two {
-  display: flex;
-  gap: 18px;
-  align-items: stretch;
+/* ===========================
+   RIGHT – TOP CARD STRIP
+=========================== */
+
+.about-top-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
+  gap: 14px;
 }
 
 @media (max-width: 900px) {
-  .about-row-two {
-    flex-direction: column;
+  .about-top-row {
+    grid-template-columns: 1fr;
   }
 }
 
-/* generic card for right side */
+/* shared card style */
 .about-card {
-  flex: 1;
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  background: rgba(248, 250, 252, 0.98);
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
   padding: 14px 16px 16px;
 }
 
-/* tighten headings inside cards */
-.about-card h3 {
-  margin-bottom: 10px;
-}
-
-/* ===== HORIZONTAL TIMELINE (inside card) ===== */
+/* ===========================
+   HORIZONTAL TIMELINE
+=========================== */
 
 .about-timeline-card .timeline-row {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   border-top: 2px solid #009fa5;
-  padding-top: 16px;
+  padding-top: 14px;
   margin-top: 4px;
   position: relative;
 }
@@ -308,25 +304,26 @@
   padding-top: 4px;
 }
 
+/* teal dot on line */
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: -11px;         /* on the line */
+  top: -11px;
   left: 0;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 999px;
   background: #009fa5;
   box-shadow: 0 0 12px rgba(0, 159, 165, 0.7);
 }
 
 .timeline-year {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #0f172a;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .timeline-place {
@@ -335,6 +332,7 @@
   color: #111827;
 }
 
+/* wrap timeline on smaller screens */
 @media (max-width: 900px) {
   .about-timeline-card .timeline-row {
     flex-wrap: wrap;
@@ -343,22 +341,54 @@
     flex: 1 1 45%;
   }
 }
-
 @media (max-width: 600px) {
-  .about-timeline-card .timeline-row {
-    border-top-width: 1px;
-  }
   .timeline-item {
     flex: 1 1 100%;
   }
 }
 
-/* ===== Focus Areas Grid ===== */
+/* ===========================
+   CURRENT PROJECTS (in card)
+=========================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.project-card {
+  padding: 10px 0;
+  border-bottom: 1px dashed #d1d5db;
+}
+
+.project-card:last-child {
+  border-bottom: none;
+}
+
+.project-card h4 {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.project-card p {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #374151;
+}
+
+/* ===========================
+   FOCUS AREAS – CHIPS
+=========================== */
+
+.about-focus-area {
+  margin-top: 2px;
+}
 
 .about-focus-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .focus-card {
@@ -377,37 +407,12 @@
   color: #009fa5;
 }
 
-/* ===== Projects Grid ===== */
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.project-card {
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-}
-
-.project-card h4 {
-  font-size: 0.9rem;
-  margin-bottom: 4px;
-}
-
-.project-card p {
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: #374151;
-}
-
-/* ===== Values (pills) ===== */
+/* ===========================
+   VALUES – PILLS
+=========================== */
 
 .about-values {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .values-row {
@@ -434,39 +439,36 @@
   color: #009fa5;
 }
 
+/* ===========================
+   ABOUT – MAP (unchanged)
+=========================== */
 
-    /* === About info grid (right side layout) === */
-
-.about-main {
-  margin-left: 40px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+.map-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  overflow: visible;
+  max-width: 1100px;
+  margin: 18px auto 0;
 }
 
-/* grid for journey/focus vs projects/values */
-.about-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 20px;
-  align-items: flex-start;
+#visitedMap {
+  height: min(60vh, 520px);
+  width: 100%;
+  border-radius: 14px;
 }
 
-/* allow stacking on smaller screens */
-@media (max-width: 900px) {
-  .about-shell {
-    flex-direction: column;
-  }
+#visitedMap.leaflet-container {
+  background: transparent !important;
+}
 
-  .about-main {
-    margin-left: 0;
-    margin-top: 24px;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
+#visitedMap .leaflet-interactive {
+  transition: filter 0.25s ease, stroke-width 0.2s ease;
+}
+#visitedMap .leaflet-interactive:hover {
+  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
 }
 
 
@@ -2741,39 +2743,49 @@ margin-bottom: 6px;
   <!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN (unchanged) -->
-    <div class="about-stats-column">
+    <!-- LEFT: STATS, REDESIGNED -->
+    <div class="about-left">
+      <div class="about-stats-header">By the numbers</div>
 
-      <div class="about-stat">
-        <div class="about-stat-number">30</div>
-        <div class="about-stat-label">countries visited</div>
+      <div class="about-stats-column">
+        <div class="about-stat">
+          <div class="about-stat-main">
+            <div class="about-stat-number">30</div>
+            <div class="about-stat-label">countries visited</div>
+          </div>
+        </div>
+
+        <div class="about-stat">
+          <div class="about-stat-main">
+            <div class="about-stat-number">100+</div>
+            <div class="about-stat-label">translation sessions</div>
+          </div>
+        </div>
+
+        <div class="about-stat">
+          <div class="about-stat-main">
+            <div class="about-stat-number">200+</div>
+            <div class="about-stat-label">refugees supported</div>
+          </div>
+        </div>
+
+        <div class="about-stat">
+          <div class="about-stat-main">
+            <div class="about-stat-number">5</div>
+            <div class="about-stat-label">languages spoken</div>
+          </div>
+        </div>
+
+        <div class="about-stat">
+          <div class="about-stat-main">
+            <div class="about-stat-number">7</div>
+            <div class="about-stat-label">cities lived in</div>
+          </div>
+        </div>
       </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">100+</div>
-        <div class="about-stat-label">translation sessions</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">200+</div>
-        <div class="about-stat-label">refugees supported</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">5</div>
-        <div class="about-stat-label">languages spoken</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">7</div>
-        <div class="about-stat-label">cities lived in</div>
-      </div>
-
     </div>
 
-    <!-- RIGHT: ABOUT MAIN CONTENT -->
-       <!-- RIGHT: ABOUT MAIN CONTENT -->
-      <!-- RIGHT: ABOUT MAIN CONTENT -->
+    <!-- RIGHT: MAIN CONTENT -->
     <div class="about-main">
 
       <!-- Identity Block -->
@@ -2786,8 +2798,8 @@ margin-bottom: 6px;
         </p>
       </div>
 
-      <!-- Row: Journey | Current projects -->
-      <div class="about-row-two">
+      <!-- Top row: Journey | Current projects -->
+      <div class="about-top-row">
 
         <!-- Journey card -->
         <div class="about-card about-timeline-card">
@@ -2798,22 +2810,18 @@ margin-bottom: 6px;
                 <div class="timeline-year">2021–2022</div>
                 <div class="timeline-place">Nancy</div>
               </div>
-
               <div class="timeline-item">
                 <div class="timeline-year">2022–2023</div>
                 <div class="timeline-place">Menton</div>
               </div>
-
               <div class="timeline-item">
                 <div class="timeline-year">2023–2024</div>
                 <div class="timeline-place">Tokyo</div>
               </div>
-
               <div class="timeline-item">
                 <div class="timeline-year">2024–2026</div>
                 <div class="timeline-place">Paris</div>
               </div>
-
               <div class="timeline-item">
                 <div class="timeline-year">2026–2027</div>
                 <div class="timeline-place">Berlin</div>
@@ -2847,9 +2855,9 @@ margin-bottom: 6px;
           </div>
         </div>
 
-      </div> <!-- /.about-row-two -->
+      </div><!-- /.about-top-row -->
 
-      <!-- Focus areas (full width under cards) -->
+      <!-- Focus areas -->
       <div class="about-focus-area">
         <h3>Focus areas</h3>
 
@@ -2862,7 +2870,7 @@ margin-bottom: 6px;
         </div>
       </div>
 
-      <!-- Values (full width) -->
+      <!-- Values -->
       <div class="about-values">
         <h3>Values I work with</h3>
         <div class="values-row">
@@ -2874,16 +2882,34 @@ margin-bottom: 6px;
         </div>
       </div>
 
-    </div> <!-- /.about-main -->
+    </div><!-- /.about-main -->
 
+  </div><!-- /.about-shell -->
 
-  </div> <!-- /.about-shell -->
-
-  <!-- Travel / visited countries map (full width under the two columns) -->
+  <!-- Travel / visited countries map (kept exactly as before) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
