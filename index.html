@@ -766,18 +766,6 @@
   }
 }
 
-    /* prepare path for drawing animation */
-.leaflet-overlay-pane path {
-  stroke-dasharray: 1000;      /* long enough for any country */
-  stroke-dashoffset: 1000;     /* start hidden */
-  transition: stroke-dashoffset 2s ease-out;
-}
-
-/* when class added, it "draws" */
-.leaflet-overlay-pane path.draw-outline {
-  stroke-dashoffset: 0;
-}
-
 
 /* ===========================
    EXPERIENCE – 2×2 GRID
@@ -4000,30 +3988,6 @@ document.getElementById("map-germany").addEventListener("click", () => {
   });
 });
     }
-
-
-    // ========================================
-// DRAW THE COUNTRY OUTLINE ONCE ON SCROLL
-// ========================================
-document.addEventListener("DOMContentLoaded", () => {
-  const eduSection = document.querySelector("#education");
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // find all country outline paths in Leaflet layer pane
-        const paths = document.querySelectorAll(".leaflet-overlay-pane path");
-
-        paths.forEach(p => p.classList.add("draw-outline"));
-
-        obs.unobserve(entry.target); // run once
-      }
-    });
-  }, { threshold: 0.3 });
-
-  observer.observe(eduSection);
-});
-
 
     /* ===============================
        SINGLE-SECTION NAVIGATION
