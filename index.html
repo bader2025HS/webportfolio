@@ -409,6 +409,135 @@
   color: #374151;
 }
 
+/* Right column layout */
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Generic block style (cards) */
+.about-block {
+  border-radius: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15); /* tweak if you already have a bg */
+  backdrop-filter: blur(12px);
+}
+
+.about-heading {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+  margin: 0 0 0.9rem;
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  position: relative;
+  padding-left: 0.6rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent-color, #00b3a4);
+}
+
+.timeline-years {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  min-width: 5.6rem;
+}
+
+.timeline-content h4 {
+  font-size: 0.95rem;
+  margin: 0 0 0.15rem;
+}
+
+.timeline-content p {
+  font-size: 0.78rem;
+  opacity: 0.78;
+  margin: 0;
+}
+
+/* Chips / pills */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.78rem;
+  line-height: 1.1;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  white-space: nowrap;
+}
+
+.chip-soft {
+  border-style: dashed;
+  opacity: 0.9;
+}
+
+.chip-row-soft {
+  gap: 0.6rem;
+}
+
+/* Current projects list */
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.about-list li {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-list-title {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.about-list-sub {
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+/* Responsive tweak if your about section stacks on mobile */
+@media (max-width: 768px) {
+  .about-right {
+    margin-top: 1.5rem;
+  }
+}
 
     /* ===========================
        EDUCATION MAPS
@@ -2711,57 +2840,115 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
-    <div class="about-main">
+    <div class="about-right">
 
-      <!-- Identity Block -->
-      <div class="about-identity-small">
-        <h3>Who I Am</h3>
-        <p>
-          I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by
-          clarity, dignity, and the stories behind movement and resilience.
-        </p>
-      </div>
-
-      <!-- Focus Areas Grid -->
-      <div class="about-focus-area">
-        <h3>Focus Areas</h3>
-
-        <div class="about-focus-grid">
-          <div class="focus-card">Human Security</div>
-          <div class="focus-card">Migration</div>
-          <div class="focus-card">Humanitarian Action</div>
-          <div class="focus-card">Development Data</div>
-          <div class="focus-card">Water &amp; Climate</div>
-          <div class="focus-card">Cultural Diplomacy</div>
+  <!-- Journey / Timeline -->
+  <section class="about-block about-timeline">
+    <h3 class="about-heading">Journey</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-years">2021–2022</span>
+        <div class="timeline-content">
+          <h4>Sciences Po Nancy</h4>
+          <p>Franco-German campus · European affairs foundation</p>
         </div>
       </div>
 
-      <!-- Current Projects -->
-      <div class="about-projects">
-        <h3>Current Work</h3>
-
-        <div class="projects-grid">
-          <div class="project-card">
-            <h4>Oman Research &amp; Cultural Diplomacy</h4>
-            <p>
-              Leading a multi-partner initiative integrating field research,
-              photography, and cultural exchange across institutions.
-            </p>
-          </div>
-
-          <div class="project-card">
-            <h4>Human Security Interactive Tool</h4>
-            <p>
-              Building an accessible digital experience that reframes core
-              security concepts through storytelling and systems thinking.
-            </p>
-          </div>
+      <div class="timeline-item">
+        <span class="timeline-years">2022–2023</span>
+        <div class="timeline-content">
+          <h4>Sciences Po Menton</h4>
+          <p>Middle East campus · Regional specialization</p>
         </div>
       </div>
 
-    </div> <!-- /.about-main -->
+      <div class="timeline-item">
+        <span class="timeline-years">2023–2024</span>
+        <div class="timeline-content">
+          <h4>Tokyo University of Foreign Studies</h4>
+          <p>Exchange year · Languages & area studies</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-years">2024–2026</span>
+        <div class="timeline-content">
+          <h4>Sciences Po Paris (PSIA)</h4>
+          <p>International Security · Migration · Development</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-years">2026–2027</span>
+        <div class="timeline-content">
+          <h4>Freie Universität Berlin</h4>
+          <p>Otto-Suhr-Institut · Political science & IR</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus areas (chips / pills) -->
+  <section class="about-block">
+    <h3 class="about-heading">Focus areas</h3>
+    <div class="chip-row">
+      <span class="chip">Human Security</span>
+      <span class="chip">Water &amp; Conflict</span>
+      <span class="chip">Migration &amp; Asylum</span>
+      <span class="chip">Development Policy</span>
+      <span class="chip">Political Ecology</span>
+      <span class="chip">Humanitarian Data</span>
+      <span class="chip">Middle East Politics</span>
+      <span class="chip">Field Research</span>
+      <span class="chip">Data Visualization</span>
+    </div>
+  </section>
+
+  <!-- Current projects -->
+  <section class="about-block">
+    <h3 class="about-heading">Current projects</h3>
+    <ul class="about-list">
+      <li>
+        <span class="about-list-title">Oman Cultural Diplomacy Project</span>
+        <span class="about-list-sub">SPMA · Field research & campus events</span>
+      </li>
+      <li>
+        <span class="about-list-title">OIF Development Data</span>
+        <span class="about-list-sub">Project design & monitoring · 90+ member states</span>
+      </li>
+      <li>
+        <span class="about-list-title">Sport for Peace</span>
+        <span class="about-list-sub">Research & communication on sport diplomacy</span>
+      </li>
+      <li>
+        <span class="about-list-title">Portfolio v32</span>
+        <span class="about-list-sub">Maps, photography & UI experiments</span>
+      </li>
+      <li>
+        <span class="about-list-title">Water & Education Study</span>
+        <span class="about-list-sub">Rural water access & girls’ schooling in Africa</span>
+      </li>
+      <li>
+        <span class="about-list-title">ARDHIS Casework</span>
+        <span class="about-list-sub">LGBT asylum support · Legal & country research</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Values -->
+  <section class="about-block">
+    <h3 class="about-heading">Values I work with</h3>
+    <div class="chip-row chip-row-soft">
+      <span class="chip chip-soft">Clarity</span>
+      <span class="chip chip-soft">Rigor</span>
+      <span class="chip chip-soft">Empathy</span>
+      <span class="chip chip-soft">Curiosity</span>
+      <span class="chip chip-soft">Human-centered design</span>
+    </div>
+  </section>
+
+</div>
+
 
   </div> <!-- /.about-shell -->
 
