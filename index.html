@@ -409,236 +409,233 @@
   color: #374151;
 }
 
-/* ABOUT SECTION 2.0 */
+/* === ABOUT SECTION (minimal, with hand-writing effect) === */
 
 .about {
   padding: 6rem 10vw;
-  position: relative;
-  overflow: hidden;
 }
 
-/* soft background glow */
-.about::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(0, 255, 200, 0.08), transparent 60%),
-    radial-gradient(circle at 100% 100%, rgba(0, 180, 255, 0.09), transparent 55%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.about-inner {
+.about-layout {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 2.5rem;
-  align-items: stretch;
+  align-items: center;
 }
 
-/* glass cards */
-
-.about-stats-card,
-.about-map-card {
-  backdrop-filter: blur(24px);
-  background: rgba(6, 12, 20, 0.8);
-  border-radius: 1.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.01);
-  padding: 2rem 2.25rem;
-}
-
-/* subtle floating animation */
-.about-stats-card {
-  animation: floatLeft 16s ease-in-out infinite;
-}
-.about-map-card {
-  animation: floatRight 19s ease-in-out infinite;
-}
-
-@keyframes floatLeft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@keyframes floatRight {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-}
-
-.about-title {
-  font-size: 1rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 0.75rem;
-}
-
-.about-subtitle {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1.75rem;
-}
-
-/* stats grid */
-
-.about-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem 1.75rem;
-  margin-bottom: 2rem;
-}
-
-.stat {
+.about-left {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 1.5rem;
 }
 
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #42e4d0; /* replace with your accent color if different */
-}
-
-.stat-label {
-  font-size: 0.85rem;
+.about-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* poetic lines */
-
-.about-line {
-  margin: 0.15rem 0;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.about-line:nth-child(odd) {
-  opacity: 0.8;
-}
-
-/* MAP CARD */
-
-.about-map-header {
+.about-writing {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
+  gap: 0.35rem;
 }
 
-.map-pill {
+/* main typed line */
+
+.about-main-line {
+  position: relative;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 34rem;
+}
+
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255, 255, 255, 0.7);
+  animation:
+    typing 4s steps(55, end) 0.3s forwards,
+    caretBlink 0.8s step-end infinite 4.3s;
+}
+
+/* the little hand */
+
+.about-hand {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 42px;
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: handWrite 4s steps(55, end) 0.3s forwards;
+  pointer-events: none;
+}
+
+.about-sub-line {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 32rem;
+  opacity: 0;
+  transform: translateY(4px);
+  animation: fadeUp 0.7s ease-out forwards;
+}
+
+.about-sub-line:nth-of-type(2) { /* first sub-line after main */
+  animation-delay: 4.5s;
+}
+.about-sub-line:nth-of-type(3) { /* second sub-line */
+  animation-delay: 4.9s;
+}
+
+/* stats pills */
+
+.about-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.about-stat-pill {
   display: inline-flex;
-  align-self: flex-start;
-  padding: 0.2rem 0.8rem;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(6, 12, 20, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.pill-number {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #42e4d0; /* or your accent color variable */
+}
+
+.pill-label {
+  font-size: 0.75rem;
   text-transform: uppercase;
+  letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.map-caption {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.75);
+/* map side */
+
+.about-right {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.about-map-wrapper {
+.about-map-frame {
   position: relative;
-  border-radius: 1.3rem;
+  border-radius: 1.4rem;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: radial-gradient(circle at 15% 10%, rgba(0, 255, 200, 0.1), transparent 60%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  max-width: 420px;
 }
 
 .about-map-img {
   display: block;
   width: 100%;
   height: auto;
-  filter: saturate(1.1) contrast(1.05);
+  filter: saturate(1.05) contrast(1.05);
 }
 
-/* glowing pins */
+/* one glowing pin, adjust position as you like */
 
-.map-pin {
+.about-map-pin {
   position: absolute;
   width: 12px;
   height: 12px;
   border-radius: 999px;
   background: #42e4d0;
   box-shadow:
-    0 0 0 0 rgba(66, 228, 208, 0.9),
+    0 0 0 0 rgba(66, 228, 208, 0.8),
     0 0 16px rgba(66, 228, 208, 0.9);
+  top: 55%;  /* change to match your city */
+  left: 52%; /* change to match your city */
   transform: translate(-50%, -50%);
-  animation: pulsePin 2.4s ease-out infinite;
+  animation: pinPulse 2.3s ease-out infinite;
 }
 
-/* adjust these to sit where you like on the map image */
-.map-pin-1 {
-  top: 58%;
-  left: 47%;
+/* animations */
+
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 
-.map-pin-2 {
-  top: 35%;
-  left: 62%;
-  animation-delay: 0.7s;
+@keyframes caretBlink {
+  0%, 100% { border-color: transparent; }
+  50%      { border-color: rgba(255, 255, 255, 0.8); }
 }
 
-@keyframes pulsePin {
+@keyframes handWrite {
+  0% {
+    opacity: 1;
+    transform: translateX(-40px);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pinPulse {
   0% {
     box-shadow:
-      0 0 0 0 rgba(66, 228, 208, 0.75),
+      0 0 0 0 rgba(66, 228, 208, 0.8),
       0 0 16px rgba(66, 228, 208, 0.9);
   }
   100% {
     box-shadow:
-      0 0 0 22px rgba(66, 228, 208, 0),
+      0 0 0 26px rgba(66, 228, 208, 0),
       0 0 8px rgba(66, 228, 208, 0.5);
   }
-}
-
-/* map tags */
-
-.map-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 1rem;
-}
-
-.tag {
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
 }
 
 /* responsive */
 
 @media (max-width: 900px) {
-  .about-inner {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .about-stats-card,
-  .about-map-card {
-    padding: 1.6rem 1.5rem;
-  }
   .about {
     padding: 4.5rem 1.5rem;
   }
+
+  .about-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .about-right {
+    justify-content: flex-start;
+  }
+
+  .about-map-frame {
+    max-width: 100%;
+  }
 }
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2910,68 +2907,55 @@ margin-bottom: 6px;
 
    <!-- ABOUT -->
 <section id="about" class="about">
-  <div class="about-inner">
-    <!-- LEFT: STATS -->
-    <div class="about-stats-card">
-      <h2 class="about-title">About</h2>
-      <p class="about-subtitle">What stays constant when everything else moves.</p>
+  <div class="about-layout">
+    <!-- LEFT SIDE: TEXT + STATS -->
+    <div class="about-left">
+      <div class="about-label">ABOUT</div>
 
-      <div class="about-stats-grid">
-        <div class="stat">
-          <span class="stat-number">25+</span>
-          <span class="stat-label">countries walked</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">5</span>
-          <span class="stat-label">languages lived in</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">100k+</span>
-          <span class="stat-label">words & images</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">∞</span>
-          <span class="stat-label">maps redrawn</span>
-        </div>
+      <div class="about-writing">
+        <p class="about-main-line">
+          <span class="typing">
+            I travel to understand how places think,
+          </span>
+          <img src="hand-write.svg" alt="" class="about-hand">
+        </p>
+
+        <p class="about-sub-line">
+          I write to understand how I think,
+        </p>
+        <p class="about-sub-line">
+          and I photograph to remember what thinking felt like.
+        </p>
       </div>
 
-      <p class="about-line">
-        I travel to understand how places think,
-      </p>
-      <p class="about-line">
-        I write to understand how I think,
-      </p>
-      <p class="about-line">
-        and I photograph to remember what thinking felt like.
-      </p>
+      <div class="about-stats-row">
+        <div class="about-stat-pill">
+          <span class="pill-number">25+</span>
+          <span class="pill-label">countries</span>
+        </div>
+        <div class="about-stat-pill">
+          <span class="pill-number">5</span>
+          <span class="pill-label">languages</span>
+        </div>
+        <div class="about-stat-pill">
+          <span class="pill-number">∞</span>
+          <span class="pill-label">maps redrawn</span>
+        </div>
+      </div>
     </div>
 
-    <!-- RIGHT: MAP -->
-    <div class="about-map-card">
-      <div class="about-map-header">
-        <span class="map-pill">worldlines</span>
-        <span class="map-caption">Cities that changed how I think</span>
-      </div>
+    <!-- RIGHT SIDE: MAP ONLY -->
+    <div class="about-right">
+      <div class="about-map-frame">
+        <img src="image1.jpg" alt="Places that changed how I think" class="about-map-img">
 
-      <div class="about-map-wrapper">
-        <!-- use your own map image here -->
-        <img src="image1.jpg" alt="Map of places" class="about-map-img">
-
-        <!-- glowing pin -->
-        <div class="map-pin map-pin-1"></div>
-        <div class="map-pin map-pin-2"></div>
-      </div>
-
-      <div class="map-tags">
-        <span class="tag">Abu Dhabi</span>
-        <span class="tag">Amman</span>
-        <span class="tag">Tokyo</span>
-        <span class="tag">Paris</span>
-        <span class="tag">Berlin</span>
+        <!-- one simple glowing pin -->
+        <span class="about-map-pin"></span>
       </div>
     </div>
   </div>
 </section>
+
 
 
 
