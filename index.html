@@ -142,82 +142,117 @@
    LUGGAGE TAG STATS
 =========================== */
 
-.about-tags {
+/* ===========================
+   REALISTIC LUGGAGE TAGS
+=========================== */
+
+.real-tags {
   max-width: 1100px;
-  margin: 20px auto 30px;
+  margin: 30px auto 40px;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 26px;
+  justify-content: flex-start;
 }
 
-.luggage-tag {
+/* entire tag */
+.tag {
+  width: 160px;
+  background: #fff;
+  border: 2px solid #111;
+  border-radius: 6px;
   position: relative;
-  padding: 14px 20px 16px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  box-shadow: 0 6px 18px rgba(20, 32, 50, 0.1);
-  min-width: 160px;
-  cursor: default;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  padding-top: 24px;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15));
+  transform: rotate(-1deg);
+  transition: transform 0.2s ease;
 }
 
-/* top strap */
-.luggage-tag::before {
+/* angled luggage tag cut at the top */
+.tag::before {
   content: "";
   position: absolute;
-  top: -18px;
-  left: 24px;
-  width: 38px;
-  height: 14px;
-  border-radius: 999px;
-  background: #009fa5;
-  box-shadow: 0 4px 10px rgba(0, 159, 165, 0.5);
+  top: 0;
+  left: 0;
+  border-top: 14px solid #fff;
+  border-right: 80px solid transparent;
+}
+.tag::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top: 14px solid #fff;
+  border-left: 80px solid transparent;
 }
 
-/* hole */
-.luggage-tag::after {
-  content: "";
+/* hole + reinforcement ring */
+.tag-hole {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 50%;
   position: absolute;
   top: -4px;
-  left: 40px;
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: #ffffff;
-  border: 2px solid rgba(0,0,0,0.3);
+  left: calc(50% - 7px);
+  z-index: 3;
 }
 
-/* text */
+/* string */
+.tag-string {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 2px;
+  height: 24px;
+  background: #444;
+  transform: translateX(-50%);
+}
+
+/* body */
+.tag-body {
+  padding: 18px 14px 14px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+}
+
+/* number */
 .tag-number {
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 2px;
-  color: #111827;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+  color: #111;
 }
 
+/* label */
 .tag-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #6b7280;
+  letter-spacing: 0.18em;
+  color: #444;
+  margin-bottom: 12px;
 }
 
-/* hover */
-.luggage-tag:hover {
-  transform: translateY(-3px) rotate(-1deg);
-  box-shadow: 0 10px 24px rgba(20, 32, 50, 0.18);
+/* fake barcode */
+.tag-barcode {
+  height: 26px;
+  background: repeating-linear-gradient(
+    to right,
+    #000 0 2px,
+    transparent 2px 4px
+  );
+  opacity: 0.45;
+  border-radius: 2px;
 }
 
-
-/* layout on smaller screens */
-@media (max-width: 900px) {
-  .about-shell {
-    grid-template-columns: 1fr;
-    padding: 22px 18px;
-  }
+/* hover tilt */
+.tag:hover {
+  transform: translateY(-4px) rotate(0deg);
+  filter: drop-shadow(0 14px 22px rgba(0,0,0,0.22));
 }
+
 
 /*==========================
    ABOUT – MAP (unchanged)
@@ -2525,32 +2560,69 @@ margin-bottom: 6px;
   
 
 
-  <div class="about-tags">
-  <div class="luggage-tag">
-    <div class="tag-number">30</div>
-    <div class="tag-label">countries visited</div>
+ <div class="real-tags">
+  <div class="tag">
+    <div class="tag-top">
+      <span class="tag-hole"></span>
+      <span class="tag-string"></span>
+    </div>
+    <div class="tag-body">
+      <div class="tag-number">30</div>
+      <div class="tag-label">countries visited</div>
+      <div class="tag-barcode"></div>
+    </div>
   </div>
 
-  <div class="luggage-tag">
-    <div class="tag-number">100+</div>
-    <div class="tag-label">translation sessions</div>
+  <div class="tag">
+    <div class="tag-top">
+      <span class="tag-hole"></span>
+      <span class="tag-string"></span>
+    </div>
+    <div class="tag-body">
+      <div class="tag-number">100+</div>
+      <div class="tag-label">translation sessions</div>
+      <div class="tag-barcode"></div>
+    </div>
   </div>
 
-  <div class="luggage-tag">
-    <div class="tag-number">200+</div>
-    <div class="tag-label">refugees supported</div>
+  <div class="tag">
+    <div class="tag-top">
+      <span class="tag-hole"></span>
+      <span class="tag-string"></span>
+    </div>
+    <div class="tag-body">
+      <div class="tag-number">200+</div>
+      <div class="tag-label">refugees supported</div>
+      <div class="tag-barcode"></div>
+    </div>
   </div>
 
-  <div class="luggage-tag">
-    <div class="tag-number">5</div>
-    <div class="tag-label">languages spoken</div>
+  <div class="tag">
+    <div class="tag-top">
+      <span class="tag-hole"></span>
+      <span class="tag-string"></span>
+    </div>
+    <div class="tag-body">
+      <div class="tag-number">5</div>
+      <div class="tag-label">languages spoken</div>
+      <div class="tag-barcode"></div>
+    </div>
   </div>
 
-  <div class="luggage-tag">
-    <div class="tag-number">7</div>
-    <div class="tag-label">cities lived in</div>
+  <div class="tag">
+    <div class="tag-top">
+      <span class="tag-hole"></span>
+      <span class="tag-string"></span>
+    </div>
+    <div class="tag-body">
+      <div class="tag-number">7</div>
+      <div class="tag-label">cities lived in</div>
+      <div class="tag-barcode"></div>
+    </div>
   </div>
 </div>
+
+  
 
   <!-- Travel / visited countries map (kept exactly as before) -->
   <div class="map-card">
