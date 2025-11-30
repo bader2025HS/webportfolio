@@ -4436,5 +4436,56 @@ if (initial) setActiveWork(initial.dataset.project);
 
   </script>
 
+  
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const poem = `I travel to understand how places think,
+I write to understand how I think,
+and I photograph to remember what thinking felt like.
+
+What I make—texts, images, ideas—
+comes from trying to see what stays constant
+when everything else moves.
+
+I am made of fragments:
+a sentence from a stranger,
+a mountain road at dusk,
+a map drawn from memory,
+a city I left too early.
+
+Everything I build is an attempt
+to weave those fragments into meaning.`;
+
+  const poemEl = document.getElementById("about-poem");
+  const hand = document.getElementById("hand-writer");
+
+  let index = 0;
+
+  function write() {
+    if (index === 0) {
+      hand.style.opacity = 1;
+    }
+
+    poemEl.textContent = poem.slice(0, index);
+
+    // move hand
+    const width = poemEl.offsetWidth;
+    hand.style.transform = `translateX(${width * 0.02}px)`; 
+
+    index++;
+
+    if (index <= poem.length) {
+      setTimeout(write, 22);
+    } else {
+      // finished → fade hand out
+      setTimeout(() => hand.style.opacity = 0, 500);
+    }
+  }
+
+  write();
+});
+</script>
+
 </body>
 </html>
