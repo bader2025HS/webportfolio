@@ -428,6 +428,27 @@
   color: #111827;
 }
 
+    /* little pen that "writes" the poem */
+.poem-pen {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 1.3rem;
+  opacity: 1;
+  animation: penBounce 0.6s ease-in-out infinite alternate;
+}
+
+/* small up/down movement */
+@keyframes penBounce {
+  from { transform: translateY(1px); }
+  to   { transform: translateY(-2px); }
+}
+
+/* hide pen once typing finishes */
+.poem-pen.hidden {
+  opacity: 0;
+  animation: none;
+}
+
 
     /* ===========================
        EDUCATION MAPS
@@ -2782,9 +2803,13 @@ margin-bottom: 6px;
       </div>
 
       <!-- Poem block (typewriter handwriting effect) -->
-      <div class="about-poem-wrapper">
-        <div id="about-poem" class="about-poem"></div>
-      </div>
+    <div class="about-poem-wrapper">
+  <div id="about-poem" class="about-poem">
+    <span id="poem-text"></span>
+    <span class="poem-pen">✍️</span>
+  </div>
+</div>
+
 
     </div> <!-- /.about-main -->
 
@@ -4478,12 +4503,14 @@ const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
 
-  </script>
-
-  <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
-  var poemElement = document.getElementById("about-poem");
-  if (!poemElement) return;
+  var poemContainer = document.getElementById("about-poem");
+  if (!poemContainer) return;
+
+  var poemTextSpan = document.getElementById("poem-text");
+  var pen = poemContainer.querySelector(".poem-pen");
+  if (!poemTextSpan || !pen) return;
 
   var poemText = `I travel to understand how places think,
 I write to understand how I think,
@@ -4505,9 +4532,13 @@ to weave those fragments into meaning.`;
   var index = 0;
 
   function typeNextChar() {
-    if (index > poemText.length) return;
+    if (index > poemText.length) {
+      // typing finished → hide pen
+      pen.classList.add("hidden");
+      return;
+    }
 
-    poemElement.textContent = poemText.slice(0, index);
+    poemTextSpan.textContent = poemText.slice(0, index);
     index++;
 
     var delay = 18; // lower = faster, higher = slower
@@ -4517,6 +4548,7 @@ to weave those fragments into meaning.`;
   typeNextChar();
 });
 </script>
+
 
 </body>
 </html>
