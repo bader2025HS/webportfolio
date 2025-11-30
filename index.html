@@ -90,7 +90,7 @@
 
 
 /* ===========================
-   ABOUT – CONTAINER
+   ABOUT – VERTICAL STATS COLUMN
 =========================== */
 
 #about {
@@ -98,150 +98,97 @@
 }
 
 .about-shell {
-  max-width: 1100px;
-  margin: 24px auto 24px;
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
-  gap: 32px;
-  padding: 26px 28px;
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.10);
-  position: relative;
-  overflow: hidden;
-}
-
-/* soft abstract shapes */
-.about-shell::before,
-.about-shell::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(26px);
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-.about-shell::before {
-  width: 220px;
-  height: 220px;
-  background: rgba(0, 159, 165, 0.20);
-  top: -80px;
-  right: -40px;
-}
-
-.about-shell::after {
-  width: 180px;
-  height: 180px;
-  background: rgba(148, 163, 184, 0.20);
-  bottom: -90px;
-  left: -60px;
-}
-
-/* ===========================
-   REALISTIC LUGGAGE TAGS (CLEAN VERSION)
-=========================== */
-
-.real-tags {
-  max-width: 1100px;
-  margin: 10px auto 30px;
-  padding-left: 20px;      /* adjust this number to align perfectly */
+  max-width: 1050px;
+  margin: 6px auto 24px;    /* less vertical space */
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: flex-start;
 }
 
-
-/* entire tag */
-.tag {
-  width: 135px;
-  background: #ffffff;
-  border: 2px solid #111;
-  border-radius: 6px;
-  position: relative;
-  padding-top: 8px;     /* MUCH tighter */
-  transform: rotate(-0.6deg);
-  transition: transform 0.15s ease;
-  box-shadow: none !important;
+/* compact vertical stack */
+.about-stats-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;                 /* smaller gap = less height */
 }
 
+/* one stat */
+.about-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 0 10px 18px;  /* small left padding for the accent line */
+  cursor: default;
+}
 
-/* angled luggage tag cuts */
-.tag::before,
-.tag::after {
+/* thin accent line on the left */
+.about-stat::before {
   content: "";
   position: absolute;
-  top: 0;
-  border-top: 12px solid #fff;
-}
-
-.tag::before {
   left: 0;
-  border-right: 70px solid transparent;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 999px;
+  background: rgba(0, 159, 165, 0.25);
+  transform-origin: top;
+  transform: scaleY(0.7);
+  transition: transform 0.22s ease, background 0.22s ease, opacity 0.22s ease;
+  opacity: 0.6;
 }
 
-.tag::after {
-  right: 0;
-  border-left: 70px solid transparent;
-}
-
-/* hole reinforcement ring */
-.tag-hole {
-  width: 12px;
-  height: 12px;
-  background: #fff;
-  border: 2px solid #000;
-  border-radius: 50%;
-  position: absolute;
-  top: -3px;
-  left: calc(50% - 6px);
-  z-index: 3;
-}
-
-/* string */
-.tag-string {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  width: 2px;
-  height: 20px;
-  background: #333;
-  transform: translateX(-50%);
-}
-
-/* body of tag */
-.tag-body {
-  padding: 14px 10px 10px;
-  text-align: center;
-  font-family: "Inter", sans-serif;
-}
-
-/* number */
-.tag-number {
-  font-size: 1.6rem;          /* smaller */
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 2px;
-  color: #111;
+/* big number */
+.about-stat-number {
+  font-size: 2.6rem;        /* slightly smaller than before */
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
 }
 
 /* label */
-.tag-label {
-  font-size: 0.62rem;         /* smaller */
+.about-stat-label {
+  margin-top: 1px;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #444;
+  letter-spacing: 0.16em;
+  color: #6b7280;
 }
 
-/* hover effect: lightweight */
-.tag:hover {
-  transform: translateY(-2px) rotate(0deg);
+
+/* HOVER EFFECTS */
+.about-stat:hover::before {
+  transform: scaleY(1);
+  background: rgba(0, 159, 165, 0.75);
+  opacity: 1;
 }
 
-/*==========================
-   ABOUT – MAP (unchanged)
-=========================== */
+.about-stat:hover .about-stat-number {
+  transform: translateX(3px);
+  color: #009fa5;
+  text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+
+/* MOBILE – even more compact so it never causes extra scrolling */
+@media (max-width: 640px) {
+  .about-shell {
+    margin: 4px auto 18px;
+  }
+
+  .about-stat-number {
+    font-size: 2.1rem;
+  }
+
+  .about-stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  .about-stat {
+    padding: 2px 0 2px 14px;
+  }
+}
+
+    /* ====== ABOUT – TRAVEL MAP ====== */
 
 .map-card {
   background: transparent;
@@ -250,8 +197,8 @@
   box-shadow: none;
   padding: 0;
   overflow: visible;
-  max-width: 1100px;
-  margin: 18px auto 0;
+  max-width: 1050px;
+  margin: 24px auto 0;  /* centers under About */
 }
 
 #visitedMap {
@@ -260,15 +207,206 @@
   border-radius: 14px;
 }
 
+/* make Leaflet background transparent inside About */
 #visitedMap.leaflet-container {
   background: transparent !important;
 }
 
+/* micro glow when hovering country polygons */
 #visitedMap .leaflet-interactive {
-  transition: filter 0.25s ease, stroke-width 0.2s ease;
+  transition: filter .25s ease, stroke-width .2s ease;
 }
 #visitedMap .leaflet-interactive:hover {
   filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
+}
+
+    /* ======== ABOUT – IDENTITY BLOCK ======== */
+
+.about-identity {
+  max-width: 1050px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Portrait + Micro-Bio */
+.about-identity-top {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.about-portrait img {
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.about-intro-text h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-intro-text p {
+  font-size: 1rem;
+  max-width: 38rem;
+  line-height: 1.55;
+}
+
+/* Focus Areas Grid */
+.about-focus-area h3,
+.about-languages h3,
+.about-projects h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.about-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-card {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.focus-card:hover {
+  border-color: #009fa5;
+  color: #009fa5;
+  background: #e6f9f9;
+}
+
+/* Languages */
+.lang-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.lang-caption {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.project-card h4 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+/* ===== RIGHT SIDE CONTENT IN ABOUT ===== */
+
+.about-main {
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Identity Block */
+.about-identity-small h3,
+.about-focus-area h3,
+.about-projects h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-identity-small p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 40rem;
+}
+
+/* Focus Areas Grid */
+.about-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focus-card {
+  padding: 7px 12px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.focus-card:hover {
+  border-color: #009fa5;
+  background: #e6f9f9;
+  color: #009fa5;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.project-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.project-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.project-card p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #374151;
 }
 
 
@@ -2540,99 +2678,100 @@ margin-bottom: 6px;
 
       <!-- ABOUT -->
 
-  <!-- ABOUT -->
+   <!-- ABOUT -->
 <section id="about">
-  
+  <div class="about-shell">
+    <!-- LEFT: STATS COLUMN (unchanged) -->
+    <div class="about-stats-column">
 
+      <div class="about-stat">
+        <div class="about-stat-number">30</div>
+        <div class="about-stat-label">countries visited</div>
+      </div>
 
- <div class="real-tags">
-  <div class="tag">
-    <div class="tag-top">
-      <span class="tag-hole"></span>
-      <span class="tag-string"></span>
-    </div>
-    <div class="tag-body">
-      <div class="tag-number">30</div>
-      <div class="tag-label">countries visited</div>
-      <div class="tag-barcode"></div>
-    </div>
-  </div>
+      <div class="about-stat">
+        <div class="about-stat-number">100+</div>
+        <div class="about-stat-label">translation sessions</div>
+      </div>
 
-  <div class="tag">
-    <div class="tag-top">
-      <span class="tag-hole"></span>
-      <span class="tag-string"></span>
-    </div>
-    <div class="tag-body">
-      <div class="tag-number">100+</div>
-      <div class="tag-label">translation sessions</div>
-      <div class="tag-barcode"></div>
-    </div>
-  </div>
+      <div class="about-stat">
+        <div class="about-stat-number">200+</div>
+        <div class="about-stat-label">refugees supported</div>
+      </div>
 
-  <div class="tag">
-    <div class="tag-top">
-      <span class="tag-hole"></span>
-      <span class="tag-string"></span>
-    </div>
-    <div class="tag-body">
-      <div class="tag-number">200+</div>
-      <div class="tag-label">refugees supported</div>
-      <div class="tag-barcode"></div>
-    </div>
-  </div>
+      <div class="about-stat">
+        <div class="about-stat-number">5</div>
+        <div class="about-stat-label">languages spoken</div>
+      </div>
 
-  <div class="tag">
-    <div class="tag-top">
-      <span class="tag-hole"></span>
-      <span class="tag-string"></span>
-    </div>
-    <div class="tag-body">
-      <div class="tag-number">5</div>
-      <div class="tag-label">languages spoken</div>
-      <div class="tag-barcode"></div>
-    </div>
-  </div>
+      <div class="about-stat">
+        <div class="about-stat-number">7</div>
+        <div class="about-stat-label">cities lived in</div>
+      </div>
 
-  <div class="tag">
-    <div class="tag-top">
-      <span class="tag-hole"></span>
-      <span class="tag-string"></span>
     </div>
-    <div class="tag-body">
-      <div class="tag-number">7</div>
-      <div class="tag-label">cities lived in</div>
-      <div class="tag-barcode"></div>
-    </div>
-  </div>
-</div>
 
-  
+    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
+    <div class="about-main">
 
-  <!-- Travel / visited countries map (kept exactly as before) -->
+      <!-- Identity Block -->
+      <div class="about-identity-small">
+        <h3>Who I Am</h3>
+        <p>
+          I work at the intersection of <strong>human security, mobility, and data</strong>.
+          My background spans the Middle East, Europe, and Asia, and I’m driven by
+          clarity, dignity, and the stories behind movement and resilience.
+        </p>
+      </div>
+
+      <!-- Focus Areas Grid -->
+      <div class="about-focus-area">
+        <h3>Focus Areas</h3>
+
+        <div class="about-focus-grid">
+          <div class="focus-card">Human Security</div>
+          <div class="focus-card">Migration</div>
+          <div class="focus-card">Humanitarian Action</div>
+          <div class="focus-card">Development Data</div>
+          <div class="focus-card">Water &amp; Climate</div>
+          <div class="focus-card">Cultural Diplomacy</div>
+        </div>
+      </div>
+
+      <!-- Current Projects -->
+      <div class="about-projects">
+        <h3>Current Work</h3>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <h4>Oman Research &amp; Cultural Diplomacy</h4>
+            <p>
+              Leading a multi-partner initiative integrating field research,
+              photography, and cultural exchange across institutions.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h4>Human Security Interactive Tool</h4>
+            <p>
+              Building an accessible digital experience that reframes core
+              security concepts through storytelling and systems thinking.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /.about-main -->
+
+  </div> <!-- /.about-shell -->
+
+  <!-- Travel / visited countries map (full width under the two columns) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
 
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills">
