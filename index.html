@@ -10,6 +10,10 @@
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         crossorigin="" />
 
+    <!-- Handwriting font for About poem -->
+  <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -407,6 +411,21 @@
   font-size: 0.85rem;
   line-height: 1.4;
   color: #374151;
+}
+
+    /* ===== ABOUT – HANDWRITTEN POEM TYPE EFFECT ===== */
+
+.about-poem-wrapper {
+  margin-top: 18px;
+  max-width: 520px;
+}
+
+.about-poem {
+  font-family: "Reenie Beanie", cursive;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  white-space: pre-wrap;  /* keep line breaks */
+  color: #111827;
 }
 
 
@@ -2739,6 +2758,7 @@ margin-bottom: 6px;
       </div>
 
       <!-- Current Projects -->
+           <!-- Current Projects -->
       <div class="about-projects">
         <h3>Current Work</h3>
 
@@ -2760,6 +2780,14 @@ margin-bottom: 6px;
           </div>
         </div>
       </div>
+
+      <!-- Poem block (typewriter handwriting effect) -->
+      <div class="about-poem-wrapper">
+        <div id="about-poem" class="about-poem"></div>
+      </div>
+
+    </div> <!-- /.about-main -->
+
 
     </div> <!-- /.about-main -->
 
@@ -4451,6 +4479,44 @@ if (initial) setActiveWork(initial.dataset.project);
 
 
   </script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  var poemElement = document.getElementById("about-poem");
+  if (!poemElement) return;
+
+  var poemText = `I travel to understand how places think,
+I write to understand how I think,
+and I photograph to remember what thinking felt like.
+
+What I make—texts, images, ideas—
+comes from trying to see what stays constant
+when everything else moves.
+
+I am made of fragments:
+a sentence from a stranger,
+a mountain road at dusk,
+a map drawn from memory,
+a city I left too early.
+
+Everything I build is an attempt
+to weave those fragments into meaning.`;
+
+  var index = 0;
+
+  function typeNextChar() {
+    if (index > poemText.length) return;
+
+    poemElement.textContent = poemText.slice(0, index);
+    index++;
+
+    var delay = 18; // lower = faster, higher = slower
+    setTimeout(typeNextChar, delay);
+  }
+
+  typeNextChar();
+});
+</script>
 
 </body>
 </html>
