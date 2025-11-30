@@ -716,6 +716,122 @@
   }
 }
 
+/* ===== ABOUT – CLEAN CARD LAYOUT ===== */
+
+.about-main {
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* main card */
+
+.about-card {
+  width: 100%;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid #d0d7de;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-card-header h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.about-card-header p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #111827;
+  max-width: 40rem;
+}
+
+/* tags */
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-tag {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+}
+
+.about-tag:hover {
+  border-color: #009fa5;
+  color: #009fa5;
+  background: #e6f9f9;
+}
+
+/* meta row */
+
+.about-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+  margin-top: 4px;
+}
+
+.about-meta-block {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.about-meta-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+.about-meta-value {
+  color: #111827;
+}
+
+/* map shorter so whole section stays compact */
+
+#visitedMap {
+  height: 280px;   /* overrides previous height */
+  width: 100%;
+  border-radius: 14px;
+}
+
+/* responsive */
+
+@media (max-width: 720px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .about-main {
+    margin-left: 0;
+  }
+
+  .about-meta {
+    grid-template-columns: 1fr;
+  }
+
+  #visitedMap {
+    height: 220px;
+  }
+}
 
     /* ===========================
        EDUCATION MAPS
@@ -2987,7 +3103,7 @@ margin-bottom: 6px;
 
 <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN (kept, still minimal) -->
+    <!-- LEFT: STATS COLUMN (same as before) -->
     <div class="about-stats-column">
 
       <div class="about-stat">
@@ -3017,61 +3133,48 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: ABSTRACT ABOUT PANEL -->
+    <!-- RIGHT: SIMPLE, NORMAL ABOUT CARD -->
     <div class="about-main">
-
-      <!-- Abstract “orbit” card -->
-      <div class="about-orbit">
-        <div class="about-orbit-header">
-          <span class="about-orbit-tag">about</span>
-          <span class="about-orbit-coords">N 48° · E 2° ↔ MENA · Europe · Asia</span>
+      <div class="about-card">
+        <div class="about-card-header">
+          <h3>About</h3>
+          <p>
+            I work at the intersection of <strong>human security, migration, and data</strong>.
+            My path moves between the <strong>MENA region, Europe, and Asia</strong>,
+            combining field-facing work with policy, mapping, and visual storytelling.
+          </p>
         </div>
 
-        <div class="about-orbit-rings">
-          <div class="orbit-ring orbit-ring--identity">
-            <span class="orbit-label">Vector</span>
-            <span class="orbit-value">Human security → everyday life</span>
+        <div class="about-tags">
+          <span class="about-tag">Human security</span>
+          <span class="about-tag">Migration &amp; asylum</span>
+          <span class="about-tag">Humanitarian data</span>
+          <span class="about-tag">Water &amp; climate</span>
+        </div>
+
+        <div class="about-meta">
+          <div class="about-meta-block">
+            <span class="about-meta-label">Currently</span>
+            <span class="about-meta-value">
+              International Security (PSIA) · Project work with OIF
+            </span>
           </div>
-          <div class="orbit-ring orbit-ring--field">
-            <span class="orbit-label">Field</span>
-            <span class="orbit-value">Mobility · water · cities</span>
-          </div>
-          <div class="orbit-ring orbit-ring--medium">
-            <span class="orbit-label">Medium</span>
-            <span class="orbit-value">Maps · data · stories</span>
+          <div class="about-meta-block">
+            <span class="about-meta-label">Interested in</span>
+            <span class="about-meta-value">
+              Policy analysis · cultural diplomacy · data visualisation
+            </span>
           </div>
         </div>
       </div>
-
-      <!-- Compact abstract grid (no long paragraphs) -->
-      <div class="about-grid">
-        <div class="about-tile">
-          <span class="about-tile-label">Axis I</span>
-          <span class="about-tile-value">MENA / Europe / Asia</span>
-        </div>
-        <div class="about-tile">
-          <span class="about-tile-label">Axis II</span>
-          <span class="about-tile-value">Policy desks / field visits</span>
-        </div>
-        <div class="about-tile">
-          <span class="about-tile-label">Mode</span>
-          <span class="about-tile-value">Listening · translation · synthesis</span>
-        </div>
-        <div class="about-tile">
-          <span class="about-tile-label">Output</span>
-          <span class="about-tile-value">Briefs · dashboards · exhibitions</span>
-        </div>
-      </div>
-
     </div> <!-- /.about-main -->
   </div> <!-- /.about-shell -->
 
-  <!-- Thin map band under everything (height reduced) -->
+  <!-- Travel / visited countries map (shorter height) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
 </section>
-
 
 
      <!-- SKILLS – AIRPORT TERMINAL -->
