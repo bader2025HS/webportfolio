@@ -439,20 +439,16 @@
     }
 
     .country-map {
-  width: 100%;
-  height: 260px;   /* or 240px or whatever you want */
-  border-radius: 0;
-  box-shadow: none !important;
-  background: transparent !important;
+  width: 340px;
+  height: 340px;
   cursor: pointer;
-  transition: none;  /* remove hover grow effect */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .country-map:hover {
-  transform: none;
-  box-shadow: none;
+  transform: scale(1.06); /* "zoom" effect */
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
 }
-
 
 
     .leaflet-container {
