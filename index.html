@@ -537,6 +537,186 @@
   }
 }
 
+    /* Make right column a bit tighter */
+.about-main {
+  margin-left: 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ABSTRACT ORBIT CARD */
+
+.about-orbit {
+  position: relative;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid #d0d7de;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0,159,165,0.08) 0, transparent 55%),
+    radial-gradient(circle at 120% 120%, rgba(37,99,235,0.08) 0, transparent 60%),
+    #ffffff;
+  overflow: hidden;
+}
+
+.about-orbit::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px dashed rgba(148,163,184,0.6);
+  right: -90px;
+  top: -80px;
+  opacity: 0.7;
+}
+
+.about-orbit::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,159,165,0.3);
+  right: -20px;
+  top: 10px;
+  opacity: 0.7;
+}
+
+.about-orbit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.about-orbit-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6b7280;
+}
+
+.about-orbit-coords {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+/* orbit "rings" = 3 short lines, no big paragraphs */
+
+.about-orbit-rings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.orbit-ring {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.82rem;
+  padding: 4px 0;
+}
+
+.orbit-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.orbit-value {
+  font-size: 0.82rem;
+  color: #111827;
+}
+
+/* tiny accent dots */
+
+.orbit-ring::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #009fa5;
+  margin-right: 8px;
+  box-shadow: 0 0 0 4px rgba(0,159,165,0.18);
+}
+
+.orbit-ring--field::before {
+  background: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.18);
+}
+
+.orbit-ring--medium::before {
+  background: #ec4899;
+  box-shadow: 0 0 0 4px rgba(236,72,153,0.18);
+}
+
+/* ABSTRACT GRID BELOW (2×2, very compact) */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.about-tile {
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  background: #f9fafb;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.about-tile-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+  color: #9ca3af;
+}
+
+.about-tile-value {
+  color: #111827;
+}
+
+/* Make the map a thin band so About stays in the viewport */
+
+#visitedMap {
+  height: 260px; /* overrides previous min(60vh, 520px) */
+}
+
+/* On small screens, keep it even shorter or hide if needed */
+@media (max-width: 720px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .about-main {
+    margin-left: 0;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #visitedMap {
+    height: 200px;
+  }
+}
+
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
@@ -2805,10 +2985,9 @@ margin-bottom: 6px;
 
       <!-- ABOUT -->
 
-   <!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN -->
+    <!-- LEFT: STATS COLUMN (kept, still minimal) -->
     <div class="about-stats-column">
 
       <div class="about-stat">
@@ -2838,113 +3017,56 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: MAIN ABOUT CONTENT -->
+    <!-- RIGHT: ABSTRACT ABOUT PANEL -->
     <div class="about-main">
 
-      <!-- Top: Title + micro-intro -->
-      <div class="about-main-header">
-        <span class="about-eyebrow">About</span>
-        <h2>Human security, mobility &amp; data storytelling.</h2>
-        <p>
-          I move between <strong>policy, fieldwork and visualisation</strong> – from supporting
-          refugees with casework and legal preparation to turning complex project data
-          into clear narratives for international organisations. My work sits at the
-          crossroads of the <strong>MENA region, Europe and Asia</strong>.
-        </p>
-      </div>
-
-      <!-- Meta strip: “Currently / Based in / Looking for” -->
-      <div class="about-meta-row">
-        <div class="about-meta-item">
-          <span class="about-meta-label">Currently</span>
-          <span class="about-meta-value">
-            Project Design &amp; Monitoring – OIF (Intern)
-          </span>
+      <!-- Abstract “orbit” card -->
+      <div class="about-orbit">
+        <div class="about-orbit-header">
+          <span class="about-orbit-tag">about</span>
+          <span class="about-orbit-coords">N 48° · E 2° ↔ MENA · Europe · Asia</span>
         </div>
-        <div class="about-meta-item">
-          <span class="about-meta-label">Based in</span>
-          <span class="about-meta-value">
-            Paris &amp; Berlin (Sciences Po / FU Berlin)
-          </span>
-        </div>
-        <div class="about-meta-item">
-          <span class="about-meta-label">Working on</span>
-          <span class="about-meta-value">
-            Human security, water &amp; climate, cultural diplomacy
-          </span>
-        </div>
-      </div>
 
-      <!-- Focus Areas Grid -->
-      <div class="about-focus-area">
-        <h3>Focus areas</h3>
-
-        <div class="about-focus-grid">
-          <div class="focus-card">Human Security</div>
-          <div class="focus-card">Migration &amp; Asylum</div>
-          <div class="focus-card">Humanitarian Action</div>
-          <div class="focus-card">Development Data</div>
-          <div class="focus-card">Water &amp; Climate</div>
-          <div class="focus-card">Cultural Diplomacy</div>
-        </div>
-      </div>
-
-      <!-- Now / Next / Always mini-grid -->
-      <div class="about-now-next">
-        <h3>Rhythm of my work</h3>
-        <div class="about-now-next-grid">
-          <div class="about-now-card">
-            <span class="about-chip">Now</span>
-            <p>
-              Consolidating experience in <strong>multilateral project monitoring</strong>
-              and data-driven reporting across Francophone countries.
-            </p>
+        <div class="about-orbit-rings">
+          <div class="orbit-ring orbit-ring--identity">
+            <span class="orbit-label">Vector</span>
+            <span class="orbit-value">Human security → everyday life</span>
           </div>
-          <div class="about-now-card">
-            <span class="about-chip">Next</span>
-            <p>
-              Deepening research on <strong>water stress, climate and mobility</strong>
-              and how they reshape security and development agendas.
-            </p>
+          <div class="orbit-ring orbit-ring--field">
+            <span class="orbit-label">Field</span>
+            <span class="orbit-value">Mobility · water · cities</span>
           </div>
-          <div class="about-now-card">
-            <span class="about-chip">Always</span>
-            <p>
-              Centering <strong>dignity, clarity and lived experience</strong> in how
-              we design policies, tell stories and build partnerships.
-            </p>
+          <div class="orbit-ring orbit-ring--medium">
+            <span class="orbit-label">Medium</span>
+            <span class="orbit-value">Maps · data · stories</span>
           </div>
         </div>
       </div>
 
-      <!-- Current Projects -->
-      <div class="about-projects">
-        <h3>Current work</h3>
-
-        <div class="projects-grid">
-          <div class="project-card">
-            <h4>Oman Research &amp; Cultural Diplomacy</h4>
-            <p>
-              Coordinating a multi-partner initiative that links field research,
-              photography and cultural exchange between Oman and European campuses.
-            </p>
-          </div>
-
-          <div class="project-card">
-            <h4>Human Security Interactive Tool</h4>
-            <p>
-              Building a digital experience that reframes security concepts through
-              stories, visualisations and systems thinking for students and practitioners.
-            </p>
-          </div>
+      <!-- Compact abstract grid (no long paragraphs) -->
+      <div class="about-grid">
+        <div class="about-tile">
+          <span class="about-tile-label">Axis I</span>
+          <span class="about-tile-value">MENA / Europe / Asia</span>
+        </div>
+        <div class="about-tile">
+          <span class="about-tile-label">Axis II</span>
+          <span class="about-tile-value">Policy desks / field visits</span>
+        </div>
+        <div class="about-tile">
+          <span class="about-tile-label">Mode</span>
+          <span class="about-tile-value">Listening · translation · synthesis</span>
+        </div>
+        <div class="about-tile">
+          <span class="about-tile-label">Output</span>
+          <span class="about-tile-value">Briefs · dashboards · exhibitions</span>
         </div>
       </div>
 
     </div> <!-- /.about-main -->
-
   </div> <!-- /.about-shell -->
 
-  <!-- Travel / visited countries map (full width under the two columns) -->
+  <!-- Thin map band under everything (height reduced) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
