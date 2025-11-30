@@ -833,6 +833,156 @@
   }
 }
 
+    /* ===== ABOUT – ID CARD STYLE ===== */
+
+.about-main {
+  margin-left: 32px;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* main card on the right */
+
+.about-idcard {
+  position: relative;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid #d0d7de;
+  background: linear-gradient(90deg, #f9fafb 0%, #ffffff 45%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* subtle top accent line, like a boarding pass */
+
+.about-idcard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #009fa5, #2563eb);
+}
+
+/* header */
+
+.about-id-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.about-id-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+}
+
+.about-id-location {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+/* main sentence */
+
+.about-id-main {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #111827;
+  max-width: 40rem;
+}
+
+/* 3 small blocks */
+
+.about-id-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 18px;
+  font-size: 0.84rem;
+}
+
+.about-id-block {
+  padding-top: 4px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.about-id-block-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+.about-id-block-value {
+  color: #111827;
+}
+
+/* tags row */
+
+.about-id-tags {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.about-id-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid #d0d7de;
+  background: #f7faf9;
+}
+
+.about-id-tag:hover {
+  border-color: #009fa5;
+  color: #009fa5;
+  background: #e6f9f9;
+}
+
+/* keep the whole section shallow by making the map shorter */
+
+#visitedMap {
+  height: 260px;  /* shorter than before */
+  width: 100%;
+  border-radius: 14px;
+}
+
+/* responsive – stack nicely on small screens */
+
+@media (max-width: 720px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .about-main {
+    margin-left: 0;
+  }
+
+  .about-id-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #visitedMap {
+    height: 210px;
+  }
+}
+
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
@@ -3103,7 +3253,7 @@ margin-bottom: 6px;
 
 <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN (same as before) -->
+    <!-- LEFT: STATS COLUMN (unchanged) -->
     <div class="about-stats-column">
 
       <div class="about-stat">
@@ -3133,44 +3283,56 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: SIMPLE, NORMAL ABOUT CARD -->
+    <!-- RIGHT: CLEAN ID-CARD STYLE ABOUT -->
     <div class="about-main">
-      <div class="about-card">
-        <div class="about-card-header">
-          <h3>About</h3>
-          <p>
-            I work at the intersection of <strong>human security, migration, and data</strong>.
-            My path moves between the <strong>MENA region, Europe, and Asia</strong>,
-            combining field-facing work with policy, mapping, and visual storytelling.
-          </p>
+      <div class="about-idcard">
+        <!-- top row -->
+        <div class="about-id-header">
+          <span class="about-id-label">About</span>
+          <span class="about-id-location">FR · AR · EN · DE · FA · JP</span>
         </div>
 
-        <div class="about-tags">
-          <span class="about-tag">Human security</span>
-          <span class="about-tag">Migration &amp; asylum</span>
-          <span class="about-tag">Humanitarian data</span>
-          <span class="about-tag">Water &amp; climate</span>
+        <!-- middle: one short sentence -->
+        <div class="about-id-main">
+          I connect <strong>human security, migration and data</strong> across the
+          <strong>MENA region, Europe and Asia</strong>—moving between field support,
+          policy work, and visual storytelling.
         </div>
 
-        <div class="about-meta">
-          <div class="about-meta-block">
-            <span class="about-meta-label">Currently</span>
-            <span class="about-meta-value">
-              International Security (PSIA) · Project work with OIF
+        <!-- bottom: 3 compact blocks -->
+        <div class="about-id-grid">
+          <div class="about-id-block">
+            <span class="about-id-block-label">Focus</span>
+            <span class="about-id-block-value">
+              Migration · humanitarian action · water &amp; climate
             </span>
           </div>
-          <div class="about-meta-block">
-            <span class="about-meta-label">Interested in</span>
-            <span class="about-meta-value">
-              Policy analysis · cultural diplomacy · data visualisation
+          <div class="about-id-block">
+            <span class="about-id-block-label">Currently</span>
+            <span class="about-id-block-value">
+              International Security (PSIA) · OIF project work
             </span>
           </div>
+          <div class="about-id-block">
+            <span class="about-id-block-label">I like working through</span>
+            <span class="about-id-block-value">
+              Briefs · maps · dashboards · exhibitions
+            </span>
+          </div>
+        </div>
+
+        <!-- small tags row -->
+        <div class="about-id-tags">
+          <span class="about-id-tag">Human security</span>
+          <span class="about-id-tag">Policy &amp; research</span>
+          <span class="about-id-tag">Data &amp; mapping</span>
+          <span class="about-id-tag">Cultural diplomacy</span>
         </div>
       </div>
-    </div> <!-- /.about-main -->
-  </div> <!-- /.about-shell -->
+    </div>
+  </div>
 
-  <!-- Travel / visited countries map (shorter height) -->
+  <!-- MAP (kept, but shorter) -->
   <div class="map-card">
     <div id="visitedMap" aria-label="Visited countries map"></div>
   </div>
