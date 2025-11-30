@@ -409,6 +409,133 @@
   color: #374151;
 }
 
+/* ===== ABOUT – REFINED LAYOUT ===== */
+
+.about-main-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.about-eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #9ca3af;
+}
+
+.about-main-header h2 {
+  font-size: 1.6rem;
+  line-height: 1.25;
+}
+
+.about-main-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
+  max-width: 40rem;
+}
+
+/* Meta strip: Currently / Based in / Working on */
+
+.about-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 10px 0 24px;
+}
+
+.about-meta-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.about-meta-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.about-meta-value {
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+/* Now / Next / Always */
+
+.about-now-next {
+  margin-top: 10px;
+}
+
+.about-now-next h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.about-now-next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.about-now-card {
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 10px 12px;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.04);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #374151;
+}
+
+.about-chip {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #009fa5;
+  background: #e6f9f9;
+  border-radius: 999px;
+  padding: 3px 9px;
+  margin-bottom: 6px;
+}
+
+/* Responsive tweaks for About layout */
+
+@media (max-width: 900px) {
+  .about-meta-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-now-next-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .about-shell {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-main {
+    margin-left: 0;
+  }
+
+  .about-meta-row {
+    grid-template-columns: 1fr;
+  }
+}
 
     /* ===========================
        EDUCATION MAPS
@@ -2681,7 +2808,7 @@ margin-bottom: 6px;
    <!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
-    <!-- LEFT: STATS COLUMN (unchanged) -->
+    <!-- LEFT: STATS COLUMN -->
     <div class="about-stats-column">
 
       <div class="about-stat">
@@ -2711,26 +2838,50 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: ABOUT MAIN CONTENT (now correctly next to stats) -->
+    <!-- RIGHT: MAIN ABOUT CONTENT -->
     <div class="about-main">
 
-      <!-- Identity Block -->
-      <div class="about-identity-small">
-        <h3>Who I Am</h3>
+      <!-- Top: Title + micro-intro -->
+      <div class="about-main-header">
+        <span class="about-eyebrow">About</span>
+        <h2>Human security, mobility &amp; data storytelling.</h2>
         <p>
-          I work at the intersection of <strong>human security, mobility, and data</strong>.
-          My background spans the Middle East, Europe, and Asia, and I’m driven by
-          clarity, dignity, and the stories behind movement and resilience.
+          I move between <strong>policy, fieldwork and visualisation</strong> – from supporting
+          refugees with casework and legal preparation to turning complex project data
+          into clear narratives for international organisations. My work sits at the
+          crossroads of the <strong>MENA region, Europe and Asia</strong>.
         </p>
+      </div>
+
+      <!-- Meta strip: “Currently / Based in / Looking for” -->
+      <div class="about-meta-row">
+        <div class="about-meta-item">
+          <span class="about-meta-label">Currently</span>
+          <span class="about-meta-value">
+            Project Design &amp; Monitoring – OIF (Intern)
+          </span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label">Based in</span>
+          <span class="about-meta-value">
+            Paris &amp; Berlin (Sciences Po / FU Berlin)
+          </span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label">Working on</span>
+          <span class="about-meta-value">
+            Human security, water &amp; climate, cultural diplomacy
+          </span>
+        </div>
       </div>
 
       <!-- Focus Areas Grid -->
       <div class="about-focus-area">
-        <h3>Focus Areas</h3>
+        <h3>Focus areas</h3>
 
         <div class="about-focus-grid">
           <div class="focus-card">Human Security</div>
-          <div class="focus-card">Migration</div>
+          <div class="focus-card">Migration &amp; Asylum</div>
           <div class="focus-card">Humanitarian Action</div>
           <div class="focus-card">Development Data</div>
           <div class="focus-card">Water &amp; Climate</div>
@@ -2738,24 +2889,52 @@ margin-bottom: 6px;
         </div>
       </div>
 
+      <!-- Now / Next / Always mini-grid -->
+      <div class="about-now-next">
+        <h3>Rhythm of my work</h3>
+        <div class="about-now-next-grid">
+          <div class="about-now-card">
+            <span class="about-chip">Now</span>
+            <p>
+              Consolidating experience in <strong>multilateral project monitoring</strong>
+              and data-driven reporting across Francophone countries.
+            </p>
+          </div>
+          <div class="about-now-card">
+            <span class="about-chip">Next</span>
+            <p>
+              Deepening research on <strong>water stress, climate and mobility</strong>
+              and how they reshape security and development agendas.
+            </p>
+          </div>
+          <div class="about-now-card">
+            <span class="about-chip">Always</span>
+            <p>
+              Centering <strong>dignity, clarity and lived experience</strong> in how
+              we design policies, tell stories and build partnerships.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Current Projects -->
       <div class="about-projects">
-        <h3>Current Work</h3>
+        <h3>Current work</h3>
 
         <div class="projects-grid">
           <div class="project-card">
             <h4>Oman Research &amp; Cultural Diplomacy</h4>
             <p>
-              Leading a multi-partner initiative integrating field research,
-              photography, and cultural exchange across institutions.
+              Coordinating a multi-partner initiative that links field research,
+              photography and cultural exchange between Oman and European campuses.
             </p>
           </div>
 
           <div class="project-card">
             <h4>Human Security Interactive Tool</h4>
             <p>
-              Building an accessible digital experience that reframes core
-              security concepts through storytelling and systems thinking.
+              Building a digital experience that reframes security concepts through
+              stories, visualisations and systems thinking for students and practitioners.
             </p>
           </div>
         </div>
