@@ -3827,7 +3827,7 @@ let lockedCountry = null;   // last clicked country (stays colored)
       }
     }
 
-function drawCountry(containerId, countryKey) {
+function drawCountry(containerId, countryKey, center, zoom) {
   const map = L.map(containerId, {
     zoomControl: false,
     attributionControl: false,
@@ -3837,6 +3837,8 @@ function drawCountry(containerId, countryKey) {
     touchZoom: false,
     keyboard: false
   });
+
+  map.setView(center, zoom);   // <-- no fitBounds, no extra tricks
 
   const aliases = COUNTRY_NAMES[countryKey].map(normalize);
 
@@ -3848,27 +3850,7 @@ function drawCountry(containerId, countryKey) {
 
   // keep color-change logic working
   countryLayers[countryKey] = layer;
-
-  const bounds = layer.getBounds();
-
-  // first: fit whole country in the box
-  map.fitBounds(bounds, { padding: [20, 20] });
-
-  // then: tweak zoom per country so sizes look similar
-  const zoomBoost = {
-    france: 0.6,
-    japan: 0.6,
-    germany: 0          // leave as is
-  };
-
-  const extra = zoomBoost[countryKey] || 0;
-  if (extra !== 0) {
-    map.setZoom(map.getZoom() + extra);
-    map.panTo(bounds.getCenter());
-  }
 }
-
-
 
     /* ========= Visited countries map in ABOUT ========= */
 
@@ -3971,10 +3953,9 @@ async function initVisitedMap() {
       document.querySelector(".education-maps").style.display = "flex";
 
       // Same visual scale for all three; Japan balanced
-     drawCountry("map-france", "france");
-drawCountry("map-japan", "japan");
-drawCountry("map-germany", "germany");
-
+      drawCountry("map-france", "france", [46.6, 2.2], 4.5);
+      drawCountry("map-japan", "japan", [38.5, 138.5], 4.5);
+      drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
 
       // Click maps → lock color + open education popup
 document.getElementById("map-france").addEventListener("click", () => {
