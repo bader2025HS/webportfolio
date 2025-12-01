@@ -1015,40 +1015,74 @@
 
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
 
+/* --------- RESPONSIVE (EXPERIENCE) --------- */
+
 @media (max-width: 800px) {
-  /* stack cards vertically and use full phone width */
+  /* container full width with side padding */
   .experience-layout {
     max-width: 100%;
     padding: 0 16px;
     margin: 0 auto;
   }
 
+  /* stack cards vertically */
   .exp-mosaic {
     width: 100%;
     margin: 0;
-    display: flex;                 /* ignore grid on mobile */
-    flex-direction: column;        /* vertical stack */
-    gap: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .exp-card {
     width: 100%;
-    min-height: 220px;
+    min-height: auto;
   }
 
+  /* kill the flip on mobile */
+  .exp-card-inner {
+    transform: none !important;
+    height: auto;
+  }
+
+  /* faces should behave like normal blocks */
+  .exp-card-face {
+    position: relative;
+    inset: auto;
+    height: auto;
+  }
+
+  /* hide FRONT, only show BACK */
+  .exp-card-front {
+    display: none;
+  }
+
+  .exp-card-back {
+    display: block;
+    transform: none;
+    box-shadow: 0 10px 24px rgba(15,23,42,0.25);
+  }
+
+  .exp-card-back-inner {
+    height: auto;
+    overflow: visible;
+  }
+
+  /* org block centered */
   .exp-org {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 10px;
   }
 
   .exp-org-logo {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
   }
 
-  /* on mobile, expanded cards just grow downwards */
+  /* expanded cards just grow downwards */
   .exp-card--ngo.exp-card--expanded .exp-card-back,
   .exp-card--io.exp-card--expanded .exp-card-back,
   .exp-card--research.exp-card--expanded .exp-card-back,
@@ -1056,10 +1090,8 @@
     position: relative;
     top: 0;
     height: auto;
-    box-shadow: 0 14px 30px rgba(15,23,42,0.3);
   }
 }
-
 
 
 /* ===========================
