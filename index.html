@@ -1013,21 +1013,15 @@
 
 @media (max-width: 800px) {
   .exp-mosaic {
-    width: min(100vw - 40px, 80vh);
-  }
-}
-
-@media (max-width: 640px) {
-  .exp-mosaic {
     width: 100%;
-    grid-template-areas: none;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;   /* 1 column on mobile */
+    grid-template-areas: none;    /* remove 2×2 layout */
     grid-auto-rows: auto;
-    gap: 12px;
+    gap: 14px;
   }
 
   .exp-card {
-    min-height: 180px;
+    min-height: 200px;
   }
 
   .exp-org {
@@ -1048,6 +1042,7 @@
     height: 200%;
   }
 }
+
 
 /* ===========================
    WORK – VERTICAL STRIPS
