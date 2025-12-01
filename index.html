@@ -1498,7 +1498,7 @@
 
 
 /* ===========================
-   ACTIVITIES
+   ACTIVITIES (new layout)
 =========================== */
 
 #activities {
@@ -1506,62 +1506,120 @@
   text-align: center;
 }
 
+/* 3 cards, centered, tighter */
 .activities-row {
   display: flex;
   justify-content: center;
-  gap: 18px;             /* smaller gap so things feel tighter */
+  align-items: stretch;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-top: 10px;      /* pulls the cards closer to the banner */
+  max-width: 780px;
+  margin: 6px auto 0;
 }
 
-/* Modern “card” look */
+/* Base card */
 .activity-box {
-  background: #ffffff;
+  position: relative;
+  width: 220px;              /* smaller width */
+  min-height: 120px;         /* smaller height */
+  padding: 16px 18px 18px;
   border-radius: 14px;
-  padding: 20px 24px;
-  width: 260px;
-  min-height: 150px;
+  background: #020617;       /* deep slate */
+  color: #e5e7eb;
+  border: 1px solid rgba(148,163,184,0.35);
+  box-shadow: 0 8px 22px rgba(15,23,42,0.35);
 
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  overflow: hidden;
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
-/* Hover — dynamic but clean */
-.activity-box:hover {
+/* Slight stagger to avoid “flat” look */
+.activity-box:nth-child(1) {
+  transform: translateY(2px);
+}
+.activity-box:nth-child(2) {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(15,23,42,0.18);
-  border-color: rgba(0,159,165,0.45);   /* turquoise accent */
+}
+.activity-box:nth-child(3) {
+  transform: translateY(2px);
 }
 
-.activity-box h3 {
-  margin-bottom: 8px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #0f172a;
-}
-
-.activity-box p {
-  font-size: 14px;
-  line-height: 1.42;
-  color: #475569;
-}
-
-/* Decorative turquoise top line */
+/* Colored accent “ribbon” in the corner */
 .activity-box::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  border-radius: 14px 14px 0 0;
-  background: #0bbfc4;       /* your turquoise */
-  opacity: 0.9;
+  inset: -40px -40px auto auto;
+  height: 60px;
+  transform: rotate(35deg);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Different accent per card */
+.activity-box:nth-child(1)::before {
+  background: linear-gradient(90deg, #0bbfc4, #38bdf8);
+}
+.activity-box:nth-child(2)::before {
+  background: linear-gradient(90deg, #f97316, #facc15);
+}
+.activity-box:nth-child(3)::before {
+  background: linear-gradient(90deg, #ec4899, #a855f7);
+}
+
+/* Small pill label (optional: use <small> in HTML if you want) */
+.activity-box small {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+/* Title */
+.activity-box h3 {
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+/* Text */
+.activity-box p {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #cbd5f5;
+}
+
+/* Hover: lift + glow */
+.activity-box:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 34px rgba(15,23,42,0.65);
+  border-color: rgba(56,189,248,0.75);
+}
+
+/* On very small screens: remove stagger so it doesn’t look messy */
+@media (max-width: 640px) {
+  .activities-row {
+    gap: 12px;
+  }
+  .activity-box,
+  .activity-box:nth-child(1),
+  .activity-box:nth-child(2),
+  .activity-box:nth-child(3) {
+    transform: translateY(0);
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
 }
 
 
