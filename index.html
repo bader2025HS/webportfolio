@@ -821,12 +821,12 @@
 }
 
 .exp-org {
-  display: flex;
-  flex-direction: column;   /* logo on top, text below */
-  align-items: center;      /* center horizontally */
-  text-align: center;       /* center the text too */
-  gap: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr; /* logo left, text right */
+  align-items: center;
+  gap: 14px;
 }
+
 
 .exp-org-logo {
   width: 90px;              /* bigger logo */
@@ -860,17 +860,27 @@
 }
 
 .exp-org-list {
+  grid-column: 1 / -1;   /* expand across the full row */
+  margin-left: 0;        /* remove weird indent */
+  padding-left: 20px;    /* normal bullet indentation */
+  margin-top: 6px;
   font-size: 0.82rem;
-  margin-left: 16px;
-  margin-bottom: 2px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
+
 
 .exp-card-back-hint {
   margin-top: 2px;
   font-size: 0.75rem;
   color: #9ca3af;
 }
+
+    .exp-org-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 
 /* mapping into the 2×2 grid */
 
