@@ -2211,6 +2211,15 @@ margin-bottom: 6px;
   font-size: 0.82rem;
 }
 
+    /* Force identical row height in Tools and Soft Skills */
+.terminal-column.tools .terminal-row,
+.terminal-column.softskills .terminal-row {
+  min-height: 46px;       /* ← match your Tools height */
+  display: flex;          /* ensures vertical centering */
+  align-items: center;
+}
+
+
 /* Responsive */
 
 @media (max-width: 900px) {
