@@ -1497,49 +1497,73 @@
 }
 
 
-    /* ===========================
+/* ===========================
    ACTIVITIES
 =========================== */
 
-/* already existing */
 #activities {
-  margin-top: -20px;
+  margin-top: -10px;
   text-align: center;
 }
 
 .activities-row {
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 18px;             /* smaller gap so things feel tighter */
   flex-wrap: wrap;
+  margin-top: 10px;      /* pulls the cards closer to the banner */
 }
 
+/* Modern “card” look */
 .activity-box {
-  background: #f7f9fa;
-  border-radius: 16px;        /* slightly smaller corners */
-  padding: 18px 22px;         /* smaller padding */
-  width: 240px;               /* was 300px */
-  min-height: 140px;          /* was 180px */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  transition: 0.3s ease;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 24px;
+  width: 260px;
+  min-height: 150px;
+
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
+/* Hover — dynamic but clean */
 .activity-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15,23,42,0.18);
+  border-color: rgba(0,159,165,0.45);   /* turquoise accent */
 }
 
 .activity-box h3 {
-margin-bottom: 6px;
-  font-size: 18px;            /* was 22px */
+  margin-bottom: 8px;
+  font-size: 18px;
   font-weight: 600;
+  color: #0f172a;
 }
 
 .activity-box p {
-  font-size: 14px;            /* was 15px */
-  line-height: 1.35;
-  color: #333;
+  font-size: 14px;
+  line-height: 1.42;
+  color: #475569;
 }
+
+/* Decorative turquoise top line */
+.activity-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 14px 14px 0 0;
+  background: #0bbfc4;       /* your turquoise */
+  opacity: 0.9;
+}
+
 
 /* 🔻 Horizontal auto-scrolling strip */
 .activities-banner {
