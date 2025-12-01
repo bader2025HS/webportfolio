@@ -1519,17 +1519,18 @@
 /* each card */
 .activity-box {
   background: #ffffff;
-  border: 1px solid #d1d5db;   /* light grey border */
+  border: 1px solid #d1d5db;
   border-radius: 10px;
   padding: 18px 22px;
 
   display: grid;
-  grid-template-columns: 120px 1fr; /* title left, text right */
-  column-gap: 16px;
+  grid-template-columns: 105px 1fr; /* was 120px 1fr */
+  column-gap: 8px;                  /* was 16px → brings text closer */
   align-items: center;
 
   transition: border 0.2s ease;
 }
+
 
 /* hover – subtle only */
 .activity-box:hover {
