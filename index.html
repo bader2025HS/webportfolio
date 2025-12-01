@@ -93,28 +93,34 @@
    ABOUT – VERTICAL STATS COLUMN
 =========================== */
 
+/* ===========================
+   ABOUT – LAYOUT
+=========================== */
+
 #about {
   margin-top: -10px;
 }
 
 .about-shell {
-  max-width: 1050px;
-  margin: 6px auto 24px;    /* less vertical space */
+  max-width: 1200px;
+  margin: 6px auto 24px;
   display: flex;
-  justify-content: flex-start;
   align-items: flex-start;
-  gap: 32px;                 /* space between stats and text box */
+  justify-content: flex-start;
+  gap: 32px;                 /* space between stats, text box, and map */
 }
 
+/* ===========================
+   ABOUT – VERTICAL STATS COLUMN
+=========================== */
 
 /* compact vertical stack */
 .about-stats-column {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-left: 0; /* or 0; tweak by eye */
+  gap: 12px;                 /* smaller gap = less height */
+  margin-left: 10px;
 }
-
 
 /* one stat */
 .about-stat {
@@ -159,7 +165,6 @@
   color: #6b7280;
 }
 
-
 /* HOVER EFFECTS */
 .about-stat:hover::before {
   transform: scaleY(1);
@@ -173,10 +178,74 @@
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
 
-/* MOBILE – even more compact so it never causes extra scrolling */
+/* ===========================
+   ABOUT – TEXT BOX (RIGHT)
+=========================== */
+
+.about-text-box {
+  flex: 1;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #ffffff;                 /* white box */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;                    /* no shadow */
+  line-height: 1.6;
+  font-size: 0.96rem;
+  color: #111827;
+}
+
+.about-text-box p:first-child {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* ===========================
+   ABOUT – TRAVEL MAP (SQUARE, BOTTOM-RIGHT)
+=========================== */
+
+.about-map-box {
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* Leaflet map inside square */
+.about-map-box #visitedMap {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+/* make Leaflet background transparent inside About */
+#visitedMap.leaflet-container {
+  background: transparent !important;
+}
+
+/* micro glow when hovering country polygons */
+#visitedMap .leaflet-interactive {
+  transition: filter 0.25s ease, stroke-width 0.2s ease;
+}
+#visitedMap .leaflet-interactive:hover {
+  filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.55));
+}
+
+/* ===========================
+   MOBILE – STACKED LAYOUT
+=========================== */
+
 @media (max-width: 640px) {
   .about-shell {
     margin: 4px auto 18px;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .about-stats-column {
+    margin-left: 0;
   }
 
   .about-stat-number {
@@ -191,59 +260,18 @@
   .about-stat {
     padding: 2px 0 2px 14px;
   }
+
+  .about-text-box {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+  }
+
+  .about-map-box {
+    width: 100%;
+    height: 260px;
+  }
 }
 
-    /* right-side description box */
-.about-text-box {
-  flex: 1;
-  padding: 18px 20px;
-  border-radius: 14px;
-  background: #ffffff;                 /* pure white */
-  border: 1px solid rgba(0,0,0,0.08);   /* very light border */
-  box-shadow: none;                    /* no shadow */
-  line-height: 1.6;
-  font-size: 0.96rem;
-  color: #111;                          /* darker text for readability */
-}
-
-
-/* optional: make first sentence stand out */
-.about-text-box p:first-child {
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-    /* ====== ABOUT – TRAVEL MAP ====== */
-
-.map-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  overflow: visible;
-  max-width: 1050px;
-  margin: 24px auto 0;  /* centers under About */
-}
-
-#visitedMap {
-  height: min(60vh, 520px);
-  width: 100%;
-  border-radius: 14px;
-}
-
-/* make Leaflet background transparent inside About */
-#visitedMap.leaflet-container {
-  background: transparent !important;
-}
-
-/* micro glow when hovering country polygons */
-#visitedMap .leaflet-interactive {
-  transition: filter .25s ease, stroke-width .2s ease;
-}
-#visitedMap .leaflet-interactive:hover {
-  filter: drop-shadow(0 0 8px rgba(14,165,162,0.55));
-}
 
     /* ===========================
        EDUCATION MAPS
@@ -2516,10 +2544,9 @@ margin-bottom: 6px;
 <!-- ABOUT -->
 <section id="about">
   
-  <!-- FLEX WRAPPER: STATS (LEFT) + TEXT BOX (RIGHT) -->
   <div class="about-shell">
 
-    <!-- LEFT: STATS COLUMN -->
+    <!-- LEFT: STATS -->
     <div class="about-stats-column">
 
       <div class="about-stat">
@@ -2549,20 +2576,21 @@ margin-bottom: 6px;
 
     </div>
 
-    <!-- RIGHT: TEXT BOX -->
+    <!-- MIDDLE: TEXT BOX -->
     <div class="about-text-box">
-      <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
+      <p><strong>I make sense first, then make it simple.</strong> Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
       <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
+    </div>
+
+    <!-- RIGHT-BOTTOM: MAP CARD -->
+    <div class="about-map-box">
+      <div id="visitedMap"></div>
     </div>
 
   </div>
 
-  <!-- Travel / visited countries map (full width under the two columns) -->
-  <div class="map-card">
-    <div id="visitedMap" aria-label="Visited countries map"></div>
-  </div>
-
 </section>
+
 
 
 
