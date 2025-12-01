@@ -2316,29 +2316,6 @@ margin-bottom: 6px;
       z-index: 9999;
     }
 
-
-    /* Hide normal cursor */
-body, * {
-  cursor: none !important;
-}
-
-/* The turquoise dot cursor */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 14px;
-  height: 14px;
-  background: #0bbfc4; /* turquoise */
-  border-radius: 50%;
-  pointer-events: none;   /* don't block clicks */
-  transform: translate(-50%, -50%);
-  z-index: 999999;        /* always on top */
-  mix-blend-mode: difference;
-  transition: transform 0.08s linear; /* smooth follow */
-}
-
-
     /* ===========================
            LIGHTBOX (PHOTOS)
     ============================ */
@@ -3614,8 +3591,6 @@ body, * {
 
     <div id="ui-tooltip"></div>  <!-- put this here -->
 
-  <div class="cursor-dot"></div>
-
   
 <!-- ================= END EDUCATION LIGHTBOX ================= -->
 
@@ -4341,13 +4316,6 @@ if (initial) setActiveWork(initial.dataset.project);
 
 
   </script>
-
-  <script>
-document.addEventListener("mousemove", (e) => {
-  const dot = document.querySelector(".cursor-dot");
-  dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-});
-</script>
 
 </body>
 </html>
