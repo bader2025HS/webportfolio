@@ -1531,16 +1531,16 @@
     min-height: auto;
   }
 
-  /* ORDER FIX → strips go first, content after */
+  /* ORDER → strips first, content after */
   .work-strips {
-    order: 0;                    /* top */
+    order: 0;
   }
 
   .work-main {
-    order: 1;                    /* bottom */
+    order: 1;
   }
 
-  /* Strips become vertical stack */
+  /* Strips = vertical stack */
   .work-strips {
     flex: 0 0 auto;
     display: flex;
@@ -1558,7 +1558,7 @@
     justify-content: space-between;
     padding: 14px 18px;
     gap: 10px;
-    border-bottom: 1px solid rgba(15,23,42,0.08);
+    border-bottom: none;         /* ← remove dark line */
     opacity: 0.95;
     box-shadow: none;
   }
@@ -1567,7 +1567,7 @@
     border-bottom: none;
   }
 
-  /* Stop the “active strip becomes wider” desktop behavior */
+  /* kill “wider when active” behavior on mobile */
   .work-strip,
   .work-strip.is-active {
     flex-basis: auto;
@@ -1612,6 +1612,7 @@
     gap: 8px;
   }
 }
+
 
 
 @media (max-width: 540px) {
