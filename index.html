@@ -1522,16 +1522,25 @@
 /* Responsive */
 
 @media (max-width: 840px) {
-  /* Whole card becomes vertical:
-     strips on top, content opens below */
+
+  /* Whole card becomes vertical */
   .work-shell {
-    flex-direction: column;
+    flex-direction: column;      /* strips at the top, content below */
     border-radius: 26px;
     overflow: hidden;
     min-height: auto;
   }
 
-  /* Strips = vertical stack */
+  /* ORDER FIX → strips go first, content after */
+  .work-strips {
+    order: 0;                    /* top */
+  }
+
+  .work-main {
+    order: 1;                    /* bottom */
+  }
+
+  /* Strips become vertical stack */
   .work-strips {
     flex: 0 0 auto;
     display: flex;
@@ -1544,20 +1553,21 @@
     flex: 0 0 auto;
     width: 100%;
     height: auto;
-    flex-direction: row;          /* label + caption on one line */
+    flex-direction: row;         /* horizontal: LABEL | < */
     align-items: center;
     justify-content: space-between;
-    padding: 12px 18px;
+    padding: 14px 18px;
     gap: 10px;
     border-bottom: 1px solid rgba(15,23,42,0.08);
-    opacity: 0.9;                 /* a bit stronger on mobile */
+    opacity: 0.95;
+    box-shadow: none;
   }
 
   .work-strip:last-child {
     border-bottom: none;
   }
 
-  /* kill the “wider when active” behavior on mobile */
+  /* Stop the “active strip becomes wider” desktop behavior */
   .work-strip,
   .work-strip.is-active {
     flex-basis: auto;
@@ -1565,28 +1575,44 @@
     box-shadow: none;
   }
 
-  /* labels become horizontal text */
+  /* Strip label now horizontal */
   .work-strip-label {
     writing-mode: horizontal-tb;
     text-orientation: mixed;
-    font-size: 0.8rem;
+    font-size: 0.84rem;
+    letter-spacing: 0.15em;
     text-align: left;
   }
 
   .work-strip-caption {
     text-align: right;
+    font-size: 0.7rem;
   }
 
-  /* content panel under the stacked tabs */
+  /* Content panel below strips */
   .work-main {
-    padding: 24px 20px 26px;
+    padding: 26px 22px 32px;
+  }
+
+  .work-main-title {
+    font-size: 1.65rem;
   }
 
   .work-main-title::before {
-    font-size: 3rem;
-    top: -36px;
+    font-size: 3.2rem;
+    top: -34px;
+    left: -4px;
+  }
+
+  .work-main-desc {
+    font-size: 0.95rem;
+  }
+
+  .work-main-chips {
+    gap: 8px;
   }
 }
+
 
 
 @media (max-width: 540px) {
