@@ -2599,119 +2599,28 @@
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
 
-
-    /* ============================
-   MOBILE MENU (ONLY < 840px)
-============================ */
-/* ============================
-   MOBILE MENU (ONLY < 840px)
-============================ */
-
-@media (max-width: 840px) {
-
-  /* HAMBURGER */
-  .mobile-menu-toggle {
-    position: fixed;
-    top: 14px;
-    right: 14px;
-    z-index: 9999;
-    width: 36px;
-    height: 32px;
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.12);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 4px;
-    gap: 4px;
-    cursor: pointer;
-  }
-
-  .mobile-menu-toggle span {
-    width: 18px;
-    height: 2px;
-    background: #111827;
-    border-radius: 999px;
-    transition: 0.2s;
-  }
-
-  /* X animation */
-  .mobile-menu-toggle.is-open span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-  .mobile-menu-toggle.is-open span:nth-child(2) {
-    opacity: 0;
-  }
-  .mobile-menu-toggle.is-open span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-
-  /* HIDE NAV ON MOBILE */
-  .main-nav {
-    display: none !important;
-  }
-
-  /* SHOW NAV WHEN MENU IS OPEN */
-  body.mobile-nav-open .main-nav {
-    display: block !important;
-    position: fixed;
-    top: 60px;
-    left: 12px;
-    right: 12px;
-    background: #ffffff;
-    z-index: 9998;
-    padding: 14px;
-    border-radius: 18px;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.2);
-  }
-
-  .main-nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 0;
-    padding: 0;
-  }
-
-  .main-nav li a {
-    width: 100%;
-    display: block;
-    text-align: center;
-    padding: 10px 0;
-  }
-}
-
-
-/* DESKTOP = UNTOUCHED */
-
   </style>
 </head>
 
 <body>
-
-  <button class="mobile-menu-toggle" aria-label="Menu">
-  <span></span><span></span><span></span>
-</button>
 
   <div id="scrollProgress"></div>
 
   <div class="page">
     <header>
       <h1>Bader Suliman</h1>
-      <nav class="main-nav">
-         <ul>
-      <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#activities">Activities</a></li>
-      <li><a href="#contact">Contact</a></li>
-       </ul>
-  </nav>
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
@@ -4611,20 +4520,8 @@ workStrips.forEach(strip => {
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
-    const menuBtn = document.querySelector('.mobile-menu-toggle');
-
-menuBtn.addEventListener('click', () => {
-  menuBtn.classList.toggle('is-open');
-  document.body.classList.toggle('mobile-nav-open');
-});
-
 
   </script>
 
 </body>
-
-  <button class="mobile-menu-toggle" aria-label="Menu">
-  <span></span><span></span><span></span>
-</button>
-
 </html>
