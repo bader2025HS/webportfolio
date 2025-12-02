@@ -1013,6 +1013,8 @@
 
 /* --------- RESPONSIVE --------- */
 
+/* --------- RESPONSIVE (EXPERIENCE) --------- */
+
 @media (max-width: 800px) {
   /* full-width container with side padding */
   .experience-layout {
@@ -1035,7 +1037,7 @@
     position: relative;
   }
 
-  /* remove the vertical accent stripe */
+  /* remove vertical accent stripe */
   .exp-card::before {
     display: none;
   }
@@ -1073,18 +1075,24 @@
 
   /* LOGO + TITLE ROW (logo top-left, text to the right) */
   .exp-org {
-    display: grid;
-    grid-template-columns: auto 1fr;  /* logo | text */
+    display: flex;
+    flex-wrap: wrap;            /* allows bullets to go onto their own line */
+    align-items: flex-start;
     gap: 10px;
-    align-items: flex-start;          /* logo + text aligned to top */
     text-align: left;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .exp-org-logo {
     width: 60px;
     height: 60px;
     margin: 0;
+    flex: 0 0 auto;             /* fixed-size logo on the left */
+  }
+
+  .exp-org-text {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .exp-org-text h3,
@@ -1094,13 +1102,11 @@
 
   /* BULLETS UNDER BOTH (full width, left-aligned) */
   .exp-org-list {
-    grid-column: 1 / -1 !important;   /* span below logo + text */
+    flex: 0 0 100%;             /* forces list onto a new row, full width */
     text-align: left !important;
-    padding-left: 20px !important;    /* normal bullet indent */
-    margin-left: 0 !important;
-    margin-top: 6px;
-    width: 100% !important;
-    display: block !important;
+    padding-left: 20px;
+    margin: 6px 0 0;
+    list-style-position: outside;
     font-size: 0.85rem;
     line-height: 1.45;
   }
@@ -1120,6 +1126,7 @@
     box-shadow: none;
   }
 }
+
 
 
 /* ===========================
