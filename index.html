@@ -2603,10 +2603,13 @@
     /* ============================
    MOBILE MENU (ONLY < 840px)
 ============================ */
+/* ============================
+   MOBILE MENU (ONLY < 840px)
+============================ */
 
 @media (max-width: 840px) {
 
-  /* HAMBURGER BUTTON */
+  /* HAMBURGER */
   .mobile-menu-toggle {
     position: fixed;
     top: 14px;
@@ -2634,7 +2637,7 @@
     transition: 0.2s;
   }
 
-  /* X animation when open */
+  /* X animation */
   .mobile-menu-toggle.is-open span:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
@@ -2645,35 +2648,41 @@
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  /* HIDE THE CURRENT DESKTOP MENU ON MOBILE */
-  .nav-pill,
-  .nav-pills {
+  /* HIDE NAV ON MOBILE */
+  .main-nav {
     display: none !important;
   }
 
-  /* WHEN MENU IS OPEN: SHOW PILLS VERTICALLY */
-  .mobile-nav-open .nav-pills {
-    display: flex !important;
+  /* SHOW NAV WHEN MENU IS OPEN */
+  body.mobile-nav-open .main-nav {
+    display: block !important;
     position: fixed;
     top: 60px;
     left: 12px;
     right: 12px;
-    flex-direction: column;
     background: #ffffff;
+    z-index: 9998;
     padding: 14px;
     border-radius: 18px;
-    gap: 10px;
     box-shadow: 0 18px 40px rgba(0,0,0,0.2);
-    z-index: 9998;
   }
 
-  .mobile-nav-open .nav-pill {
-    display: flex !important;
+  .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-nav li a {
     width: 100%;
-    justify-content: center;
-    padding: 12px 0;
+    display: block;
+    text-align: center;
+    padding: 10px 0;
   }
 }
+
 
 /* DESKTOP = UNTOUCHED */
 
@@ -2691,18 +2700,18 @@
   <div class="page">
     <header>
       <h1>Bader Suliman</h1>
-      <nav>
-        <ul>
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#activities">Activities</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <nav class="main-nav">
+         <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#contact">Contact</a></li>
+       </ul>
+  </nav>
     </header>
 
     <main>
