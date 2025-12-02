@@ -1015,6 +1015,8 @@
 
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
 
+/* --------- RESPONSIVE (EXPERIENCE) --------- */
+
 @media (max-width: 800px) {
   /* full-width container with side padding */
   .experience-layout {
@@ -1037,7 +1039,12 @@
     position: relative;
   }
 
-  /* 🔹 disable flip on mobile – show back only */
+  /* remove the blue vertical stripe */
+  .exp-card::before {
+    display: none;
+  }
+
+  /* disable flip on mobile – show back only */
   .exp-card-inner {
     transform: none !important;
     height: auto;
@@ -1057,9 +1064,9 @@
   .exp-card-back {
     display: block !important;
     transform: none !important;
-    box-shadow: none !important;                    /* no shadow */
+    box-shadow: none !important;
     border-radius: 18px;
-    border: 1px solid rgba(0, 0, 0, 0.08);         /* subtle border */
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .exp-card-back-inner {
@@ -1068,19 +1075,19 @@
     overflow: visible;
   }
 
-  /* logo left, text right */
+  /* LOGO + TITLE ROW (logo top-left, text to the right) */
   .exp-org {
     display: grid;
-    grid-template-columns: 64px 1fr;               /* logo | text */
-    gap: 12px;
-    align-items: center;
+    grid-template-columns: auto 1fr;  /* logo | text */
+    gap: 10px;
+    align-items: flex-start;          /* logo & text aligned to top */
     text-align: left;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .exp-org-logo {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     margin: 0;
   }
 
@@ -1089,12 +1096,12 @@
     text-align: left !important;
   }
 
-  /* bullets left-aligned, normal list */
+  /* BULLETS UNDER BOTH (full width) */
   .exp-org-list {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1;             /* span below logo + text */
     text-align: left !important;
-    padding-left: 20px;                            /* normal bullet indent */
-    margin: 4px 0 0;
+    padding-left: 20px;
+    margin: 6px 0 0;
     font-size: 0.85rem;
     line-height: 1.45;
   }
@@ -1110,6 +1117,7 @@
     box-shadow: none;
   }
 }
+
 
 
 /* ===========================
