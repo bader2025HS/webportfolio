@@ -1596,18 +1596,21 @@
     margin-bottom: 0;
   }
 
-  /* Content panel below strips */
+  /* Content panel below strips – really pull it left */
   .work-main {
-    padding: 20px 10px 28px 16px;   /* ← pulled further left */
+    padding: 20px 10px 28px 10px !important;  /* ← much smaller & forced */
   }
 
-  /* In case there is an inner wrapper */
-  .work-board-left {
-    padding: 0 10px 24px 16px;      /* ← removes big desktop padding */
+  /* In case there is an inner wrapper, nuke extra padding/margin */
+  .work-board-left,
+  .work-detail {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
   }
 
   .work-main-title {
     font-size: 1.65rem;
+    margin-left: 0;
   }
 
   .work-main-title::before {
@@ -1618,10 +1621,13 @@
 
   .work-main-desc {
     font-size: 0.95rem;
+    margin-left: 0;
   }
 
-  .work-main-chips {
-    gap: 8px;
+  .work-main-meta,
+  .work-main-chips,
+  .work-main-links {
+    margin-left: 0;
   }
 }
 
