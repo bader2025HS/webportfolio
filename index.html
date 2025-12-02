@@ -1017,42 +1017,38 @@
 
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
 
-/* ===========================
-   EXPERIENCE — MOBILE VERSION
-=========================== */
-
 @media (max-width: 800px) {
 
-  /* container */
   .experience-layout {
     max-width: 100%;
     padding: 0 16px;
     margin: 0 auto;
   }
 
-  /* stack cards vertically */
   .exp-mosaic {
     width: 100%;
-    display: block;
     margin: 0;
+    display: block;
   }
 
   .exp-card {
     width: 100%;
     margin-bottom: 18px;
+    min-height: auto;
     position: relative;
   }
 
-  /* remove left accent stripe */
+  /* remove teal vertical bar */
   .exp-card::before {
-    display: none !important;
+    display: none;
   }
 
   /* disable flip */
   .exp-card-inner {
     transform: none !important;
-    height: auto !important;
+    height: auto;
   }
+
   .exp-card-front {
     display: none !important;
   }
@@ -1060,76 +1056,71 @@
   .exp-card-back {
     display: block !important;
     border-radius: 18px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.08);
     box-shadow: none !important;
   }
 
   .exp-card-back-inner {
-    padding: 18px 16px 20px;
+    padding: 16px 14px 18px;
+    overflow: visible;
   }
 
-  /* ===============
-     TOP ROW (logo + title only)
-     =============== */
+  /* ROW 1 — logo + title ONLY */
   .exp-org {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: auto 1fr;   /* logo | title */
+    gap: 10px;
     align-items: flex-start;
-    gap: 12px;
-    text-align: left;
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
   .exp-org-logo {
     width: 60px;
     height: 60px;
-    flex: 0 0 auto;       /* fixed logo */
+    flex-shrink: 0;
   }
 
-  .exp-org-text {
-    flex: 1 1 auto;       /* title container */
-    min-width: 0;
-  }
-
+  /* TITLE stays next to the logo */
   .exp-org-text h3 {
-    margin: 0 0 4px 0;
     text-align: left !important;
+    margin: 0;
   }
 
-  /* ===============
-     CAPTION — FULL WIDTH UNDER LOGO + TITLE
-     =============== */
+  /* CAPTION moves BELOW both logo + title */
   .exp-org-meta {
-    width: 100%;
+    grid-column: 1 / -1;  /* full width row */
     text-align: left !important;
-    margin: 4px 0 4px 0;
+    margin-top: 6px;
   }
 
-  /* ===============
-     BULLET LIST — FULL WIDTH LEFT-ALIGNED
-     =============== */
+  /* BULLETS also full width under caption */
   .exp-org-list {
-    width: 100%;
+    grid-column: 1 / -1;  /* full width row */
     text-align: left !important;
-    list-style-position: outside;
-    padding-left: 22px !important;
+    padding-left: 20px !important;
     margin-top: 6px;
-    font-size: 0.9rem;
+    list-style-position: outside;
+    font-size: 0.85rem;
     line-height: 1.45;
   }
 
   .exp-org-list li {
     text-align: left !important;
   }
+}
 
-  /* expanded cards behave normally */
-  .exp-card--expanded .exp-card-back {
+  /* expanded states: just behave like normal blocks */
+  .exp-card--ngo.exp-card--expanded .exp-card-back,
+  .exp-card--io.exp-card--expanded .exp-card-back,
+  .exp-card--research.exp-card--expanded .exp-card-back,
+  .exp-card--assoc.exp-card--expanded .exp-card-back {
     position: relative;
     top: 0;
     height: auto;
-    box-shadow: none !important;
+    box-shadow: none;
   }
 }
+
 
 
 /* ===========================
