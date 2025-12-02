@@ -1014,7 +1014,7 @@
 /* --------- RESPONSIVE --------- */
 
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
-
+    
 @media (max-width: 800px) {
   /* full-width container with side padding */
   .experience-layout {
@@ -1073,10 +1073,10 @@
     overflow: visible;
   }
 
-  /* LOGO + TITLE ROW (logo top-left, text to the right) */
+  /* LOGO + TITLE ROW */
   .exp-org {
     display: flex;
-    flex-wrap: wrap;            /* allows bullets to go onto their own line */
+    flex-wrap: nowrap;          /* 🔥 CHANGED: force title to stay next to logo */
     align-items: flex-start;
     gap: 10px;
     text-align: left;
@@ -1087,22 +1087,30 @@
     width: 60px;
     height: 60px;
     margin: 0;
-    flex: 0 0 auto;             /* fixed-size logo on the left */
+    flex: 0 0 auto;
   }
 
   .exp-org-text {
     flex: 1 1 auto;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  .exp-org-text h3,
+  /* title stays next to logo */
+  .exp-org-text h3 {
+    white-space: nowrap;        /* 🔥 ensures title NEVER goes below logo */
+    text-align: left !important;
+  }
+
   .exp-org-meta {
     text-align: left !important;
+    margin-top: 4px;
   }
 
   /* BULLETS UNDER BOTH (full width, left-aligned) */
   .exp-org-list {
-    flex: 0 0 100%;             /* forces list onto a new row, full width */
+    flex: 0 0 100%;
     text-align: left !important;
     padding-left: 20px;
     margin: 6px 0 0;
@@ -1115,7 +1123,7 @@
     text-align: left !important;
   }
 
-  /* expanded states: just behave like normal blocks */
+  /* expanded states: normal blocks */
   .exp-card--ngo.exp-card--expanded .exp-card-back,
   .exp-card--io.exp-card--expanded .exp-card-back,
   .exp-card--research.exp-card--expanded .exp-card-back,
