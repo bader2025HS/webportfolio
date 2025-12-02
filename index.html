@@ -1016,7 +1016,7 @@
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
 
 @media (max-width: 800px) {
-  /* container full width with side padding */
+  /* full-width container with side padding */
   .experience-layout {
     max-width: 100%;
     padding: 0 16px;
@@ -1037,7 +1037,7 @@
     position: relative;
   }
 
-  /* 🔹 DISABLE FLIP ON MOBILE */
+  /* 🔹 disable flip on mobile – show back only */
   .exp-card-inner {
     transform: none !important;
     height: auto;
@@ -1050,7 +1050,6 @@
     backface-visibility: visible;
   }
 
-  /* hide FRONT, show BACK only */
   .exp-card-front {
     display: none !important;
   }
@@ -1058,29 +1057,49 @@
   .exp-card-back {
     display: block !important;
     transform: none !important;
-    box-shadow: 0 10px 24px rgba(15,23,42,0.25);
+    box-shadow: none !important;                    /* no shadow */
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);         /* subtle border */
   }
 
   .exp-card-back-inner {
+    padding: 16px 14px 18px;
     height: auto;
     overflow: visible;
   }
 
-  /* logos + text centered */
+  /* logo left, text right */
   .exp-org {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 64px 1fr;               /* logo | text */
+    gap: 12px;
     align-items: center;
-    text-align: center;
-    gap: 10px;
+    text-align: left;
+    margin-bottom: 8px;
   }
 
   .exp-org-logo {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
+    margin: 0;
   }
 
-  /* expanded states: just normal blocks, no 200% height */
+  .exp-org-text h3,
+  .exp-org-meta {
+    text-align: left !important;
+  }
+
+  /* bullets left-aligned, normal list */
+  .exp-org-list {
+    grid-column: 1 / -1;
+    text-align: left !important;
+    padding-left: 20px;                            /* normal bullet indent */
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  /* expanded states: just behave like normal blocks */
   .exp-card--ngo.exp-card--expanded .exp-card-back,
   .exp-card--io.exp-card--expanded .exp-card-back,
   .exp-card--research.exp-card--expanded .exp-card-back,
@@ -1088,7 +1107,7 @@
     position: relative;
     top: 0;
     height: auto;
-    box-shadow: 0 12px 26px rgba(15,23,42,0.3);
+    box-shadow: none;
   }
 }
 
