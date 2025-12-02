@@ -2599,10 +2599,92 @@
     .lightbox-arrow.left { left: -50px; }
     .lightbox-arrow.right { right: -50px; }
 
+
+    /* ============================
+   MOBILE MENU (ONLY < 840px)
+============================ */
+
+@media (max-width: 840px) {
+
+  /* HAMBURGER BUTTON */
+  .mobile-menu-toggle {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 9999;
+    width: 36px;
+    height: 32px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  .mobile-menu-toggle span {
+    width: 18px;
+    height: 2px;
+    background: #111827;
+    border-radius: 999px;
+    transition: 0.2s;
+  }
+
+  /* X animation when open */
+  .mobile-menu-toggle.is-open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .mobile-menu-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-toggle.is-open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* HIDE THE CURRENT DESKTOP MENU ON MOBILE */
+  .nav-pill,
+  .nav-pills {
+    display: none !important;
+  }
+
+  /* WHEN MENU IS OPEN: SHOW PILLS VERTICALLY */
+  .mobile-nav-open .nav-pills {
+    display: flex !important;
+    position: fixed;
+    top: 60px;
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 18px;
+    gap: 10px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+    z-index: 9998;
+  }
+
+  .mobile-nav-open .nav-pill {
+    display: flex !important;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 0;
+  }
+}
+
+/* DESKTOP = UNTOUCHED */
+
   </style>
 </head>
 
 <body>
+
+  <button class="mobile-menu-toggle" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
 
   <div id="scrollProgress"></div>
 
@@ -4520,8 +4602,20 @@ workStrips.forEach(strip => {
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
+    const menuBtn = document.querySelector('.mobile-menu-toggle');
+
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('is-open');
+  document.body.classList.toggle('mobile-nav-open');
+});
+
 
   </script>
 
 </body>
+
+  <button class="mobile-menu-toggle" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
 </html>
