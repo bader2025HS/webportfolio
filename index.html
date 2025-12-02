@@ -1013,6 +1013,8 @@
 
 /* --------- RESPONSIVE --------- */
 
+/* --------- RESPONSIVE (EXPERIENCE) --------- */
+
 @media (max-width: 800px) {
   /* container full width with side padding */
   .experience-layout {
@@ -1021,21 +1023,50 @@
     margin: 0 auto;
   }
 
-  /* stack cards vertically */
+  /* stack cards vertically, no more grid */
   .exp-mosaic {
     width: 100%;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: block;
   }
 
   .exp-card {
     width: 100%;
-    min-height: 220px;
+    margin-bottom: 18px;
+    min-height: auto;
+    position: relative;
   }
 
-  /* org block centered on the BACK side when you flip */
+  /* 🔹 DISABLE FLIP ON MOBILE */
+  .exp-card-inner {
+    transform: none !important;
+    height: auto;
+  }
+
+  .exp-card-face {
+    position: relative;
+    inset: auto;
+    height: auto;
+    backface-visibility: visible;
+  }
+
+  /* hide FRONT, show BACK only */
+  .exp-card-front {
+    display: none !important;
+  }
+
+  .exp-card-back {
+    display: block !important;
+    transform: none !important;
+    box-shadow: 0 10px 24px rgba(15,23,42,0.25);
+  }
+
+  .exp-card-back-inner {
+    height: auto;
+    overflow: visible;
+  }
+
+  /* logos + text centered */
   .exp-org {
     display: flex;
     flex-direction: column;
@@ -1049,7 +1080,7 @@
     height: 72px;
   }
 
-  /* when a card is expanded on mobile, let the back just grow downwards */
+  /* expanded states: just normal blocks, no 200% height */
   .exp-card--ngo.exp-card--expanded .exp-card-back,
   .exp-card--io.exp-card--expanded .exp-card-back,
   .exp-card--research.exp-card--expanded .exp-card-back,
@@ -1057,10 +1088,9 @@
     position: relative;
     top: 0;
     height: auto;
-    box-shadow: 0 14px 30px rgba(15,23,42,0.3);
+    box-shadow: 0 12px 26px rgba(15,23,42,0.3);
   }
 }
-
 
 
 /* ===========================
