@@ -1015,15 +1015,16 @@
 
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
 
+/* --------- RESPONSIVE (EXPERIENCE) --------- */
+
 @media (max-width: 800px) {
-  /* full-width container with side padding */
+
   .experience-layout {
     max-width: 100%;
     padding: 0 16px;
     margin: 0 auto;
   }
 
-  /* stack cards vertically, no more grid */
   .exp-mosaic {
     width: 100%;
     margin: 0;
@@ -1037,22 +1038,15 @@
     position: relative;
   }
 
-  /* remove vertical accent stripe */
+  /* remove teal vertical bar */
   .exp-card::before {
     display: none;
   }
 
-  /* disable flip on mobile – show BACK only */
+  /* disable flip */
   .exp-card-inner {
     transform: none !important;
     height: auto;
-  }
-
-  .exp-card-face {
-    position: relative;
-    inset: auto;
-    height: auto;
-    backface-visibility: visible;
   }
 
   .exp-card-front {
@@ -1061,51 +1055,50 @@
 
   .exp-card-back {
     display: block !important;
-    transform: none !important;
-    box-shadow: none !important;
     border-radius: 18px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: none !important;
   }
 
   .exp-card-back-inner {
     padding: 16px 14px 18px;
-    height: auto;
     overflow: visible;
   }
 
-  /* LOGO + TITLE ROW (logo top-left, text to the right) */
+  /* ROW 1 — logo + title ONLY */
   .exp-org {
-    display: flex;
-    flex-wrap: wrap;            /* allows bullets to go onto their own line */
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: auto 1fr;   /* logo | title */
     gap: 10px;
-    text-align: left;
-    margin-bottom: 4px;
+    align-items: flex-start;
+    margin-bottom: 0;
   }
 
   .exp-org-logo {
     width: 60px;
     height: 60px;
+    flex-shrink: 0;
+  }
+
+  /* TITLE stays next to the logo */
+  .exp-org-text h3 {
+    text-align: left !important;
     margin: 0;
-    flex: 0 0 auto;             /* fixed-size logo on the left */
   }
 
-  .exp-org-text {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .exp-org-text h3,
+  /* CAPTION moves BELOW both logo + title */
   .exp-org-meta {
+    grid-column: 1 / -1;  /* full width row */
     text-align: left !important;
+    margin-top: 6px;
   }
 
-  /* BULLETS UNDER BOTH (full width, left-aligned) */
+  /* BULLETS also full width under caption */
   .exp-org-list {
-    flex: 0 0 100%;             /* forces list onto a new row, full width */
+    grid-column: 1 / -1;  /* full width row */
     text-align: left !important;
-    padding-left: 20px;
-    margin: 6px 0 0;
+    padding-left: 20px !important;
+    margin-top: 6px;
     list-style-position: outside;
     font-size: 0.85rem;
     line-height: 1.45;
@@ -1114,19 +1107,7 @@
   .exp-org-list li {
     text-align: left !important;
   }
-
-  /* expanded states: just behave like normal blocks */
-  .exp-card--ngo.exp-card--expanded .exp-card-back,
-  .exp-card--io.exp-card--expanded .exp-card-back,
-  .exp-card--research.exp-card--expanded .exp-card-back,
-  .exp-card--assoc.exp-card--expanded .exp-card-back {
-    position: relative;
-    top: 0;
-    height: auto;
-    box-shadow: none;
-  }
 }
-
 
 
 /* ===========================
