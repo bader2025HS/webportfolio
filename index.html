@@ -1017,38 +1017,42 @@
 
 /* --------- RESPONSIVE (EXPERIENCE) --------- */
 
+/* ===========================
+   EXPERIENCE — MOBILE VERSION
+=========================== */
+
 @media (max-width: 800px) {
 
+  /* container */
   .experience-layout {
     max-width: 100%;
     padding: 0 16px;
     margin: 0 auto;
   }
 
+  /* stack cards vertically */
   .exp-mosaic {
     width: 100%;
-    margin: 0;
     display: block;
+    margin: 0;
   }
 
   .exp-card {
     width: 100%;
     margin-bottom: 18px;
-    min-height: auto;
     position: relative;
   }
 
-  /* remove teal vertical bar */
+  /* remove left accent stripe */
   .exp-card::before {
-    display: none;
+    display: none !important;
   }
 
   /* disable flip */
   .exp-card-inner {
     transform: none !important;
-    height: auto;
+    height: auto !important;
   }
-
   .exp-card-front {
     display: none !important;
   }
@@ -1056,56 +1060,74 @@
   .exp-card-back {
     display: block !important;
     border-radius: 18px;
-    border: 1px solid rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.1);
     box-shadow: none !important;
   }
 
   .exp-card-back-inner {
-    padding: 16px 14px 18px;
-    overflow: visible;
+    padding: 18px 16px 20px;
   }
 
-  /* ROW 1 — logo + title ONLY */
+  /* ===============
+     TOP ROW (logo + title only)
+     =============== */
   .exp-org {
-    display: grid;
-    grid-template-columns: auto 1fr;   /* logo | title */
-    gap: 10px;
+    display: flex;
+    flex-wrap: nowrap;
     align-items: flex-start;
-    margin-bottom: 0;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 8px;
   }
 
   .exp-org-logo {
     width: 60px;
     height: 60px;
-    flex-shrink: 0;
+    flex: 0 0 auto;       /* fixed logo */
   }
 
-  /* TITLE stays next to the logo */
+  .exp-org-text {
+    flex: 1 1 auto;       /* title container */
+    min-width: 0;
+  }
+
   .exp-org-text h3 {
+    margin: 0 0 4px 0;
     text-align: left !important;
-    margin: 0;
   }
 
-  /* CAPTION moves BELOW both logo + title */
+  /* ===============
+     CAPTION — FULL WIDTH UNDER LOGO + TITLE
+     =============== */
   .exp-org-meta {
-    grid-column: 1 / -1;  /* full width row */
+    width: 100%;
     text-align: left !important;
-    margin-top: 6px;
+    margin: 4px 0 4px 0;
   }
 
-  /* BULLETS also full width under caption */
+  /* ===============
+     BULLET LIST — FULL WIDTH LEFT-ALIGNED
+     =============== */
   .exp-org-list {
-    grid-column: 1 / -1;  /* full width row */
+    width: 100%;
     text-align: left !important;
-    padding-left: 20px !important;
-    margin-top: 6px;
     list-style-position: outside;
-    font-size: 0.85rem;
+    padding-left: 22px !important;
+    margin-top: 6px;
+    font-size: 0.9rem;
     line-height: 1.45;
   }
 
   .exp-org-list li {
     text-align: left !important;
+  }
+
+  /* expanded cards behave normally */
+  .exp-card--expanded .exp-card-back {
+    position: relative;
+    top: 0;
+    height: auto;
+    box-shadow: none !important;
   }
 }
 
