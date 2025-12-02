@@ -670,23 +670,27 @@
   }
 }
 
-    /* STACK MAPS VERTICALLY ON MOBILE */
-.edu-maps,
-.edu-map-wrapper,
-.edu-map-grid,
-.edu-ticket-right {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 20px;   /* nice spacing between maps */
+/* EDUCATION MAPS – stack vertically on mobile */
+@media (max-width: 720px) {
+
+  .education-maps {
+    flex-direction: column;   /* instead of row */
+    align-items: center;      /* center each column */
+    gap: 32px;                /* space between maps */
+    margin-top: 40px;
+  }
+
+  .map-column {
+    width: 100%;
+    align-items: center;
+  }
+
+  .country-map {
+    width: 100%;
+    max-width: 340px;         /* keep same “visual” size, but responsive */
+  }
 }
 
-/* ensure each map takes full width on mobile */
-.edu-map,
-.edu-year-map,
-.leaflet-container {
-  width: 100% !important;
-  max-width: 100% !important;
-}
 
 
 /* ===========================
