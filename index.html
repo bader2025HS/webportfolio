@@ -1553,12 +1553,12 @@
     flex: 0 0 auto;
     width: 100%;
     height: auto;
-    flex-direction: row;         /* horizontal: LABEL | < */
+    flex-direction: row;         /* horizontal: LABEL | arrow */
     align-items: center;
     justify-content: space-between;
     padding: 14px 18px;
     gap: 10px;
-    border-bottom: none;         /* ← remove dark line */
+    border-bottom: none;
     opacity: 0.95;
     box-shadow: none;
   }
@@ -1589,9 +1589,21 @@
     font-size: 0.7rem;
   }
 
+  /* Mobile: arrow points DOWN because content opens below */
+  .work-strip-caption::before {
+    content: "⌄";
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
   /* Content panel below strips */
   .work-main {
-    padding: 26px 12px 32px;
+    padding: 20px 10px 28px 16px;   /* ← pulled further left */
+  }
+
+  /* In case there is an inner wrapper */
+  .work-board-left {
+    padding: 0 10px 24px 16px;      /* ← removes big desktop padding */
   }
 
   .work-main-title {
@@ -1613,12 +1625,6 @@
   }
 }
 
-/* Mobile: arrow points DOWN because content opens below */
-.work-strip-caption::before {
-  content: "⌄";
-  font-size: 0.9rem;
-  margin-bottom: 0;   /* optional: aligns better on row layout */
-}
 
 
 
