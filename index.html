@@ -670,6 +670,27 @@
   }
 }
 
+    /* EDUCATION MAPS — MOBILE LAYOUT ONLY */
+@media (max-width: 720px) {
+
+  .education-maps {
+    flex-direction: column !important;   /* stack vertically */
+    align-items: center !important;      /* center each map-column */
+    gap: 40px !important;                /* nice spacing between maps */
+  }
+
+  .map-column {
+    width: 100%;
+    align-items: center;
+  }
+
+  .country-map {
+    width: 100%;
+    max-width: 340px;   /* same size as desktop, but responsive */
+  }
+}
+
+
 
 /* ===========================
    EXPERIENCE – 2×2 GRID
