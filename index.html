@@ -670,6 +670,24 @@
   }
 }
 
+    /* STACK MAPS VERTICALLY ON MOBILE */
+.edu-maps,
+.edu-map-wrapper,
+.edu-map-grid,
+.edu-ticket-right {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px;   /* nice spacing between maps */
+}
+
+/* ensure each map takes full width on mobile */
+.edu-map,
+.edu-year-map,
+.leaflet-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 
 /* ===========================
    EXPERIENCE – 2×2 GRID
