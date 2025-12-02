@@ -1522,19 +1522,72 @@
 /* Responsive */
 
 @media (max-width: 840px) {
+  /* Whole card becomes vertical:
+     strips on top, content opens below */
   .work-shell {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    border-radius: 26px;
+    overflow: hidden;
+    min-height: auto;
   }
-  .work-main {
-    padding: 24px 22px 26px;
-  }
+
+  /* Strips = vertical stack */
   .work-strips {
-    min-height: 120px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: auto;
   }
+
+  .work-strip {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    flex-direction: row;          /* label + caption on one line */
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    gap: 10px;
+    border-bottom: 1px solid rgba(15,23,42,0.08);
+    opacity: 0.9;                 /* a bit stronger on mobile */
+  }
+
+  .work-strip:last-child {
+    border-bottom: none;
+  }
+
+  /* kill the “wider when active” behavior on mobile */
+  .work-strip,
+  .work-strip.is-active {
+    flex-basis: auto;
+    flex-grow: 0;
+    box-shadow: none;
+  }
+
+  /* labels become horizontal text */
   .work-strip-label {
     writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .work-strip-caption {
+    text-align: right;
+  }
+
+  /* content panel under the stacked tabs */
+  .work-main {
+    padding: 24px 20px 26px;
+  }
+
+  .work-main-title::before {
+    font-size: 3rem;
+    top: -36px;
   }
 }
+
 
 @media (max-width: 540px) {
   .work-main-title {
