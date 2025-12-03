@@ -251,6 +251,47 @@
   filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.55));
 }
 
+    /* ===========================
+   ABOUT – FOCUS AREAS
+=========================== */
+
+.about-focus {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 2px; /* subtle spacing below text box */
+}
+
+.about-focus-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.about-focus-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-focus-chip {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #ffffff;
+  color: #111827;
+  line-height: 1.3;
+  cursor: default;
+  transition: border-color 0.2s ease;
+}
+
+.about-focus-chip:hover {
+  border-color: #009fa5;
+}
+
 /* ===========================
    MOBILE – STACKED LAYOUT
 =========================== */
@@ -2833,6 +2874,8 @@
 
     </div>
 
+
+
     <!-- RIGHT: TEXT + MAP STACKED -->
     <div class="about-main-column">
       <div class="about-text-box">
@@ -2840,6 +2883,16 @@
         <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
       </div>
 
+         <div class="about-focus">
+  <div class="about-focus-label">Focus Areas</div>
+  <div class="about-focus-chips">
+    <span class="about-focus-chip">Forced Displacement</span>
+    <span class="about-focus-chip">Sustainability</span>
+    <span class="about-focus-chip">Energy Transitions</span>
+    <span class="about-focus-chip">MENA & Africa</span>
+  </div>
+</div>
+      
       <div class="map-card">
         <div id="visitedMap" aria-label="Visited countries map"></div>
       </div>
