@@ -257,26 +257,6 @@
   filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.55));
 }
 
-    /* INDIA OUTLINE MAP – matches other maps */
-.india-map-card {
-  width: 260px;     /* same size as your visited map */
-  height: 260px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
-  overflow: hidden;
-  align-self: flex-end; /* aligns right like your world map */
-}
-
-#indiaMap {
-  width: 100%;
-  height: 100%;
-}
-
-#indiaMap.leaflet-container {
-  background: #ffffff !important; /* white like Japan/Germany */
-}
-
     /* ===========================
    ABOUT – FOCUS AREAS
 =========================== */
@@ -2910,11 +2890,6 @@
         <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
       </div>
 
-      <!-- INDIA OUTLINE MAP -->
-<div class="map-card india-map-card">
-  <div id="indiaMap"></div>
-</div>
-
          <div class="about-focus">
   <div class="about-focus-label">Focus Areas</div>
   <div class="about-focus-chips">
@@ -4152,57 +4127,6 @@ document.getElementById("map-germany").addEventListener("click", () => {
   });
 });
     }
-
-
-
-
-
-    // =====================================
-// INDIA OUTLINE MAP (simple + clean)
-// =====================================
-
-const indiaMap = L.map('indiaMap', {
-  zoomControl: false,
-  attributionControl: false
-});
-
-// Invisible tile layer (used just for map projection)
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  opacity: 0
-}).addTo(indiaMap);
-
-// Simplified India polygon
-const indiaOutline = {
-  "type": "Feature",
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [[
-      [68.17665, 23.691965],
-      [70.470459, 20.877331],
-      [72.630533, 21.356009],
-      [74.42138, 20.851324],
-      [77.837451, 24.79795],
-      [78.912269, 28.390736],
-      [75.864751, 31.692639],
-      [73.675379, 33.905471],
-      [71.777666, 26.92397],
-      [68.17665, 23.691965]
-    ]]
-  }
-};
-
-// Draw map outline
-L.geoJSON(indiaOutline, {
-  style: {
-    color: "#000000",
-    weight: 2,
-    fill: false
-  }
-}).addTo(indiaMap);
-
-// Fit India into the box
-indiaMap.fitBounds(L.geoJSON(indiaOutline).getBounds());
-
 
     /* ===============================
        SINGLE-SECTION NAVIGATION
