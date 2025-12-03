@@ -258,35 +258,6 @@
 }
 
     /* ===========================
-   ABOUT – INDIA COUNTRY MAP
-=========================== */
-
-.about-india-card {
-  margin-top: 20px;
-  align-self: flex-end;      /* line up with the visited map on the right */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* optional: slightly smaller label than in Education */
-.about-map-label {
-  font-size: 0.9rem;
-  margin-bottom: 14px;
-}
-
-/* we reuse .country-map from Education:
-   width: 340px; height: 340px; hover zoom etc. */
-/* If you want a bit smaller in About, you can override: */
-/*
-#map-india-about.country-map {
-  width: 300px;
-  height: 300px;
-}
-*/
-
-
-    /* ===========================
    ABOUT – FOCUS AREAS
 =========================== */
 
@@ -2919,12 +2890,6 @@
         <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
       </div>
 
-      <div class="about-india-card">
-  <div class="map-label about-map-label">INDIA</div>
-  <div id="map-india-about" class="country-map"></div>
-</div>
-
-
          <div class="about-focus">
   <div class="about-focus-label">Focus Areas</div>
   <div class="about-focus-chips">
@@ -4118,24 +4083,6 @@ async function initVisitedMap() {
       "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
   }
 }
-    // ===============================
-// INDIA MAP FOR ABOUT SECTION
-// ===============================
-
-let indiaAboutLoaded = false;
-
-async function initIndiaAboutMap() {
-  if (indiaAboutLoaded) return;
-  indiaAboutLoaded = true;
-
-  await loadGeoJSON();   // same function used for France/Japan/Germany
-
-  // draw outline-only India map (same style as Education maps)
-  drawCountry("map-india-about", "india", [22.5, 79], 4.3);
-}
-
-
-    
 
     async function initMaps() {
       if (mapsLoaded) return;
@@ -4640,11 +4587,6 @@ workStrips.forEach(strip => {
 // initialize the first active one
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
-
-
-    document.addEventListener("DOMContentLoaded", () => {
-  initIndiaAboutMap();
-});
 
 
   </script>
