@@ -298,6 +298,105 @@
   border-color: #009fa5;
 }
 
+    /* ===========================
+   ABOUT – INDIA STATIC MAP
+=========================== */
+
+.about-india {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.about-india-title {
+  font-size: 0.85rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* wrapper around the outline image */
+.india-map {
+  position: relative;
+  max-width: 320px;      /* tweak for size */
+  width: 100%;
+}
+
+.india-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* base style for each city pin */
+.india-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  color: #f9fafb;
+  padding: 2px 6px 2px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  white-space: nowrap;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+
+/* small teal dot before the label */
+.india-pin::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #009fa5;
+  box-shadow: 0 0 8px rgba(0,159,165,0.8);
+  transform: translate(-50%, -50%);
+}
+
+/* positions are % of the original 550x712 outline image */
+.india-pin--delhi {
+  left: 47.3%;
+  top: 29.5%;
+}
+
+.india-pin--jaipur {
+  left: 44.5%;
+  top: 34.4%;
+}
+
+.india-pin--varanasi {
+  left: 58.2%;
+  top: 36.5%;
+}
+
+.india-pin--mumbai {
+  left: 40%;
+  top: 59%;
+}
+
+.india-pin--goa {
+  left: 41.8%;
+  top: 66%;
+}
+
+.india-pin--kochi {
+  left: 45.5%;
+  top: 78.7%;
+}
+
+/* optional: shrink text slightly on small screens */
+@media (max-width: 640px) {
+  .about-india-title {
+    font-size: 0.8rem;
+  }
+  .india-pin {
+    font-size: 0.65rem;
+  }
+}
+
+
 /* ===========================
    MOBILE – STACKED LAYOUT
 =========================== */
@@ -2888,7 +2987,7 @@
         <p class="about-hello">Hi. Bonjour. Hallo. こんにちは. .سلام. مرحبًا</p>
         <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
         <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
-      </div>
+      </div
 
          <div class="about-focus">
   <div class="about-focus-label">Focus Areas</div>
@@ -2899,6 +2998,25 @@
     <span class="about-focus-chip">MENA & Africa</span>
   </div>
 </div>
+
+      <div class="about-india">
+  <p class="about-india-title">
+    Most spontaneous thing I’ve done: a solo trip across India.
+  </p>
+
+  <div class="india-map">
+    <!-- update the src path to where you put the PNG -->
+    <img src="india map.gif" alt="India map with my solo trip route" />
+
+    <span class="india-pin india-pin--delhi">Delhi</span>
+    <span class="india-pin india-pin--jaipur">Jaipur</span>
+    <span class="india-pin india-pin--varanasi">Varanasi</span>
+    <span class="india-pin india-pin--mumbai">Mumbai</span>
+    <span class="india-pin india-pin--goa">Goa</span>
+    <span class="india-pin india-pin--kochi">Kochi</span>
+  </div>
+</div>
+
       
       <div class="map-card">
         <div id="visitedMap" aria-label="Visited countries map"></div>
