@@ -220,6 +220,37 @@
   margin-bottom: 6px;
 }
 
+    /* ===========================
+   ABOUT – INDIA MINI-MAP
+=========================== */
+
+.about-india {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.about-india-title {
+  font-size: 0.85rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+#indiaMap {
+  width: 100%;
+  max-width: 320px;
+  height: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* transparent background like your main map */
+#indiaMap.leaflet-container {
+  background: transparent !important;
+}
+
 /* ===========================
    ABOUT – TRAVEL MAP
    small square, right-aligned UNDER text
@@ -2899,6 +2930,14 @@
     <span class="about-focus-chip">MENA & Africa</span>
   </div>
 </div>
+
+      <div class="about-india">
+  <p class="about-india-title">
+    Most spontaneous thing I’ve done: a solo trip across India.
+  </p>
+  <div id="indiaMap"></div>
+</div>
+
       
       <div class="map-card">
         <div id="visitedMap" aria-label="Visited countries map"></div>
@@ -3992,6 +4031,47 @@ function drawCountry(containerId, countryKey, center, zoom) {
 }
 
     /* ========= Visited countries map in ABOUT ========= */
+
+    // -------------------------------
+// INDIA ITINERARY MAP
+// -------------------------------
+
+const indiaMap = L.map("indiaMap", {
+  zoomControl: false,
+  attributionControl: false
+}).setView([21.5, 78.9], 4.8); // India centered
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 7
+}).addTo(indiaMap);
+
+// Cities visited (coords)
+const indiaCities = [
+  { name: "Delhi", coords: [28.6139, 77.2090] },
+  { name: "Varanasi", coords: [25.3176, 82.9739] },
+  { name: "Jaipur", coords: [26.9124, 75.7873] },
+  { name: "Mumbai", coords: [19.0760, 72.8777] },
+  { name: "Goa", coords: [15.2993, 74.1240] },
+  { name: "Kochi", coords: [9.9312, 76.2673] }
+];
+
+// Add markers
+indiaCities.forEach(city => {
+  L.circleMarker(city.coords, {
+    radius: 5,
+    fillColor: "#009fa5",
+    color: "#009fa5",
+    fillOpacity: 0.9
+  }).addTo(indiaMap).bindTooltip(city.name, { direction: "top" });
+});
+
+// Draw the route line
+L.polyline(indiaCities.map(c => c.coords), {
+  color: "#009fa5",
+  weight: 3,
+  opacity: 0.9
+}).addTo(indiaMap);
+
 
 let visitedMapInitialized = false;
 
