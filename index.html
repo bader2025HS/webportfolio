@@ -220,6 +220,39 @@
   margin-bottom: 6px;
 }
 
+    /* ===========================
+   ABOUT – INDIA MAP
+=========================== */
+
+.about-india-card {
+  margin-top: 18px;
+  align-self: flex-end; /* align to the right, like the visited map */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-map-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  margin-bottom: 14px;
+}
+
+/* override transparent background ONLY for this map */
+#about-india-map.leaflet-container {
+  background: #ffffff !important;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* optional: make India map a bit smaller than education ones */
+#about-india-map.country-map {
+  width: 260px;
+  height: 260px;
+}
+
+
 /* ===========================
    ABOUT – TRAVEL MAP
    small square, right-aligned UNDER text
@@ -2899,6 +2932,11 @@
     <span class="about-focus-chip">MENA & Africa</span>
   </div>
 </div>
+
+      <div class="about-india-card">
+    <div class="map-label about-map-label">INDIA</div>
+    <div id="about-india-map" class="country-map"></div>
+  </div>
       
       <div class="map-card">
         <div id="visitedMap" aria-label="Visited countries map"></div>
@@ -4084,6 +4122,59 @@ async function initVisitedMap() {
   }
 }
 
+    // ===============================
+// INDIA MAP IN ABOUT SECTION
+// ===============================
+
+let aboutIndiaMapInitialized = false;
+
+async function initAboutIndiaMap() {
+  if (aboutIndiaMapInitialized) return;
+  aboutIndiaMapInitialized = true;
+
+  // Leaflet or element missing? bail.
+  if (typeof L === "undefined") return;
+  const el = document.getElementById("about-india-map");
+  if (!el) return;
+
+  const map = L.map(el, {
+    scrollWheelZoom: false,
+    zoomControl: false,
+    attributionControl: false
+  });
+
+  // load the same world GeoJSON you already use
+  const geo = await loadGeoJSON();
+
+  // normalize helper – same logic as in visited map
+  const normalizeName = s =>
+    (s || "")
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
+  // keep only India from the world polygons
+  const indiaLayer = L.geoJSON(geo, {
+    filter: feature => {
+      const props = feature.properties || {};
+      const name = props.ADMIN || props.name || "";
+      return normalizeName(name) === "india";
+    },
+    style: {
+      color: "#000000",
+      weight: 1.6,
+      fillColor: "#ffffff",
+      fillOpacity: 0   // outline only
+    }
+  }).addTo(map);
+
+  try {
+    map.fitBounds(indiaLayer.getBounds(), { padding: [10, 10] });
+  } catch (e) {
+    console.error("Could not fit India bounds", e);
+  }
+}
+
     async function initMaps() {
       if (mapsLoaded) return;
       mapsLoaded = true;
@@ -4587,6 +4678,11 @@ workStrips.forEach(strip => {
 // initialize the first active one
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+  initAboutIndiaMap();
+});
 
 
   </script>
