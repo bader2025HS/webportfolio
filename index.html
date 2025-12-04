@@ -88,6 +88,39 @@
   white-space: nowrap;
 }
 
+    .brand-name {
+  display: flex;
+  align-items: center;
+  gap: 0.15em;
+  font-size: 1.1rem;          /* adjust if you want bigger/smaller */
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-name-part {
+  display: inline-block;
+}
+
+/* The animated A */
+.brand-name-a {
+  display: inline-block;
+  position: relative;
+  animation: slide-a 2.2s ease-in-out infinite;
+}
+
+/* Left–right slide, no rotation */
+@keyframes slide-a {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0.35em); /* move right a bit; tweak if needed */
+  }
+}
+
 
 /* ===========================
    ABOUT – LAYOUT
@@ -2663,7 +2696,11 @@
 
   <div class="page">
     <header>
-      <h1>Bader Suliman</h1>
+<h1 class="brand-name">
+  <span class="brand-name-part">B</span>
+  <span class="brand-name-a">A</span>
+  <span class="brand-name-part">DER&nbsp;SULIMAN</span>
+</h1>
       <nav>
         <ul>
           <li><a href="#home" class="active">Home</a></li>
