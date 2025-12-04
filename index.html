@@ -89,6 +89,30 @@
 }
 
 
+    .name-logo {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 40px;
+  color: white; /* or your accent */
+}
+
+.wiggle {
+  display: inline-block;
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+/* EXACT Colin Moy side-to-side effect */
+@keyframes wiggle {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-6px); }
+  50%  { transform: translateX(0); }
+  75%  { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+
 /* ===========================
    ABOUT – LAYOUT
 =========================== */
@@ -2663,6 +2687,11 @@
 
   <div class="page">
     <header>
+
+      <h1 class="name-logo">
+  B<span class="wiggle">A</span>DER SULIMAN
+</h1>
+
       <h1>Bader Suliman</h1>
       <nav>
         <ul>
