@@ -220,6 +220,28 @@
   margin-bottom: 6px;
 }
 
+    .about-hello .rotator {
+  display: inline-block;
+}
+
+.hello-fade {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.hello-fade.out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.hello-fade.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 /* ===========================
    ABOUT – TRAVEL MAP
    small square, right-aligned UNDER text
@@ -2885,7 +2907,11 @@
     <!-- RIGHT: TEXT + MAP STACKED -->
     <div class="about-main-column">
       <div class="about-text-box">
-        <p class="about-hello">Hi. Bonjour. Hallo. こんにちは. .سلام. مرحبًا</p>
+        <p class="about-hello">
+  <span class="rotator">
+    <span id="hello-rotate" class="hello-fade">Hi.</span>
+  </span>
+</p>
         <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
         <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
       </div>
@@ -4588,6 +4614,44 @@ workStrips.forEach(strip => {
 const initial = document.querySelector(".work-strip.is-active");
 if (initial) setActiveWork(initial.dataset.project);
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("hello-rotate");
+  if (!el) return;
+
+  const greetings = [
+    "Hi.",
+    "Bonjour.",
+    "Hallo.",
+    "こんにちは。",
+    "سلام.",
+    "مرحبًا."
+  ];
+
+  let i = 0;
+  el.textContent = greetings[i];
+
+  function rotateGreeting() {
+    el.classList.add("out");
+
+    setTimeout(() => {
+      i = (i + 1) % greetings.length;
+      el.textContent = greetings[i];
+
+      el.classList.remove("out");
+      el.classList.add("in");
+
+      // reset so the in-animation can replay next time
+      setTimeout(() => {
+        el.classList.remove("in");
+      }, 350);
+    }, 350);
+  }
+
+  // change word every 2 seconds
+  setInterval(rotateGreeting, 2000);
+});
+</script>
 
   </script>
 
