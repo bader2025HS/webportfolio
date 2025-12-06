@@ -245,6 +245,60 @@
   font-weight: 600;
 }
 
+    /* ===========================
+   ABOUT – VALUES
+=========================== */
+
+    .values-section {
+  margin-top: 2.4rem;
+}
+
+.values-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.values-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.value-card {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 1.1rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.value-icon {
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.value-card h4 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.value-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: #555;
+}
 
 
 /* ===========================
@@ -2930,6 +2984,37 @@
     <span class="about-focus-chip">MENA & Africa</span>
   </div>
 </div>
+
+      <div class="values-section">
+  <h3 class="values-title">VALUES I WORK WITH</h3>
+
+  <div class="values-cards">
+    <div class="value-card">
+      <span class="value-icon">✨</span>
+      <h4>Clarity</h4>
+      <p>Making information understandable, structured, and usable.</p>
+    </div>
+
+    <div class="value-card">
+      <span class="value-icon">🕊️</span>
+      <h4>Integrity</h4>
+      <p>Acting with honesty, responsibility, and ethical decision-making.</p>
+    </div>
+
+    <div class="value-card">
+      <span class="value-icon">📘</span>
+      <h4>Rigor</h4>
+      <p>Working with depth, accuracy, and precision in analysis.</p>
+    </div>
+
+    <div class="value-card">
+      <span class="value-icon">⚖️</span>
+      <h4>Responsibility</h4>
+      <p>Acting with purpose, accountability, and social awareness.</p>
+    </div>
+  </div>
+</div>
+
       
       <div class="map-card">
         <div id="visitedMap" aria-label="Visited countries map"></div>
