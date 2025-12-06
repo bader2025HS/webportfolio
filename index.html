@@ -383,6 +383,33 @@
   border-color: #009fa5;
 }
 
+
+
+    .about-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(240px, 260px);
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* remove the old align-self so grid can control placement */
+.map-card {
+  align-self: auto;
+}
+
+
 /* ===========================
    MOBILE – STACKED LAYOUT
 =========================== */
@@ -421,6 +448,21 @@
     width: 100%;
     height: 260px;
     align-self: stretch;
+  }
+}
+
+    @media (max-width: 640px) {
+  .about-lower {
+    grid-template-columns: 1fr;
+  }
+
+  .about-right {
+    justify-content: flex-start;
+  }
+
+  .map-card {
+    width: 100%;
+    height: 260px;
   }
 }
 
@@ -2967,63 +3009,71 @@
 
 
 
-    <!-- RIGHT: TEXT + MAP STACKED -->
-    <div class="about-main-column">
-      <div class="about-text-box">
-<p class="about-hello">
-  <span class="rotator">
-    <span id="hello-rotate" class="hello-fade">Hi.</span>
-  </span>
-</p>
-        <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
-        <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
+   <div class="about-main-column">
+  <div class="about-text-box">
+    <p class="about-hello">
+      <span class="rotator">
+        <span id="hello-rotate" class="hello-fade">Hi.</span>
+      </span>
+    </p>
+    <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
+    <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
+  </div>
+
+  <!-- NEW LOWER GRID: LEFT = focus + values, RIGHT = map -->
+  <div class="about-lower">
+
+    <div class="about-left">
+      <div class="about-focus">
+        <div class="about-focus-label">Focus Areas</div>
+        <div class="about-focus-chips">
+          <span class="about-focus-chip">Forced Displacement</span>
+          <span class="about-focus-chip">Sustainability</span>
+          <span class="about-focus-chip">Energy Transitions</span>
+          <span class="about-focus-chip">MENA & Africa</span>
+        </div>
       </div>
 
-         <div class="about-focus">
-  <div class="about-focus-label">Focus Areas</div>
-  <div class="about-focus-chips">
-    <span class="about-focus-chip">Forced Displacement</span>
-    <span class="about-focus-chip">Sustainability</span>
-    <span class="about-focus-chip">Energy Transitions</span>
-    <span class="about-focus-chip">MENA & Africa</span>
-  </div>
-</div>
-
       <div class="values-section">
-  <h3 class="values-title">VALUES I WORK WITH</h3>
+        <h3 class="values-title">VALUES I WORK WITH</h3>
 
-  <div class="values-cards">
-    <div class="value-card">
-      <span class="value-icon">✨</span>
-      <h4>Clarity</h4>
-      <p>Making information understandable, structured, and usable.</p>
+        <div class="values-cards">
+          <div class="value-card">
+            <span class="value-icon">✨</span>
+            <h4>Clarity</h4>
+            <p>Making information understandable, structured, and usable.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-icon">🕊️</span>
+            <h4>Integrity</h4>
+            <p>Acting with honesty, responsibility, and ethical decision-making.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-icon">📘</span>
+            <h4>Rigor</h4>
+            <p>Working with depth, accuracy, and precision in analysis.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-icon">⚖️</span>
+            <h4>Responsibility</h4>
+            <p>Acting with purpose, accountability, and social awareness.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="value-card">
-      <span class="value-icon">🕊️</span>
-      <h4>Integrity</h4>
-      <p>Acting with honesty, responsibility, and ethical decision-making.</p>
-    </div>
-
-    <div class="value-card">
-      <span class="value-icon">📘</span>
-      <h4>Rigor</h4>
-      <p>Working with depth, accuracy, and precision in analysis.</p>
-    </div>
-
-    <div class="value-card">
-      <span class="value-icon">⚖️</span>
-      <h4>Responsibility</h4>
-      <p>Acting with purpose, accountability, and social awareness.</p>
-    </div>
-  </div>
-</div>
-
-      
+    <div class="about-right">
       <div class="map-card">
         <div id="visitedMap" aria-label="Visited countries map"></div>
       </div>
     </div>
+
+  </div>
+</div>
+
 
   </div>
 </section>
