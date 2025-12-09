@@ -167,11 +167,11 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) minmax(320px, 1fr);
-  /*       stats     focus areas       map expands dynamically  */
-  gap: 32px;
+  grid-template-columns: 240px 1fr 1.5fr;  /* map gets more space */
+  gap: 16px;                               /* smaller gap between focus & map */
   align-items: flex-start;
 }
+
 
 
 /* ===========================
@@ -292,8 +292,9 @@
 .about-map {
   display: flex;
   width: 100%;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
+
 
 .map-card {
   width: 100%;   /* makes leaflet fill the entire right column */
