@@ -12,6 +12,13 @@
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+    scrollbar-width: none;         /* Firefox */
+  }
+
+  html::-webkit-scrollbar {
+    display: none;                 /* Chrome, Edge, Safari */
+  }
     body {
   font-family: "Trebuchet MS", Verdana, sans-serif;
   background: #ffffff;
