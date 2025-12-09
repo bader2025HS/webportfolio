@@ -295,6 +295,12 @@
   transform: translateY(0px);
 }
 
+    .about-stat.tooltip-open .about-stat-tooltip {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+
 
 
 
@@ -4764,6 +4770,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // change word every 2 seconds
   setInterval(rotateGreeting, 2000);
 });
+</script>
+<script>
+  // Enable tap-to-toggle tooltips on stats (for phones / touch)
+  const stats = document.querySelectorAll('.about-stat');
+
+  stats.forEach(stat => {
+    stat.addEventListener('click', (e) => {
+      e.stopPropagation(); // don’t bubble up
+
+      // close any other open tooltip
+      stats.forEach(s => {
+        if (s !== stat) s.classList.remove('tooltip-open');
+      });
+
+      // toggle this one
+      stat.classList.toggle('tooltip-open');
+    });
+  });
+
+  // tap anywhere else to close
+  document.addEventListener('click', () => {
+    stats.forEach(s => s.classList.remove('tooltip-open'));
+  });
 </script>
 
 </body>
