@@ -472,6 +472,25 @@
   }
 }
 
+    @media (max-width: 640px) {
+  /* make the focus block not offset on mobile */
+  .about-focus {
+    margin-left: 0;
+  }
+
+  /* make chips take the full width */
+  .about-focus-chips {
+    grid-template-columns: 1fr;   /* already there is fine */
+    justify-items: stretch;       /* stretch each chip to full column */
+  }
+
+  .about-focus-chip {
+    width: 100%;                  /* chip fills the column */
+    text-align: center;           /* keep text nice */
+  }
+}
+
+
     /* ===========================
        EDUCATION MAPS
     ============================ */
