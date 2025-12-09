@@ -100,6 +100,10 @@
    ABOUT – LAYOUT
 =========================== */
 
+/* ===========================
+   ABOUT – LAYOUT
+=========================== */
+
 #about {
   margin-top: 0;
 }
@@ -176,6 +180,8 @@
   align-items: flex-start;
 }
 
+
+
 /* ===========================
    ABOUT – STATS (2×2 GRID)
 =========================== */
@@ -240,46 +246,6 @@
   transform: translateX(3px);
   color: #009fa5;
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
-}
-/* Tooltip cloud for stats */
-.about-stat-tooltip {
-  position: absolute;
-  left: 0;
-  top: -46px; /* position above the stat, adjust as needed */
-  padding: 8px 12px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  font-size: 0.75rem;
-  color: #111827;
-  white-space: nowrap;
-
-  opacity: 0;
-  transform: translateY(4px);
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 20;
-}
-
-/* small arrow */
-.about-stat-tooltip::after {
-  content: "";
-  position: absolute;
-  left: 14px;
-  bottom: -6px;
-  width: 10px;
-  height: 10px;
-  background: #fff;
-  border-left: 1px solid rgba(0,0,0,0.1);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  transform: rotate(45deg);
-}
-
-/* Show on hover */
-.about-stat:hover .about-stat-tooltip {
-  opacity: 1;
-  transform: translateY(0px);
 }
 
 /* ===========================
@@ -2991,14 +2957,6 @@
           <div class="about-stat-number">7</div>
           <div class="about-stat-label">Cities</div>
         </div>
-        <div class="about-stat">
-  <div class="about-stat-number">25</div>
-  <div class="about-stat-label">Countries</div>
-
-  <div class="about-stat-tooltip">
-    Countries I’ve lived in, worked in, or explored deeply.
-  </div>
-</div>
       </div>
 
       <!-- MIDDLE: FOCUS AREAS -->
