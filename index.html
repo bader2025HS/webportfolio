@@ -103,45 +103,83 @@
 
 .about-shell {
   max-width: 1050px;
-  margin: 6px auto 6px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 32px;
-}
-
-/* right side: text box + map stacked */
-.about-main-column {
-  flex: 1;
+  margin: 6px auto 32px;
+  padding: 0 12px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
-/* right side: text box + map stacked */
-.about-main-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: stretch;
+/* top text box spans full width */
+.about-text-box {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
+  line-height: 1.6;
+  font-size: 0.96rem;
+  color: #111827;
 }
 
-    .about-hello {
+.about-text-box p:first-child {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* hello rotator */
+.about-hello {
   font-weight: 600;
   margin-bottom: 8px;
   letter-spacing: 0.02em;
 }
 
+.about-hello .rotator {
+  display: inline-block;
+}
+
+.hello-fade {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.hello-fade.out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.hello-fade.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#hello-rotate {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
 /* ===========================
-   ABOUT – VERTICAL STATS COLUMN
+   ABOUT – SECOND ROW GRID
+   (STATS | FOCUS | MAP)
 =========================== */
 
-.about-stats-column {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-left: 10px; /* tweak if needed */
+.about-grid {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr) 280px;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* ===========================
+   ABOUT – STATS (2×2 GRID)
+=========================== */
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 12px;
 }
 
 /* one stat */
@@ -150,7 +188,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 0 10px 18px;
+  padding: 8px 0 8px 18px;
   cursor: default;
 }
 
@@ -201,97 +239,14 @@
 }
 
 /* ===========================
-   ABOUT – TEXT BOX
-=========================== */
-
-.about-text-box {
-  padding: 18px 20px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: none;
-  line-height: 1.6;
-  font-size: 0.96rem;
-  color: #111827;
-}
-
-.about-text-box p:first-child {
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-    .about-hello .rotator {
-  display: inline-block;
-}
-
-.hello-fade {
-  display: inline-block;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.hello-fade.out {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-
-.hello-fade.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-    #hello-rotate {
-  font-size: 1.8rem;
-  font-weight: 600;
-}
-
-
-/* ===========================
-   ABOUT – TRAVEL MAP
-   small square, right-aligned UNDER text
-=========================== */
-
-.map-card {
-  background: transparent;
-  border: none;
-  padding: 0;
-  overflow: hidden;
-
-  width: 260px;        /* square size */
-  height: 260px;
-  border-radius: 18px;
-  align-self: flex-end; /* push to the right side of the column */
-}
-
-/* Leaflet map inside square */
-#visitedMap {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-}
-
-/* make Leaflet background transparent inside About */
-#visitedMap.leaflet-container {
-  background: transparent !important;
-}
-
-/* micro glow when hovering country polygons */
-#visitedMap .leaflet-interactive {
-  transition: filter 0.25s ease, stroke-width 0.2s ease;
-}
-#visitedMap .leaflet-interactive:hover {
-  filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.55));
-}
-
-    /* ===========================
-   ABOUT – FOCUS AREAS
+   ABOUT – FOCUS AREAS (MIDDLE COLUMN)
 =========================== */
 
 .about-focus {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 2px; /* subtle spacing below text box */
+  margin-top: 2px;
 }
 
 .about-focus-label {
@@ -324,46 +279,88 @@
   border-color: #009fa5;
 }
 
+/* ===========================
+   ABOUT – TRAVEL MAP (RIGHT COLUMN)
+=========================== */
 
-
-    .about-lower {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(240px, 260px);
-  gap: 24px;
-  align-items: flex-start;
-  margin-top: 24px;
-}
-
-.about-left {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.about-right {
+.about-map {
   display: flex;
   justify-content: flex-end;
 }
 
-/* remove the old align-self so grid can control placement */
 .map-card {
-  align-self: auto;
+  background: transparent;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+
+  width: 100%;
+  height: 260px;
+  border-radius: 18px;
 }
 
+/* Leaflet map inside square */
+#visitedMap {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+/* make Leaflet background transparent inside About */
+#visitedMap.leaflet-container {
+  background: transparent !important;
+}
+
+/* micro glow when hovering country polygons */
+#visitedMap .leaflet-interactive {
+  transition: filter 0.25s ease, stroke-width 0.2s ease;
+}
+#visitedMap .leaflet-interactive:hover {
+  filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.55));
+}
 
 /* ===========================
-   MOBILE – STACKED LAYOUT
+   RESPONSIVE LAYOUT
 =========================== */
 
+/* tablet */
+@media (max-width: 960px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .about-map {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .map-card {
+    max-width: 420px;
+    height: 260px;
+  }
+}
+
+/* mobile */
 @media (max-width: 640px) {
   .about-shell {
     margin: 4px auto 18px;
-    flex-direction: column;
     gap: 18px;
   }
 
-  .about-stats-column {
-    margin-left: 0;
+  .about-text-box {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 10px;
   }
 
   .about-stat-number {
@@ -379,16 +376,13 @@
     padding: 2px 0 2px 14px;
   }
 
-  .about-text-box {
-    padding: 14px 16px;
-    font-size: 0.9rem;
+  .about-map {
+    justify-content: stretch;
   }
 
-  /* on mobile, let the map go full width under the text */
   .map-card {
     width: 100%;
-    height: 260px;
-    align-self: stretch;
+    height: 240px;
   }
 }
 
@@ -2903,48 +2897,41 @@
 <section id="about">
   <div class="about-shell">
 
-    <!-- LEFT: STATS COLUMN -->
-    <div class="about-stats-column">
-
-      <div class="about-stat">
-        <div class="about-stat-number">25</div>
-        <div class="about-stat-label">countries visited</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">100+</div>
-        <div class="about-stat-label">translation sessions</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">200+</div>
-        <div class="about-stat-label">refugees supported</div>
-      </div>
-
-      <div class="about-stat">
-        <div class="about-stat-number">7</div>
-        <div class="about-stat-label">cities lived in</div>
-      </div>
-
+    <!-- ROW 1: FULL-WIDTH TEXT BOX -->
+    <div class="about-text-box about-fullwidth">
+      <p class="about-hello">
+        <span class="rotator">
+          <span id="hello-rotate" class="hello-fade">Hi.</span>
+        </span>
+      </p>
+      <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
+      <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
     </div>
 
+    <!-- ROW 2: 3-COLUMN GRID (STATS | FOCUS | MAP) -->
+    <div class="about-grid">
 
+      <!-- LEFT: STATS 2×2 GRID -->
+      <div class="about-stats-grid">
+        <div class="about-stat">
+          <div class="about-stat-number">25</div>
+          <div class="about-stat-label">Countries Visited</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-number">100+</div>
+          <div class="about-stat-label">Translation Sessions</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-number">200+</div>
+          <div class="about-stat-label">Refugees Supported</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-number">7</div>
+          <div class="about-stat-label">Cities Lived In</div>
+        </div>
+      </div>
 
-   <div class="about-main-column">
-  <div class="about-text-box">
-    <p class="about-hello">
-      <span class="rotator">
-        <span id="hello-rotate" class="hello-fade">Hi.</span>
-      </span>
-    </p>
-    <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
-    <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
-  </div>
-
-  <!-- NEW LOWER GRID: LEFT = focus + values, RIGHT = map -->
-  <div class="about-lower">
-
-    <div class="about-left">
+      <!-- MIDDLE: FOCUS AREAS -->
       <div class="about-focus">
         <div class="about-focus-label">Focus Areas</div>
         <div class="about-focus-chips">
@@ -2957,19 +2944,21 @@
         </div>
       </div>
 
-    <div class="about-right">
-      <div class="map-card">
-        <div id="visitedMap" aria-label="Visited countries map"></div>
+      <!-- RIGHT: MAP -->
+      <div class="about-map">
+        <div class="map-card">
+          <div id="visitedMap"></div>
+        </div>
       </div>
+
     </div>
-
-  </div>
-</div>
-
-
   </div>
 </section>
 
+
+
+
+  
 
 
 
