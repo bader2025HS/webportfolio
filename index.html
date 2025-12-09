@@ -301,10 +301,6 @@
 }
 
 
-
-
-
-
 /* ===========================
    ABOUT – FOCUS AREAS (MIDDLE COLUMN)
 =========================== */
@@ -1035,17 +1031,18 @@
 
 
 .exp-org-logo {
-  width: 90px;              /* bigger logo */
+  width: 90px;
   height: 90px;
-  border-radius: 16px;
+  border-radius: 0;       /* or keep rounded if you prefer */
   overflow: hidden;
-  padding: 8px;
-  background: #f3f4f6;
+  padding: 0;             /* remove spacing that created a fake frame */
+  background: transparent; /* no background frame */
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 4px;
 }
+
 
 .exp-org-logo img {
   max-width: 100%;
@@ -1287,12 +1284,16 @@
     margin-bottom: 4px;
   }
 
-  .exp-org-logo {
-    width: 60px;
-    height: 60px;
-    margin: 0;
-    flex: 0 0 auto;             /* fixed-size logo on the left */
-  }
+.exp-org-logo {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  flex: 0 0 auto;
+  padding: 0;              /* remove frame on mobile */
+  background: transparent; /* remove background */
+  border-radius: 0;
+}
+
 
   .exp-org-text {
     flex: 1 1 auto;
