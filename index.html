@@ -933,25 +933,34 @@
 .exp-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 0;
+  border-radius: 10px;                     /* softer corners */
   overflow: hidden;
   backface-visibility: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  box-shadow: none;
+
+  background: #f7f3e9;                     /* aged paper */
+  border: 1px solid rgba(120, 98, 68, 0.35);
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.06);
+
+  background-image:
+    radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 3px 3px, 6px 6px;       /* fiber speckle */
+  background-blend-mode: multiply;
 }
+
 
 /* FRONT */
 
 .exp-card-front {
-  background: #ffffff;
-  color: #111111;
-  transition: background 0.2s ease;
+  background: transparent !important;
+  color: #2f2a21;                            /* ink */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 26px;
   gap: 14px;
 }
+
 
 .exp-front-left {
   display: flex;
@@ -999,12 +1008,13 @@
 /* BACK */
 
 .exp-card-back {
-  background: #ffffff;
-  color: #111827;
+  background: transparent !important;
+  color: #2f2a21;
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
 }
+
 
 .exp-card-back-inner {
   padding: 14px 14px 10px;
@@ -1058,18 +1068,24 @@
 
 .exp-org-meta {
   font-size: 0.78rem;
-  color: #6b7280;
+  color: rgba(70,60,50,0.7);
   margin-bottom: 4px;
 }
 
+
 .exp-org-list {
-  grid-column: 1 / -1;   /* expand across the full row */
-  margin-left: 0;        /* remove weird indent */
-  padding-left: 20px;    /* normal bullet indentation */
-  margin-top: 6px;
-  font-size: 0.82rem;
-  line-height: 1.45;
+  grid-column: 1 / -1;        /* keep */
+  margin-left: 0;             /* keep */
+  padding-left: 20px;         /* keep */
+  margin-top: 6px;            /* keep */
+  font-size: 0.82rem;         /* keep */
+  line-height: 1.45;          /* keep */
+
+  /* NEW styles */
+  color: #3e3328;
+  font-family: "Courier New", monospace;
 }
+
 
 
 .exp-card-back-hint {
@@ -1187,10 +1203,13 @@
 
 /* make hover a bit more “alive” but still clean */
 .exp-card:hover .exp-card-front {
-  background: linear-gradient(135deg, var(--exp-accent-soft), #ffffff);
-  border-color: var(--exp-accent);
-  box-shadow: 0 14px 30px rgba(15,23,42,0.14);
+  background: transparent !important;
+  border-color: rgba(120,98,68,0.45) !important;  /* ink border */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);         /* lifted paper */
+  transform: translateY(-2px);
 }
+
+
 
 /* on the back: tint the meta line slightly */
 .exp-card--ngo .exp-org-meta,
