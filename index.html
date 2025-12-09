@@ -167,10 +167,12 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) 380px; /* wider map */
+  grid-template-columns: 260px minmax(0, 1fr) minmax(320px, 1fr);
+  /*       stats     focus areas       map expands dynamically  */
   gap: 32px;
   align-items: flex-start;
 }
+
 
 /* ===========================
    ABOUT – STATS (2×2 GRID)
@@ -289,10 +291,13 @@
 
 .about-map {
   display: flex;
+  width: 100%;
   justify-content: flex-end;
 }
 
 .map-card {
+  width: 100%;   /* makes leaflet fill the entire right column */
+  height: 220px; /* or whatever you want */
   background: transparent;
   border: none;
   padding: 0;
