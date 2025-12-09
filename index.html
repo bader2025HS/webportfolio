@@ -2591,14 +2591,32 @@
            GALLERY (HOME)
     ============================ */
 
-    .gallery {
-      grid-auto-rows: 200px;
-      grid-auto-flow: dense;
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 10px;
-    }
+ .gallery {
+  display: grid;
+  grid-auto-flow: column;               /* horizontal layout */
+  grid-template-rows: repeat(2, 200px); /* 2 rows */
+  grid-auto-columns: 250px;             /* width of each item */
+  gap: 12px;
+
+  overflow-x: auto;                     /* allow horizontal scroll */
+  overflow-y: hidden;                   
+  padding: 10px 0 20px;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;             /* IE + old Edge */
+  scrollbar-width: none;                /* Firefox */
+}
+
+/* Chrome / Safari / Edge */
+.gallery::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none !important;
+}
+
+.gallery {
+  scrollbar-color: transparent transparent !important;
+}
+
 
     .gallery-item {
       position: relative;
