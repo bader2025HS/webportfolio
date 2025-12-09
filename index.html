@@ -167,7 +167,7 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) 340px; /* map a bit wider */
+  grid-template-columns: 260px minmax(0, 1fr) 380px; /* wider map */
   gap: 32px;
   align-items: flex-start;
 }
@@ -260,9 +260,11 @@
 /* 2-column grid for chips */
 .about-focus-chips {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 12px;
+  grid-template-columns: repeat(2, max-content); /* fits chip size */
+  gap: 10px 16px;
+  justify-content: start; /* prevents full row stretching */
 }
+
 
 .about-focus-chip {
   padding: 7px 14px;         /* a bit larger */
@@ -297,7 +299,7 @@
   overflow: hidden;
 
   width: 100%;
-  height: 240px;             /* slightly shorter → less vertical scroll */
+  height: 200px;             /* slightly shorter → less vertical scroll */
   border-radius: 18px;
 }
 
