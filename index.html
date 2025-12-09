@@ -277,25 +277,24 @@
 .about-stat-tooltip::after {
   content: "";
   position: absolute;
-  left: 50%;                     /* center horizontally */
-  transform: translateX(-50%) rotate(45deg); 
-  top: 100%;                    /* below the bubble */
-  
+  left: 24px;
+  top: 100%;
   width: 10px;
   height: 10px;
-  background: #000;             /* black arrow */
+
+  background: #000;                       /* black arrow */
   border-left: 1px solid rgba(255,255,255,0.15);
   border-bottom: 1px solid rgba(255,255,255,0.15);
-  
-  border-radius: 2px;           /* smoother, less pointy */
-}
 
+  transform: rotate(45deg);
+}
 
 /* Show tooltip on hover */
 .about-stat:hover .about-stat-tooltip {
   opacity: 1;
   transform: translateY(0px);
 }
+
 
 
 
