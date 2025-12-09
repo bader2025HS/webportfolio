@@ -251,7 +251,7 @@
 .about-stat-tooltip {
   position: absolute;
   left: 0;
-  top: -46px; /* position above the stat, adjust as needed */
+  bottom: calc(100% + 10px);   /* 💡 put the bubble ABOVE the stat */
   padding: 8px 12px;
   background: #fff;
   border: 1px solid rgba(0,0,0,0.1);
@@ -259,7 +259,9 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   font-size: 0.75rem;
   color: #111827;
-  white-space: nowrap;
+
+  max-width: 260px;            /* 💡 allow multiple lines */
+  white-space: normal;         /* 💡 wrap text instead of one long line */
 
   opacity: 0;
   transform: translateY(4px);
@@ -272,8 +274,8 @@
 .about-stat-tooltip::after {
   content: "";
   position: absolute;
-  left: 14px;
-  bottom: -6px;
+  left: 24px;                  /* tweak so arrow aligns roughly above number */
+  top: 100%;                   /* 💡 arrow sits under the bubble */
   width: 10px;
   height: 10px;
   background: #fff;
