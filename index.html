@@ -933,18 +933,29 @@
 .exp-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 0;
+  border-radius: 10px;
   overflow: hidden;
   backface-visibility: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  box-shadow: none;
+
+  background: #f7f3e9;  /* aged paper beige */
+  border: 1px solid rgba(120, 98, 68, 0.35);  /* warm ink border */
+
+  /* subtle paper fibers texture */
+  background-image:
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 4px 4px, 7px 7px;
+  background-blend-mode: multiply;
+
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.08);
 }
+
 
 /* FRONT */
 
 .exp-card-front {
-  background: #ffffff;
-  color: #111111;
+  background: transparent !important; /* already replaced by face texture */
+  color: #2f2a21;                     /* ink-like tone */
   transition: background 0.2s ease;
   display: flex;
   align-items: center;
@@ -999,8 +1010,8 @@
 /* BACK */
 
 .exp-card-back {
-  background: #ffffff;
-  color: #111827;
+  background: transparent !important; /* texture comes from .exp-card-face */
+  color: #2f2a21;
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
