@@ -2663,6 +2663,17 @@
   gap: 6px 12px;  /* row-gap / column-gap */
 }
 
+@media (max-width: 640px) {
+  /* ... you already have some rules here ... */
+
+  /* Tools + Soft Skills: 1 item per row on mobile */
+  .terminal-column.tools .terminal-rows,
+  .terminal-column.softskills .terminal-rows {
+    grid-template-columns: 1fr;   /* one column */
+  }
+}
+
+
     /* ===========================
            GALLERY (HOME)
     ============================ */
