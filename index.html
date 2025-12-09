@@ -247,21 +247,24 @@
   color: #009fa5;
   text-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
- /* Tooltip cloud for stats */
+/* Tooltip cloud for stats — black bubble */
 .about-stat-tooltip {
   position: absolute;
   left: 0;
-  bottom: calc(100% + 10px);   /* 💡 put the bubble ABOVE the stat */
+  bottom: calc(100% + 10px);   /* stays above stat */
   padding: 8px 12px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  font-size: 0.75rem;
-  color: #111827;
 
-  max-width: 260px;            /* 💡 allow multiple lines */
-  white-space: normal;         /* 💡 wrap text instead of one long line */
+  background: #000;            /* BLACK background */
+  color: #fff;                 /* WHITE text */
+
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.45);
+
+  font-size: 0.75rem;
+  line-height: 1.45;
+  max-width: 260px;
+  white-space: normal;         /* allow wrapping */
 
   opacity: 0;
   transform: translateY(4px);
@@ -270,25 +273,28 @@
   z-index: 20;
 }
 
-/* small arrow */
+/* Arrow — now black */
 .about-stat-tooltip::after {
   content: "";
   position: absolute;
-  left: 24px;                  /* tweak so arrow aligns roughly above number */
-  top: 100%;                   /* 💡 arrow sits under the bubble */
+  left: 24px;
+  top: 100%;
   width: 10px;
   height: 10px;
-  background: #fff;
-  border-left: 1px solid rgba(0,0,0,0.1);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+
+  background: #000;                       /* black arrow */
+  border-left: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+
   transform: rotate(45deg);
 }
 
-/* Show on hover */
+/* Show tooltip on hover */
 .about-stat:hover .about-stat-tooltip {
   opacity: 1;
   transform: translateY(0px);
 }
+
 
 
 
