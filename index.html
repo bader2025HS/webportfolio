@@ -2202,13 +2202,13 @@
 }
 
 /* ===========================
-   CONTACT – ENVELOPE STYLE
+   CONTACT – ENVELOPE STYLE (TURQUOISE/BLUE)
 =========================== */
 
 #contact {
   margin-top: -20px;
   padding: 0;
-  background: #ffffff;
+  background: transparent; /* let the grid/paper show through */
 }
 
 .contact-envelope {
@@ -2216,7 +2216,7 @@
   max-width: 1050px;
   margin: 0 auto;
   width: 100%;
-  padding-top: 0; /* we don't need extra top padding */
+  padding-top: 0; /* keep layout same */
 }
 
 /* Triangular flap */
@@ -2230,6 +2230,7 @@
   overflow: hidden;
 }
 
+/* Flap paper */
 .contact-envelope-flap::before {
   content: "";
   position: absolute;
@@ -2237,9 +2238,9 @@
   top: -60%;
   width: 220%;
   height: 220%;
-  background: #ffffff;
+  background: #f0fbfb; /* soft turquoise-tinted paper */
   transform: translateX(-50%) rotate(45deg);
-  box-shadow: none;
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
 }
 
 /* Envelope body with airmail border */
@@ -2248,14 +2249,14 @@
   background:
     repeating-linear-gradient(
       -45deg,
-      #ff4d4d 0 14px,
-      #ff4d4d 14px 28px,
-      #1c8dde 28px 42px,
-      #1c8dde 42px 56px
+      #0ea5a3 0 14px,
+      #0ea5a3 14px 28px,
+      #2563eb 28px 42px,
+      #2563eb 42px 56px
     );
   border-radius: 0;
   padding: 12px;
-  box-shadow: none;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
   overflow: hidden;
 }
 
@@ -2266,6 +2267,7 @@
   inset: 12px;
   background: #ffffff;
   border-radius: 0;
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .contact-envelope-body > * {
@@ -2280,19 +2282,19 @@
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 26px;
-  color: #1c8dde;
+  color: #0e7490; /* deep turquoise */
 }
 
 .contact-envelope-subtitle {
   margin: 0 40px 16px;
   text-align: center;
   font-size: 16px;
-  color: #8c9ab0;
+  color: #5b8ba3; /* cool slate */
 }
 
 /* Form layout */
 .contact-envelope-form {
-  padding: 0 40px 24px; /* a bit more bottom padding to fit chips row */
+  padding: 0 40px 24px; /* keep structure, a bit more bottom padding */
 }
 
 .contact-envelope-row {
@@ -2315,25 +2317,31 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #1c8dde;
+  color: #0e7490;
   margin-bottom: 8px;
 }
 
+/* Inputs */
 .contact-envelope-field input,
 .contact-envelope-field textarea {
   border-radius: 10px;
-  border: 1px solid #dde4f0;
+  border: 1px solid rgba(14, 165, 162, 0.28);
   padding: 14px 14px;
   font-size: 16px;
   outline: none;
   resize: vertical;
-  transition: border 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+  background: #f9fafb;
 }
 
 .contact-envelope-field input:focus,
 .contact-envelope-field textarea:focus {
-  border-color: #009fa5;
-  box-shadow: 0 0 0 3px rgba(0, 159, 165, 0.18);
+  border-color: #0ea5a3;
+  box-shadow: 0 0 0 3px rgba(14, 165, 162, 0.18);
+  background: #ffffff;
 }
 
 /* Bottom row: Send on left, chips on right */
@@ -2355,22 +2363,25 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  background: #009fa5;
+  background: #0ea5a3;
   color: #ffffff;
   cursor: pointer;
-  box-shadow: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 14px 26px rgba(14, 165, 162, 0.45);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
 }
 
 .contact-envelope-btn:hover {
-  background: #00787d;
+  background: #0c8c8b;
   transform: translateY(-2px);
-  box-shadow: 0 18px 30px rgba(0, 159, 165, 0.45);
+  box-shadow: 0 20px 36px rgba(14, 165, 162, 0.55);
 }
 
 .contact-envelope-btn:active {
   transform: translateY(0);
-  box-shadow: 0 10px 18px rgba(0, 159, 165, 0.35);
+  box-shadow: 0 10px 20px rgba(14, 165, 162, 0.4);
 }
 
 /* Social chips inside envelope */
@@ -2378,7 +2389,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-left: auto;      /* pushes chips to the right */
+  margin-left: auto;
 }
 
 .contact-social-btn {
@@ -2387,29 +2398,30 @@
   justify-content: center;
   padding: 10px 18px;
   border-radius: 999px;
-  background: #f7fafc;
-  border: 1px solid #d0d7de;
+  background: #f0fbfb;
+  border: 1px solid rgba(14, 165, 162, 0.28);
   font-size: 0.95rem;
-  color: #222;
+  color: #0e6073;
   text-decoration: none;
   transition: 0.25s ease;
 }
 
 .contact-social-btn:hover {
-  background: #e6f9f9;
-  border-color: #009fa5;
-  color: #009fa5;
+  background: #e2fafb;
+  border-color: #0ea5a3;
+  color: #0ea5a3;
 }
 
+/* Primary chip (e.g. main CTA link) */
 .contact-social-btn.primary {
-  background: #009fa5;
+  background: #0ea5a3;
   color: #fff;
-  border-color: #009fa5;
+  border-color: #0ea5a3;
 }
 
 .contact-social-btn.primary:hover {
-  background: #00787d;
-  border-color: #00787d;
+  background: #0c8c8b;
+  border-color: #0c8c8b;
   color: #fff;
 }
 
@@ -2446,6 +2458,7 @@
     margin-left: 0;
   }
 }
+
 
   /* ===========================
        SKILLS SECTION – AIRPORT TERMINAL
