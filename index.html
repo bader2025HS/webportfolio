@@ -487,8 +487,8 @@
     ============================ */
 
 /* ===========================
-   EDUCATION MAPS – STATIC PANEL
-   (ONLY STATIC PART, NO POPUPS)
+   EDUCATION MAPS – MINIMAL + SEPARATED
+   (NO BOXES, NO CARDS, CLEAN FLOATING MAPS)
 =========================== */
 
 #education {
@@ -496,70 +496,79 @@
 }
 
 .education-maps {
-  display: none; /* still controlled by JS */
+  display: none; /* activated by JS */
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 20px;
+  gap: 40px; /* more separation = premium look */
   margin-top: 40px;
-
-  padding: 18px 20px;
-  border-radius: 22px;
-  background: radial-gradient(circle at top left, #fdf7ec 0%, #f9f0dd 40%, #fdfaf3 100%);
-  border: 1px solid rgba(148, 81, 32, 0.18);
-  box-shadow:
-    0 18px 40px rgba(15, 23, 42, 0.16),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
-/* one column per country map */
+/* each column holds label + map */
 .map-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 14px;
 }
 
-/* label above each map */
+/* cleaner, modern labels */
 .map-label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  margin-bottom: 20px;
-  color: #9f7a52;
+  color: #7c6a58;
   font-weight: 600;
+  opacity: 0.85;
+  position: relative;
+  padding-bottom: 6px;
 }
 
-/* map card */
+/* thin accent line under label (not a box!) */
+.map-label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 36px;
+  height: 2px;
+  transform: translateX(-50%);
+  background: rgba(180, 83, 9, 0.45); /* warm accent line */
+  border-radius: 3px;
+}
+
+/* the map itself */
 .country-map {
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 320px;
+
+  /* NO BOX, NO BORDER, NO CARD */
+  background: transparent;
+  border: none;
+
+  /* subtle shadow to “float” it */
+  box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+
+  border-radius: 18px; /* purely cosmetic rounding */
   cursor: pointer;
-  border-radius: 20px;
-  padding: 4px;
-  background: rgba(253, 247, 236, 0.95);
-  border: 1px solid rgba(148, 81, 32, 0.28);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.2s ease,
-    background 0.2s ease;
+
+  transition: transform 0.26s ease, box-shadow 0.26s ease;
 }
 
+/* hover = lift, like experience cards */
 .country-map:hover {
-  transform: scale(1.04); /* slight zoom */
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.24);
-  border-color: #b45309;
-  background: rgba(253, 244, 226, 1);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.22);
 }
 
-/* Leaflet container inside the card */
+/* keep Leaflet background clean */
 .leaflet-container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 16px; /* follow card curve */
+  border-radius: inherit;
 }
+
 
 
  /* ====== EDUCATION POPUP – BOARDING PASS ====== */
