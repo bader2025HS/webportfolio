@@ -2203,194 +2203,156 @@ nav a:hover {
 }
 
 /* ===========================
-   CONTACT – ENVELOPE STYLE (TURQUOISE/BLUE)
+   CONTACT – CLEAN BROWN PALETTE
+   NO ENVELOPE, NO SHADOWS
 =========================== */
 
 #contact {
-  margin-top: -20px;
-  padding: 0;
-  background: transparent; /* let the grid/paper show through */
+  margin-top: -25px;           /* brings the section up near menu */
+  padding: 30px 0 60px;
+  background: transparent;     /* keep grid background */
 }
 
-.contact-envelope {
-  position: relative;
+.contact-box {
   max-width: 1050px;
   margin: 0 auto;
-  width: 100%;
-  padding-top: 0; /* keep layout same */
+  padding: 32px 42px 48px;
+  background: #f8f1e3;         /* plain parchment box */
+  border: 1px solid rgba(110, 86, 52, 0.35);
+  border-radius: 20px;
+  box-shadow: none;
 }
 
-/* Triangular flap */
-.contact-envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 420px;
-  height: 220px;
-  transform: translateX(-50%);
-  overflow: hidden;
-}
 
-/* Flap paper */
-.contact-envelope-flap::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -60%;
-  width: 220%;
-  height: 220%;
-  background: #f0fbfb; /* soft turquoise-tinted paper */
-  transform: translateX(-50%) rotate(45deg);
-  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
-}
+/* ===========================
+   HEADINGS
+=========================== */
 
-/* Envelope body with airmail border */
-.contact-envelope-body {
-  position: relative;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      #0ea5a3 0 14px,
-      #0ea5a3 14px 28px,
-      #2563eb 28px 42px,
-      #2563eb 42px 56px
-    );
-  border-radius: 0;
-  padding: 12px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
-  overflow: hidden;
-}
-
-/* Inner white area */
-.contact-envelope-body::before {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  background: #ffffff;
-  border-radius: 0;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-}
-
-.contact-envelope-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Titles */
-.contact-envelope-title {
-  margin: 20px 20px 4px;
+.contact-title {
   text-align: center;
+  font-size: 28px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  font-size: 26px;
-  color: #0e7490; /* deep turquoise */
+  color: #4b3927;
+  margin-bottom: 6px;
 }
 
-.contact-envelope-subtitle {
-  margin: 0 40px 16px;
+.contact-subtitle {
   text-align: center;
   font-size: 16px;
-  color: #5b8ba3; /* cool slate */
+  color: #6e5a46;
+  margin-bottom: 28px;
 }
 
-/* Form layout */
-.contact-envelope-form {
-  padding: 0 40px 24px; /* keep structure, a bit more bottom padding */
+
+/* ===========================
+   FORM
+=========================== */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.contact-envelope-row {
+.contact-row {
   display: flex;
   gap: 24px;
-  margin-bottom: 22px;
 }
 
-.contact-envelope-row-full {
+.contact-row-full {
   flex-direction: column;
 }
 
-.contact-envelope-field {
+.contact-field {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.contact-envelope-field label {
+.contact-field label {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #0e7490;
+  color: #4b3927;
   margin-bottom: 8px;
 }
 
-/* Inputs */
-.contact-envelope-field input,
-.contact-envelope-field textarea {
+.contact-field input,
+.contact-field textarea {
   border-radius: 10px;
-  border: 1px solid rgba(14, 165, 162, 0.28);
-  padding: 14px 14px;
+  border: 1px solid rgba(110, 86, 52, 0.3);
+  padding: 14px;
   font-size: 16px;
-  outline: none;
+  background: #fffdf9;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: #8c6f52;
+  box-shadow: 0 0 0 3px rgba(110, 86, 52, 0.2);
+}
+
+.contact-field textarea {
   resize: vertical;
-  transition:
-    border 0.15s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
-  background: #f9fafb;
+  min-height: 160px;
 }
 
-.contact-envelope-field input:focus,
-.contact-envelope-field textarea:focus {
-  border-color: #0ea5a3;
-  box-shadow: 0 0 0 3px rgba(14, 165, 162, 0.18);
-  background: #ffffff;
-}
 
-/* Bottom row: Send on left, chips on right */
-.contact-footer-row {
-  margin-top: 24px;
+/* ===========================
+   FOOTER: BUTTON + SOCIALS
+=========================== */
+
+.contact-footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  align-items: center;
+  margin-top: 12px;
   flex-wrap: wrap;
+  gap: 16px;
 }
 
-/* Send button */
-.contact-envelope-btn {
+
+/* --- Send Button --- */
+
+.contact-send-btn {
   border: none;
   border-radius: 999px;
-  padding: 14px 50px;
+  padding: 14px 44px;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  background: #0ea5a3;
+  background: #4b3927;
   color: #ffffff;
   cursor: pointer;
-  box-shadow: 0 14px 26px rgba(14, 165, 162, 0.45);
+
   transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
 
-.contact-envelope-btn:hover {
-  background: #0c8c8b;
-  transform: translateY(-2px);
-  box-shadow: 0 20px 36px rgba(14, 165, 162, 0.55);
+/* floating effect */
+.contact-send-btn:hover {
+  transform: translateY(-3px);
+  background: #3d2e20;
+  box-shadow: 0 10px 18px rgba(75, 57, 39, 0.35);
 }
 
-.contact-envelope-btn:active {
+.contact-send-btn:active {
   transform: translateY(0);
-  box-shadow: 0 10px 20px rgba(14, 165, 162, 0.4);
+  box-shadow: 0 4px 10px rgba(75, 57, 39, 0.25);
 }
 
-/* Social chips inside envelope */
+
+/* --- Social Buttons --- */
+
 .contact-socials {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-left: auto;
 }
 
 .contact-social-btn {
@@ -2399,66 +2361,56 @@ nav a:hover {
   justify-content: center;
   padding: 10px 18px;
   border-radius: 999px;
-  background: #f0fbfb;
-  border: 1px solid rgba(14, 165, 162, 0.28);
+  background: #fffdf9;
+  border: 1px solid rgba(110, 86, 52, 0.3);
   font-size: 0.95rem;
-  color: #0e6073;
+  color: #4b3927;
   text-decoration: none;
   transition: 0.25s ease;
 }
 
 .contact-social-btn:hover {
-  background: #e2fafb;
-  border-color: #0ea5a3;
-  color: #0ea5a3;
+  background: #f8f1e3;
+  border-color: #4b3927;
+  color: #4b3927;
 }
 
-/* Primary chip (e.g. main CTA link) */
 .contact-social-btn.primary {
-  background: #0ea5a3;
-  color: #fff;
-  border-color: #0ea5a3;
+  background: #4b3927;
+  color: #ffffff;
+  border-color: #4b3927;
 }
 
 .contact-social-btn.primary:hover {
-  background: #0c8c8b;
-  border-color: #0c8c8b;
-  color: #fff;
+  background: #3d2e20;
+  border-color: #3d2e20;
 }
 
-/* Responsive: stack nicely on mobile */
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
 @media (max-width: 640px) {
-  #contact {
-    padding: 40px 0 60px;
+
+  .contact-box {
+    padding: 28px 24px 40px;
   }
 
-  .contact-envelope {
-    padding-top: 80px;
-  }
-
-  .contact-envelope-flap {
-    width: 260px;
-    height: 140px;
-  }
-
-  .contact-envelope-row {
+  .contact-row {
     flex-direction: column;
   }
 
-  .contact-envelope-form {
-    padding: 0 24px 32px;
-  }
-
-  .contact-footer-row {
+  .contact-footer {
     flex-direction: column;
     align-items: stretch;
   }
 
   .contact-socials {
     justify-content: flex-start;
-    margin-left: 0;
   }
 }
+
 
 
   /* ===========================
