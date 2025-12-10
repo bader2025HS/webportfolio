@@ -1334,58 +1334,53 @@
   }
 }
 
-    /* ===========================
-   OLD-PAPER / HISTORIC CARD LOOK
-   Applies to FRONT + BACK + FACE
+   /* ===========================
+   EXP – TURQUOISE PAPER STYLE
+   (same design, only color replaced)
 =========================== */
 
 .exp-card-face,
 .exp-card-front,
 .exp-card-back {
-  background: #f7f1df !important; /* parchment beige */
-  color: #3b2f23 !important;      /* warm ink-brown */
-  border: 1px solid rgba(110, 86, 52, 0.35) !important;
+  background: #e7f8f8 !important; /* soft turquoise paper */
+  color: #083f40 !important;      /* deep ink-turquoise */
+  border: 1px solid rgba(0, 159, 165, 0.25) !important;
 
-  /* paper grain texture */
+  /* subtle grain texture (same as before, just recolored) */
   background-image:
-      radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-      linear-gradient(0deg, rgba(255,255,255,0.15), transparent 40%);
+      radial-gradient(rgba(0, 159, 165, 0.12) 1px, transparent 1px),
+      radial-gradient(rgba(0, 159, 165, 0.10) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,0.25), transparent 40%);
   background-size: 4px 4px, 7px 7px, 100% 100%;
   background-blend-mode: multiply;
 
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.12) !important;
+  box-shadow: inset 0 0 6px rgba(0,159,165,0.15) !important;
 }
 
-/* Titles + accents inside card adapt to parchment tone */
+/* Titles + labels recolored into turquoise ink */
 .exp-front-main,
 .exp-back-label,
 .exp-org-meta {
-  color: #7b5e3b !important;  /* warm printed ink */
+  color: #0c6064 !important;  /* printed turquoise ink */
 }
 
-/* Gate code number more subtle */
+/* Gate code = darker turquoise */
 .exp-gate-code {
-  color: #634b2d !important;
+  color: #066a6e !important;
 }
 
-/* Vertical category stripe stays but more vintage */
-.exp-card::before {
-  opacity: 0.55 !important;
-  mix-blend-mode: multiply;
-}
-
-/* Hover effect updated to a parchment glow instead of teal/blue gradient */
+/* Hover = light turquoise glow */
 .exp-card:hover .exp-card-front {
-  background: #f9f3e3 !important;
-  box-shadow: 0 6px 16px rgba(60, 40, 20, 0.15) !important;
-  border-color: rgba(110, 86, 52, 0.45) !important;
+  background: #f0fcfc !important;
+  box-shadow: 0 8px 20px rgba(0,159,165,0.20) !important;
+  border-color: rgba(0,159,165,0.35) !important;
 }
 
-    /* Remove colored left stripe for old-paper design */
+/* Remove the old colored stripe (you already disabled it) */
 .exp-card::before {
   display: none !important;
 }
+
 
 
 
