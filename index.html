@@ -77,7 +77,6 @@ nav a:hover {
   color: #7b5e3b;             /* ink brown text */
 }
 
-
     /* ====== GLOBAL SECTION HANDLING ====== */
     main section {
       display: none;          /* hidden by default, JS will show one */
@@ -1941,87 +1940,6 @@ nav a:hover {
   margin-top: 12px; 
   gap: 12px;
 }
-
-
-/* ===========================
-   WORK – BROWN PALETTE OVERRIDES
-=========================== */
-
-/* Left panel text on dark brown background */
-.work-main {
-  color: #fdf7ee;
-}
-
-.work-main-label,
-.work-main-meta,
-.work-main-desc {
-  color: #f9f2e7;
-}
-
-/* warm abstract blobs */
-.work-main::before {
-  content: "";
-  position: absolute;
-  inset: -30%;
-  background:
-    radial-gradient(circle at 0% 0%,
-      rgba(255, 255, 255, 0.18) 0,
-      transparent 55%),
-    radial-gradient(circle at 120% 20%,
-      rgba(210, 163, 112, 0.25) 0,
-      transparent 60%),
-    radial-gradient(circle at 20% 120%,
-      rgba(167, 111, 63, 0.22) 0,
-      transparent 60%);
-  opacity: 0.9;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* concentric “ink rings” */
-.work-main::after {
-  border: 1px solid rgba(249, 244, 235, 0.25);
-  box-shadow:
-    0 0 0 18px rgba(46, 30, 18, 0.55),
-    0 0 0 40px rgba(46, 30, 18, 0.35);
-}
-
-/* chips on dark brown panel */
-.work-chip-pill {
-  border: 1px solid rgba(250, 240, 230, 0.7);
-  background: rgba(35, 23, 16, 0.92);
-  color: #fdf7ee;
-}
-
-/* file buttons */
-.work-main-link-btn {
-  border: 1px solid rgba(252, 250, 245, 0.9);
-  color: #fdf7ee;
-}
-.work-main-link-btn:hover {
-  background: rgba(252, 250, 245, 0.14);
-  border-color: #fdf7ee;
-  box-shadow: 0 12px 24px rgba(33, 24, 18, 0.65);
-}
-
-/* strips: light brown variants (match data-panel-color) */
-.work-strip--hsq { background: #f3e4d3; }
-.work-strip--oda { background: #f2ddc7; }
-.work-strip--cox { background: #f0e2cc; }
-.work-strip--vsl { background: #f4e0d9; }
-
-.work-strip-label,
-.work-strip-caption {
-  color: #5c4330;
-}
-
-/* no extra shadow on active strip */
-.work-strip.is-active {
-  box-shadow: none;
-}
-
-
 
 
 /* ===========================
@@ -3898,31 +3816,32 @@ nav a:hover {
 
   <button class="work-strip work-strip--hsq is-active"
         data-project="hsq"
-        data-panel-color="#f3e4d3">
+        data-panel-color="#1e3a8a">
   <span class="work-strip-label">Research Papers</span>
   <span class="work-strip-caption"></span>
 </button>
 
-<button class="work-strip work-strip--oda"
-        data-project="oda"
-        data-panel-color="#f2ddc7">
-  <span class="work-strip-label">Cooperation Notes</span>
-  <span class="work-strip-caption"></span>
-</button>
 
-<button class="work-strip work-strip--cox"
-        data-project="cox"
-        data-panel-color="#f0e2cc">
-  <span class="work-strip-label">Social Media</span>
-  <span class="work-strip-caption"></span>
-</button>
+  <button class="work-strip work-strip--oda"
+          data-project="oda"
+          data-panel-color="#c2410c">
+    <span class="work-strip-label">Cooperation Notes</span>
+    <span class="work-strip-caption"></span>
+  </button>
 
-<button class="work-strip work-strip--vsl"
-        data-project="vsl"
-        data-panel-color="#f4e0d9">
-  <span class="work-strip-label">Visuals &amp; infographics</span>
-  <span class="work-strip-caption"></span>
-</button>
+  <button class="work-strip work-strip--cox"
+          data-project="cox"
+          data-panel-color="#15803d">
+    <span class="work-strip-label">Social Media</span>
+    <span class="work-strip-caption"></span>
+  </button>
+
+  <button class="work-strip work-strip--vsl"
+          data-project="vsl"
+          data-panel-color="#be123c">
+    <span class="work-strip-label">Visuals &amp; infographics</span>
+    <span class="work-strip-caption"></span>
+  </button>
 
 </div>
 
@@ -4858,10 +4777,10 @@ document.addEventListener("keydown", e => {
 const workStrips      = document.querySelectorAll(".work-strip");
 const workDetails     = document.querySelectorAll(".work-detail");
 const workPanelLeft   = document.querySelector(".work-board-left");
-const workPanelRight  = document.querySelector(".work-strips");
+const workPanelRight  = document.querySelector(".work-strips"); // dark column background
 const workShell       = document.querySelector(".work-shell");
 
-// darken a hex color by "amount" (0–1)
+// helper: darken hex by a factor
 function darkenColor(hex, amount) {
   let c = hex.replace("#", "");
   if (c.length === 3) {
@@ -4880,13 +4799,13 @@ function darkenColor(hex, amount) {
   return "#" + [r, g, b].map(v => v.toString(16).padStart(2,"0")).join("");
 }
 
-function setActiveWork(project) {
-  // show correct detail
+    function setActiveWork(project) {
+  // toggle content
   workDetails.forEach(d => {
     d.classList.toggle("is-active", d.dataset.project === project);
   });
 
-  // toggle strips + recolor panels
+  // toggle strips & recolor panels
   workStrips.forEach(strip => {
     const active = strip.dataset.project === project;
     strip.classList.toggle("is-active", active);
@@ -4894,32 +4813,32 @@ function setActiveWork(project) {
     if (active) {
       const baseColor = strip.dataset.panelColor;
 
-      // LEFT PANEL = darker than strip
+      // LEFT PANEL = medium-darker shade
       const leftColor  = darkenColor(baseColor, 0.40);
-      // RIGHT COLUMN = even darker
+      // RIGHT PANEL = even darker
       const rightColor = darkenColor(baseColor, 0.60);
 
-      if (workPanelLeft)  workPanelLeft.style.background  = leftColor;
-      if (workPanelRight) workPanelRight.style.background = rightColor;
-      if (workShell)      workShell.style.background      = leftColor;
+      workPanelLeft.style.background  = leftColor;
+      workPanelRight.style.background = rightColor;
+
+      // 👇 NEW: make the rounded container corners match the left panel
+      if (workShell) {
+        workShell.style.background = leftColor;
+      }
     }
   });
 }
 
-// click handlers
+// add click listeners
 workStrips.forEach(strip => {
   strip.addEventListener("click", () => {
     setActiveWork(strip.dataset.project);
   });
 });
 
-// init with the strip that has .is-active
-const initialStrip = document.querySelector(".work-strip.is-active");
-if (initialStrip) {
-  setActiveWork(initialStrip.dataset.project);
-}
-
-
+// initialize the first active one
+const initial = document.querySelector(".work-strip.is-active");
+if (initial) setActiveWork(initial.dataset.project);
 
 
   </script>
