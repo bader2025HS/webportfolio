@@ -19,12 +19,19 @@
   html::-webkit-scrollbar {
     display: none;                 /* Chrome, Edge, Safari */
   }
-    body {
+ body {
   font-family: "Trebuchet MS", Verdana, sans-serif;
-  background: #ffffff;
   color: #111;
   overflow-x: hidden;   /* prevents horizontal scroll bar */
+
+  /* graph paper style background */
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px; /* size of each square (change if you want bigger/smaller) */
 }
+
 
 
     /* Container */
