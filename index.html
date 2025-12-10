@@ -2202,36 +2202,36 @@ nav a:hover {
 }
 
 /* ===========================
-   CONTACT – BROWN CARD STYLE
+   CONTACT – FLAT BROWN CARD
+   (NO SHADOW, FULL-WIDTH, CLOSER TO MENU)
 =========================== */
 
 #contact {
-  margin-top: -10px;
-  padding: 40px 0 70px;
-  background: transparent; /* grid paper stays visible */
+  margin-top: -5px;          /* brings closer to menu */
+  padding: 20px 0 40px;      /* less vertical space */
+  background: transparent;   /* keep grid paper */
 }
 
+/* FULL WIDTH CONTAINER (same as menu width logic) */
 .contact-envelope {
-  position: relative;
-  max-width: 1050px;
-  margin: 0 auto;
   width: 100%;
-  padding: 0 16px;
+  max-width: 1200px;         /* same as your .page / nav */
+  margin: 0 auto;
+  padding: 0 20px;           /* side padding like header/nav */
 }
 
-/* No more flap – hide it completely */
+/* remove envelope visuals entirely */
 .contact-envelope-flap {
   display: none;
 }
 
-/* Main contact box */
+/* FLAT PARCHMENT BOX */
 .contact-envelope-body {
-  position: relative;
-  background: #f7f1df; /* parchment beige */
-  border-radius: 22px;
-  padding: 28px 32px 26px;
-  box-shadow: 0 18px 38px rgba(60, 40, 20, 0.25);
+  background: #f7f1df;  /* parchment beige */
+  border-radius: 18px;
+  padding: 26px 32px;
   border: 1px solid rgba(110, 86, 52, 0.35);
+  box-shadow: none !important;   /* ← removed shadow */
   overflow: hidden;
 }
 
@@ -2245,7 +2245,6 @@ nav a:hover {
     radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
     linear-gradient(0deg, rgba(255, 255, 255, 0.12), transparent 40%);
   background-size: 4px 4px, 7px 7px, 100% 100%;
-  background-blend-mode: multiply;
   opacity: 0.85;
   pointer-events: none;
   z-index: 0;
@@ -2256,24 +2255,24 @@ nav a:hover {
   z-index: 1;
 }
 
-/* Titles */
+/* TITLES */
 .contact-envelope-title {
-  margin: 4px 4px 6px;
-  text-align: left;
+  margin: 0 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 22px;
-  color: #5c4330; /* warm ink brown */
+  color: #5c4330;
+  text-align: left;
 }
 
 .contact-envelope-subtitle {
-  margin: 0 4px 18px;
-  text-align: left;
+  margin: 0 0 22px;
   font-size: 15px;
   color: #8a6f53;
+  text-align: left;
 }
 
-/* Form layout */
+/* FORM */
 .contact-envelope-form {
   padding: 0;
 }
@@ -2298,50 +2297,36 @@ nav a:hover {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #7b5e3b;
   margin-bottom: 6px;
+  color: #7b5e3b;
 }
 
-/* Inputs */
 .contact-envelope-field input,
 .contact-envelope-field textarea {
   border-radius: 10px;
   border: 1px solid rgba(110, 86, 52, 0.4);
   padding: 12px 13px;
   font-size: 15px;
-  outline: none;
-  resize: vertical;
-  transition:
-    border 0.15s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
   background: #fdf7ee;
   color: #3b2a1a;
-}
-
-.contact-envelope-field input::placeholder,
-.contact-envelope-field textarea::placeholder {
-  color: rgba(90, 68, 45, 0.6);
 }
 
 .contact-envelope-field input:focus,
 .contact-envelope-field textarea:focus {
   border-color: #b88746;
-  box-shadow: 0 0 0 3px rgba(184, 135, 70, 0.35);
+  box-shadow: 0 0 0 2px rgba(184, 135, 70, 0.25);
   background: #fffaf1;
 }
 
-/* Bottom row: Send on left, chips on right */
 .contact-footer-row {
-  margin-top: 24px;
+  margin-top: 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-/* Send button */
+/* BUTTON — FLAT */
 .contact-envelope-btn {
   border: none;
   border-radius: 999px;
@@ -2353,25 +2338,14 @@ nav a:hover {
   background: #5c4330;
   color: #ffffff;
   cursor: pointer;
-  box-shadow: 0 12px 24px rgba(60, 40, 20, 0.5);
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
+  box-shadow: none !important;   /* no shadow */
 }
 
 .contact-envelope-btn:hover {
   background: #4a3423;
-  transform: translateY(-1px);
-  box-shadow: 0 16px 28px rgba(60, 40, 20, 0.55);
 }
 
-.contact-envelope-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 10px 20px rgba(60, 40, 20, 0.45);
-}
-
-/* Social chips */
+/* Social buttons */
 .contact-socials {
   display: flex;
   gap: 10px;
@@ -2380,64 +2354,38 @@ nav a:hover {
 }
 
 .contact-social-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 9px 16px;
   border-radius: 999px;
   background: #fbf3e7;
   border: 1px solid rgba(110, 86, 52, 0.45);
   font-size: 0.9rem;
   color: #4a3423;
-  text-decoration: none;
-  transition: 0.22s ease;
 }
 
 .contact-social-btn:hover {
-  background: #f6e8d6;
+  background: #f2e4d3;
   border-color: #b88746;
   color: #3b2718;
 }
 
-/* Primary chip (e.g. main CTA link) */
 .contact-social-btn.primary {
   background: #5c4330;
-  color: #fff;
+  color: white;
   border-color: #5c4330;
 }
 
 .contact-social-btn.primary:hover {
   background: #4a3423;
-  border-color: #4a3423;
-  color: #fff;
 }
 
-/* Responsive: stack nicely on mobile */
+/* MOBILE */
 @media (max-width: 640px) {
-  #contact {
-    padding: 30px 0 50px;
-  }
-
-  .contact-envelope {
-    padding: 0 10px;
-  }
-
   .contact-envelope-body {
-    padding: 22px 18px 22px;
-    border-radius: 18px;
-  }
-
-  .contact-envelope-title {
-    font-size: 20px;
-  }
-
-  .contact-envelope-subtitle {
-    font-size: 14px;
+    padding: 22px 20px;
   }
 
   .contact-envelope-row {
     flex-direction: column;
-    gap: 14px;
   }
 
   .contact-footer-row {
@@ -2446,16 +2394,14 @@ nav a:hover {
   }
 
   .contact-socials {
-    justify-content: flex-start;
     margin-left: 0;
   }
 
   .contact-envelope-btn {
     width: 100%;
-    text-align: center;
-    justify-content: center;
   }
 }
+
 
 
 
