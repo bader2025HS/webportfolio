@@ -2203,176 +2203,194 @@ nav a:hover {
 }
 
 /* ===========================
-   CONTACT – CLEAN BROWN PALETTE
-   NO ENVELOPE, NO SHADOWS
+   CONTACT – CLEAN BROWN BOX
+   (matches .contact-envelope HTML)
 =========================== */
 
 #contact {
-  margin-top: -25px;           /* brings the section up near menu */
+  margin-top: -25px;           /* closer to menu */
   padding: 30px 0 60px;
-  background: transparent;     /* keep grid background */
+  background: transparent;     /* DO NOT touch page bg */
 }
 
-.contact-box {
+/* main container aligned with other sections */
+.contact-envelope {
+  position: relative;
   max-width: 1050px;
   margin: 0 auto;
-  padding: 32px 42px 48px;
-  background: #f8f1e3;         /* plain parchment box */
-  border: 1px solid rgba(110, 86, 52, 0.35);
-  border-radius: 20px;
-  box-shadow: none;
+  width: 100%;
+  padding: 0;
 }
 
+/* no more flap */
+.contact-envelope-flap {
+  display: none !important;
+}
 
-/* ===========================
-   HEADINGS
-=========================== */
+/* plain beige box */
+.contact-envelope-body {
+  position: relative;
+  background: #f8f1e3;         /* plain parchment */
+  border-radius: 20px;
+  padding: 32px 40px 40px;
+  border: 1px solid rgba(110, 86, 52, 0.35);
+  box-shadow: none;            /* no shadow */
+  overflow: hidden;
+}
 
-.contact-title {
-  text-align: center;
-  font-size: 28px;
+/* everything inside should sit above the box background */
+.contact-envelope-body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADINGS ===== */
+
+.contact-envelope-title {
+  margin: 0 0 6px;
+  text-align: center;          /* centered */
   text-transform: uppercase;
   letter-spacing: 0.16em;
+  font-size: 24px;
   color: #4b3927;
-  margin-bottom: 6px;
 }
 
-.contact-subtitle {
-  text-align: center;
-  font-size: 16px;
-  color: #6e5a46;
-  margin-bottom: 28px;
+.contact-envelope-subtitle {
+  margin: 0 0 24px;
+  text-align: center;          /* centered */
+  font-size: 15px;
+  color: #6e5741;
 }
 
+/* ===== FORM LAYOUT ===== */
 
-/* ===========================
-   FORM
-=========================== */
+.contact-envelope-form {
+  padding: 0;
+}
 
-.contact-form {
+.contact-envelope-row {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 22px;
+  margin-bottom: 20px;
 }
 
-.contact-row {
-  display: flex;
-  gap: 24px;
-}
-
-.contact-row-full {
+.contact-envelope-row-full {
   flex-direction: column;
 }
 
-.contact-field {
+.contact-envelope-field {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.contact-field label {
+.contact-envelope-field label {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #4b3927;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
-.contact-field input,
-.contact-field textarea {
+/* inputs + textarea */
+
+.contact-envelope-field input,
+.contact-envelope-field textarea {
   border-radius: 10px;
-  border: 1px solid rgba(110, 86, 52, 0.3);
-  padding: 14px;
-  font-size: 16px;
+  border: 1px solid rgba(110, 86, 52, 0.35);
+  padding: 12px 13px;
+  font-size: 15px;
   background: #fffdf9;
+  color: #2f2216;
+  outline: none;
   transition: border 0.15s ease, box-shadow 0.15s ease;
 }
 
-.contact-field input:focus,
-.contact-field textarea:focus {
-  border-color: #8c6f52;
-  box-shadow: 0 0 0 3px rgba(110, 86, 52, 0.2);
+.contact-envelope-field input::placeholder,
+.contact-envelope-field textarea::placeholder {
+  color: rgba(80, 60, 40, 0.6);
 }
 
-.contact-field textarea {
+.contact-envelope-field input:focus,
+.contact-envelope-field textarea:focus {
+  border-color: #b88746;
+  box-shadow: 0 0 0 2px rgba(184, 135, 70, 0.25);
+}
+
+.contact-envelope-field textarea {
   resize: vertical;
   min-height: 160px;
 }
 
+/* ===== FOOTER ROW ===== */
 
-/* ===========================
-   FOOTER: BUTTON + SOCIALS
-=========================== */
-
-.contact-footer {
+.contact-footer-row {
+  margin-top: 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
-  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
+/* SEND BUTTON (floating on hover) */
 
-/* --- Send Button --- */
-
-.contact-send-btn {
+.contact-envelope-btn {
   border: none;
   border-radius: 999px;
-  padding: 14px 44px;
-  font-size: 16px;
+  padding: 13px 42px;
+  font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   background: #4b3927;
   color: #ffffff;
   cursor: pointer;
 
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+    background 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-/* floating effect */
-.contact-send-btn:hover {
-  transform: translateY(-3px);
+/* float effect */
+.contact-envelope-btn:hover {
   background: #3d2e20;
+  transform: translateY(-3px);
   box-shadow: 0 10px 18px rgba(75, 57, 39, 0.35);
 }
 
-.contact-send-btn:active {
+.contact-envelope-btn:active {
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(75, 57, 39, 0.25);
 }
 
-
-/* --- Social Buttons --- */
+/* ===== SOCIAL CHIPS ===== */
 
 .contact-socials {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .contact-social-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 18px;
+  padding: 9px 16px;
   border-radius: 999px;
   background: #fffdf9;
-  border: 1px solid rgba(110, 86, 52, 0.3);
+  border: 1px solid rgba(110, 86, 52, 0.35);
   font-size: 0.95rem;
   color: #4b3927;
   text-decoration: none;
-  transition: 0.25s ease;
+  transition: 0.22s ease;
 }
 
 .contact-social-btn:hover {
-  background: #f8f1e3;
-  border-color: #4b3927;
-  color: #4b3927;
+  background: #f0e4d4;
+  border-color: #b88746;
 }
 
 .contact-social-btn.primary {
@@ -2386,28 +2404,37 @@ nav a:hover {
   border-color: #3d2e20;
 }
 
-
-/* ===========================
-   RESPONSIVE
-=========================== */
+/* ===== RESPONSIVE ===== */
 
 @media (max-width: 640px) {
-
-  .contact-box {
-    padding: 28px 24px 40px;
+  #contact {
+    margin-top: -15px;
+    padding: 24px 0 50px;
   }
 
-  .contact-row {
+  .contact-envelope-body {
+    padding: 24px 18px 32px;
+    border-radius: 16px;
+  }
+
+  .contact-envelope-row {
     flex-direction: column;
+    gap: 16px;
   }
 
-  .contact-footer {
+  .contact-footer-row {
     flex-direction: column;
     align-items: stretch;
   }
 
   .contact-socials {
-    justify-content: flex-start;
+    margin-left: 0;
+  }
+
+  .contact-envelope-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 }
 
