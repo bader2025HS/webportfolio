@@ -1334,16 +1334,15 @@
   }
 }
 
-    /* ===========================
-   OLD-PAPER / HISTORIC CARD LOOK
-   Applies to FRONT + BACK + FACE
+ /* ===========================
+   EXPERIENCE – PARCHMENT + TURQUOISE ACCENTS
 =========================== */
 
 .exp-card-face,
 .exp-card-front,
 .exp-card-back {
-  background: #f7f1df !important; /* parchment beige */
-  color: #3b2f23 !important;      /* warm ink-brown */
+  background: #f7f1df !important;           /* parchment beige */
+  color: #3b2f23 !important;                /* warm ink-brown */
   border: 1px solid rgba(110, 86, 52, 0.35) !important;
 
   /* paper grain texture */
@@ -1354,35 +1353,29 @@
   background-size: 4px 4px, 7px 7px, 100% 100%;
   background-blend-mode: multiply;
 
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.12) !important;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.10) !important;
 }
 
-/* Titles + accents inside card adapt to parchment tone */
+/* warm ink for labels */
 .exp-front-main,
 .exp-back-label,
 .exp-org-meta {
-  color: #7b5e3b !important;  /* warm printed ink */
+  color: #7b5e3b !important;
 }
 
-/* Gate code number more subtle */
+/* gate code: turquoise accent to tie with rest of site */
 .exp-gate-code {
-  color: #634b2d !important;
+  color: #009fa5 !important;
 }
 
-/* Vertical category stripe stays but more vintage */
-.exp-card::before {
-  opacity: 0.55 !important;
-  mix-blend-mode: multiply;
-}
-
-/* Hover effect updated to a parchment glow instead of teal/blue gradient */
+/* hover = parchment glow + slight turquoise hint on border */
 .exp-card:hover .exp-card-front {
   background: #f9f3e3 !important;
-  box-shadow: 0 6px 16px rgba(60, 40, 20, 0.15) !important;
-  border-color: rgba(110, 86, 52, 0.45) !important;
+  box-shadow: 0 8px 20px rgba(60, 40, 20, 0.18) !important;
+  border-color: rgba(0, 159, 165, 0.45) !important; /* subtle turquoise */
 }
 
-    /* Remove colored left stripe for old-paper design */
+/* no left stripe */
 .exp-card::before {
   display: none !important;
 }
