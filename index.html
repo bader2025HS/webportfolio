@@ -2373,30 +2373,52 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 /* Info card: slightly smaller */
 .contact-info-card {
   position: relative;
-  padding: 18px 18px 14px;   /* was 24px 20px 20px */
+  padding: 20px 18px 16px;
   border-radius: 0;
-  background: var(--bg1, #f5f8ff);
+  background: var(--bg1, #f5f8ff);     /* light blue */
   border: 1px solid rgba(0, 0, 0, 0.10);
   text-align: center;
   text-decoration: none;
   color: inherit;
   transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
+    background 0.20s ease,
+    border-color 0.20s ease,
+    box-shadow 0.20s ease;
 }
 
+/* Hover: white + brown border */
+.contact-info-card:hover {
+  background: #ffffff;
+  border-color: var(--accent, #d79a3b);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* Title */
 .contact-info-card h3 {
-  font-size: 0.85rem;        /* slightly smaller */
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin: 0 0 4px;           /* was 6px */
+  margin: 0 0 4px;
 }
 
+/* Text */
 .contact-info-card p {
-  font-size: 0.8rem;         /* slightly smaller */
+  font-size: 0.8rem;
   opacity: 0.9;
   margin: 0;
 }
+
+/* ICON COLOR FIX: always dark blue */
+.contact-info-icon svg {
+  stroke: #1c2d5a;
+  transition: stroke 0.20s ease;
+}
+
+/* ICON OPTIONAL HOVER EFFECT */
+.contact-info-card:hover .contact-info-icon svg {
+  stroke: var(--accent, #d79a3b);   /* icon becomes brown on hover */
+}
+
 
 
 /* Icon centered above title */
