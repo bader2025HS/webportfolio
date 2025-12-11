@@ -2214,7 +2214,7 @@ nav a:hover {
 /* Layout: left form, right info grid */
 .contact-layout {
   max-width: 1050px;
-  margin: 0 auto 80px;
+  margin: 0 auto 40px;
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
   gap: 32px;
@@ -2228,12 +2228,20 @@ nav a:hover {
 }
 
 .contact-envelope {
-  background: var(--card-bg, #fdf4e3);
-  border-radius: 24px;
+  background: var(--bg1, #f5f8ff);      /* same blue as right cards */
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 0;                     /* sharp corners */
   padding: 32px 32px 28px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
+.contact-envelope:hover {
+  background: #ffffff;                  /* white on hover */
+  border-color: var(--accent, #d79a3b); /* brown frame on hover */
+}
+
 
 .contact-title {
   text-align: center;
