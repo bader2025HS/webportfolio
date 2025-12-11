@@ -2213,7 +2213,7 @@ nav a:hover {
 
 /* Layout: left form, right info grid */
 .contact-layout {
-  max-width: 1150px;
+  max-width: 1050px;
   margin: 0 auto 80px;
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
@@ -2451,6 +2451,29 @@ nav a:hover {
   margin: 0;
   opacity: 0.75;
 }
+
+    /* Glass Copyright Footer */
+.glass {
+  margin-top: 20px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.32); /* soft frosted */
+  backdrop-filter: blur(10px);            /* strong blur effect */
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 0;                       /* sharp edges like your cards */
+  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: rgba(0,0,0,0.75);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05); /* subtle shadow */
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
 
 /* ================================
    RESPONSIVE
@@ -4096,9 +4119,10 @@ nav a:hover {
   </div>
 
   <!-- COPYRIGHT -->
-  <div class="contact-copyright">
-    <p>© 2025 Bader Suliman — All rights reserved.</p>
-  </div>
+  <div class="contact-copyright glass">
+  © 2025 Bader Suliman — All rights reserved.
+</div>
+
 </aside>
 
 
