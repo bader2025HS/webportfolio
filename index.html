@@ -2203,17 +2203,15 @@ nav a:hover {
   margin-right: -50vw;
 }
 
-/* ===========================
-   CONTACT – CLEAN BROWN BOX
-   (matches .contact-envelope HTML)
-=========================== */
-
-/* ===== CONTACT LAYOUT (left form + right cards) ===== */
+/* ================================
+   CONTACT SECTION
+   ================================ */
 
 #contact {
   margin-top: 64px;
 }
 
+/* Layout: left form, right info grid */
 .contact-layout {
   max-width: 1150px;
   margin: 0 auto 80px;
@@ -2223,7 +2221,11 @@ nav a:hover {
   align-items: stretch;
 }
 
-/* left side: keep your envelope style, just tweak if needed */
+/* LEFT SIDE – CONTACT FORM ("envelope") */
+
+.contact-left {
+  min-width: 0;
+}
 
 .contact-envelope {
   background: var(--card-bg, #fdf4e3);
@@ -2248,7 +2250,12 @@ nav a:hover {
   opacity: 0.8;
 }
 
-/* 3 fields in one row */
+/* 3 fields (name / email / topic) in one row on desktop */
+
+.contact-envelope-form {
+  width: 100%;
+}
+
 .contact-envelope-fields {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2279,7 +2286,10 @@ nav a:hover {
   font: inherit;
   background: #fff;
   outline: none;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.12s ease;
 }
 
 .contact-envelope-field input:focus,
@@ -2299,7 +2309,8 @@ nav a:hover {
   min-height: 140px;
 }
 
-/* send button */
+/* Send button */
+
 .contact-send-btn {
   margin-top: 18px;
   display: inline-flex;
@@ -2315,7 +2326,10 @@ nav a:hover {
   background: var(--accent-dark, #583016);
   color: #fff;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
 }
 
 .contact-send-btn:hover {
@@ -2328,13 +2342,16 @@ nav a:hover {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== RIGHT SIDE : INFO GRID ===== */
+/* RIGHT SIDE – 2×2 INFO GRID + COPYRIGHT */
 
 .contact-right {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
 }
+
+/* 2×2 grid of cards */
 
 .contact-info-grid {
   display: grid;
@@ -2342,37 +2359,47 @@ nav a:hover {
   gap: 16px;
 }
 
+/* Info card: sharp corners, centered content, subtle */
+
 .contact-info-card {
   position: relative;
-  padding: 18px 18px 16px;
-  border-radius: 18px;
+  padding: 24px 20px 20px;
+  border-radius: 0; /* sharp */
   background: var(--bg1, #f5f8ff);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  text-align: center;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-              border-color 0.15s ease, background 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .contact-info-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.09);
-  border-color: var(--accent, #d79a3b);
   background: #ffffff;
+  border-color: var(--accent, #d79a3b);
 }
 
+/* Icon centered above title */
+
 .contact-info-icon {
-  font-size: 1.4rem;
-  margin-bottom: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
 }
+
+.contact-info-icon svg {
+  display: block;
+}
+
+/* Card title + text */
 
 .contact-info-card h3 {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
 }
 
 .contact-info-card p {
@@ -2382,16 +2409,38 @@ nav a:hover {
 }
 
 .contact-info-card a {
-  text-decoration: underline;
+  color: inherit;
 }
 
-/* COPYRIGHT BOX (under the 2x2 grid, right column) */
+/* Social icons row */
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.social-links a {
+  display: inline-flex;
+}
+
+.social-links svg {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.social-links a:hover svg {
+  transform: translateY(-2px);
+  opacity: 0.7;
+}
+
+/* Copyright box under grid (also sharp) */
 
 .contact-copyright {
   margin-top: 4px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px dashed rgba(0, 0, 0, 0.14);
+  padding: 12px 10px;
+  border-radius: 0;
+  border: 1px dashed rgba(0, 0, 0, 0.18);
   background: rgba(255, 255, 255, 0.7);
   font-size: 0.75rem;
   text-align: center;
@@ -2403,7 +2452,9 @@ nav a:hover {
   opacity: 0.75;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ================================
+   RESPONSIVE
+   ================================ */
 
 @media (max-width: 900px) {
   .contact-layout {
@@ -2413,10 +2464,6 @@ nav a:hover {
   .contact-envelope-fields {
     grid-template-columns: 1fr;
   }
-
-  .contact-info-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media (max-width: 600px) {
@@ -2425,19 +2472,6 @@ nav a:hover {
   }
 }
 
-    .social-links a {
-  margin-right: 10px;
-  display: inline-block;
-}
-
-.social-links svg {
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.social-links a:hover svg {
-  transform: translateY(-2px);
-  opacity: 0.7;
-}
 
 
 
