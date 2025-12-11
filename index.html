@@ -2231,7 +2231,7 @@ nav a:hover {
   background: var(--bg1, #f5f8ff);      /* same blue as right cards */
   border: 1px solid rgba(0, 0, 0, 0.10);
   border-radius: 0;                     /* sharp corners */
-padding: 16px 32px 28px;   /* moves content 16px upward */
+padding: 4px 32px 28px;   /* moves content 16px upward */
   text-align: left;
   transition:
     background 0.15s ease,
@@ -2244,11 +2244,12 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
 
 .contact-title {
+  margin-top: 0 !important;          /* removes browser default top gap */
+  margin-bottom: 24px;               /* your preferred spacing */
   text-align: center;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-size: 0.95rem;
-  margin-bottom: 24px; /* increased gap */
 }
 
 
