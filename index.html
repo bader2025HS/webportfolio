@@ -2362,18 +2362,18 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
 /* 2×2 grid of cards */
 
+/* 2×2 (now 3 rows) grid of cards */
 .contact-info-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px; /* was 16px – tighter vertically */
 }
 
-/* Info card: sharp corners, centered content, subtle */
-
+/* Info card: slightly smaller */
 .contact-info-card {
   position: relative;
-  padding: 24px 20px 20px;
-  border-radius: 0; /* sharp */
+  padding: 18px 18px 14px;   /* was 24px 20px 20px */
+  border-radius: 0;
   background: var(--bg1, #f5f8ff);
   border: 1px solid rgba(0, 0, 0, 0.10);
   text-align: center;
@@ -2384,10 +2384,19 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
     border-color 0.15s ease;
 }
 
-.contact-info-card:hover {
-  background: #ffffff;
-  border-color: var(--accent, #d79a3b);
+.contact-info-card h3 {
+  font-size: 0.85rem;        /* slightly smaller */
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 4px;           /* was 6px */
 }
+
+.contact-info-card p {
+  font-size: 0.8rem;         /* slightly smaller */
+  opacity: 0.9;
+  margin: 0;
+}
+
 
 /* Icon centered above title */
 
@@ -2463,20 +2472,21 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
     /* Glass Copyright Footer */
 .glass {
-  margin-top: 20px;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.32); /* soft frosted */
-  backdrop-filter: blur(10px);            /* strong blur effect */
+  margin-top: 8px;                /* was 20px */
+  padding: 10px 16px;             /* was 14px 18px */
+  background: rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 0;                       /* sharp edges like your cards */
+  border-radius: 0;
   text-align: center;
-  font-size: 0.78rem;
+  font-size: 0.72rem;             /* slightly smaller */
   letter-spacing: 0.03em;
   color: rgba(0,0,0,0.75);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.05); /* subtle shadow */
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
   transition: background 0.25s ease, border-color 0.25s ease;
 }
+
 
 .glass:hover {
   background: rgba(255, 255, 255, 0.45);
