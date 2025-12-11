@@ -2204,16 +2204,17 @@ nav a:hover {
 }
 
 /* ===========================
-   CONTACT – HERE TO HELP LAYOUT
+   CONTACT – ABSTRACT POSTER
+   (uses existing .contact-envelope HTML)
 =========================== */
 
 #contact {
-  margin-top: -20px;
-  padding: 30px 0 60px;
-  background: transparent;        /* keep grid background */
+  margin-top: -10px;                 /* closer to menu, but not glued */
+  padding: 32px 0 60px;
+  background: transparent;           /* keep grid background */
 }
 
-/* main container */
+/* main container aligned with other sections */
 .contact-envelope {
   position: relative;
   max-width: 1050px;
@@ -2222,82 +2223,90 @@ nav a:hover {
   padding: 0;
 }
 
-/* beige panel */
-.contact-envelope-body {
-  position: relative;
-  background: #f8f1e3;            /* parchment */
-  border-radius: 20px;
-  padding: 36px 42px 40px;
-  border: 1px solid rgba(110, 86, 52, 0.35);
-  box-shadow: none;
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 40px;
+/* no flap at all */
+.contact-envelope-flap {
+  display: none !important;
 }
 
+/* MAIN POSTER CARD */
+.contact-envelope-body {
+  position: relative;
+  background: #f8f1e3;               /* parchment */
+  border-radius: 24px;
+  border: 1px solid rgba(110, 86, 52, 0.35);
+  box-shadow: none;
+  padding: 30px 38px 36px;
+  overflow: hidden;
+}
+
+/* big ghost word CONTACT diagonal in the background */
+.contact-envelope-body::before {
+  content: "CONTACT";
+  position: absolute;
+  left: -24px;
+  top: -34px;
+  font-size: 5.2rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #2b2014;
+  opacity: 0.06;
+  transform: rotate(-7deg);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* circular abstract accent on the right */
+.contact-envelope-body::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 2px solid rgba(184, 135, 70, 0.5);
+  box-shadow:
+    0 0 0 18px rgba(248, 241, 227, 0.9),
+    0 0 0 32px rgba(184, 135, 70, 0.25);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* ensure inner content stays above abstract shapes */
 .contact-envelope-body > * {
   position: relative;
   z-index: 1;
 }
 
-/* left / right columns */
-.contact-left {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+/* ===== HEADINGS ===== */
+
+.contact-envelope-title {
+  margin: 0;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.88rem;
+  color: #7c6044;
 }
 
-.contact-right {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ===== HERO TITLE (Here to help) ===== */
-
-.contact-heading {
-  margin-bottom: 6px;
-}
-
-.contact-hero-title {
-  font-size: 2.4rem;
-  line-height: 1.05;
+.contact-envelope-subtitle {
+  margin: 6px 0 24px;
+  text-align: left;
+  font-size: 1.6rem;
   font-weight: 600;
-  color: #2e2015;
+  color: #2f2216;
 }
 
-.contact-hero-title span {
-  position: relative;
-  font-weight: 700;
-}
-
-/* red "paint" underline */
-.contact-hero-title span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
-  height: 7px;
-  background: #e86b4a;
-  border-radius: 999px;
-  opacity: 0.9;
-  z-index: -1;
-}
-
-.contact-hero-sub {
-  margin-top: 10px;
-  font-size: 0.98rem;
-  color: #6e5741;
-}
-
-/* ===== FORM ===== */
-
+/* center the whole form block a bit, keep left alignment */
 .contact-envelope-form {
   padding: 0;
+  max-width: 850px;
+  margin: 0 auto;
 }
 
-/* base rows */
+/* ===== FORM LAYOUT ===== */
+
 .contact-envelope-row {
   display: flex;
   gap: 22px;
@@ -2329,7 +2338,7 @@ nav a:hover {
   margin-bottom: 6px;
 }
 
-/* inputs + textarea + select */
+/* inputs + textarea + select share same style */
 
 .contact-envelope-field input,
 .contact-envelope-field textarea,
@@ -2349,7 +2358,8 @@ nav a:hover {
   color: rgba(80, 60, 40, 0.6);
 }
 
-/* select arrow */
+/* SELECT DROPDOWN (Topic) */
+
 .contact-envelope-field select {
   appearance: none;
   -webkit-appearance: none;
@@ -2384,8 +2394,10 @@ nav a:hover {
   flex-wrap: wrap;
 }
 
-/* Send button – floating */
+/* SEND BUTTON – with subtle paint strip feel */
+
 .contact-envelope-btn {
+  position: relative;
   border: none;
   border-radius: 999px;
   padding: 13px 42px;
@@ -2396,10 +2408,23 @@ nav a:hover {
   background: #4b3927;
   color: #ffffff;
   cursor: pointer;
+  overflow: hidden;
   transition:
     background 0.22s ease,
     transform 0.22s ease,
     box-shadow 0.22s ease;
+}
+
+/* “paint” underlay */
+.contact-envelope-btn::before {
+  content: "";
+  position: absolute;
+  inset: 60% -10%;
+  background: #e86b4a;
+  opacity: 0.0;
+  transform: translateY(120%) skewX(-12deg);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: -1;
 }
 
 .contact-envelope-btn:hover {
@@ -2408,17 +2433,24 @@ nav a:hover {
   box-shadow: 0 10px 18px rgba(75, 57, 39, 0.35);
 }
 
+/* on hover, paint swoosh appears */
+.contact-envelope-btn:hover::before {
+  opacity: 0.9;
+  transform: translateY(15%) skewX(-12deg);
+}
+
 .contact-envelope-btn:active {
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(75, 57, 39, 0.25);
 }
 
-/* ===== SOCIAL CHIPS (reused on right) ===== */
+/* ===== SOCIAL CHIPS ===== */
 
 .contact-socials {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .contact-social-btn {
@@ -2451,68 +2483,21 @@ nav a:hover {
   border-color: #3d2e20;
 }
 
-/* ===== RIGHT SIDE (newsletter / info) ===== */
-
-.contact-right-title {
-  font-size: 1.4rem;
-  margin-bottom: 6px;
-  color: #2f2216;
-}
-
-.contact-right-text {
-  font-size: 0.95rem;
-  color: #6e5741;
-}
-
-.contact-side-block {
-  margin-top: 10px;
-}
-
-.contact-side-label {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #4b3927;
-  margin-bottom: 6px;
-}
-
-.contact-side-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.contact-side-list li + li {
-  margin-top: 4px;
-}
-
-.contact-side-list a {
-  color: #4b3927;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-.contact-side-note {
-  margin-top: 16px;
-  font-size: 0.9rem;
-  color: #6e5741;
-}
-
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 800px) {
   .contact-envelope-body {
-    grid-template-columns: 1fr;
-    padding: 26px 22px 32px;
-  }
-
-  .contact-right {
-    margin-top: 10px;
+    padding: 24px 20px 30px;
+    border-radius: 20px;
   }
 }
 
 @media (max-width: 640px) {
+  #contact {
+    margin-top: -12px;
+    padding: 24px 0 46px;
+  }
+
   .contact-envelope-row-3 {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -2528,7 +2513,21 @@ nav a:hover {
     text-align: center;
     justify-content: center;
   }
+
+  .contact-envelope-body::before {
+    font-size: 3.8rem;
+    top: -24px;
+    left: -16px;
+  }
+
+  .contact-envelope-body::after {
+    right: -100px;
+    bottom: -100px;
+    width: 200px;
+    height: 200px;
+  }
 }
+
 
 
 
