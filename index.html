@@ -2208,274 +2208,222 @@ nav a:hover {
    (matches .contact-envelope HTML)
 =========================== */
 
+/* ===== CONTACT LAYOUT (left form + right cards) ===== */
+
 #contact {
-  margin-top: -20px;           /* closer to menu */
-  background: transparent;     /* DO NOT touch page bg */
+  margin-top: 64px;
 }
 
-/* main container aligned with other sections */
+.contact-layout {
+  max-width: 1150px;
+  margin: 0 auto 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* left side: keep your envelope style, just tweak if needed */
+
 .contact-envelope {
-  position: relative;
-  max-width: 1050px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0;
+  background: var(--card-bg, #fdf4e3);
+  border-radius: 24px;
+  padding: 32px 32px 28px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
-/* no more flap */
-.contact-envelope-flap {
-  display: none !important;
-}
-
-/* plain beige box */
-.contact-envelope-body {
-  position: relative;
-  background: #f8f1e3;         /* plain parchment */
-  border-radius: 20px;
-  padding: 32px 40px 40px;
-  border: 1px solid rgba(110, 86, 52, 0.35);
-  box-shadow: none;            /* no shadow */
-  overflow: hidden;
-}
-
-/* everything inside should sit above the box background */
-.contact-envelope-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== HEADINGS ===== */
-
-.contact-envelope-title {
-  margin: 0 0 6px;
-  text-align: center;          /* centered */
+.contact-title {
+  text-align: center;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 24px;
-  color: #4b3927;
-}
-
-.contact-envelope-subtitle {
-  margin: 0 0 24px;
-  text-align: center;          /* centered */
-  font-size: 15px;
-  color: #6e5741;
-}
-
-/* ===== FORM LAYOUT ===== */
-
-.contact-envelope-form {
-  padding: 0;
-}
-
-.contact-envelope-row {
-  display: flex;
-  gap: 22px;
-  margin-bottom: 20px;
-}
-
-.contact-envelope-row-full {
-  flex-direction: column;
-}
-
-.contact-envelope-field {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-envelope-field label {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #4b3927;
+  font-size: 0.95rem;
   margin-bottom: 6px;
 }
 
-/* inputs + textarea */
-
-.contact-envelope-field input,
-.contact-envelope-field textarea {
-  border-radius: 10px;
-  border: 1px solid rgba(110, 86, 52, 0.35);
-  padding: 12px 13px;
-  font-size: 15px;
-  background: #fffdf9;
-  color: #2f2216;
-  outline: none;
-  transition: border 0.15s ease, box-shadow 0.15s ease;
+.contact-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+  opacity: 0.8;
 }
 
-.contact-envelope-field input::placeholder,
-.contact-envelope-field textarea::placeholder {
-  color: rgba(80, 60, 40, 0.6);
+/* 3 fields in one row */
+.contact-envelope-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.contact-envelope-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.contact-envelope-field label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.contact-envelope-field input,
+.contact-envelope-field select,
+.contact-envelope-field textarea {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
 }
 
 .contact-envelope-field input:focus,
+.contact-envelope-field select:focus,
 .contact-envelope-field textarea:focus {
-  border-color: #b88746;
-  box-shadow: 0 0 0 2px rgba(184, 135, 70, 0.25);
+  border-color: var(--accent, #d79a3b);
+  box-shadow: 0 0 0 2px rgba(215, 154, 59, 0.18);
+  transform: translateY(-1px);
 }
 
-.contact-envelope-field textarea {
+.contact-envelope-message {
+  margin-top: 4px;
+}
+
+.contact-envelope-message textarea {
   resize: vertical;
-  min-height: 160px;
+  min-height: 140px;
 }
 
-/* ===== FOOTER ROW ===== */
-
-.contact-footer-row {
-  margin-top: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-/* SEND BUTTON (floating on hover) */
-
-.contact-envelope-btn {
-  border: none;
-  border-radius: 999px;
-  padding: 13px 42px;
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  background: #4b3927;
-  color: #ffffff;
-  cursor: pointer;
-
-  transition:
-    background 0.22s ease,
-    transform 0.22s ease,
-    box-shadow 0.22s ease;
-}
-
-/* float effect */
-.contact-envelope-btn:hover {
-  background: #3d2e20;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 18px rgba(75, 57, 39, 0.35);
-}
-
-.contact-envelope-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(75, 57, 39, 0.25);
-}
-
-/* ===== SOCIAL CHIPS ===== */
-
-.contact-socials {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-left: auto;
-}
-
-.contact-social-btn {
+/* send button */
+.contact-send-btn {
+  margin-top: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 9px 16px;
+  padding: 10px 26px;
   border-radius: 999px;
-  background: #fffdf9;
-  border: 1px solid rgba(110, 86, 52, 0.35);
-  font-size: 0.95rem;
-  color: #4b3927;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: var(--accent-dark, #583016);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.contact-send-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.contact-send-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== RIGHT SIDE : INFO GRID ===== */
+
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.contact-info-card {
+  position: relative;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: var(--bg1, #f5f8ff);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   text-decoration: none;
-  transition: 0.22s ease;
+  color: inherit;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+              border-color 0.15s ease, background 0.15s ease;
 }
 
-.contact-social-btn:hover {
-  background: #f0e4d4;
-  border-color: #b88746;
+.contact-info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.09);
+  border-color: var(--accent, #d79a3b);
+  background: #ffffff;
 }
 
-.contact-social-btn.primary {
-  background: #4b3927;
-  color: #ffffff;
-  border-color: #4b3927;
+.contact-info-icon {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
 }
 
-.contact-social-btn.primary:hover {
-  background: #3d2e20;
-  border-color: #3d2e20;
+.contact-info-card h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 4px;
+}
+
+.contact-info-card p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.contact-info-card a {
+  text-decoration: underline;
+}
+
+/* COPYRIGHT BOX (under the 2x2 grid, right column) */
+
+.contact-copyright {
+  margin-top: 4px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px dashed rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+
+.contact-copyright p {
+  margin: 0;
+  opacity: 0.75;
 }
 
 /* ===== RESPONSIVE ===== */
 
-@media (max-width: 640px) {
-  #contact {
-    margin-top: -15px;
-    padding: 24px 0 50px;
-  }
-
-  .contact-envelope-body {
-    padding: 24px 18px 32px;
-    border-radius: 16px;
-  }
-
-  .contact-envelope-row {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .contact-footer-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .contact-socials {
-    margin-left: 0;
-  }
-
-  .contact-envelope-btn {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
-}
-
-   /* 3-column layout for name + email + topic */
-.contact-envelope-row-3 {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-/* Mobile: stack vertically */
-@media (max-width: 640px) {
-  .contact-envelope-row-3 {
+@media (max-width: 900px) {
+  .contact-layout {
     grid-template-columns: 1fr;
-    gap: 16px;
+  }
+
+  .contact-envelope-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Select styling matches the inputs */
-.contact-envelope-field select {
-  border-radius: 10px;
-  border: 1px solid rgba(110, 86, 52, 0.35);
-  padding: 12px 13px;
-  font-size: 15px;
-  background: #fffdf9;
-  color: #2f2216;
-  outline: none;
-  transition: border 0.15s ease, box-shadow 0.15s ease;
-  appearance: none;
-  background-image:
-    url("data:image/svg+xml;utf8,<svg fill='%236e5741' height='18' viewBox='0 0 20 20' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548a.625.625 0 0 1 .884-.884L10 10.264l3.6-3.6a.625.625 0 1 1 .884.884l-4.042 4.042a.625.625 0 0 1-.884 0L5.516 7.548z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
+@media (max-width: 600px) {
+  .contact-info-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-.contact-envelope-field select:focus {
-  border-color: #b88746;
-  box-shadow: 0 0 0 2px rgba(184, 135, 70, 0.25);
-}
-
 
 
 
@@ -3964,86 +3912,94 @@ nav a:hover {
 
       <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-envelope">
+  <div class="contact-layout">
 
-    <!-- Top flap -->
-    <div class="contact-envelope-flap"></div>
+    <!-- LEFT : FORM -->
+    <div class="contact-left">
+      <div class="contact-envelope">
+        <h2 class="contact-title">Get in touch</h2>
+        <p class="contact-subtitle">I’ll get back to you as soon as I can.</p>
 
-    <!-- Body with airmail border + form + chips -->
-    <div class="contact-envelope-body">
-      <h2 class="contact-envelope-title">Get in touch</h2>
-      <p class="contact-envelope-subtitle">
-        I’ll get back to you as soon as I can.
-      </p>
+        <form class="contact-envelope-form">
 
-      <form class="contact-envelope-form">
+          <!-- three fields on one row -->
+          <div class="contact-envelope-fields">
+            <div class="contact-envelope-field">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" name="name" type="text"
+                     placeholder="Your name" required />
+            </div>
 
-  <!-- 3-COLUMN ROW -->
-  <div class="contact-envelope-row contact-envelope-row-3">
-    
-    <div class="contact-envelope-field">
-      <label for="contact-name">Name</label>
-      <input id="contact-name" name="name" type="text"
-             placeholder="Your name" required />
-    </div>
+            <div class="contact-envelope-field">
+              <label for="contact-email">E-mail</label>
+              <input id="contact-email" name="email" type="email"
+                     placeholder="you@example.com" required />
+            </div>
 
-    <div class="contact-envelope-field">
-      <label for="contact-email">E-mail</label>
-      <input id="contact-email" name="email" type="email"
-             placeholder="you@example.com" required />
-    </div>
+            <div class="contact-envelope-field">
+              <label for="contact-topic">Topic</label>
+              <select id="contact-topic" name="topic">
+                <option>Other</option>
+                <option>Internship / Work</option>
+                <option>Collaboration</option>
+                <option>Talk / Event</option>
+              </select>
+            </div>
+          </div>
 
-    <div class="contact-envelope-field">
-      <label for="contact-topic">Topic</label>
-      <select id="contact-topic" name="topic">
-        <option value="" disabled selected>Select a topic…</option>
-        <option value="general">General inquiry</option>
-        <option value="collaboration">Collaboration</option>
-        <option value="research">Research question</option>
-        <option value="opportunity">Opportunity / Stage</option>
-        <option value="other">Other</option>
-      </select>
-    </div>
-
-  </div>
-
-
-
-        <div class="contact-envelope-row contact-envelope-row-full">
-          <div class="contact-envelope-field">
+          <!-- message -->
+          <div class="contact-envelope-field contact-envelope-message">
             <label for="contact-message">Message</label>
             <textarea id="contact-message" name="message" rows="5"
                       placeholder="Write your message here..." required></textarea>
           </div>
-        </div>
 
-        <!-- Bottom row: Send + chips -->
-        <div class="contact-footer-row">
-          <button type="submit" class="contact-envelope-btn">
-            Send
-          </button>
-
-          <div class="contact-socials">
-            <a href="mailto:badersuliman79@gmail.com"
-               class="contact-social-btn primary">
-              ✉️ Email me
-            </a>
-
-            <a href="https://www.linkedin.com/in/bader-suliman-845840234/"
-               target="_blank" rel="noopener"
-               class="contact-social-btn">
-              🔗 LinkedIn
-            </a>
-
-            <a href="cv-bader.pdf"
-               target="_blank" rel="noopener"
-               class="contact-social-btn">
-              📄 Download CV
-            </a>
-          </div>
-        </div>
-      </form>
+          <button type="submit" class="contact-send-btn">Send</button>
+        </form>
+      </div>
     </div>
+
+    <!-- RIGHT : 2x2 INFO GRID + COPYRIGHT -->
+    <aside class="contact-right">
+      <div class="contact-info-grid">
+        <!-- EMAIL -->
+        <a class="contact-info-card" href="mailto:bader.suliman@email.com">
+          <div class="contact-info-icon">✉️</div>
+          <h3>Email</h3>
+          <p>bader.suliman@email.com</p>
+        </a>
+
+        <!-- CV -->
+        <a class="contact-info-card" href="assets/Bader_Suliman_CV.pdf" target="_blank">
+          <div class="contact-info-icon">📄</div>
+          <h3>Download CV</h3>
+          <p>Open my latest résumé.</p>
+        </a>
+
+        <!-- SOCIAL -->
+        <div class="contact-info-card">
+          <div class="contact-info-icon">🌐</div>
+          <h3>Social</h3>
+          <p>
+            <a href="https://www.linkedin.com/in/your-link" target="_blank">LinkedIn</a>
+            <!-- · <a href="#">Twitter</a> -->
+          </p>
+        </div>
+
+        <!-- LOCATION -->
+        <div class="contact-info-card">
+          <div class="contact-info-icon">📍</div>
+          <h3>Location</h3>
+          <p>Based in Paris · open to remote work.</p>
+        </div>
+      </div>
+
+      <!-- COPYRIGHT BOX -->
+      <div class="contact-copyright">
+        <p>© 2025 Bader Suliman — All rights reserved.</p>
+      </div>
+    </aside>
+
   </div>
 </section>
 
