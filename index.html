@@ -2438,6 +2438,35 @@ nav a:hover {
   }
 }
 
+    /* ===========================
+   CONTACT – TOPIC DROPDOWN
+=========================== */
+
+.contact-envelope-field select {
+  border-radius: 10px;
+  border: 1px solid rgba(110, 86, 52, 0.35);
+  padding: 12px 13px;
+  font-size: 15px;
+  background: #fffdf9;
+  color: #2f2216;
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg fill='%236e5741' height='18' viewBox='0 0 20 20' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548a.625.625 0 0 1 .884-.884L10 10.264l3.6-3.6a.625.625 0 1 1 .884.884l-4.042 4.042a.625.625 0 0 1-.884 0L5.516 7.548z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.contact-envelope-field select:focus {
+  border-color: #b88746;
+  box-shadow: 0 0 0 2px rgba(184, 135, 70, 0.25);
+}
+
+
 
 
   /* ===========================
@@ -3951,6 +3980,22 @@ nav a:hover {
                    placeholder="you@example.com" required />
           </div>
         </div>
+
+        <!-- DROPDOWN: TOPIC SELECTION -->
+<div class="contact-envelope-row">
+  <div class="contact-envelope-field">
+    <label for="contact-topic">Topic</label>
+    <select id="contact-topic" name="topic">
+      <option value="" disabled selected>Select a topic…</option>
+      <option value="general">General inquiry</option>
+      <option value="collaboration">Collaboration</option>
+      <option value="research">Research question</option>
+      <option value="opportunity">Opportunity / Stage</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+</div>
+
 
         <div class="contact-envelope-row contact-envelope-row-full">
           <div class="contact-envelope-field">
