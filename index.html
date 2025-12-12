@@ -2328,33 +2328,33 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
   padding: 10px 26px;
 
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.10);   /* same as cards */
-  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.10);   /* subtle default border */
 
+  background: var(--bg1, #f5f8ff);        /* blue background (same as cards) */
+  color: #1c2d5a;                         /* navy text */
+
+  cursor: pointer;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
 
-  background: var(--bg1, #f5f8ff);        /* SAME blue as cards */
-  color: #1c2d5a;                         /* navy like icons */
-
   transition:
-    background 0.20s ease,
     border-color 0.20s ease,
     color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.15s ease;
+    transform 0.15s ease,
+    box-shadow 0.20s ease;
 }
+
 
 
 /* Hover = warm brown accent, matching card hover border */
 .contact-send-btn:hover {
-  background: #ffffff;                    /* white hover */
-  border-color: var(--accent, #d79a3b);   /* brown border (same as cards) */
-  color: var(--accent, #d79a3b);          /* text becomes brown */
+  border-color: var(--accent, #d79a3b);   /* brown border */
+  color: var(--accent, #d79a3b);          /* brown text */
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
+
 
 
 /* Active press animation */
@@ -2364,10 +2364,8 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 }
 
 .contact-envelope:hover .contact-send-btn {
-  background: var(--accent, #d79a3b);     /* brown background */
-  color: white;                           /* white text */
-  border-color: var(--accent, #d79a3b);   /* brown border */
-  transform: translateY(-2px);            /* optional lift */
+  border-color: var(--accent, #d79a3b);  /* brown outline */
+  color: var(--accent, #d79a3b);         /* brown SEND text */
 }
 
 
