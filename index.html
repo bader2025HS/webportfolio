@@ -1971,36 +1971,33 @@ nav a:hover {
   padding: 18px 22px;
 
   display: grid;
-  grid-template-columns: 90px 1fr; /* was 120px 1fr */
-  column-gap: 4px;                  /* was 16px → brings text closer */
+  grid-template-columns: 90px 1fr;
+  column-gap: 4px;
   align-items: center;
 
-  transition: border 0.2s ease;
+  position: relative;
+  cursor: default;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
-
-/* hover – subtle only */
+/* hover – subtle lift + accent */
 .activity-box:hover {
   border-color: #000;
+  background: #f9fafb;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
 }
 
-/* left side title */
-.activity-box h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #000000;
-  text-align: left;
+/* Tiny accent on title on hover */
+.activity-box:hover h3 {
+  color: var(--accent, #d79a3b);
 }
 
-/* right side description */
-.activity-box p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #000000;
-  text-align: left;
-}
 
 /* RESPONSIVE */
 @media (max-width: 800px) {
@@ -2202,6 +2199,35 @@ nav a:hover {
   margin-left: -50vw;     /* break out of the .page container */
   margin-right: -50vw;
 }
+
+/* Pause scroll when user hovers the activities banner */
+.activities-banner:hover .banner-track {
+  animation-play-state: paused;
+}
+
+/* Slight zoom on banner images */
+.banner-item img {
+  transition: transform 0.25s ease;
+}
+
+.banner-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Pause filmstrip scroll on hover */
+.filmstrip-wrapper:hover .filmstrip-track {
+  animation-play-state: paused;
+}
+
+/* Slight zoom on film photos */
+.film-cell img {
+  transition: transform 0.25s ease;
+}
+
+.film-cell:hover img {
+  transform: scale(1.05);
+}
+
 
 /* ================================
    CONTACT SECTION
