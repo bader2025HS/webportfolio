@@ -2214,7 +2214,7 @@ nav a:hover {
 /* Layout: left form, right info grid */
 .contact-layout {
   max-width: 1050px;
-  margin: 0 auto 40px;
+  margin: 0 auto 16px;
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
   gap: 32px;
@@ -2376,7 +2376,7 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 .contact-right {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
   min-width: 0;
 }
 
@@ -2498,7 +2498,8 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
 /* Copyright box styled like a card */
 .contact-copyright {
-  margin-top: 12px;
+  margin-top: 6px;
+  margin-bottom: 0 !important;
   padding: 14px 16px;
   border-radius: 0;
   background: var(--bg1, #f5f8ff);           /* same as cards */
@@ -2523,6 +2524,7 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 .contact-copyright p {
   margin: 0;
 }
+
 
 
 
