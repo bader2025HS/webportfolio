@@ -2231,7 +2231,7 @@ nav a:hover {
   background: var(--bg1, #f5f8ff);      /* same blue as right cards */
   border: 1px solid rgba(0, 0, 0, 0.10);
   border-radius: 0;                     /* sharp corners */
-padding: 16px 32px 28px;   /* moves content 16px upward */
+padding: 16px 32px 40px;   /* was 28px → add +12px height */
   text-align: left;
   transition:
     background 0.15s ease,
@@ -2316,12 +2316,13 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
 .contact-envelope-message textarea {
   resize: vertical;
-  min-height: 140px;
+  min-height: 160px;
 }
 
 /* Send button */
 .contact-send-btn {
   margin-top: 18px;
+  margin-bottom: 8px;   /* NEW — adds extra height cleanly */
   display: inline-flex;
   align-items: center;
   justify-content: center;
