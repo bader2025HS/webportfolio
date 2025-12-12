@@ -131,14 +131,14 @@ nav a:hover {
 .about-text-box {
   padding: 18px 20px;
   border-radius: 18px;
-  background: radial-gradient(circle at top left, #fdf7ec 0%, #f9f0dd 40%, #fdfaf3 100%);
-  border: 1px solid rgba(148, 81, 32, 0.18);
-  box-shadow: none,
-  inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  background: radial-gradient(circle at top left, #f5f8ff 0%, #eef4ff 40%, #ffffff 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08); /* soft navy border */
+  box-shadow: none;
   line-height: 1.6;
   font-size: 0.96rem;
-  color: #2b2117;
+  color: #111827; /* neutral dark */
 }
+
 
 .about-text-box p:first-child {
   font-weight: 600;
@@ -150,8 +150,9 @@ nav a:hover {
   font-weight: 600;
   margin-bottom: 8px;
   letter-spacing: 0.02em;
-  color: #92400e;
+  color: #1c2d5a; /* same navy as icons */
 }
+
 
 .about-hello .rotator {
   display: inline-block;
@@ -177,9 +178,8 @@ nav a:hover {
 #hello-rotate {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #b45309;
+  color: var(--accent, #d79a3b); /* accent only here */
 }
-
 /* ===========================
    ABOUT – SECOND ROW GRID
    (STATS | FOCUS | MAP)
@@ -221,7 +221,7 @@ nav a:hover {
   bottom: 6px;
   width: 3px;
   border-radius: 999px;
-  background: rgba(180, 83, 9, 0.35);   /* warm amber instead of teal */
+  background: rgba(37, 99, 235, 0.45); /* soft blue line instead of amber */
   transform-origin: top;
   transform: scaleY(0.7);
   transition: transform 0.22s ease, background 0.22s ease, opacity 0.22s ease;
@@ -239,25 +239,25 @@ nav a:hover {
 }
 
 /* label */
-.about-stat-label {
+about-stat-label {
   margin-top: 10px;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: #9f7a52;
+  color: #6b7280; /* gray instead of brown */
 }
 
 /* hover */
 .about-stat:hover::before {
   transform: scaleY(1);
-  background: rgba(180, 83, 9, 0.9);
+  background: rgba(37, 99, 235, 0.9);
   opacity: 1;
 }
 
 .about-stat:hover .about-stat-number {
   transform: translateX(3px);
-  color: #b45309;
-  text-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
+  color: var(--accent, #d79a3b); /* accent, not dark brown */
+  text-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
 }
 
 /* Tooltip cloud for stats — warm dark bubble */
@@ -322,7 +322,7 @@ nav a:hover {
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: #9f7a52;
+  color: #6b7280; /* neutral gray */
   font-weight: 600;
 }
 
@@ -338,9 +338,9 @@ nav a:hover {
   padding: 7px 14px;
   font-size: 0.84rem;
   border-radius: 999px;
-  border: 1px solid rgba(148, 81, 32, 0.25);
-  background: rgba(253, 247, 236, 0.95);
-  color: #2b2117;
+  border: 1px solid rgba(148, 163, 184, 0.8); /* cool gray */
+  background: #f5f8ff; /* same vibe as contact cards */
+  color: #111827;
   line-height: 1.3;
   cursor: default;
   text-align: center;
@@ -351,10 +351,11 @@ nav a:hover {
 }
 
 .about-focus-chip:hover {
-  border-color: #b45309;
+  border-color: var(--accent, #d79a3b);
   box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
   transform: translateY(-1px);
 }
+
 
 /* ===========================
    ABOUT – TRAVEL MAP (RIGHT COLUMN)
