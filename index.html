@@ -3045,17 +3045,17 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
     #scrollProgress {
       position: fixed; top: 0; left: 0;
       width: 0; height: 4px;
-      background: #009fa5;
+      background: #7a4a2e;
       z-index: 9999;
-    }
-
+      opacity: 0.9;
+}
     /* Back to top */
     #backToTop {
       position: fixed;
       bottom: 24px; right: 24px;
       width: 44px; height: 44px;
       border-radius: 50%;
-      background: #009fa5;
+      background: #7a4a2e;
       border: none;
       display: none;
       justify-content: center;
@@ -3064,6 +3064,13 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
       cursor: pointer;
       z-index: 9999;
     }
+
+    #backToTop:hover {
+  box-shadow: 0 0 12px rgba(0,159,165,.6);
+  transform: translateY(-2px);
+}
+
+    
 
     /* ===========================
            LIGHTBOX (PHOTOS)
