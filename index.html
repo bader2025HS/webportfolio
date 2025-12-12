@@ -2954,38 +2954,20 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 }
 
 /* ===========================
-   SKILLS – DARK HONEY OVERRIDE
+   SKILLS – HONEY DARK OVERRIDES
    =========================== */
 
-/* Main terminal background: dark brown instead of navy */
-.skills-terminal {
-  background: #1b140a;           /* very dark brown */
-  border-color: #2a1d0f;
-  color: #f5e6c8;
-}
-
-/* Dark honey glow */
+/* Honey glow instead of blue/cyan */
 .skills-terminal::before {
-  background:
-    radial-gradient(circle at 0% 0%,
-      rgba(215, 154, 59, 0.22) 0,
-      transparent 55%),
-    radial-gradient(circle at 100% 100%,
-      rgba(180, 115, 22, 0.18) 0,
-      transparent 60%);
+  background: radial-gradient(circle at 0% 0%,
+              rgba(215, 154, 59, 0.18) 0,
+              transparent 55%),
+              radial-gradient(circle at 100% 100%,
+              rgba(180, 115, 22, 0.16) 0,
+              transparent 60%);
 }
 
-/* Divider line */
-.terminal-divider {
-  background: linear-gradient(
-    to right,
-    rgba(215, 154, 59, 0.25),
-    rgba(215, 154, 59, 0.6),
-    rgba(215, 154, 59, 0.25)
-  );
-}
-
-/* Section titles */
+/* Titles → honey */
 .terminal-title {
   color: #f5e6c8;
 }
@@ -2995,28 +2977,23 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   color: #d79a3b;
 }
 
-/* Rows: dark brown instead of navy */
-.terminal-row {
-  background: rgba(43, 31, 16, 0.96);
-  border-color: rgba(80, 56, 28, 0.9);
+/* Rows hover → honey instead of green */
+.terminal-row:hover {
+  border-color: #d79a3b;
+  box-shadow: 0 0 0 1px rgba(215, 154, 59, 0.55);
+  background: rgba(15, 23, 42, 0.98);
 }
 
-/* Vertical separator */
+/* Right-side meta text slightly warmer */
+.terminal-cell-meta {
+  color: #c9b08a;
+}
+
+/* Subtle honey separator */
 .terminal-row::before {
   background: rgba(215, 154, 59, 0.35);
 }
 
-/* Hover: honey highlight */
-.terminal-row:hover {
-  border-color: #d79a3b;
-  box-shadow: 0 0 0 1px rgba(215, 154, 59, 0.55);
-  background: rgba(48, 34, 18, 0.98);
-}
-
-/* Right-side meta text */
-.terminal-cell-meta {
-  color: #c9b08a;
-}
 
 
     /* ===========================
