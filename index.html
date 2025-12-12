@@ -1390,13 +1390,6 @@ nav a:hover {
 }
 
 
-
-
-
-
-
-
-
 /* ==========================================
    EXPERIENCE — MODERN BLUE + HONEY ACCENTS
    ========================================== */
@@ -1479,6 +1472,94 @@ nav a:hover {
   }
 }
 
+/* ==========================================
+   EXPERIENCE — DARK NAVY / TERMINAL LOOK
+   ========================================== */
+
+/* Base card faces */
+.exp-card-face,
+.exp-card-front,
+.exp-card-back {
+  background: #0a0f1a !important;                /* deep navy */
+  color: #e5e7eb !important;                     /* light grey text */
+  border: 1px solid rgba(148, 163, 184, 0.25) !important;
+  background-image: none !important;             /* remove parchment */
+  box-shadow: none !important;
+}
+
+/* Remove colored left stripe */
+.exp-card::before {
+  background: rgba(37, 99, 235, 0.55) !important; /* soft blue glow */
+  width: 4px !important;
+  display: block !important;
+  opacity: 0.85 !important;
+}
+
+/* FRONT main title (small top label) */
+.exp-front-main {
+  color: #38bdf8 !important;  /* cyan */
+}
+
+/* FRONT big title */
+.exp-front-sub {
+  color: #f8fafc !important;  /* white */
+}
+
+/* Gate label */
+.exp-gate-label {
+  color: #9ca3af !important;  /* grey */
+}
+
+/* Gate code */
+.exp-gate-code {
+  color: #38bdf8 !important;  /* cyan */
+}
+
+/* BACK side labels */
+.exp-back-label {
+  color: #38bdf8 !important;  /* cyan accent */
+}
+
+/* Organization info */
+.exp-org-text h3 {
+  color: #f8fafc !important;  /* white */
+}
+
+.exp-org-meta {
+  color: #9ca3af !important;  /* muted grey */
+}
+
+/* Bullets */
+.exp-org-list {
+  color: #e5e7eb !important;
+}
+
+/* LOGO BACKGROUND REMAINS CLEAN */
+.exp-org-logo {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Hover effect: gentle cyan glow */
+.exp-card:hover .exp-card-front {
+  background: #111827 !important; /* slightly lighter navy */
+  border-color: #38bdf8 !important;
+  box-shadow: 0 10px 28px rgba(56,189,248,0.22) !important;
+  transform: translateY(-2px);
+}
+
+/* Expanded back shadow */
+.exp-card--expanded .exp-card-back {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45) !important;
+}
+
+/* MOBILE (still navy style) */
+@media (max-width: 800px) {
+  .exp-card-back {
+    background: #0a0f1a !important;
+    border-radius: 12px !important;
+  }
+}
 
 
 /* ===========================
@@ -2964,110 +3045,6 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   }
 }
 
-
-/* ==============================
-   SKILLS — BLUE + HONEY THEME
-   ============================== */
-
-/* Terminal container */
-.skills-terminal {
-  background: #f5f8ff !important;                 /* same soft blue as Contact */
-  color: #1f2937 !important;                      /* clean dark grey */
-  border-radius: 18px;
-  padding: 20px 22px 22px;
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  box-shadow: none;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Remove old dark glow */
-.skills-terminal::before {
-  display: none !important;
-}
-
-/* HEADER TITLES */
-.terminal-title {
-  color: #1c2d5a !important; /* navy */
-}
-
-.terminal-subtitle {
-  color: #6b7280 !important; /* grey */
-}
-
-/* Yellow/gold headers → honey brown */
-.terminal-column-title,
-.terminal-languages-title {
-  color: #d79a3b !important; /* honey */
-}
-
-/* Divider line */
-.terminal-divider {
-  background: linear-gradient(
-    to right,
-    rgba(28, 45, 90, 0.2),
-    rgba(28, 45, 90, 0.6),
-    rgba(28, 45, 90, 0.2)
-  ) !important;
-}
-
-/* ==============================
-   TERMINAL ROWS (skills rows)
-   ============================== */
-
-.terminal-row {
-  background: #ffffff !important;                 /* clean white, consistent with cards */
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  color: #1f2937 !important;
-}
-
-/* vertical separator */
-.terminal-row::before {
-  background: rgba(28, 45, 90, 0.25) !important; /* soft navy line */
-}
-
-/* hover effect → white + honey border */
-.terminal-row:hover {
-  border-color: #d79a3b !important;  /* honey */
-  box-shadow: 0 0 0 1px rgba(215,154,59,0.35) !important;
-  background: #ffffff !important;
-}
-
-/* TEXT IN ROWS */
-.terminal-cell-main,
-.terminal-cell-meta,
-.terminal-soft-label {
-  color: #1f2937 !important;
-}
-
-/* ==============================
-   FLAGS + BADGES
-   ============================== */
-
-/* Border of flags clean */
-.terminal-flag {
-  box-shadow: 0 0 0 1px rgba(28,45,90,0.4) !important;
-}
-
-/* tool badges keep color but lighten text if needed */
-.terminal-tool-badge {
-  color: #ffffff !important;
-  box-shadow: none !important;
-}
-
-/* PowerBI yellow → honey-compliant */
-.badge-powerbi {
-  background: #d79a3b !important;
-  color: #1f2937 !important;
-}
-
-/* ==============================
-   LANGUAGE GRID HEADERS
-   ============================== */
-.terminal-languages-grid div,
-.terminal-rows div {
-  color: #1f2937 !important;
-}
 
     /* ===========================
            GALLERY (HOME)
