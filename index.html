@@ -2376,11 +2376,9 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 .contact-right {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 0;          /* was 16px */
   min-width: 0;
 }
-
-/* 2×2 grid of cards */
 
 /* 2×2 (now 3 rows) grid of cards */
 .contact-info-grid {
@@ -2392,9 +2390,9 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 /* Info card: slightly smaller */
 .contact-info-card {
   position: relative;
-  padding: 20px 18px 16px;
+  padding: 12px 14px 10px;   /* was 20/18/16 */
   border-radius: 0;
-  background: var(--bg1, #f5f8ff);     /* light blue */
+  background: var(--bg1, #f5f8ff);
   border: 1px solid rgba(0, 0, 0, 0.10);
   text-align: center;
   text-decoration: none;
@@ -2404,6 +2402,7 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
     border-color 0.20s ease,
     box-shadow 0.20s ease;
 }
+
 
 /* Hover: white + brown border */
 .contact-info-card:hover {
@@ -2498,16 +2497,15 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
 /* Copyright box styled like a card */
 .contact-copyright {
-  margin-top: 6px;
-  margin-bottom: 0 !important;
-  padding: 14px 16px;
+  margin-top: 2px;          /* was 6px */
+  padding: 6px 10px;        /* was 14px 16px */
   border-radius: 0;
-  background: var(--bg1, #f5f8ff);           /* same as cards */
-  border: 1px solid rgba(0, 0, 0, 0.10);     /* same subtle border */
+  background: var(--bg1, #f5f8ff);
+  border: 1px solid rgba(0, 0, 0, 0.10);
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;        /* slightly smaller */
   letter-spacing: 0.03em;
-  color: #1c2d5a;                            /* same navy text */
+  color: #1c2d5a;
   transition:
     background 0.20s ease,
     border-color 0.20s ease,
@@ -2545,6 +2543,13 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 @media (max-width: 600px) {
   .contact-info-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+    /* On large screens, show 3 cards per row instead of 2 → fewer rows → shorter column */
+@media (min-width: 1000px) {
+  .contact-info-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
