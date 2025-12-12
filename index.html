@@ -2326,33 +2326,36 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
   align-items: center;
   justify-content: center;
   padding: 10px 26px;
+
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.10);        /* matches cards */
+  border: 1px solid rgba(0, 0, 0, 0.10);   /* same as cards */
   cursor: pointer;
+
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
 
-  background: var(--bg1, #f5f8ff);            /* BLUE default */
-  color: #1c2d5a;                             /* dark blue text like icons */
+  background: var(--bg1, #f5f8ff);        /* SAME blue as cards */
+  color: #1c2d5a;                         /* navy like icons */
 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
   transition:
     background 0.20s ease,
     border-color 0.20s ease,
     color 0.20s ease,
-    transform 0.15s ease,
-    box-shadow 0.20s ease;
+    box-shadow 0.20s ease,
+    transform 0.15s ease;
 }
+
 
 /* Hover = warm brown accent, matching card hover border */
 .contact-send-btn:hover {
-  background: var(--accent, #d79a3b);         /* brown */
-  color: white;                               /* clean readable contrast */
-  border-color: var(--accent, #d79a3b);       /* match cards */
+  background: #ffffff;                    /* white hover */
+  border-color: var(--accent, #d79a3b);   /* brown border (same as cards) */
+  color: var(--accent, #d79a3b);          /* text becomes brown */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
+
 
 /* Active press animation */
 .contact-send-btn:active {
