@@ -1390,6 +1390,57 @@ about-stat-label {
   display: none !important;
 }
 
+/* ===========================
+   EXPERIENCE — BLUE × BROWN THEME
+   (minimal overrides)
+=========================== */
+
+/* Base card front/back */
+.exp-card-face,
+.exp-card-front,
+.exp-card-back {
+  background: #ffffff !important;       /* clean white */
+  color: #1c2d5a !important;            /* navy text, matches contact */
+  border: 1px solid rgba(0,0,0,0.10) !important;
+  box-shadow: none !important;          /* clean look like contact cards */
+}
+
+/* Category stripe – soft blue, subtle */
+.exp-card::before {
+  display: block !important;
+  width: 6px;
+  background: #a5c4ff !important;       /* soft blue stripe */
+  opacity: 0.55;
+}
+
+/* Main label text color */
+.exp-front-main,
+.exp-back-label,
+.exp-org-meta {
+  color: #1c2d5a !important;            /* navy */
+}
+
+/* Gate code = navy */
+.exp-gate-code {
+  color: #1c2d5a !important;
+}
+
+/* Hover front face – white + brown border (matches CONTACT CARDS) */
+.exp-card:hover .exp-card-front {
+  background: #ffffff !important;
+  border-color: #d79a3b !important;     /* warm brown accent */
+  box-shadow: 0 10px 26px rgba(0,0,0,0.12) !important;
+}
+
+/* On hover, stripe becomes brown too */
+.exp-card:hover::before {
+  background: #d79a3b !important;       /* brown accent stripe */
+}
+
+/* Back meta line tint */
+.exp-card-back .exp-org-meta {
+  color: #1c2d5a !important;
+}
 
 
 
