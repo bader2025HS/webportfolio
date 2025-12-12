@@ -490,57 +490,77 @@ about-stat-label {
   }
 }
 
-.about-text-box {
-  background: #f7f3e8 !important; /* light parchment tone */
-  border: 1px solid rgba(120, 98, 62, 0.25) !important;
-  color: #3b2f23 !important;
+/* ===========================
+   ABOUT — UPDATED BLUE THEME
+   =========================== */
 
-  /* subtle paper grain */
+/* 1) LIGHT TEXT BOX (no more brown, soft texture) */
+.about-text-box {
+  background: #fdfdfc !important;
+  border: 1px solid rgba(28, 45, 90, 0.18) !important;
+  color: #1f2933 !important;
+
   background-image:
-      radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-      linear-gradient(0deg, rgba(255,255,255,0.25), transparent 40%);
+      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,0.4), transparent 40%);
   background-size: 6px 6px, 100% 100%;
-  background-blend-mode: multiply;
+  background-blend-mode: soft-light;
 }
 
+/* 2) HELLO ROTATOR → NAVY */
 .about-hello,
 #hello-rotate {
-  color: #6d4b2e !important; /* classy brown ink */
+  color: #1c2d5a !important;
 }
+
+/* 3) STATS — BLUE ACCENTS INSTEAD OF BROWN */
 .about-stat::before {
-  background: rgba(120, 98, 62, 0.55) !important; /* soft brown line */
+  background: rgba(28, 45, 90, 0.35) !important;
 }
 
 .about-stat-number {
-  color: #3b2f23 !important; /* ink brown */
+  color: #1f2933 !important;
 }
 
 .about-stat-label {
-  color: #7d6140 !important;
+  color: #4a5876 !important;
 }
 
 .about-stat:hover .about-stat-number {
-  color: #6d4b2e !important;
+  color: #1c2d5a !important;
 }
-.about-stat-tooltip {
-  background: #f7f1e4 !important;
-  color: #3b2f23 !important;
-  border: 1px solid rgba(120,98,62,0.3) !important;
-}
+
+/* tooltip stays black → no override */
+
+/* 4) FOCUS CHIPS — BLUE CARDS */
 .about-focus-chip {
-  background: #f9f4e7 !important;
-  border: 1px solid rgba(120, 98, 62, 0.28) !important;
-  color: #3b2f23 !important;
+  background: #f5f8ff !important;
+  border: 1px solid rgba(28, 45, 90, 0.22) !important;
+  color: #1f2933 !important;
 }
 
 .about-focus-chip:hover {
-  border-color: #6d4b2e !important;
-  box-shadow: 0 6px 14px rgba(60,40,20,0.18) !important;
+  border-color: #1c2d5a !important;
+  box-shadow: 0 6px 14px rgba(28,45,90,0.12) !important;
+  transform: translateY(-1px);
 }
+
+/* 5) FOCUS LABEL COLOR */
+.about-focus-label {
+  color: #1c2d5a !important;
+}
+
+/* 6) MAP CARD — MATCH CONTACT STYLE */
 .map-card {
-  background: #f8f3e6 !important;
-  border: 1px solid rgba(120, 98, 62, 0.28) !important;
+  background: #f5f8ff !important;
+  border: 1px solid rgba(28, 45, 90, 0.22) !important;
 }
+
+/* 7) MAP HOVER GLOW — NAVY INSTEAD OF BROWN */
+#visitedMap .leaflet-interactive:hover {
+  filter: drop-shadow(0 0 8px rgba(28, 45, 90, 0.45)) !important;
+}
+
 
 
     /* ===========================
