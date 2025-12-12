@@ -2376,15 +2376,16 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 .contact-right {
   display: flex;
   flex-direction: column;
-  gap: 0;          /* was 16px */
+  gap: 0;        /* we'll control spacing manually */
   min-width: 0;
 }
 
 /* 2×2 (now 3 rows) grid of cards */
 .contact-info-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px; /* was 16px – tighter vertically */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* or 2 if you changed it */
+  gap: 12px;
+  margin-bottom: 16px;   /* NEW – nice gap above copyright */
 }
 
 /* Info card: slightly smaller */
@@ -2497,13 +2498,13 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
 
 /* Copyright box styled like a card */
 .contact-copyright {
-  margin-top: 2px;          /* was 6px */
-  padding: 6px 10px;        /* was 14px 16px */
+  margin-top: auto;      /* pushes it to the bottom of .contact-right */
+  padding: 6px 10px;     /* or whatever you like */
   border-radius: 0;
   background: var(--bg1, #f5f8ff);
   border: 1px solid rgba(0, 0, 0, 0.10);
   text-align: center;
-  font-size: 0.7rem;        /* slightly smaller */
+  font-size: 0.75rem;
   letter-spacing: 0.03em;
   color: #1c2d5a;
   transition:
@@ -2511,6 +2512,7 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
     border-color 0.20s ease,
     color 0.20s ease;
 }
+
 
 /* Hover behavior identical to cards */
 .contact-copyright:hover {
