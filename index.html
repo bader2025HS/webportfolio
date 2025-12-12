@@ -1392,6 +1392,94 @@ nav a:hover {
 
 
 
+
+
+
+
+
+/* ==========================================
+   EXPERIENCE — MODERN BLUE + HONEY ACCENTS
+   ========================================== */
+
+/* Reset old parchment look */
+.exp-card-face,
+.exp-card-front,
+.exp-card-back {
+  background: #f5f8ff !important; /* same soft blue as contact */
+  color: #1f2937 !important;       /* clean dark grey */
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: none !important;
+  background-image: none !important; /* remove texture */
+}
+
+/* FRONT TEXT COLORS */
+.exp-front-main {
+  color: #1c2d5a !important; /* navy accent */
+}
+
+.exp-front-sub {
+  color: #1f2937 !important;
+}
+
+/* CATEGORY COLOR → same honey-brown everywhere */
+.exp-gate-code {
+  color: #d79a3b !important;       /* honey */
+}
+
+/* Remove the vertical color stripe */
+.exp-card::before {
+  display: none !important;
+}
+
+/* Modern hover effect */
+.exp-card:hover .exp-card-front {
+  background: #ffffff !important;
+  border-color: #d79a3b !important;   /* honey border */
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12) !important;
+  transform: translateY(-2px);
+}
+
+/* BACK SIDE CLEAN STYLE */
+.exp-card-back {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+}
+
+.exp-back-label {
+  color: #1c2d5a !important; /* navy */
+}
+
+/* Organization meta text */
+.exp-org-meta {
+  color: #6b7280 !important; /* muted grey */
+}
+
+/* Logo frame clean */
+.exp-org-logo {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Bullet list */
+.exp-org-list {
+  color: #1f2937 !important; /* dark grey */
+}
+
+/* Expanded card shadow */
+.exp-card--expanded .exp-card-back {
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18) !important;
+}
+
+/* MOBILE cleanup */
+@media (max-width: 800px) {
+  .exp-card-back {
+    border-radius: 12px !important;
+    background: #ffffff !important;
+  }
+}
+
+
+
 /* ===========================
    WORK – VERTICAL STRIPS
 =========================== */
