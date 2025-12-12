@@ -2494,46 +2494,34 @@ padding: 16px 32px 28px;   /* moves content 16px upward */
   opacity: 0.7;
 }
 
-/* Copyright box under grid (also sharp) */
-
+/* Copyright box styled like a card */
 .contact-copyright {
-  margin-top: 4px;
-  padding: 12px 10px;
+  margin-top: 12px;
+  padding: 14px 16px;
   border-radius: 0;
-  border: 1px dashed rgba(0, 0, 0, 0.18);
-  background: rgba(255, 255, 255, 0.7);
-  font-size: 0.75rem;
+  background: var(--bg1, #f5f8ff);           /* same as cards */
+  border: 1px solid rgba(0, 0, 0, 0.10);     /* same subtle border */
   text-align: center;
-  backdrop-filter: blur(6px);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: #1c2d5a;                            /* same navy text */
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease;
+}
+
+/* Hover behavior identical to cards */
+.contact-copyright:hover {
+  background: #ffffff;
+  border-color: var(--accent, #d79a3b);      /* brown */
+  color: var(--accent, #d79a3b);             /* brown text */
 }
 
 .contact-copyright p {
   margin: 0;
-  opacity: 0.75;
 }
 
-    /* Glass Copyright Footer */
-.glass {
-  margin-top: 8px;                /* was 20px */
-  padding: 10px 16px;             /* was 14px 18px */
-  background: rgba(255, 255, 255, 0.32);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 0;
-  text-align: center;
-  font-size: 0.72rem;             /* slightly smaller */
-  letter-spacing: 0.03em;
-  color: rgba(0,0,0,0.75);
-  box-shadow: none;
-  transition: background 0.25s ease, border-color 0.25s ease;
-}
-
-
-.glass:hover {
-  background: rgba(255, 255, 255, 0.45);
-  border-color: rgba(255, 255, 255, 0.65);
-}
 
 
 /* ================================
