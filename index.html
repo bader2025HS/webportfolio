@@ -3022,6 +3022,52 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
       z-index: 9999;
     }
 
+
+
+
+
+
+    /* ===========================
+   SKILLS – HONEY DARK OVERRIDES
+   =========================== */
+
+/* Honey glow instead of blue/cyan */
+.skills-terminal::before {
+  background: radial-gradient(circle at 0% 0%,
+              rgba(215, 154, 59, 0.18) 0,
+              transparent 55%),
+              radial-gradient(circle at 100% 100%,
+              rgba(180, 115, 22, 0.16) 0,
+              transparent 60%);
+}
+
+/* Titles → honey */
+.terminal-title {
+  color: #f5e6c8;
+}
+
+.terminal-languages-title,
+.terminal-column-title {
+  color: #d79a3b;
+}
+
+/* Rows hover → honey instead of green */
+.terminal-row:hover {
+  border-color: #d79a3b;
+  box-shadow: 0 0 0 1px rgba(215, 154, 59, 0.55);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+/* Right-side meta text slightly warmer */
+.terminal-cell-meta {
+  color: #c9b08a;
+}
+
+/* Subtle honey separator */
+.terminal-row::before {
+  background: rgba(215, 154, 59, 0.35);
+}
+
     /* ===========================
            LIGHTBOX (PHOTOS)
     ============================ */
