@@ -106,6 +106,56 @@ nav a:hover {
 }
 
 
+
+
+
+
+
+  /* ===========================
+       SKILLS SECTION – AIRPORT TERMINAL
+   ============================ */
+
+/* === SKILLS GRID BASE === */
+.skillsGrid{
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+/* section blocks */
+.skillsBlock{
+  margin-bottom: 48px;
+}
+
+.skillsBlockLabel{
+  font-size: .85rem;
+  font-weight: 900;
+  letter-spacing: .35em;
+  margin-bottom: 18px;
+  color: #111;
+}
+
+/* grid */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 22px;
+}
+
+/* card */
+.card{
+  background: #fff;
+  border-radius: 22px;
+  padding: 20px 18px;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover{
+  transform: translateY(-4px);
+}
+
 /* ===========================
    ABOUT – LAYOUT
 =========================== */
@@ -2668,106 +2718,6 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 }
 
 
-
-
-
-  /* ===========================
-       SKILLS SECTION – AIRPORT TERMINAL
-   ============================ */
-
-/* === SKILLS GRID BASE === */
-.skillsGrid{
-  width: min(1200px, 92vw);
-  margin: 0 auto;
-  padding: 48px 0;
-}
-
-/* section blocks */
-.skillsBlock{
-  margin-bottom: 48px;
-}
-
-.skillsBlockLabel{
-  font-size: .85rem;
-  font-weight: 900;
-  letter-spacing: .35em;
-  margin-bottom: 18px;
-  color: #111;
-}
-
-/* grid */
-.grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 22px;
-}
-
-/* card */
-.card{
-  background: #fff;
-  border-radius: 22px;
-  padding: 20px 18px;
-  text-align: center;
-  box-shadow: 0 16px 36px rgba(0,0,0,.12);
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-
-.card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 24px 50px rgba(0,0,0,.16);
-}
-
-/* names + meta */
-.name{
-  font-weight: 900;
-  font-size: 1.1rem;
-  color: #111;
-}
-
-.meta{
-  margin-top: 6px;
-  font-size: .95rem;
-  font-weight: 700;
-  color: #555;
-}
-
-/* === LANGUAGES === */
-.langFlag{
-  font-size: 2.4rem;
-  margin-bottom: 12px;
-}
-
-/* === TOOLS === */
-.logoTile{
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 14px;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  box-shadow: 0 12px 26px rgba(0,0,0,.12);
-}
-
-.logoTile svg{
-  width: 56px;
-  height: 56px;
-  display: block;
-}
-
-/* === SOFT SKILLS === */
-.emoji{
-  font-size: 2.2rem;
-  margin-bottom: 12px;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 640px){
-  .grid{
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-  }
-}
 
 
 
