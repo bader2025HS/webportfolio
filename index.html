@@ -2788,17 +2788,6 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   font-size: 1.05rem;
 }
 
-/* Color tints per app (solid, not transparent) */
-.tint-blue svg rect{ fill: #2B579A; }    /* Word-ish */
-.tint-orange svg rect{ fill: #D24726; }  /* PowerPoint-ish */
-.tint-green svg rect{ fill: #217346; }   /* Excel-ish */
-.tint-yellow svg rect{ fill: #F2C811; }  /* Power BI-ish */
-.tint-indigo svg rect{ fill: #4264FB; }  /* Mapbox-ish */
-.tint-amber svg rect{ fill: #FF9A00; }   /* Illustrator-ish */
-.tint-sky svg rect{ fill: #4285F4; }     /* Google-ish */
-.tint-cyan svg rect{ fill: #00C4CC; }    /* Canva-ish */
-.tint-lime svg rect{ fill: #7FB800; }    /* QGIS-ish */
-.tint-gray svg rect{ fill: #24292F; }    /* GitHub-ish */
 
 /* Responsive */
 @media (max-width: 640px){
@@ -3228,61 +3217,18 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
      <!-- SKILLS – AIRPORT TERMINAL -->
 <section id="skills" class="skillsGrid">
 
-  <!-- LANGUAGES -->
-  <div class="skillsBlock">
-    <div class="skillsBlockLabel">LANGUAGES</div>
-
-    <div class="grid">
-      <article class="card">
-        <div class="langCode">SA</div>
-        <div class="name">Arabic</div>
-        <div class="meta">Native</div>
-      </article>
-
-      <article class="card">
-        <div class="langCode">FR</div>
-        <div class="name">French</div>
-        <div class="meta">Native</div>
-      </article>
-
-      <article class="card">
-        <div class="langCode">GB</div>
-        <div class="name">English</div>
-        <div class="meta">C2</div>
-      </article>
-
-      <article class="card">
-        <div class="langCode">DE</div>
-        <div class="name">German</div>
-        <div class="meta">C1</div>
-      </article>
-
-      <article class="card">
-        <div class="langCode">IR</div>
-        <div class="name">Persian</div>
-        <div class="meta">A2</div>
-      </article>
-
-      <article class="card">
-        <div class="langCode">JP</div>
-        <div class="name">Japanese</div>
-        <div class="meta">A2</div>
-      </article>
-    </div>
-  </div>
-
   <!-- TOOLS -->
   <div class="skillsBlock">
     <div class="skillsBlockLabel">TOOLS</div>
 
     <div class="grid">
+
       <!-- Word -->
       <article class="card">
-        <div class="logoTile tint-blue" aria-hidden="true">
-          <!-- Replace this SVG with the real Word SVG path -->
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">W</text>
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#185ABD" d="M3 4h10l4 4v12H3z"/>
+            <path fill="#fff" d="M6 8h1.5l1.2 7 1.3-7h1.4l1.3 7 1.2-7H15l-2 10h-1.4l-1.3-6-1.3 6H7.6z"/>
           </svg>
         </div>
         <div class="name">Word</div>
@@ -3291,10 +3237,10 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
       <!-- PowerPoint -->
       <article class="card">
-        <div class="logoTile tint-orange" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">P</text>
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#D24726"/>
+            <path fill="#fff" d="M9 7h4a3 3 0 010 6H11v4H9z"/>
           </svg>
         </div>
         <div class="name">PowerPoint</div>
@@ -3303,10 +3249,10 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
       <!-- Excel -->
       <article class="card">
-        <div class="logoTile tint-green" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">X</text>
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#217346" d="M3 4h10l4 4v12H3z"/>
+            <path fill="#fff" d="M7 9h2l1.5 2.5L12 9h2l-2.5 3.5L14 16h-2l-1.5-2.7L9 16H7l2.5-3.5z"/>
           </svg>
         </div>
         <div class="name">Excel</div>
@@ -3315,146 +3261,105 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
       <!-- Power BI -->
       <article class="card">
-        <div class="logoTile tint-yellow" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">BI</text>
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="10" width="3" height="8" fill="#F2C811"/>
+            <rect x="9" y="6" width="3" height="12" fill="#F2C811"/>
+            <rect x="14" y="3" width="3" height="15" fill="#F2C811"/>
           </svg>
         </div>
         <div class="name">Power BI</div>
         <div class="meta">Dashboards</div>
       </article>
 
-      <!-- Mapbox -->
-      <article class="card">
-        <div class="logoTile tint-indigo" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">M</text>
-          </svg>
-        </div>
-        <div class="name">Mapbox</div>
-        <div class="meta">Web mapping</div>
-      </article>
-
-      <!-- Illustrator -->
-      <article class="card">
-        <div class="logoTile tint-amber" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">Ai</text>
-          </svg>
-        </div>
-        <div class="name">Illustrator</div>
-        <div class="meta">Infographics</div>
-      </article>
-
-      <!-- Google Suite -->
-      <article class="card">
-        <div class="logoTile tint-sky" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">G</text>
-          </svg>
-        </div>
-        <div class="name">Google Suite</div>
-        <div class="meta">Collab & forms</div>
-      </article>
-
-      <!-- Canva -->
-      <article class="card">
-        <div class="logoTile tint-cyan" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">C</text>
-          </svg>
-        </div>
-        <div class="name">Canva</div>
-        <div class="meta">Visual comms</div>
-      </article>
-
-      <!-- QGIS -->
-      <article class="card">
-        <div class="logoTile tint-lime" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">Q</text>
-          </svg>
-        </div>
-        <div class="name">QGIS</div>
-        <div class="meta">Mapping</div>
-      </article>
-
       <!-- GitHub -->
       <article class="card">
-        <div class="logoTile tint-gray" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="12" />
-            <text x="32" y="41" text-anchor="middle">GH</text>
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#181717" d="M12 .5A12 12 0 008 23.5c.6.1.8-.2.8-.5v-2c-3.3.7-4-1.4-4-1.4-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.4.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.4.1-2.9 0 0 1-.3 3.3 1.2a11.4 11.4 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.5.2 2.6.1 2.9.8.8 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.3.8 1 .8 2v3c0 .3.2.6.8.5A12 12 0 0012 .5z"/>
           </svg>
         </div>
         <div class="name">GitHub</div>
         <div class="meta">Versioning</div>
       </article>
 
+      <!-- Google -->
+      <article class="card">
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M21.8 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.5a4.7 4.7 0 01-2 3.1v2.6h3.2c1.9-1.8 3.1-4.4 3.1-7.5z"/>
+            <path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.7l-3.2-2.6c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3v2.6A10 10 0 0012 22z"/>
+            <path fill="#FBBC05" d="M6.4 13.5a6 6 0 010-3V8H3a10 10 0 000 8z"/>
+            <path fill="#EA4335" d="M12 6.3c1.5 0 2.8.5 3.9 1.5l2.9-2.9A9.8 9.8 0 0012 2a10 10 0 00-9 6l3.4 2.6c.8-2.4 3-4.3 5.6-4.3z"/>
+          </svg>
+        </div>
+        <div class="name">Google Suite</div>
+        <div class="meta">Collab & forms</div>
+      </article>
+
+      <!-- Adobe Illustrator -->
+      <article class="card">
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#FF9A00"/>
+            <path fill="#330000" d="M8 17l2.5-9h1.7l2.5 9h-1.7l-.5-2H10l-.5 2zm2.4-3.5h2.2l-1.1-4zM15.5 9H17v8h-1.5z"/>
+          </svg>
+        </div>
+        <div class="name">Illustrator</div>
+        <div class="meta">Infographics</div>
+      </article>
+
+      <!-- Canva -->
+      <article class="card">
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#00C4CC"/>
+            <path fill="#fff" d="M13.5 8.2c1.6 0 2.9.8 2.9 2.2 0 1-.7 1.6-1.4 1.6-.5 0-.8-.3-.8-.7 0-.4.3-.6.7-.6.2 0 .4.1.5.1-.2-.7-.9-1.2-1.8-1.2-1.4 0-2.6 1.2-2.6 2.8s1.2 2.9 2.6 2.9c.9 0 1.6-.4 2-.9l1 .6c-.6 1-1.7 1.6-3 1.6-2.2 0-3.9-1.8-3.9-4.2s1.7-4.2 3.8-4.2z"/>
+          </svg>
+        </div>
+        <div class="name">Canva</div>
+        <div class="meta">Visual comms</div>
+      </article>
+
+      <!-- Flourish -->
+      <article class="card">
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#FF5A5F"/>
+            <path fill="#fff" d="M8 16V8h3.5a3 3 0 010 6H10v2z"/>
+          </svg>
+        </div>
+        <div class="name">Flourish</div>
+        <div class="meta">Data storytelling</div>
+      </article>
+
+      <!-- Mapbox -->
+      <article class="card">
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="#4264FB"/>
+            <path fill="#fff" d="M12 6l2.2 5.6H9.8zM12 10.5l-1 2.6h2zM12 14.5a2 2 0 110 4 2 2 0 010-4z"/>
+          </svg>
+        </div>
+        <div class="name">Mapbox</div>
+        <div class="meta">Web mapping</div>
+      </article>
+
+      <!-- QGIS -->
+      <article class="card">
+        <div class="logoTile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="#7FB800"/>
+            <circle cx="12" cy="12" r="4" fill="#fff"/>
+            <rect x="16" y="16" width="4" height="2" rx="1" transform="rotate(45 16 16)" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="name">QGIS</div>
+        <div class="meta">Mapping</div>
+      </article>
+
     </div>
   </div>
-
-  <!-- SOFT SKILLS -->
-  <div class="skillsBlock">
-    <div class="skillsBlockLabel">SOFT SKILLS</div>
-
-    <div class="grid">
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">✦</div>
-        <div class="name">Communication</div>
-        <div class="meta">Briefings</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">⌁</div>
-        <div class="name">Synthesis</div>
-        <div class="meta">Notes</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">◎</div>
-        <div class="name">Press monitoring</div>
-        <div class="meta">Watch & alerts</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">⟡</div>
-        <div class="name">Critical thinking</div>
-        <div class="meta">Policy lenses</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">⬡</div>
-        <div class="name">Team facilitation</div>
-        <div class="meta">Workshops</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">⇄</div>
-        <div class="name">Coordination</div>
-        <div class="meta">Embassies/NGOs</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">✎</div>
-        <div class="name">Policy briefs</div>
-        <div class="meta">2–4 page notes</div>
-      </article>
-
-      <article class="card">
-        <div class="logoTile plain" aria-hidden="true">◉</div>
-        <div class="name">Public speaking</div>
-        <div class="meta">Conferences</div>
-      </article>
-    </div>
-  </div>
-
 </section>
 
 
