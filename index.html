@@ -3070,6 +3070,113 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   transform: translateY(-2px);
 }
 
+/* ===========================
+   SKILLS — POST-IT LOOK (CSS ONLY)
+   (keeps your existing HTML)
+=========================== */
+
+/* Board background (apply to your existing wrapper) */
+#skills .terminal-grid{
+  /* if .terminal-grid is your skills container */
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  padding: 34px 28px;
+  border-radius: 18px;
+
+  background: #e56a3a; /* board orange like screenshot */
+  box-shadow: 0 18px 50px rgba(0,0,0,.22);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  place-items: center;
+}
+
+/* Turn each row into a sticky note */
+#skills .terminal-row{
+  width: 100%;
+  max-width: 240px;
+  min-height: 170px;
+
+  padding: 22px 18px 18px;
+  border-radius: 6px;
+
+  background: #f3c55d; /* sticky color */
+  box-shadow: 0 10px 0 rgba(0,0,0,.18), 0 22px 30px rgba(0,0,0,.18);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+
+  transform: rotate(var(--r, -2deg));
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* “Tape” at top (no HTML needed) */
+#skills .terminal-row::before{
+  content:"";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 70%;
+  height: 26px;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 4px;
+
+  background: rgba(255, 240, 205, .75);
+  box-shadow: 0 6px 10px rgba(0,0,0,.18);
+}
+
+/* Ink / typography */
+#skills .terminal-cell-main{
+  padding: 0;
+  margin-top: 14px; /* pushes text below tape */
+}
+
+#skills .terminal-soft-label{
+  display: block;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  color: #0b3a73;  /* blue ink */
+  letter-spacing: 0.01em;
+}
+
+#skills .terminal-cell-meta{
+  padding: 0;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0b3a73;
+  opacity: .95;
+}
+
+/* Hover lift */
+#skills .terminal-row:hover{
+  transform: rotate(var(--r, -2deg)) translateY(-6px);
+  box-shadow: 0 12px 0 rgba(0,0,0,.18), 0 32px 40px rgba(0,0,0,.22);
+}
+
+/* Slightly different rotations (keeps it organic) */
+#skills .terminal-row:nth-child(1){ --r:-6deg; }
+#skills .terminal-row:nth-child(2){ --r: 3deg; }
+#skills .terminal-row:nth-child(3){ --r:-2deg; }
+#skills .terminal-row:nth-child(4){ --r: 6deg; }
+#skills .terminal-row:nth-child(5){ --r:-4deg; }
+#skills .terminal-row:nth-child(6){ --r: 2deg; }
+
+/* Mobile tuning */
+@media (max-width: 520px){
+  #skills .terminal-grid{
+    padding: 22px 16px;
+  }
+  #skills .terminal-row{
+    max-width: 100%;
+  }
+}
+
     
 
     /* ===========================
