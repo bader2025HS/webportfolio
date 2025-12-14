@@ -2667,133 +2667,332 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   }
 }
 
-/* ===========================
-   SKILLS — CLEAN LOGO GRID
-   - no title
-   - no transparency
-=========================== */
 
-.skillsGrid{
-  padding: 60px 0 30px;
-  width: min(1200px, 92vw);
-  margin: 0 auto;
+
+
+
+  /* ===========================
+       SKILLS SECTION – AIRPORT TERMINAL
+   ============================ */
+
+#skills {
+  margin-top:-20px;
+}
+
+.skills-terminal {
+  background: #020617;                  /* near-black navy */
+  color: #e5e7eb;
+  border-radius: 18px;
+  padding: 20px 22px 22px;
+  border: 1px solid #111827;
+  box-shadow: none;
   position: relative;
-
-  /* subtle grid background like your screenshot */
-  background:
-    linear-gradient(to right, rgba(0,0,0,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,.05) 1px, transparent 1px);
-  background-size: 44px 44px;
-  border-radius: 24px;
+  overflow: hidden;
+  max-width: 1050px;      /* Same width as page */
+  margin: 0 auto;         /* Centers it perfectly */
 }
 
-/* section label (LANGUAGES/TOOLS/SOFT SKILLS) */
-.skillsBlock{
-  padding: 28px 28px 6px;
+/* subtle gradient glow */
+.skills-terminal::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%,
+              rgba(34, 197, 235, 0.16) 0,
+              transparent 55%),
+              radial-gradient(circle at 100% 100%,
+              rgba(249, 115, 22, 0.14) 0,
+              transparent 60%);
+  opacity: 0.8;
+  pointer-events: none;
 }
 
-.skillsBlockLabel{
-  font-weight: 900;
-  letter-spacing: .35em;
-  font-size: .9rem;
-  color: #111;
-  margin: 0 0 18px;
+.skills-terminal-inner {
+  position: relative;
+  z-index: 1;
 }
 
-/* grid */
-.grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 22px;
-  align-items: stretch;
+/* Top bar (like airport screen header) */
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-/* card */
-.card{
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.06);
-  border-radius: 26px;
-  padding: 22px 18px 18px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.12);
-  text-align: center;
-  transition: transform .18s ease, box-shadow .18s ease;
+.terminal-title {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: #f9fafb;
 }
 
-.card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 26px 55px rgba(0,0,0,.16);
+.terminal-subtitle {
+  font-size: 0.85rem;
+  color: #9ca3af;
 }
 
-/* language code big */
-.langCode{
-  font-weight: 900;
-  font-size: 2.3rem;
-  letter-spacing: .08em;
-  margin-top: 6px;
+/* Thin separator line */
+
+.terminal-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(148, 163, 184, 0.3),
+    rgba(148, 163, 184, 0.7),
+    rgba(148, 163, 184, 0.3)
+  );
   margin-bottom: 14px;
-  color: #111;
 }
 
-/* logo tile */
-.logoTile{
-  width: 94px;
-  height: 94px;
-  margin: 4px auto 14px;
-  border-radius: 26px;
+/* Grid of 3 columns: Languages / Tools / Soft Skills */
 
+.terminal-grid {
   display: grid;
-  place-items: center;
-
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.10);
-  box-shadow: 0 14px 28px rgba(0,0,0,.12);
+  grid-template-columns: 1.1fr 1.1fr;   /* was 3 columns before */
+  gap: 18px;
 }
 
-.logoTile svg{
-  width: 88px;
-  height: 88px;
+    /* Languages at top: 2 rows × 3 columns */
+
+.terminal-languages {
+  margin-bottom: 14px;
 }
 
-.logoTile svg rect{
-  fill: #e9eefb; /* overridden by tints */
+.terminal-languages-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #fbbf24;
+  margin-bottom: 6px;
 }
 
-.logoTile svg text{
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  font-weight: 900;
-  font-size: 28px;
-  fill: rgba(255,255,255,.95);
+/* grid of 6 terminal rows */
+.terminal-languages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 10px;
 }
 
-/* glyph tile for soft skills */
-.logoTile.plain{
-  font-size: 34px;
-  font-weight: 900;
-  color: #111;
-  background: #fff;
+/* responsive: stack better on smaller screens */
+@media (max-width: 900px) {
+  .terminal-languages-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .terminal-languages-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* name/meta */
-.name{
-  font-weight: 900;
-  font-size: 1.25rem;
-  color: #111;
-  margin: 0;
+/* Column headers */
+
+.terminal-column-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #fbbf24;
+  margin-bottom: 6px;
 }
 
-.meta{
-  margin-top: 8px;
-  font-weight: 800;
-  color: #555;
-  font-size: 1.05rem;
+/* Rows = departure lines */
+
+.terminal-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
+.terminal-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 9px;
+  padding: 6px 8px 6px 10px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle vertical separator like FIDS boards */
+.terminal-row::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 52%;
+  width: 1px;
+  background: rgba(55, 65, 81, 0.8);
+}
+
+/* Hover = slight “lit up” flight line */
+
+.terminal-row:hover {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.6);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+/* Left side (label) */
+
+.terminal-cell-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 6px;
+  font-weight: 500;
+}
+
+/* Right side (meta) */
+
+.terminal-cell-meta {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  padding-left: 8px;
+}
+
+/* Language flags in rows */
+
+.terminal-flag {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.8);
+  flex-shrink: 0;
+}
+
+.terminal-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tool badges (letters inside small squares) */
+
+.terminal-tool-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #f9fafb;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
+}
+
+/* reuse your existing colors so it matches the rest */
+
+.badge-word       { background:#185abd; }
+.badge-google     { background:#4285f4; }
+.badge-powerpoint { background:#d24726; }
+.badge-excel      { background:#107c41; }
+.badge-powerbi    { background:#f2c811; color:#111827; }
+.badge-canva      { background:#00c4cc; }
+.badge-mapbox     { background:#4264fb; }
+.badge-qgis       { background:#589632; }
+.badge-ai         { background:#ff9a00; }
+.badge-github     { background:#24292e; }
+
+/* Soft skills small chips inside terminal rows */
+
+.terminal-soft-label {
+  font-size: 0.82rem;
+}
 
 /* Responsive */
-@media (max-width: 640px){
-  .skillsBlock{ padding: 22px 18px 6px; }
-  .grid{ grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
-  .card{ border-radius: 22px; }
+
+@media (max-width: 900px) {
+  .terminal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .skills-terminal {
+    padding: 18px 14px 18px;
+  }
+
+  .terminal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .terminal-row {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .terminal-row::before {
+    left: 60%;
+  }
+}
+
+    /* Make Tools + Soft Skills use 2 columns, same formatting */
+.terminal-column.tools .terminal-rows,
+.terminal-column.softskills .terminal-rows {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 12px;  /* row-gap / column-gap */
+}
+
+@media (max-width: 640px) {
+  /* ... you already have some rules here ... */
+
+  /* Tools + Soft Skills: 1 item per row on mobile */
+  .terminal-column.tools .terminal-rows,
+  .terminal-column.softskills .terminal-rows {
+    grid-template-columns: 1fr;   /* one column */
+  }
+}
+
+/* ===========================
+   SKILLS – HONEY DARK OVERRIDES
+   =========================== */
+
+/* Honey glow instead of blue/cyan */
+.skills-terminal::before {
+  background: radial-gradient(circle at 0% 0%,
+              rgba(215, 154, 59, 0.18) 0,
+              transparent 55%),
+              radial-gradient(circle at 100% 100%,
+              rgba(180, 115, 22, 0.16) 0,
+              transparent 60%);
+}
+
+/* Titles → honey */
+.terminal-title {
+  color: #f5e6c8;
+}
+
+.terminal-languages-title,
+.terminal-column-title {
+  color: #d79a3b;
+}
+
+/* Rows hover → honey instead of green */
+.terminal-row:hover {
+  border-color: #d79a3b;
+  box-shadow: 0 0 0 1px rgba(215, 154, 59, 0.55);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+/* Right-side meta text slightly warmer */
+.terminal-cell-meta {
+  color: #c9b08a;
+}
+
+/* Subtle honey separator */
+.terminal-row::before {
+  background: rgba(215, 154, 59, 0.35);
 }
 
 
@@ -3215,153 +3414,301 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 
      <!-- SKILLS – AIRPORT TERMINAL -->
-<section id="skills" class="skillsGrid">
+<section id="skills">
+  <div class="skills-terminal">
+    <div class="skills-terminal-inner">
 
-  <!-- TOOLS -->
-  <div class="skillsBlock">
-    <div class="skillsBlockLabel">TOOLS</div>
+      <div class="terminal-header">
+        <span class="terminal-title">Skills terminal</span>
+        <span class="terminal-subtitle">
+          Departure board of what I work with most.
+        </span>
+      </div>
 
-    <div class="grid">
+      <div class="terminal-divider"></div>
 
-      <!-- Word -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#185ABD" d="M3 4h10l4 4v12H3z"/>
-            <path fill="#fff" d="M6 8h1.5l1.2 7 1.3-7h1.4l1.3 7 1.2-7H15l-2 10h-1.4l-1.3-6-1.3 6H7.6z"/>
-          </svg>
+      <!-- TOP: LANGUAGES 2×3 GRID -->
+      <div class="terminal-languages">
+        <div class="terminal-languages-title">Languages</div>
+
+        <div class="terminal-languages-grid">
+          <!-- Arabic -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/sa.png" alt="Arabic flag">
+              </span>
+              <span>Arabic</span>
+            </div>
+            <div class="terminal-cell-meta">
+              Native
+            </div>
+          </div>
+
+          <!-- French -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/fr.png" alt="French flag">
+              </span>
+              <span>French</span>
+            </div>
+            <div class="terminal-cell-meta">
+              Native
+            </div>
+          </div>
+
+          <!-- English -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/gb.png" alt="UK flag">
+              </span>
+              <span>English</span>
+            </div>
+            <div class="terminal-cell-meta">
+              C2
+            </div>
+          </div>
+
+          <!-- German -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/de.png" alt="German flag">
+              </span>
+              <span>German</span>
+            </div>
+            <div class="terminal-cell-meta">
+              C1
+            </div>
+          </div>
+
+          <!-- Persian -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/ir.png" alt="Iran flag">
+              </span>
+              <span>Persian</span>
+            </div>
+            <div class="terminal-cell-meta">
+              A2
+            </div>
+          </div>
+
+          <!-- Japanese -->
+          <div class="terminal-row">
+            <div class="terminal-cell-main">
+              <span class="terminal-flag">
+                <img src="https://flagcdn.com/w40/jp.png" alt="Japan flag">
+              </span>
+              <span>Japanese</span>
+            </div>
+            <div class="terminal-cell-meta">
+              A2
+            </div>
+          </div>
         </div>
-        <div class="name">Word</div>
-        <div class="meta">Reporting</div>
-      </article>
+      </div>
 
-      <!-- PowerPoint -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#D24726"/>
-            <path fill="#fff" d="M9 7h4a3 3 0 010 6H11v4H9z"/>
-          </svg>
-        </div>
-        <div class="name">PowerPoint</div>
-        <div class="meta">Decks & briefs</div>
-      </article>
+      <!-- BOTTOM: 2-COLUMN GRID (TOOLS + SOFT SKILLS) -->
+      <div class="terminal-grid">
 
-      <!-- Excel -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#217346" d="M3 4h10l4 4v12H3z"/>
-            <path fill="#fff" d="M7 9h2l1.5 2.5L12 9h2l-2.5 3.5L14 16h-2l-1.5-2.7L9 16H7l2.5-3.5z"/>
-          </svg>
-        </div>
-        <div class="name">Excel</div>
-        <div class="meta">Data cleaning</div>
-      </article>
+        <!-- COLUMN 1 – TOOLS -->
+        <div class="terminal-column tools">
+  <div class="terminal-column-title">Tools</div>
+  <div class="terminal-rows">
 
-      <!-- Power BI -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="4" y="10" width="3" height="8" fill="#F2C811"/>
-            <rect x="9" y="6" width="3" height="12" fill="#F2C811"/>
-            <rect x="14" y="3" width="3" height="15" fill="#F2C811"/>
-          </svg>
-        </div>
-        <div class="name">Power BI</div>
-        <div class="meta">Dashboards</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-word">W</span>
+                <span>Word</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Reporting
+              </div>
+            </div>
 
-      <!-- GitHub -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#181717" d="M12 .5A12 12 0 008 23.5c.6.1.8-.2.8-.5v-2c-3.3.7-4-1.4-4-1.4-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.4.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.4.1-2.9 0 0 1-.3 3.3 1.2a11.4 11.4 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.5.2 2.6.1 2.9.8.8 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.3.8 1 .8 2v3c0 .3.2.6.8.5A12 12 0 0012 .5z"/>
-          </svg>
-        </div>
-        <div class="name">GitHub</div>
-        <div class="meta">Versioning</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-google">G</span>
+                <span>Google Suite</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Collab &amp; forms
+              </div>
+            </div>
 
-      <!-- Google -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#4285F4" d="M21.8 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.5a4.7 4.7 0 01-2 3.1v2.6h3.2c1.9-1.8 3.1-4.4 3.1-7.5z"/>
-            <path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.7l-3.2-2.6c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3v2.6A10 10 0 0012 22z"/>
-            <path fill="#FBBC05" d="M6.4 13.5a6 6 0 010-3V8H3a10 10 0 000 8z"/>
-            <path fill="#EA4335" d="M12 6.3c1.5 0 2.8.5 3.9 1.5l2.9-2.9A9.8 9.8 0 0012 2a10 10 0 00-9 6l3.4 2.6c.8-2.4 3-4.3 5.6-4.3z"/>
-          </svg>
-        </div>
-        <div class="name">Google Suite</div>
-        <div class="meta">Collab & forms</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-powerpoint">P</span>
+                <span>PowerPoint</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Decks &amp; briefs
+              </div>
+            </div>
 
-      <!-- Adobe Illustrator -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="2" y="2" width="20" height="20" rx="3" fill="#FF9A00"/>
-            <path fill="#330000" d="M8 17l2.5-9h1.7l2.5 9h-1.7l-.5-2H10l-.5 2zm2.4-3.5h2.2l-1.1-4zM15.5 9H17v8h-1.5z"/>
-          </svg>
-        </div>
-        <div class="name">Illustrator</div>
-        <div class="meta">Infographics</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-excel">X</span>
+                <span>Excel</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Data cleaning
+              </div>
+            </div>
 
-      <!-- Canva -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#00C4CC"/>
-            <path fill="#fff" d="M13.5 8.2c1.6 0 2.9.8 2.9 2.2 0 1-.7 1.6-1.4 1.6-.5 0-.8-.3-.8-.7 0-.4.3-.6.7-.6.2 0 .4.1.5.1-.2-.7-.9-1.2-1.8-1.2-1.4 0-2.6 1.2-2.6 2.8s1.2 2.9 2.6 2.9c.9 0 1.6-.4 2-.9l1 .6c-.6 1-1.7 1.6-3 1.6-2.2 0-3.9-1.8-3.9-4.2s1.7-4.2 3.8-4.2z"/>
-          </svg>
-        </div>
-        <div class="name">Canva</div>
-        <div class="meta">Visual comms</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-powerbi">BI</span>
+                <span>Power BI</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Dashboards
+              </div>
+            </div>
 
-      <!-- Flourish -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#FF5A5F"/>
-            <path fill="#fff" d="M8 16V8h3.5a3 3 0 010 6H10v2z"/>
-          </svg>
-        </div>
-        <div class="name">Flourish</div>
-        <div class="meta">Data storytelling</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-canva">C</span>
+                <span>Canva</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Visual comms
+              </div>
+            </div>
 
-      <!-- Mapbox -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" fill="#4264FB"/>
-            <path fill="#fff" d="M12 6l2.2 5.6H9.8zM12 10.5l-1 2.6h2zM12 14.5a2 2 0 110 4 2 2 0 010-4z"/>
-          </svg>
-        </div>
-        <div class="name">Mapbox</div>
-        <div class="meta">Web mapping</div>
-      </article>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-mapbox">M</span>
+                <span>Mapbox</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Web mapping
+              </div>
+            </div>
 
-      <!-- QGIS -->
-      <article class="card">
-        <div class="logoTile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" fill="#7FB800"/>
-            <circle cx="12" cy="12" r="4" fill="#fff"/>
-            <rect x="16" y="16" width="4" height="2" rx="1" transform="rotate(45 16 16)" fill="#fff"/>
-          </svg>
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-qgis">Q</span>
+                <span>QGIS</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Mapping
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-ai">Ai</span>
+                <span>Illustrator</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Infographics
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-tool-badge badge-github"></span>
+                <span>GitHub</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Versioning
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="name">QGIS</div>
-        <div class="meta">Mapping</div>
-      </article>
+
+        <!-- COLUMN 2 – SOFT SKILLS -->
+       <div class="terminal-column softskills">
+  <div class="terminal-column-title">Soft skills</div>
+  <div class="terminal-rows">
+
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Communication</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Briefings
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Synthesis</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Notes
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Press monitoring</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Watch &amp; alerts
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Critical thinking</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Policy lenses
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Team facilitation</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Workshops
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Coordination</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Embassies/NGOs
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Policy briefs</span>
+              </div>
+              <div class="terminal-cell-meta">
+                2–4 page notes
+              </div>
+            </div>
+
+            <div class="terminal-row">
+              <div class="terminal-cell-main">
+                <span class="terminal-soft-label">Public speaking</span>
+              </div>
+              <div class="terminal-cell-meta">
+                Conferences
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div> <!-- /terminal-grid -->
 
     </div>
   </div>
 </section>
-
 
 
       <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
