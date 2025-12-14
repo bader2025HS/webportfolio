@@ -2667,140 +2667,145 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   }
 }
 
-
-
-
-
-  /* ===========================
-   SKILLS — LOGO GRID LAYOUT
+/* ===========================
+   SKILLS — CLEAN LOGO GRID
+   - no title
+   - no transparency
 =========================== */
 
-.skillsLogo{
-  padding: 70px 0;
+.skillsGrid{
+  padding: 60px 0 30px;
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  position: relative;
+
+  /* subtle grid background like your screenshot */
+  background:
+    linear-gradient(to right, rgba(0,0,0,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  border-radius: 24px;
 }
 
-.skillsLogo-head{
-  width: min(1100px, 92vw);
-  margin: 0 auto 26px;
-  text-align: center;
+/* section label (LANGUAGES/TOOLS/SOFT SKILLS) */
+.skillsBlock{
+  padding: 28px 28px 6px;
 }
 
-.skillsLogo-title{
-  margin: 0;
-  font-weight: 800;
-  letter-spacing: .02em;
-  font-size: clamp(1.15rem, 2vw, 1.8rem);
-  opacity: .92;
+.skillsBlockLabel{
+  font-weight: 900;
+  letter-spacing: .35em;
+  font-size: .9rem;
+  color: #111;
+  margin: 0 0 18px;
 }
 
-.skillsLogo-block{
-  width: min(1100px, 92vw);
-  margin: 0 auto 28px;
-}
-
-.skillsLogo-blockTitle{
-  margin: 0 0 14px;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  font-size: .95rem;
-  opacity: .85;
-}
-
-.skillsLogo-grid{
+/* grid */
+.grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: clamp(14px, 1.8vw, 22px);
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 22px;
+  align-items: stretch;
 }
 
-.logoCard{
-  padding: 18px 12px 14px;
-  border-radius: 18px;
+/* card */
+.card{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 26px;
+  padding: 22px 18px 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
   text-align: center;
-
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 12px 34px rgba(0,0,0,.18);
-
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.logoCard:hover{
+.card:hover{
   transform: translateY(-4px);
-  background: rgba(255,255,255,.05);
-  border-color: rgba(255,255,255,.14);
+  box-shadow: 0 26px 55px rgba(0,0,0,.16);
 }
 
-/* Logo bubble */
-.logoMark{
-  width: 78px;
-  height: 78px;
-  margin: 2px auto 10px;
-  border-radius: 22px;
+/* language code big */
+.langCode{
+  font-weight: 900;
+  font-size: 2.3rem;
+  letter-spacing: .08em;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  color: #111;
+}
+
+/* logo tile */
+.logoTile{
+  width: 94px;
+  height: 94px;
+  margin: 4px auto 14px;
+  border-radius: 26px;
 
   display: grid;
   place-items: center;
 
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.10);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 14px 28px rgba(0,0,0,.12);
 }
 
-/* Inline SVG styling */
-.logoMark svg{
-  width: 64px;
-  height: 64px;
+.logoTile svg{
+  width: 88px;
+  height: 88px;
 }
 
-.logoMark svg rect{
-  fill: rgba(255,255,255,.09);
+.logoTile svg rect{
+  fill: #e9eefb; /* overridden by tints */
 }
 
-.logoMark svg text{
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+.logoTile svg text{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
   font-weight: 900;
-  font-size: 26px;
-  fill: rgba(255,255,255,.92);
+  font-size: 28px;
+  fill: rgba(255,255,255,.95);
 }
 
-/* Flags / glyphs */
-.logoMark.flag{
-  font-size: 40px;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-.logoMark.glyph{
+/* glyph tile for soft skills */
+.logoTile.plain{
   font-size: 34px;
+  font-weight: 900;
+  color: #111;
+  background: #fff;
 }
 
-/* Names / meta */
-.logoName{
+/* name/meta */
+.name{
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: #111;
+  margin: 0;
+}
+
+.meta{
+  margin-top: 8px;
   font-weight: 800;
+  color: #555;
   font-size: 1.05rem;
-  line-height: 1.1;
 }
 
-.logoMeta{
-  margin-top: 6px;
-  font-weight: 650;
-  opacity: .78;
-  font-size: .95rem;
+/* Color tints per app (solid, not transparent) */
+.tint-blue svg rect{ fill: #2B579A; }    /* Word-ish */
+.tint-orange svg rect{ fill: #D24726; }  /* PowerPoint-ish */
+.tint-green svg rect{ fill: #217346; }   /* Excel-ish */
+.tint-yellow svg rect{ fill: #F2C811; }  /* Power BI-ish */
+.tint-indigo svg rect{ fill: #4264FB; }  /* Mapbox-ish */
+.tint-amber svg rect{ fill: #FF9A00; }   /* Illustrator-ish */
+.tint-sky svg rect{ fill: #4285F4; }     /* Google-ish */
+.tint-cyan svg rect{ fill: #00C4CC; }    /* Canva-ish */
+.tint-lime svg rect{ fill: #7FB800; }    /* QGIS-ish */
+.tint-gray svg rect{ fill: #24292F; }    /* GitHub-ish */
+
+/* Responsive */
+@media (max-width: 640px){
+  .skillsBlock{ padding: 22px 18px 6px; }
+  .grid{ grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+  .card{ border-radius: 22px; }
 }
-
-/* Brand color accents (subtle) */
-.logoMark[data-brand="word"]{ background: rgba(37, 99, 235, .18); border-color: rgba(37, 99, 235, .28); }
-.logoMark[data-brand="ppt"]{  background: rgba(249, 115, 22, .18); border-color: rgba(249, 115, 22, .30); }
-.logoMark[data-brand="excel"]{background: rgba(34, 197, 94, .16);  border-color: rgba(34, 197, 94, .28); }
-.logoMark[data-brand="pbi"]{  background: rgba(234, 179, 8, .18);  border-color: rgba(234, 179, 8, .30); }
-.logoMark[data-brand="mapbox"]{background: rgba(99, 102, 241, .16); border-color: rgba(99, 102, 241, .28); }
-.logoMark[data-brand="ai"]{   background: rgba(245, 158, 11, .16); border-color: rgba(245, 158, 11, .28); }
-.logoMark[data-brand="google"]{background: rgba(59, 130, 246, .14); border-color: rgba(59, 130, 246, .26); }
-.logoMark[data-brand="canva"]{background: rgba(6, 182, 212, .14); border-color: rgba(6, 182, 212, .26); }
-.logoMark[data-brand="qgis"]{ background: rgba(34, 197, 94, .14); border-color: rgba(34, 197, 94, .26); }
-.logoMark[data-brand="github"]{background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); }
-
 
 
 
@@ -3221,239 +3226,237 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 
      <!-- SKILLS – AIRPORT TERMINAL -->
-<section id="skills" class="skillsLogo">
-  <header class="skillsLogo-head">
-    <h2 class="skillsLogo-title">I have experience with these tools</h2>
-  </header>
+<section id="skills" class="skillsGrid">
 
   <!-- LANGUAGES -->
-  <div class="skillsLogo-block">
-    <h3 class="skillsLogo-blockTitle">Languages</h3>
-    <div class="skillsLogo-grid">
+  <div class="skillsBlock">
+    <div class="skillsBlockLabel">LANGUAGES</div>
 
-      <div class="logoCard">
-        <div class="logoMark flag" aria-hidden="true">🇸🇦</div>
-        <div class="logoName">Arabic</div>
-        <div class="logoMeta">Native</div>
-      </div>
+    <div class="grid">
+      <article class="card">
+        <div class="langCode">SA</div>
+        <div class="name">Arabic</div>
+        <div class="meta">Native</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark flag" aria-hidden="true">🇫🇷</div>
-        <div class="logoName">French</div>
-        <div class="logoMeta">Native</div>
-      </div>
+      <article class="card">
+        <div class="langCode">FR</div>
+        <div class="name">French</div>
+        <div class="meta">Native</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark flag" aria-hidden="true">🇬🇧</div>
-        <div class="logoName">English</div>
-        <div class="logoMeta">C2</div>
-      </div>
+      <article class="card">
+        <div class="langCode">GB</div>
+        <div class="name">English</div>
+        <div class="meta">C2</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark flag" aria-hidden="true">🇩🇪</div>
-        <div class="logoName">German</div>
-        <div class="logoMeta">C1</div>
-      </div>
+      <article class="card">
+        <div class="langCode">DE</div>
+        <div class="name">German</div>
+        <div class="meta">C1</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark flag" aria-hidden="true">🇮🇷</div>
-        <div class="logoName">Persian</div>
-        <div class="logoMeta">A2</div>
-      </div>
+      <article class="card">
+        <div class="langCode">IR</div>
+        <div class="name">Persian</div>
+        <div class="meta">A2</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark flag" aria-hidden="true">🇯🇵</div>
-        <div class="logoName">Japanese</div>
-        <div class="logoMeta">A2</div>
-      </div>
-
+      <article class="card">
+        <div class="langCode">JP</div>
+        <div class="name">Japanese</div>
+        <div class="meta">A2</div>
+      </article>
     </div>
   </div>
 
-  <!-- TOOLS (THE APPS) -->
-  <div class="skillsLogo-block">
-    <h3 class="skillsLogo-blockTitle">Tools</h3>
-    <div class="skillsLogo-grid">
+  <!-- TOOLS -->
+  <div class="skillsBlock">
+    <div class="skillsBlockLabel">TOOLS</div>
 
+    <div class="grid">
       <!-- Word -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="word" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-blue" aria-hidden="true">
+          <!-- Replace this SVG with the real Word SVG path -->
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">W</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">W</text>
           </svg>
         </div>
-        <div class="logoName">Word</div>
-        <div class="logoMeta">Reporting</div>
-      </div>
+        <div class="name">Word</div>
+        <div class="meta">Reporting</div>
+      </article>
 
       <!-- PowerPoint -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="ppt" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-orange" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">P</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">P</text>
           </svg>
         </div>
-        <div class="logoName">PowerPoint</div>
-        <div class="logoMeta">Decks & briefs</div>
-      </div>
+        <div class="name">PowerPoint</div>
+        <div class="meta">Decks & briefs</div>
+      </article>
 
       <!-- Excel -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="excel" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-green" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">X</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">X</text>
           </svg>
         </div>
-        <div class="logoName">Excel</div>
-        <div class="logoMeta">Data cleaning</div>
-      </div>
+        <div class="name">Excel</div>
+        <div class="meta">Data cleaning</div>
+      </article>
 
       <!-- Power BI -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="pbi" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-yellow" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">BI</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">BI</text>
           </svg>
         </div>
-        <div class="logoName">Power BI</div>
-        <div class="logoMeta">Dashboards</div>
-      </div>
+        <div class="name">Power BI</div>
+        <div class="meta">Dashboards</div>
+      </article>
 
       <!-- Mapbox -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="mapbox" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-indigo" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">M</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">M</text>
           </svg>
         </div>
-        <div class="logoName">Mapbox</div>
-        <div class="logoMeta">Web mapping</div>
-      </div>
+        <div class="name">Mapbox</div>
+        <div class="meta">Web mapping</div>
+      </article>
 
       <!-- Illustrator -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="ai" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-amber" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">Ai</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">Ai</text>
           </svg>
         </div>
-        <div class="logoName">Illustrator</div>
-        <div class="logoMeta">Infographics</div>
-      </div>
+        <div class="name">Illustrator</div>
+        <div class="meta">Infographics</div>
+      </article>
 
       <!-- Google Suite -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="google" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-sky" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">G</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">G</text>
           </svg>
         </div>
-        <div class="logoName">Google Suite</div>
-        <div class="logoMeta">Collab & forms</div>
-      </div>
+        <div class="name">Google Suite</div>
+        <div class="meta">Collab & forms</div>
+      </article>
 
       <!-- Canva -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="canva" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-cyan" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">C</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">C</text>
           </svg>
         </div>
-        <div class="logoName">Canva</div>
-        <div class="logoMeta">Visual comms</div>
-      </div>
+        <div class="name">Canva</div>
+        <div class="meta">Visual comms</div>
+      </article>
 
       <!-- QGIS -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="qgis" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-lime" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">Q</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">Q</text>
           </svg>
         </div>
-        <div class="logoName">QGIS</div>
-        <div class="logoMeta">Mapping</div>
-      </div>
+        <div class="name">QGIS</div>
+        <div class="meta">Mapping</div>
+      </article>
 
       <!-- GitHub -->
-      <div class="logoCard">
-        <div class="logoMark" data-brand="github" aria-hidden="true">
+      <article class="card">
+        <div class="logoTile tint-gray" aria-hidden="true">
           <svg viewBox="0 0 64 64" role="img" focusable="false">
-            <rect x="10" y="10" width="44" height="44" rx="10"/>
-            <text x="32" y="40" text-anchor="middle">GH</text>
+            <rect x="10" y="10" width="44" height="44" rx="12" />
+            <text x="32" y="41" text-anchor="middle">GH</text>
           </svg>
         </div>
-        <div class="logoName">GitHub</div>
-        <div class="logoMeta">Versioning</div>
-      </div>
+        <div class="name">GitHub</div>
+        <div class="meta">Versioning</div>
+      </article>
 
     </div>
   </div>
 
   <!-- SOFT SKILLS -->
-  <div class="skillsLogo-block">
-    <h3 class="skillsLogo-blockTitle">Soft skills</h3>
-    <div class="skillsLogo-grid">
+  <div class="skillsBlock">
+    <div class="skillsBlockLabel">SOFT SKILLS</div>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">✦</div>
-        <div class="logoName">Communication</div>
-        <div class="logoMeta">Briefings</div>
-      </div>
+    <div class="grid">
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">✦</div>
+        <div class="name">Communication</div>
+        <div class="meta">Briefings</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">⌁</div>
-        <div class="logoName">Synthesis</div>
-        <div class="logoMeta">Notes</div>
-      </div>
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">⌁</div>
+        <div class="name">Synthesis</div>
+        <div class="meta">Notes</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">◎</div>
-        <div class="logoName">Press monitoring</div>
-        <div class="logoMeta">Watch & alerts</div>
-      </div>
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">◎</div>
+        <div class="name">Press monitoring</div>
+        <div class="meta">Watch & alerts</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">⟡</div>
-        <div class="logoName">Critical thinking</div>
-        <div class="logoMeta">Policy lenses</div>
-      </div>
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">⟡</div>
+        <div class="name">Critical thinking</div>
+        <div class="meta">Policy lenses</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">⬡</div>
-        <div class="logoName">Team facilitation</div>
-        <div class="logoMeta">Workshops</div>
-      </div>
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">⬡</div>
+        <div class="name">Team facilitation</div>
+        <div class="meta">Workshops</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">⇄</div>
-        <div class="logoName">Coordination</div>
-        <div class="logoMeta">Embassies/NGOs</div>
-      </div>
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">⇄</div>
+        <div class="name">Coordination</div>
+        <div class="meta">Embassies/NGOs</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">✎</div>
-        <div class="logoName">Policy briefs</div>
-        <div class="logoMeta">2–4 page notes</div>
-      </div>
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">✎</div>
+        <div class="name">Policy briefs</div>
+        <div class="meta">2–4 page notes</div>
+      </article>
 
-      <div class="logoCard">
-        <div class="logoMark glyph" aria-hidden="true">◉</div>
-        <div class="logoName">Public speaking</div>
-        <div class="logoMeta">Conferences</div>
-      </div>
-
+      <article class="card">
+        <div class="logoTile plain" aria-hidden="true">◉</div>
+        <div class="name">Public speaking</div>
+        <div class="meta">Conferences</div>
+      </article>
     </div>
   </div>
+
 </section>
+
 
 
       <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
