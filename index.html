@@ -312,6 +312,65 @@ nav a:hover {
 }
 
 
+/* ======================
+   LANGUAGES — ROTATING TEXT
+====================== */
+
+/* hide old meta if still present */
+.card.lang .meta{ display:none; }
+
+/* the rotating “slot” */
+.card.lang .flipText{
+  position: relative;
+  height: 1.25em;              /* reserves space so cards don’t jump */
+  margin-top: 2px;
+  font-weight: 900;
+  font-size: 1.02rem;
+  color: #111;
+  line-height: 1.25;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* two layers (name + level) */
+.card.lang .flip{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: langFlip 3.2s infinite;
+}
+
+/* show the language first */
+.card.lang .flip.a{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* show the level second (delayed) + slightly lighter */
+.card.lang .flip.b{
+  animation-delay: 1.6s;
+  font-weight: 800;
+  color: #555;
+}
+
+/* keyframes: fade/slide in → hold → fade/slide out */
+@keyframes langFlip{
+  0%   { opacity:0; transform: translateY(6px); }
+  10%  { opacity:1; transform: translateY(0); }
+  40%  { opacity:1; transform: translateY(0); }
+  50%  { opacity:0; transform: translateY(-6px); }
+  100% { opacity:0; transform: translateY(-6px); }
+}
+
+/* accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .card.lang .flip{ animation: none; opacity: 1; transform: none; }
+  .card.lang .flip.b{ display:none; }
+}
 
 
 
@@ -3419,8 +3478,9 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 </svg>      
 	  </div>
-		<div class="name lang-line">
-  Arabic <span>– Native</span>
+		<div class="flipText" aria-label="Arabic - Native">
+  <span class="flip a">Arabic</span>
+  <span class="flip b">Native</span>
 </div>
     </article>
 
@@ -3428,9 +3488,11 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
       <div class="langFlag">
 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><path d="M1.9 32c0 13.1 8.4 24.2 20 28.3V3.7C10.3 7.8 1.9 18.9 1.9 32z" fill="#428bc1"></path><path d="M61.9 32c0-13.1-8.3-24.2-20-28.3v56.6c11.7-4.1 20-15.2 20-28.3" fill="#ed4c5c"></path><path d="M21.9 60.3c3.1 1.1 6.5 1.7 10 1.7s6.9-.6 10-1.7V3.7C38.8 2.6 35.5 2 31.9 2s-6.9.6-10 1.7v56.6" fill="#ffffff"></path></svg>
       </div>
-      <div class="name lang-line">
-  French <span>– Native</span>
+      <div class="flipText" aria-label="French - Native">
+  <span class="flip a">French</span>
+  <span class="flip b">Native</span>
 </div>
+
     </article>
 
     <article class="card lang">
@@ -3531,9 +3593,11 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 </svg>
 	  </div>
-     <div class="name lang-line">
-  English <span>– C2</span>
+     <div class="flipText" aria-label="English - C2">
+  <span class="flip a">English</span>
+  <span class="flip b">C2</span>
 </div>
+
 
     </article>
 
@@ -3541,9 +3605,11 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
       <div class="langFlag">
 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><path d="M31.9 2C18.8 2 7.7 10.4 3.6 22h56.6C56.1 10.4 45 2 31.9 2z" fill="#3e4347"></path><path d="M31.9 62c13.1 0 24.2-8.3 28.3-20H3.6c4.1 11.7 15.2 20 28.3 20z" fill="#ffe62e"></path><path d="M3.6 22c-1.1 3.1-1.7 6.5-1.7 10s.6 6.9 1.7 10h56.6c1.1-3.1 1.7-6.5 1.7-10s-.6-6.9-1.7-10H3.6" fill="#ed4c5c"></path></svg>
       </div>
-      <div class="name lang-line">
-  German <span>– C1</span>
+      <div class="flipText" aria-label="German - C2">
+  <span class="flip a">German</span>
+  <span class="flip b">C2</span>
 </div>
+
 
     </article>
 
@@ -3803,9 +3869,11 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 </g>
 
 </svg>            </div>
-     <div class="name lang-line">
-  Persian <span>– A2</span>
+     <div class="flipText" aria-label="Persian - A2">
+  <span class="flip a">Persian</span>
+  <span class="flip b">A2</span>
 </div>
+
 
     </article>
 
@@ -3817,9 +3885,11 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 <circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
 </svg>      
 	  </div>
-     <div class="name lang-line">
-  Japanese <span>– A2</span>
+     <div class="flipText" aria-label="Japanese - A2">
+  <span class="flip a">Japanese</span>
+  <span class="flip b">A2</span>
 </div>
+
 
     </article>
 
