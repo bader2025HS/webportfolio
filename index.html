@@ -112,24 +112,19 @@ nav a:hover {
 /* =========================
    SKILLS — 3-COLUMN SHELL (SCOPED)
 ========================= */
-
-#skills.skillsGrid{
+#skills .skillsGrid{ /* if you have a wrapper inside skills */
   width: min(1400px, 92vw);
   margin: 0 auto;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Languages | Tools | Soft */
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 28px;
   align-items: start;
 }
 
-/* each block = a column */
-#skills.skillsGrid > .skillsBlock{
-  margin: 0;
-}
+#skills .skillsBlock{ margin: 0; }
 
-/* labels */
-#skills.skillsGrid .skillsBlockLabel{
+#skills .skillsBlockLabel{
   font-size: .7rem;
   font-weight: 900;
   letter-spacing: .35em;
@@ -137,31 +132,25 @@ nav a:hover {
   color: #111;
 }
 
-/* --------- GRIDS PER COLUMN --------- */
-
-/* LANGUAGES (first block) = 2 columns */
-#skills.skillsGrid > .skillsBlock:nth-of-type(1) > .grid{
+/* LANG / TOOLS / SOFT grids */
+#skills .skillsBlock:nth-of-type(1) .grid{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 12px;
 }
-
-/* TOOLS (second block) = dense grid */
-#skills.skillsGrid > .skillsBlock:nth-of-type(2) > .grid{
+#skills .skillsBlock:nth-of-type(2) .grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
   gap: 12px;
 }
-
-/* SOFT (third block) = single column list */
-#skills.skillsGrid > .skillsBlock:nth-of-type(3) > .grid{
+#skills .skillsBlock:nth-of-type(3) .grid{
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
 }
 
-/* --------- ITEMS (cards) --------- */
-#skills.skillsGrid .card{
+/* cards */
+#skills .card{
   background: #fff;
   border-radius: 14px;
   padding: 12px 10px;
@@ -169,47 +158,22 @@ nav a:hover {
   box-shadow: 0 8px 18px rgba(0,0,0,.08);
 }
 
-/* text */
-#skills.skillsGrid .name{
-  font-size: .8rem;
-  font-weight: 800;
-  color: #111;
-  line-height: 1.15;
-}
-#skills.skillsGrid .meta{
-  margin-top: 2px;
-  font-size: .7rem;
-  font-weight: 600;
-  color: #666;
-}
+#skills .name{ font-size: .8rem; font-weight: 800; color:#111; }
+#skills .meta{ font-size: .7rem; font-weight: 600; color:#666; margin-top:2px; }
 
-/* languages */
-#skills.skillsGrid .langFlag{
-  font-size: 1.4rem;
-  margin-bottom: 6px;
-}
+#skills .langFlag{ font-size: 1.4rem; margin-bottom: 6px; }
 
-/* tools */
-#skills.skillsGrid .logoTile{
-  width: 44px;
-  height: 44px;
+#skills .logoTile{
+  width: 44px; height: 44px;
   margin: 0 auto 6px;
   border-radius: 10px;
-  display: grid;
-  place-items: center;
+  display: grid; place-items: center;
   box-shadow: 0 4px 10px rgba(0,0,0,.08);
 }
-#skills.skillsGrid .logoTile svg{
-  width: 26px;
-  height: 26px;
-  display: block;
-}
+#skills .logoTile svg{ width: 26px; height: 26px; display:block; }
 
-/* soft skills */
-#skills.skillsGrid .emoji{
-  font-size: 1.4rem;
-  margin-bottom: 6px;
-}
+#skills .emoji{ font-size: 1.4rem; margin-bottom: 6px; }
+
 
 /* mobile fallback */
 @media (max-width: 900px){
