@@ -374,15 +374,28 @@ nav a:hover {
   z-index: 0;
   will-change: transform;
   transform-origin: center;
-  animation: toolPulse 14s ease-in-out infinite;
+  animation: toolPulse 22s ease-in-out infinite; /* slower cycle */
 }
+
 
 /* the pulse itself: short zoom, long rest */
 @keyframes toolPulse{
-  0%, 86%, 100% { transform: scale(1); z-index: 0; }
-  90%          { transform: scale(1.08); z-index: 6; }
-  94%          { transform: scale(1); z-index: 0; }
+  0%, 90%, 100% { 
+    transform: scale(1); 
+    z-index: 0; 
+  }
+
+  92% { 
+    transform: scale(1.14);   /* 🔥 bigger zoom */
+    z-index: 6; 
+  }
+
+  96% { 
+    transform: scale(1); 
+    z-index: 0; 
+  }
 }
+
 
 /* stagger the pulses (your first 6 cards are languages, tools start at child 7) */
 .skillsGrid .skills-7x3 > .card.tool:nth-child(7)  { animation-delay: -1s;  }
