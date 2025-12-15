@@ -115,7 +115,8 @@ nav a:hover {
 ========================= */
 
 /* =========================
-   SKILLS — 3 PANEL SHELL
+   SKILLS — 2 COLUMN SHELL
+   (MINIMAL CHANGE)
 ========================= */
 
 /* === SKILLS GRID BASE === */
@@ -123,11 +124,21 @@ nav a:hover {
   width: min(1200px, 92vw);
   margin: 0 auto;
   padding: 48px 0;
+
+  /* ✅ ONLY ADDITION */
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 22px;
 }
 
 /* section blocks */
 .skillsBlock{
   margin-bottom: 48px;
+}
+
+/* ❌ remove bottom margin on desktop so columns align */
+.skillsBlock:last-child{
+  margin-bottom: 0;
 }
 
 .skillsBlockLabel{
@@ -143,6 +154,11 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 22px;
+}
+
+/* 🔹 LANGUAGES = force 2×3 */
+.skillsBlock:first-child .grid{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 /* card */
@@ -205,6 +221,13 @@ nav a:hover {
 }
 
 /* === RESPONSIVE === */
+@media (max-width: 900px){
+  /* stack back to 1 column */
+  .skillsGrid{
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px){
   .grid{
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
