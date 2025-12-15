@@ -1757,6 +1757,29 @@ background: #ffffff !important;
 }
 }
 
+/* ==========================================
+EXPERIENCE — FRAME: 1px static, 2.5px turquoise on hover (no shift)
+========================================== */
+
+/* keep frame thickness stable using outline (doesn't affect layout) */
+.exp-card-face{
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;  /* static normal frame */
+  outline: 1px solid transparent;                    /* reserve visual edge */
+  outline-offset: -1px;                              /* sits on the frame */
+  transition: outline-color 0.18s ease, outline-width 0.18s ease;
+}
+
+/* hover: turquoise 2.5px frame */
+.exp-card:hover .exp-card-face{
+  outline-color: #009fa5 !important; /* turquoise */
+  outline-width: 2.5px;
+}
+
+.exp-card--expanded .exp-card-back{
+  outline: 2.5px solid #009fa5 !important;
+  outline-offset: -2.5px;
+}
+
 /* ===========================
 WORK – VERTICAL STRIPS
 =========================== */
