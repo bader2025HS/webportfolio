@@ -105,112 +105,154 @@ nav a:hover {
   white-space: nowrap;
 }
 
+/* ===========================
+   SKILLS – 2 PART LAYOUT (SAFE)
+   Left: Languages (2x3)
+   Right: Tools (grid)
+   =========================== */
 
+/* Keep section in normal flow (prevents overlap) */
+#skills{
+  display: block;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 32px;      /* IMPORTANT: creates real space after */
+  overflow: visible;         /* IMPORTANT: don't clip / collapse visuals */
+}
 
-
-
-/* =========================
-   SKILLS — 2-PANEL LAYOUT
-   LANGUAGES | TOOLS
-========================= */
-
-/* =========================
-   SKILLS — 3 PANEL SHELL
-========================= */
-
-/* === SKILLS GRID BASE === */
+/* Shell (like your working skills base) */
+#skills.skillsGrid,
 .skillsGrid{
   width: min(1200px, 92vw);
   margin: 0 auto;
-  padding: 48px 0;
-}
-
-/* section blocks */
-.skillsBlock{
-  margin-bottom: 48px;
-}
-
-.skillsBlockLabel{
-  font-size: .85rem;
-  font-weight: 900;
-  letter-spacing: .35em;
-  margin-bottom: 18px;
-  color: #111;
-}
-
-/* grid */
-.grid{
+  padding: 22px 0;           /* lighter than old 48px to fit your site */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: 1fr 1.5fr;   /* left smaller, right bigger */
   gap: 22px;
+  align-items: start;
 }
 
-/* card */
-.card{
+/* Panels */
+#skills .skillsBlock{
   background: #fff;
   border-radius: 22px;
-  padding: 20px 18px;
-  text-align: center;
-  box-shadow: 0 16px 36px rgba(0,0,0,.12);
+  padding: 18px;
+  box-shadow: 0 16px 36px rgba(0,0,0,.10);
+  overflow: visible;
+}
+
+/* IMPORTANT: your HTML uses .grid in BOTH blocks
+   We scope layouts by "first/last skillsBlock" */
+#skills .skillsBlock > .grid{
+  display: grid;
+  gap: 16px;
+}
+
+/* LEFT: Languages 2 x 3 */
+#skills .skillsBlock:first-child > .grid{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* RIGHT: Tools grid */
+#skills .skillsBlock:last-child > .grid{
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+/* Card */
+#skills .card{
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px 14px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 24px 50px rgba(0,0,0,.16);
+/* Hover */
+#skills .card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
-/* names + meta */
-.name{
+/* ---------- LANGUAGES CARD STYLE ---------- */
+#skills .skillsBlock:first-child .card{
+  text-align: center;
+}
+
+#skills .langFlag{
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- TOOLS CARD STYLE ---------- */
+#skills .skillsBlock:last-child .card{
+  text-align: center;
+}
+
+#skills .logoTile{
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 12px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+}
+
+#skills .logoTile svg{
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+/* Placeholder for empty logo tiles */
+#skills .logoTile:empty::after{
+  content:"";
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.18);
+}
+
+/* Text */
+#skills .name{
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: #111;
 }
 
-.meta{
+#skills .meta{
   margin-top: 6px;
-  font-size: .95rem;
+  font-size: .92rem;
   font-weight: 700;
   color: #555;
 }
 
-/* === LANGUAGES === */
-.langFlag{
-  font-size: 2.4rem;
-  margin-bottom: 12px;
-}
-
-/* === TOOLS === */
-.logoTile{
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 14px;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  box-shadow: 0 12px 26px rgba(0,0,0,.12);
-}
-
-.logoTile svg{
-  width: 56px;
-  height: 56px;
-  display: block;
-}
-
-/* === SOFT SKILLS === */
-.emoji{
-  font-size: 2.2rem;
-  margin-bottom: 12px;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 640px){
-  .grid{
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 900px){
+  .skillsGrid{
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 }
+
+@media (max-width: 640px){
+  #skills{
+    margin-bottom: 22px;
+  }
+
+  #skills .skillsBlock:first-child > .grid{
+    grid-template-columns: 1fr;   /* languages stack on small screens */
+  }
+
+  #skills .skillsBlock:last-child > .grid{
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+  }
+}
+
 
 
 /* ===========================
