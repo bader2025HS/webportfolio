@@ -300,11 +300,6 @@ height: 44px;
 
 /* ======================
 LANGUAGES — ROTATING TEXT
-Uses your HTML:
-<div class="flipText">
-<span class="flip a">Arabic</span>
-<span class="flip b">Native</span>
-</div>
 ====================== */
 
 /* if any old .name/.meta exist in language cards, hide them */
@@ -384,16 +379,27 @@ animation: logoShakira 85s infinite;
 
 /* pulse + strong fast shake */
 @keyframes logoShakira{
-0%, 94%{ transform: scale(1) translateX(0) rotate(0deg); }
-95% { transform: scale(1.55) translateX(0) rotate(0deg); }
-
-96%{ transform: scale(1.55) translateX(-5px) rotate(-6deg); }
-97%{ transform: scale(1.55) translateX( 5px) rotate( 6deg); }
-98%{ transform: scale(1.55) translateX(-4px) rotate(-5deg); }
-99%{ transform: scale(1.55) translateX( 4px) rotate( 5deg); }
-
-100%{ transform: scale(1) translateX(0) rotate(0deg); }
+  0%, 7%{transform: scale(1) translateX(0) rotate(0deg);}
+  8%{
+    transform: scale(1.55) translateX(0) rotate(0deg);
+  }
+  9%{
+    transform: scale(1.55) translateX(-5px) rotate(-6deg);
+  }
+  10%{
+    transform: scale(1.55) translateX( 5px) rotate( 6deg);
+  }
+  11%{
+    transform: scale(1.55) translateX(-4px) rotate(-5deg);
+  }
+  12%{
+    transform: scale(1.55) translateX( 4px) rotate( 5deg);
+  }
+  13%, 100%{
+    transform: scale(1) translateX(0) rotate(0deg);
+  }
 }
+
 
 /* ✅ delays must target the SVG (not the card) */
 .skillsGrid .skills-7x3 > .card.tool:nth-child(7) .logoTile svg { animation-delay: -60s; }
