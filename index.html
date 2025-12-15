@@ -110,103 +110,127 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — MINIMAL VIEW
+   SKILLS — 3 PANEL SHELL
 ========================= */
-/* === SKILLS GRID BASE === */
+
 .skillsGrid{
-  width: min(1200px, 92vw);
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 48px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* LANG | TOOLS | SOFT */
+  gap: 32px;
+  align-items: start;
 }
 
-/* section blocks */
+/* panels */
 .skillsBlock{
-  margin-bottom: 48px;
+  margin: 0;
 }
 
+/* titles */
 .skillsBlockLabel{
-  font-size: .85rem;
+  font-size: .7rem;
   font-weight: 900;
   letter-spacing: .35em;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   color: #111;
 }
 
-/* grid */
-.grid{
+/* =========================
+   GRIDS PER PANEL
+========================= */
+
+/* LANGUAGES — fixed 2x3 */
+.skillsBlock:nth-child(1) .grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
-/* card */
+/* TOOLS — dense grid */
+.skillsBlock:nth-child(2) .grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 14px;
+}
+
+/* SOFT SKILLS — single column */
+.skillsBlock:nth-child(3) .grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* =========================
+   CARD (COMPACT)
+========================= */
 .card{
   background: #fff;
-  border-radius: 22px;
-  padding: 20px 18px;
+  border-radius: 14px;
+  padding: 12px 10px;
   text-align: center;
-  box-shadow: 0 16px 36px rgba(0,0,0,.12);
-  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
 }
 
-.card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 24px 50px rgba(0,0,0,.16);
-}
-
-/* names + meta */
+/* text */
 .name{
-  font-weight: 900;
-  font-size: 1.1rem;
+  font-size: .8rem;
+  font-weight: 800;
   color: #111;
 }
 
 .meta{
-  margin-top: 6px;
-  font-size: .95rem;
-  font-weight: 700;
-  color: #555;
+  font-size: .7rem;
+  font-weight: 600;
+  color: #666;
+  margin-top: 2px;
 }
 
-/* === LANGUAGES === */
+/* =========================
+   LANGUAGES
+========================= */
 .langFlag{
-  font-size: 2.4rem;
-  margin-bottom: 12px;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
 }
 
-/* === TOOLS === */
+/* =========================
+   TOOLS
+========================= */
 .logoTile{
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 14px;
-  border-radius: 20px;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 6px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  background: #fff;
-  box-shadow: 0 12px 26px rgba(0,0,0,.12);
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
 }
 
 .logoTile svg{
-  width: 56px;
-  height: 56px;
-  display: block;
+  width: 26px;
+  height: 26px;
 }
 
-/* === SOFT SKILLS === */
+/* =========================
+   SOFT SKILLS
+========================= */
 .emoji{
-  font-size: 2.2rem;
-  margin-bottom: 12px;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 640px){
-  .grid{
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
+/* =========================
+   MOBILE FALLBACK
+========================= */
+@media (max-width: 900px){
+  .skillsGrid{
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 }
-
-
 
 /* ===========================
    ABOUT – LAYOUT
