@@ -364,70 +364,65 @@ color: #111;
 }
 
 /* ======================
-TOOLS — “RANDOM” AUTO ZOOM (LOGO ONLY)
+TOOLS — EVEN INTERVAL AUTO PULSE (LOGO ONLY)
+1 logo pulses every 6s, equal spacing, shuffled order
 ====================== */
 
-/* cards stay static */
 .card.tool{ position: relative; }
 
-/* animate ONLY the logo */
 .card.tool .logoTile svg{
-transform-origin: center;
-will-change: transform;
-animation: logoShakira 85s infinite;
+  transform-origin: center;
+  will-change: transform;
+  animation: logoShakira 90s linear infinite; /* 15 tools × 6s = 90s full cycle */
 }
 
-/* pulse + strong fast shake */
+/* shorter pulse window so it doesn't overlap with the 6s spacing */
 @keyframes logoShakira{
-  0%, 7%{transform: scale(1) translateX(0) rotate(0deg);}
-  8%{
-    transform: scale(1.55) translateX(0) rotate(0deg);
-  }
-  9%{
-    transform: scale(1.55) translateX(-5px) rotate(-6deg);
-  }
-  10%{
-    transform: scale(1.55) translateX( 5px) rotate( 6deg);
-  }
-  11%{
-    transform: scale(1.55) translateX(-4px) rotate(-5deg);
-  }
-  12%{
-    transform: scale(1.55) translateX( 4px) rotate( 5deg);
-  }
-  13%, 100%{
-    transform: scale(1) translateX(0) rotate(0deg);
-  }
+  /* idle */
+  0%, 97% { transform: scale(1) translateX(0) rotate(0deg); }
+
+  /* zoom */
+  98%     { transform: scale(1.70) translateX(0) rotate(0deg); }
+
+  /* SHAKIRA shake (fast + strong) */
+  98.3%   { transform: scale(1.70) translateX(-6px) rotate(-7deg); }
+  98.6%   { transform: scale(1.70) translateX( 6px) rotate( 7deg); }
+  98.9%   { transform: scale(1.70) translateX(-5px) rotate(-6deg); }
+  99.2%   { transform: scale(1.70) translateX( 5px) rotate( 6deg); }
+  99.5%   { transform: scale(1.70) translateX(-4px) rotate(-5deg); }
+  99.8%   { transform: scale(1.70) translateX( 4px) rotate( 5deg); }
+
+  /* return */
+  100%    { transform: scale(1) translateX(0) rotate(0deg); }
 }
 
+/* ✅ Equal interval: 6s between pulses.
+   We shuffle the slot order so neighbors (like Word/PowerPoint) won't pulse back-to-back.
+   Slot = n means delay = -(3 + 6n)s  (starts quickly after landing) */
 
-/* ✅ spread across the full 85s cycle (~5–6s apart) so pulses don’t stack */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  .logoTile svg { animation-delay: -3s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  .logoTile svg { animation-delay: -9s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  .logoTile svg { animation-delay: -16s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -23s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -31s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  .logoTile svg { animation-delay: -3s;  }  /* slot 0 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  .logoTile svg { animation-delay: -39s; }  /* slot 6 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  .logoTile svg { animation-delay: -15s; }  /* slot 2 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -63s; }  /* slot 10 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -27s; }  /* slot 4 */
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -38s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -46s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -54s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -61s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -69s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -75s; }  /* slot 12 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -9s;  }  /* slot 1 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -57s; }  /* slot 9 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -21s; }  /* slot 3 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -69s; }  /* slot 11 */
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -75s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -12s; } /* extra “random” */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -28s; } /* extra “random” */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -43s; } /* extra “random” */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -58s; } /* extra “random” */
-
+.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -33s; }  /* slot 5 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -81s; }  /* slot 13 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -45s; }  /* slot 7 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -87s; }  /* slot 14 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -51s; }  /* slot 8 */
 
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
-.card.tool .logoTile svg{
-animation: none;
-transform: none;
+  .card.tool .logoTile svg{ animation: none; transform: none; }
 }
-}
+
 
 /* ===========================
 ABOUT – LAYOUT
