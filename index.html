@@ -114,17 +114,22 @@ nav a:hover {
    LANGUAGES | TOOLS
 ========================= */
 
+/* =========================
+   SKILLS — 2 COLUMN SHELL
+   LEFT: LANGUAGES | RIGHT: TOOLS
+========================= */
+
 #skills{
   width: 1050px;
   margin: 0 auto;
   padding: 0;
 }
 
-/* main shell */
+/* MAIN CONTAINER — THIS IS THE KEY */
 #skills .skillsGrid{
   display: grid;
-  grid-template-columns: 420px 1fr; /* left fixed, right fluid */
-  column-gap: 48px;                 /* SPACE BETWEEN PANELS */
+  grid-template-columns: 420px 1fr; /* LEFT | RIGHT */
+  gap: 40px;
   align-items: start;
 }
 
@@ -133,7 +138,7 @@ nav a:hover {
   margin: 0;
 }
 
-/* section titles */
+/* labels (keep or remove in HTML) */
 #skills .skillsBlockLabel{
   font-size: .7rem;
   font-weight: 900;
@@ -146,9 +151,9 @@ nav a:hover {
    LANGUAGES (LEFT)
 ========================= */
 
-#skills .skillsBlock:first-of-type .grid{
+#skills .skillsBlock:first-child .grid{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* 2 x 3 */
   gap: 16px;
 }
 
@@ -156,9 +161,9 @@ nav a:hover {
    TOOLS (RIGHT)
 ========================= */
 
-#skills .skillsBlock:last-of-type .grid{
+#skills .skillsBlock:last-child .grid{
   display: grid;
-  grid-template-columns: repeat(5, minmax(90px, 1fr));
+  grid-template-columns: repeat(4, minmax(90px, 1fr));
   gap: 16px;
 }
 
@@ -168,7 +173,7 @@ nav a:hover {
 
 #skills .card{
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 14px 12px;
   text-align: center;
   box-shadow: 0 8px 18px rgba(0,0,0,.08);
@@ -179,7 +184,6 @@ nav a:hover {
   font-size: .8rem;
   font-weight: 800;
   color: #111;
-  line-height: 1.15;
 }
 
 #skills .meta{
@@ -214,16 +218,20 @@ nav a:hover {
 }
 
 /* =========================
-   MOBILE
+   MOBILE (STACK)
 ========================= */
 
 @media (max-width: 900px){
   #skills .skillsGrid{
     grid-template-columns: 1fr;
-    row-gap: 32px;
+    gap: 32px;
   }
 
-  #skills .skillsBlock:last-of-type .grid{
+  #skills .skillsBlock:first-child .grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #skills .skillsBlock:last-child .grid{
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
   }
 }
