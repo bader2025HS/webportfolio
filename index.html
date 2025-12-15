@@ -364,81 +364,57 @@ nav a:hover {
 }
 
 /* ======================
-   TOOLS — “RANDOM” AUTO ZOOM (PURE CSS)
-   (staggered pulses so it looks random)
+   TOOLS — “RANDOM” AUTO ZOOM (LOGO ONLY)
 ====================== */
 
-.card.tool{
-  position: relative;   /* harmless, keeps stacking normal */
-}
+/* cards stay static */
+.card.tool{ position: relative; }
 
+/* animate ONLY the logo */
 .card.tool .logoTile svg{
   transform-origin: center;
   will-change: transform;
   animation: logoShakira 85s infinite;
 }
 
-
-
-
-/* the pulse itself: short zoom, long rest */
+/* pulse + strong fast shake */
 @keyframes logoShakira{
-  /* idle */
-  0%, 94%{
-    transform: scale(1) translateX(0) rotate(0deg);
-  }
+  0%, 94%{ transform: scale(1) translateX(0) rotate(0deg); }
+  95%    { transform: scale(1.55) translateX(0) rotate(0deg); }
 
-  /* pulse start */
-  95%{
-    transform: scale(1.45) translateX(0);
-  }
+  96%{ transform: scale(1.55) translateX(-5px) rotate(-6deg); }
+  97%{ transform: scale(1.55) translateX( 5px) rotate( 6deg); }
+  98%{ transform: scale(1.55) translateX(-4px) rotate(-5deg); }
+  99%{ transform: scale(1.55) translateX( 4px) rotate( 5deg); }
 
-  /* SHAKIRA MODE */
-  96%{
-    transform: scale(1.45) translateX(-4px) rotate(-4deg);
-  }
-  97%{
-    transform: scale(1.45) translateX(4px) rotate(4deg);
-  }
-  98%{
-    transform: scale(1.45) translateX(-3px) rotate(-3deg);
-  }
-  99%{
-    transform: scale(1.45) translateX(3px) rotate(3deg);
-  }
-
-  /* return */
-  100%{
-    transform: scale(1) translateX(0) rotate(0deg);
-  }
+  100%{ transform: scale(1) translateX(0) rotate(0deg); }
 }
 
+/* ✅ delays must target the SVG (not the card) */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  .logoTile svg { animation-delay: -60s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  .logoTile svg { animation-delay: -15s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  .logoTile svg { animation-delay: -45s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -5s;  }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -70s; }
 
-/* shuffled order — ~5s between pulses */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  { animation-delay: -60s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  { animation-delay: -15s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  { animation-delay: -45s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(10) { animation-delay: -5s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(11) { animation-delay: -70s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -30s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -10s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -55s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -20s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -75s; }
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(12) { animation-delay: -30s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(13) { animation-delay: -10s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(14) { animation-delay: -55s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(15) { animation-delay: -20s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(16) { animation-delay: -75s; }
-
-.skillsGrid .skills-7x3 > .card.tool:nth-child(17) { animation-delay: -35s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(18) { animation-delay: -65s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(19) { animation-delay: -25s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(20) { animation-delay: -50s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(21) { animation-delay: -40s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -35s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -65s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -25s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -50s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -40s; }
 
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
-.skillsGrid .skills-7x3 > .card.tool{
-  animation: toolPulse 150s ease-in-out infinite;
-}
-
+  .card.tool .logoTile svg{
+    animation: none;
+    transform: none;
+  }
 }
 
 /* ===========================
