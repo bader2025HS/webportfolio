@@ -380,41 +380,32 @@ nav a:hover {
 
 /* the pulse itself: short zoom, long rest */
 @keyframes toolPulse{
-  0%, 92%, 100%{
+  /* idle */
+  0%, 90%, 100%{
     transform: scale(1) rotate(0deg) translate(0,0);
     z-index: 0;
   }
 
-  /* ramp in */
-  93%{
-    transform: scale(1.12) rotate(-0.6deg) translate(-1px, 0);
-    z-index: 6;
+  /* zoom in */
+  91%{
+    transform: scale(1.25);
+    z-index: 10;
   }
 
-  /* peak + shake */
-  94%{
-    transform: scale(1.22) rotate(0.8deg) translate(1px, -1px);
-    z-index: 6;
-  }
-  95%{
-    transform: scale(1.20) rotate(-0.9deg) translate(-1px, 1px);
-    z-index: 6;
-  }
-  96%{
-    transform: scale(1.22) rotate(0.7deg) translate(1px, 0);
-    z-index: 6;
-  }
-  97%{
-    transform: scale(1.18) rotate(-0.6deg) translate(0, 1px);
-    z-index: 6;
-  }
+  /* SHAKIRA ZONE — fast + aggressive */
+  92%{ transform: scale(1.28) rotate(-2.2deg) translate(-2px, 1px); }
+  93%{ transform: scale(1.30) rotate( 2.4deg) translate( 3px,-2px); }
+  94%{ transform: scale(1.28) rotate(-2.6deg) translate(-3px, 2px); }
+  95%{ transform: scale(1.30) rotate( 2.8deg) translate( 3px,-1px); }
+  96%{ transform: scale(1.27) rotate(-2.3deg) translate(-2px, 2px); }
+  97%{ transform: scale(1.24) rotate( 1.6deg) translate( 2px,-2px); }
 
-  /* settle */
+  /* exit */
   98%{
-    transform: scale(1.05) rotate(0deg) translate(0,0);
-    z-index: 2;
+    transform: scale(1.08) rotate(0deg) translate(0,0);
   }
 }
+
 
 
 /* shuffled order — ~5s between pulses */
