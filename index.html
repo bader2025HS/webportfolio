@@ -107,167 +107,170 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — SAFE 2 COLUMNS (NO OVERFLOW)
+   SKILLS — SAFE 2 COLUMNS (UPDATED)
 ========================= */
 
+/* DO NOT FORCE DISPLAY HERE */
+/* pull the whole Skills section closer to the menu */
 #skills{
-  margin-top: -20px;
-  padding: 0;              /* ← no padding on section itself */
+  margin-top: -20px;   /* try -10 / -20 / -30 */
+  padding-top: 0;
 }
 
-/* fixed width, NO bottom padding */
+/* width locked to 1050px like your other sections */
 .skillsGrid{
   width: 1050px;
+  max-width: 1050px;
   margin: 0 auto;
-  padding: 16px 0 0;       /* ← removed bottom padding */
+  padding: 14px 0 10px;   /* reduced bottom padding to avoid scrollbar */
+  box-sizing: border-box;
 }
 
-/* ONLY layout when active */
+/* ONLY layout when section is active */
 section.active-section.skillsGrid{
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
+  grid-template-columns: 1fr 1.9fr;   /* a bit wider tools column */
   gap: 18px;
+  align-items: start;
 }
 
 /* blocks */
 .skillsBlock{
-  margin-bottom: 0;        /* ← IMPORTANT: no block stacking space */
+  margin-bottom: 0; /* avoid extra vertical space */
 }
 
-/* ======================
-   GRIDS
-====================== */
-
+/* grid base */
 .grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  align-content: start;
+}
+
+/* LANGUAGES forced 2×3 */
+.skillsBlock:first-child .grid{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
-/* languages: 2×3 */
-.skillsBlock:first-child .grid{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-/* tools: 4 per row */
+/* TOOLS forced 5 per row */
 .skillsBlock:nth-child(2) .grid{
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px; /* tighter so 5 fit */
 }
 
-/* ======================
-   CARDS
-====================== */
-
+/* cards (shared) */
 .card{
-  background: #ffffff;
+  background: #fff;
   border-radius: 18px;
-  padding: 14px 12px;
+  padding: 16px 14px;              /* slightly smaller overall */
   text-align: center;
-  box-shadow: 0 12px 28px rgba(0,0,0,.10);
+  box-shadow: 0 14px 30px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
+  box-sizing: border-box;
 }
 
 .card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 18px 36px rgba(0,0,0,.14);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
-/* text */
+/* Typography */
 .name{
   font-weight: 900;
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   color: #111;
 }
 
 .meta{
-  margin-top: 4px;
-  font-size: 0.82rem;
+  margin-top: 6px;
+  font-size: .9rem;
   font-weight: 700;
   color: #555;
 }
 
-/* languages */
+/* Languages flag / code */
 .langFlag{
-  font-size: 2rem;
-  margin-bottom: 6px;
+  font-size: 2.1rem;
+  margin-bottom: 10px;
 }
 
-/* ======================
-   TOOLS — COMPACT
-====================== */
+/* Tool logo tile: REMOVE frame (logo sits freely) */
+.logoTile{
+  width: auto;
+  height: auto;
+  margin: 0 auto 8px;
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  box-shadow: none;
+}
 
+/* Bigger tool logos */
+.logoTile svg{
+  width: 40px;      /* bigger */
+  height: 40px;
+  display: block;
+}
+
+/* TOOLS: make cards slimmer so 5 fit nicely */
 .skillsBlock:nth-child(2) .card{
-  padding: 10px 8px;
+  padding: 10px 8px;   /* narrower tool cards */
   border-radius: 16px;
 }
 
-.skillsBlock:nth-child(2) .logoTile{
-  margin: 0 auto 6px;
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.skillsBlock:nth-child(2) .logoTile svg{
-  width: 32px;
-  height: 32px;
-}
-
+/* TOOLS: slightly tighter label */
 .skillsBlock:nth-child(2) .name{
-  margin-top: 4px;
   font-size: 0.85rem;
   font-weight: 800;
+  margin-top: 4px;
 }
 
-/* ======================
-   HARD STOP: LAST ELEMENT
-   (kills scrollbar)
-====================== */
-
-.skillsGrid > *:last-child{
-  margin-bottom: 0 !important;
+/* Responsive */
+@media (max-width: 1100px){
+  .skillsGrid{
+    width: min(1050px, 92vw);
+    max-width: 92vw;
+  }
 }
-
-.skillsGrid::after{
-  content: "";
-  display: block;
-  height: 0;
-  clear: both;
-}
-
-/* ======================
-   RESPONSIVE
-====================== */
 
 @media (max-width: 900px){
   section.active-section.skillsGrid{
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* stack */
   }
 
   .skillsBlock:nth-child(2) .grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px){
   .skillsGrid{
-    width: min(1050px, 92vw);
-    padding: 12px 0 0;   /* still no bottom padding */
+    padding: 10px 0 8px;
   }
 
   .grid{
     gap: 14px;
   }
 
+  .skillsBlock:first-child .grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .skillsBlock:nth-child(2) .grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
+  .card{
+    padding: 14px 12px;
+    border-radius: 16px;
+  }
+
+  .langFlag{
+    font-size: 1.9rem;
+  }
+}
 
 
 /* ===========================
