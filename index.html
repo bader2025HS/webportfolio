@@ -107,81 +107,55 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — PERFECT ROW ALIGNMENT
-   2×3 LANG LEFT + 5×3 TOOLS RIGHT (SHARP)
-   (does NOT touch your global display rules)
+   SKILLS — 7 COLUMNS / 3 ROWS
+   COLS 1–2: LANGUAGES
+   COLS 3–7: TOOLS
+   SHARP + PERFECTLY ALIGNED
 ========================= */
 
-/* pull Skills closer to the menu */
+/* pull Skills closer to menu */
 #skills{
   margin-top: -20px;
   padding-top: 0;
 }
 
-/* lock width like your other sections */
+/* container */
 .skillsGrid{
   width: 1050px;
   max-width: 1050px;
   margin: 0 auto;
-  padding: 14px 0 10px;     /* keep tight → no scrollbar */
+  padding: 14px 0 10px;
   box-sizing: border-box;
 }
 
-/* ONLY layout when active (don’t force display globally) */
+/* ONLY layout when active */
 section.active-section.skillsGrid{
   display: grid;
-  grid-template-columns: 2fr 5fr;  /* languages | tools */
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 1fr;              /* all rows equal */
   gap: 18px;
-  align-items: start;
-}
-
-/* blocks */
-.skillsBlock{
-  margin: 0;                 /* no extra bottom spacing */
+  align-items: stretch;
 }
 
 /* ======================
-   GRIDS
-====================== */
-
-.grid{
-  display: grid;
-  align-content: start;
-}
-
-/* LANGUAGES — 2×3 */
-.skillsBlock:first-child .grid{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-/* TOOLS — 5 columns */
-.skillsBlock:nth-child(2) .grid{
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-}
-
-/* ======================
-   CARDS — SHARP + SAME HEIGHT
-   (this is what fixes row alignment)
+   CARDS — UNIFIED
 ====================== */
 
 .card{
-  background: #fff;
-  border-radius: 0;                 /* sharp */
+  background: #ffffff;
+  border-radius: 0;
   box-shadow: 0 14px 30px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
   box-sizing: border-box;
 
-  /* equalize all cards */
   min-height: 128px;
+  padding: 14px 10px;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;          /* vertical centering */
+  justify-content: center;
   align-items: center;
   text-align: center;
-
-  padding: 14px 10px;
 }
 
 .card:hover{
@@ -205,7 +179,7 @@ section.active-section.skillsGrid{
 }
 
 /* ======================
-   LANGUAGES — SVG ICONS
+   LANGUAGE ICONS (SVG)
 ====================== */
 
 .langFlag{
@@ -216,14 +190,7 @@ section.active-section.skillsGrid{
   line-height: 0;
 }
 
-/* inline <svg> */
-.langFlag svg{
-  width: 42px;
-  height: auto;
-  display: block;
-}
-
-/* if you ever use <img> instead */
+.langFlag svg,
 .langFlag img{
   width: 42px;
   height: auto;
@@ -231,17 +198,11 @@ section.active-section.skillsGrid{
 }
 
 /* ======================
-   TOOLS — LOGO + NAME
+   TOOL ICONS
 ====================== */
 
-/* keep tools same card size, just tighter padding */
-.skillsBlock:nth-child(2) .card{
-  padding: 12px 8px;
-  min-height: 128px; /* explicit so it never diverges */
-}
-
-/* no inner “box” */
 .logoTile{
+  /* no inner box */
   margin: 0 auto 10px;
   background: transparent;
   box-shadow: none;
@@ -256,10 +217,25 @@ section.active-section.skillsGrid{
   display: block;
 }
 
-.skillsBlock:nth-child(2) .name{
+/* slightly smaller label for tools */
+.card.tool .name{
   font-size: 0.86rem;
   font-weight: 800;
-  margin-top: 0;
+}
+
+/* ======================
+   GRID POSITIONING
+   (HTML ORDER MATTERS)
+====================== */
+
+/* LANGUAGES — occupy cols 1–2 */
+.card.lang{
+  grid-column: span 2;
+}
+
+/* TOOLS — occupy 1 column each */
+.card.tool{
+  grid-column: span 1;
 }
 
 /* ======================
@@ -273,30 +249,27 @@ section.active-section.skillsGrid{
   }
 }
 
-/* tablet: stack */
+/* tablet */
 @media (max-width: 900px){
   section.active-section.skillsGrid{
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  .skillsBlock:nth-child(2) .grid{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .card.lang{
+    grid-column: span 2;
   }
 }
 
 /* mobile */
 @media (max-width: 640px){
-  .skillsGrid{
-    padding: 10px 0 8px;
-  }
-
-  .skillsBlock:first-child .grid{
+  section.active-section.skillsGrid{
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
-  .skillsBlock:nth-child(2) .grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+  .card.lang,
+  .card.tool{
+    grid-column: span 2;
   }
 
   .card{
@@ -3286,19 +3259,27 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
   </div>
 </section>
 
+
+		
+
      <!-- SKILLS – AIRPORT TERMINAL -->
+<!-- SKILLS — 7×3 GRID
+     First 2 columns = Languages (each language card spans 2 columns)
+     Remaining columns = Tools (each tool card is 1 column)
+     ✅ Paste your SVG INSIDE the marked containers
+-->
 <section id="skills" class="skillsGrid">
 
- <!-- LANGUAGES -->
-<div class="skillsBlock">
-  <div class="grid"> 
+  <div class="grid skills-7x3">
 
-    <!-- Arabic -->
-    <article class="card"> 
+    <!-- =========================
+         LANGUAGES (span 2 columns)
+         Paste flag SVG inside: <div class="langFlag"> ... </div>
+    ========================== -->
+
+    <article class="card lang">
       <div class="langFlag">
-       
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet">
+       <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet">
 
 <circle cx="32" cy="32" r="30" fill="#699635">
 
@@ -3416,26 +3397,22 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 </g>
 
-</svg>
-      </div> 
-      <div class="name">Arabic</div> 
-      <div class="meta">Native</div> 
-    </article> 
+</svg>      
+	  </div>
+      <div class="name">Arabic</div>
+      <div class="meta">Native</div>
+    </article>
 
-    <!-- French -->
-    <article class="card"> 
+    <article class="card lang">
       <div class="langFlag">
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><path d="M1.9 32c0 13.1 8.4 24.2 20 28.3V3.7C10.3 7.8 1.9 18.9 1.9 32z" fill="#428bc1"></path><path d="M61.9 32c0-13.1-8.3-24.2-20-28.3v56.6c11.7-4.1 20-15.2 20-28.3" fill="#ed4c5c"></path><path d="M21.9 60.3c3.1 1.1 6.5 1.7 10 1.7s6.9-.6 10-1.7V3.7C38.8 2.6 35.5 2 31.9 2s-6.9.6-10 1.7v56.6" fill="#ffffff"></path></svg>
-      </div> 
-      <div class="name">French</div> 
-      <div class="meta">Native</div> 
-    </article> 
+      </div>
+      <div class="name">French</div>
+      <div class="meta">Native</div>
+    </article>
 
-    <!-- English -->
-    <article class="card"> 
-      <div class="langFlag">     
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card lang">
+      <div class="langFlag">
 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet">
 
 <g fill="#2a5f9e">
@@ -3531,27 +3508,21 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 </g>
 
 </svg>
-      </div> 
-      <div class="name">English</div> 
-      <div class="meta">C2</div> 
-    </article> 
+	  </div>
+      <div class="name">English</div>
+      <div class="meta">C2</div>
+    </article>
 
-    <!-- German -->
-    <article class="card"> 
+    <article class="card lang">
       <div class="langFlag">
-        <!-- DE flag SVG here -->
-        
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><path d="M31.9 2C18.8 2 7.7 10.4 3.6 22h56.6C56.1 10.4 45 2 31.9 2z" fill="#3e4347"></path><path d="M31.9 62c13.1 0 24.2-8.3 28.3-20H3.6c4.1 11.7 15.2 20 28.3 20z" fill="#ffe62e"></path><path d="M3.6 22c-1.1 3.1-1.7 6.5-1.7 10s.6 6.9 1.7 10h56.6c1.1-3.1 1.7-6.5 1.7-10s-.6-6.9-1.7-10H3.6" fill="#ed4c5c"></path></svg>
-      </div> 
-      <div class="name">German</div> 
-      <div class="meta">C1</div> 
-    </article> 
+      </div>
+      <div class="name">German</div>
+      <div class="meta">C1</div>
+    </article>
 
-    <!-- Persian -->
-    <article class="card"> 
+    <article class="card lang">
       <div class="langFlag">
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet">
 <path d="M32 2C18.9 2 7.8 10.3 3.7 22h56.6C56.2 10.3 45.1 2 32 2z" fill="#83bf4f">
 
@@ -3805,74 +3776,53 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 </g>
 
-</svg>      </div> 
-      <div class="name">Persian</div> 
-      <div class="meta">A2</div> 
-    </article> 
+</svg>            </div>
+      <div class="name">Persian</div>
+      <div class="meta">A2</div>
+    </article>
 
-    <!-- Japanese -->
-    <article class="card"> 
+    <article class="card lang">
       <div class="langFlag">
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 512 512" xml:space="preserve">
 <circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/>
 <circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
-</svg> 
-      </div> 
-      <div class="name">Japanese</div> 
-      <div class="meta">A2</div> 
-    </article> 
-
-  </div> 
-</div>
+</svg>      
+	  </div>
+      <div class="name">Japanese</div>
+      <div class="meta">A2</div>
+    </article>
 
 
-  <!-- TOOLS -->
-  <div class="skillsBlock">
-    <div class="grid">
+    <!-- =========================
+         TOOLS (1 column each)
+         Paste tool SVG inside: <div class="logoTile"> ... </div>
+    ========================== -->
 
-      <article class="card">
-        <div class="logoTile">
-      <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_word2</title><path d="M18.536,2.323V4.868c3.4.019,7.12-.035,10.521.019a.783.783,0,0,1,.912.861c.054,6.266-.013,12.89.032,19.157-.02.4.009,1.118-.053,1.517-.079.509-.306.607-.817.676-.286.039-.764.034-1.045.047-2.792-.014-5.582-.011-8.374-.01l-1.175,0v2.547L2,27.133Q2,16,2,4.873L18.536,2.322" style="fill:#283c82"/><path d="M18.536,5.822h10.5V26.18h-10.5V23.635h8.27V22.363h-8.27v-1.59h8.27V19.5h-8.27v-1.59h8.27V16.637h-8.27v-1.59h8.27V13.774h-8.27v-1.59h8.27V10.911h-8.27V9.321h8.27V8.048h-8.27V5.822" style="fill:#fff"/><path d="M8.573,11.443c.6-.035,1.209-.06,1.813-.092.423,2.147.856,4.291,1.314,6.429.359-2.208.757-4.409,1.142-6.613.636-.022,1.272-.057,1.905-.1-.719,3.082-1.349,6.19-2.134,9.254-.531.277-1.326-.013-1.956.032-.423-2.106-.916-4.2-1.295-6.314C8.99,16.1,8.506,18.133,8.08,20.175q-.916-.048-1.839-.111c-.528-2.8-1.148-5.579-1.641-8.385.544-.025,1.091-.048,1.635-.067.328,2.026.7,4.043.986,6.072.448-2.08.907-4.161,1.352-6.241" style="fill:#fff"/></svg>
-        </div>
-        <div class="name">Word</div>
-      </article>
+      </div>
+      <div class="name">Word</div>
+    </article>
 
+    <article class="card tool">
+      <div class="logoTile">
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_powerpoint2</title><path d="M18.536,2.321V5.184c3.4.019,7.357-.035,10.754.016.642,0,.67.568.678,1.064.054,5.942-.013,12.055.032,18-.012.234-.006,1.1-.013,1.346-.022.823-.434.859-1.257.884-.132,0-.52.006-.648.012-3.181-.016-6.362-.009-9.546-.009v3.182L2,27.134Q2,16,2,4.873L18.536,2.322" style="fill:#d33922"/><path d="M18.536,6.138h10.5v19.4h-10.5V23H26.17V21.725H18.536V20.135H26.17V18.863H18.539c0-.624,0-1.247-.006-1.87a4.467,4.467,0,0,0,3.82-.375,4.352,4.352,0,0,0,1.959-3.474c-1.4-.01-2.793-.006-4.186-.006,0-1.384.016-2.767-.029-4.148-.522.1-1.043.21-1.562.321V6.139" style="fill:#fff"/><path d="M20.766,8.324a4.476,4.476,0,0,1,4.186,4.167c-1.4.016-2.793.01-4.189.01,0-1.393,0-2.787,0-4.177" style="fill:#d33922"/><path d="M7.1,10.726c1.727.083,3.82-.684,5.252.611,1.371,1.664,1.008,4.724-1.024,5.719A4.7,4.7,0,0,1,9,17.348c0,1.244-.006,2.488,0,3.731-.63-.054-1.263-.108-1.893-.159-.029-3.4-.035-6.8,0-10.2" style="fill:#fff"/><path d="M8.993,12.446c.627-.029,1.4-.143,1.826.445a2.308,2.308,0,0,1,.041,2.087c-.363.655-1.183.592-1.816.668-.067-1.066-.06-2.131-.051-3.2" style="fill:#d33922"/></svg>        
+	  </div>
+      <div class="name">PowerPoint</div>
+    </article>
 
+    <article class="card tool">
+      <div class="logoTile">
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_excel2</title><path d="M28.781,4.405H18.651V2.018L2,4.588V27.115l16.651,2.868V26.445H28.781A1.162,1.162,0,0,0,30,25.349V5.5A1.162,1.162,0,0,0,28.781,4.405Zm.16,21.126H18.617L18.6,23.642h2.487v-2.2H18.581l-.012-1.3h2.518v-2.2H18.55l-.012-1.3h2.549v-2.2H18.53v-1.3h2.557v-2.2H18.53v-1.3h2.557v-2.2H18.53v-2H28.941Z" style="fill:#20744a;fill-rule:evenodd"/><rect x="22.487" y="7.439" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="10.94" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="14.441" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="17.942" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="21.443" width="4.323" height="2.2" style="fill:#20744a"/><polygon points="6.347 10.673 8.493 10.55 9.842 14.259 11.436 10.397 13.582 10.274 10.976 15.54 13.582 20.819 11.313 20.666 9.781 16.642 8.248 20.513 6.163 20.329 8.585 15.666 6.347 10.673" style="fill:#ffffff;fill-rule:evenodd"/></svg>       
+      </div>
+      <div class="name">Excel</div>
+    </article>
 
-
-		
-      <article class="card">
-        <div class="logoTile">
-
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_powerpoint2</title><path d="M18.536,2.321V5.184c3.4.019,7.357-.035,10.754.016.642,0,.67.568.678,1.064.054,5.942-.013,12.055.032,18-.012.234-.006,1.1-.013,1.346-.022.823-.434.859-1.257.884-.132,0-.52.006-.648.012-3.181-.016-6.362-.009-9.546-.009v3.182L2,27.134Q2,16,2,4.873L18.536,2.322" style="fill:#d33922"/><path d="M18.536,6.138h10.5v19.4h-10.5V23H26.17V21.725H18.536V20.135H26.17V18.863H18.539c0-.624,0-1.247-.006-1.87a4.467,4.467,0,0,0,3.82-.375,4.352,4.352,0,0,0,1.959-3.474c-1.4-.01-2.793-.006-4.186-.006,0-1.384.016-2.767-.029-4.148-.522.1-1.043.21-1.562.321V6.139" style="fill:#fff"/><path d="M20.766,8.324a4.476,4.476,0,0,1,4.186,4.167c-1.4.016-2.793.01-4.189.01,0-1.393,0-2.787,0-4.177" style="fill:#d33922"/><path d="M7.1,10.726c1.727.083,3.82-.684,5.252.611,1.371,1.664,1.008,4.724-1.024,5.719A4.7,4.7,0,0,1,9,17.348c0,1.244-.006,2.488,0,3.731-.63-.054-1.263-.108-1.893-.159-.029-3.4-.035-6.8,0-10.2" style="fill:#fff"/><path d="M8.993,12.446c.627-.029,1.4-.143,1.826.445a2.308,2.308,0,0,1,.041,2.087c-.363.655-1.183.592-1.816.668-.067-1.066-.06-2.131-.051-3.2" style="fill:#d33922"/></svg>        </div>
-        <div class="name">PowerPoint</div>
-      </article>
-
-
-		
-
-      <article class="card">
-        <div class="logoTile">
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_excel2</title><path d="M28.781,4.405H18.651V2.018L2,4.588V27.115l16.651,2.868V26.445H28.781A1.162,1.162,0,0,0,30,25.349V5.5A1.162,1.162,0,0,0,28.781,4.405Zm.16,21.126H18.617L18.6,23.642h2.487v-2.2H18.581l-.012-1.3h2.518v-2.2H18.55l-.012-1.3h2.549v-2.2H18.53v-1.3h2.557v-2.2H18.53v-1.3h2.557v-2.2H18.53v-2H28.941Z" style="fill:#20744a;fill-rule:evenodd"/><rect x="22.487" y="7.439" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="10.94" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="14.441" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="17.942" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="21.443" width="4.323" height="2.2" style="fill:#20744a"/><polygon points="6.347 10.673 8.493 10.55 9.842 14.259 11.436 10.397 13.582 10.274 10.976 15.54 13.582 20.819 11.313 20.666 9.781 16.642 8.248 20.513 6.163 20.329 8.585 15.666 6.347 10.673" style="fill:#ffffff;fill-rule:evenodd"/></svg>        </div>
-        <div class="name">Excel</div>
-      </article>
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    
     <title>github [#142]</title>
     <desc>Created with Sketch.</desc>
     <defs>
@@ -3887,35 +3837,20 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
             </g>
         </g>
     </g>
-</svg>        </div>
-        <div class="name">Github</div>
-      </article>
+</svg>
+	  </div>
+      <div class="name">GitHub</div>
+    </article>
 
-
-
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
+    <article class="card tool">
+      <div class="logoTile">
       <svg fill="#F2C811" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>powerbi</title> <path d="M13.501 16h-7.498c0 0-0 0-0 0-0.69 0-1.25 0.559-1.25 1.25 0 0 0 0 0 0v0 12.496c0 0 0 0 0 0 0 0.69 0.559 1.25 1.25 1.25 0 0 0 0 0 0h8.747v-13.746c0-0.69-0.559-1.25-1.25-1.25v0zM19.749 8.502h-7.498c0 0-0 0-0 0-0.69 0-1.25 0.559-1.25 1.25 0 0 0 0 0 0v0 5.623h2.499c1.035 0.001 1.873 0.84 1.874 1.874v13.746h5.623v-21.244c0-0.69-0.559-1.25-1.25-1.25v0zM27.247 2.254v27.492c0 0 0 0 0 0 0 0.69-0.559 1.25-1.25 1.25 0 0-0 0-0 0h-4.374v-21.244c-0.001-1.035-0.84-1.873-1.874-1.874h-2.499v-5.623c0-0 0-0 0-0 0-0.69 0.559-1.25 1.25-1.25h7.498c0.69 0 1.25 0.559 1.25 1.25 0 0 0 0 0 0v0z"></path> </g></svg>
-        </div>
-        <div class="name">Power bi</div>
-      </article>
+      </div>
+      <div class="name">Power BI</div>
+    </article>
 
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     
     <title>Google-color</title>
@@ -3940,42 +3875,24 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
             </g>
         </g>
     </g>
-</svg>        </div>
-        <div class="name">Google Suite</div>
-      </article>
+</svg>     
+	  </div>
+      <div class="name">Google Suite</div>
+    </article>
 
-
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
-
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2 12.1333C2 8.58633 2 6.81283 2.69029 5.45806C3.29749 4.26637 4.26637 3.29749 5.45806 2.69029C6.81283 2 8.58633 2 12.1333 2H19.8667C23.4137 2 25.1872 2 26.5419 2.69029C27.7336 3.29749 28.7025 4.26637 29.3097 5.45806C30 6.81283 30 8.58633 30 12.1333V19.8667C30 23.4137 30 25.1872 29.3097 26.5419C28.7025 27.7336 27.7336 28.7025 26.5419 29.3097C25.1872 30 23.4137 30 19.8667 30H12.1333C8.58633 30 6.81283 30 5.45806 29.3097C4.26637 28.7025 3.29749 27.7336 2.69029 26.5419C2 25.1872 2 23.4137 2 19.8667V12.1333Z" fill="#330000"/>
 <path d="M15.5686 19.5963H11.2297L10.3469 22.409C10.3224 22.5135 10.2262 22.5875 10.1215 22.5823H7.92384C7.79851 22.5823 7.75469 22.5117 7.79236 22.3704L11.549 11.2738C11.5866 11.1582 11.6242 11.0266 11.6617 10.8789C11.7109 10.6218 11.736 10.3606 11.7369 10.0987C11.7261 10.0213 11.7941 9.95294 11.8683 9.96378H14.8549C14.9424 9.96378 14.9924 9.9959 15.0051 10.0601L19.269 22.3897C19.3065 22.5182 19.269 22.5824 19.1563 22.5823H16.7144C16.6288 22.5921 16.547 22.5334 16.5266 22.4475L15.5686 19.5963ZM11.9059 17.1689H14.8737C14.3861 15.5027 13.8358 13.8584 13.3898 12.1793C12.9086 13.8613 12.3836 15.5365 11.9059 17.1689Z" fill="#FF9A00"/>
 <path d="M21.8045 12.0058C21.6129 12.0137 21.4219 11.98 21.2438 11.907C21.0658 11.834 20.9048 11.7232 20.7714 11.582C20.6384 11.4346 20.535 11.2618 20.4673 11.0733C20.3996 10.8849 20.3689 10.6846 20.3769 10.4839C20.3701 10.2852 20.4042 10.0873 20.477 9.90305C20.5499 9.71881 20.6598 9.5524 20.7996 9.41468C20.938 9.27839 21.1014 9.17161 21.2804 9.10052C21.4593 9.02942 21.6502 8.99543 21.842 9.00049C22.2929 9.00049 22.6466 9.13856 22.9033 9.41468C23.0329 9.55818 23.1336 9.72648 23.1997 9.90995C23.2657 10.0934 23.2959 10.2885 23.2883 10.4839C23.2962 10.6853 23.2645 10.8864 23.1951 11.075C23.1258 11.2636 23.0201 11.436 22.8845 11.582C22.7428 11.7253 22.5736 11.8369 22.3878 11.9099C22.2019 11.9828 22.0033 12.0155 21.8045 12.0058ZM20.5084 22.3896V13.181C20.5084 13.0654 20.5583 13.0076 20.6587 13.0076H22.9691C23.0691 13.0076 23.1192 13.0654 23.1193 13.181V22.3896C23.1193 22.5182 23.0692 22.5824 22.9691 22.5823H20.6775C20.5648 22.5823 20.5084 22.5181 20.5084 22.3896Z" fill="#FF9A00"/>
-</svg>        </div>
-        <div class="name">Adobe Illustrator</div>
-      </article>
+</svg> 
+	  </div>
+      <div class="name">Adobe Illustrator</div>
+    </article>
 
-
-
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
-
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 -13.5 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
     <g>
         <path d="M19.3542312,196.033928 L30.644172,215.534816 C32.9900287,219.64014 36.3622164,222.86588 40.3210929,225.211737 C51.6602421,210.818376 59.5534225,199.772864 64.000634,192.075201 C68.5137119,184.263529 74.0609657,172.045039 80.6423954,155.41973 C62.9064315,153.085282 49.4659974,151.918058 40.3210929,151.918058 C31.545465,151.918058 18.1051007,153.085282 0,155.41973 C0,159.964996 1.17298825,164.510261 3.51893479,168.615586 L19.3542312,196.033928 Z" fill="#0066DA">
@@ -3997,22 +3914,13 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 </path>
     </g>
-</svg>       
-		</div>
-        <div class="name">Google Drive</div>
-      </article>
+</svg>
+	  </div>
+      <div class="name">Google Drive</div>
+    </article>
 
-
-
-
-
-
-
-
-		
- <article class="card">
-        <div class="logoTile">
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M19 13.9032C19 13.4044 19.4044 13 19.9032 13H31.0968C31.5956 13 32 13.4044 32 13.9032V20.5C32 24.0899 29.0899 27 25.5 27C21.9101 27 19 24.0899 19 20.5V13.9032Z" fill="url(#paint0_linear_87_7777)"/>
 <path d="M9 12.2258C9 11.5488 9.54881 11 10.2258 11H23.7742C24.4512 11 25 11.5488 25 12.2258V22C25 26.4183 21.4183 30 17 30C12.5817 30 9 26.4183 9 22V12.2258Z" fill="url(#paint1_linear_87_7777)"/>
@@ -4058,25 +3966,14 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 <stop offset="1" stop-color="#4C56B9"/>
 </linearGradient>
 </defs>
-</svg>        </div>
-        <div class="name">Teams</div>
- </article>
+</svg>
+	  </div>
+      <div class="name">Teams</div>
+    </article>
 
-
-
-
-
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
-         
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <article class="card tool">
+      <div class="logoTile">
+      <svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="15.5" cy="11.5" r="9.5" fill="url(#paint0_linear_87_7767)"/>
 <circle cx="24" cy="17" r="8" fill="url(#paint1_linear_87_7767)"/>
 <mask id="mask0_87_7767" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="10" y="6" width="13" height="24">
@@ -4107,42 +4004,19 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 </linearGradient>
 </defs>
 </svg>
-        </div>
-        <div class="name">SharePoint</div>
-      </article>
+	  </div>
+      <div class="name">SharePoint</div>
+    </article>
 
-
-
-
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
+    <article class="card tool">
+      <div class="logoTile">
           <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#F35325" d="M1 1h6.5v6.5H1V1z"></path><path fill="#81BC06" d="M8.5 1H15v6.5H8.5V1z"></path><path fill="#05A6F0" d="M1 8.5h6.5V15H1V8.5z"></path><path fill="#FFBA08" d="M8.5 8.5H15V15H8.5V8.5z"></path></g></svg>
-        </div>
-        <div class="name">Microsoft</div>
-      </article>
+      </div>
+      <div class="name">Microsoft</div>
+    </article>
 
-
-
-
-
-
-
-
-
-
-
-		
-      <article class="card">
-        <div class="logoTile">
-
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 -22.5 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
     <g>
         <polygon fill="#00832D" points="144.822496 105.321856 169.778926 133.848796 203.341343 155.294133 209.178931 105.50196 203.341343 56.8331137 169.136495 75.6715889">
@@ -4164,19 +4038,15 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
 </path>
         <path d="M185.787731,0 L59.9843714,0 L59.9843714,59.9838143 L144.822496,59.9838143 L144.822496,105.32167 L203.341343,56.832928 L203.341343,17.5536117 C203.341343,7.86329022 195.478053,0 185.787731,0" fill="#FFBA00">
-
 </path>
     </g>
-</svg>        </div>
-        <div class="name">Google Meet</div>
-      </article>
+</svg>   
+	  </div>
+      <div class="name">Google Meet</div>
+    </article>
 
-
-
-  <article class="card">
-        <div class="logoTile">
-
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint0_radial_87_7153)"/>
 <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint1_radial_87_7153)"/>
@@ -4202,41 +4072,25 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 <stop offset="1" stop-color="#6A45BE" stop-opacity="0"/>
 </radialGradient>
 </defs>
-</svg>        
-		</div>
-        <div class="name">Instagram</div>
-  </article>
+</svg>    
+	  </div>
+      <div class="name">Instagram</div>
+    </article>
 
-
-<article class="card">
-        <div class="logoTile">
-
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-
 <g fill="none">
-
 <path d="M0 18.338C0 8.216 8.474 0 18.92 0h218.16C247.53 0 256 8.216 256 18.338v219.327C256 247.79 247.53 256 237.08 256H18.92C8.475 256 0 247.791 0 237.668V18.335z" fill="#069"/>
-
 <path d="M77.796 214.238V98.986H39.488v115.252H77.8zM58.65 83.253c13.356 0 21.671-8.85 21.671-19.91-.25-11.312-8.315-19.915-21.417-19.915-13.111 0-21.674 8.603-21.674 19.914 0 11.06 8.312 19.91 21.169 19.91h.248zM99 214.238h38.305v-64.355c0-3.44.25-6.889 1.262-9.346 2.768-6.885 9.071-14.012 19.656-14.012 13.858 0 19.405 10.568 19.405 26.063v61.65h38.304v-66.082c0-35.399-18.896-51.872-44.099-51.872-20.663 0-29.738 11.549-34.78 19.415h.255V98.99H99.002c.5 10.812-.003 115.252-.003 115.252z" fill="#ffffff"/>
-
 </g>
-
-</svg>
-		</div>
-        <div class="name">LinkedIn</div>
-</article>
+</svg>      </div>
+      <div class="name">LinkedIn</div>
+    </article>
 
 
-
-
-
-
-
-
-<article class="card">
-        <div class="logoTile">
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+	 <article class="card tool">
+      <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.45095 19.7926C8.60723 18.4987 9.1379 17.7743 10.1379 17.0317C11.5688 16.0259 13.3561 16.5948 13.3561 16.5948V13.2197C13.7907 13.2085 14.2254 13.2343 14.6551 13.2966V17.6401C14.6551 17.6401 12.8683 17.0712 11.4375 18.0775C10.438 18.8196 9.90623 19.5446 9.7505 20.8385C9.74562 21.5411 9.87747 22.4595 10.4847 23.2536C10.3345 23.1766 10.1815 23.0889 10.0256 22.9905C8.68807 22.0923 8.44444 20.7449 8.45095 19.7926ZM22.0352 6.97898C21.0509 5.90039 20.6786 4.81139 20.5441 4.04639H21.7823C21.7823 4.04639 21.5354 6.05224 23.3347 8.02482L23.3597 8.05134C22.8747 7.7463 22.43 7.38624 22.0352 6.97898ZM28 10.0369V14.293C28 14.293 26.42 14.2312 25.2507 13.9337C23.6179 13.5176 22.5685 12.8795 22.5685 12.8795C22.5685 12.8795 21.8436 12.4245 21.785 12.3928V21.1817C21.785 21.6711 21.651 22.8932 21.2424 23.9125C20.709 25.246 19.8859 26.1212 19.7345 26.3001C19.7345 26.3001 18.7334 27.4832 16.9672 28.28C15.3752 28.9987 13.9774 28.9805 13.5596 28.9987C13.5596 28.9987 11.1434 29.0944 8.96915 27.6814C8.49898 27.3699 8.06011 27.0172 7.6582 26.6277L7.66906 26.6355C9.84383 28.0485 12.2595 27.9528 12.2595 27.9528C12.6779 27.9346 14.0756 27.9528 15.6671 27.2341C17.4317 26.4374 18.4344 25.2543 18.4344 25.2543C18.5842 25.0754 19.4111 24.2001 19.9423 22.8662C20.3498 21.8474 20.4849 20.6247 20.4849 20.1354V11.3475C20.5435 11.3797 21.2679 11.8347 21.2679 11.8347C21.2679 11.8347 22.3179 12.4734 23.9506 12.8889C25.1204 13.1864 26.7 13.2483 26.7 13.2483V9.91314C27.2404 10.0343 27.7011 10.0671 28 10.0369Z" fill="#EE1D52"/>
 <path d="M26.7009 9.91314V13.2472C26.7009 13.2472 25.1213 13.1853 23.9515 12.8879C22.3188 12.4718 21.2688 11.8337 21.2688 11.8337C21.2688 11.8337 20.5444 11.3787 20.4858 11.3464V20.1364C20.4858 20.6258 20.3518 21.8484 19.9432 22.8672C19.4098 24.2012 18.5867 25.0764 18.4353 25.2553C18.4353 25.2553 17.4337 26.4384 15.668 27.2352C14.0765 27.9539 12.6788 27.9357 12.2604 27.9539C12.2604 27.9539 9.84473 28.0496 7.66995 26.6366L7.6591 26.6288C7.42949 26.4064 7.21336 26.1717 7.01177 25.9257C6.31777 25.0795 5.89237 24.0789 5.78547 23.7934C5.78529 23.7922 5.78529 23.791 5.78547 23.7898C5.61347 23.2937 5.25209 22.1022 5.30147 20.9482C5.38883 18.9122 6.10507 17.6625 6.29444 17.3494C6.79597 16.4957 7.44828 15.7318 8.22233 15.0919C8.90538 14.5396 9.6796 14.1002 10.5132 13.7917C11.4144 13.4295 12.3794 13.2353 13.3565 13.2197V16.5948C13.3565 16.5948 11.5691 16.028 10.1388 17.0317C9.13879 17.7743 8.60812 18.4987 8.45185 19.7926C8.44534 20.7449 8.68897 22.0923 10.0254 22.991C10.1813 23.0898 10.3343 23.1775 10.4845 23.2541C10.7179 23.5576 11.0021 23.8221 11.3255 24.0368C12.631 24.8632 13.7249 24.9209 15.1238 24.3842C16.0565 24.0254 16.7586 23.2167 17.0842 22.3206C17.2888 21.7611 17.2861 21.1978 17.2861 20.6154V4.04639H20.5417C20.6763 4.81139 21.0485 5.90039 22.0328 6.97898C22.4276 7.38624 22.8724 7.7463 23.3573 8.05134C23.5006 8.19955 24.2331 8.93231 25.1734 9.38216C25.6596 9.61469 26.1722 9.79285 26.7009 9.91314Z" fill="#000000"/>
@@ -4244,15 +4098,11 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 <path d="M10.5128 13.7916C9.67919 14.1002 8.90498 14.5396 8.22192 15.0918C7.44763 15.7332 6.79548 16.4987 6.29458 17.354C6.10521 17.6661 5.38897 18.9168 5.30161 20.9528C5.25223 22.1068 5.61361 23.2983 5.78561 23.7944C5.78543 23.7956 5.78543 23.7968 5.78561 23.798C5.89413 24.081 6.31791 25.0815 7.01191 25.9303C7.2135 26.1763 7.42963 26.4111 7.65924 26.6334C6.92357 26.1457 6.26746 25.5562 5.71236 24.8839C5.02433 24.0451 4.60001 23.0549 4.48932 22.7626C4.48919 22.7605 4.48919 22.7584 4.48932 22.7564V22.7527C4.31677 22.2571 3.95431 21.0651 4.00477 19.9096C4.09213 17.8736 4.80838 16.6239 4.99775 16.3108C5.4985 15.4553 6.15067 14.6898 6.92509 14.0486C7.608 13.4961 8.38225 13.0567 9.21598 12.7484C9.73602 12.5416 10.2778 12.3891 10.8319 12.2934C11.6669 12.1537 12.5198 12.1415 13.3588 12.2575V13.2196C12.3808 13.2349 11.4148 13.4291 10.5128 13.7916Z" fill="#69C9D0"/>
 <path d="M20.5438 4.04635H17.2881V20.6159C17.2881 21.1983 17.2881 21.76 17.0863 22.3211C16.7575 23.2167 16.058 24.0253 15.1258 24.3842C13.7265 24.923 12.6326 24.8632 11.3276 24.0368C11.0036 23.823 10.7187 23.5594 10.4844 23.2567C11.5962 23.8251 12.5913 23.8152 13.8241 23.341C14.7558 22.9821 15.4563 22.1734 15.784 21.2774C15.9891 20.7178 15.9864 20.1546 15.9864 19.5726V3H20.4819C20.4819 3 20.4315 3.41188 20.5438 4.04635ZM26.7002 8.99104V9.9131C26.1725 9.79263 25.6609 9.61447 25.1755 9.38213C24.2352 8.93228 23.5026 8.19952 23.3594 8.0513C23.5256 8.1559 23.6981 8.25106 23.8759 8.33629C25.0192 8.88339 26.1451 9.04669 26.7002 8.99104Z" fill="#69C9D0"/>
 </svg>
+	  </div>
+      <div class="name">LinkedIn</div>
+    </article>
 
-		</div>
-        <div class="name">LinkedIn</div>
-</article>
-
-	
-    </div>
   </div>
-
 </section>
 
 
