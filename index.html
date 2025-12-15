@@ -2905,6 +2905,25 @@ RESPONSIVE
   .contact-info-grid { grid-template-columns: 1fr; }
 }
 
+/* shared lift behavior (same as skills cards) */
+.contact-envelope,
+.contact-info-card,
+.contact-copyright{
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+/* lift on hover */
+.contact-envelope:hover,
+.contact-info-card:hover,
+.contact-copyright:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
 
 /* ===========================
 GALLERY (HOME)
