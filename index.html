@@ -374,52 +374,55 @@ nav a:hover {
   z-index: 0;
   will-change: transform;
   transform-origin: center;
-  animation: toolPulse 22s ease-in-out infinite; /* slower cycle */
+  animation: toolPulse 90s ease-in-out infinite; /* VERY long cycle */
 }
-
 
 /* the pulse itself: short zoom, long rest */
 @keyframes toolPulse{
-  0%, 90%, 100% { 
-    transform: scale(1); 
-    z-index: 0; 
+  0%, 97%, 100%{
+    transform: scale(1);
+    z-index: 0;
   }
 
-  92% { 
-    transform: scale(1.14);   /* 🔥 bigger zoom */
-    z-index: 6; 
+  98%{
+    transform: scale(1.14);
+    z-index: 6;
   }
 
-  96% { 
-    transform: scale(1); 
-    z-index: 0; 
+  99%{
+    transform: scale(1);
+    z-index: 0;
   }
 }
+
 
 
 /* stagger the pulses (your first 6 cards are languages, tools start at child 7) */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  { animation-delay: -1s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  { animation-delay: -9s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  { animation-delay: -5s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(10) { animation-delay: -12s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(11) { animation-delay: -3s;  }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  { animation-delay: 0s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  { animation-delay: -6s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  { animation-delay: -12s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(10) { animation-delay: -18s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(11) { animation-delay: -24s; }
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(12) { animation-delay: -7s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(13) { animation-delay: -10s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(14) { animation-delay: -2s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(15) { animation-delay: -13s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(16) { animation-delay: -6s;  }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(12) { animation-delay: -30s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(13) { animation-delay: -36s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(14) { animation-delay: -42s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(15) { animation-delay: -48s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(16) { animation-delay: -54s; }
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(17) { animation-delay: -11s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(18) { animation-delay: -4s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(19) { animation-delay: -8s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(20) { animation-delay: -14s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(21) { animation-delay: -15s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(17) { animation-delay: -60s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(18) { animation-delay: -66s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(19) { animation-delay: -72s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(20) { animation-delay: -78s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(21) { animation-delay: -84s; }
 
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
-  .skillsGrid .skills-7x3 > .card.tool{ animation: none; }
+  .skillsGrid .skills-7x3 > .card.tool{
+    animation: none;
+  }
 }
+
 
 
 
