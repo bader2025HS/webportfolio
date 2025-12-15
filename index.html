@@ -401,24 +401,25 @@ animation: logoShakira 85s infinite;
 }
 
 
-/* ✅ delays must target the SVG (not the card) */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  .logoTile svg { animation-delay: -2s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  .logoTile svg { animation-delay: -14s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  .logoTile svg { animation-delay: -7s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -18s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -4s;  }
+/* ✅ spread across the full 85s cycle (~5–6s apart) so pulses don’t stack */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  .logoTile svg { animation-delay: -3s;  }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  .logoTile svg { animation-delay: -9s;  }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  .logoTile svg { animation-delay: -16s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -23s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -31s; }
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -11s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -1s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -16s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -6s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -20s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -38s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -46s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -54s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -61s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -69s; }
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -9s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -13s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -5s;  }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -17s; }
-.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -8s;  }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -75s; }
+.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -12s; } /* extra “random” */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -28s; } /* extra “random” */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -43s; } /* extra “random” */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -58s; } /* extra “random” */
+
 
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
