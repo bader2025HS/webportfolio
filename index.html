@@ -107,39 +107,41 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — SAFE 2 COLUMNS (UPDATED)
+   SKILLS — SAFE 2 COLUMNS (SHARP)
 ========================= */
 
-/* DO NOT FORCE DISPLAY HERE */
 /* pull the whole Skills section closer to the menu */
 #skills{
-  margin-top: -20px;   /* try -10 / -20 / -30 */
+  margin-top: -20px;
   padding-top: 0;
 }
 
-/* width locked to 1050px like your other sections */
+/* width locked to 1050px */
 .skillsGrid{
   width: 1050px;
   max-width: 1050px;
   margin: 0 auto;
-  padding: 14px 0 10px;   /* reduced bottom padding to avoid scrollbar */
+  padding: 14px 0 10px;
   box-sizing: border-box;
 }
 
-/* ONLY layout when section is active */
+/* ONLY layout when active */
 section.active-section.skillsGrid{
   display: grid;
-  grid-template-columns: 1fr 1.9fr;   /* a bit wider tools column */
+  grid-template-columns: 1fr 1.9fr;
   gap: 18px;
   align-items: start;
 }
 
 /* blocks */
 .skillsBlock{
-  margin-bottom: 0; /* avoid extra vertical space */
+  margin-bottom: 0;
 }
 
-/* grid base */
+/* ======================
+   GRIDS
+====================== */
+
 .grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -147,23 +149,25 @@ section.active-section.skillsGrid{
   align-content: start;
 }
 
-/* LANGUAGES forced 2×3 */
+/* LANGUAGES — 2×3 */
 .skillsBlock:first-child .grid{
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
 }
 
-/* TOOLS forced 5 per row */
+/* TOOLS — 5 per row */
 .skillsBlock:nth-child(2) .grid{
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px; /* tighter so 5 fit */
+  gap: 12px;
 }
 
-/* cards (shared) */
+/* ======================
+   CARDS — SHARP
+====================== */
+
 .card{
-  background: #fff;
-  border-radius: 18px;
-  padding: 16px 14px;              /* slightly smaller overall */
+  background: #ffffff;
+  border-radius: 0;                 /* 🔥 sharp edges */
+  padding: 16px 14px;
   text-align: center;
   box-shadow: 0 14px 30px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
@@ -175,7 +179,7 @@ section.active-section.skillsGrid{
   box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
-/* Typography */
+/* text */
 .name{
   font-weight: 900;
   font-size: 1.02rem;
@@ -189,45 +193,47 @@ section.active-section.skillsGrid{
   color: #555;
 }
 
-/* Languages flag / code */
+/* languages */
 .langFlag{
   font-size: 2.1rem;
   margin-bottom: 10px;
 }
 
-/* Tool logo tile: REMOVE frame (logo sits freely) */
-.logoTile{
-  width: auto;
-  height: auto;
-  margin: 0 auto 8px;
-  border-radius: 0;
-  display: grid;
-  place-items: center;
-  background: transparent;
-  box-shadow: none;
+/* ======================
+   TOOLS — LOGO + NAME
+====================== */
+
+.skillsBlock:nth-child(2) .card{
+  padding: 10px 8px;      /* slimmer tool cards */
 }
 
-/* Bigger tool logos */
+/* remove logo container styling */
+.logoTile{
+  margin: 0 auto 8px;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;       /* 🔥 sharp */
+  display: grid;
+  place-items: center;
+}
+
+/* bigger logos */
 .logoTile svg{
-  width: 40px;      /* bigger */
+  width: 40px;
   height: 40px;
   display: block;
 }
 
-/* TOOLS: make cards slimmer so 5 fit nicely */
-.skillsBlock:nth-child(2) .card{
-  padding: 10px 8px;   /* narrower tool cards */
-  border-radius: 16px;
-}
-
-/* TOOLS: slightly tighter label */
 .skillsBlock:nth-child(2) .name{
   font-size: 0.85rem;
   font-weight: 800;
   margin-top: 4px;
 }
 
-/* Responsive */
+/* ======================
+   RESPONSIVE
+====================== */
+
 @media (max-width: 1100px){
   .skillsGrid{
     width: min(1050px, 92vw);
@@ -237,7 +243,7 @@ section.active-section.skillsGrid{
 
 @media (max-width: 900px){
   section.active-section.skillsGrid{
-    grid-template-columns: 1fr; /* stack */
+    grid-template-columns: 1fr;
   }
 
   .skillsBlock:nth-child(2) .grid{
@@ -254,23 +260,19 @@ section.active-section.skillsGrid{
     gap: 14px;
   }
 
-  .skillsBlock:first-child .grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .skillsBlock:nth-child(2) .grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .card{
     padding: 14px 12px;
-    border-radius: 16px;
   }
 
   .langFlag{
     font-size: 1.9rem;
   }
 }
+
 
 
 /* ===========================
