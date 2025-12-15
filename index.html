@@ -107,35 +107,37 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — 2×3 LANG LEFT + 5×3 TOOLS RIGHT (SHARP + ALIGNED)
+   SKILLS — PERFECT ROW ALIGNMENT
+   2×3 LANG LEFT + 5×3 TOOLS RIGHT (SHARP)
+   (does NOT touch your global display rules)
 ========================= */
 
-/* pull the whole Skills section closer to the menu */
+/* pull Skills closer to the menu */
 #skills{
   margin-top: -20px;
   padding-top: 0;
 }
 
-/* width locked to 1050px */
+/* lock width like your other sections */
 .skillsGrid{
   width: 1050px;
   max-width: 1050px;
   margin: 0 auto;
-  padding: 14px 0 10px;
+  padding: 14px 0 10px;     /* keep tight → no scrollbar */
   box-sizing: border-box;
 }
 
-/* ONLY layout when active (do NOT force display globally) */
+/* ONLY layout when active (don’t force display globally) */
 section.active-section.skillsGrid{
   display: grid;
-  grid-template-columns: 2fr 5fr;   /* left (languages) | right (tools) */
+  grid-template-columns: 2fr 5fr;  /* languages | tools */
   gap: 18px;
   align-items: start;
 }
 
 /* blocks */
 .skillsBlock{
-  margin-bottom: 0;
+  margin: 0;                 /* no extra bottom spacing */
 }
 
 /* ======================
@@ -144,7 +146,6 @@ section.active-section.skillsGrid{
 
 .grid{
   display: grid;
-  gap: 12px;
   align-content: start;
 }
 
@@ -154,7 +155,7 @@ section.active-section.skillsGrid{
   gap: 18px;
 }
 
-/* TOOLS — 5 columns (3 rows naturally) */
+/* TOOLS — 5 columns */
 .skillsBlock:nth-child(2) .grid{
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
@@ -162,24 +163,25 @@ section.active-section.skillsGrid{
 
 /* ======================
    CARDS — SHARP + SAME HEIGHT
+   (this is what fixes row alignment)
 ====================== */
 
 .card{
-  background: #ffffff;
-  border-radius: 0;
+  background: #fff;
+  border-radius: 0;                 /* sharp */
   box-shadow: 0 14px 30px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
   box-sizing: border-box;
 
-  /* align + equalize */
+  /* equalize all cards */
   min-height: 128px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center;          /* vertical centering */
   align-items: center;
+  text-align: center;
 
   padding: 14px 10px;
-  text-align: center;
 }
 
 .card:hover{
@@ -214,7 +216,15 @@ section.active-section.skillsGrid{
   line-height: 0;
 }
 
+/* inline <svg> */
 .langFlag svg{
+  width: 42px;
+  height: auto;
+  display: block;
+}
+
+/* if you ever use <img> instead */
+.langFlag img{
   width: 42px;
   height: auto;
   display: block;
@@ -224,12 +234,13 @@ section.active-section.skillsGrid{
    TOOLS — LOGO + NAME
 ====================== */
 
+/* keep tools same card size, just tighter padding */
 .skillsBlock:nth-child(2) .card{
-  padding: 12px 8px;     /* slightly slimmer so 5 columns breathe */
-  min-height: 128px;
+  padding: 12px 8px;
+  min-height: 128px; /* explicit so it never diverges */
 }
 
-/* no “box inside box” */
+/* no inner “box” */
 .logoTile{
   margin: 0 auto 10px;
   background: transparent;
@@ -262,7 +273,7 @@ section.active-section.skillsGrid{
   }
 }
 
-/* tablet: stack columns */
+/* tablet: stack */
 @media (max-width: 900px){
   section.active-section.skillsGrid{
     grid-template-columns: 1fr;
@@ -280,7 +291,6 @@ section.active-section.skillsGrid{
   }
 
   .skillsBlock:first-child .grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
 
@@ -293,7 +303,8 @@ section.active-section.skillsGrid{
     min-height: 120px;
   }
 
-  .langFlag svg{
+  .langFlag svg,
+  .langFlag img{
     width: 38px;
   }
 
@@ -302,7 +313,6 @@ section.active-section.skillsGrid{
     height: 44px;
   }
 }
-
 
 
 
