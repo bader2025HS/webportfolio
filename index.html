@@ -2624,11 +2624,12 @@ CONTACT SECTION — TURQUOISE VERSION
   border-radius: 0;
   padding: 16px 32px 15px;
   text-align: left;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, border-width 0.15s ease;
 }
 .contact-envelope:hover {
   background: #ffffff;
   border-color: var(--accent, #0ea5a2); /* ✅ turquoise frame */
+  border-width: 2.5px;                 /* ✅ thicker on hover */
 }
 
 .contact-title {
@@ -2784,13 +2785,14 @@ CONTACT SECTION — TURQUOISE VERSION
   text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: background 0.20s ease, border-color 0.20s ease, box-shadow 0.20s ease;
+  transition: background 0.20s ease, border-color 0.20s ease, box-shadow 0.20s ease, border-width 0.20s ease;
 }
 
 /* Hover: white + turquoise border */
 .contact-info-card:hover {
   background: #ffffff;
   border-color: var(--accent, #0ea5a2); /* ✅ turquoise */
+  border-width: 2.5px;                 /* ✅ thicker on hover */
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
@@ -2877,13 +2879,14 @@ CONTACT SECTION — TURQUOISE VERSION
   font-size: 0.75rem;
   letter-spacing: 0.03em;
   color: #1c2d5a;
-  transition: background 0.20s ease, border-color 0.20s ease, color 0.20s ease;
+  transition: background 0.20s ease, border-color 0.20s ease, color 0.20s ease, border-width 0.20s ease;
 }
 
 /* Hover behavior identical to cards */
 .contact-copyright:hover {
   background: #ffffff;
   border-color: var(--accent, #0ea5a2); /* ✅ turquoise */
+  border-width: 2.5px;                 /* ✅ thicker on hover */
   color: var(--accent, #0ea5a2);        /* ✅ turquoise text */
 }
 
