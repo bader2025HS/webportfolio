@@ -2348,11 +2348,6 @@ ACTIVITIES – clean horizontal cards
 #activities {
 margin-top: -20px;
 text-align: center;
-padding-bottom: 0 !important;
-margin-bottom: 0 !important;
-}
-.filmstrip-wrapper{
-  margin-bottom: 0 !important;
 }
 
 /* 3 equal boxes in one row */
@@ -2385,6 +2380,8 @@ margin-bottom: 0 !important;
     background 0.2s ease,
     box-shadow 0.2s ease,
     transform 0.2s ease,
+    outline-color 0.2s ease,
+    outline-width 0.2s ease;
 }
 
 /* LEFT — icon holder */
@@ -2430,13 +2427,12 @@ gap: 8px; /* was 6px */
 /* HOVER — lift + white card + turquoise frame */
 .activity-box:hover {
   background: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-3px);
-  box-shadow:
-    inset 0 0 0 2.5px #009fa5,  /* turquoise frame INSIDE */
-    0 10px 24px rgba(0, 0, 0, 0.08); /* your normal lift shadow */
-}
 
-#activities { overflow-x: clip; }
+  outline: 2.5px solid #009fa5; /* turquoise frame */
+  outline-offset: -2.5px;
+}
 
 /* hover accents */
 .activity-box:hover h3 {
