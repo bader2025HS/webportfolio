@@ -379,21 +379,33 @@ TOOLS — EVEN INTERVAL AUTO PULSE (LOGO ONLY)
 /* shorter pulse window so it doesn't overlap with the 6s spacing */
 @keyframes logoShakira{
   /* idle */
-  0%, 97% { transform: scale(1) translateX(0) rotate(0deg); }
+  0%, 96%{
+    transform: scale(1) translateX(0) rotate(0deg);
+  }
 
-  /* zoom */
-  98%     { transform: scale(1.70) translateX(0) rotate(0deg); }
+  /* zoom in */
+  96.5%{
+    transform: scale(1.70) translateX(0) rotate(0deg);
+  }
 
-  /* SHAKIRA shake (fast + strong) */
-  98.3%   { transform: scale(1.70) translateX(-6px) rotate(-7deg); }
-  98.6%   { transform: scale(1.70) translateX( 6px) rotate( 7deg); }
-  98.9%   { transform: scale(1.70) translateX(-5px) rotate(-6deg); }
-  99.2%   { transform: scale(1.70) translateX( 5px) rotate( 6deg); }
-  99.5%   { transform: scale(1.70) translateX(-4px) rotate(-5deg); }
-  99.8%   { transform: scale(1.70) translateX( 4px) rotate( 5deg); }
+  /* slower + smoother shake */
+  97.2%{
+    transform: scale(1.70) translateX(-5px) rotate(-5deg);
+  }
+  97.9%{
+    transform: scale(1.70) translateX(5px) rotate(5deg);
+  }
+  98.6%{
+    transform: scale(1.70) translateX(-4px) rotate(-4deg);
+  }
+  99.3%{
+    transform: scale(1.70) translateX(4px) rotate(4deg);
+  }
 
-  /* return */
-  100%    { transform: scale(1) translateX(0) rotate(0deg); }
+  /* smooth return */
+  100%{
+    transform: scale(1) translateX(0) rotate(0deg);
+  }
 }
 
 /* ✅ Equal interval: 6s between pulses.
