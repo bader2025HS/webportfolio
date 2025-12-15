@@ -2427,12 +2427,14 @@ gap: 8px; /* was 6px */
 /* HOVER — lift + white card + turquoise frame */
 .activity-box:hover {
   background: #ffffff;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-3px);
 
-  outline: 2.5px solid #009fa5; /* turquoise frame */
-  outline-offset: -2.5px;
+  /* turquoise frame INSIDE the box (no overflow) */
+  box-shadow:
+    inset 0 0 0 2.5px #009fa5,
+    0 10px 24px rgba(0, 0, 0, 0.08);
 }
+
 
 /* hover accents */
 .activity-box:hover h3 {
