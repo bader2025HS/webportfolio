@@ -380,23 +380,41 @@ nav a:hover {
 
 /* the pulse itself: short zoom, long rest */
 @keyframes toolPulse{
-  0%, 96%, 100%{
-    transform: scale(1);
+  0%, 92%, 100%{
+    transform: scale(1) rotate(0deg) translate(0,0);
     z-index: 0;
   }
 
-  97%{
-    transform: scale(1.20);
+  /* ramp in */
+  93%{
+    transform: scale(1.12) rotate(-0.6deg) translate(-1px, 0);
     z-index: 6;
   }
 
+  /* peak + shake */
+  94%{
+    transform: scale(1.22) rotate(0.8deg) translate(1px, -1px);
+    z-index: 6;
+  }
+  95%{
+    transform: scale(1.20) rotate(-0.9deg) translate(-1px, 1px);
+    z-index: 6;
+  }
+  96%{
+    transform: scale(1.22) rotate(0.7deg) translate(1px, 0);
+    z-index: 6;
+  }
+  97%{
+    transform: scale(1.18) rotate(-0.6deg) translate(0, 1px);
+    z-index: 6;
+  }
+
+  /* settle */
   98%{
-    transform: scale(1);
-    z-index: 0;
+    transform: scale(1.05) rotate(0deg) translate(0,0);
+    z-index: 2;
   }
 }
-
-
 
 
 /* shuffled order — ~5s between pulses */
@@ -418,9 +436,6 @@ nav a:hover {
 .skillsGrid .skills-7x3 > .card.tool:nth-child(20) { animation-delay: -50s; }
 .skillsGrid .skills-7x3 > .card.tool:nth-child(21) { animation-delay: -40s; }
 
-
-
-
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
 .skillsGrid .skills-7x3 > .card.tool{
@@ -428,9 +443,6 @@ nav a:hover {
 }
 
 }
-
-
-
 
 /* ===========================
    ABOUT – LAYOUT
