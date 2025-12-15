@@ -142,13 +142,15 @@ CARDS
 
 .card{
   background: var(--bg1, #f5f8ff); /* same blue as experience/contact */
-  border: 1px solid rgba(15, 23, 42, 0.18); /* visible static frame */
+  border: 1.25px solid rgba(15, 23, 42, 0.18); /* visible static frame */
   border-radius: 0;
   box-shadow: none;
   transition:
     background .18s ease,
     border-color .18s ease,
-    transform .18s ease;
+    border-width .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
   box-sizing: border-box;
   min-height: 128px;
   padding: 14px 10px;
@@ -157,30 +159,27 @@ CARDS
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-width: 1.25px;
 }
-
 .card:hover{
   background: #ffffff;
-  border-color: var(--accent, #38bdf8); /* turquoise frame */
+  border-color: #0ea5a2;     /* ✅ ORIGINAL turquoise */
+  border-width: 2.5px;       /* ✅ thicker frame on hover */
   transform: translateY(-3px);
   box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
-
-
-/* text (TOOLS only use .name) */
+/* text */
 .name{
-font-weight: 900;
-font-size: 1.02rem;
-color: #111;
-line-height: 1.2;
+  font-weight: 900;
+  font-size: 1.02rem;
+  color: #111;
+  line-height: 1.2;
 }
 
 .meta{
-margin-top: 4px;
-font-size: .9rem;
-font-weight: 700;
-color: #555;
+  margin-top: 4px;
+  font-size: .9rem;
+  font-weight: 700;
+  color: #555;
 }
 
 /* ======================
