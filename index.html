@@ -166,7 +166,7 @@ section.active-section.skillsGrid{
 
 .card{
   background: #ffffff;
-  border-radius: 0;                 /* 🔥 sharp edges */
+  border-radius: 0;
   padding: 16px 14px;
   text-align: center;
   box-shadow: 0 14px 30px rgba(0,0,0,.10);
@@ -193,10 +193,31 @@ section.active-section.skillsGrid{
   color: #555;
 }
 
-/* languages */
+/* ======================
+   LANGUAGES — SVG ICONS (replaces emoji)
+   Works for <img> OR inline <svg>
+====================== */
+
 .langFlag{
-  font-size: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
+  line-height: 0;
+}
+
+/* if you use <img src="flags/jp.svg"> */
+.langFlag img{
+  width: 42px;
+  height: auto;
+  display: block;
+}
+
+/* if you paste inline <svg> */
+.langFlag svg{
+  width: 42px;
+  height: auto;
+  display: block;
 }
 
 /* ======================
@@ -204,7 +225,7 @@ section.active-section.skillsGrid{
 ====================== */
 
 .skillsBlock:nth-child(2) .card{
-  padding: 10px 8px;      /* slimmer tool cards */
+  padding: 10px 8px;
 }
 
 /* remove logo container styling */
@@ -212,7 +233,7 @@ section.active-section.skillsGrid{
   margin: 0 auto 8px;
   background: transparent;
   box-shadow: none;
-  border-radius: 0;       /* 🔥 sharp */
+  border-radius: 0;
   display: grid;
   place-items: center;
 }
@@ -268,8 +289,9 @@ section.active-section.skillsGrid{
     padding: 14px 12px;
   }
 
-  .langFlag{
-    font-size: 1.9rem;
+  .langFlag img,
+  .langFlag svg{
+    width: 38px;
   }
 }
 
