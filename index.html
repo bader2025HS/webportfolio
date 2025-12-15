@@ -114,116 +114,69 @@ nav a:hover {
    LANGUAGES | TOOLS
 ========================= */
 
-/* =========================
-   SKILLS — 2 COLUMN SHELL (SAFE)
-   matches: <section id="skills" class="skillsGrid">
-========================= */
-
+/* ===== SKILLS ONLY: force 2-column shell without touching other sections ===== */
 #skills.skillsGrid{
   width: 1050px;
   margin: 0 auto;
   padding: 48px 0;
-
   display: grid;
-  grid-template-columns: 420px 1fr; /* languages | tools */
+  grid-template-columns: 420px 1fr; /* Languages | Tools */
   gap: 40px;
   align-items: start;
 }
 
-/* blocks */
-#skills.skillsGrid .skillsBlock{ margin: 0; }
+/* remove the old bottom spacing inside skills only */
+#skills.skillsGrid .skillsBlock{ margin-bottom: 0; }
 
-/* grids */
+/* languages: 2 columns */
 #skills.skillsGrid .skillsBlock:first-child .grid{
-  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
+/* tools: denser + bigger tiles */
 #skills.skillsGrid .skillsBlock:last-child .grid{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(110px, 1fr));
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
   gap: 16px;
 }
 
-/* cards */
-#skills.skillsGrid .card{
-  background: #fff;
-  border-radius: 22px;
-  text-align: center;
-  box-shadow: 0 16px 36px rgba(0,0,0,.12);
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-
-#skills.skillsGrid .card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 24px 50px rgba(0,0,0,.16);
-}
-
-/* language cards smaller */
+/* language cards smaller (skills only) */
 #skills.skillsGrid .skillsBlock:first-child .card{
-  padding: 12px 10px;
-  border-radius: 18px;
+  padding: 10px 10px;
+  border-radius: 16px;
 }
+#skills.skillsGrid .skillsBlock:first-child .langFlag{
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+#skills.skillsGrid .skillsBlock:first-child .name{ font-size: .85rem; }
+#skills.skillsGrid .skillsBlock:first-child .meta{ font-size: .72rem; }
 
-/* tool cards a bit bigger */
+/* tool cards a bit bigger (skills only) */
 #skills.skillsGrid .skillsBlock:last-child .card{
   padding: 18px 14px;
-  border-radius: 22px;
 }
-
-/* text */
-#skills.skillsGrid .name{
-  font-weight: 900;
-  font-size: .95rem;
-  color: #111;
-}
-
-#skills.skillsGrid .meta{
-  margin-top: 4px;
-  font-size: .75rem;
-  font-weight: 700;
-  color: #555;
-}
-
-/* language flag */
-#skills.skillsGrid .langFlag{
-  font-size: 1.3rem;
-  margin-bottom: 6px;
-}
-
-/* tools icon tile */
-#skills.skillsGrid .logoTile{
+#skills.skillsGrid .skillsBlock:last-child .logoTile{
   width: 58px;
   height: 58px;
-  margin: 0 auto 10px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  box-shadow: 0 12px 26px rgba(0,0,0,.12);
 }
-
-/* force svgrepo svgs */
-#skills.skillsGrid .logoTile svg{
+#skills.skillsGrid .skillsBlock:last-child .logoTile svg{
   width: 36px !important;
   height: 36px !important;
+}
+
+/* if you use SVG flags later */
+#skills.skillsGrid .langIcon{
+  width: 26px;
+  height: 18px;
+  margin: 0 auto 6px;
+  display: grid;
+  place-items: center;
+}
+#skills.skillsGrid .langIcon svg{
+  width: 100%;
+  height: 100%;
   display: block;
-}
-
-/* responsive */
-@media (max-width: 1100px){
-  #skills.skillsGrid{ width: 92vw; }
-}
-
-@media (max-width: 900px){
-  #skills.skillsGrid{
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-  #skills.skillsGrid .skillsBlock:last-child .grid{
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  }
 }
 
 
