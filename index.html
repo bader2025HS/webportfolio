@@ -141,32 +141,34 @@ CARDS
 ====================== */
 
 .card{
-  background: var(--bg1, #f5f8ff); /* same blue as experience/contact */
-  border: 1.25px solid rgba(15, 23, 42, 0.18); /* visible static frame */
+  background: var(--bg1, #f5f8ff);
+  border: 2.5px solid rgba(15, 23, 42, 0.18); /* reserve thickness */
   border-radius: 0;
   box-shadow: none;
   transition:
     background .18s ease,
     border-color .18s ease,
-    border-width .18s ease,
     transform .18s ease,
     box-shadow .18s ease;
   box-sizing: border-box;
+
   min-height: 128px;
   padding: 14px 10px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
+
 .card:hover{
   background: #ffffff;
   border-color: #0ea5a2;     /* ✅ ORIGINAL turquoise */
-  border-width: 2.5px;       /* ✅ thicker frame on hover */
   transform: translateY(-3px);
   box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
+
 /* text */
 .name{
   font-weight: 900;
@@ -180,6 +182,25 @@ CARDS
   font-size: .9rem;
   font-weight: 700;
   color: #555;
+}
+/* tools */
+.card.tool .logoTile svg{
+  transition: transform .22s ease;
+}
+
+.card.tool:hover .logoTile svg{
+  transform: scale(1.18);
+}
+
+/* languages */
+.card.lang .langFlag svg,
+.card.lang .langFlag img{
+  transition: transform .22s ease;
+}
+
+.card.lang:hover .langFlag svg,
+.card.lang:hover .langFlag img{
+  transform: scale(1.18);
 }
 
 /* ======================
