@@ -2960,34 +2960,42 @@ text-align: center;
 margin-top: 40px;
 }
 
-/* Scroll progress bar */
 #scrollProgress {
-position: fixed; top: 0; left: 0;
-width: 0; height: 4px;
-background: #7a4a2e;
-z-index: 9999;
-opacity: 0.9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: #0ea5e9;              /* turquoise */
+  z-index: 9999;
+  opacity: 0.95;
 }
-/* Back to top */
+
 #backToTop {
-position: fixed;
-bottom: 24px; right: 24px;
-width: 44px; height: 44px;
-border-radius: 50%;
-background: #7a4a2e;
-border: none;
-display: none;
-justify-content: center;
-align-items: center;
-color: white; font-size: 22px;
-cursor: pointer;
-z-index: 9999;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0ea5e9;              /* turquoise */
+  border: none;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 #backToTop:hover {
-box-shadow: 0 0 12px rgba(0,159,165,.6);
-transform: translateY(-2px);
+  background: #0284c7;              /* deeper turquoise */
+  box-shadow: 0 0 14px rgba(14,165,233,.6);
+  transform: translateY(-2px);
 }
+
 
 /* ===========================
 LIGHTBOX (PHOTOS)
