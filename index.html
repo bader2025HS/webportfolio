@@ -107,7 +107,7 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — LANG ROW + TOOLS GRID (SHARP + ALIGNED)
+   SKILLS — 2×3 LANG LEFT + 5×3 TOOLS RIGHT (SHARP + ALIGNED)
 ========================= */
 
 /* pull the whole Skills section closer to the menu */
@@ -127,9 +127,10 @@ nav a:hover {
 
 /* ONLY layout when active (do NOT force display globally) */
 section.active-section.skillsGrid{
-  display: flex;              /* stack languages row then tools grid */
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 2fr 5fr;   /* left (languages) | right (tools) */
   gap: 18px;
+  align-items: start;
 }
 
 /* blocks */
@@ -143,42 +144,42 @@ section.active-section.skillsGrid{
 
 .grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 18px;
+  gap: 12px;
   align-content: start;
 }
 
-/* LANGUAGES — one row (6 across) */
+/* LANGUAGES — 2×3 */
 .skillsBlock:first-child .grid{
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
-/* TOOLS — 5 per row */
+/* TOOLS — 5 columns (3 rows naturally) */
 .skillsBlock:nth-child(2) .grid{
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 
 /* ======================
-   CARDS — SHARP + ALIGNED HEIGHT
+   CARDS — SHARP + SAME HEIGHT
 ====================== */
 
 .card{
   background: #ffffff;
   border-radius: 0;
-  padding: 16px 14px;
-  text-align: center;
   box-shadow: 0 14px 30px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
   box-sizing: border-box;
 
-  /* alignment fix */
-  min-height: 132px;                 /* same height for languages + tools */
+  /* align + equalize */
+  min-height: 128px;
   display: flex;
   flex-direction: column;
-  justify-content: center;           /* vertical align */
+  justify-content: center;
   align-items: center;
+
+  padding: 14px 10px;
+  text-align: center;
 }
 
 .card:hover{
@@ -195,15 +196,14 @@ section.active-section.skillsGrid{
 }
 
 .meta{
-  margin-top: 4px;                   /* tighter so languages don’t get taller */
+  margin-top: 4px;
   font-size: .9rem;
   font-weight: 700;
   color: #555;
 }
 
 /* ======================
-   LANGUAGES — SVG ICONS (replaces emoji)
-   Works for inline <svg> inside .langFlag
+   LANGUAGES — SVG ICONS
 ====================== */
 
 .langFlag{
@@ -224,13 +224,12 @@ section.active-section.skillsGrid{
    TOOLS — LOGO + NAME
 ====================== */
 
-/* tools are slimmer but same height */
 .skillsBlock:nth-child(2) .card{
-  padding: 12px 10px;
-  min-height: 132px;                 /* keep same as .card */
+  padding: 12px 8px;     /* slightly slimmer so 5 columns breathe */
+  min-height: 128px;
 }
 
-/* logo container is just alignment (no extra box) */
+/* no “box inside box” */
 .logoTile{
   margin: 0 auto 10px;
   background: transparent;
@@ -241,12 +240,11 @@ section.active-section.skillsGrid{
 }
 
 .logoTile svg{
-  width: 46px;                       /* a bit bigger logos */
+  width: 46px;
   height: 46px;
   display: block;
 }
 
-/* tool label slightly smaller than language name */
 .skillsBlock:nth-child(2) .name{
   font-size: 0.86rem;
   font-weight: 800;
@@ -264,10 +262,10 @@ section.active-section.skillsGrid{
   }
 }
 
-/* tablet */
+/* tablet: stack columns */
 @media (max-width: 900px){
-  .skillsBlock:first-child .grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  section.active-section.skillsGrid{
+    grid-template-columns: 1fr;
   }
 
   .skillsBlock:nth-child(2) .grid{
@@ -281,21 +279,18 @@ section.active-section.skillsGrid{
     padding: 10px 0 8px;
   }
 
-  .grid{
-    gap: 14px;
-  }
-
   .skillsBlock:first-child .grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
 
   .skillsBlock:nth-child(2) .grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
 
   .card{
-    padding: 14px 12px;
-    min-height: 124px;
+    min-height: 120px;
   }
 
   .langFlag svg{
@@ -307,6 +302,7 @@ section.active-section.skillsGrid{
     height: 44px;
   }
 }
+
 
 
 
