@@ -107,9 +107,10 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — LANG ROW TOP + TOOLS UNDER (SHARP)
+   SKILLS — LANG ROW + TOOLS GRID (SHARP + ALIGNED)
 ========================= */
 
+/* pull the whole Skills section closer to the menu */
 #skills{
   margin-top: -20px;
   padding-top: 0;
@@ -124,14 +125,16 @@ nav a:hover {
   box-sizing: border-box;
 }
 
-/* IMPORTANT: stack blocks vertically (languages on top, tools under) */
+/* ONLY layout when active (do NOT force display globally) */
 section.active-section.skillsGrid{
-  display: block;              /* <- was grid */
+  display: flex;              /* stack languages row then tools grid */
+  flex-direction: column;
+  gap: 18px;
 }
 
 /* blocks */
 .skillsBlock{
-  margin-bottom: 14px;         /* a bit of space between languages and tools */
+  margin-bottom: 0;
 }
 
 /* ======================
@@ -145,7 +148,7 @@ section.active-section.skillsGrid{
   align-content: start;
 }
 
-/* LANGUAGES — 1 ROW OF 6 */
+/* LANGUAGES — one row (6 across) */
 .skillsBlock:first-child .grid{
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 18px;
@@ -158,7 +161,7 @@ section.active-section.skillsGrid{
 }
 
 /* ======================
-   CARDS — SHARP
+   CARDS — SHARP + ALIGNED HEIGHT
 ====================== */
 
 .card{
@@ -169,6 +172,13 @@ section.active-section.skillsGrid{
   box-shadow: 0 14px 30px rgba(0,0,0,.10);
   transition: transform .18s ease, box-shadow .18s ease;
   box-sizing: border-box;
+
+  /* alignment fix */
+  min-height: 132px;                 /* same height for languages + tools */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;           /* vertical align */
+  align-items: center;
 }
 
 .card:hover{
@@ -181,17 +191,19 @@ section.active-section.skillsGrid{
   font-weight: 900;
   font-size: 1.02rem;
   color: #111;
+  line-height: 1.2;
 }
 
 .meta{
-  margin-top: 6px;
+  margin-top: 4px;                   /* tighter so languages don’t get taller */
   font-size: .9rem;
   font-weight: 700;
   color: #555;
 }
 
 /* ======================
-   LANGUAGES — SVG ICONS
+   LANGUAGES — SVG ICONS (replaces emoji)
+   Works for inline <svg> inside .langFlag
 ====================== */
 
 .langFlag{
@@ -212,13 +224,15 @@ section.active-section.skillsGrid{
    TOOLS — LOGO + NAME
 ====================== */
 
+/* tools are slimmer but same height */
 .skillsBlock:nth-child(2) .card{
-  padding: 10px 8px;
+  padding: 12px 10px;
+  min-height: 132px;                 /* keep same as .card */
 }
 
-/* remove logo container styling */
+/* logo container is just alignment (no extra box) */
 .logoTile{
-  margin: 0 auto 8px;
+  margin: 0 auto 10px;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -227,15 +241,16 @@ section.active-section.skillsGrid{
 }
 
 .logoTile svg{
-  width: 44px;                 /* slightly bigger */
-  height: 44px;
+  width: 46px;                       /* a bit bigger logos */
+  height: 46px;
   display: block;
 }
 
+/* tool label slightly smaller than language name */
 .skillsBlock:nth-child(2) .name{
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   font-weight: 800;
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 /* ======================
@@ -249,7 +264,7 @@ section.active-section.skillsGrid{
   }
 }
 
-/* Tablet: languages wrap to 3 per row, tools 4 per row */
+/* tablet */
 @media (max-width: 900px){
   .skillsBlock:first-child .grid{
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -260,7 +275,7 @@ section.active-section.skillsGrid{
   }
 }
 
-/* Mobile: languages 2 per row, tools 2 per row */
+/* mobile */
 @media (max-width: 640px){
   .skillsGrid{
     padding: 10px 0 8px;
@@ -280,10 +295,16 @@ section.active-section.skillsGrid{
 
   .card{
     padding: 14px 12px;
+    min-height: 124px;
   }
 
   .langFlag svg{
     width: 38px;
+  }
+
+  .logoTile svg{
+    width: 44px;
+    height: 44px;
   }
 }
 
