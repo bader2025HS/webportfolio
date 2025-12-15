@@ -2385,8 +2385,6 @@ margin-bottom: 0 !important;
     background 0.2s ease,
     box-shadow 0.2s ease,
     transform 0.2s ease,
-    outline-color 0.2s ease,
-    outline-width 0.2s ease;
 }
 
 /* LEFT — icon holder */
@@ -2433,13 +2431,12 @@ gap: 8px; /* was 6px */
 .activity-box:hover {
   background: #ffffff;
   transform: translateY(-3px);
-
-  /* turquoise frame INSIDE the box (no overflow) */
   box-shadow:
-    inset 0 0 0 2.5px #009fa5,
-    0 10px 24px rgba(0, 0, 0, 0.08);
+    inset 0 0 0 2.5px #009fa5,  /* turquoise frame INSIDE */
+    0 10px 24px rgba(0, 0, 0, 0.08); /* your normal lift shadow */
 }
 
+#activities { overflow-x: clip; }
 
 /* hover accents */
 .activity-box:hover h3 {
