@@ -2365,7 +2365,7 @@ gap: 16px;
 .activity-box {
 background: #ffffff;
 border: 1px solid #d1d5db;
-border-radius: 10px;
+border-radius: 0;
 padding: 18px 22px;
 
 display: grid;
@@ -2382,21 +2382,27 @@ box-shadow 0.2s ease,
 transform 0.2s ease,
 background 0.2s ease;
 }
+/* sharp industrial frame behavior */
+.activity-box{
+  outline: 1px solid transparent;   /* reserve space */
+  outline-offset: -1px;
+}
 
 /* hover – subtle lift + accent */
 .activity-box:hover {
-border-color: #000;
 background: #f9fafb;
 box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 transform: translateY(-3px);
+
+outline: 2.5px solid #009fa5; /* turquoise frame */
+outline-offset: -2.5px;
 }
+
 
 /* Tiny accent on title on hover */
 .activity-box:hover h3 {
-color: #b45309;
+color: #009fa5;
 }
-
-
 
 /* RESPONSIVE */
 @media (max-width: 800px) {
