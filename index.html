@@ -106,46 +106,38 @@ nav a:hover {
 }
 
 /* =========================
-   SKILLS — ONE UNIFIED GRID (NO 2-COLUMN PANELS)
-   Uses your existing HTML, but visually makes ALL cards sit in one grid.
-   ========================= */
+   SKILLS — SAFE UNIFIED GRID
+   NO overlap, NO collapse
+========================= */
 
-/* section wrapper */
 #skills{
-  display:block;
+  display: block;
+  position: relative;
   margin-top: 20px;
 }
 
-/* shell */
-#skills.skillsGrid,
+/* shell — SAME AS WORKING VERSION */
 .skillsGrid{
-  width: 1050px;
+  width: min(1200px, 92vw);
   margin: 0 auto;
-  padding: 48px 0;      /* keep your “safe buffer” */
+  padding: 48px 0;
 }
 
-/* IMPORTANT:
-   You have 2 .skillsBlock each containing a .grid.
-   We turn each .grid into a “pass-through” so the cards can flow together. */
-#skills .skillsBlock{
-  margin: 0;            /* no extra gaps between the two blocks */
+/* blocks stay REAL blocks */
+.skillsBlock{
+  margin: 0;
   padding: 0;
 }
 
-/* make each inner .grid stop behaving like a grid container */
-#skills .skillsBlock > .grid{
-  display: contents;    /* cards become children of the section grid */
-}
-
-/* the ONE real grid: apply it to the section */
-#skills.skillsGrid{
+/* ONE grid only — applied to BOTH blocks */
+.skillsBlock .grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 22px;
 }
 
-/* cards */
-#skills .card{
+/* cards — unchanged from working */
+.skillsBlock .card{
   background: #fff;
   border-radius: 22px;
   padding: 20px 18px;
@@ -154,19 +146,19 @@ nav a:hover {
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
-#skills .card:hover{
+.skillsBlock .card:hover{
   transform: translateY(-4px);
   box-shadow: 0 24px 50px rgba(0,0,0,.16);
 }
 
-/* names + meta */
-#skills .name{
+/* text */
+.skillsBlock .name{
   font-weight: 900;
   font-size: 1.1rem;
   color: #111;
 }
 
-#skills .meta{
+.skillsBlock .meta{
   margin-top: 6px;
   font-size: .95rem;
   font-weight: 700;
@@ -174,13 +166,13 @@ nav a:hover {
 }
 
 /* languages */
-#skills .langFlag{
+.skillsBlock .langFlag{
   font-size: 2.4rem;
   margin-bottom: 12px;
 }
 
 /* tools */
-#skills .logoTile{
+.skillsBlock .logoTile{
   width: 88px;
   height: 88px;
   margin: 0 auto 14px;
@@ -191,14 +183,13 @@ nav a:hover {
   box-shadow: 0 12px 26px rgba(0,0,0,.12);
 }
 
-#skills .logoTile svg{
+.skillsBlock .logoTile svg{
   width: 56px;
   height: 56px;
   display: block;
 }
 
-/* placeholder for empty logo tiles */
-#skills .logoTile:empty::after{
+.skillsBlock .logoTile:empty::after{
   content:"";
   width: 18px;
   height: 18px;
@@ -206,14 +197,13 @@ nav a:hover {
   background: rgba(0,0,0,.18);
 }
 
-/* responsive */
+/* responsive — same as before */
 @media (max-width: 640px){
-  #skills.skillsGrid{
+  .skillsBlock .grid{
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 16px;
   }
 }
-
 
 
 
