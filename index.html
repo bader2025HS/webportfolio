@@ -112,44 +112,85 @@ nav a:hover {
 /* =========================
    SKILLS — 3-COLUMN SHELL (SCOPED)
 ========================= */
-#skills .skillsGrid{ /* if you have a wrapper inside skills */
+/* =========================
+   SKILLS — 2-COLUMN SHELL
+   (LANGUAGES | TOOLS)
+========================= */
+
+#skills{
   width: min(1400px, 92vw);
   margin: 0 auto;
   padding: 0;
+}
+
+/* main shell */
+#skills .skillsGrid{
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 28px;
+  grid-template-columns: 1fr 2fr; /* LANG | TOOLS */
+  gap: 32px;
   align-items: start;
 }
 
-#skills .skillsBlock{ margin: 0; }
+/* blocks */
+#skills .skillsBlock{
+  margin: 0;
+}
 
+/* labels */
 #skills .skillsBlockLabel{
   font-size: .7rem;
   font-weight: 900;
   letter-spacing: .35em;
-  margin: 0 0 12px;
+  margin-bottom: 12px;
   color: #111;
 }
 
-/* LANG / TOOLS / SOFT grids */
+/* =========================
+   LANGUAGES
+========================= */
+
 #skills .skillsBlock:nth-of-type(1) .grid{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 x 3 */
+  gap: 14px;
 }
+
+#skills .langFlag{
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+/* =========================
+   TOOLS
+========================= */
+
 #skills .skillsBlock:nth-of-type(2) .grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 12px;
-}
-#skills .skillsBlock:nth-of-type(3) .grid{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* cards */
+#skills .logoTile{
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 6px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+}
+
+#skills .logoTile svg{
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+/* =========================
+   ITEMS (CARDS)
+========================= */
+
 #skills .card{
   background: #fff;
   border-radius: 14px;
@@ -158,36 +199,36 @@ nav a:hover {
   box-shadow: 0 8px 18px rgba(0,0,0,.08);
 }
 
-#skills .name{ font-size: .8rem; font-weight: 800; color:#111; }
-#skills .meta{ font-size: .7rem; font-weight: 600; color:#666; margin-top:2px; }
-
-#skills .langFlag{ font-size: 1.4rem; margin-bottom: 6px; }
-
-#skills .logoTile{
-  width: 44px; height: 44px;
-  margin: 0 auto 6px;
-  border-radius: 10px;
-  display: grid; place-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+/* text */
+#skills .name{
+  font-size: .8rem;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.15;
 }
-#skills .logoTile svg{ width: 26px; height: 26px; display:block; }
 
-#skills .emoji{ font-size: 1.4rem; margin-bottom: 6px; }
+#skills .meta{
+  font-size: .7rem;
+  font-weight: 600;
+  color: #666;
+  margin-top: 2px;
+}
 
+/* =========================
+   RESPONSIVE
+========================= */
 
-/* mobile fallback */
 @media (max-width: 900px){
-  #skills.skillsGrid{
+  #skills .skillsGrid{
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 24px;
   }
-  #skills.skillsGrid > .skillsBlock:nth-of-type(1) > .grid{
+
+  #skills .skillsBlock:nth-of-type(1) .grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  #skills.skillsGrid > .skillsBlock:nth-of-type(3) > .grid{
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
 }
+
 
 
 /* ===========================
