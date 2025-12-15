@@ -162,7 +162,7 @@ nav a:hover {
   box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
-/* text */
+/* text (TOOLS only use .name) */
 .name{
   font-weight: 900;
   font-size: 1.02rem;
@@ -292,77 +292,66 @@ nav a:hover {
 }
 
 /* ======================
-   LANGUAGES — SINGLE LINE
-====================== */
-
-.card.lang .meta{
-  display: none;
-}
-
-.card.lang .lang-line{
-  font-weight: 900;
-  font-size: 1.02rem;
-  color: #111;
-  line-height: 1.2;
-}
-
-.card.lang .lang-line span{
-  font-weight: 700;
-  color: #555;
-}
-
-
-/* ======================
    LANGUAGES — ROTATING TEXT
+   Uses your HTML:
+   <div class="flipText">
+     <span class="flip a">Arabic</span>
+     <span class="flip b">Native</span>
+   </div>
 ====================== */
 
-/* hide old meta if still present */
-.card.lang .meta{ display:none; }
+/* if any old .name/.meta exist in language cards, hide them */
+.card.lang .name,
+.card.lang .meta{
+  display: none !important;
+}
 
-/* the rotating “slot” */
+/* slot */
 .card.lang .flipText{
   position: relative;
-  height: 1.25em;              /* reserves space so cards don’t jump */
+  width: 100%;
+  height: 1.25em;               /* reserve space */
   margin-top: 2px;
-  font-weight: 900;
-  font-size: 1.02rem;
-  color: #111;
-  line-height: 1.25;
   display: grid;
   place-items: center;
   overflow: hidden;
 }
 
-/* two layers (name + level) */
+/* both layers */
 .card.lang .flip{
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
+
+  font-weight: 900;
+  font-size: 1.02rem;
+  line-height: 1.25;
+  color: #111;
+
   opacity: 0;
   transform: translateY(6px);
   animation: langFlip 3.2s infinite;
 }
 
-/* show the language first */
+/* language first */
 .card.lang .flip.a{
-  opacity: 1;
-  transform: translateY(0);
+  animation-delay: 0s;
 }
 
-/* show the level second (delayed) + slightly lighter */
+/* level second */
 .card.lang .flip.b{
   animation-delay: 1.6s;
   font-weight: 800;
   color: #555;
 }
 
-/* keyframes: fade/slide in → hold → fade/slide out */
+/* in → hold → out */
 @keyframes langFlip{
   0%   { opacity:0; transform: translateY(6px); }
-  10%  { opacity:1; transform: translateY(0); }
-  40%  { opacity:1; transform: translateY(0); }
-  50%  { opacity:0; transform: translateY(-6px); }
+  12%  { opacity:1; transform: translateY(0); }
+  42%  { opacity:1; transform: translateY(0); }
+  55%  { opacity:0; transform: translateY(-6px); }
   100% { opacity:0; transform: translateY(-6px); }
 }
 
@@ -371,6 +360,7 @@ nav a:hover {
   .card.lang .flip{ animation: none; opacity: 1; transform: none; }
   .card.lang .flip.b{ display:none; }
 }
+
 
 
 
