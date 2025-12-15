@@ -107,14 +107,11 @@ nav a:hover {
 
 
 /* =========================
-   SKILLS — 7 COLUMNS / 3 ROWS
-   COLS 1–2: LANGUAGES
-   COLS 3–7: TOOLS
-   SHARP + PERFECTLY ALIGNED
-   ✅ GRID APPLIES TO: .skillsGrid .skills-7x3
+   SKILLS — TRUE 7×3 GRID
+   Cols 1–2: Languages (6 cards = 2 per row × 3 rows)
+   Cols 3–7: Tools     (15 cards = 5 per row × 3 rows)
 ========================= */
 
-/* pull Skills closer to menu */
 #skills{
   margin-top: -20px;
   padding-top: 0;
@@ -129,17 +126,18 @@ nav a:hover {
   box-sizing: border-box;
 }
 
-/* ✅ GRID LAYOUT (your actual wrapper: <div class="grid skills-7x3">) */
+/* the real grid wrapper in your HTML: <div class="grid skills-7x3"> */
 .skillsGrid .skills-7x3{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: 1fr;              /* all rows equal */
+  grid-template-rows: repeat(3, 1fr);   /* force exactly 3 rows */
   gap: 18px;
   align-items: stretch;
+  grid-auto-flow: row;
 }
 
 /* ======================
-   CARDS — UNIFIED
+   CARDS
 ====================== */
 
 .card{
@@ -180,7 +178,7 @@ nav a:hover {
 }
 
 /* ======================
-   LANGUAGE ICONS (SVG)
+   LANGUAGE ICONS
 ====================== */
 
 .langFlag{
@@ -217,25 +215,27 @@ nav a:hover {
   display: block;
 }
 
-/* slightly smaller label for tools */
 .card.tool .name{
   font-size: 0.86rem;
   font-weight: 800;
 }
 
 /* ======================
-   GRID POSITIONING
-   (HTML ORDER MATTERS)
+   ✅ FORCE LANGUAGES INTO COLS 1–2 / ROWS 1–3
+   (because they are the first 6 cards in your HTML)
 ====================== */
 
-/* LANGUAGES — occupy cols 1–2 */
-.card.lang{
-  grid-column: span 2;
-}
+.skillsGrid .skills-7x3 > .card.lang:nth-of-type(1){ grid-column: 1; grid-row: 1; }
+.skillsGrid .skills-7x3 > .card.lang:nth-of-type(2){ grid-column: 2; grid-row: 1; }
+.skillsGrid .skills-7x3 > .card.lang:nth-of-type(3){ grid-column: 1; grid-row: 2; }
+.skillsGrid .skills-7x3 > .card.lang:nth-of-type(4){ grid-column: 2; grid-row: 2; }
+.skillsGrid .skills-7x3 > .card.lang:nth-of-type(5){ grid-column: 1; grid-row: 3; }
+.skillsGrid .skills-7x3 > .card.lang:nth-of-type(6){ grid-column: 2; grid-row: 3; }
 
-/* TOOLS — occupy 1 column each */
-.card.tool{
-  grid-column: span 1;
+/* tools auto-fill starting at col 3 row 1 */
+.skillsGrid .skills-7x3 > .card.tool{
+  grid-column: auto;
+  grid-row: auto;
 }
 
 /* ======================
@@ -253,10 +253,18 @@ nav a:hover {
 @media (max-width: 900px){
   .skillsGrid .skills-7x3{
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto; /* allow wrap */
   }
 
-  .card.lang{
-    grid-column: span 2;
+  /* let items flow naturally on smaller screens */
+  .skillsGrid .skills-7x3 > .card.lang:nth-of-type(1),
+  .skillsGrid .skills-7x3 > .card.lang:nth-of-type(2),
+  .skillsGrid .skills-7x3 > .card.lang:nth-of-type(3),
+  .skillsGrid .skills-7x3 > .card.lang:nth-of-type(4),
+  .skillsGrid .skills-7x3 > .card.lang:nth-of-type(5),
+  .skillsGrid .skills-7x3 > .card.lang:nth-of-type(6){
+    grid-column: auto;
+    grid-row: auto;
   }
 }
 
@@ -265,11 +273,7 @@ nav a:hover {
   .skillsGrid .skills-7x3{
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
-  }
-
-  .card.lang,
-  .card.tool{
-    grid-column: span 2;
+    grid-template-rows: auto;
   }
 
   .card{
@@ -286,6 +290,7 @@ nav a:hover {
     height: 44px;
   }
 }
+
 
 
 
