@@ -115,148 +115,102 @@ nav a:hover {
 ========================= */
 
 /* =========================
-   SKILLS — 2 COLUMN SHELL
-   ONLY affects: <section id="skills" class="skillsGrid">
+   SKILLS — 3 PANEL SHELL
 ========================= */
 
-#skills.skillsGrid,
-#skills.skillsGrid *{
-  box-sizing: border-box;
-}
-
-#skills.skillsGrid{
-  width: 1050px;
+/* === SKILLS GRID BASE === */
+.skillsGrid{
+  width: min(1200px, 92vw);
   margin: 0 auto;
-  padding: 0;              /* close to menu */
-  display: grid;
-  grid-template-columns: 420px 1fr;  /* LEFT languages | RIGHT tools */
-  gap: 44px;               /* space between the 2 parts */
-  align-items: start;
+  padding: 48px 0;
 }
 
-/* blocks */
-#skills.skillsGrid .skillsBlock{ margin: 0; }
-
-/* ===== LEFT: LANGUAGES (smaller) ===== */
-#skills.skillsGrid .skillsBlock:first-child .grid{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+/* section blocks */
+.skillsBlock{
+  margin-bottom: 48px;
 }
 
-#skills.skillsGrid .skillsBlock:first-child .card{
-  background: #fff;
-  border-radius: 14px;
-  padding: 10px 10px;
-  text-align: center;
-  box-shadow: 0 8px 18px rgba(0,0,0,.08);
-}
-
-#skills.skillsGrid .skillsBlock:first-child .langFlag{
-  font-size: 1.2rem;
-  margin-bottom: 4px;
-}
-
-#skills.skillsGrid .skillsBlock:first-child .name{
-  font-size: .82rem;
-  font-weight: 800;
+.skillsBlockLabel{
+  font-size: .85rem;
+  font-weight: 900;
+  letter-spacing: .35em;
+  margin-bottom: 18px;
   color: #111;
-  line-height: 1.15;
 }
 
-#skills.skillsGrid .skillsBlock:first-child .meta{
-  font-size: .70rem;
-  font-weight: 650;
-  color: #666;
-  margin-top: 2px;
-}
-
-/* (optional) if you switch flags -> SVG */
-#skills.skillsGrid .langIcon{
-  width: 26px;
-  height: 18px;
-  margin: 0 auto 6px;
+/* grid */
+.grid{
   display: grid;
-  place-items: center;
-}
-#skills.skillsGrid .langIcon svg{
-  width: 100%;
-  height: 100%;
-  display: block;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 22px;
 }
 
-/* ===== RIGHT: TOOLS (bigger) ===== */
-#skills.skillsGrid .skillsBlock:last-child .grid{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(110px, 1fr));
-  gap: 16px;
-}
-
-#skills.skillsGrid .skillsBlock:last-child .card{
+/* card */
+.card{
   background: #fff;
+  border-radius: 22px;
+  padding: 20px 18px;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(0,0,0,.16);
+}
+
+/* names + meta */
+.name{
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #111;
+}
+
+.meta{
+  margin-top: 6px;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #555;
+}
+
+/* === LANGUAGES === */
+.langFlag{
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+/* === TOOLS === */
+.logoTile{
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 14px;
   border-radius: 20px;
-  padding: 18px 14px;
-  text-align: center;
-  box-shadow: 0 10px 22px rgba(0,0,0,.10);
-}
-
-#skills.skillsGrid .skillsBlock:last-child .logoTile{
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 8px;
-  border-radius: 14px;
   display: grid;
   place-items: center;
   background: #fff;
-  box-shadow: 0 6px 14px rgba(0,0,0,.10);
+  box-shadow: 0 12px 26px rgba(0,0,0,.12);
 }
 
-/* force svgrepo icons to behave */
-#skills.skillsGrid .skillsBlock:last-child .logoTile svg{
-  width: 36px !important;
-  height: 36px !important;
+.logoTile svg{
+  width: 56px;
+  height: 56px;
   display: block;
 }
 
-#skills.skillsGrid .skillsBlock:last-child .name{
-  font-size: .92rem;
-  font-weight: 850;
-  color: #111;
-  line-height: 1.15;
+/* === SOFT SKILLS === */
+.emoji{
+  font-size: 2.2rem;
+  margin-bottom: 12px;
 }
 
-/* hover (skills only) */
-#skills.skillsGrid .card{
-  transition: transform .16s ease, box-shadow .16s ease;
-}
-#skills.skillsGrid .card:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 16px 32px rgba(0,0,0,.14);
-}
-
-/* responsive */
-@media (max-width: 1100px){
-  #skills.skillsGrid{ width: 92vw; }
-}
-@media (max-width: 900px){
-  #skills.skillsGrid{
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-  #skills.skillsGrid .skillsBlock:last-child .grid{
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+/* === RESPONSIVE === */
+@media (max-width: 640px){
+  .grid{
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
   }
 }
-
-/* FORCE skills to behave like a normal section */
-#skills,
-#skills.skillsGrid{
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  z-index: auto !important;
-}
-
 
 
 /* ===========================
@@ -3245,89 +3199,43 @@ padding: 16px 32px 15px;   /* was 28px → add +12px height */
 
   <!-- LANGUAGES -->
   <div class="skillsBlock">
-    <div class="grid">
-
-       <article class="card">
-  <div class="langIcon">
-<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" 
-  xmlns:xlink="http://www.w3.org/1999/xlink" 
-  aria-hidden="true" role="img" 
-  class="iconify iconify--emojione" 
-  preserveAspectRatio="xMidYMid meet" 
-  fill="#000000"><g 
-                   id="SVGRepo_bgCarrier" 
-                   stroke-width="0"></g><g id="SVGRepo_tracerCarrier" 
-                    stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="32" cy="32" r="30" fill="#699635"> </circle> <g fill="#ffffff"> <path d="M31.7 26.7c-.1-.9.4-1.8 1.3-1.6c.7.1 1.5.8 1.1 1.5c-.6 1.1-2.2 1.1-3.2 1.7c.1.6 3-.1 3.5-.1s1 .2.7.8c-.3.6-1.3.6-1.9.7c-.6.1-1.6.1-1.9.6c-.6.8.6.9 1 1.1c1 .5-.6 1-1 .9c-1.5-.3-1.8-1.1-2.7-2.1c-.9 1.2-3.7 3.9-4.3 1.1c-1 .4-2 .9-3.1 1c.5-.7 1.5-1 2.3-1.4c1-.5 1-1.4 1.6-2.2c.2.3 0 .7.1 1.1c.8-.4 1.8-1.2 1.4-2.2c0-.1-1.2-2.5-.2-2.1c.9.4.6 1.3.8 2c.3 1.3-.3 2-1.3 2.8c-.4.3-1.5 1.5-.2 1.5c.9 0 1.7-1 2.2-1.6c.6-.8.4-1.6 0-2.5c-.3-.7-1-2.2-.1-2.7c.7 1.1 1 2.4 1.3 3.7c.2 1.1.4 2.2 1.6 2.5c-.1-.8.4-1.4 1.1-1.7c-.5-.4-3.3.1-2.2-1.4c.1-.7 2.1-1 2.1-1.4"> </path> <path d="M16.4 30.4c.5 1.4 2.2.9 3.2.5c1.6-.8 1.6-2 1.6-3.6c-.6.3-.5 1.4-.7 1.9c-.4.8-1.7 1.5-2.6 1.4c-1.3-.2-1.9-2.4-.9-3.2c.2.7-.3 2.2.9 2.3c.9.1 2.7-1 2.4-2c-1.2.4-1.9 0-1.5-1.3c.3-1.2 1.5-.3 2 .3c1.9-1.1-1.5-5.3.5-6.4c.4.7 1 1.6.5 2.3c-.6.8 0 2.5.1 3.4c1-.9.2.7 1 .8c.5.1.7-1.2 1-1.2c.1.3.1 1.2.6 1.1c.6-.2-.1-1 .5-1.2c.2.5.1 2-.6 1.9c-.6-.1-.5-.5-1.2-.1c-.6.3-.8 0-1.2-.3c-.1 1.2.3 2.5-.4 3.6c-.6.9-1.8 1.4-2.8 1.6c-2.6.5-3.3-2.1-2.4-4.2c.2.6-.2 1.7 0 2.4"> </path> <path d="M40.8 30.9c.5 1.3 1.5-1.4 1.8-1.8c.8-1.2 2 1.9 2.5-.1c.3-1.3-.1-2.6-.2-3.9c-.1-.9-.4-1.7-1-2.4c-.6-.8-1.2-1.5-.9-2.5c1 .4 1 1.2 1.5 2c.1-.6-.3-1.4.1-1.9c.5-.7.9 1.2.9 1.4c.1.5-.4.7-.1 1.5c.2.6.6 1.2 1 1.7c-.1-.6-1-4.7 0-4.7c.3 0 .6 1.2.6 1.4c.2.6-.2 1.1-.2 1.8c-.1 1.2.1 2.6.9 3.5c.4.5 1.9 2.3 1.1 2.9c-.6-.7-1-1.5-1.5-2.2c0 .8.2 1.7-.2 2.3c-.4-.2-.2-1.5-.2-1.8c0-1.1-.7-2-1.3-2.9c-.2 1.5 1 4.3-.4 5.4c-.9.8-2.1-1-2.4-.3c-.3.5-1 2.3-1.8 2.1c-1-.2-1.7-3-.6-3.3c.1.5.1 1.2.4 1.8"> </path> <path d="M19.4 24.1c.7.1 0-2.3 0-2.7c.1-.4.4-.6.6-.2c.3.6.3 1.3.4 1.9c0 .5.1 1.1-.3 1.5c-.6.6-1.4.3-1.7-.5c-1.4 1.2.4 3.3-.8 4.5c-.2-1.1 0-2.3-.4-3.3c-.2-.5-1.1-.3-1.2-1.2c0-.4.3-1.5-.1-1.8c-.2.4-.4 3.5-1.4 2.6c-.8-.6-.6-2.6-.3-3.4c.6.3-.1 2.5.7 2.6c.4.1.5-1.6.6-1.9c.3-.5 1.3-1.9 1.1-.5c-.1.6-.6 2.5.6 2.4c-.1-1-.2-2-.4-3c-.1-.5.2-1.5.6-.6c.3.6.1.9 0 1.5c-.1.7.2 1.4.3 2c.6-.5-.2-2.4.3-3.2c1.2.7-.1 3.1 1.4 3.3"> </path> <path d="M32.3 24.3c-.5.7-1.4.1-1.8-.4c-.5.6-1.5 1.6-2.3.8c-.6-.6.1-1.7-.4-2.2c-.3.5-.8 2.9-1.7 1.8c-.5-.6-1.2-2.7-.1-3.2c-.1.8-.3 1.7.2 2.4s1-1.1 1.2-1.5c.3-.7 1.3-1.9 1.1-.4c-.1.6-.3 2 .3 2.4c.4.3.9-.2 1.1-.5c.4-.5.2-1.3.1-1.9c-.1-.5-.3-1.1 0-1.6c.4-.6.7.8.7 1.1c0 .3.4 3.4 1.1 2.4c.7-.9-1.2-2.9.1-3.4c.5-.2 1.4 1.8.4 1.2c.3.9.7 2.2 0 3"> </path> <path d="M36.1 25.5c.1 1.3 1.2 4.9-.3 5.7c-.2-.4 0-1 .1-1.5c.1-.9-.1-1.8-.2-2.6c-.2-1.9-.4-3.3-1.7-4.8c-.3-.4-.8-.7-.9-1.3c0-.2-.1-1.1.3-.9c.3.1 2 1.6 1.1 1.6c.1.2.5 1 .7 1c0-.5-.6-2 0-2.3c.5-.3 1.1 1.6.9 2c-.2.5-.2.8 0 1.5c.2.8.7 1.5 1.1 2.2c.6 1 1.8 2.4 1.5 3.7c-.6-.3-1-1.7-1.3-2.3c-.2-.5-.4-1-.7-1.4c-.1-.1-.7-.9-.6-.4v-.2"> </path> <path d="M50 27.4c.1 2.1-.6 4.8-3.2 4.8c0-.6 1.3-1.2 1.7-1.5c1-.8.9-2.3.8-3.4c-.1-1.5-.2-3-.5-4.5c-.1-.9-.6-2.2.2-2.8c.5.4 1.2 1.5.9 1.9c-.5.6 0 5.1.1 5.5"> </path> <path d="M37.2 31.9c2.6-1.5 1.8-4.7 1.6-7.2c-.1-.7-.1-1.4-.2-2.1c0-.5-.4-1.2-.2-1.7c.5-1.3.9-.1 1 .7c.1.5-.3.6-.2 1c.1.8.1 1.6.2 2.4c.1 1.3.3 2.6.2 3.8c-.2 1.9-1.2 4-3.5 3.6c.1-.2.8-.3 1.1-.5"> </path> <path d="M41.4 26.9c.1 1 .5 2.8 0 3.7c-.4.6-.4-.4-.5-.5c-.1-.8-.1-1.6-.1-2.5c-.2-2.2-.9-4.4-.9-6.5c0-2.7 2.3 1.5 1 1.3c.1 1.5.3 3 .5 4.5"> </path> <path d="M25.1 21.8c.2.5-2.3 1.8-2.6 1.8c-.1-.5 1.1-1.2 1.4-1.4c.3-.3.5-.3.4-.7c-.2-.4-.1-1.1.4-1.3c1-.3.3 1.2.4 1.6"> </path> <path d="M14.8 30.7c0 .8.3.4.7.2c.2.4-.3 1.5-.8 1c-.7-.7-.1-2.3.2-3c.2.5-.2 1.3-.1 1.8"> </path> <path d="M43 24.5c.1-.4-.2-.8.1-1.2c.4-.5.8.1.6.3c-.2.2-.5-.2-.5.4c0 .3.2.9-.1 1.2c-.2-.1-1.1-1.4-1-1.6c.4-.4.8.8.9.9"> </path> <path d="M16.9 26.2c-.2.4-2.5 1.7-2.6 1.4c0-.3 2.9-2 2.6-1.4"> </path> <path d="M33.9 31.3c-.3.9 1 .1 1.3 0c-.4.7-1.8 1.3-1.6 0c-.1 0-.3.1-.4.1c-.2-.2 1-1 .7-.1"> </path> <path d="M44.8 31c.3 0 .8.9.5 1.1c-.2.2-1.1.3-.6-.1c.6-.6.1-1 .1-1"> </path> <path d="M30.7 25.9c.1-.2.1-.5.2-.7c1 .8-1.6 2.1-1.1.2c.2.2.2.5.4.6c0-.2.1-.5.1-.7c.2.2.2.5.4.6"> </path> <path d="M42.4 27.2c-.3-.4 1.5-1.5 1.8-1.7c.2.3-1.2 1.4-1.8 1.7"> </path> <path d="M48 23.2c-.2-.6-.8-1.8-.2-2.3c.4.3.6 1.8.2 2.3"> </path> <path d="M37.1 21.2c-.1-.2-.4-.4-.4-.7c.1-.4.3-.3.5-.1c.3.4.5 1.5 0 1.8c0-.3.1-.7-.1-1"> </path> <path d="M24.9 23.9c0 .6-1 1.2-1.1.4c-.1-.3.4-1.4.6-1.1c-.4.9-.4 1.2.5.7"> </path> <path d="M37.4 22.8c.4 1 .2.1.6-.1c.7 1.3-1.5 1-1 .2c.1.1.2.3.2.4c.1-.1.1-.3.2-.5"> </path> <path d="M43.8 27.4c-.5-.4.1-.9.4-.4c.2.3.2 1.1-.2 1.3c0-.3.1-.7-.2-.9"> </path> <path d="M23.3 29.6c0-.2-.1-1.7.2-1.5c.4.2.3 1.3-.2 1.5"> </path> <path d="M19.1 20.2c.1.3.2.7.4.2c.8.9-2 .6-1-.3c0 .1.2.7.6.1"> </path> <path d="M29.3 22.4c0-.4-.6-2.1-.1-2.1c.6.1.5 1.6.1 2.1"> </path> <path d="M15.3 21.5c-.3-.1.2-.6 0-1c-.2.1-.4-.2-.2-.4c.8-.6.5 1.4.2 1.4"> </path> <path d="M41.2 41.8l-.4-1.2l-.4 1.2H18.5s.2 1.8 2.4 1.8h19.4V45h5.3v-3.2h-4.4m3.4 2.4H41v-1h3.6v1"> </path> </g> </g></svg>  </div>
-  <div class="name">Arabic</div>
-  <div class="meta">Native</div>
-</article>
-
-       <article class="card">
-  <div class="langIcon">
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/>
-<circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
-</svg>
-  <div class="name">Arabic</div>
-  <div class="meta">Native</div>
-</article>
-
-      <article class="card">
-  <div class="langIcon">
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/>
-<circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
-</svg>
-    <div class="name">English</div>
-        <div class="meta">C2</div>
-      </article>
-
-      <article class="card">
-  <div class="langIcon">
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/>
-<circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
-</svg>
-    <div class="name">German</div>
-        <div class="meta">C1</div>
-      </article>
-
-      <article class="card">
-  <div class="langIcon">
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/>
-<circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
-</svg>
-    <div class="name">Persian</div>
-        <div class="meta">A2</div>
-      </article>
-
-      <article class="card">
-  <div class="langIcon">
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<circle style="fill:#F0F0F0;" cx="256" cy="256" r="256"/>
-<circle style="fill:#D80027;" cx="256" cy="256" r="111.304"/>
-</svg>
-    <div class="name">Japanese</div>
-        <div class="meta">A2</div>
-      </article>
-
-    </div>
+    <div class="grid"> 
+		<article class="card"> 
+			<div class="langFlag">🇸🇦</div> 
+			<div class="name">Arabic</div> 
+			<div class="meta">Native</div> 
+		</article> 
+		
+		<article class="card"> 
+			<div class="langFlag">🇫🇷</div> 
+			<div class="name">French</div> 
+			<div class="meta">Native</div> 
+		</article> 
+		
+		<article class="card"> 
+			<div class="langFlag">🇬🇧</div> 
+			<div class="name">English</div> 
+			<div class="meta">C2</div> 
+		</article> 
+		
+		<article class="card"> 
+			<div class="langFlag">🇩🇪</div> 
+			<div class="name">German</div> 
+			<div class="meta">C1</div> 
+		</article> 
+		
+		<article class="card"> 
+			<div class="langFlag">🇮🇷</div> 
+			<div class="name">Persian</div> 
+			<div class="meta">A2</div> 
+		</article> 
+		
+		<article class="card"> 
+			<div class="langFlag">🇯🇵</div> 
+			<div class="name">Japanese</div> 
+			<div class="meta">A2</div> 
+		</article> 
+	</div> 
   </div>
 
   <!-- TOOLS -->
