@@ -113,83 +113,100 @@ nav a:hover {
    SKILLS — MINIMAL VIEW
 ========================= */
 
-/* === SKILLS — SCALE DOWN (FIT VIEWPORT) === */
-
-/* overall spacing */
+/* === SKILLS GRID BASE === */
 .skillsGrid{
-  padding: 28px 0;
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  padding: 48px 0;
 }
 
+/* section blocks */
 .skillsBlock{
-  margin-bottom: 28px;
+  margin-bottom: 48px;
 }
 
 .skillsBlockLabel{
-  font-size: .7rem;
-  margin-bottom: 12px;
+  font-size: .85rem;
+  font-weight: 900;
+  letter-spacing: .35em;
+  margin-bottom: 18px;
+  color: #111;
 }
 
-/* grid tighter */
+/* grid */
 .grid{
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 22px;
 }
 
-/* cards smaller */
+/* card */
 .card{
-  padding: 14px 12px;
-  border-radius: 16px;
-  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+  background: #fff;
+  border-radius: 22px;
+  padding: 20px 18px;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
 .card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0,0,0,.14);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(0,0,0,.16);
 }
 
-/* text smaller */
+/* names + meta */
 .name{
-  font-size: .95rem;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #111;
 }
 
 .meta{
-  font-size: .8rem;
-  margin-top: 4px;
+  margin-top: 6px;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #555;
 }
 
-/* languages */
+/* === LANGUAGES === */
 .langFlag{
-  font-size: 1.8rem;
-  margin-bottom: 8px;
+  font-size: 2.4rem;
+  margin-bottom: 12px;
 }
 
-/* tools */
+/* === TOOLS === */
 .logoTile{
-  width: 60px;
-  height: 60px;
-  margin-bottom: 8px;
-  border-radius: 14px;
-  box-shadow: 0 8px 18px rgba(0,0,0,.10);
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 14px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 12px 26px rgba(0,0,0,.12);
 }
 
 .logoTile svg{
-  width: 36px;
-  height: 36px;
+  width: 56px;
+  height: 56px;
+  display: block;
 }
 
-/* soft skills */
+/* === SOFT SKILLS === */
 .emoji{
-  font-size: 1.6rem;
-  margin-bottom: 8px;
+  font-size: 2.2rem;
+  margin-bottom: 12px;
 }
 
-/* small screens */
+/* === RESPONSIVE === */
 @media (max-width: 640px){
   .grid{
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
   }
 }
+
 
 
 
