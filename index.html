@@ -2366,23 +2366,20 @@ ACTIVITIES — ICON + TEXT CARDS
 
 /* each card */
 .activity-box {
+  align-items: center; /* ⬅ centers icon vertically relative to text block */
   background: #f5f8ff; /* soft blue like other sections */
   border: 1px solid #d1d5db;
   border-radius: 0; /* sharp angles */
   padding: 18px 22px;
-
   display: grid;
   grid-template-columns: 64px 1fr;
   column-gap: 14px;
   align-items: flex-start;
-
   position: relative;
   cursor: default;
-
   /* reserve space for thick hover frame (no jump) */
   outline: 1px solid transparent;
   outline-offset: -1px;
-
   transition:
     background 0.2s ease,
     box-shadow 0.2s ease,
@@ -2398,8 +2395,13 @@ ACTIVITIES — ICON + TEXT CARDS
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6b7280; /* muted by default */
+  transition: transform 0.25s ease, color 0.25s ease;
 }
+.activity-box:hover .activity-icon {
+  transform: scale(1.15); /* subtle zoom */
+  color: #009fa5;         /* turquoise to match frame */
+}
+
 
 /* RIGHT — stacked text */
 .activity-content {
@@ -2410,10 +2412,13 @@ ACTIVITIES — ICON + TEXT CARDS
 
 .activity-content h3 {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.05rem;   /* was ~0.95rem */
   font-weight: 600;
   color: #1f2937;
+  line-height: 1.25;
+gap: 8px; /* was 6px */
 }
+
 
 .activity-content p {
   margin: 0;
