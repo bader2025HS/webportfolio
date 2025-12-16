@@ -558,7 +558,6 @@ Hover: white + thick turquoise border
 
 /* ===========================
 ABOUT – SECOND ROW GRID
-(STATS | FOCUS | MAP)
 =========================== */
 
 .about-grid{
@@ -570,7 +569,6 @@ ABOUT – SECOND ROW GRID
 
 /* ===========================
 ABOUT – STATS (2×2 GRID)
-Turquoise on hover + turquoise left strip
 =========================== */
 
 .about-stats-grid{
@@ -675,7 +673,10 @@ Turquoise on hover + turquoise left strip
   opacity:1;
   transform: translateY(0);
 }
-
+/* stats label → turn black on hover */
+.about-stat:hover .about-stat-label{
+  color: #111111;
+}
 /* ===========================
 ABOUT – FOCUS AREAS (MIDDLE)
 Chips: blue static + thin inner line
