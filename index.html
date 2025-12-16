@@ -1266,6 +1266,20 @@ overflow: visible;
 
 /* --------- CARDS BASE --------- */
 
+/* EXPERIENCE — reserve hover border space (no layout shift) */
+.exp-card-face{
+  border: 2.5px solid transparent;
+  position: relative;
+}
+/* inner thin static frame (same system as other sections) */
+.exp-card-face::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+}
+
 .exp-card {
 position: relative;
 cursor: pointer;
@@ -1293,7 +1307,6 @@ inset: 0;
 border-radius: 0;
 overflow: hidden;
 backface-visibility: hidden;
-border: 1px solid rgba(148, 163, 184, 0.5);
 box-shadow: none;
 }
 
@@ -1329,28 +1342,6 @@ font-size: 1.35rem;
 font-weight: 600;
 max-width: 14ch;
 line-height: 1.15;
-}
-
-/* right side gate block */
-
-.exp-gate {
-text-align: right;
-min-width: 90px;
-}
-
-.exp-gate-label {
-font-size: 0.7rem;
-text-transform: uppercase;
-letter-spacing: 0.18em;
-color: #9ca3af;
-}
-
-.exp-gate-code {
-margin-top: 4px;
-font-size: 2.1rem;
-font-weight: 700;
-letter-spacing: 0.16em;
-color: var(--exp-accent);
 }
 
 /* BACK */
@@ -1697,7 +1688,6 @@ EXPERIENCE — MODERN BLUE + HONEY ACCENTS
 .exp-card-back {
 background: #f5f8ff !important; /* same soft blue as contact */
 color: #1f2937 !important; /* clean dark grey */
-border: 1px solid rgba(0, 0, 0, 0.12) !important;
 box-shadow: none !important;
 background-image: none !important; /* remove texture */
 }
@@ -1722,11 +1712,15 @@ display: none !important;
 }
 
 /* Modern hover effect */
-.exp-card:hover .exp-card-front {
-background: #ffffff !important;
-border-color: #d79a3b !important; /* honey border */
-box-shadow: 0 10px 24px rgba(0,0,0,0.12) !important;
-transform: translateY(-2px);
+/* hover — activate real border */
+.exp-card:hover .exp-card-face{
+  background: #ffffff;
+  border-color: var(--exp-accent, #0ea5a2); /* turquoise default */
+}
+
+/* hide inner line when real border is active */
+.exp-card:hover .exp-card-face::after{
+  box-shadow: none;
 }
 
 /* BACK SIDE CLEAN STYLE */
@@ -1780,16 +1774,6 @@ EXPERIENCE — FRAME: 1px static, 2.5px turquoise on hover (no shift)
   transition: outline-color 0.18s ease, outline-width 0.18s ease;
 }
 
-/* hover: turquoise 2.5px frame */
-.exp-card:hover .exp-card-face{
-  outline-color: #009fa5 !important; /* turquoise */
-  outline-width: 2.5px;
-}
-
-.exp-card--expanded .exp-card-back{
-  outline: 2.5px solid #009fa5 !important;
-  outline-offset: -2.5px;
-}
 
 /* EXPERIENCE — unified lift (matches Skills / Contact) */
 .exp-card{
