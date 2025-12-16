@@ -1232,556 +1232,324 @@ margin-top: -20px !important; /* adjust -20 / -30 / -50 to taste */
 EXPERIENCE – 2×2 GRID
 =========================== */
 
-#experience {
-margin-top: -10px;
-padding: 10px 0 0;
-position: relative;
+#experience{
+  margin-top:-10px;
+  padding:10px 0 0;
+  position:relative;
 }
 
-.experience-layout {
-position: relative;
-z-index: 1;
-max-width: 1050px;
-margin: -20px auto 0;
-padding: 0;
+.experience-layout{
+  position:relative;
+  z-index:1;
+  max-width:1050px;
+  margin:-20px auto 0;
+  padding:0;
 }
 
-/* 2×2 grid, all cards same size */
-.exp-mosaic {
-position: relative;
-max-width: 1050px;
-width: 100%; /* full width of container */
-margin: 0 auto; /* center */
-display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-grid-auto-rows: minmax(200px, 1fr);
-grid-template-areas:
-"ngo io"
-"research assoc";
-gap: 18px;
-perspective: 1200px;
-overflow: visible;
+/* 2×2 grid */
+.exp-mosaic{
+  max-width:1050px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-rows:minmax(200px,1fr);
+  grid-template-areas:
+    "ngo io"
+    "research assoc";
+  gap:18px;
+  perspective:1200px;
 }
 
+/* ======================
+CARD SHELL (UNIFIED SYSTEM)
+====================== */
 
-/* --------- CARDS BASE --------- */
-
-/* EXPERIENCE — reserve hover border space (no layout shift) */
-.exp-card-face{
-  border: 2.5px solid transparent;
-  position: relative;
-}
-/* inner thin static frame (same system as other sections) */
-.exp-card-face::after{
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+.exp-card{
+  position:relative;
+  cursor:pointer;
+  overflow:visible;
 }
 
-.exp-card {
-position: relative;
-cursor: pointer;
-overflow: visible; /* so the expanded back can spill out */
+/* lift */
+.exp-card{
+  transition: transform .22s ease;
 }
-
-.exp-card-inner {
-position: relative;
-width: 100%;
-height: 100%;
-transform-style: preserve-3d;
-transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.25, 1);
-}
-
-/* flip state */
-.exp-card.is-flipped .exp-card-inner {
-transform: rotateY(180deg);
+.exp-card:hover{
+  transform: translateY(-3px);
 }
 
 /* faces */
-
-.exp-card-face {
-position: absolute;
-inset: 0;
-border-radius: 0;
-overflow: hidden;
-backface-visibility: hidden;
-box-shadow: none;
-}
-
-/* FRONT */
-
-.exp-card-front {
-background: #ffffff;
-color: #111111;
-transition: background 0.2s ease;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 24px 26px;
-gap: 14px;
-}
-
-.exp-front-left {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-}
-
-.exp-front-main {
-text-transform: uppercase;
-letter-spacing: 0.2em;
-font-size: 0.8rem;
-opacity: 0.9;
-}
-
-.exp-front-sub {
-margin-top: 10px;
-font-size: 1.35rem;
-font-weight: 600;
-max-width: 14ch;
-line-height: 1.15;
-}
-
-/* BACK */
-
-.exp-card-back {
-background: #ffffff;
-color: #111827;
-transform: rotateY(180deg);
-display: flex;
-flex-direction: column;
-}
-
-.exp-card-back-inner {
-padding: 14px 14px 10px;
-display: flex;
-flex-direction: column;
-gap: 10px;
-height: 100%;
-overflow-y: auto; /* if bullets are really long */
-}
-
-.exp-back-label {
-font-size: 0.75rem;
-text-transform: uppercase;
-letter-spacing: 0.18em;
-color: #009fa5;
-}
-
-.exp-org {
-display: grid;
-grid-template-columns: auto 1fr; /* logo left, text right */
-align-items: center;
-gap: 14px;
-}
-
-
-.exp-org-logo {
-width: 90px;
-height: 90px;
-border-radius: 0; /* or keep rounded if you prefer */
-overflow: hidden;
-padding: 0; /* remove spacing that created a fake frame */
-background: transparent; /* no background frame */
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 4px;
-}
-
-
-.exp-org-logo img {
-max-width: 100%;
-max-height: 100%;
-object-fit: contain;
-}
-
-
-.exp-org-text h3 {
-font-size: 0.95rem;
-margin-bottom: 2px;
-}
-
-.exp-org-meta {
-font-size: 0.78rem;
-color: #6b7280;
-margin-bottom: 4px;
-}
-
-.exp-org-list {
-grid-column: 1 / -1; /* expand across the full row */
-margin-left: 0; /* remove weird indent */
-padding-left: 20px; /* normal bullet indentation */
-margin-top: 6px;
-font-size: 0.82rem;
-line-height: 1.45;
-}
-
-
-.exp-card-back-hint {
-margin-top: 2px;
-font-size: 0.75rem;
-color: #9ca3af;
-}
-
-.exp-org-text {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-
-/* mapping into the 2×2 grid */
-
-.exp-card--ngo { grid-area: ngo; }
-.exp-card--io { grid-area: io; }
-.exp-card--research { grid-area: research; }
-.exp-card--assoc { grid-area: assoc; }
-
-/* --------- EXPANSION BEHAVIOUR --------- */
-
-/* keep each grid item one row high, but let its content overflow */
-.exp-card {
-position: relative;
-overflow: visible;
-}
-
-/* expanded card sits above neighbours */
-.exp-card--expanded {
-z-index: 20;
-}
-
-/* faces may overflow when expanded */
-.exp-card--expanded .exp-card-face {
-overflow: visible;
-}
-
-/* make the BACK face span exactly 2 rows in its column */
-.exp-card--expanded .exp-card-back {
-position: absolute;
-left: 0;
-right: 0;
-box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
-}
-
-/* TOP ROW (NGO + IO) → expand DOWN over the card below */
-.exp-card--ngo.exp-card--expanded .exp-card-back {
-top: 0;
-height: calc(200% + 18px); /* its own row + gap + row below */
-}
-
-
-/* BOTTOM ROW (Research + Assoc) → expand UP over the card above */
-.exp-card--research.exp-card--expanded .exp-card-back {
-top: calc(-100% - 18px); /* move up by one row + gap */
-height: calc(200% + 18px); /* 2 rows total */
-}
-
-/* --------- COLORS & HOVER --------- */
-
-/* one accent per category */
-.exp-card--ngo {
---exp-accent: #009fa5; /* teal */
---exp-accent-soft: rgba(0,159,165,0.06);
-}
-
-.exp-card--io {
---exp-accent: #2563eb; /* blue */
---exp-accent-soft: rgba(37,99,235,0.06);
-}
-
-.exp-card--research {
---exp-accent: #0f766e; /* deep green-teal */
---exp-accent-soft: rgba(15,118,110,0.06);
-}
-
-.exp-card--assoc {
---exp-accent: #ec4899; /* pink */
---exp-accent-soft: rgba(236,72,153,0.06);
-}
-
-/* default if ever needed */
-.exp-card {
---exp-accent: #009fa5;
---exp-accent-soft: rgba(0,159,165,0.06);
-}
-
-/* colored vertical stripe on the left of each card */
-.exp-card::before {
-content: "";
-position: absolute;
-left: 0;
-top: 0;
-bottom: 0;
-width: 6px;
-background: var(--exp-accent);
-opacity: 0.95;
-pointer-events: none;
-}
-
-/* color the small top line text */
-.exp-card .exp-front-main {
-color: #6b7280; /* fallback */
-}
-
-.exp-card--ngo .exp-front-main,
-.exp-card--io .exp-front-main,
-.exp-card--research .exp-front-main,
-.exp-card--assoc .exp-front-main {
-color: var(--exp-accent);
-}
-
-/* make hover a bit more “alive” but still clean */
-.exp-card:hover .exp-card-front {
-background: linear-gradient(135deg, var(--exp-accent-soft), #ffffff);
-border-color: var(--exp-accent);
-box-shadow: 0 14px 30px rgba(15,23,42,0.14);
-}
-
-/* on the back: tint the meta line slightly */
-.exp-card--ngo .exp-org-meta,
-.exp-card--io .exp-org-meta,
-.exp-card--research .exp-org-meta,
-.exp-card--assoc .exp-org-meta {
-color: var(--exp-accent);
-}
-
-/* dim all non-flipped cards when one is expanded */
-.exp-mosaic.dim-others .exp-card {
-opacity: 0.35;
-transition: opacity 0.25s ease;
-}
-
-/* keep the expanded card bright */
-.exp-mosaic.dim-others .exp-card.exp-card--expanded {
-opacity: 1;
-}
-
-
-/* --------- RESPONSIVE --------- */
-
-@media (max-width: 800px) {
-/* full-width container with side padding */
-.experience-layout {
-max-width: 100%;
-padding: 0 16px;
-margin: 0 auto;
-}
-
-/* stack cards vertically, no more grid */
-.exp-mosaic {
-width: 100%;
-margin: 0;
-display: block;
-}
-
-.exp-card {
-width: 100%;
-margin-bottom: 18px;
-min-height: auto;
-position: relative;
-}
-
-/* remove vertical accent stripe */
-.exp-card::before {
-display: none;
-}
-
-/* disable flip on mobile – show BACK only */
-.exp-card-inner {
-transform: none !important;
-height: auto;
-}
-
-.exp-card-face {
-position: relative;
-inset: auto;
-height: auto;
-backface-visibility: visible;
-}
-
-.exp-card-front {
-display: none !important;
-}
-
-.exp-card-back {
-display: block !important;
-transform: none !important;
-box-shadow: none !important;
-border-radius: 18px;
-border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.exp-card-back-inner {
-padding: 16px 14px 18px;
-height: auto;
-overflow: visible;
-}
-
-/* LOGO + TITLE ROW (logo top-left, text to the right) */
-.exp-org {
-display: flex;
-flex-wrap: wrap; /* allows bullets to go onto their own line */
-align-items: flex-start;
-gap: 10px;
-text-align: left;
-margin-bottom: 4px;
-}
-
-.exp-org-logo {
-width: 60px;
-height: 60px;
-margin: 0;
-flex: 0 0 auto;
-padding: 0; /* remove frame on mobile */
-background: transparent; /* remove background */
-border-radius: 0;
-}
-
-
-.exp-org-text {
-flex: 1 1 auto;
-min-width: 0;
-}
-
-.exp-org-text h3,
-.exp-org-meta {
-text-align: left !important;
-}
-
-/* BULLETS UNDER BOTH (full width, left-aligned) */
-.exp-org-list {
-flex: 0 0 100%; /* forces list onto a new row, full width */
-text-align: left !important;
-padding-left: 20px;
-margin: 6px 0 0;
-list-style-position: outside;
-font-size: 0.85rem;
-line-height: 1.45;
-}
-
-.exp-org-list li {
-text-align: left !important;
-}
-
-/* expanded states: just behave like normal blocks */
-.exp-card--ngo.exp-card--expanded .exp-card-back,
-.exp-card--io.exp-card--expanded .exp-card-back,
-.exp-card--research.exp-card--expanded .exp-card-back,
-.exp-card--assoc.exp-card--expanded .exp-card-back {
-position: relative;
-top: 0;
-height: auto;
-box-shadow: none;
-}
-}
-
-/* ==========================================
-EXPERIENCE — MODERN BLUE + HONEY ACCENTS
-========================================== */
-
-/* Reset old parchment look */
-.exp-card-face,
-.exp-card-front,
-.exp-card-back {
-background: #f5f8ff !important; /* same soft blue as contact */
-color: #1f2937 !important; /* clean dark grey */
-box-shadow: none !important;
-background-image: none !important; /* remove texture */
-}
-
-/* FRONT TEXT COLORS */
-.exp-front-main {
-color: #1c2d5a !important; /* navy accent */
-}
-
-.exp-front-sub {
-color: #1f2937 !important;
-}
-
-/* CATEGORY COLOR → same honey-brown everywhere */
-.exp-gate-code {
-color: #d79a3b !important; /* honey */
-}
-
-/* Remove the vertical color stripe */
-.exp-card::before {
-display: none !important;
-}
-
-/* Modern hover effect */
-/* hover — activate real border */
-.exp-card:hover .exp-card-face{
-  background: #ffffff;
-  border-color: var(--exp-accent, #0ea5a2); /* turquoise default */
-}
-
-/* hide inner line when real border is active */
-.exp-card:hover .exp-card-face::after{
-  box-shadow: none;
-}
-
-/* BACK SIDE CLEAN STYLE */
-.exp-card-back {
-background: #ffffff !important;
-border: 1px solid rgba(0,0,0,0.12) !important;
-}
-
-.exp-back-label {
-color: #1c2d5a !important; /* navy */
-}
-
-/* Organization meta text */
-.exp-org-meta {
-color: #6b7280 !important; /* muted grey */
-}
-
-/* Logo frame clean */
-.exp-org-logo {
-background: transparent !important;
-border-radius: 0 !important;
-}
-
-/* Bullet list */
-.exp-org-list {
-color: #1f2937 !important; /* dark grey */
-}
-
-/* Expanded card shadow */
-.exp-card--expanded .exp-card-back {
-box-shadow: 0 18px 40px rgba(0,0,0,0.18) !important;
-}
-
-/* MOBILE cleanup */
-@media (max-width: 800px) {
-.exp-card-back {
-border-radius: 12px !important;
-background: #ffffff !important;
-}
-}
-
-/* ==========================================
-EXPERIENCE — FRAME: 1px static, 2.5px turquoise on hover (no shift)
-========================================== */
-
-/* keep frame thickness stable using outline (doesn't affect layout) */
 .exp-card-face{
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;  /* static normal frame */
-  outline: 1px solid transparent;                    /* reserve visual edge */
-  outline-offset: -1px;                              /* sits on the frame */
-  transition: outline-color 0.18s ease, outline-width 0.18s ease;
+  position:absolute;
+  inset:0;
+  border-radius:0;
+  backface-visibility:hidden;
+  overflow:hidden;
+
+  /* 🔑 unified border system */
+  background:#f5f8ff;
+  border:2.5px solid transparent;       /* reserve hover space */
+  box-shadow:none;
 }
 
-
-/* EXPERIENCE — unified lift (matches Skills / Contact) */
-.exp-card{
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* inner thin static line */
+.exp-card-face::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
-.exp-card:hover{
-  transform: translateY(-4px);
+/* hover = activate real border */
+.exp-card:hover .exp-card-face{
+  background:#ffffff;
+  border-color: var(--exp-accent,#0ea5a2);
+}
+
+/* hide inner line on hover */
+.exp-card:hover .exp-card-face::after{
+  box-shadow:none;
+}
+
+/* ======================
+FLIP
+====================== */
+
+.exp-card-inner{
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  transition: transform .6s cubic-bezier(.2,.8,.25,1);
+}
+.exp-card.is-flipped .exp-card-inner{
+  transform: rotateY(180deg);
+}
+
+/* ======================
+FRONT
+====================== */
+
+.exp-card-front{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:24px 26px;
+  gap:14px;
+  color:#1f2937;
+}
+
+.exp-front-left{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.exp-front-main{
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  font-size:.8rem;
+  color:var(--exp-accent);
+}
+
+.exp-front-sub{
+  margin-top:10px;
+  font-size:1.35rem;
+  font-weight:600;
+  max-width:14ch;
+  line-height:1.15;
+}
+
+/* gate */
+.exp-gate{
+  text-align:right;
+  min-width:90px;
+}
+.exp-gate-label{
+  font-size:.7rem;
+  letter-spacing:.18em;
+  color:#9ca3af;
+}
+.exp-gate-code{
+  margin-top:4px;
+  font-size:2.1rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  color:#d79a3b; /* honey */
+}
+
+/* ======================
+BACK
+====================== */
+
+.exp-card-back{
+  transform: rotateY(180deg);
+  display:flex;
+  flex-direction:column;
+  color:#1f2937;
+}
+
+.exp-card-back-inner{
+  padding:14px 14px 10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  height:100%;
+  overflow-y:auto;
+}
+
+.exp-back-label{
+  font-size:.75rem;
+  letter-spacing:.18em;
+  color:#1c2d5a;
+}
+
+/* org block */
+.exp-org{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:14px;
+  align-items:center;
+}
+
+.exp-org-logo{
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.exp-org-logo img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+.exp-org-text{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.exp-org-text h3{
+  font-size:.95rem;
+  margin:0;
+}
+
+.exp-org-meta{
+  font-size:.78rem;
+  color:var(--exp-accent);
+}
+
+.exp-org-list{
+  grid-column:1/-1;
+  padding-left:20px;
+  font-size:.82rem;
+  line-height:1.45;
+}
+
+/* ======================
+ACCENTS
+====================== */
+
+.exp-card--ngo{ --exp-accent:#009fa5; }
+.exp-card--io{ --exp-accent:#2563eb; }
+.exp-card--research{ --exp-accent:#0f766e; }
+.exp-card--assoc{ --exp-accent:#ec4899; }
+
+.exp-card--ngo{ grid-area:ngo; }
+.exp-card--io{ grid-area:io; }
+.exp-card--research{ grid-area:research; }
+.exp-card--assoc{ grid-area:assoc; }
+
+/* ======================
+EXPANSION
+====================== */
+
+.exp-card--expanded{
+  z-index:20;
+}
+
+.exp-card--expanded .exp-card-back{
+  position:absolute;
+  left:0;
+  right:0;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+
+.exp-card--ngo.exp-card--expanded .exp-card-back{
+  top:0;
+  height: calc(200% + 18px);
+}
+.exp-card--research.exp-card--expanded .exp-card-back{
+  top: calc(-100% - 18px);
+  height: calc(200% + 18px);
+}
+
+/* dim others */
+.exp-mosaic.dim-others .exp-card{
+  opacity:.35;
+}
+.exp-mosaic.dim-others .exp-card--expanded{
+  opacity:1;
+}
+
+/* ======================
+MOBILE
+====================== */
+
+@media (max-width:800px){
+
+  .experience-layout{
+    padding:0 16px;
+  }
+
+  .exp-mosaic{
+    display:block;
+  }
+
+  .exp-card{
+    margin-bottom:18px;
+  }
+
+  .exp-card-inner{
+    transform:none!important;
+  }
+
+  .exp-card-front{
+    display:none!important;
+  }
+
+  .exp-card-face{
+    position:relative;
+    height:auto;
+  }
+
+  .exp-card-back{
+    transform:none!important;
+    box-shadow:none!important;
+  }
+
+  .exp-card-back-inner{
+    padding:16px 14px 18px;
+  }
+
+  .exp-org{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .exp-org-logo{
+    width:60px;
+    height:60px;
+  }
+
+  .exp-org-list{
+    width:100%;
+    font-size:.85rem;
+  }
 }
 
 
