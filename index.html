@@ -1538,61 +1538,100 @@ EXPANSION
 }
 
 /* ======================
-MOBILE
+MOBILE — 1 column + flip in-place (no expansion overlay)
 ====================== */
-
 @media (max-width:800px){
 
   .experience-layout{
-    padding:0 16px;
+    max-width: 100%;
+    padding: 0 16px;
+    margin: 0 auto;
   }
 
+  /* stack in one column */
   .exp-mosaic{
-    display:block;
+    display: grid;                 /* keep grid, just 1 col */
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    grid-auto-rows: 220px;         /* each flip card has its own height */
+    gap: 14px;
+    perspective: 1200px;           /* keep flip perspective */
   }
 
   .exp-card{
-    margin-bottom:18px;
+    width: 100%;
+    margin: 0;
   }
 
+  /* IMPORTANT: disable the desktop "expanded overlay" behavior on mobile */
+  .exp-card--expanded{
+    z-index: auto;
+  }
+  .exp-card--expanded .exp-card-back{
+    position: absolute !important;   /* back stays inside the card */
+    top: 0 !important;
+    left: 0;
+    right: 0;
+    height: 100% !important;
+    box-shadow: none !important;
+  }
+  .exp-card--ngo.exp-card--expanded .exp-card-back,
+  .exp-card--research.exp-card--expanded .exp-card-back{
+    top: 0 !important;
+    height: 100% !important;
+  }
+
+  /* flip should work normally */
   .exp-card-inner{
-    transform:none!important;
+    height: 100%;
   }
 
-  .exp-card-front{
-    display:none!important;
-  }
-
+  /* faces must fill the card and flip in-place */
   .exp-card-face{
-    position:relative;
-    height:auto;
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+
+  /* keep both faces visible for flipping (do NOT hide front on mobile) */
+  .exp-card-front{
+    display: flex !important;
   }
 
   .exp-card-back{
-    transform:none!important;
-    box-shadow:none!important;
+    transform: rotateY(180deg); /* keep back face orientation */
   }
 
+  /* content sizing on the back to fit the smaller height */
   .exp-card-back-inner{
-    padding:16px 14px 18px;
+    padding: 14px 14px 12px;
+    height: 100%;
+    overflow-y: auto;
   }
 
+  /* make logos smaller so content fits */
   .exp-org{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 10px;
+    align-items: center;
   }
 
   .exp-org-logo{
-    width:60px;
-    height:60px;
+    width: 56px;
+    height: 56px;
   }
 
   .exp-org-list{
-    width:100%;
-    font-size:.85rem;
+    grid-column: 1 / -1;
+    width: 100%;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    margin: 6px 0 0;
+    padding-left: 18px;
   }
 }
+
 
 
 /* ===========================
