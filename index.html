@@ -1538,10 +1538,11 @@ EXPANSION
 .exp-mosaic.dim-others .exp-card--expanded{
   opacity:1;
 }
-
 @media (max-width:800px){
 
-  /* 1) stack cards vertically */
+  /* =========================
+     LAYOUT — STACK VERTICALLY
+  ========================= */
   .exp-mosaic{
     display: flex;
     flex-direction: column;
@@ -1549,7 +1550,6 @@ EXPANSION
     perspective: none;
   }
 
-  /* 2) stop grid-area forcing */
   .exp-card{
     grid-area: auto !important;
     width: 100%;
@@ -1557,7 +1557,9 @@ EXPANSION
     cursor: default;
   }
 
-  /* 3) kill flip mechanics completely */
+  /* =========================
+     KILL FLIP COMPLETELY
+  ========================= */
   .exp-card-inner{
     width: 100%;
     height: auto;
@@ -1565,22 +1567,24 @@ EXPANSION
     transform-style: flat;
     transition: none;
   }
+
   .exp-card.is-flipped .exp-card-inner{
     transform: none;
   }
 
-  /* 4) CRITICAL: faces must be in normal flow (NOT absolute) */
+  /* faces MUST be normal blocks */
   .exp-card-face{
-    position: relative;     /* overrides absolute */
-    inset: auto;            /* overrides inset:0 */
+    position: relative;
+    inset: auto;
     height: auto;
     backface-visibility: visible;
   }
 
-  /* 5) show ONLY the back */
+  /* front gone, back only */
   .exp-card-front{
     display: none;
   }
+
   .exp-card-back{
     display: flex;
     position: relative;
@@ -1588,7 +1592,6 @@ EXPANSION
     box-shadow: none;
   }
 
-  /* 6) let content expand naturally */
   .exp-card-back-inner{
     height: auto;
     max-height: none;
@@ -1596,7 +1599,36 @@ EXPANSION
     padding: 16px 14px 18px;
   }
 
-  /* optional: disable hover lift on touch */
+  /* =========================
+     KILL EXPANSION + DIM SYSTEM
+     (THIS IS WHAT YOU WERE MISSING)
+  ========================= */
+  .exp-mosaic.dim-others .exp-card{
+    opacity: 1 !important;
+  }
+
+  .exp-card--expanded{
+    z-index: auto !important;
+  }
+
+  .exp-card--expanded .exp-card-back{
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+
+  .exp-card--ngo.exp-card--expanded .exp-card-back,
+  .exp-card--research.exp-card--expanded .exp-card-back{
+    top: auto !important;
+    height: auto !important;
+  }
+
+  /* =========================
+     NO HOVER / NO TAP EFFECTS
+  ========================= */
   .exp-card:hover{
     transform: none;
     box-shadow: none;
