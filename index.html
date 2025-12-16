@@ -1541,25 +1541,68 @@ EXPANSION
 
 @media (max-width:800px){
 
-  /* kill the 2x2 grid completely */
+  /* 1) stack cards vertically */
   .exp-mosaic{
     display: flex;
     flex-direction: column;
     gap: 18px;
+    perspective: none;
   }
 
-  /* remove grid-area positioning */
+  /* 2) stop grid-area forcing */
   .exp-card{
     grid-area: auto !important;
     width: 100%;
+    height: auto;
+    cursor: default;
   }
 
-  /* card should size to content */
-  .exp-card-face,
-  .exp-card-back{
+  /* 3) kill flip mechanics completely */
+  .exp-card-inner{
     width: 100%;
+    height: auto;
+    transform: none;
+    transform-style: flat;
+    transition: none;
+  }
+  .exp-card.is-flipped .exp-card-inner{
+    transform: none;
+  }
+
+  /* 4) CRITICAL: faces must be in normal flow (NOT absolute) */
+  .exp-card-face{
+    position: relative;     /* overrides absolute */
+    inset: auto;            /* overrides inset:0 */
+    height: auto;
+    backface-visibility: visible;
+  }
+
+  /* 5) show ONLY the back */
+  .exp-card-front{
+    display: none;
+  }
+  .exp-card-back{
+    display: flex;
+    position: relative;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* 6) let content expand naturally */
+  .exp-card-back-inner{
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 16px 14px 18px;
+  }
+
+  /* optional: disable hover lift on touch */
+  .exp-card:hover{
+    transform: none;
+    box-shadow: none;
   }
 }
+
 
 
 
