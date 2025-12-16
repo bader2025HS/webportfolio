@@ -1593,6 +1593,40 @@ MOBILE
     font-size:.85rem;
   }
 }
+@media (max-width:800px){
+
+  /* kill 3D context entirely */
+  .exp-mosaic{
+    perspective: none;
+  }
+
+  .exp-card-inner{
+    transform-style: flat !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* JS flip class becomes harmless */
+  .exp-card.is-flipped .exp-card-inner{
+    transform: none !important;
+  }
+
+  /* faces behave like normal blocks */
+  .exp-card-face{
+    backface-visibility: visible;
+  }
+
+  /* front never appears */
+  .exp-card-front{
+    display: none !important;
+  }
+
+  /* back is static content */
+  .exp-card-back{
+    position: relative;
+    transform: none !important;
+  }
+}
 
 
 /* ===========================
