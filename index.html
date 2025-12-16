@@ -1539,96 +1539,55 @@ EXPANSION
   opacity:1;
 }
 
-/* ======================
-MOBILE
-====================== */
-
 @media (max-width:800px){
 
-  .experience-layout{
-    padding:0 16px;
-  }
-
-  .exp-mosaic{
-    display:block;
-  }
-
-  .exp-card{
-    margin-bottom:18px;
-  }
-
-  .exp-card-inner{
-    transform:none!important;
-  }
-
-  .exp-card-front{
-    display:none!important;
-  }
-
-  .exp-card-face{
-    position:relative;
-    height:auto;
-  }
-
-  .exp-card-back{
-    transform:none!important;
-    box-shadow:none!important;
-  }
-
-  .exp-card-back-inner{
-    padding:16px 14px 18px;
-  }
-
-  .exp-org{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-  }
-
-  .exp-org-logo{
-    width:60px;
-    height:60px;
-  }
-
-  .exp-org-list{
-    width:100%;
-    font-size:.85rem;
-  }
-}
-@media (max-width:800px){
-
-  /* kill 3D context entirely */
+  /* remove 3D / flip system entirely */
   .exp-mosaic{
     perspective: none;
   }
 
   .exp-card-inner{
-    transform-style: flat !important;
-    transform: none !important;
-    transition: none !important;
+    transform-style: flat;
+    transform: none;
+    transition: none;
   }
 
-  /* JS flip class becomes harmless */
+  /* JS flip class becomes inert */
   .exp-card.is-flipped .exp-card-inner{
-    transform: none !important;
+    transform: none;
   }
 
-  /* faces behave like normal blocks */
+  /* faces behave like normal document blocks (CRITICAL) */
   .exp-card-face{
+    position: relative;
+    inset: auto;
     backface-visibility: visible;
+    height: auto;
   }
 
-  /* front never appears */
+  /* front never exists on mobile */
   .exp-card-front{
-    display: none !important;
+    display: none;
   }
 
-  /* back is static content */
+  /* back is the only visible content */
   .exp-card-back{
     position: relative;
-    transform: none !important;
+    transform: none;
+    display: flex;
+  }
+
+  /* no hover lift on touch */
+  .exp-card{
+    cursor: default;
+  }
+
+  .exp-card:hover{
+    transform: none;
+    box-shadow: none;
   }
 }
+
 
 
 /* ===========================
