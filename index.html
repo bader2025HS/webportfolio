@@ -470,23 +470,22 @@ TOOLS — EVEN INTERVAL AUTO PULSE (LOGO ONLY)
 ABOUT – LAYOUT
 =========================== */
 
-
 #about{
-  margin-top: -28px;      /* pulls section UP toward menu */
-  padding-top: 16px;      /* internal buffer so hover border never clips */
+  margin-top: -28px;     /* ✅ pulls section UP toward the menu */
+  padding-top: 0;        /* ✅ do NOT push it down */
   overflow-x: hidden;
-  overflow-y: visible;
+  overflow-y: visible;   /* ✅ keep hover border from clipping */
 }
 
 .about-shell{
-  overflow-y: visible;
+  padding-top: 8px;      /* ✅ hover lift room */
   max-width: 1050px;
   margin: 0 auto 32px;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
+
 
 /* ===========================
 TOP HELLO BOX (match other sections)
