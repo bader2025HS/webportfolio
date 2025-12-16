@@ -474,7 +474,7 @@ ABOUT – LAYOUT
   margin-top: 0;
   overflow-x:hidden;
   overflow-y:visible;     /* ✅ only stop vertical clipping */
-  padding-top:2px;
+  padding-top:6px;
 }
 
 
@@ -1541,50 +1541,23 @@ EXPANSION
 
 @media (max-width:800px){
 
-  /* remove 3D / flip system entirely */
+  /* kill the 2x2 grid completely */
   .exp-mosaic{
-    perspective: none;
-  }
-
-  .exp-card-inner{
-    transform-style: flat;
-    transform: none;
-    transition: none;
-  }
-
-  /* JS flip class becomes inert */
-  .exp-card.is-flipped .exp-card-inner{
-    transform: none;
-  }
-
-  /* faces behave like normal document blocks (CRITICAL) */
-  .exp-card-face{
-    position: relative;
-    inset: auto;
-    backface-visibility: visible;
-    height: auto;
-  }
-
-  /* front never exists on mobile */
-  .exp-card-front{
-    display: none;
-  }
-
-  /* back is the only visible content */
-  .exp-card-back{
-    position: relative;
-    transform: none;
     display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  /* no hover lift on touch */
+  /* remove grid-area positioning */
   .exp-card{
-    cursor: default;
+    grid-area: auto !important;
+    width: 100%;
   }
 
-  .exp-card:hover{
-    transform: none;
-    box-shadow: none;
+  /* card should size to content */
+  .exp-card-face,
+  .exp-card-back{
+    width: 100%;
   }
 }
 
