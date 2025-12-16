@@ -470,11 +470,13 @@ TOOLS — EVEN INTERVAL AUTO PULSE (LOGO ONLY)
 ABOUT – LAYOUT
 =========================== */
 
-#about { 
-  margin-top: -20px;
-  overflow-x: hidden;
-  overflow-y: hidden;
+#about{
+  margin-top:-20px;
+  overflow-x:hidden;
+  overflow-y:visible;     /* ✅ only stop vertical clipping */
+  padding-top:6px;
 }
+
 
 .about-shell{
   overflow-y: visible;
