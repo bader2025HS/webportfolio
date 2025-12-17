@@ -947,6 +947,39 @@ EDUCATION MAPS — SVG
   transition: fill .22s ease, fill-opacity .22s ease, stroke .22s ease, stroke-width .22s ease;
 }
 
+/* kill the rectangle box */
+.country-map:hover{
+  box-shadow: none;
+}
+
+/* zoom ONLY the svg (no rectangle) */
+.country-map svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform .25s ease;
+  transform-origin: center;
+}
+
+/* desktop hover */
+@media (hover: hover) and (pointer: fine){
+  .country-map:hover svg{
+    transform: scale(1.06);
+  }
+}
+
+/* mobile tap feedback */
+@media (hover: none) and (pointer: coarse){
+  .country-map:active svg{
+    transform: scale(1.04);
+  }
+}
+
+/* keep the zoom while the pass is open (locked state) */
+.country-map.is-locked svg{
+  transform: scale(1.06);
+}
+
 /* ===========================
 EDUCATION SVG — HOVER + LOCKED COLORS
 =========================== */
