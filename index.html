@@ -5600,6 +5600,7 @@ hideTooltip(); // optional: hide when popup opens
 /* ===============================
 EDUCATION POPUP – BOARDING PASS LOGIC
 =============================== */
+let eduJustOpened = false;
 
 const eduOverlay = document.getElementById("eduOverlay");
 const eduClose = document.getElementById("eduClose");
@@ -5709,7 +5710,9 @@ eduDetailsList.innerHTML = data.details
 .map(item => `<li>${item}</li>`)
 .join("");
 
+eduJustOpened = true;
 eduOverlay.style.display = "flex";
+setTimeout(() => { eduJustOpened = false; }, 0);
 }
 
 function closeEduPopup() {
@@ -5720,8 +5723,10 @@ resetCountryStyles(); // resets the map colors
 
 eduClose.addEventListener("click", closeEduPopup);
 eduOverlay.addEventListener("click", e => {
-if (e.target === eduOverlay) closeEduPopup();
+  if (eduJustOpened) return;          // ✅ ignore the opening click
+  if (e.target === eduOverlay) closeEduPopup();
 });
+
 document.addEventListener("keydown", e => {
 if (e.key === "Escape" && eduOverlay.style.display === "flex") {
 closeEduPopup();
