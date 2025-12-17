@@ -997,6 +997,21 @@ EDUCATION SVG — HOVER + LOCKED COLORS
 }
 
 
+.map-label{
+  display: block;
+  color: #111827;     /* force visible */
+  line-height: 1.1;
+}
+
+.map-column{
+  position: relative;
+  z-index: 1;
+}
+
+.country-map{
+  position: relative;
+  z-index: 0;
+}
 
 	
 
@@ -4271,11 +4286,14 @@ Paste tool SVG inside: <div class="logoTile"> ... </div>
 
 
 <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
-<section id="education">
-<div class="education-maps">
 
-<!-- FRANCE -->
-<div id="map-france" class="country-map">
+<section id="education">
+  <div class="education-maps">
+
+    <!-- FRANCE -->
+    <div class="map-column">
+      <div class="map-label">FRANCE</div>
+      <div id="map-france" class="country-map">
 <svg height="800px" width="800px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 512 512"  xml:space="preserve">
 <style type="text/css">
@@ -4328,14 +4346,14 @@ Paste tool SVG inside: <div class="logoTile"> ... </div>
 		c0.309,0.634,0.789,1.165,1.389,1.525l8.584,5.14c0.822,0.498,1.799,0.634,2.724,0.395c0.926-0.232,1.714-0.823,2.194-1.654
 		l6.546-11.224c0.291-0.505,0.462-1.088,0.48-1.67l1.217-33.825C502.893,463.135,502.842,462.758,502.738,462.398z"/>
 </g>
-</svg>
-</div>
+</svg>      
+	  </div>
+    </div>
 
-
-<!-- JAPAN -->
-<div id="map-japan" class="country-map">
-
-<?xml version="1.0" encoding="utf-8"?>
+    <!-- JAPAN -->
+    <div class="map-column">
+      <div class="map-label">JAPAN</div>
+      <div id="map-japan" class="country-map">
 <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 width="800px" height="800px" viewBox="0 0 238 260" enable-background="new 0 0 238 260" xml:space="preserve">
 <path d="M77.972,205.527l3.567,4.927l-6.62,7.338l-10.572-0.462l-5.414,2.72l-4.773,8.442l-5.517-1.155l-2.078-1.719l-1.129-8.827
@@ -4355,11 +4373,14 @@ Paste tool SVG inside: <div class="logoTile"> ... </div>
 	 M35.609,213.815l-8.083-1.36l-3.9-5.542h-6.569l-2.001,4.465l-5.748,2.13l-3.669,1.95l-3.515,6.184l3.438,6.261l5.363-4.67
 	l2.617-3.413l0.924,3.079l2.258,3.284l-1.206,7.108l-3.875,4.542l-3.413,6.569l2.309,3.284l-2.489,6.8L18.905,258l4.182-6.261
 	l2.617,1.77l7.441-20.579l3.284-3.336l2.669-3.336l-4.285-6.774L35.609,213.815z"/>
-</svg>
-</div>
+</svg>      
+	  </div>
+    </div>
 
-<!-- GERMANY -->
-<div id="map-germany" class="country-map">
+    <!-- GERMANY -->
+    <div class="map-column">
+      <div class="map-label">GERMANY</div>
+      <div id="map-germany" class="country-map">
 <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 width="800px" height="800px" viewBox="0 0 196 260" enable-background="new 0 0 196 260" xml:space="preserve">
 <path d="M186.695,112.9l-3.258-34.73l-11.126-8.64l4.586-16.532l-4.682-20.129l-14.746-5.623l-12.212-10.475l-7.434-0.603
@@ -4368,10 +4389,13 @@ Paste tool SVG inside: <div class="logoTile"> ... </div>
 	l-6.203,20.056l7.651,15.905l-5.068,3.379l3.041,23.363l10.064,11.174l11.778,2.003l19.96,5.985l-10.957,12.936l-7.723,31.52
 	l18.825,3.669l12.623-2.076l15.953,2.582L94.065,258l5.02-7.603l16.774,4.199l8.182-6.468l25.921-3.186l-0.845-15.253l21.287-14.312
 	l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l4.393-14.553L186.695,112.9z"/>
-</svg></div>
+</svg>
+	  </div>
+    </div>
 
-</div>
+  </div>
 </section>
+
 
 
 <!-- EXPERIENCE – MOSAIC SQUARE -->
