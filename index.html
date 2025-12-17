@@ -5816,5 +5816,38 @@ stats.forEach(s => s.classList.remove('tooltip-open'));
 });
 </script>
 
+<script>
+// EXPERIENCE — DESKTOP ONLY
+if (window.matchMedia("(min-width: 801px)").matches) {
+
+  document.addEventListener("click", (e) => {
+    const clickedCard = e.target.closest(".exp-card");
+    const openCard = document.querySelector(".exp-card.is-flipped");
+    const mosaic = document.querySelector(".exp-mosaic");
+
+    // Click outside → close open card
+    if (!clickedCard) {
+      if (openCard) {
+        openCard.classList.remove("is-flipped", "exp-card--expanded");
+        mosaic?.classList.remove("dim-others");
+      }
+      return;
+    }
+
+    // Clicked a card
+    if (openCard && openCard !== clickedCard) {
+      openCard.classList.remove("is-flipped", "exp-card--expanded");
+    }
+
+    const willOpen = !clickedCard.classList.contains("is-flipped");
+    clickedCard.classList.toggle("is-flipped", willOpen);
+    clickedCard.classList.toggle("exp-card--expanded", willOpen);
+    mosaic?.classList.toggle("dim-others", willOpen);
+  });
+
+}
+</script>
+
+
 </body>
 </html>
