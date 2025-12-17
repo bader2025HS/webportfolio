@@ -955,6 +955,46 @@ EDUCATION MAPS — SVG
   vector-effect: non-scaling-stroke;
   transition: fill 0.25s ease, stroke 0.25s ease;
 }
+/* ===========================
+EDUCATION SVG — HOVER + LOCKED COLORS
+=========================== */
+
+/* base (same as before) */
+.edu-svg .edu-country-shape{
+  fill: transparent;
+  stroke: #222;
+  stroke-width: 1.8;
+  fill-opacity: 0;
+  vector-effect: non-scaling-stroke;
+  transition: fill .22s ease, fill-opacity .22s ease, stroke .22s ease, stroke-width .22s ease;
+}
+
+/* FRANCE hover/locked */
+#map-france:hover .edu-country-shape,
+#map-france.is-locked .edu-country-shape{
+  stroke: #003b8e;
+  stroke-width: 2.4;
+  fill: #b7d4ff;
+  fill-opacity: 0.65;
+}
+
+/* JAPAN hover/locked */
+#map-japan:hover .edu-country-shape,
+#map-japan.is-locked .edu-country-shape{
+  stroke: #bc002d;
+  stroke-width: 2.4;
+  fill: #ffe5e5;
+  fill-opacity: 0.80;
+}
+
+/* GERMANY hover/locked */
+#map-germany:hover .edu-country-shape,
+#map-germany.is-locked .edu-country-shape{
+  stroke: #d4a300;
+  stroke-width: 2.4;
+  fill: #ffe680;
+  fill-opacity: 0.65;
+}
 
 
 
