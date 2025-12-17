@@ -5193,167 +5193,267 @@ Exchange – Asia-Pacific & Japanese Studies
 <div id="ui-tooltip"></div> <!-- put this here -->
 
 
-<!-- LEAFLET JS (keep for ABOUT visitedMap) -->
+<!-- ================= END EDUCATION LIGHTBOX ================= -->
+
+
+<!-- LEAFLET JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 /* ===== Scroll progress bar ===== */
 window.addEventListener("scroll", () => {
-  const s = window.scrollY;
-  const d = document.documentElement.scrollHeight - window.innerHeight;
-  document.getElementById("scrollProgress").style.width = (s / d) * 100 + "%";
+const s = window.scrollY;
+const d = document.documentElement.scrollHeight - window.innerHeight;
+document.getElementById("scrollProgress").style.width = (s / d) * 100 + "%";
 });
 
 /* ===== Back to top ===== */
 window.addEventListener("scroll", () => {
-  document.getElementById("backToTop").style.display =
-    window.scrollY > 300 ? "flex" : "none";
+document.getElementById("backToTop").style.display =
+window.scrollY > 300 ? "flex" : "none";
 });
 document.getElementById("backToTop").onclick = () =>
-  window.scrollTo({ top: 0, behavior: "smooth" });
+window.scrollTo({ top: 0, behavior: "smooth" });
 
 /* ===============================
-MAPS (EDUCATION + ABOUT)
+MAPS (EDUCATION)
 =============================== */
 
 let worldData = null;
 let mapsLoaded = false;
-let lockedCountry = null; // used for education "is-locked" state
 
-async function loadGeoJSON() {
-  if (worldData) return worldData;
-  const urls = [
-    "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json",
-    "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
-  ];
-  for (let url of urls) {
-    try {
-      let r = await fetch(url);
-      if (r.ok) return (worldData = await r.json());
-    } catch (e) {}
-  }
+const COUNTRY_NAMES = {
+france: ["france"],
+germany: ["germany"],
+japan: ["japan"]
+};
+
+const normalize = s =>
+s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+// store the Leaflet layers for each country to recolor
+const countryLayers = {};
+let lockedCountry = null; // last clicked country (stays colored)
+
+const baseStyle = {
+color: "#222",
+weight: 1.8,
+fillOpacity: 0
+};
+
+// flag-style color themes (dark border, light fill — *same color family*)
+const selectedStyles = {
+france: {
+color: "#003b8e", // dark blue border
+weight: 2.4,
+fillColor: "#b7d4ff", // light blue fill
+fillOpacity: 0.65
+},
+germany: {
+color: "#d4a300", // dark yellow border
+weight: 2.4,
+fillColor: "#ffe680", // light yellow fill
+fillOpacity: 0.65
+},
+japan: {
+color: "#bc002d", // dark red border
+weight: 2.4,
+fillColor: "#ffe5e5", // soft red fill
+fillOpacity: 0.8
+}
+};
+
+function resetCountryStyles() {
+Object.keys(countryLayers).forEach(key => {
+countryLayers[key].setStyle(baseStyle);
+});
 }
 
-/* ========= Visited countries map in ABOUT (DO NOT TOUCH) ========= */
+function setCountryFill(countryKey) {
+// reset all to base
+resetCountryStyles();
+// apply selected style to clicked one
+const layer = countryLayers[countryKey];
+if (layer) {
+layer.setStyle(selectedStyles[countryKey] || baseStyle);
+}
+}
+
+async function loadGeoJSON() {
+if (worldData) return worldData;
+const urls = [
+"https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json",
+"https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
+];
+for (let url of urls) {
+try {
+let r = await fetch(url);
+if (r.ok) return (worldData = await r.json());
+} catch (e) {}
+}
+}
+
+function drawCountry(containerId, countryKey, center, zoom) {
+const map = L.map(containerId, {
+zoomControl: false,
+attributionControl: false,
+dragging: false,
+scrollWheelZoom: false,
+doubleClickZoom: false,
+touchZoom: false,
+keyboard: false
+});
+
+map.setView(center, zoom); // <-- no fitBounds, no extra tricks
+
+const aliases = COUNTRY_NAMES[countryKey].map(normalize);
+
+const layer = L.geoJSON(worldData, {
+filter: f =>
+aliases.includes(normalize(f.properties.ADMIN || f.properties.name)),
+style: baseStyle
+}).addTo(map);
+
+// keep color-change logic working
+countryLayers[countryKey] = layer;
+}
+
+/* ========= Visited countries map in ABOUT ========= */
 
 let visitedMapInitialized = false;
 
 async function initVisitedMap() {
-  if (visitedMapInitialized) return;
-  visitedMapInitialized = true;
+if (visitedMapInitialized) return;
+visitedMapInitialized = true;
 
-  const el = document.getElementById("visitedMap");
-  if (!el || typeof L === "undefined") return;
+const el = document.getElementById("visitedMap");
+if (!el || typeof L === "undefined") return;
 
-  const map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    zoomSnap: 0.5,
-    zoomDelta: 0.5
-  });
+const map = L.map(el, {
+scrollWheelZoom: false,
+zoomControl: true,
+zoomSnap: 0.5,
+zoomDelta: 0.5
+});
 
-  function setEurasiaView() {
-    map.setView([32, 25], 2.3);
-  }
-  setEurasiaView();
-  window.addEventListener("resize", setEurasiaView);
+function setEurasiaView() {
+map.setView([32, 25], 2.3); // centred-ish on Europe / MENA / Asia
+}
+setEurasiaView();
+window.addEventListener("resize", setEurasiaView);
 
-  const visitedNames = [
-    "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
-    "Armenia","Georgia","Bulgaria","South Korea","Malaysia",
-    "Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
-    "India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
-    "Australia"
-  ];
+const visitedNames = [
+"France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
+"Armenia","Georgia","Bulgaria","South Korea","Malaysia",
+"Syria","Jordan","United Arab Emirates","Lebanon","Saudi Arabia",
+"India","China","Vietnam","Japan","Taiwan","Cambodia","Thailand","Singapore","Philippines",
+"Australia"
+];
 
-  const normalizeName = s =>
-    s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const normalizeName = s =>
+s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-  const visited = new Set(visitedNames.map(normalizeName));
+const visited = new Set(visitedNames.map(normalizeName));
 
-  const accent = "#009fa5";
-  const stroke = "#7a7a7a";
+const accent = "#009fa5";
+const stroke = "#7a7a7a";
 
-  try {
-    const geo = await loadGeoJSON();
+try {
+const geo = await loadGeoJSON(); // reuse your global worldData
 
-    const useAdmin =
-      !!(geo.features && geo.features[0]?.properties?.ADMIN);
+const useAdmin =
+!!(geo.features && geo.features[0]?.properties?.ADMIN);
 
-    const layer = L.geoJSON(geo, {
-      style: f => {
-        const props = f.properties || {};
-        const name = useAdmin ? (props.ADMIN || "") : (props.name || "");
-        const hit = visited.has(normalizeName(name));
-        return {
-          fillColor: hit ? accent : "transparent",
-          color: stroke,
-          weight: hit ? 1.2 : 0.6,
-          fillOpacity: hit ? 0.9 : 0.0,
-          opacity: 0.9
-        };
-      },
-      onEachFeature: (f, l) => {
-        const props = f.properties || {};
-        const name = (props.name || props.ADMIN || "");
+const layer = L.geoJSON(geo, {
+style: f => {
+const props = f.properties || {};
+const name = useAdmin ? (props.ADMIN || "") : (props.name || "");
+const hit = visited.has(normalizeName(name));
+return {
+fillColor: hit ? accent : "transparent",
+color: stroke,
+weight: hit ? 1.2 : 0.6,
+fillOpacity: hit ? 0.9 : 0.0,
+opacity: 0.9
+};
+},
+onEachFeature: (f, l) => {
+const props = f.properties || {};
+const name = (props.name || props.ADMIN || "");
 
-        l.bindTooltip(name, { sticky: true, direction: "top", opacity: 0.9 });
+l.bindTooltip(name, {
+sticky: true,
+direction: "top",
+opacity: 0.9
+});
 
-        if (visited.has(normalizeName(name))) {
-          l.bindPopup(`<strong>${name}</strong>`);
-        }
-
-        l.on("mouseover", e => {
-          e.target.setStyle({ weight: 2.2 });
-          try { e.target.bringToFront(); } catch {}
-        });
-
-        l.on("mouseout", e => {
-          try { layer.resetStyle(e.target); } catch {}
-        });
-      }
-    }).addTo(map);
-
-    setTimeout(setEurasiaView, 0);
-  } catch (err) {
-    console.error("GeoJSON load error for visited map:", err);
-    el.innerHTML =
-      "<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
-  }
+if (visited.has(normalizeName(name))) {
+l.bindPopup(`<strong>${name}</strong>`);
 }
 
-/* ========= EDUCATION SVG MAPS ========= */
+l.on("mouseover", e => {
+e.target.setStyle({ weight: 2.2 });
+try { e.target.bringToFront(); } catch {}
+});
+
+l.on("mouseout", e => {
+try { layer.resetStyle(e.target); } catch {}
+});
+}
+}).addTo(map);
+
+// re-assert view after polygons load
+setTimeout(setEurasiaView, 0);
+} catch (err) {
+console.error("GeoJSON load error for visited map:", err);
+el.innerHTML =
+"<div style='padding:16px;color:#ef4444'>Failed to load country polygons.</div>";
+}
+}
 
 async function initMaps() {
-  if (mapsLoaded) return;
-  mapsLoaded = true;
+if (mapsLoaded) return;
+mapsLoaded = true;
 
-  document.querySelector(".education-maps").style.display = "flex";
+await loadGeoJSON();
+document.querySelector(".education-maps").style.display = "flex";
 
-  function lockEdu(key){
-    ["france","japan","germany"].forEach(k=>{
-      document.getElementById("map-"+k)?.classList.toggle("is-locked", k===key);
-    });
-    lockedCountry = key;
-  }
+// Same visual scale for all three; Japan balanced
+drawCountry("map-france", "france", [46.6, 2.2], 4.5);
+drawCountry("map-japan", "japan", [38.5, 138.5], 4.5);
+drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
 
-  document.getElementById("map-france")?.addEventListener("click", () => {
-    lockEdu("france");
-    openEduPopup("france");
-  });
-
-  document.getElementById("map-japan")?.addEventListener("click", () => {
-    lockEdu("japan");
-    openEduPopup("japan");
-  });
-
-  document.getElementById("map-germany")?.addEventListener("click", () => {
-    lockEdu("germany");
-    openEduPopup("germany");
-  });
+// Click maps → lock color + open education popup
+document.getElementById("map-france").addEventListener("click", () => {
+lockedCountry = "france";
+setCountryFill("france");
+openEduPopup("france");
+});
+document.getElementById("map-japan").addEventListener("click", () => {
+lockedCountry = "japan";
+setCountryFill("japan");
+openEduPopup("japan");
+});
+document.getElementById("map-germany").addEventListener("click", () => {
+lockedCountry = "germany";
+setCountryFill("germany");
+openEduPopup("germany");
+});
+// Hover → temporary highlight + respect last clicked country
+["france", "japan", "germany"].forEach(key => {
+const el = document.getElementById("map-" + key);
+el.addEventListener("mouseenter", () => {
+setCountryFill(key); // highlight hovered country
+});
+el.addEventListener("mouseleave", () => {
+if (lockedCountry) {
+setCountryFill(lockedCountry); // go back to last clicked
+} else {
+resetCountryStyles(); // nothing selected → clear all
 }
-</script>
-
+});
+});
+}
 
 /* ===============================
 SINGLE-SECTION NAVIGATION
