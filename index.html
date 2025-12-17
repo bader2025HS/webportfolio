@@ -941,19 +941,8 @@ EDUCATION MAPS — SVG
 }
 
 /* base country shape */
-.edu-svg .edu-country-shape{
-  fill: transparent;
-  stroke: #222;
-  stroke-width: 1.8;
-  vector-effect: non-scaling-stroke;
-  transition: fill 0.25s ease, stroke 0.25s ease;
-}
-/* ===========================
-EDUCATION SVG — HOVER + LOCKED COLORS
-=========================== */
-
-/* base (same as before) */
-.edu-svg .edu-country-shape{
+/* base country shape */
+.edu-country-shape{
   fill: transparent;
   stroke: #222;
   stroke-width: 1.8;
@@ -961,6 +950,10 @@ EDUCATION SVG — HOVER + LOCKED COLORS
   vector-effect: non-scaling-stroke;
   transition: fill .22s ease, fill-opacity .22s ease, stroke .22s ease, stroke-width .22s ease;
 }
+
+/* ===========================
+EDUCATION SVG — HOVER + LOCKED COLORS
+=========================== */
 
 /* FRANCE hover/locked */
 #map-france:hover .edu-country-shape,
@@ -5408,48 +5401,37 @@ el.innerHTML =
 }
 
 async function initMaps() {
-if (mapsLoaded) return;
-mapsLoaded = true;
+  if (mapsLoaded) return;
+  mapsLoaded = true;
 
-await loadGeoJSON();
-document.querySelector(".education-maps").style.display = "flex";
+  // show the education maps row
+  document.querySelector(".education-maps").style.display = "flex";
 
-// Same visual scale for all three; Japan balanced
-drawCountry("map-france", "france", [46.6, 2.2], 4.5);
-drawCountry("map-japan", "japan", [38.5, 138.5], 4.5);
-drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
+  // lock ONE map at a time (adds .is-locked used by your CSS)
+  function lockEdu(key) {
+    ["france", "japan", "germany"].forEach(k => {
+      document.getElementById("map-" + k)?.classList.toggle("is-locked", k === key);
+    });
+    lockedCountry = key;
+  }
 
-// Click maps → lock color + open education popup
-document.getElementById("map-france").addEventListener("click", () => {
-lockedCountry = "france";
-setCountryFill("france");
-openEduPopup("france");
-});
-document.getElementById("map-japan").addEventListener("click", () => {
-lockedCountry = "japan";
-setCountryFill("japan");
-openEduPopup("japan");
-});
-document.getElementById("map-germany").addEventListener("click", () => {
-lockedCountry = "germany";
-setCountryFill("germany");
-openEduPopup("germany");
-});
-// Hover → temporary highlight + respect last clicked country
-["france", "japan", "germany"].forEach(key => {
-const el = document.getElementById("map-" + key);
-el.addEventListener("mouseenter", () => {
-setCountryFill(key); // highlight hovered country
-});
-el.addEventListener("mouseleave", () => {
-if (lockedCountry) {
-setCountryFill(lockedCountry); // go back to last clicked
-} else {
-resetCountryStyles(); // nothing selected → clear all
+  // Click → lock + popup
+  document.getElementById("map-france")?.addEventListener("click", () => {
+    lockEdu("france");
+    openEduPopup("france");
+  });
+
+  document.getElementById("map-japan")?.addEventListener("click", () => {
+    lockEdu("japan");
+    openEduPopup("japan");
+  });
+
+  document.getElementById("map-germany")?.addEventListener("click", () => {
+    lockEdu("germany");
+    openEduPopup("germany");
+  });
 }
-});
-});
-}
+
 
 /* ===============================
 SINGLE-SECTION NAVIGATION
@@ -5712,10 +5694,13 @@ setTimeout(() => { eduJustOpened = false; }, 0);
 }
 
 function closeEduPopup() {
-eduOverlay.style.display = "none";
-lockedCountry = null; // keep your existing variable
-resetCountryStyles(); // resets the map colors
+  eduOverlay.style.display = "none";
+  lockedCountry = null;
+  ["france","japan","germany"].forEach(k=>{
+    document.getElementById("map-"+k)?.classList.remove("is-locked");
+  });
 }
+
 
 eduClose.addEventListener("click", closeEduPopup);
 eduOverlay.addEventListener("click", e => {
