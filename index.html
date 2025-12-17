@@ -5816,5 +5816,27 @@ stats.forEach(s => s.classList.remove('tooltip-open'));
 });
 </script>
 
+
+<script>
+// EXPERIENCE — DESKTOP ONLY: click outside to close (does NOT change your flip logic)
+if (window.matchMedia("(min-width: 801px)").matches) {
+
+  document.addEventListener("click", (e) => {
+    // If you clicked inside the Experience section, do nothing
+    if (e.target.closest("#experience") || e.target.closest(".exp-mosaic")) return;
+
+    // Otherwise, close any open card(s)
+    document.querySelectorAll(".exp-card.is-flipped").forEach(card => {
+      card.classList.remove("is-flipped", "exp-card--expanded");
+    });
+
+    document.querySelector(".exp-mosaic")?.classList.remove("dim-others");
+  });
+
+}
+</script>
+
+
+	
 </body>
 </html>
