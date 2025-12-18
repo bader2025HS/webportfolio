@@ -5721,10 +5721,9 @@ eduOverlay.style.display = "flex";
 function closeEduPopup() {
   eduOverlay.style.display = "none";
   lockedCountry = null;
-  document.querySelectorAll(".country-map").forEach(m => m.classList.remove("is-locked")); // ✅ add this
+  document.querySelectorAll(".country-map").forEach(m => m.classList.remove("is-locked"));
   resetCountryStyles();
 }
-
 
 eduClose.addEventListener("click", closeEduPopup);
 eduOverlay.addEventListener("click", e => {
