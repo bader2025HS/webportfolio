@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,12 +70,12 @@ text-decoration: none;
 color: #333;
 transition: 0.25s; 
 }
-  
+
 nav a.active,
 nav a:hover {
-  border-color: #0ea5a2;   /* old turquoise */
-  background: #eafaf7;    /* your old bg1 light mint */
-  color: #0ea5a2;          /* old turquoise text */
+border-color: #0ea5a2; /* old turquoise */
+background: #eafaf7; /* your old bg1 light mint */
+color: #0ea5a2; /* old turquoise text */
 }
 
 
@@ -138,78 +139,78 @@ CARDS
 ====================== */
 
 .card{
-  background: var(--bg1, #f5f8ff);
-  border: 2.5px solid transparent; /* reserve hover border space */
-  border-radius: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-  min-height: 128px;
-  padding: 14px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  transition:
-    background .18s ease,
-    border-color .18s ease,
-    transform .18s ease,
-    box-shadow .18s ease;
+background: var(--bg1, #f5f8ff);
+border: 2.5px solid transparent; /* reserve hover border space */
+border-radius: 0;
+box-shadow: none;
+box-sizing: border-box;
+min-height: 128px;
+padding: 14px 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+position: relative;
+transition:
+background .18s ease,
+border-color .18s ease,
+transform .18s ease,
+box-shadow .18s ease;
 }
 /* inner thin static frame (same as Activities & Contact) */
 .card::after{
-  content:"";
-  position:absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.18);
+content:"";
+position:absolute;
+inset: 0;
+pointer-events: none;
+box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.18);
 }
 
 .card:hover{
-  background: #ffffff;
-  border-color: #0ea5a2; /* turquoise */
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+background: #ffffff;
+border-color: #0ea5a2; /* turquoise */
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 /* hide inner line when real border appears */
 .card:hover::after{
-  box-shadow: none;
+box-shadow: none;
 }
 
 /* text */
 .name{
-  font-weight: 900;
-  font-size: 1.02rem;
-  color: #111;
-  line-height: 1.2;
+font-weight: 900;
+font-size: 1.02rem;
+color: #111;
+line-height: 1.2;
 }
 
 .meta{
-  margin-top: 4px;
-  font-size: .9rem;
-  font-weight: 700;
-  color: #555;
+margin-top: 4px;
+font-size: .9rem;
+font-weight: 700;
+color: #555;
 }
 /* tools */
 .card.tool .logoTile svg{
-  transition: transform .22s ease;
+transition: transform .22s ease;
 }
 
 .card.tool:hover .logoTile svg{
-  transform: scale(1.18);
+transform: scale(1.18);
 }
 
 /* languages */
 .card.lang .langFlag svg,
 .card.lang .langFlag img{
-  transition: transform .22s ease;
+transition: transform .22s ease;
 }
 
 .card.lang:hover .langFlag svg,
 .card.lang:hover .langFlag img{
-  transform: scale(1.18);
+transform: scale(1.18);
 }
 
 /* ======================
@@ -401,68 +402,68 @@ TOOLS — EVEN INTERVAL AUTO PULSE (LOGO ONLY)
 .card.tool{ position: relative; }
 
 .card.tool .logoTile svg{
-  transform-origin: center;
-  will-change: transform;
-  animation: logoShakira 90s linear infinite; /* 15 tools × 6s = 90s full cycle */
+transform-origin: center;
+will-change: transform;
+animation: logoShakira 90s linear infinite; /* 15 tools × 6s = 90s full cycle */
 }
 
 /* shorter pulse window so it doesn't overlap with the 6s spacing */
 @keyframes logoShakira{
-  /* idle */
-  0%, 96%{
-    transform: scale(1) translateX(0) rotate(0deg);
-  }
+/* idle */
+0%, 96%{
+transform: scale(1) translateX(0) rotate(0deg);
+}
 
-  /* zoom in */
-  96.5%{
-    transform: scale(1.70) translateX(0) rotate(0deg);
-  }
+/* zoom in */
+96.5%{
+transform: scale(1.70) translateX(0) rotate(0deg);
+}
 
-  /* slower + smoother shake */
-  97.2%{
-    transform: scale(1.70) translateX(-5px) rotate(-5deg);
-  }
-  97.9%{
-    transform: scale(1.70) translateX(5px) rotate(5deg);
-  }
-  98.6%{
-    transform: scale(1.70) translateX(-4px) rotate(-4deg);
-  }
-  99.3%{
-    transform: scale(1.70) translateX(4px) rotate(4deg);
-  }
+/* slower + smoother shake */
+97.2%{
+transform: scale(1.70) translateX(-5px) rotate(-5deg);
+}
+97.9%{
+transform: scale(1.70) translateX(5px) rotate(5deg);
+}
+98.6%{
+transform: scale(1.70) translateX(-4px) rotate(-4deg);
+}
+99.3%{
+transform: scale(1.70) translateX(4px) rotate(4deg);
+}
 
-  /* smooth return */
-  100%{
-    transform: scale(1) translateX(0) rotate(0deg);
-  }
+/* smooth return */
+100%{
+transform: scale(1) translateX(0) rotate(0deg);
+}
 }
 
 /* ✅ Equal interval: 6s between pulses.
-   We shuffle the slot order so neighbors (like Word/PowerPoint) won't pulse back-to-back.
-   Slot = n means delay = -(3 + 6n)s  (starts quickly after landing) */
+We shuffle the slot order so neighbors (like Word/PowerPoint) won't pulse back-to-back.
+Slot = n means delay = -(3 + 6n)s (starts quickly after landing) */
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(7)  .logoTile svg { animation-delay: -3s;  }  /* slot 0 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(8)  .logoTile svg { animation-delay: -39s; }  /* slot 6 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(9)  .logoTile svg { animation-delay: -15s; }  /* slot 2 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -63s; }  /* slot 10 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -27s; }  /* slot 4 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(7) .logoTile svg { animation-delay: -3s; } /* slot 0 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(8) .logoTile svg { animation-delay: -39s; } /* slot 6 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(9) .logoTile svg { animation-delay: -15s; } /* slot 2 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(10) .logoTile svg { animation-delay: -63s; } /* slot 10 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(11) .logoTile svg { animation-delay: -27s; } /* slot 4 */
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -75s; }  /* slot 12 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -9s;  }  /* slot 1 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -57s; }  /* slot 9 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -21s; }  /* slot 3 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -69s; }  /* slot 11 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(12) .logoTile svg { animation-delay: -75s; } /* slot 12 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(13) .logoTile svg { animation-delay: -9s; } /* slot 1 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(14) .logoTile svg { animation-delay: -57s; } /* slot 9 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(15) .logoTile svg { animation-delay: -21s; } /* slot 3 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(16) .logoTile svg { animation-delay: -69s; } /* slot 11 */
 
-.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -33s; }  /* slot 5 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -81s; }  /* slot 13 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -45s; }  /* slot 7 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -87s; }  /* slot 14 */
-.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -51s; }  /* slot 8 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(17) .logoTile svg { animation-delay: -33s; } /* slot 5 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(18) .logoTile svg { animation-delay: -81s; } /* slot 13 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(19) .logoTile svg { animation-delay: -45s; } /* slot 7 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(20) .logoTile svg { animation-delay: -87s; } /* slot 14 */
+.skillsGrid .skills-7x3 > .card.tool:nth-child(21) .logoTile svg { animation-delay: -51s; } /* slot 8 */
 
 /* accessibility */
 @media (prefers-reduced-motion: reduce){
-  .card.tool .logoTile svg{ animation: none; transform: none; }
+.card.tool .logoTile svg{ animation: none; transform: none; }
 }
 
 
@@ -471,19 +472,19 @@ ABOUT – LAYOUT
 =========================== */
 
 #about{
-  margin-top: -60px;    /* stronger pull up */
-  padding-top: 0;
-  overflow-x: hidden;
-  overflow-y: visible;
+margin-top: -60px; /* stronger pull up */
+padding-top: 0;
+overflow-x: hidden;
+overflow-y: visible;
 }
 
 .about-shell{
-  padding-top: 5px;      /* ✅ hover lift room */
-  max-width: 1050px;
-  margin: 0 auto 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+padding-top: 5px; /* ✅ hover lift room */
+max-width: 1050px;
+margin: 0 auto 32px;
+display: flex;
+flex-direction: column;
+gap: 14px;
 }
 
 
@@ -493,71 +494,71 @@ Blue static + thin inner frame
 Hover: white + thick turquoise border
 =========================== */
 .about-text-box{
-  padding: 18px 20px;
-  border-radius: 0;                 /* sharp angles */
-  background: #f5f8ff;              /* blue static */
-  color: #1f2937;                   /* clean dark text */
-  line-height: 1.6;
-  font-size: 0.96rem;
-  box-shadow: none;
+padding: 18px 20px;
+border-radius: 0; /* sharp angles */
+background: #f5f8ff; /* blue static */
+color: #1f2937; /* clean dark text */
+line-height: 1.6;
+font-size: 0.96rem;
+box-shadow: none;
 
-  /* reserve space for thick hover border (no layout shift) */
-  border: 2.5px solid transparent;
-  position: relative;
+/* reserve space for thick hover border (no layout shift) */
+border: 2.5px solid transparent;
+position: relative;
 
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.18s ease;
 }
 
 /* thin inner line like other sections */
 .about-text-box::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
 .about-text-box:hover{
-  background:#ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+background:#ffffff;
+border-color: var(--accent, #0ea5a2);
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 .about-text-box:hover::after{ box-shadow:none; }
 
 .about-text-box p:first-child{
-  font-weight: 600;
-  margin-bottom: 6px;
+font-weight: 600;
+margin-bottom: 6px;
 }
 
 /* hello rotator */
 .about-hello{
-  font-weight: 600;
-  margin-bottom: 8px;
-  letter-spacing: 0.02em;
-  color: #1c2d5a; /* navy (clean) */
+font-weight: 600;
+margin-bottom: 8px;
+letter-spacing: 0.02em;
+color: #1c2d5a; /* navy (clean) */
 }
 
 .about-hello .rotator{ display:inline-block; }
 
 .hello-fade{
-  display:inline-block;
-  opacity:1;
-  transform: translateY(0);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+display:inline-block;
+opacity:1;
+transform: translateY(0);
+transition: opacity 0.35s ease, transform 0.35s ease;
 }
 .hello-fade.out{ opacity:0; transform: translateY(-6px); }
 .hello-fade.in{ opacity:1; transform: translateY(0); }
 
 #hello-rotate{
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--accent, #0ea5a2); /* turquoise */
+font-size: 1.8rem;
+font-weight: 600;
+color: var(--accent, #0ea5a2); /* turquoise */
 }
 
 /* ===========================
@@ -565,10 +566,10 @@ ABOUT – SECOND ROW GRID
 =========================== */
 
 .about-grid{
-  display:grid;
-  grid-template-columns: 240px 1fr 1.5fr;
-  gap:16px;
-  align-items:flex-start;
+display:grid;
+grid-template-columns: 240px 1fr 1.5fr;
+gap:16px;
+align-items:flex-start;
 }
 
 /* ===========================
@@ -576,111 +577,111 @@ ABOUT – STATS (2×2 GRID)
 =========================== */
 
 .about-stats-grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px 12px;
+display:grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 18px 12px;
 }
 
 .about-stat{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  padding: 8px 0 8px 18px;
-  cursor: default;
+position:relative;
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+padding: 8px 0 8px 18px;
+cursor: default;
 }
 
 /* left strip */
 .about-stat::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:6px;
-  bottom:6px;
-  width:3px;
-  border-radius:999px;
-  background: rgba(0,0,0,0.18); /* neutral idle */
-  transform-origin: top;
-  transform: scaleY(0.7);
-  transition: transform 0.22s ease, background 0.22s ease, opacity 0.22s ease;
-  opacity:0.7;
+content:"";
+position:absolute;
+left:0;
+top:6px;
+bottom:6px;
+width:3px;
+border-radius:999px;
+background: rgba(0,0,0,0.18); /* neutral idle */
+transform-origin: top;
+transform: scaleY(0.7);
+transition: transform 0.22s ease, background 0.22s ease, opacity 0.22s ease;
+opacity:0.7;
 }
 
 /* big number */
 .about-stat-number{
-  font-size: 2.6rem;
-  font-weight:700;
-  line-height:1;
-  color:#1f2937;
-  text-shadow: 0 0 0 rgba(0,0,0,0);
-  transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
+font-size: 2.6rem;
+font-weight:700;
+line-height:1;
+color:#1f2937;
+text-shadow: 0 0 0 rgba(0,0,0,0);
+transition: transform 0.22s ease, color 0.22s ease, text-shadow 0.22s ease;
 }
 
 /* label */
 .about-stat-label{
-  margin-top:10px;
-  font-size:0.8rem;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:#6b7280; /* muted grey */
+margin-top:10px;
+font-size:0.8rem;
+text-transform:uppercase;
+letter-spacing:0.16em;
+color:#6b7280; /* muted grey */
 }
 
 /* hover = turquoise number + turquoise strip */
 .about-stat:hover::before{
-  transform: scaleY(1);
-  background: var(--accent, #0ea5a2);
-  opacity: 1;
+transform: scaleY(1);
+background: var(--accent, #0ea5a2);
+opacity: 1;
 }
 .about-stat:hover .about-stat-number{
-  transform: translateX(3px);
-  color: var(--accent, #0ea5a2);
-  text-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+transform: translateX(3px);
+color: var(--accent, #0ea5a2);
+text-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
 }
 
 /* Tooltip stays same */
 .about-stat-tooltip{
-  position:absolute;
-  left:0;
-  bottom: calc(100% + 10px);
-  padding: 8px 12px;
+position:absolute;
+left:0;
+bottom: calc(100% + 10px);
+padding: 8px 12px;
 
-  background:#111827;
-  color:#f9fafb;
+background:#111827;
+color:#f9fafb;
 
-  border:1px solid rgba(249,250,251,0.15);
-  border-radius:12px;
-  box-shadow: 0 4px 14px rgba(15,23,42,0.55);
+border:1px solid rgba(249,250,251,0.15);
+border-radius:12px;
+box-shadow: 0 4px 14px rgba(15,23,42,0.55);
 
-  font-size:0.75rem;
-  line-height:1.45;
-  max-width:260px;
-  white-space:normal;
+font-size:0.75rem;
+line-height:1.45;
+max-width:260px;
+white-space:normal;
 
-  opacity:0;
-  transform: translateY(4px);
-  pointer-events:none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index:20;
+opacity:0;
+transform: translateY(4px);
+pointer-events:none;
+transition: opacity 0.25s ease, transform 0.25s ease;
+z-index:20;
 }
 .about-stat-tooltip::after{
-  content:"";
-  position:absolute;
-  top:100%;
-  left:24px;
-  width:0; height:0;
-  border-left:7px solid transparent;
-  border-right:7px solid transparent;
-  border-top:7px solid #111827;
+content:"";
+position:absolute;
+top:100%;
+left:24px;
+width:0; height:0;
+border-left:7px solid transparent;
+border-right:7px solid transparent;
+border-top:7px solid #111827;
 }
 .about-stat:hover .about-stat-tooltip,
 .about-stat.tooltip-open .about-stat-tooltip{
-  opacity:1;
-  transform: translateY(0);
+opacity:1;
+transform: translateY(0);
 }
 /* stats label → turn black on hover */
 .about-stat:hover .about-stat-label{
-  color: #111111;
-  font-weight: 700; /* bold / thick */
+color: #111111;
+font-weight: 700; /* bold / thick */
 }
 
 /* ===========================
@@ -690,63 +691,63 @@ Hover: white + thick turquoise border
 =========================== */
 
 .about-focus{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-top:2px;
-  margin-left:20px;
+display:flex;
+flex-direction:column;
+gap:12px;
+margin-top:2px;
+margin-left:20px;
 }
 
 .about-focus-label{
-  font-size:0.82rem;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:#6b7280;
-  font-weight:600;
+font-size:0.82rem;
+text-transform:uppercase;
+letter-spacing:0.16em;
+color:#6b7280;
+font-weight:600;
 }
 
 .about-focus-chips{
-  display:grid;
-  grid-template-columns: repeat(2, max-content);
-  gap: 10px 16px;
-  justify-content:start;
+display:grid;
+grid-template-columns: repeat(2, max-content);
+gap: 10px 16px;
+justify-content:start;
 }
 
 .about-focus-chip{
-  padding: 7px 14px;
-  font-size: 0.84rem;
-  border-radius: 999px; /* keep pills */
-  background: #f5f8ff;  /* blue static */
-  color:#1f2937;
-  line-height:1.3;
-  cursor: default;
-  text-align:center;
+padding: 7px 14px;
+font-size: 0.84rem;
+border-radius: 999px; /* keep pills */
+background: #f5f8ff; /* blue static */
+color:#1f2937;
+line-height:1.3;
+cursor: default;
+text-align:center;
 
-  border: 2.5px solid transparent; /* reserve hover thickness */
-  position: relative;
+border: 2.5px solid transparent; /* reserve hover thickness */
+position: relative;
 
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.15s ease;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.15s ease;
 }
 
 /* thin inner line */
 .about-focus-chip::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+content:"";
+position:absolute;
+inset:0;
+border-radius: inherit;
+pointer-events:none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
 .about-focus-chip:hover{
-  background:#ffffff;
-  border-color: var(--accent, #0ea5a2);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
-  transform: translateY(-1px);
+background:#ffffff;
+border-color: var(--accent, #0ea5a2);
+box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+transform: translateY(-1px);
 }
 .about-focus-chip:hover::after{ box-shadow:none; }
 
@@ -756,59 +757,59 @@ Map card: white background
 =========================== */
 
 .about-map{
-  display:flex;
-  width:100%;
-  justify-content:flex-start;
+display:flex;
+width:100%;
+justify-content:flex-start;
 }
 
 .map-card{
-  width:100%;
-  height:200px;
-  background:#ffffff;                 /* ✅ white */
-  border-radius: 0;                   /* match sharp system */
-  border: 2.5px solid transparent;    /* same shell system */
-  position: relative;
-  box-shadow:none;
-  padding:0;
-  overflow:hidden;
+width:100%;
+height:200px;
+background:#ffffff; /* ✅ white */
+border-radius: 0; /* match sharp system */
+border: 2.5px solid transparent; /* same shell system */
+position: relative;
+box-shadow:none;
+padding:0;
+overflow:hidden;
 }
 
 /* thin inner frame */
 .map-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
 /* optional hover (kept subtle + consistent) */
 .map-card:hover{
-  border-color: var(--accent, #0ea5a2);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
-  transform: translateY(-2px);
-  transition: transform .18s ease, box-shadow .20s ease, border-color .20s ease;
+border-color: var(--accent, #0ea5a2);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
+transform: translateY(-2px);
+transition: transform .18s ease, box-shadow .20s ease, border-color .20s ease;
 }
 .map-card:hover::after{ box-shadow:none; }
 
 /* Leaflet map inside */
 #visitedMap{
-  width:100%;
-  height:100%;
-  border-radius: inherit;
+width:100%;
+height:100%;
+border-radius: inherit;
 }
 
 /* Leaflet background: white instead of transparent */
 #visitedMap.leaflet-container{
-  background:#ffffff !important;
+background:#ffffff !important;
 }
 
 /* micro glow on polygons: turquoise */
 #visitedMap .leaflet-interactive{
-  transition: filter 0.25s ease, stroke-width 0.2s ease;
+transition: filter 0.25s ease, stroke-width 0.2s ease;
 }
 #visitedMap .leaflet-interactive:hover{
-  filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.45));
+filter: drop-shadow(0 0 8px rgba(14, 165, 162, 0.45));
 }
 
 /* ===========================
@@ -816,77 +817,77 @@ RESPONSIVE LAYOUT (unchanged)
 =========================== */
 
 @media (max-width: 960px){
-  .about-shell{ padding: 0 8px; }
+.about-shell{ padding: 0 8px; }
 
-  .about-grid{
-    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-    gap:24px;
-  }
+.about-grid{
+grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+gap:24px;
+}
 
-  .about-map{
-    grid-column: 1 / -1;
-    justify-content:flex-start;
-  }
+.about-map{
+grid-column: 1 / -1;
+justify-content:flex-start;
+}
 
-  .map-card{
-    max-width:480px;
-    height:240px;
-  }
+.map-card{
+max-width:480px;
+height:240px;
+}
 }
 
 @media (max-width: 640px){
-  .about-shell{
-    margin: 4px auto 18px;
-    padding: 0 10px;
-    gap: 18px;
-  }
+.about-shell{
+margin: 4px auto 18px;
+padding: 0 10px;
+gap: 18px;
+}
 
-  .about-text-box{
-    padding: 14px 16px;
-    font-size: 0.9rem;
-  }
+.about-text-box{
+padding: 14px 16px;
+font-size: 0.9rem;
+}
 
-  .about-grid{
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
+.about-grid{
+grid-template-columns: 1fr;
+gap: 18px;
+}
 
-  .about-stats-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 10px;
-  }
+.about-stats-grid{
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 14px 10px;
+}
 
-  .about-stat-number{ font-size: 2.1rem; }
+.about-stat-number{ font-size: 2.1rem; }
 
-  .about-stat-label{
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-  }
+.about-stat-label{
+font-size: 0.75rem;
+letter-spacing: 0.14em;
+}
 
-  .about-stat{ padding: 2px 0 2px 14px; }
+.about-stat{ padding: 2px 0 2px 14px; }
 
-  .about-map{ justify-content: stretch; }
+.about-map{ justify-content: stretch; }
 
-  .map-card{
-    width: 100%;
-    height: 230px;
-  }
+.map-card{
+width: 100%;
+height: 230px;
+}
 
-  .about-focus-chips{ grid-template-columns: 1fr; }
+.about-focus-chips{ grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px){
-  .about-focus{ margin-left: 0; }
+.about-focus{ margin-left: 0; }
 
-  .about-focus-chips{
-    grid-template-columns: 1fr;
-    justify-items: stretch;
-  }
+.about-focus-chips{
+grid-template-columns: 1fr;
+justify-items: stretch;
+}
 
-  .about-focus-chip{
-    width: 100%;
-    text-align: center;
-  }
+.about-focus-chip{
+width: 100%;
+text-align: center;
+}
 }
 
 
@@ -925,95 +926,157 @@ cursor: pointer;
 transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.country-map:hover {
-transform: scale(1.06); /* "zoom" effect */
-box-shadow: 0 10px 24px rgba(0,0,0,0.16);
-}
 
-
-
-
-
-
-
-
-/* ===========================
+/* ==========================
 EDUCATION MAPS — SVG
 =========================== */
 
 .country-map svg{
-  width: 100%;
-  height: 100%;
-  display: block;
+width: 100%;
+height: 100%;
+display: block;
 }
 
 /* base country shape */
-.edu-svg .edu-country-shape{
-  fill: transparent;
-  stroke: #222;
-  stroke-width: 1.8;
-  vector-effect: non-scaling-stroke;
-  transition: fill 0.25s ease, stroke 0.25s ease;
+/* BASE (static) = black-filled */
+.edu-country-shape{
+fill: #000;
+fill-opacity: 1;
+stroke: #222;
+stroke-width: 1.8;
+vector-effect: non-scaling-stroke;
+transition: fill .22s ease, fill-opacity .22s ease, stroke .22s ease, stroke-width .22s ease;
 }
+
+
+/* kill the rectangle box */
+.country-map:hover{
+box-shadow: none;
+}
+
+/* zoom ONLY the svg (no rectangle) */
+.country-map svg{
+width: 100%;
+height: 100%;
+display: block;
+transition: transform .25s ease;
+transform-origin: center;
+}
+
+/* desktop hover */
+@media (hover: hover) and (pointer: fine){
+.country-map:hover svg{
+transform: scale(1.06);
+}
+}
+
+/* mobile tap feedback */
+@media (hover: none) and (pointer: coarse){
+.country-map:active svg{
+transform: scale(1.04);
+}
+}
+
+/* keep the zoom while the pass is open (locked state) */
+.country-map.is-locked svg{
+transform: scale(1.06);
+}
+
 /* ===========================
 EDUCATION SVG — HOVER + LOCKED COLORS
 =========================== */
 
-/* base (same as before) */
-.edu-svg .edu-country-shape{
-  fill: transparent;
-  stroke: #222;
-  stroke-width: 1.8;
-  fill-opacity: 0;
-  vector-effect: non-scaling-stroke;
-  transition: fill .22s ease, fill-opacity .22s ease, stroke .22s ease, stroke-width .22s ease;
-}
-
 /* FRANCE hover/locked */
 #map-france:hover .edu-country-shape,
 #map-france.is-locked .edu-country-shape{
-  stroke: #003b8e;
-  stroke-width: 2.4;
-  fill: #b7d4ff;
-  fill-opacity: 0.65;
+stroke: #003b8e;
+stroke-width: 2.4;
+fill: #b7d4ff;
+fill-opacity: 0.65;
 }
 
 /* JAPAN hover/locked */
 #map-japan:hover .edu-country-shape,
 #map-japan.is-locked .edu-country-shape{
-  stroke: #bc002d;
-  stroke-width: 2.4;
-  fill: #ffe5e5;
-  fill-opacity: 0.80;
+stroke: #bc002d;
+stroke-width: 2.4;
+fill: #ffe5e5;
+fill-opacity: 0.80;
 }
 
 /* GERMANY hover/locked */
 #map-germany:hover .edu-country-shape,
 #map-germany.is-locked .edu-country-shape{
-  stroke: #d4a300;
-  stroke-width: 2.4;
-  fill: #ffe680;
-  fill-opacity: 0.65;
+stroke: #d4a300;
+stroke-width: 2.4;
+fill: #ffe680;
+fill-opacity: 0.65;
 }
 
+#ui-tooltip{ pointer-events: none; }
 
-.map-label{
-  display: block;
-  color: #111827;     /* force visible */
-  line-height: 1.1;
+/* Make sure taps hit the SVG/path reliably */
+.country-map,
+.country-map svg,
+.country-map .edu-country-shape{
+pointer-events: auto;
+touch-action: manipulation;
+-webkit-tap-highlight-color: transparent;
 }
 
-.map-column{
-  position: relative;
-  z-index: 1;
+/* MOBILE: treat touch-down like hover */
+@media (hover: none) and (pointer: coarse){
+.country-map:active svg{
+transform: scale(1.06);
 }
 
-.country-map{
-  position: relative;
-  z-index: 0;
+/* FRANCE */
+#map-france:active .edu-country-shape{
+stroke: #003b8e;
+stroke-width: 2.4;
+fill: #b7d4ff;
+fill-opacity: 0.65;
 }
 
-	
+/* JAPAN */
+#map-japan:active .edu-country-shape{
+stroke: #bc002d;
+stroke-width: 2.4;
+fill: #ffe5e5;
+fill-opacity: 0.80;
+}
+
+/* GERMANY */
+#map-germany:active .edu-country-shape{
+stroke: #d4a300;
+stroke-width: 2.4;
+fill: #ffe680;
+fill-opacity: 0.65;
+}
+}
+
+/* Optional enhancement: if :has() is supported, catch cases where the PATH is active instead of the wrapper */
+@supports selector(.country-map:has(.edu-country-shape:active)) {
+@media (hover: none) and (pointer: coarse){
+
+.country-map:has(.edu-country-shape:active) svg{
+transform: scale(1.06);
+}
+
+#map-france:has(.edu-country-shape:active) .edu-country-shape{
+stroke:#003b8e; stroke-width:2.4; fill:#b7d4ff; fill-opacity:.65;
+}
+
+#map-japan:has(.edu-country-shape:active) .edu-country-shape{
+stroke:#bc002d; stroke-width:2.4; fill:#ffe5e5; fill-opacity:.80;
+}
+
+#map-germany:has(.edu-country-shape:active) .edu-country-shape{
+stroke:#d4a300; stroke-width:2.4; fill:#ffe680; fill-opacity:.65;
+}
+}
+}
+
 
 .leaflet-container {
 background: transparent !important;
@@ -1360,31 +1423,31 @@ EXPERIENCE – 2×2 GRID
 =========================== */
 
 #experience{
-  margin-top:-10px;
-  padding:10px 0 0;
-  position:relative;
+margin-top:-10px;
+padding:10px 0 0;
+position:relative;
 }
 
 .experience-layout{
-  position:relative;
-  z-index:1;
-  max-width:1050px;
-  margin:-20px auto 0;
-  padding:0;
+position:relative;
+z-index:1;
+max-width:1050px;
+margin:-20px auto 0;
+padding:0;
 }
 
 /* 2×2 grid */
 .exp-mosaic{
-  max-width:1050px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  grid-auto-rows:minmax(200px,1fr);
-  grid-template-areas:
-    "ngo io"
-    "research assoc";
-  gap:18px;
-  perspective:1200px;
+max-width:1050px;
+margin:0 auto;
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+grid-auto-rows:minmax(200px,1fr);
+grid-template-areas:
+"ngo io"
+"research assoc";
+gap:18px;
+perspective:1200px;
 }
 
 /* ======================
@@ -1392,51 +1455,51 @@ CARD SHELL (UNIFIED SYSTEM)
 ====================== */
 
 .exp-card{
-  position:relative;
-  cursor:pointer;
-  overflow:visible;
+position:relative;
+cursor:pointer;
+overflow:visible;
 }
 
 /* lift */
 .exp-card{
-  transition: transform .22s ease;
+transition: transform .22s ease;
 }
 .exp-card:hover{
-  transform: translateY(-3px);
+transform: translateY(-3px);
 }
 
 /* faces */
 .exp-card-face{
-  position:absolute;
-  inset:0;
-  border-radius:0;
-  backface-visibility:hidden;
-  overflow:hidden;
+position:absolute;
+inset:0;
+border-radius:0;
+backface-visibility:hidden;
+overflow:hidden;
 
-  /* 🔑 unified border system */
-  background:#f5f8ff;
-  border:2.5px solid transparent;       /* reserve hover space */
-  box-shadow:none;
+/* 🔑 unified border system */
+background:#f5f8ff;
+border:2.5px solid transparent; /* reserve hover space */
+box-shadow:none;
 }
 
 /* inner thin static line */
 .exp-card-face::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
 /* hover = activate real border */
 .exp-card:hover .exp-card-face{
-  background:#ffffff;
-  border-color: var(--exp-accent,#0ea5a2);
+background:#ffffff;
+border-color: var(--exp-accent,#0ea5a2);
 }
 
 /* hide inner line on hover */
 .exp-card:hover .exp-card-face::after{
-  box-shadow:none;
+box-shadow:none;
 }
 
 /* ======================
@@ -1444,13 +1507,13 @@ FLIP
 ====================== */
 
 .exp-card-inner{
-  width:100%;
-  height:100%;
-  transform-style:preserve-3d;
-  transition: transform .6s cubic-bezier(.2,.8,.25,1);
+width:100%;
+height:100%;
+transform-style:preserve-3d;
+transition: transform .6s cubic-bezier(.2,.8,.25,1);
 }
 .exp-card.is-flipped .exp-card-inner{
-  transform: rotateY(180deg);
+transform: rotateY(180deg);
 }
 
 /* ======================
@@ -1458,51 +1521,51 @@ FRONT
 ====================== */
 
 .exp-card-front{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:24px 26px;
-  gap:14px;
-  color:#1f2937;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:24px 26px;
+gap:14px;
+color:#1f2937;
 }
 
 .exp-front-left{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
+display:flex;
+flex-direction:column;
+align-items:flex-start;
 }
 
 .exp-front-main{
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  font-size:.8rem;
-  color:var(--exp-accent);
+text-transform:uppercase;
+letter-spacing:.2em;
+font-size:.8rem;
+color:var(--exp-accent);
 }
 
 .exp-front-sub{
-  margin-top:10px;
-  font-size:1.35rem;
-  font-weight:600;
-  max-width:14ch;
-  line-height:1.15;
+margin-top:10px;
+font-size:1.35rem;
+font-weight:600;
+max-width:14ch;
+line-height:1.15;
 }
 
 /* gate */
 .exp-gate{
-  text-align:right;
-  min-width:90px;
+text-align:right;
+min-width:90px;
 }
 .exp-gate-label{
-  font-size:.7rem;
-  letter-spacing:.18em;
-  color:#9ca3af;
+font-size:.7rem;
+letter-spacing:.18em;
+color:#9ca3af;
 }
 .exp-gate-code{
-  margin-top:4px;
-  font-size:2.1rem;
-  font-weight:700;
-  letter-spacing:.16em;
-  color:#d79a3b; /* honey */
+margin-top:4px;
+font-size:2.1rem;
+font-weight:700;
+letter-spacing:.16em;
+color:#d79a3b; /* honey */
 }
 
 /* ======================
@@ -1510,77 +1573,77 @@ BACK
 ====================== */
 
 .exp-card-back{
-  transform: rotateY(180deg);
-  display:flex;
-  flex-direction:column;
-  color:#1f2937;
+transform: rotateY(180deg);
+display:flex;
+flex-direction:column;
+color:#1f2937;
 }
 
 .exp-card-back-inner{
-  padding:14px 14px 10px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  height:100%;
-  overflow-y:auto;
+padding:14px 14px 10px;
+display:flex;
+flex-direction:column;
+gap:10px;
+height:100%;
+overflow-y:auto;
 }
 
 .exp-back-label{
-  font-size:.75rem;
-  letter-spacing:.18em;
-  color:#1c2d5a;
+font-size:.75rem;
+letter-spacing:.18em;
+color:#1c2d5a;
 }
 
 /* org block */
 .exp-org{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:14px;
-  align-items:center;
+display:grid;
+grid-template-columns:auto 1fr;
+gap:14px;
+align-items:center;
 }
 
 .exp-org-logo{
-  width:90px;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+width:90px;
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .exp-org-logo img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
+max-width:100%;
+max-height:100%;
+object-fit:contain;
 }
 
 .exp-org-text{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+display:flex;
+flex-direction:column;
+gap:6px;
 }
 
 .exp-org-text h3{
-  font-size:.95rem;
-  margin:0;
+font-size:.95rem;
+margin:0;
 }
 
 .exp-org-meta{
-  font-size:.78rem;
-  color:var(--exp-accent);
+font-size:.78rem;
+color:var(--exp-accent);
 }
 
 .exp-org-list{
-  grid-column:1/-1;
-  padding-left:20px;
-  font-size:.82rem;
-  line-height:1.45;
+grid-column:1/-1;
+padding-left:20px;
+font-size:.82rem;
+line-height:1.45;
 }
 
 /* ======================
 ACCENTS
 ====================== */
 
-.exp-card{ --exp-accent:#0ea5a2; }   /* one accent for all cards */
+.exp-card{ --exp-accent:#0ea5a2; } /* one accent for all cards */
 
 /* keep grid areas */
 .exp-card--ngo{ grid-area:ngo; }
@@ -1594,127 +1657,127 @@ EXPANSION
 ====================== */
 
 .exp-card--expanded{
-  z-index:20;
+z-index:20;
 }
 
 .exp-card--expanded .exp-card-back{
-  position:absolute;
-  left:0;
-  right:0;
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
+position:absolute;
+left:0;
+right:0;
+box-shadow:0 18px 40px rgba(0,0,0,.18);
 }
 
 .exp-card--ngo.exp-card--expanded .exp-card-back{
-  top:0;
-  height: calc(200% + 18px);
+top:0;
+height: calc(200% + 18px);
 }
 .exp-card--research.exp-card--expanded .exp-card-back{
-  top: calc(-100% - 18px);
-  height: calc(200% + 18px);
+top: calc(-100% - 18px);
+height: calc(200% + 18px);
 }
 
 /* dim others */
 .exp-mosaic.dim-others .exp-card{
-  opacity:.35;
+opacity:.35;
 }
 .exp-mosaic.dim-others .exp-card--expanded{
-  opacity:1;
+opacity:1;
 }
 @media (max-width:800px){
 
-  /* =========================
-     LAYOUT — STACK VERTICALLY
-  ========================= */
-  .exp-mosaic{
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    perspective: none;
-  }
+/* =========================
+LAYOUT — STACK VERTICALLY
+========================= */
+.exp-mosaic{
+display: flex;
+flex-direction: column;
+gap: 18px;
+perspective: none;
+}
 
-  .exp-card{
-    grid-area: auto !important;
-    width: 100%;
-    height: auto;
-    cursor: default;
-  }
+.exp-card{
+grid-area: auto !important;
+width: 100%;
+height: auto;
+cursor: default;
+}
 
-  /* =========================
-     KILL FLIP COMPLETELY
-  ========================= */
-  .exp-card-inner{
-    width: 100%;
-    height: auto;
-    transform: none;
-    transform-style: flat;
-    transition: none;
-  }
+/* =========================
+KILL FLIP COMPLETELY
+========================= */
+.exp-card-inner{
+width: 100%;
+height: auto;
+transform: none;
+transform-style: flat;
+transition: none;
+}
 
-  .exp-card.is-flipped .exp-card-inner{
-    transform: none;
-  }
+.exp-card.is-flipped .exp-card-inner{
+transform: none;
+}
 
-  /* faces MUST be normal blocks */
-  .exp-card-face{
-    position: relative;
-    inset: auto;
-    height: auto;
-    backface-visibility: visible;
-  }
+/* faces MUST be normal blocks */
+.exp-card-face{
+position: relative;
+inset: auto;
+height: auto;
+backface-visibility: visible;
+}
 
-  /* front gone, back only */
-  .exp-card-front{
-    display: none;
-  }
+/* front gone, back only */
+.exp-card-front{
+display: none;
+}
 
-  .exp-card-back{
-    display: flex;
-    position: relative;
-    transform: none;
-    box-shadow: none;
-  }
+.exp-card-back{
+display: flex;
+position: relative;
+transform: none;
+box-shadow: none;
+}
 
-  .exp-card-back-inner{
-    height: auto;
-    max-height: none;
-    overflow: visible;
-    padding: 16px 14px 18px;
-  }
+.exp-card-back-inner{
+height: auto;
+max-height: none;
+overflow: visible;
+padding: 16px 14px 18px;
+}
 
-  /* =========================
-     KILL EXPANSION + DIM SYSTEM
-     (THIS IS WHAT YOU WERE MISSING)
-  ========================= */
-  .exp-mosaic.dim-others .exp-card{
-    opacity: 1 !important;
-  }
+/* =========================
+KILL EXPANSION + DIM SYSTEM
+(THIS IS WHAT YOU WERE MISSING)
+========================= */
+.exp-mosaic.dim-others .exp-card{
+opacity: 1 !important;
+}
 
-  .exp-card--expanded{
-    z-index: auto !important;
-  }
+.exp-card--expanded{
+z-index: auto !important;
+}
 
-  .exp-card--expanded .exp-card-back{
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    height: auto !important;
-    box-shadow: none !important;
-  }
+.exp-card--expanded .exp-card-back{
+position: relative !important;
+top: auto !important;
+left: auto !important;
+right: auto !important;
+height: auto !important;
+box-shadow: none !important;
+}
 
-  .exp-card--ngo.exp-card--expanded .exp-card-back,
-  .exp-card--research.exp-card--expanded .exp-card-back{
-    top: auto !important;
-    height: auto !important;
-  }
+.exp-card--ngo.exp-card--expanded .exp-card-back,
+.exp-card--research.exp-card--expanded .exp-card-back{
+top: auto !important;
+height: auto !important;
+}
 
-  /* =========================
-     NO HOVER / NO TAP EFFECTS
-  ========================= */
-  .exp-card:hover{
-    transform: none;
-    box-shadow: none;
-  }
+/* =========================
+NO HOVER / NO TAP EFFECTS
+========================= */
+.exp-card:hover{
+transform: none;
+box-shadow: none;
+}
 }
 
 
@@ -2280,124 +2343,124 @@ text-align: center;
 
 /* 3 equal boxes in one row */
 .activities-row {
-  max-width: 1070px;
-  margin: 0 auto;
-  padding: 0 10px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+max-width: 1070px;
+margin: 0 auto;
+padding: 0 10px;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
 }
 
 /* each card */
 
 /* each card */
 .activity-box{
-  background: #f5f8ff;
-  border: 2.5px solid transparent;    /* reserve space for thick hover border */
-  border-radius: 0;
-  padding: 18px 22px;
+background: #f5f8ff;
+border: 2.5px solid transparent; /* reserve space for thick hover border */
+border-radius: 0;
+padding: 18px 22px;
 
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  column-gap: 14px;
-  align-items: center;
+display: grid;
+grid-template-columns: 64px 1fr;
+column-gap: 14px;
+align-items: center;
 
-  position: relative;
-  cursor: default;
+position: relative;
+cursor: default;
 
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.18s ease;
 }
 
 /* fake "normal 1px frame" (inside), like Contact */
 .activity-box::after{
-  content:"";
-  position:absolute;
-  inset: 0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+content:"";
+position:absolute;
+inset: 0;
+pointer-events:none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
 /* LEFT — icon holder */
 .activity-icon{
-  width: 40px;
-  height: 40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  align-self:center;
+width: 40px;
+height: 40px;
+display:flex;
+align-items:center;
+justify-content:center;
+align-self:center;
 
-  transition: transform 0.25s ease, color 0.25s ease;
+transition: transform 0.25s ease, color 0.25s ease;
 }
 
 /* RIGHT — stacked text */
 .activity-content{
-  display:flex;
-  flex-direction:column;
-  gap: 8px; /* (you wanted a bit more breathing room) */
+display:flex;
+flex-direction:column;
+gap: 8px; /* (you wanted a bit more breathing room) */
 }
 
 .activity-content h3{
-  margin:0;
-  font-size:1.05rem;
-  font-weight:600;
-  color:#1f2937;
-  line-height:1.25;
+margin:0;
+font-size:1.05rem;
+font-weight:600;
+color:#1f2937;
+line-height:1.25;
 }
 
 .activity-content p{
-  margin:0;
-  font-size:0.9rem;
-  color:#4b5563;
-  line-height:1.45;
+margin:0;
+font-size:0.9rem;
+color:#4b5563;
+line-height:1.45;
 }
 
 /* hover — EXACT Contact behavior */
 .activity-box:hover{
-  background:#ffffff;
-  border-color: var(--accent, #0ea5a2);  /* turquoise */
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+background:#ffffff;
+border-color: var(--accent, #0ea5a2); /* turquoise */
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 /* hide the inner 1px frame when the real border appears */
 .activity-box:hover::after{
-  box-shadow: none;
+box-shadow: none;
 }
 
 /* hover accents */
 .activity-box:hover h3{
-  color: var(--accent, #0ea5a2);
+color: var(--accent, #0ea5a2);
 }
 
 .activity-box:hover .activity-icon{
-  transform: scale(1.28);
-  color: var(--accent, #0ea5a2);
+transform: scale(1.28);
+color: var(--accent, #0ea5a2);
 }
 
 
 /* RESPONSIVE */
 @media (max-width: 800px) {
-  .activities-row {
-    grid-template-columns: 1fr;
-  }
+.activities-row {
+grid-template-columns: 1fr;
+}
 
-  .activity-box {
-    grid-template-columns: 48px 1fr;
-    padding: 16px 18px;
-  }
+.activity-box {
+grid-template-columns: 48px 1fr;
+padding: 16px 18px;
+}
 
-  .activity-icon {
-    width: 32px;
-    height: 32px;
-  }
+.activity-icon {
+width: 32px;
+height: 32px;
+}
 }
 /* DEBUG — disable icon hover animation */
 .activity-box:hover .activity-icon{
-  transform: none !important;
+transform: none !important;
 }
 
 /* 🔻 Horizontal auto-scrolling strip */
@@ -2621,17 +2684,17 @@ CONTACT SECTION — TURQUOISE VERSION
 ================================ */
 
 #contact {
-  margin-top: -20px;
+margin-top: -20px;
 }
 
 /* Layout: left form, right info grid */
 .contact-layout {
-  max-width: 1050px;
-  margin: 0 auto 16px;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-  gap: 32px;
-  align-items: stretch;
+max-width: 1050px;
+margin: 0 auto 16px;
+display: grid;
+grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+gap: 32px;
+align-items: stretch;
 }
 
 /* LEFT SIDE – CONTACT FORM ("envelope") */
@@ -2639,63 +2702,63 @@ CONTACT SECTION — TURQUOISE VERSION
 .contact-left { min-width: 0; }
 
 .contact-envelope {
-  background: var(--bg1, #f5f8ff);
-  border: 2.5px solid transparent; /* reserve space */
-  border-radius: 0;
-  padding: 16px 32px 15px;
-  text-align: left;
-  position: relative;
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
+background: var(--bg1, #f5f8ff);
+border: 2.5px solid transparent; /* reserve space */
+border-radius: 0;
+padding: 16px 32px 15px;
+text-align: left;
+position: relative;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.18s ease;
 }
 .contact-envelope::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
 }
 
 .contact-envelope:hover {
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+background: #ffffff;
+border-color: var(--accent, #0ea5a2);
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 .contact-envelope:hover::after {
-  box-shadow: none;
+box-shadow: none;
 }
 
 .contact-title {
-  margin-top: 0;
-  margin-bottom: 24px;
-  text-align: center;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 1.15rem;
-  font-weight: 600;
-  transition: color 0.25s ease;
+margin-top: 0;
+margin-bottom: 24px;
+text-align: center;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+font-size: 1.15rem;
+font-weight: 600;
+transition: color 0.25s ease;
 }
 
 .contact-subline {
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.75;
-  margin-top: -15px;
-  margin-bottom: 20px;
-  transition: color 0.25s ease, opacity 0.25s ease;
+text-align: center;
+font-size: 0.85rem;
+opacity: 0.75;
+margin-top: -15px;
+margin-bottom: 20px;
+transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 .contact-envelope:hover .contact-title {
-  color: var(--accent, #0ea5a2); /* ✅ turquoise */
+color: var(--accent, #0ea5a2); /* ✅ turquoise */
 }
 .contact-envelope:hover .contact-subline {
-  color: var(--accent, #0ea5a2);
-  opacity: 1;
+color: var(--accent, #0ea5a2);
+opacity: 1;
 }
 
 /* 3 fields (name / email / topic) in one row on desktop */
@@ -2703,272 +2766,272 @@ CONTACT SECTION — TURQUOISE VERSION
 .contact-envelope-form { width: 100%; }
 
 .contact-envelope-fields {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 16px;
+margin-bottom: 16px;
 }
 
 .contact-envelope-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 0.85rem;
+display: flex;
+flex-direction: column;
+gap: 6px;
+font-size: 0.85rem;
 }
 
 .contact-envelope-field label {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  opacity: 0.75;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+font-weight: 600;
+opacity: 0.75;
 }
 
 .contact-envelope-field input,
 .contact-envelope-field select,
 .contact-envelope-field textarea {
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 10px 12px;
-  font: inherit;
-  background: #fff;
-  outline: none;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+border-radius: 12px;
+border: 1px solid rgba(0, 0, 0, 0.12);
+padding: 10px 12px;
+font: inherit;
+background: #fff;
+outline: none;
+transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
 }
 
 .contact-envelope-field input:focus,
 .contact-envelope-field select:focus,
 .contact-envelope-field textarea:focus {
-  border-color: var(--accent, #0ea5a2);                 /* ✅ turquoise */
-  box-shadow: 0 0 0 2px rgba(14, 165, 162, 0.18);       /* ✅ turquoise aura */
-  transform: translateY(-1px);
+border-color: var(--accent, #0ea5a2); /* ✅ turquoise */
+box-shadow: 0 0 0 2px rgba(14, 165, 162, 0.18); /* ✅ turquoise aura */
+transform: translateY(-1px);
 }
 
 .contact-envelope-message { margin-top: 4px; }
 
 .contact-envelope-message textarea {
-  resize: vertical;
-  min-height: 160px;
+resize: vertical;
+min-height: 160px;
 }
 
 /* Send button */
 .contact-send-btn {
-  margin-top: 18px;
-  margin-bottom: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 26px;
+margin-top: 18px;
+margin-bottom: 8px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 10px 26px;
 
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  cursor: pointer;
+border-radius: 999px;
+border: 1px solid rgba(0, 0, 0, 0.10);
+cursor: pointer;
 
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
+font-size: 0.9rem;
+text-transform: uppercase;
+letter-spacing: 0.15em;
 
-  background: var(--bg1, #f5f8ff);
-  color: #1c2d5a;
+background: var(--bg1, #f5f8ff);
+color: #1c2d5a;
 
-  transition: background 0.20s ease, border-color 0.20s ease, color 0.20s ease,
-              box-shadow 0.20s ease, transform 0.15s ease;
+transition: background 0.20s ease, border-color 0.20s ease, color 0.20s ease,
+box-shadow 0.20s ease, transform 0.15s ease;
 }
 
 /* Hover = turquoise accent */
 .contact-send-btn:hover {
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2); /* ✅ turquoise border */
-  color: var(--accent, #0ea5a2);        /* ✅ turquoise text */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+background: #ffffff;
+border-color: var(--accent, #0ea5a2); /* ✅ turquoise border */
+color: var(--accent, #0ea5a2); /* ✅ turquoise text */
+transform: translateY(-2px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Active press animation */
 .contact-send-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+transform: translateY(0);
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
 .contact-envelope:hover .contact-send-btn {
-  background: var(--accent, #0ea5a2); /* ✅ turquoise background */
-  color: white;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-2px);
+background: var(--accent, #0ea5a2); /* ✅ turquoise background */
+color: white;
+border-color: var(--accent, #0ea5a2);
+transform: translateY(-2px);
 }
 
 /* RIGHT SIDE – 2×2 INFO GRID + COPYRIGHT */
 
 .contact-right {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-width: 0;
+display: flex;
+flex-direction: column;
+gap: 0;
+min-width: 0;
 }
 
 /* 2×2 (now 3 rows) grid of cards */
 .contact-info-grid {
-  display: grid;
-  margin-bottom: 20px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+display: grid;
+margin-bottom: 20px;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 12px;
 }
 
 /* Info card: slightly smaller */
 .contact-info-card {
-  position: relative;
-  padding: 14px 14px 12px;
-  border-radius: 0;
+position: relative;
+padding: 14px 14px 12px;
+border-radius: 0;
 
-  background: var(--bg1, #f5f8ff);
+background: var(--bg1, #f5f8ff);
 
-  /* reserve hover border space */
-  border: 2.5px solid transparent;
+/* reserve hover border space */
+border: 2.5px solid transparent;
 
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
+text-align: center;
+text-decoration: none;
+color: inherit;
 
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.18s ease;
 }
 
 /* inner crisp 1px line */
 .contact-info-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
 /* hover = same behavior as Activities */
 .contact-info-card:hover {
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+background: #ffffff;
+border-color: var(--accent, #0ea5a2);
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 /* hide inner line when real border appears */
 .contact-info-card:hover::after {
-  box-shadow: none;
+box-shadow: none;
 }
 
 
 /* Title */
 .contact-info-card h3 {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin: 0 0 4px;
+font-size: 0.85rem;
+text-transform: uppercase;
+letter-spacing: 0.12em;
+margin: 0 0 4px;
 }
 
 /* Text */
 .contact-info-card p {
-  font-size: 0.8rem;
-  opacity: 0.9;
-  margin: 0;
+font-size: 0.8rem;
+opacity: 0.9;
+margin: 0;
 }
 
 /* ICON COLOR FIX: always dark blue */
 .contact-info-icon svg {
-  stroke: #1c2d5a;
-  transition: stroke 0.20s ease;
+stroke: #1c2d5a;
+transition: stroke 0.20s ease;
 }
 
 /* ICON OPTIONAL HOVER EFFECT */
 .contact-info-card:hover .contact-info-icon svg {
-  stroke: var(--accent, #0ea5a2); /* ✅ turquoise on hover */
+stroke: var(--accent, #0ea5a2); /* ✅ turquoise on hover */
 }
 
 /* Icon centered above title */
 .contact-info-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 12px;
 }
 
 .contact-info-icon svg { display: block; }
 
 /* Card title + text */
 .contact-info-card h3 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin: 0 0 6px;
+font-size: 0.9rem;
+text-transform: uppercase;
+letter-spacing: 0.12em;
+margin: 0 0 6px;
 }
 
 .contact-info-card p {
-  font-size: 0.85rem;
-  opacity: 0.9;
-  margin: 0;
+font-size: 0.85rem;
+opacity: 0.9;
+margin: 0;
 }
 
 .contact-info-card a { color: inherit; }
 
 /* Social icons row */
 .social-links {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 4px;
+display: flex;
+justify-content: center;
+gap: 14px;
+margin-top: 4px;
 }
 
 .social-links a { display: inline-flex; }
 
 .social-links svg {
-  transition: transform 0.15s ease, opacity 0.15s ease;
+transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
 .social-links a:hover svg {
-  transform: translateY(-2px);
-  opacity: 0.7;
+transform: translateY(-2px);
+opacity: 0.7;
 }
 
 /* Copyright box styled like a card */
 .contact-copyright {
-  position: relative;
-  padding: 14px 16px;
-  border-radius: 0;
+position: relative;
+padding: 14px 16px;
+border-radius: 0;
 
-  background: var(--bg1, #f5f8ff);
-  border: 2.5px solid transparent;
+background: var(--bg1, #f5f8ff);
+border: 2.5px solid transparent;
 
-  text-align: center;
-  font-size: 0.75rem;
-  letter-spacing: 0.03em;
-  color: #1c2d5a;
+text-align: center;
+font-size: 0.75rem;
+letter-spacing: 0.03em;
+color: #1c2d5a;
 
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.18s ease;
 }
 
 .contact-copyright::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
 }
 
 .contact-copyright:hover {
-  background:#ffffff;
-  border-color: var(--accent, #0ea5a2);
-  color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+background:#ffffff;
+border-color: var(--accent, #0ea5a2);
+color: var(--accent, #0ea5a2);
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 .contact-copyright:hover::after {
-  box-shadow: none;
+box-shadow: none;
 }
 
 .contact-copyright p { margin: 0; }
@@ -2978,32 +3041,32 @@ RESPONSIVE
 ================================ */
 
 @media (max-width: 900px) {
-  .contact-layout { grid-template-columns: 1fr; }
-  .contact-envelope-fields { grid-template-columns: 1fr; }
+.contact-layout { grid-template-columns: 1fr; }
+.contact-envelope-fields { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
-  .contact-info-grid { grid-template-columns: 1fr; }
+.contact-info-grid { grid-template-columns: 1fr; }
 }
 
 /* shared lift behavior (same as skills cards) */
 .contact-envelope,
 .contact-info-card,
 .contact-copyright{
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
+transition:
+background 0.20s ease,
+border-color 0.20s ease,
+color 0.20s ease,
+box-shadow 0.20s ease,
+transform 0.18s ease;
 }
 
 /* lift on hover */
 .contact-envelope:hover,
 .contact-info-card:hover,
 .contact-copyright:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+transform: translateY(-3px);
+box-shadow: 0 20px 44px rgba(0,0,0,.14);
 }
 
 /* ===========================
@@ -3051,38 +3114,38 @@ margin-top: 40px;
 }
 
 #scrollProgress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 4px;
-  background: #0ea5a2;   /* ORIGINAL turquoise */
-  z-index: 9999;
-  opacity: 0.95;
+position: fixed;
+top: 0;
+left: 0;
+width: 0;
+height: 4px;
+background: #0ea5a2; /* ORIGINAL turquoise */
+z-index: 9999;
+opacity: 0.95;
 }
 
 #backToTop {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #0ea5a2;   /* ORIGINAL turquoise */
-  border: none;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 9999;
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+position: fixed;
+bottom: 24px;
+right: 24px;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+background: #0ea5a2; /* ORIGINAL turquoise */
+border: none;
+display: none;
+justify-content: center;
+align-items: center;
+color: #ffffff;
+font-size: 22px;
+cursor: pointer;
+z-index: 9999;
+transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 #backToTop:hover {
-  background: #1fbdb9;  /* accent2 from old version */
-  box-shadow: 0 0 14px rgba(14,165,162,.6);
-  transform: translateY(-2px);
+background: #1fbdb9; /* accent2 from old version */
+box-shadow: 0 0 14px rgba(14,165,162,.6);
+transform: translateY(-2px);
 }
 
 
@@ -3982,7 +4045,7 @@ Paste tool SVG inside: <div class="logoTile"> ... </div>
 </div>
 <div class="name">Microsoft</div>
 </article>
-	
+
 <article class="card tool">
 <div class="logoTile">
 <svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_word2</title><path d="M18.536,2.323V4.868c3.4.019,7.12-.035,10.521.019a.783.783,0,0,1,.912.861c.054,6.266-.013,12.89.032,19.157-.02.4.009,1.118-.053,1.517-.079.509-.306.607-.817.676-.286.039-.764.034-1.045.047-2.792-.014-5.582-.011-8.374-.01l-1.175,0v2.547L2,27.133Q2,16,2,4.873L18.536,2.322" style="fill:#283c82"/><path d="M18.536,5.822h10.5V26.18h-10.5V23.635h8.27V22.363h-8.27v-1.59h8.27V19.5h-8.27v-1.59h8.27V16.637h-8.27v-1.59h8.27V13.774h-8.27v-1.59h8.27V10.911h-8.27V9.321h8.27V8.048h-8.27V5.822" style="fill:#fff"/><path d="M8.573,11.443c.6-.035,1.209-.06,1.813-.092.423,2.147.856,4.291,1.314,6.429.359-2.208.757-4.409,1.142-6.613.636-.022,1.272-.057,1.905-.1-.719,3.082-1.349,6.19-2.134,9.254-.531.277-1.326-.013-1.956.032-.423-2.106-.916-4.2-1.295-6.314C8.99,16.1,8.506,18.133,8.08,20.175q-.916-.048-1.839-.111c-.528-2.8-1.148-5.579-1.641-8.385.544-.025,1.091-.048,1.635-.067.328,2.026.7,4.043.986,6.072.448-2.08.907-4.161,1.352-6.241" style="fill:#fff"/></svg>
@@ -4288,109 +4351,109 @@ Paste tool SVG inside: <div class="logoTile"> ... </div>
 <!-- EDUCATION (MAPS ONLY + CLICK TO POPUP) -->
 
 <section id="education">
-  <div class="education-maps">
+<div class="education-maps">
 
-    <!-- FRANCE -->
-    <div class="map-column">
-      <div class="map-label">FRANCE</div>
-      <div id="map-france" class="country-map">
+<!-- FRANCE -->
+<div class="map-column">
+<div class="map-label">FRANCE</div>
+<div id="map-france" class="country-map">
 <svg height="800px" width="800px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
+viewBox="0 0 512 512" xml:space="preserve">
 <g>
-	<path class="edu-country-shape" d="M425.098,246.562c0.395,0.034,0.72,0.24,1.096,0.317c0.498-0.025,0.985-0.12,1.492-0.077L425.098,246.562z"/>
-	<path class="edu-country-shape" d="M458.787,179.417c-0.086,0.162-0.232,0.274-0.318,0.428c-0.094,0.223-0.137,0.471-0.248,0.685L458.787,179.417
-		z"/>
-	<path class="edu-country-shape" d="M448.711,300.966c0,0.284-0.112,0.541-0.137,0.814c0.026,0.291,0.137,0.557,0.137,0.848V300.966z"/>
-	<path class="edu-country-shape" d="M470.764,388.082l1.114-7.411c0.496-3.256-0.532-6.555-2.794-8.944c-2.262-2.391-9.99-3.761-11.772-4.652
-		l-6.305-3.161c-2.297-1.148-4.113-3.094-5.09-5.458l-2.416-5.792c-1.456-3.504-0.96-7.522,1.32-10.555l0.514-0.685
-		c3.581-7.437-14.48-16.261-10.538-24.718c1.302-2.802,3.856-4.824,6.854-5.62l-0.909,0.24c4.421-1.183,7.48-5.046,7.831-9.544
-		c-0.162-1.97-0.771-3.889-1.936-5.492l-5.174-7.034c-1.731-2.356-2.416-5.321-1.902-8.2c0.514-2.878,1.37-9.322-0.668-14.068
-		l-3.187-7.437c-0.565-1.327-0.856-2.758-0.856-4.214v1.902c0-5.141-3.71-9.365-8.654-10.359c-3.538,0.171-6.819,1.988-8.67,5.081
-		l-3.068,5.115c-2.758,4.601-12.371,0.232-10.692-5.029l5.26-16.518c0.412-1.276,1.045-2.468,1.902-3.513l17.992-22.071
-		c2.039-2.526,2.844-5.843,2.159-9.03c-0.686-3.179,5.004-3.504,4.232-6.528c-0.754-3.015,6.1-10.555,10.35-9.579l1.131,0.257
-		c4.635,1.071,9.338-1.106,11.677-5.218c0.232-0.548,0.472-1.096,0.609-1.67l14.719-63.075c0.669-2.913,0.103-5.98-1.576-8.448
-		c-1.679-2.484-4.318-4.146-7.283-4.584l-36.481-5.474c-1.593-0.24-3.136-0.84-4.472-1.764L407.963,83.81
-		c-1.388-0.951-2.964-1.559-4.626-1.782l-22.688-3.101c-1.662-0.223-3.238-0.832-4.61-1.774L357.791,64.67
-		c-2.313-1.585-3.908-4.001-4.456-6.752l0.052,0.291c-0.994-5.004-8.894-8.079-10.573-7.077l0.189-0.12
-		c-2.605,1.576-5.757,1.954-8.671,1.062c-2.913-0.899-5.295-2.999-6.562-5.757l-0.548-1.149c-1.285-2.793-3.701-4.9-6.648-5.774
-		l-5.38-1.62c-1.697-0.505-3.239-1.431-4.507-2.681l-8.191-8.208c-0.822-0.814-1.491-1.756-2.005-2.785l-2.193-4.36
-		c-2.005-4.018-5.861-6.409-5.861-6.409c-5.122,0.574-9.921-2.57-11.429-7.497l0.532,1.722c-1.662-5.406-7.248-8.585-12.749-7.258
-		l-20.528,4.944c-3.838,0.926-6.854,3.89-7.848,7.711l-10.83,41.331c-0.892,3.384-3.376,6.117-6.648,7.334l-23.596,8.739
-		c-3.256,1.208-5.723,3.924-6.631,7.283l-1.885,7.111c-1.062,3.941-4.25,6.94-8.259,7.745l-10.007,1.997
-		c-1.542,0.317-3.153,0.274-4.696-0.111l-16.998-4.25c-3.65-0.908-6.546-3.658-7.642-7.248l-1.199-3.872
-		c-1.251-4.087-4.815-7.034-9.065-7.506l-1.422-0.154c-3.358-0.377-6.7,0.856-9.013,3.324c-2.297,2.467-3.308,5.895-2.708,9.219
-		l5.603,31.255c0.429,2.433-4.387,2.715-5.603,6.785c-1.234,4.061-4.73,7.017-8.945,7.54l-15.747,0.548
-		c-2.776,0.154-5.483-0.789-7.574-2.605l-12.286-10.641c-2.159-1.859-4.952-2.794-7.779-2.588l-8.671,0.617
-		c-2.913,0.206-5.602,1.593-7.47,3.821l0.411-0.479c-2.364,2.827-6.014,4.249-9.664,3.761l-11.155-1.482
-		c-1.234-0.171-2.502-0.12-3.736,0.154l-8.516,1.902c-3.067,0.676-4.746,3.444-7.145,5.449c-2.536,2.107-2.416,4.13-2.416,4.13
-		c1.422,3.564,5.209,6.168,5.209,6.168c3.41,0.488,8.002,3.787,11.79,5.672c9.664,5.252-3.702,8.276-4.198,11.763
-		c-0.498,3.487,3.341,6.666,5.928,9.056l3.838,3.547c0.771,0.694,1.628,1.285,2.554,1.731l65.439,32.18
-		c4.421,2.159,6.786,7.06,5.758,11.857l-0.942,4.37c-0.686,3.222,0.137,6.58,2.244,9.108l20.272,24.323
-		c1.062,1.26,2.382,2.262,3.889,2.93l1.645,0.737c4.387,1.945,6.94,6.564,6.255,11.31l-2.005,14.102
-		c-0.394,2.776,0.309,5.604,1.988,7.874l13.417,18.206c1.062,1.448,1.748,3.136,1.987,4.918l1.748,12.851
-		c0.429,3.067,1.663,6.7,6.7,10.059c2.57,1.713,0.428,5.038,0.428,5.038c-5.552,0-13.417-7.163-13.914-12.68l-1.251-13.759
-		c-0.24-2.708-4.232-4.807-7.916-3.513c-3.667,1.302-6.357,4.498-6.991,8.344l-2.416,14.497c-0.462,2.682,2.177,14.256-0.942,17.897
-		l-0.531,0.626c-1.148,1.337-1.954,2.93-2.331,4.644l-9.047,40.713c-0.291,1.354-0.857,2.63-1.645,3.77l-4.712,6.786
-		c-3.102,4.489-2.348,10.58,1.764,14.17l11.155,9.768c1.183,1.036,2.588,1.799,4.113,2.236l61.789,17.658
-		c3.958,1.131,8.208-0.111,10.95-3.187l0.96-1.08c2.827-3.178,7.265-4.387,11.309-3.076l33.191,10.736
-		c1.954,0.633,3.685,1.816,4.987,3.41l6.134,7.488c2.039,2.493,5.072,3.941,8.293,3.941h23.596c5.792,0,10.538-4.601,10.71-10.384
-		l0.788-24.932c0.103-3.179,1.594-6.152,4.113-8.105l21.333-16.707c2.348-1.834,5.363-2.613,8.328-2.134l49.179,8.011
-		c0.257,0.034,0.496,0.086,0.737,0.146l37.544,8.833c3.136,0.737,6.426,0.034,8.962-1.919l35.384-27.057
-		C468.896,393.326,470.352,390.841,470.764,388.082z"/>
-	<path class="edu-country-shape" d="M502.738,462.398l-4.746-16.612c-0.085-0.318-0.137-0.651-0.137-0.985v-12.784c0-1.062-0.48-2.082-1.302-2.758
-		c-0.814-0.66-1.851-0.917-2.88-0.737c-1.311,0.3-2.339,1.285-2.672,2.587l-1.645,6.58c-0.206,0.848-0.72,1.594-1.44,2.082
-		l-17.821,12.243c-0.788,0.548-1.32,1.388-1.491,2.331l-3.324,18.814c-0.12,0.737-0.017,1.49,0.309,2.168l14.153,29.498
-		c0.309,0.634,0.789,1.165,1.389,1.525l8.584,5.14c0.822,0.498,1.799,0.634,2.724,0.395c0.926-0.232,1.714-0.823,2.194-1.654
-		l6.546-11.224c0.291-0.505,0.462-1.088,0.48-1.67l1.217-33.825C502.893,463.135,502.842,462.758,502.738,462.398z"/>
+<path class="edu-country-shape" d="M425.098,246.562c0.395,0.034,0.72,0.24,1.096,0.317c0.498-0.025,0.985-0.12,1.492-0.077L425.098,246.562z"/>
+<path class="edu-country-shape" d="M458.787,179.417c-0.086,0.162-0.232,0.274-0.318,0.428c-0.094,0.223-0.137,0.471-0.248,0.685L458.787,179.417
+z"/>
+<path class="edu-country-shape" d="M448.711,300.966c0,0.284-0.112,0.541-0.137,0.814c0.026,0.291,0.137,0.557,0.137,0.848V300.966z"/>
+<path class="edu-country-shape" d="M470.764,388.082l1.114-7.411c0.496-3.256-0.532-6.555-2.794-8.944c-2.262-2.391-9.99-3.761-11.772-4.652
+l-6.305-3.161c-2.297-1.148-4.113-3.094-5.09-5.458l-2.416-5.792c-1.456-3.504-0.96-7.522,1.32-10.555l0.514-0.685
+c3.581-7.437-14.48-16.261-10.538-24.718c1.302-2.802,3.856-4.824,6.854-5.62l-0.909,0.24c4.421-1.183,7.48-5.046,7.831-9.544
+c-0.162-1.97-0.771-3.889-1.936-5.492l-5.174-7.034c-1.731-2.356-2.416-5.321-1.902-8.2c0.514-2.878,1.37-9.322-0.668-14.068
+l-3.187-7.437c-0.565-1.327-0.856-2.758-0.856-4.214v1.902c0-5.141-3.71-9.365-8.654-10.359c-3.538,0.171-6.819,1.988-8.67,5.081
+l-3.068,5.115c-2.758,4.601-12.371,0.232-10.692-5.029l5.26-16.518c0.412-1.276,1.045-2.468,1.902-3.513l17.992-22.071
+c2.039-2.526,2.844-5.843,2.159-9.03c-0.686-3.179,5.004-3.504,4.232-6.528c-0.754-3.015,6.1-10.555,10.35-9.579l1.131,0.257
+c4.635,1.071,9.338-1.106,11.677-5.218c0.232-0.548,0.472-1.096,0.609-1.67l14.719-63.075c0.669-2.913,0.103-5.98-1.576-8.448
+c-1.679-2.484-4.318-4.146-7.283-4.584l-36.481-5.474c-1.593-0.24-3.136-0.84-4.472-1.764L407.963,83.81
+c-1.388-0.951-2.964-1.559-4.626-1.782l-22.688-3.101c-1.662-0.223-3.238-0.832-4.61-1.774L357.791,64.67
+c-2.313-1.585-3.908-4.001-4.456-6.752l0.052,0.291c-0.994-5.004-8.894-8.079-10.573-7.077l0.189-0.12
+c-2.605,1.576-5.757,1.954-8.671,1.062c-2.913-0.899-5.295-2.999-6.562-5.757l-0.548-1.149c-1.285-2.793-3.701-4.9-6.648-5.774
+l-5.38-1.62c-1.697-0.505-3.239-1.431-4.507-2.681l-8.191-8.208c-0.822-0.814-1.491-1.756-2.005-2.785l-2.193-4.36
+c-2.005-4.018-5.861-6.409-5.861-6.409c-5.122,0.574-9.921-2.57-11.429-7.497l0.532,1.722c-1.662-5.406-7.248-8.585-12.749-7.258
+l-20.528,4.944c-3.838,0.926-6.854,3.89-7.848,7.711l-10.83,41.331c-0.892,3.384-3.376,6.117-6.648,7.334l-23.596,8.739
+c-3.256,1.208-5.723,3.924-6.631,7.283l-1.885,7.111c-1.062,3.941-4.25,6.94-8.259,7.745l-10.007,1.997
+c-1.542,0.317-3.153,0.274-4.696-0.111l-16.998-4.25c-3.65-0.908-6.546-3.658-7.642-7.248l-1.199-3.872
+c-1.251-4.087-4.815-7.034-9.065-7.506l-1.422-0.154c-3.358-0.377-6.7,0.856-9.013,3.324c-2.297,2.467-3.308,5.895-2.708,9.219
+l5.603,31.255c0.429,2.433-4.387,2.715-5.603,6.785c-1.234,4.061-4.73,7.017-8.945,7.54l-15.747,0.548
+c-2.776,0.154-5.483-0.789-7.574-2.605l-12.286-10.641c-2.159-1.859-4.952-2.794-7.779-2.588l-8.671,0.617
+c-2.913,0.206-5.602,1.593-7.47,3.821l0.411-0.479c-2.364,2.827-6.014,4.249-9.664,3.761l-11.155-1.482
+c-1.234-0.171-2.502-0.12-3.736,0.154l-8.516,1.902c-3.067,0.676-4.746,3.444-7.145,5.449c-2.536,2.107-2.416,4.13-2.416,4.13
+c1.422,3.564,5.209,6.168,5.209,6.168c3.41,0.488,8.002,3.787,11.79,5.672c9.664,5.252-3.702,8.276-4.198,11.763
+c-0.498,3.487,3.341,6.666,5.928,9.056l3.838,3.547c0.771,0.694,1.628,1.285,2.554,1.731l65.439,32.18
+c4.421,2.159,6.786,7.06,5.758,11.857l-0.942,4.37c-0.686,3.222,0.137,6.58,2.244,9.108l20.272,24.323
+c1.062,1.26,2.382,2.262,3.889,2.93l1.645,0.737c4.387,1.945,6.94,6.564,6.255,11.31l-2.005,14.102
+c-0.394,2.776,0.309,5.604,1.988,7.874l13.417,18.206c1.062,1.448,1.748,3.136,1.987,4.918l1.748,12.851
+c0.429,3.067,1.663,6.7,6.7,10.059c2.57,1.713,0.428,5.038,0.428,5.038c-5.552,0-13.417-7.163-13.914-12.68l-1.251-13.759
+c-0.24-2.708-4.232-4.807-7.916-3.513c-3.667,1.302-6.357,4.498-6.991,8.344l-2.416,14.497c-0.462,2.682,2.177,14.256-0.942,17.897
+l-0.531,0.626c-1.148,1.337-1.954,2.93-2.331,4.644l-9.047,40.713c-0.291,1.354-0.857,2.63-1.645,3.77l-4.712,6.786
+c-3.102,4.489-2.348,10.58,1.764,14.17l11.155,9.768c1.183,1.036,2.588,1.799,4.113,2.236l61.789,17.658
+c3.958,1.131,8.208-0.111,10.95-3.187l0.96-1.08c2.827-3.178,7.265-4.387,11.309-3.076l33.191,10.736
+c1.954,0.633,3.685,1.816,4.987,3.41l6.134,7.488c2.039,2.493,5.072,3.941,8.293,3.941h23.596c5.792,0,10.538-4.601,10.71-10.384
+l0.788-24.932c0.103-3.179,1.594-6.152,4.113-8.105l21.333-16.707c2.348-1.834,5.363-2.613,8.328-2.134l49.179,8.011
+c0.257,0.034,0.496,0.086,0.737,0.146l37.544,8.833c3.136,0.737,6.426,0.034,8.962-1.919l35.384-27.057
+C468.896,393.326,470.352,390.841,470.764,388.082z"/>
+<path class="edu-country-shape" d="M502.738,462.398l-4.746-16.612c-0.085-0.318-0.137-0.651-0.137-0.985v-12.784c0-1.062-0.48-2.082-1.302-2.758
+c-0.814-0.66-1.851-0.917-2.88-0.737c-1.311,0.3-2.339,1.285-2.672,2.587l-1.645,6.58c-0.206,0.848-0.72,1.594-1.44,2.082
+l-17.821,12.243c-0.788,0.548-1.32,1.388-1.491,2.331l-3.324,18.814c-0.12,0.737-0.017,1.49,0.309,2.168l14.153,29.498
+c0.309,0.634,0.789,1.165,1.389,1.525l8.584,5.14c0.822,0.498,1.799,0.634,2.724,0.395c0.926-0.232,1.714-0.823,2.194-1.654
+l6.546-11.224c0.291-0.505,0.462-1.088,0.48-1.67l1.217-33.825C502.893,463.135,502.842,462.758,502.738,462.398z"/>
 </g>
-</svg>      
-	  </div>
-    </div>
+</svg> 
+</div>
+</div>
 
-    <!-- JAPAN -->
-    <div class="map-column">
-      <div class="map-label">JAPAN</div>
-      <div id="map-japan" class="country-map">
+<!-- JAPAN -->
+<div class="map-column">
+<div class="map-label">JAPAN</div>
+<div id="map-japan" class="country-map">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 width="800px" height="800px" viewBox="0 0 238 260" enable-background="new 0 0 238 260" xml:space="preserve">
+width="800px" height="800px" viewBox="0 0 238 260" enable-background="new 0 0 238 260" xml:space="preserve">
 <path class="edu-country-shape" d="M77.972,205.527l3.567,4.927l-6.62,7.338l-10.572-0.462l-5.414,2.72l-4.773,8.442l-5.517-1.155l-2.078-1.719l-1.129-8.827
-	l4.927-4.208l1.822-5.029l5.671,1.642l6.928-1.18l0.975-2.899l8.031-3.13L77.972,205.527z M231.618,32.893l1.257-8.365l-4.644,5.055
-	h-5.979l-2.284-2.746l-7.082-1.052l-9.391-7.133L189.948,2l-4.773,6.363l2.617,7.287l-1.745,15.164l-4.003,4.131l1.411,6.415
-	l-2.822,3.823l-5.594-0.693l-7.415,7.852l-5.209,1.719l-1.309,7.595l4.798,4.901l-2.284,7.698l3.053,2.951l6.004-7.544l1.001-5.825
-	l-5.722-2.335l1.232-4.465l4.798-1.078l3.823,4.542l9.571-5.542l20.604,12.188l1.488-7.133l3.746-6.363l8.981-6.569l9.109-0.103
-	l4.567-6.004L231.618,32.893z M187.1,94.603l-3.438-4.003l-0.821-12.83l-6.543-2.335l-1.95,6.492l6.492-1.693l-0.693,5.979
-	l-12.701,1.77l-5.183,3.053l0.565,3.9l1.283,16.935l-2.463,7.082l-4.901,10.366l-1.796,6.825l-8.442,6.081l-4.234,7.672
-	l-4.978,3.875l-9.366,3.515l-4.285,3.721l-4.105-3.695l1.206-5.953l-5.209-1.591l-0.231,8.929l-8.365,10.341l-4.285,5.517
-	l0.026,6.286l-7.595,1.18l-3.515-4.413l-5.568,1.77l-7.492,0.565l-15.703,1.334l-0.975-1.386l-9.468,1.001l-3.849,4.567
-	l-11.906,8.237l-4.388,4.182l-5.157-0.513l-3.823,5.388l5.927,4.054l8.621-0.949l3.951,3.105l2.669-5.645l4.978,0.385l13.728-4.105
-	l8.288-0.411l5.081-2.977l6.723-0.616l4.388,2.848l5.619-0.898l-5.363,6.902l-0.744,7.569l10.315,7.954l3.669-3.567l3.772-6.8
-	l10.879-6.261l-5.799-4.747l3.772-6.184l2.284,4.696l8.262,2.232l11.316-0.411l5.26-6.877l2.72,6.774l6.03-2.463l-0.616-4.516
-	l6.851-3.002l3.618-4.054l1.206-2.181l-0.231,11.803l8.083-3.772l1.36-6.748l5.619-3.079l-4.157-7.775l3.284-12.522l2.386-2.181
-	l1.206-7.518l-1.591-9.366l2.386-8.801l3.387-0.693l4.336-10.238l2.951-1.026l3.053-9.519l-1.796-8.313L187.1,94.603z
-	 M35.609,213.815l-8.083-1.36l-3.9-5.542h-6.569l-2.001,4.465l-5.748,2.13l-3.669,1.95l-3.515,6.184l3.438,6.261l5.363-4.67
-	l2.617-3.413l0.924,3.079l2.258,3.284l-1.206,7.108l-3.875,4.542l-3.413,6.569l2.309,3.284l-2.489,6.8L18.905,258l4.182-6.261
-	l2.617,1.77l7.441-20.579l3.284-3.336l2.669-3.336l-4.285-6.774L35.609,213.815z"/>
-</svg>      
-	  </div>
-    </div>
+l4.927-4.208l1.822-5.029l5.671,1.642l6.928-1.18l0.975-2.899l8.031-3.13L77.972,205.527z M231.618,32.893l1.257-8.365l-4.644,5.055
+h-5.979l-2.284-2.746l-7.082-1.052l-9.391-7.133L189.948,2l-4.773,6.363l2.617,7.287l-1.745,15.164l-4.003,4.131l1.411,6.415
+l-2.822,3.823l-5.594-0.693l-7.415,7.852l-5.209,1.719l-1.309,7.595l4.798,4.901l-2.284,7.698l3.053,2.951l6.004-7.544l1.001-5.825
+l-5.722-2.335l1.232-4.465l4.798-1.078l3.823,4.542l9.571-5.542l20.604,12.188l1.488-7.133l3.746-6.363l8.981-6.569l9.109-0.103
+l4.567-6.004L231.618,32.893z M187.1,94.603l-3.438-4.003l-0.821-12.83l-6.543-2.335l-1.95,6.492l6.492-1.693l-0.693,5.979
+l-12.701,1.77l-5.183,3.053l0.565,3.9l1.283,16.935l-2.463,7.082l-4.901,10.366l-1.796,6.825l-8.442,6.081l-4.234,7.672
+l-4.978,3.875l-9.366,3.515l-4.285,3.721l-4.105-3.695l1.206-5.953l-5.209-1.591l-0.231,8.929l-8.365,10.341l-4.285,5.517
+l0.026,6.286l-7.595,1.18l-3.515-4.413l-5.568,1.77l-7.492,0.565l-15.703,1.334l-0.975-1.386l-9.468,1.001l-3.849,4.567
+l-11.906,8.237l-4.388,4.182l-5.157-0.513l-3.823,5.388l5.927,4.054l8.621-0.949l3.951,3.105l2.669-5.645l4.978,0.385l13.728-4.105
+l8.288-0.411l5.081-2.977l6.723-0.616l4.388,2.848l5.619-0.898l-5.363,6.902l-0.744,7.569l10.315,7.954l3.669-3.567l3.772-6.8
+l10.879-6.261l-5.799-4.747l3.772-6.184l2.284,4.696l8.262,2.232l11.316-0.411l5.26-6.877l2.72,6.774l6.03-2.463l-0.616-4.516
+l6.851-3.002l3.618-4.054l1.206-2.181l-0.231,11.803l8.083-3.772l1.36-6.748l5.619-3.079l-4.157-7.775l3.284-12.522l2.386-2.181
+l1.206-7.518l-1.591-9.366l2.386-8.801l3.387-0.693l4.336-10.238l2.951-1.026l3.053-9.519l-1.796-8.313L187.1,94.603z
+M35.609,213.815l-8.083-1.36l-3.9-5.542h-6.569l-2.001,4.465l-5.748,2.13l-3.669,1.95l-3.515,6.184l3.438,6.261l5.363-4.67
+l2.617-3.413l0.924,3.079l2.258,3.284l-1.206,7.108l-3.875,4.542l-3.413,6.569l2.309,3.284l-2.489,6.8L18.905,258l4.182-6.261
+l2.617,1.77l7.441-20.579l3.284-3.336l2.669-3.336l-4.285-6.774L35.609,213.815z"/>
+</svg> 
+</div>
+</div>
 
-    <!-- GERMANY -->
-    <div class="map-column">
-      <div class="map-label">GERMANY</div>
-      <div id="map-germany" class="country-map">
+<!-- GERMANY -->
+<div class="map-column">
+<div class="map-label">GERMANY</div>
+<div id="map-germany" class="country-map">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 width="800px" height="800px" viewBox="0 0 196 260" enable-background="new 0 0 196 260" xml:space="preserve">
+width="800px" height="800px" viewBox="0 0 196 260" enable-background="new 0 0 196 260" xml:space="preserve">
 <path class="edu-country-shape" d="M186.695,112.9l-3.258-34.73l-11.126-8.64l4.586-16.532l-4.682-20.129l-14.746-5.623l-12.212-10.475l-7.434-0.603
-	l-20.249,19.525l-10.981-1.762l3.113-7.506L89.119,14.237l-2.003-8.302L62.786,2l2.679,29.059l6.65,5.93l-11.96-0.041l-1.424,8.061
-	l0.796,3.306l-11.898-7.168l-14.553,1.279l-4.417,7.072l2.486,16.436l-4.344,24.304l-14.047,13.129l-9.509,0.145l5.02,14.409
-	l-6.203,20.056l7.651,15.905l-5.068,3.379l3.041,23.363l10.064,11.174l11.778,2.003l19.96,5.985l-10.957,12.936l-7.723,31.52
-	l18.825,3.669l12.623-2.076l15.953,2.582L94.065,258l5.02-7.603l16.774,4.199l8.182-6.468l25.921-3.186l-0.845-15.253l21.287-14.312
-	l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l4.393-14.553L186.695,112.9z"/>
+l-20.249,19.525l-10.981-1.762l3.113-7.506L89.119,14.237l-2.003-8.302L62.786,2l2.679,29.059l6.65,5.93l-11.96-0.041l-1.424,8.061
+l0.796,3.306l-11.898-7.168l-14.553,1.279l-4.417,7.072l2.486,16.436l-4.344,24.304l-14.047,13.129l-9.509,0.145l5.02,14.409
+l-6.203,20.056l7.651,15.905l-5.068,3.379l3.041,23.363l10.064,11.174l11.778,2.003l19.96,5.985l-10.957,12.936l-7.723,31.52
+l18.825,3.669l12.623-2.076l15.953,2.582L94.065,258l5.02-7.603l16.774,4.199l8.182-6.468l25.921-3.186l-0.845-15.253l21.287-14.312
+l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l4.393-14.553L186.695,112.9z"/>
 </svg>
-	  </div>
-    </div>
+</div>
+</div>
 
-  </div>
+</div>
 </section>
 
 
@@ -4759,79 +4822,79 @@ data-panel-color="#be123c">
 
 <div class="activities-row">
 
-  <div class="activity-box">
-    <div class="activity-icon" aria-hidden="true">
+<div class="activity-box">
+<div class="activity-icon" aria-hidden="true">
 <svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" fill="none" width="20" height="20"/>
 <g>
 <path d="M11 7H9.49c-.63 0-1.25.3-1.59.7L7 5H4.13l-2.39 7h1.69l.74-2H7v4H2c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h7c1.1 0 2 .9 2 2v2zM6.51 9H4.49l1-2.93zM10 8h7c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-7c-1.1 0-2-.9-2-2v-7c0-1.1.9-2 2-2zm7.25 5v-1.08h-3.17V9.75h-1.16v2.17H9.75V13h1.28c.11.85.56 1.85 1.28 2.62-.87.36-1.89.62-2.31.62-.01.02.22.97.2 1.46.84 0 2.21-.5 3.28-1.15 1.09.65 2.48 1.15 3.34 1.15-.02-.49.2-1.44.2-1.46-.43 0-1.49-.27-2.38-.63.7-.77 1.14-1.77 1.25-2.61h1.36zm-3.81 1.93c-.5-.46-.85-1.13-1.01-1.93h2.09c-.17.8-.51 1.47-1 1.93l-.04.03s-.03-.02-.04-.03z"/>
 </g>
-</svg>    </div>
-    <div class="activity-content">
-      <h3>Tarjimly</h3>
-      <p>Volunteer Translator & Interpreter supporting refugees in Arabic–English–French.</p>
-    </div>
-  </div>
+</svg> </div>
+<div class="activity-content">
+<h3>Tarjimly</h3>
+<p>Volunteer Translator & Interpreter supporting refugees in Arabic–English–French.</p>
+</div>
+</div>
 
-  <div class="activity-box">
-    <div class="activity-icon" aria-hidden="true">
+<div class="activity-box">
+<div class="activity-icon" aria-hidden="true">
 
 <?xml version="1.0" encoding="iso-8859-1"?>
 <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
+viewBox="0 0 512 512" xml:space="preserve">
 <g>
-	<g>
-		<path d="M419.404,130.723h-78.979V86.007c12.558-3.567,21.787-15.13,21.787-28.816V29.957C362.213,13.438,348.773,0,332.255,0
-			c-16.518,0-29.957,13.438-29.957,29.957v27.234c0,13.686,9.229,25.249,21.787,28.816v44.716H264.17V86.007
-			c12.558-3.567,21.787-15.13,21.787-28.816V29.957C285.957,13.438,272.518,0,256,0s-29.957,13.438-29.957,29.957v27.234
-			c0,13.686,9.229,25.249,21.787,28.816v44.716h-59.915V86.007c12.558-3.567,21.787-15.13,21.787-28.816V29.957
-			C209.702,13.438,196.263,0,179.745,0s-29.957,13.438-29.957,29.957v27.234c0,13.686,9.229,25.249,21.787,28.816v44.716H92.596
-			c-4.513,0-8.17,3.658-8.17,8.17v32.681c0,4.512,3.657,8.17,8.17,8.17h24.511v57.191c0,4.512,3.657,8.17,8.17,8.17H128v217.872
-			h-2.723c-4.513,0-8.17,3.658-8.17,8.17v24.511h-2.723c-4.513,0-8.17,3.658-8.17,8.17s3.657,8.17,8.17,8.17h283.234
-			c4.513,0,8.17-3.658,8.17-8.17s-3.657-8.17-8.17-8.17h-2.723v-24.511c0-4.512-3.657-8.17-8.17-8.17H384V245.106h2.723
-			c4.513,0,8.17-3.658,8.17-8.17v-57.191h24.511c4.513,0,8.17-3.658,8.17-8.17v-32.681
-			C427.574,134.381,423.917,130.723,419.404,130.723z M318.638,57.192V29.957c0-7.509,6.108-13.617,13.617-13.617
-			s13.617,6.108,13.617,13.617v27.234c0,7.509-6.108,13.617-13.617,13.617S318.638,64.7,318.638,57.192z M242.383,57.192V29.957
-			c0-7.509,6.108-13.617,13.617-13.617s13.617,6.108,13.617,13.617v27.234c0,7.509-6.108,13.617-13.617,13.617
-			S242.383,64.7,242.383,57.192z M166.128,57.192V29.957c0-7.509,6.108-13.617,13.617-13.617s13.617,6.108,13.617,13.617v27.234
-			c0,7.509-6.108,13.617-13.617,13.617S166.128,64.7,166.128,57.192z M378.553,495.66H133.447v-16.34h177.021
-			c4.513,0,8.17-3.658,8.17-8.17s-3.657-8.17-8.17-8.17H144.34V245.106H367.66v217.872h-24.511c-4.513,0-8.17,3.658-8.17,8.17
-			s3.657,8.17,8.17,8.17h35.404V495.66z M378.553,228.766H133.447v-49.021h245.106V228.766z M411.234,163.404H100.766v-16.34
-			h310.468V163.404z"/>
-	</g>
+<g>
+<path d="M419.404,130.723h-78.979V86.007c12.558-3.567,21.787-15.13,21.787-28.816V29.957C362.213,13.438,348.773,0,332.255,0
+c-16.518,0-29.957,13.438-29.957,29.957v27.234c0,13.686,9.229,25.249,21.787,28.816v44.716H264.17V86.007
+c12.558-3.567,21.787-15.13,21.787-28.816V29.957C285.957,13.438,272.518,0,256,0s-29.957,13.438-29.957,29.957v27.234
+c0,13.686,9.229,25.249,21.787,28.816v44.716h-59.915V86.007c12.558-3.567,21.787-15.13,21.787-28.816V29.957
+C209.702,13.438,196.263,0,179.745,0s-29.957,13.438-29.957,29.957v27.234c0,13.686,9.229,25.249,21.787,28.816v44.716H92.596
+c-4.513,0-8.17,3.658-8.17,8.17v32.681c0,4.512,3.657,8.17,8.17,8.17h24.511v57.191c0,4.512,3.657,8.17,8.17,8.17H128v217.872
+h-2.723c-4.513,0-8.17,3.658-8.17,8.17v24.511h-2.723c-4.513,0-8.17,3.658-8.17,8.17s3.657,8.17,8.17,8.17h283.234
+c4.513,0,8.17-3.658,8.17-8.17s-3.657-8.17-8.17-8.17h-2.723v-24.511c0-4.512-3.657-8.17-8.17-8.17H384V245.106h2.723
+c4.513,0,8.17-3.658,8.17-8.17v-57.191h24.511c4.513,0,8.17-3.658,8.17-8.17v-32.681
+C427.574,134.381,423.917,130.723,419.404,130.723z M318.638,57.192V29.957c0-7.509,6.108-13.617,13.617-13.617
+s13.617,6.108,13.617,13.617v27.234c0,7.509-6.108,13.617-13.617,13.617S318.638,64.7,318.638,57.192z M242.383,57.192V29.957
+c0-7.509,6.108-13.617,13.617-13.617s13.617,6.108,13.617,13.617v27.234c0,7.509-6.108,13.617-13.617,13.617
+S242.383,64.7,242.383,57.192z M166.128,57.192V29.957c0-7.509,6.108-13.617,13.617-13.617s13.617,6.108,13.617,13.617v27.234
+c0,7.509-6.108,13.617-13.617,13.617S166.128,64.7,166.128,57.192z M378.553,495.66H133.447v-16.34h177.021
+c4.513,0,8.17-3.658,8.17-8.17s-3.657-8.17-8.17-8.17H144.34V245.106H367.66v217.872h-24.511c-4.513,0-8.17,3.658-8.17,8.17
+s3.657,8.17,8.17,8.17h35.404V495.66z M378.553,228.766H133.447v-49.021h245.106V228.766z M411.234,163.404H100.766v-16.34
+h310.468V163.404z"/>
+</g>
 </g>
 <g>
-	<g>
-		<path d="M354.043,196.085H157.957c-4.513,0-8.17,3.658-8.17,8.17s3.657,8.17,8.17,8.17h196.085c4.513,0,8.17-3.658,8.17-8.17
-			S358.556,196.085,354.043,196.085z"/>
-	</g>
+<g>
+<path d="M354.043,196.085H157.957c-4.513,0-8.17,3.658-8.17,8.17s3.657,8.17,8.17,8.17h196.085c4.513,0,8.17-3.658,8.17-8.17
+S358.556,196.085,354.043,196.085z"/>
+</g>
 </g>
 <g>
-	<g>
-		<path d="M343.149,261.447H168.851c-4.513,0-8.17,3.658-8.17,8.17v68.085c0,4.512,3.657,8.17,8.17,8.17s8.17-3.658,8.17-8.17
-			v-59.915h157.957v152.511H177.021v-59.915c0-4.512-3.657-8.17-8.17-8.17s-8.17,3.658-8.17,8.17v68.085
-			c0,4.512,3.657,8.17,8.17,8.17h174.298c4.513,0,8.17-3.658,8.17-8.17V269.617C351.319,265.105,347.662,261.447,343.149,261.447z"
-			/>
-	</g>
+<g>
+<path d="M343.149,261.447H168.851c-4.513,0-8.17,3.658-8.17,8.17v68.085c0,4.512,3.657,8.17,8.17,8.17s8.17-3.658,8.17-8.17
+v-59.915h157.957v152.511H177.021v-59.915c0-4.512-3.657-8.17-8.17-8.17s-8.17,3.658-8.17,8.17v68.085
+c0,4.512,3.657,8.17,8.17,8.17h174.298c4.513,0,8.17-3.658,8.17-8.17V269.617C351.319,265.105,347.662,261.447,343.149,261.447z"
+/>
 </g>
-</svg>    </div>
-    <div class="activity-content">
-      <h3>Events</h3>
-      <p>Mediterranean of the Future. Paris Peace Forum. Diplomatic engagement.</p>
-    </div>
-  </div>
+</g>
+</svg> </div>
+<div class="activity-content">
+<h3>Events</h3>
+<p>Mediterranean of the Future. Paris Peace Forum. Diplomatic engagement.</p>
+</div>
+</div>
 
-  <div class="activity-box">
-    <div class="activity-icon" aria-hidden="true">
+<div class="activity-box">
+<div class="activity-icon" aria-hidden="true">
 <svg fill="#000000" width="800px" height="800px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1242.353 451.753v1016.471H757.496l-418.672 418.673v-418.673H0V451.754h1242.353ZM1920.033.033v1016.471h-225.881v419.012l-338.937-338.936V338.857H677.681V.034h1242.353ZM677.76 1016.46H338.824v112.94H677.76v-112.94Zm225.77-225.882H338.823V903.63h564.705V790.577Z" fill-rule="evenodd"/>
-</svg>  
-	</div>
-    <div class="activity-content">
-      <h3>MEDMUN</h3>
-      <p>Arabic Committee Director (UNHCR) and institutional events coordinator.</p>
-    </div>
-  </div>
+<path d="M1242.353 451.753v1016.471H757.496l-418.672 418.673v-418.673H0V451.754h1242.353ZM1920.033.033v1016.471h-225.881v419.012l-338.937-338.936V338.857H677.681V.034h1242.353ZM677.76 1016.46H338.824v112.94H677.76v-112.94Zm225.77-225.882H338.823V903.63h564.705V790.577Z" fill-rule="evenodd"/>
+</svg> 
+</div>
+<div class="activity-content">
+<h3>MEDMUN</h3>
+<p>Arabic Committee Director (UNHCR) and institutional events coordinator.</p>
+</div>
+</div>
 
 </div>
 
@@ -5415,45 +5478,34 @@ async function initMaps() {
 if (mapsLoaded) return;
 mapsLoaded = true;
 
-await loadGeoJSON();
+// show the education maps row
 document.querySelector(".education-maps").style.display = "flex";
 
-// Same visual scale for all three; Japan balanced
-drawCountry("map-france", "france", [46.6, 2.2], 4.5);
-drawCountry("map-japan", "japan", [38.5, 138.5], 4.5);
-drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
+// lock ONE map at a time (adds .is-locked used by your CSS)
+function lockEdu(key) {
+["france", "japan", "germany"].forEach(k => {
+document.getElementById("map-" + k)?.classList.toggle("is-locked", k === key);
+});
+lockedCountry = key;
+}
 
-// Click maps → lock color + open education popup
-document.getElementById("map-france").addEventListener("click", () => {
-lockedCountry = "france";
-setCountryFill("france");
+// Click → lock + popup
+document.getElementById("map-france")?.addEventListener("click", () => {
+lockEdu("france");
 openEduPopup("france");
 });
-document.getElementById("map-japan").addEventListener("click", () => {
-lockedCountry = "japan";
-setCountryFill("japan");
+
+document.getElementById("map-japan")?.addEventListener("click", () => {
+lockEdu("japan");
 openEduPopup("japan");
 });
-document.getElementById("map-germany").addEventListener("click", () => {
-lockedCountry = "germany";
-setCountryFill("germany");
+
+document.getElementById("map-germany")?.addEventListener("click", () => {
+lockEdu("germany");
 openEduPopup("germany");
 });
-// Hover → temporary highlight + respect last clicked country
-["france", "japan", "germany"].forEach(key => {
-const el = document.getElementById("map-" + key);
-el.addEventListener("mouseenter", () => {
-setCountryFill(key); // highlight hovered country
-});
-el.addEventListener("mouseleave", () => {
-if (lockedCountry) {
-setCountryFill(lockedCountry); // go back to last clicked
-} else {
-resetCountryStyles(); // nothing selected → clear all
 }
-});
-});
-}
+
 
 /* ===============================
 SINGLE-SECTION NAVIGATION
@@ -5600,6 +5652,7 @@ hideTooltip(); // optional: hide when popup opens
 /* ===============================
 EDUCATION POPUP – BOARDING PASS LOGIC
 =============================== */
+let eduJustOpened = false;
 
 const eduOverlay = document.getElementById("eduOverlay");
 const eduClose = document.getElementById("eduClose");
@@ -5709,19 +5762,26 @@ eduDetailsList.innerHTML = data.details
 .map(item => `<li>${item}</li>`)
 .join("");
 
+eduJustOpened = true;
 eduOverlay.style.display = "flex";
+setTimeout(() => { eduJustOpened = false; }, 0);
 }
 
 function closeEduPopup() {
 eduOverlay.style.display = "none";
-lockedCountry = null; // keep your existing variable
-resetCountryStyles(); // resets the map colors
+lockedCountry = null;
+["france","japan","germany"].forEach(k=>{
+document.getElementById("map-"+k)?.classList.remove("is-locked");
+});
 }
+
 
 eduClose.addEventListener("click", closeEduPopup);
 eduOverlay.addEventListener("click", e => {
+if (eduJustOpened) return; // ✅ ignore the opening click
 if (e.target === eduOverlay) closeEduPopup();
 });
+
 document.addEventListener("keydown", e => {
 if (e.key === "Escape" && eduOverlay.style.display === "flex") {
 closeEduPopup();
@@ -5986,22 +6046,23 @@ stats.forEach(s => s.classList.remove('tooltip-open'));
 // EXPERIENCE — DESKTOP ONLY: click outside to close (does NOT change your flip logic)
 if (window.matchMedia("(min-width: 801px)").matches) {
 
-  document.addEventListener("click", (e) => {
-    // If you clicked inside the Experience section, do nothing
-    if (e.target.closest("#experience") || e.target.closest(".exp-mosaic")) return;
+document.addEventListener("click", (e) => {
+// If you clicked inside the Experience section, do nothing
+if (e.target.closest("#experience") || e.target.closest(".exp-mosaic")) return;
 
-    // Otherwise, close any open card(s)
-    document.querySelectorAll(".exp-card.is-flipped").forEach(card => {
-      card.classList.remove("is-flipped", "exp-card--expanded");
-    });
+// Otherwise, close any open card(s)
+document.querySelectorAll(".exp-card.is-flipped").forEach(card => {
+card.classList.remove("is-flipped", "exp-card--expanded");
+});
 
-    document.querySelector(".exp-mosaic")?.classList.remove("dim-others");
-  });
+document.querySelector(".exp-mosaic")?.classList.remove("dim-others");
+});
 
 }
 </script>
 
 
-	
+
 </body>
 </html>
+
