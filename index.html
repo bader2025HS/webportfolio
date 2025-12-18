@@ -5411,6 +5411,12 @@ el.innerHTML =
 }
 }
 
+function lockSvgMap(key){
+  document.querySelectorAll(".country-map").forEach(m => m.classList.remove("is-locked"));
+  const el = document.getElementById("map-" + key);
+  if (el) el.classList.add("is-locked");
+}
+
 async function initMaps() {
 if (mapsLoaded) return;
 mapsLoaded = true;
@@ -5507,42 +5513,45 @@ showSection("home");
 EXPERIENCE — FLIP CARDS + EXPANSION
 =============================== */
 
+/* ===============================
+EXPERIENCE CARDS — SAFE VERSION
+=============================== */
+
 const expCards = document.querySelectorAll(".exp-card");
-const ngoCard = document.querySelector(".exp-card--ngo");
-const ioCard = document.querySelector(".exp-card--io");
-const researchCard= document.querySelector(".exp-card--research");
-const assocCard = document.querySelector(".exp-card--assoc");
-const expMosaic = document.querySelector(".exp-mosaic"); // NEW
+const expMosaic = document.querySelector(".exp-mosaic");
 
-function resetExpLayout() {
-expCards.forEach(card => {
-card.classList.remove("is-flipped");
-card.classList.remove("exp-card--expanded"); // match CSS name
-});
-if (expMosaic) {
-expMosaic.classList.remove("dim-others"); // NEW
+if (expCards && expCards.length) {
+
+  function resetExpLayout() {
+    expCards.forEach(card => {
+      card.classList.remove("is-flipped");
+      card.classList.remove("exp-card--expanded");
+    });
+    if (expMosaic) {
+      expMosaic.classList.remove("dim-others");
+    }
+  }
+
+  expCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const alreadyFlipped = card.classList.contains("is-flipped");
+
+      // reset everything first
+      resetExpLayout();
+
+      // if it was already open, just close
+      if (alreadyFlipped) return;
+
+      // open clicked card
+      card.classList.add("is-flipped");
+      card.classList.add("exp-card--expanded");
+
+      if (expMosaic) {
+        expMosaic.classList.add("dim-others");
+      }
+    });
+  });
 }
-}
-
-expCards.forEach(card => {
-card.addEventListener("click", () => {
-const alreadyFlipped = card.classList.contains("is-flipped");
-
-// reset everything first
-resetExpLayout();
-
-// if it was open, we just closed it
-if (alreadyFlipped) return;
-
-// flip + expand clicked card
-card.classList.add("is-flipped");
-card.classList.add("exp-card--expanded");
-
-if (expMosaic) {
-expMosaic.classList.add("dim-others"); // NEW
-}
-});
-});
 
 
 
