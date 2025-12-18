@@ -959,6 +959,22 @@ Right: stats (1 row) + focus (4x2) + map
     height: 210px; /* keep your look; adjust if you want */
   }
 }
+	
+@media (min-width: 961px){
+
+  /* Reorder RIGHT column only */
+  .about-focus{
+    order: 1;   /* top */
+  }
+
+  .about-stats-grid{
+    order: 2;   /* under focus */
+  }
+
+  .about-map{
+    order: 3;   /* bottom */
+  }
+}
 
 /* ===========================
 EDUCATION MAPS
