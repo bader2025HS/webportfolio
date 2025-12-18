@@ -932,13 +932,6 @@ transform: scale(1.06); /* "zoom" effect */
 box-shadow: 0 10px 24px rgba(0,0,0,0.16);
 }
 
-
-
-
-
-
-
-
 /* ===========================
 EDUCATION MAPS — SVG
 =========================== */
@@ -1066,6 +1059,35 @@ MAP LABEL — SYNC WITH MAP STATE
 .map-column:has(.country-map:hover) .map-label::after,
 .map-column:has(.country-map.is-locked) .map-label::after{
   width: 48%;
+}
+
+/* ===========================
+MAP LABEL — STATIC CHIP STYLE
+=========================== */
+
+.map-label{
+  display: inline-block;
+  padding: 10px 18px;
+  margin-bottom: 24px;
+
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  line-height: 1.1;
+
+  color: #111827;
+  font-weight: 500;
+
+  background: #ffffff;
+  border: 2px solid rgba(17, 24, 39, 0.18);
+  border-radius: 999px;              /* pill / chip */
+  
+  transition:
+    color .22s ease,
+    font-weight .22s ease,
+    letter-spacing .22s ease,
+    border-color .22s ease,
+    background-color .22s ease;
 }
 
 	
