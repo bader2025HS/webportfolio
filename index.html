@@ -1000,8 +1000,6 @@ EDUCATION SVG — HOVER + LOCKED COLORS
   vector-effect: non-scaling-stroke;
 }
 
-
-
 .map-label{
   display: block;
   color: #111827;     /* force visible */
@@ -1016,6 +1014,56 @@ EDUCATION SVG — HOVER + LOCKED COLORS
 .country-map{
   position: relative;
   z-index: 0;
+}
+
+/* ===========================
+MAP LABEL — SYNC WITH MAP STATE
+(works with label BEFORE map)
+=========================== */
+
+/* base label */
+.map-label{
+  font-weight: 500;
+  transition: color .22s ease, font-weight .22s ease, letter-spacing .22s ease;
+}
+
+/* FRANCE */
+.map-column:has(#map-france:hover) .map-label,
+.map-column:has(#map-france.is-locked) .map-label{
+  color: #003b8e;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+}
+
+/* JAPAN */
+.map-column:has(#map-japan:hover) .map-label,
+.map-column:has(#map-japan.is-locked) .map-label{
+  color: #bc002d;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+}
+
+/* GERMANY */
+.map-column:has(#map-germany:hover) .map-label,
+.map-column:has(#map-germany.is-locked) .map-label{
+  color: #d4a300;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+}
+
+.map-label::after{
+  content: "";
+  display: block;
+  margin: 6px auto 0;
+  width: 0;
+  height: 3px;
+  background: currentColor;
+  transition: width .22s ease;
+}
+
+.map-column:has(.country-map:hover) .map-label::after,
+.map-column:has(.country-map.is-locked) .map-label::after{
+  width: 48%;
 }
 
 	
