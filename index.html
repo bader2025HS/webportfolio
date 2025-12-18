@@ -5425,20 +5425,26 @@ drawCountry("map-germany", "germany", [51.1, 10.3], 4.8);
 
 // Click maps → lock color + open education popup
 document.getElementById("map-france").addEventListener("click", () => {
-lockedCountry = "france";
-setCountryFill("france");
-openEduPopup("france");
+  lockedCountry = "france";
+  lockSvgMap("france");      // ✅ keeps SVG colored behind overlay
+  setCountryFill("france");  // keep your Leaflet logic too
+  openEduPopup("france");
 });
+
 document.getElementById("map-japan").addEventListener("click", () => {
-lockedCountry = "japan";
-setCountryFill("japan");
-openEduPopup("japan");
+  lockedCountry = "japan";
+  lockSvgMap("japan");
+  setCountryFill("japan");
+  openEduPopup("japan");
 });
+
 document.getElementById("map-germany").addEventListener("click", () => {
-lockedCountry = "germany";
-setCountryFill("germany");
-openEduPopup("germany");
+  lockedCountry = "germany";
+  lockSvgMap("germany");
+  setCountryFill("germany");
+  openEduPopup("germany");
 });
+
 // Hover → temporary highlight + respect last clicked country
 ["france", "japan", "germany"].forEach(key => {
 const el = document.getElementById("map-" + key);
@@ -5713,10 +5719,12 @@ eduOverlay.style.display = "flex";
 }
 
 function closeEduPopup() {
-eduOverlay.style.display = "none";
-lockedCountry = null; // keep your existing variable
-resetCountryStyles(); // resets the map colors
+  eduOverlay.style.display = "none";
+  lockedCountry = null;
+  document.querySelectorAll(".country-map").forEach(m => m.classList.remove("is-locked")); // ✅ add this
+  resetCountryStyles();
 }
+
 
 eduClose.addEventListener("click", closeEduPopup);
 eduOverlay.addEventListener("click", e => {
