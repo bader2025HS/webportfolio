@@ -889,6 +889,76 @@ RESPONSIVE LAYOUT (unchanged)
   }
 }
 
+/* ===========================
+ABOUT — DESKTOP RE-ORGANIZE
+Left: text box
+Right: stats (1 row) + focus (4x2) + map
+=========================== */
+
+@media (min-width: 961px){
+
+  /* 2-column shell: left text, right stack */
+  .about-shell{
+    display: grid;
+    grid-template-columns: 1.15fr 1fr; /* left bigger than right */
+    gap: 16px;
+    align-items: start;
+  }
+
+  /* Put text box on the LEFT */
+  .about-text-box{
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Put the whole grid content on the RIGHT (stacked) */
+  .about-grid{
+    grid-column: 2;
+    grid-row: 1;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto; /* stats, focus, map */
+    gap: 14px;
+    align-items: start;
+  }
+
+  /* ===== STATS: one row (4 items) ===== */
+  .about-stats-grid{
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-items: start;
+  }
+
+  /* (optional) tighten padding so 4 fits nicely */
+  .about-stat{
+    padding: 6px 0 6px 16px;
+  }
+
+  /* ===== FOCUS: 4 columns x 2 rows ===== */
+  .about-focus{
+    grid-column: 1;
+    margin-left: 0;      /* remove the desktop offset */
+    margin-top: 0;
+  }
+
+  .about-focus-chips{
+    grid-template-columns: repeat(4, max-content);
+    gap: 10px 14px;
+  }
+
+  /* ===== MAP: full width under focus ===== */
+  .about-map{
+    grid-column: 1;
+    justify-content: stretch;
+  }
+
+  .map-card{
+    height: 210px; /* keep your look; adjust if you want */
+  }
+}
 
 /* ===========================
 EDUCATION MAPS
