@@ -891,70 +891,74 @@ RESPONSIVE LAYOUT (unchanged)
 
 /* ===========================
 ABOUT — DESKTOP RE-ORGANIZE
-Left: text box + stats (2x2)
-Right: focus (4x2) + map
+Left: text box
+Right: stats (1 row) + focus (4x2) + map
 =========================== */
 
 @media (min-width: 961px){
 
-  /* Main 2-column layout */
+  /* 2-column shell: left text, right stack */
   .about-shell{
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
+    grid-template-columns: 1.15fr 1fr; /* left bigger than right */
     gap: 16px;
     align-items: start;
   }
 
-  /* LEFT COLUMN */
+  /* Put text box on the LEFT */
   .about-text-box{
     grid-column: 1;
     grid-row: 1;
   }
 
-  .about-stats-grid{
-    grid-column: 1;
-    grid-row: 2;                /* ✅ UNDER the text box */
-    margin-top: 14px;
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2x2 */
-    gap: 18px 12px;
-    align-items: start;
-  }
-
-  /* RIGHT COLUMN container */
+  /* Put the whole grid content on the RIGHT (stacked) */
   .about-grid{
     grid-column: 2;
-    grid-row: 1 / span 2;       /* spans text + stats height */
+    grid-row: 1;
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto; /* focus, map */
+    grid-template-rows: auto auto auto; /* stats, focus, map */
     gap: 14px;
     align-items: start;
   }
 
-  /* FOCUS (top-right) */
+  /* ===== STATS: one row (4 items) ===== */
+  .about-stats-grid{
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-items: start;
+  }
+
+  /* (optional) tighten padding so 4 fits nicely */
+  .about-stat{
+    padding: 6px 0 6px 16px;
+  }
+
+  /* ===== FOCUS: 4 columns x 2 rows ===== */
   .about-focus{
-    margin-left: 0;
+    grid-column: 1;
+    margin-left: 0;      /* remove the desktop offset */
     margin-top: 0;
   }
 
   .about-focus-chips{
-    grid-template-columns: repeat(4, max-content); /* 4x2 */
+    grid-template-columns: repeat(4, max-content);
     gap: 10px 14px;
   }
 
-  /* MAP (bottom-right) */
+  /* ===== MAP: full width under focus ===== */
   .about-map{
+    grid-column: 1;
     justify-content: stretch;
   }
 
   .map-card{
-    height: 210px;
+    height: 210px; /* keep your look; adjust if you want */
   }
 }
-
 
 /* ===========================
 EDUCATION MAPS
