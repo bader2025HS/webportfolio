@@ -801,6 +801,53 @@ CONTACT — NAME + EMAIL SAME ROW
   }
 }
 
+/* ================================
+CONTACT — SOCIAL ICONS (NO BOXES)
+================================ */
+
+.contact-social-row{
+  margin-top: 12px;              /* normal gap (same rhythm as cards) */
+  display: flex;
+  justify-content: center;
+  gap: 22px;                     /* balanced spacing between icons */
+}
+
+/* remove all box styling */
+.contact-social-row a{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  transform: none;
+}
+
+/* remove inner line */
+.contact-social-row a::after{
+  content: none !important;
+}
+
+/* icons only */
+.contact-social-row svg{
+  width: 34px;
+  height: 34px;
+  stroke: #111;
+  transition: transform .15s ease, stroke .15s ease, opacity .15s ease;
+}
+
+/* subtle hover (no box, no lift) */
+.contact-social-row a:hover svg{
+  stroke: var(--accent, #0ea5a2);
+  transform: scale(1.08);
+  opacity: 0.9;
+}
+
+/* normalize vertical rhythm on right column */
+.contact-right{
+  gap: 14px;   /* same as grid spacing */
+}
+
 /* ===========================
 ABOUT – LAYOUT
 =========================== */
