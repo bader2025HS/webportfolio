@@ -259,6 +259,393 @@ z-index: 99999;
 white-space: nowrap;
 }
 
+/* ================================
+CONTACT SECTION — TURQUOISE VERSION
+================================ */
+
+#contact {
+  margin-top: -20px;
+}
+
+/* Layout: left form, right info grid */
+.contact-layout {
+  max-width: 1050px;
+  margin: 0 auto 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* LEFT SIDE – CONTACT FORM ("envelope") */
+
+.contact-left { min-width: 0; }
+
+	/* CONTACT FORM CONTAINER — reference style */
+.contact-envelope{
+  background: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 26px 26px 22px;
+  box-shadow: none;
+}
+.contact-envelope::after{ content:none; } /* remove inner frame */
+.contact-envelope:hover{
+  background:#ffffff;
+  border-color: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.contact-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.contact-subline {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.contact-envelope:hover .contact-title {
+  color: var(--accent, #0ea5a2); /* ✅ turquoise */
+}
+.contact-envelope:hover .contact-subline {
+  color: var(--accent, #0ea5a2);
+  opacity: 1;
+}
+
+/* 3 fields (name / email / topic) in one row on desktop */
+
+.contact-envelope-form { width: 100%; }
+
+.contact-envelope-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* field blocks like the reference */
+.contact-envelope-field{
+  background: #ededed;
+  border-radius: 10px;
+  padding: 18px 18px 14px;
+  gap: 12px;
+}
+
+.contact-envelope-field label{
+  font-size: 2.2rem;           /* big headline */
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: none;        /* remove uppercase */
+  font-weight: 900;
+  opacity: 1;
+  color: #0b0b0b;
+}
+.contact-envelope-field input,
+.contact-envelope-field select,
+.contact-envelope-field textarea{
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,0.65);
+  border-radius: 0;
+
+  padding: 10px 2px 8px;
+  font-size: 1.05rem;
+  color: #111;
+
+  box-shadow: none;
+  outline: none;
+  transform: none;
+}
+
+/* placeholder like reference */
+.contact-envelope-field input::placeholder,
+.contact-envelope-field textarea::placeholder{
+  color: rgba(0,0,0,0.45);
+}
+
+
+.contact-envelope-field input:focus,
+.contact-envelope-field select:focus,
+.contact-envelope-field textarea:focus{
+  border-bottom-color: var(--accent, #0ea5a2);
+  box-shadow: none;
+}
+
+
+.contact-envelope-message { margin-top: 4px; }
+
+.contact-envelope-message textarea{
+  min-height: 140px;
+  resize: vertical;
+}
+
+
+/* Send button */
+.contact-send-btn{
+  border-radius: 999px;
+  border: none;
+  background: #ededed;
+  color: #111;
+  padding: 12px 22px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+
+.contact-send-btn:hover{
+  background: var(--accent, #0ea5a2);
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* Active press animation */
+.contact-send-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.contact-envelope:hover .contact-send-btn {
+  background: var(--accent, #0ea5a2); /* ✅ turquoise background */
+  color: white;
+  border-color: var(--accent, #0ea5a2);
+  transform: translateY(-2px);
+}
+
+/* RIGHT SIDE – 2×2 INFO GRID + COPYRIGHT */
+
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+/* 2×2 (now 3 rows) grid of cards */
+.contact-info-grid {
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Info card: slightly smaller */
+.contact-info-card {
+  position: relative;
+  padding: 14px 14px 12px;
+  border-radius: 0;
+
+  background: var(--bg1, #f5f8ff);
+
+  /* reserve hover border space */
+  border: 2.5px solid transparent;
+
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+/* inner crisp 1px line */
+.contact-info-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+}
+
+/* hover = same behavior as Activities */
+.contact-info-card:hover {
+  background: #ffffff;
+  border-color: var(--accent, #0ea5a2);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
+
+/* hide inner line when real border appears */
+.contact-info-card:hover::after {
+  box-shadow: none;
+}
+
+
+/* Title */
+.contact-info-card h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 4px;
+}
+
+/* Text */
+.contact-info-card p {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ICON COLOR FIX: always dark blue */
+.contact-info-icon svg {
+  stroke: #1c2d5a;
+  transition: stroke 0.20s ease;
+}
+
+/* ICON OPTIONAL HOVER EFFECT */
+.contact-info-card:hover .contact-info-icon svg {
+  stroke: var(--accent, #0ea5a2); /* ✅ turquoise on hover */
+}
+
+/* Icon centered above title */
+.contact-info-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.contact-info-icon svg { display: block; }
+
+/* Card title + text */
+.contact-info-card h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 6px;
+}
+
+.contact-info-card p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.contact-info-card a { color: inherit; }
+
+/* Social icons row */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.social-links a { display: inline-flex; }
+
+.social-links svg {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.social-links a:hover svg {
+  transform: translateY(-2px);
+  opacity: 0.7;
+}
+
+/* Copyright box styled like a card */
+.contact-copyright {
+  position: relative;
+  padding: 14px 16px;
+  border-radius: 0;
+
+  background: var(--bg1, #f5f8ff);
+  border: 2.5px solid transparent;
+
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: #1c2d5a;
+
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+.contact-copyright::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+}
+
+.contact-copyright:hover {
+  background:#ffffff;
+  border-color: var(--accent, #0ea5a2);
+  color: var(--accent, #0ea5a2);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
+
+.contact-copyright:hover::after {
+  box-shadow: none;
+}
+
+.contact-copyright p { margin: 0; }
+
+/* ================================
+RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-envelope-fields { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .contact-info-grid { grid-template-columns: 1fr; }
+}
+
+/* shared lift behavior (same as skills cards) */
+.contact-envelope,
+.contact-info-card,
+.contact-copyright{
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+/* lift on hover */
+.contact-envelope:hover,
+.contact-info-card:hover,
+.contact-copyright:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
+
+@media (max-width: 640px){
+  .contact-envelope-field label{
+    font-size: 1.55rem;
+  }
+  .contact-envelope{
+    padding: 18px 14px 16px;
+  }
+}
+
+
 /* ===========================
 ABOUT – LAYOUT
 =========================== */
@@ -3088,395 +3475,6 @@ transform: scale(1.05);
 }
 
 
-/* ================================
-CONTACT SECTION — TURQUOISE VERSION
-================================ */
-
-#contact {
-  margin-top: -20px;
-}
-
-/* Layout: left form, right info grid */
-.contact-layout {
-  max-width: 1050px;
-  margin: 0 auto 16px;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-  gap: 32px;
-  align-items: stretch;
-}
-
-/* LEFT SIDE – CONTACT FORM ("envelope") */
-
-.contact-left { min-width: 0; }
-
-.contact-envelope {
-  background: var(--bg1, #f5f8ff);
-  border: 2.5px solid transparent; /* reserve space */
-  border-radius: 0;
-  padding: 16px 32px 15px;
-  text-align: left;
-  position: relative;
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
-}
-.contact-envelope::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
-}
-
-.contact-envelope:hover {
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
-}
-
-.contact-envelope:hover::after {
-  box-shadow: none;
-}
-
-.contact-title {
-  margin-top: 0;
-  margin-bottom: 24px;
-  text-align: center;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 1.15rem;
-  font-weight: 600;
-  transition: color 0.25s ease;
-}
-
-.contact-subline {
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.75;
-  margin-top: -15px;
-  margin-bottom: 20px;
-  transition: color 0.25s ease, opacity 0.25s ease;
-}
-
-.contact-envelope:hover .contact-title {
-  color: var(--accent, #0ea5a2); /* ✅ turquoise */
-}
-.contact-envelope:hover .contact-subline {
-  color: var(--accent, #0ea5a2);
-  opacity: 1;
-}
-
-/* 3 fields (name / email / topic) in one row on desktop */
-
-.contact-envelope-form { width: 100%; }
-
-.contact-envelope-fields {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.contact-envelope-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 0.85rem;
-}
-
-.contact-envelope-field label {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  opacity: 0.75;
-}
-
-.contact-envelope-field input,
-.contact-envelope-field select,
-.contact-envelope-field textarea {
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 10px 12px;
-  font: inherit;
-  background: #fff;
-  outline: none;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
-}
-
-.contact-envelope-field input:focus,
-.contact-envelope-field select:focus,
-.contact-envelope-field textarea:focus {
-  border-color: var(--accent, #0ea5a2);                 /* ✅ turquoise */
-  box-shadow: 0 0 0 2px rgba(14, 165, 162, 0.18);       /* ✅ turquoise aura */
-  transform: translateY(-1px);
-}
-
-.contact-envelope-message { margin-top: 4px; }
-
-.contact-envelope-message textarea {
-  resize: vertical;
-  min-height: 160px;
-}
-
-/* Send button */
-.contact-send-btn {
-  margin-top: 18px;
-  margin-bottom: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 26px;
-
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  cursor: pointer;
-
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-
-  background: var(--bg1, #f5f8ff);
-  color: #1c2d5a;
-
-  transition: background 0.20s ease, border-color 0.20s ease, color 0.20s ease,
-              box-shadow 0.20s ease, transform 0.15s ease;
-}
-
-/* Hover = turquoise accent */
-.contact-send-btn:hover {
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2); /* ✅ turquoise border */
-  color: var(--accent, #0ea5a2);        /* ✅ turquoise text */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Active press animation */
-.contact-send-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-}
-
-.contact-envelope:hover .contact-send-btn {
-  background: var(--accent, #0ea5a2); /* ✅ turquoise background */
-  color: white;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-2px);
-}
-
-/* RIGHT SIDE – 2×2 INFO GRID + COPYRIGHT */
-
-.contact-right {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-width: 0;
-}
-
-/* 2×2 (now 3 rows) grid of cards */
-.contact-info-grid {
-  display: grid;
-  margin-bottom: 20px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-/* Info card: slightly smaller */
-.contact-info-card {
-  position: relative;
-  padding: 14px 14px 12px;
-  border-radius: 0;
-
-  background: var(--bg1, #f5f8ff);
-
-  /* reserve hover border space */
-  border: 2.5px solid transparent;
-
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
-
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
-}
-
-/* inner crisp 1px line */
-.contact-info-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
-}
-
-/* hover = same behavior as Activities */
-.contact-info-card:hover {
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
-}
-
-/* hide inner line when real border appears */
-.contact-info-card:hover::after {
-  box-shadow: none;
-}
-
-
-/* Title */
-.contact-info-card h3 {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin: 0 0 4px;
-}
-
-/* Text */
-.contact-info-card p {
-  font-size: 0.8rem;
-  opacity: 0.9;
-  margin: 0;
-}
-
-/* ICON COLOR FIX: always dark blue */
-.contact-info-icon svg {
-  stroke: #1c2d5a;
-  transition: stroke 0.20s ease;
-}
-
-/* ICON OPTIONAL HOVER EFFECT */
-.contact-info-card:hover .contact-info-icon svg {
-  stroke: var(--accent, #0ea5a2); /* ✅ turquoise on hover */
-}
-
-/* Icon centered above title */
-.contact-info-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.contact-info-icon svg { display: block; }
-
-/* Card title + text */
-.contact-info-card h3 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin: 0 0 6px;
-}
-
-.contact-info-card p {
-  font-size: 0.85rem;
-  opacity: 0.9;
-  margin: 0;
-}
-
-.contact-info-card a { color: inherit; }
-
-/* Social icons row */
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 4px;
-}
-
-.social-links a { display: inline-flex; }
-
-.social-links svg {
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.social-links a:hover svg {
-  transform: translateY(-2px);
-  opacity: 0.7;
-}
-
-/* Copyright box styled like a card */
-.contact-copyright {
-  position: relative;
-  padding: 14px 16px;
-  border-radius: 0;
-
-  background: var(--bg1, #f5f8ff);
-  border: 2.5px solid transparent;
-
-  text-align: center;
-  font-size: 0.75rem;
-  letter-spacing: 0.03em;
-  color: #1c2d5a;
-
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
-}
-
-.contact-copyright::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
-}
-
-.contact-copyright:hover {
-  background:#ffffff;
-  border-color: var(--accent, #0ea5a2);
-  color: var(--accent, #0ea5a2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
-}
-
-.contact-copyright:hover::after {
-  box-shadow: none;
-}
-
-.contact-copyright p { margin: 0; }
-
-/* ================================
-RESPONSIVE
-================================ */
-
-@media (max-width: 900px) {
-  .contact-layout { grid-template-columns: 1fr; }
-  .contact-envelope-fields { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
-  .contact-info-grid { grid-template-columns: 1fr; }
-}
-
-/* shared lift behavior (same as skills cards) */
-.contact-envelope,
-.contact-info-card,
-.contact-copyright{
-  transition:
-    background 0.20s ease,
-    border-color 0.20s ease,
-    color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.18s ease;
-}
-
-/* lift on hover */
-.contact-envelope:hover,
-.contact-info-card:hover,
-.contact-copyright:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
-}
 
 /* ===========================
 GALLERY (HOME)
