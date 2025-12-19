@@ -1104,21 +1104,24 @@ MAP LABEL — CHIP HOVER (NO UNDERLINE)
 /* BASE LABEL (static) */
 .map-label{
   display: inline-block;
-  padding: 8px 18px;
-  border-radius: 999px;                 /* pill */
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  font-size: 1rem;
+  padding: 10px 22px;          /* larger chip */
+  font-size: 1.15rem;          /* 🔑 real size increase */
+  font-weight: 600;            /* stronger even when static */
+  letter-spacing: 0.22em;      /* balanced for uppercase */
   color: #111827;
   background: transparent;
   border: 2px solid transparent;
+  border-radius: 999px;
+  line-height: 1;              /* avoids visual shrink */
   transition:
     background .22s ease,
     border-color .22s ease,
     color .22s ease,
     font-weight .22s ease,
-    letter-spacing .22s ease;
+    letter-spacing .22s ease,
+    transform .18s ease;
 }
+
 
 /* ===========================
 FRANCE
