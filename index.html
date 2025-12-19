@@ -54,7 +54,7 @@ NAVBAR — CLEAN SYSTEM PILLS
 =========================== */
 
 /* ===========================
-NAVBAR — SLIDING HIGHLIGHT
+NAVBAR — SLIDING HIGHLIGHT (TURQUOISE)
 =========================== */
 
 nav{
@@ -64,7 +64,7 @@ nav{
 }
 
 nav ul{
-  position: relative;            /* anchor for slider */
+  position: relative;
   list-style: none;
   display: flex;
   align-items: stretch;
@@ -74,7 +74,7 @@ nav ul{
   padding: 0;
   height: 44px;
 
-  background: #d5d5d5;
+  background: #dfeeed;          /* turquoise-tinted bar */
   border-radius: 12px;
   box-shadow: none;
   border: none;
@@ -83,15 +83,14 @@ nav ul{
   letter-spacing: 0.12em;
   text-transform: uppercase;
 
-  overflow: hidden;              /* clips slider to rounded bar */
+  overflow: hidden;
 }
 
-/* li just keeps structure, no styling needed */
 nav ul li{
   display: flex;
 }
 
-/* the moving highlight */
+/* SLIDER */
 nav ul .nav-slider{
   position: absolute;
   top: 0;
@@ -99,8 +98,8 @@ nav ul .nav-slider{
   height: 100%;
   width: 0;
 
-  background: #b8b8b8;
-  border-radius: 8px;          /* ✅ slight rounded angles */
+  background: #9fdad6;          /* turquoise hover */
+  border-radius: 8px;
 
   transform: translateX(0);
   transition:
@@ -111,8 +110,7 @@ nav ul .nav-slider{
   z-index: 0;
 }
 
-
-/* links above the slider */
+/* LINKS */
 nav a{
   position: relative;
   z-index: 1;
@@ -124,12 +122,12 @@ nav a{
   height: 100%;
   padding: 0 18px;
 
-  background: transparent;       /* slider provides fill */
+  background: transparent;
   border: none;
   border-radius: 0;
   box-shadow: none;
 
-  color: #111;
+  color: #0f172a;
   text-decoration: none;
 
   transition: color .25s ease;
@@ -137,10 +135,9 @@ nav a{
 
 nav a:hover,
 nav a.active{
-  color: #000;
+  color: #0ea5a2;               /* turquoise text */
 }
 
-/* remove focus/active boxes */
 nav a:focus,
 nav a:focus-visible,
 nav a:active{
@@ -149,7 +146,7 @@ nav a:active{
 }
 
 /* ===========================
-NAVBAR — MOBILE FIX (horizontal scroll)
+MOBILE (unchanged behavior, new colors)
 =========================== */
 @media (max-width: 700px){
 
@@ -163,22 +160,18 @@ NAVBAR — MOBILE FIX (horizontal scroll)
     max-width: 100%;
     height: 42px;
 
-    /* keep in one line */
     flex-wrap: nowrap;
-
-    /* allow horizontal scrolling */
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
 
-    /* no scrollbar (cross-browser) */
-    scrollbar-width: none;      /* Firefox */
+    scrollbar-width: none;
   }
-  nav ul::-webkit-scrollbar{    /* Chrome/Safari/Edge */
+
+  nav ul::-webkit-scrollbar{
     display: none;
   }
 
-  /* slightly tighter spacing so more fits */
   nav a{
     padding: 0 14px;
     letter-spacing: 0.10em;
@@ -186,11 +179,12 @@ NAVBAR — MOBILE FIX (horizontal scroll)
     white-space: nowrap;
   }
 
-  /* slider corners slightly smaller on mobile */
   nav ul .nav-slider{
+    background: #7ccdc7;        /* slightly stronger on mobile */
     border-radius: 7px;
   }
 }
+
 
 /* ====== GLOBAL SECTION HANDLING ====== */
 main section {
