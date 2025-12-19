@@ -57,13 +57,8 @@ nav{
   margin-top: 24px; /* adjust spacing from title */
 }
 
-/* the long rounded bar */
 /* ===========================
-NAVBAR — FLAT GREY BAR (sharp, no shadows)
-=========================== */
-
-/* ===========================
-NAVBAR — MENU ONLY (8 SECTIONS)
+NAVBAR — TURQUOISE / SECTION STYLE
 Flat, sharp, compact, no shadow
 =========================== */
 
@@ -77,16 +72,16 @@ nav ul{
   display: inline-flex;
   align-items: center;
   gap: 0;
-  margin: 18px auto 0;
+
+  margin: 8px auto 0;          /* ⬅️ reduced top gap */
   padding: 0;
 
-  background: #f5f8ff;                /* same as section blue */
-  border: 2px solid rgba(0,0,0,0.14); /* thin neutral frame */
+  background: #f5f8ff;
+  border: 2px solid rgba(0,0,0,0.14);
   border-radius: 0;
   overflow: hidden;
 }
 
-/* remove bullets spacing */
 nav li{ margin: 0; }
 
 /* menu items */
@@ -95,13 +90,13 @@ nav a{
   align-items: center;
   justify-content: center;
 
-  padding: 8px 14px;
+  padding: 10px 18px;         /* ⬅️ slightly larger hit area */
   background: transparent;
   border: 0;
   border-radius: 0;
 
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
+  font-size: 1.05rem;         /* ⬅️ bigger text */
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #1f2937;
 
@@ -109,14 +104,14 @@ nav a{
   transition: background .18s ease, color .18s ease;
 }
 
-/* separators between items */
+/* separators */
 nav li + li a{
   border-left: 2px solid rgba(0,0,0,0.14);
 }
 
 /* hover */
 nav a:hover{
-  background: rgba(14, 165, 162, 0.14); /* turquoise wash */
+  background: rgba(14, 165, 162, 0.14);
   color: var(--accent, #0ea5a2);
 }
 
