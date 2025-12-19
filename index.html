@@ -148,6 +148,49 @@ nav a:active{
   box-shadow: none;
 }
 
+/* ===========================
+NAVBAR — MOBILE FIX (horizontal scroll)
+=========================== */
+@media (max-width: 700px){
+
+  nav{
+    margin-top: 14px;
+    padding: 0 12px;
+  }
+
+  nav ul{
+    width: 100%;
+    max-width: 100%;
+    height: 42px;
+
+    /* keep in one line */
+    flex-wrap: nowrap;
+
+    /* allow horizontal scrolling */
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    /* no scrollbar (cross-browser) */
+    scrollbar-width: none;      /* Firefox */
+  }
+  nav ul::-webkit-scrollbar{    /* Chrome/Safari/Edge */
+    display: none;
+  }
+
+  /* slightly tighter spacing so more fits */
+  nav a{
+    padding: 0 14px;
+    letter-spacing: 0.10em;
+    font-size: 0.90rem;
+    white-space: nowrap;
+  }
+
+  /* slider corners slightly smaller on mobile */
+  nav ul .nav-slider{
+    border-radius: 7px;
+  }
+}
 
 /* ====== GLOBAL SECTION HANDLING ====== */
 main section {
@@ -6403,33 +6446,49 @@ if (window.matchMedia("(min-width: 801px)").matches) {
   const links = ul.querySelectorAll("a");
   if (!slider || !links.length) return;
 
-  const moveTo = (a) => {
+  const moveTo = (a, shouldCenter = false) => {
     const ulRect = ul.getBoundingClientRect();
     const r = a.getBoundingClientRect();
+
+    // IMPORTANT: include ul.scrollLeft so slider matches when bar is scrolled
+    const left = (r.left - ulRect.left) + ul.scrollLeft;
+
     slider.style.width = r.width + "px";
-    slider.style.transform = `translateX(${r.left - ulRect.left}px)`;
+    slider.style.transform = `translateX(${left}px)`;
+
+    // Optional: keep the hovered/active item nicely visible on mobile
+    if (shouldCenter && ul.scrollWidth > ul.clientWidth) {
+      const target = left + (r.width / 2) - (ul.clientWidth / 2);
+      ul.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+    }
   };
 
-  // start on active (or first)
-  moveTo(ul.querySelector("a.active") || links[0]);
+  // initial position
+  moveTo(ul.querySelector("a.active") || links[0], true);
 
-  // hover/focus moves
   links.forEach(a => {
     a.addEventListener("mouseenter", () => moveTo(a));
-    a.addEventListener("focus", () => moveTo(a));
+    a.addEventListener("focus", () => moveTo(a, true));
+    a.addEventListener("click", () => moveTo(a, true));
+    a.addEventListener("touchstart", () => moveTo(a, true), { passive: true });
   });
 
-  // leaving nav returns to active
   ul.addEventListener("mouseleave", () => {
     moveTo(ul.querySelector("a.active") || links[0]);
   });
 
-  // keep correct on resize
+  // if user scrolls the nav, keep slider aligned
+  ul.addEventListener("scroll", () => {
+    const current = ul.querySelector("a.active") || links[0];
+    moveTo(current);
+  }, { passive: true });
+
   window.addEventListener("resize", () => {
-    moveTo(ul.querySelector("a.active") || links[0]);
+    moveTo(ul.querySelector("a.active") || links[0], true);
   });
 })();
 </script>
+
 
 	
 </body>
