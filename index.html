@@ -54,8 +54,7 @@ NAVBAR — CLEAN SYSTEM PILLS
 =========================== */
 
 /* ===========================
-NAVBAR — FLAT SEGMENT BAR
-(no shadows, no dots, no boxes)
+NAVBAR — FULL HEIGHT SEGMENTS
 =========================== */
 
 nav{
@@ -68,15 +67,15 @@ nav{
 nav ul{
   list-style: none;
   display: flex;
-  align-items: center;
-  gap: 0;                     /* segments touch */
+  align-items: stretch;        /* 🔑 IMPORTANT */
+  gap: 0;
 
   margin: 0;
-  padding: 6px 6px;
-  height: 42px;
+  padding: 0 6px;              /* horizontal padding only */
+  height: 44px;
 
-  background: #cfcfcf;        /* flat light grey */
-  border-radius: 10px;        /* bar only, not circular */
+  background: #d5d5d5;
+  border-radius: 10px;
   box-shadow: none;
   border: none;
 
@@ -85,18 +84,18 @@ nav ul{
   text-transform: uppercase;
 }
 
-/* ITEMS — PART OF THE BAR */
+/* LINKS = FULL HEIGHT SEGMENTS */
 nav a{
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: 100%;
+  height: 100%;                /* 🔑 fill bar top → bottom */
   padding: 0 18px;
 
   background: transparent;
   border: none;
-  border-radius: 8px;         /* subtle, internal */
+  border-radius: 0;            /* 🔑 no inner pill */
   box-shadow: none;
 
   color: #111;
@@ -105,19 +104,19 @@ nav a{
   transition: background .18s ease, color .18s ease;
 }
 
-/* HOVER = DARKER FILLED SEGMENT */
+/* HOVER = FULL SEGMENT DARKENS */
 nav a:hover{
-  background: #b5b5b5;        /* darker grey fill */
+  background: #b8b8b8;         /* darker grey */
   color: #000;
 }
 
-/* ACTIVE = SAME, SLIGHTLY STRONGER */
+/* ACTIVE = SAME BUT SLIGHTLY STRONGER */
 nav a.active{
-  background: #a9a9a9;
+  background: #adadad;
   color: #000;
 }
 
-/* REMOVE ALL FOCUS / CLICK BOXES */
+/* REMOVE ALL CLICK / FOCUS BOXES */
 nav a:focus,
 nav a:focus-visible,
 nav a:active{
