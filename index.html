@@ -54,7 +54,7 @@ NAVBAR — CLEAN SYSTEM PILLS
 =========================== */
 
 /* ===========================
-NAVBAR — FULL HEIGHT SEGMENTS
+NAVBAR — FULL HEIGHT + ROUNDED ENDS + SMOOTHER HOVER
 =========================== */
 
 nav{
@@ -67,15 +67,15 @@ nav{
 nav ul{
   list-style: none;
   display: flex;
-  align-items: stretch;        /* 🔑 IMPORTANT */
+  align-items: stretch;
   gap: 0;
 
   margin: 0;
-  padding: 0 6px;              /* horizontal padding only */
+  padding: 0 6px;
   height: 44px;
 
   background: #d5d5d5;
-  border-radius: 10px;
+  border-radius: 12px;          /* bar corners */
   box-shadow: none;
   border: none;
 
@@ -90,27 +90,29 @@ nav a{
   align-items: center;
   justify-content: center;
 
-  height: 100%;                /* 🔑 fill bar top → bottom */
+  height: 100%;
   padding: 0 18px;
 
   background: transparent;
   border: none;
-  border-radius: 0;            /* 🔑 no inner pill */
+  border-radius: 0;             /* important: no inner pills */
   box-shadow: none;
 
   color: #111;
   text-decoration: none;
 
-  transition: background .18s ease, color .18s ease;
+  /* smoother feel */
+  transition: background .28s ease, color .28s ease;
+  will-change: background;
 }
 
 /* HOVER = FULL SEGMENT DARKENS */
 nav a:hover{
-  background: #b8b8b8;         /* darker grey */
+  background: #b8b8b8;
   color: #000;
 }
 
-/* ACTIVE = SAME BUT SLIGHTLY STRONGER */
+/* ACTIVE */
 nav a.active{
   background: #adadad;
   color: #000;
@@ -122,6 +124,25 @@ nav a:focus-visible,
 nav a:active{
   outline: none;
   box-shadow: none;
+}
+
+/* ===========================
+ROUNDED ENDS (HOME + CONTACT)
+Works with ul > a OR ul > li > a
+=========================== */
+
+/* first item */
+nav ul > a:first-child,
+nav ul > li:first-child > a{
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+/* last item */
+nav ul > a:last-child,
+nav ul > li:last-child > a{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 
