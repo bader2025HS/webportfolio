@@ -48,35 +48,55 @@ font-size: 3rem;
 text-transform: uppercase;
 letter-spacing: 0.05em;
 }
+/* ===========================
+NAVBAR — CLEAN SYSTEM PILLS
+(Structure unchanged)
+=========================== */
 
 nav ul {
-list-style: none;
-display: flex;
-justify-content: center;
-gap: 20px;
-flex-wrap: wrap;
-margin-top: 40px;
-font-size: 1rem;
-letter-spacing: 0.12em;
-text-transform: uppercase;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 16px;                  /* slightly tighter */
+  flex-wrap: wrap;
+  margin-top: 32px;           /* cleaner vertical rhythm */
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 nav a {
-padding: 8px 18px;
-border-radius: 12px;
-border: 2px solid #d0d7de;
-text-decoration: none;
-color: #333;
-transition: 0.25s; 
-}
-  
-nav a.active,
-nav a:hover {
-  border-color: #0ea5a2;   /* old turquoise */
-  background: #eafaf7;    /* your old bg1 light mint */
-  color: #0ea5a2;          /* old turquoise text */
+  padding: 7px 16px;
+  border-radius: 4px;         /* 🔑 sharper system look */
+  border: 2px solid #d0d7de;
+  text-decoration: none;
+  color: #111827;             /* near-black, more modern */
+  background: #ffffff;
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    color .2s ease,
+    box-shadow .2s ease,
+    transform .15s ease;
 }
 
+/* hover + active */
+nav a:hover,
+nav a.active {
+  border-color: #22d3ee;      /* modern turquoise */
+  background: #f0fdff;        /* very light cyan */
+  color: #0891b2;
+  box-shadow:
+    0 0 0 3px rgba(34,211,238,0.15);
+  transform: translateY(-1px);
+}
+
+/* keyboard focus */
+nav a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(34,211,238,0.35);
+}
 
 
 /* ====== GLOBAL SECTION HANDLING ====== */
