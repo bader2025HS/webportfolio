@@ -695,28 +695,30 @@ CONTACT — CENTER RIGHT CARDS CONTENT
 }
 
 /* ================================
-CONTACT — SOCIAL ICON ROW (FINAL)
+CONTACT — BIG SOCIAL ICON ROW
 ================================ */
 
 .contact-social-row{
-  margin-top: 14px;
-  display: flex;
-  justify-content: center;
-  gap: 14px;
+  margin-top: 16px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 icons fill width */
+  gap: 16px;
 }
 
-/* icon buttons = same language as cards */
+/* icon buttons */
 .contact-social-row a{
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 44px;
-  height: 44px;
+  width: 100%;
+  height: 72px;                 /* ✅ much bigger */
 
   background: #eeeeee;
-  border-radius: 14px;
+  border-radius: 18px;
   border: 2px solid transparent;
 
   transition:
@@ -726,7 +728,7 @@ CONTACT — SOCIAL ICON ROW (FINAL)
     transform .18s ease;
 }
 
-/* thin inner line (system consistency) */
+/* inner thin line */
 .contact-social-row a::after{
   content:"";
   position:absolute;
@@ -734,18 +736,17 @@ CONTACT — SOCIAL ICON ROW (FINAL)
   pointer-events:none;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
   border-radius: inherit;
-  transition: box-shadow .20s ease;
 }
 
-/* icons */
+/* BIG icons */
 .contact-social-row svg{
-  width: 22px;
-  height: 22px;
+  width: 34px;
+  height: 34px;
   stroke: #111;
   transition: stroke .18s ease;
 }
 
-/* hover = same as cards */
+/* hover behavior (same as cards) */
 .contact-social-row a:hover{
   background: #ffffff;
   border-color: var(--accent, #0ea5a2);
@@ -761,27 +762,42 @@ CONTACT — SOCIAL ICON ROW (FINAL)
   stroke: var(--accent, #0ea5a2);
 }
 
-/* active press */
-.contact-social-row a:active{
-  transform: translateY(0);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-}
-
-/* mobile: slightly smaller icons */
+/* mobile: still full width, slightly shorter */
 @media (max-width: 640px){
   .contact-social-row{
     gap: 12px;
   }
 
   .contact-social-row a{
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    height: 64px;
+    border-radius: 16px;
   }
 
   .contact-social-row svg{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+/* ================================
+CONTACT — NAME + EMAIL SAME ROW
+================================ */
+
+/* default = stacked */
+.contact-envelope-fields{
+  grid-template-columns: 1fr;
+}
+
+/* first row: Name + Email */
+@media (min-width: 900px){
+  .contact-envelope-fields{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* make Topic span full width */
+  .contact-envelope-fields .contact-envelope-field:nth-child(3){
+    grid-column: 1 / -1;
   }
 }
 
