@@ -203,25 +203,24 @@ CUSTOM CURSOR — DOT (GLOBAL)
   top: 0;
   left: 0;
 
-  width: 12px;                 /* 🔑 bigger */
-  height: 12px;                /* 🔑 bigger */
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: #0ea5a2;         /* your turquoise */
 
+  background: #fff;                 /* important for blend mode */
+  mix-blend-mode: difference;       /* 🔥 auto-adapts */
+  
   pointer-events: none;
   z-index: 99999;
 
   transform: translate(-50%, -50%);
-  transition:
-    width .15s ease,
-    height .15s ease,
-    opacity .2s ease;
+  transition: width .15s ease, height .15s ease, opacity .2s ease;
 }
 
-/* Hover state (links, buttons, inputs) */
 .cursor-dot.is-hover{
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.9;
 }
 
 
