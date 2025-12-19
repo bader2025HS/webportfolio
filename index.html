@@ -187,14 +187,14 @@ MOBILE (unchanged behavior, new colors)
   }
 }
 /* ===========================
-CUSTOM CURSOR — DOT (DESKTOP)
+CUSTOM CURSOR — DOT (GLOBAL)
 =========================== */
 
-/* Hide default cursor */
-@media (hover: hover) and (pointer: fine) {
-  body{
-    cursor: none;
-  }
+/* Hide ALL system cursors everywhere */
+*,
+*::before,
+*::after{
+  cursor: none !important;
 }
 
 /* Cursor dot */
@@ -202,27 +202,27 @@ CUSTOM CURSOR — DOT (DESKTOP)
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
+
+  width: 12px;                 /* 🔑 bigger */
+  height: 12px;                /* 🔑 bigger */
   border-radius: 50%;
-  background: #0ea5a2;            /* your turquoise */
+  background: #0ea5a2;         /* your turquoise */
 
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
 
   transform: translate(-50%, -50%);
   transition:
-    transform .12s ease-out,
-    opacity .2s ease,
     width .15s ease,
-    height .15s ease;
+    height .15s ease,
+    opacity .2s ease;
 }
 
-/* Hover state (links, buttons) */
+/* Hover state (links, buttons, inputs) */
 .cursor-dot.is-hover{
-  width: 14px;
-  height: 14px;
-  opacity: 0.8;
+  width: 20px;
+  height: 20px;
+  opacity: 0.85;
 }
 
 
@@ -6523,11 +6523,12 @@ if (window.matchMedia("(min-width: 801px)").matches) {
   });
 })();
 </script>
+
+
+
+
 <script>
 (() => {
-  // desktop only
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-
   const dot = document.querySelector(".cursor-dot");
   if (!dot) return;
 
@@ -6536,8 +6537,7 @@ if (window.matchMedia("(min-width: 801px)").matches) {
   let targetX = x;
   let targetY = y;
 
-  // smooth follow
-  const speed = 0.18;
+  const speed = 0.22; // slightly tighter follow
 
   function animate(){
     x += (targetX - x) * speed;
@@ -6547,20 +6547,20 @@ if (window.matchMedia("(min-width: 801px)").matches) {
   }
   animate();
 
-  // track mouse
   window.addEventListener("mousemove", e => {
     targetX = e.clientX;
     targetY = e.clientY;
   });
 
-  // hover interactions
-  const hoverables = "a, button, input, textarea, [role='button']";
+  // hover detection
+  const hoverables = "a, button, input, textarea, select, label, [role='button']";
   document.querySelectorAll(hoverables).forEach(el => {
     el.addEventListener("mouseenter", () => dot.classList.add("is-hover"));
     el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
   });
 })();
 </script>
+
 
 	
 </body>
