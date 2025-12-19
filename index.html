@@ -848,6 +848,94 @@ CONTACT — SOCIAL ICONS (NO BOXES)
   gap: 14px;   /* same as grid spacing */
 }
 
+/* ================================
+CONTACT — SOCIAL ICONS: BIG + FULL ROW
+(no boxes, fill width)
+================================ */
+
+.contact-social-row{
+  width: 100%;
+  margin-top: 14px;
+  display: grid;                         /* ✅ make them fill the row */
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  align-items: center;
+  justify-items: center;
+  gap: 0;                                /* ✅ no “cluster” gaps */
+}
+
+/* each link takes its column */
+.contact-social-row a{
+  width: 100% !important;                /* ✅ fills column width */
+  height: auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0 !important;             /* little vertical breathing room */
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.contact-social-row a::after{ content:none !important; }
+
+/* bigger icons */
+.contact-social-row svg{
+  width: 46px;                           /* ✅ bigger */
+  height: 46px;
+  stroke: #111;
+  transition: transform .15s ease, stroke .15s ease, opacity .15s ease;
+}
+
+/* subtle hover only */
+.contact-social-row a:hover svg{
+  stroke: var(--accent, #0ea5a2);
+  transform: scale(1.08);
+  opacity: 0.92;
+}
+
+/* mobile: still full row but slightly smaller */
+@media (max-width: 640px){
+  .contact-social-row svg{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* ================================
+CONTACT — FORCE TRUE FULL-WIDTH (BREAK OUT OF WRAPPER)
+================================ */
+
+/* If your page has a centered max-width wrapper, this breaks contact out */
+#contact{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(12px, 3vw, 48px);
+  padding-right: clamp(12px, 3vw, 48px);
+  box-sizing: border-box;
+}
+
+/* Make sure the inside really uses full width */
+#contact .contact-layout{
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* safety: prevent horizontal scroll if any child overshoots */
+html, body{
+  overflow-x: hidden;
+}
+
 /* ===========================
 ABOUT – LAYOUT
 =========================== */
