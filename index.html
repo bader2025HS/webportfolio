@@ -634,30 +634,29 @@ ABOUT — STATS (UPDATED CARDS)
 - fixes cloud behind focus chips
 =========================== */
 
-/* container stays the same grid you already use */
 .about-stats-grid{
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 🔑 1 row, 4 boxes */
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;                 /* ⬅️ tighter gap */
   position: relative;
   z-index: 3;
 }
-
 
 /* CARD */
 .about-stat{
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;        /* ✅ centered */
-  justify-content: center;    /* ✅ centered */
-  text-align: center;         /* ✅ centered */
-  padding: 16px 14px 14px;    /* box padding */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 12px 10px 10px;   /* ⬅️ smaller box */
   cursor: default;
 
   background: #ffffff;
-  border-radius: 0;           /* match sharp system */
-  border: 2.5px solid transparent; /* reserve hover thickness */
+  border-radius: 0;
+  border: 2.5px solid transparent;
   box-shadow: none;
 
   transition:
@@ -666,7 +665,7 @@ ABOUT — STATS (UPDATED CARDS)
     border-color .20s ease;
 }
 
-/* thin inner line like your other sections */
+/* thin inner line */
 .about-stat::after{
   content:"";
   position:absolute;
@@ -675,43 +674,42 @@ ABOUT — STATS (UPDATED CARDS)
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
 }
 
-/* ❌ REMOVE the old left bar */
+/* remove old bar */
 .about-stat::before{
   content: none !important;
 }
 
 /* NUMBER */
 .about-stat-number{
-  font-size: 2.6rem;
+  font-size: 2.25rem;        /* ⬅️ smaller number */
   font-weight: 800;
   line-height: 1;
   color: #1f2937;
-  text-shadow: none;
   transition: transform .22s ease, color .22s ease, text-shadow .22s ease;
 }
 
 /* LABEL */
 .about-stat-label{
-  margin-top: 10px;
-  font-size: 0.8rem;
+  margin-top: 6px;           /* ⬅️ tighter */
+  font-size: 0.75rem;        /* ⬅️ slightly smaller */
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.15em;
   color: #6b7280;
   transition: color .22s ease;
 }
 
-/* HOVER: turquoise border + lift + number turns turquoise */
+/* HOVER */
 .about-stat:hover{
   border-color: var(--accent, #0ea5a2);
   transform: translateY(-2px);
-  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+  box-shadow: 0 18px 36px rgba(0,0,0,.14);
 }
 .about-stat:hover::after{ box-shadow:none; }
 
 .about-stat:hover .about-stat-number{
   transform: translateY(-1px);
   color: var(--accent, #0ea5a2);
-  text-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+  text-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
 }
 .about-stat:hover .about-stat-label{
   color: #111111;
