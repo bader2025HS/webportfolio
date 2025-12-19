@@ -739,9 +739,10 @@ CLOUD TOOLTIP — FIXED (like before)
   font-size: 0.75rem;
   line-height: 1.45;
 
-  width: max-content;        /* 🔑 key fix */
-  max-width: 320px;          /* readable line length */
-  white-space: normal;       /* normal wrapping */
+  width: auto;               /* ❌ remove max-content */
+  min-width: 200px;          /* prevents vertical stacking */
+  max-width: 280px;          /* prevents long horizontal line */
+  white-space: normal;       /* natural text wrapping */
   text-align: center;
 
   opacity: 0;
