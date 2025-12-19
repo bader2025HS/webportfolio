@@ -980,6 +980,35 @@ CONTACT — SEND BUTTON (FIXED)
   }
 }
 
+/* ================================
+CONTACT — ICONS (NEUTRAL / SVG-ONLY)
+================================ */
+
+/* Info card icons */
+.contact-info-icon svg{
+  stroke: none !important;   /* do not override SVG colors */
+  fill: none;                /* let SVG decide */
+  transition: none;
+}
+
+/* Remove any hover effects on icons */
+.contact-info-card:hover .contact-info-icon svg{
+  stroke: none !important;
+  fill: none;
+}
+
+/* Social icons row */
+.social-links svg{
+  stroke: none !important;
+  fill: none;
+  transition: none;
+}
+
+/* Disable hover animation on social icons */
+.social-links a:hover svg{
+  transform: none;
+  opacity: 1;
+}
 
 /* ===========================
 ABOUT – LAYOUT
