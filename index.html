@@ -54,8 +54,7 @@ NAVBAR — CLEAN SYSTEM PILLS
 =========================== */
 
 /* ===========================
-NAVBAR — NO GAP ON ENDS
-(full-height hover, rounded ends filled)
+NAVBAR — SLIDING HIGHLIGHT
 =========================== */
 
 nav{
@@ -64,15 +63,15 @@ nav{
   margin-top: 22px;
 }
 
-/* BAR */
 nav ul{
+  position: relative;            /* anchor for slider */
   list-style: none;
   display: flex;
   align-items: stretch;
   gap: 0;
 
   margin: 0;
-  padding: 0;                  /* 🔑 remove side gap */
+  padding: 0;
   height: 44px;
 
   background: #d5d5d5;
@@ -84,11 +83,38 @@ nav ul{
   letter-spacing: 0.12em;
   text-transform: uppercase;
 
-  overflow: hidden;            /* 🔑 clips segments to rounded bar */
+  overflow: hidden;              /* clips slider to rounded bar */
 }
 
-/* LINKS = FULL HEIGHT SEGMENTS */
+/* li just keeps structure, no styling needed */
+nav ul li{
+  display: flex;
+}
+
+/* the moving highlight */
+nav ul .nav-slider{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+
+  background: #b8b8b8;           /* hover shade */
+  transform: translateX(0);
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    width .35s cubic-bezier(.2,.8,.2,1);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* links above the slider */
 nav a{
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +122,7 @@ nav a{
   height: 100%;
   padding: 0 18px;
 
-  background: transparent;
+  background: transparent;       /* slider provides fill */
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -104,43 +130,21 @@ nav a{
   color: #111;
   text-decoration: none;
 
-  transition: background .28s ease, color .28s ease;
-  will-change: background;
+  transition: color .25s ease;
 }
 
-/* HOVER */
-nav a:hover{
-  background: #b8b8b8;
-  color: #000;
-}
-
-/* ACTIVE */
+nav a:hover,
 nav a.active{
-  background: #adadad;
   color: #000;
 }
 
-/* REMOVE focus box */
+/* remove focus/active boxes */
 nav a:focus,
 nav a:focus-visible,
 nav a:active{
   outline: none;
   box-shadow: none;
 }
-
-/* Rounded ends on first/last segment */
-nav ul > a:first-child,
-nav ul > li:first-child > a{
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-}
-
-nav ul > a:last-child,
-nav ul > li:last-child > a{
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-
 
 
 /* ====== GLOBAL SECTION HANDLING ====== */
@@ -3540,17 +3544,20 @@ box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 <header>
 <h1>Bader Suliman</h1>
 <nav>
-<ul>
-<li><a href="#home" class="active">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#education">Education</a></li>
-<li><a href="#experience">Experience</a></li>
-<li><a href="#work">Work</a></li>
-<li><a href="#activities">Activities</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
+  <ul>
+    <span class="nav-slider" aria-hidden="true"></span>
+
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
+
 </header>
 
 <main>
@@ -6385,6 +6392,42 @@ if (window.matchMedia("(min-width: 801px)").matches) {
 }
 </script>
 
+<script>
+(() => {
+  const ul = document.querySelector("nav ul");
+  if (!ul) return;
+
+  const slider = ul.querySelector(".nav-slider");
+  const links = ul.querySelectorAll("a");
+  if (!slider || !links.length) return;
+
+  const moveTo = (a) => {
+    const ulRect = ul.getBoundingClientRect();
+    const r = a.getBoundingClientRect();
+    slider.style.width = r.width + "px";
+    slider.style.transform = `translateX(${r.left - ulRect.left}px)`;
+  };
+
+  // start on active (or first)
+  moveTo(ul.querySelector("a.active") || links[0]);
+
+  // hover/focus moves
+  links.forEach(a => {
+    a.addEventListener("mouseenter", () => moveTo(a));
+    a.addEventListener("focus", () => moveTo(a));
+  });
+
+  // leaving nav returns to active
+  ul.addEventListener("mouseleave", () => {
+    moveTo(ul.querySelector("a.active") || links[0]);
+  });
+
+  // keep correct on resize
+  window.addEventListener("resize", () => {
+    moveTo(ul.querySelector("a.active") || links[0]);
+  });
+})();
+</script>
 
 	
 </body>
