@@ -186,6 +186,44 @@ MOBILE (unchanged behavior, new colors)
     border-radius: 7px;
   }
 }
+/* ===========================
+CUSTOM CURSOR — DOT (DESKTOP)
+=========================== */
+
+/* Hide default cursor */
+@media (hover: hover) and (pointer: fine) {
+  body{
+    cursor: none;
+  }
+}
+
+/* Cursor dot */
+.cursor-dot{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0ea5a2;            /* your turquoise */
+
+  pointer-events: none;
+  z-index: 9999;
+
+  transform: translate(-50%, -50%);
+  transition:
+    transform .12s ease-out,
+    opacity .2s ease,
+    width .15s ease,
+    height .15s ease;
+}
+
+/* Hover state (links, buttons) */
+.cursor-dot.is-hover{
+  width: 14px;
+  height: 14px;
+  opacity: 0.8;
+}
 
 
 /* ====== GLOBAL SECTION HANDLING ====== */
@@ -3580,6 +3618,7 @@ box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 <body>
 
 <div id="scrollProgress"></div>
+<div class="cursor-dot"></div>
 
 <div class="page">
 <header>
@@ -6484,7 +6523,44 @@ if (window.matchMedia("(min-width: 801px)").matches) {
   });
 })();
 </script>
+<script>
+(() => {
+  // desktop only
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
+  const dot = document.querySelector(".cursor-dot");
+  if (!dot) return;
+
+  let x = window.innerWidth / 2;
+  let y = window.innerHeight / 2;
+  let targetX = x;
+  let targetY = y;
+
+  // smooth follow
+  const speed = 0.18;
+
+  function animate(){
+    x += (targetX - x) * speed;
+    y += (targetY - y) * speed;
+    dot.style.transform = `translate(${x}px, ${y}px)`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // track mouse
+  window.addEventListener("mousemove", e => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
+
+  // hover interactions
+  const hoverables = "a, button, input, textarea, [role='button']";
+  document.querySelectorAll(hoverables).forEach(el => {
+    el.addEventListener("mouseenter", () => dot.classList.add("is-hover"));
+    el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
+  });
+})();
+</script>
 
 	
 </body>
