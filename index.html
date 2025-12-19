@@ -222,6 +222,17 @@ CUSTOM CURSOR — DOT (GLOBAL)
   height: 12px;
 }
 
+/* Disable custom cursor on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot{
+    display: none !important;
+  }
+
+  /* Restore normal cursor just in case */
+  *{
+    cursor: auto !important;
+  }
+}
 
 /* ====== GLOBAL SECTION HANDLING ====== */
 main section {
@@ -912,6 +923,19 @@ CLOUD TOOLTIP — FIXED (like before)
 .about-stat.tooltip-open .about-stat-tooltip{
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+/* ===========================
+ABOUT — PHONE: STATS ONE COLUMN
+=========================== */
+@media (max-width: 640px){
+  .about-stats-grid{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .about-stat{
+    width: 100%;
+  }
 }
 
 
