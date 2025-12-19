@@ -1098,55 +1098,66 @@ EDUCATION SVG — HOVER + LOCKED COLORS
 }
 
 /* ===========================
-MAP LABEL — SYNC WITH MAP STATE
-(works with label BEFORE map)
+MAP LABEL — CHIP HOVER (NO UNDERLINE)
 =========================== */
 
-/* base label */
+/* BASE LABEL (static) */
 .map-label{
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;                 /* pill */
   font-weight: 500;
-  transition: color .22s ease, font-weight .22s ease, letter-spacing .22s ease;
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+
+  color: #111827;
+  background: transparent;
+  border: 2px solid transparent;
+
+  transition:
+    background .22s ease,
+    border-color .22s ease,
+    color .22s ease,
+    font-weight .22s ease,
+    letter-spacing .22s ease;
 }
 
-/* FRANCE */
+/* ===========================
+FRANCE
+=========================== */
 .map-column:has(#map-france:hover) .map-label,
 .map-column:has(#map-france.is-locked) .map-label{
-  color: #003b8e;
+  color: #003b8e;                       /* dark */
+  background: rgba(0, 59, 142, 0.12);   /* light */
+  border-color: #003b8e;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
 }
 
-/* JAPAN */
+/* ===========================
+JAPAN
+=========================== */
 .map-column:has(#map-japan:hover) .map-label,
 .map-column:has(#map-japan.is-locked) .map-label{
   color: #bc002d;
+  background: rgba(188, 0, 45, 0.12);
+  border-color: #bc002d;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
 }
 
-/* GERMANY */
+/* ===========================
+GERMANY
+=========================== */
 .map-column:has(#map-germany:hover) .map-label,
 .map-column:has(#map-germany.is-locked) .map-label{
   color: #d4a300;
+  background: rgba(212, 163, 0, 0.14);
+  border-color: #d4a300;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
 }
 
-.map-label::after{
-  content: "";
-  display: block;
-  margin: 6px auto 0;
-  width: 0;
-  height: 3px;
-  background: currentColor;
-  transition: width .22s ease;
-}
-
-.map-column:has(.country-map:hover) .map-label::after,
-.map-column:has(.country-map.is-locked) .map-label::after{
-  width: 48%;
-}
-	
 
 .leaflet-container {
 background: transparent !important;
