@@ -256,11 +256,12 @@ white-space: nowrap;
 }
 
 /* ================================
-CONTACT — FINAL (matches your HTML)
-- Full-width breakout
-- Left: grey Toormix-like field cards
-- Send button: TOP-RIGHT, VERY BIG
-- Right: 2×3 ICON GRID, VERY VERY BIG (fills column)
+CONTACT — FINAL
+- Full width
+- Name+Email same row (desktop)
+- Message row: textarea left, SEND button right
+- Icon grid: HUGE + fills space
+- Icons: grey static -> colored on hover
 ================================ */
 
 /* FULL WIDTH BREAKOUT */
@@ -275,7 +276,6 @@ CONTACT — FINAL (matches your HTML)
   box-sizing: border-box;
 }
 
-/* MAIN LAYOUT */
 .contact-layout{
   width: 100%;
   max-width: none;
@@ -299,46 +299,9 @@ LEFT — FORM
   box-shadow: none;
 }
 
-/* TOP RIGHT SEND BAR */
-.contact-form-header{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 0 0 16px;
-}
+.contact-envelope-form{ width: 100%; }
 
-/* SEND BUTTON — TOP RIGHT, VERY BIG */
-.contact-send-btn{
-  padding: 16px 42px;
-  font-size: 1.1rem;
-  font-weight: 900;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-
-  background: #111;
-  color: #fff;
-
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-
-  box-shadow: 0 14px 28px rgba(0,0,0,0.18);
-  transition: transform .16s ease, opacity .16s ease, box-shadow .16s ease;
-}
-
-.contact-send-btn:hover{
-  transform: translateY(-2px);
-  opacity: 0.94;
-  box-shadow: 0 18px 36px rgba(0,0,0,0.22);
-}
-
-.contact-send-btn:active{
-  transform: translateY(0);
-  opacity: 0.88;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
-}
-
-/* FIELDS GRID */
+/* fields */
 .contact-envelope-fields{
   display: grid;
   grid-template-columns: 1fr;
@@ -346,7 +309,7 @@ LEFT — FORM
   margin-bottom: 14px;
 }
 
-/* Desktop: Name + Email same row, Topic full width */
+/* desktop: name + email same row, topic full width */
 @media (min-width: 900px){
   .contact-envelope-fields{
     grid-template-columns: 1fr 1fr;
@@ -356,7 +319,7 @@ LEFT — FORM
   }
 }
 
-/* FIELD CARD */
+/* field card */
 .contact-envelope-field{
   position: relative;
   background: #eeeeee;
@@ -383,7 +346,6 @@ LEFT — FORM
   transition: box-shadow .20s ease;
 }
 
-/* label */
 .contact-envelope-field label{
   display:block;
   font-size: 1.55rem;
@@ -402,10 +364,9 @@ LEFT — FORM
   background: transparent;
   border: none;
   border-bottom: 2px solid rgba(0,0,0,0.55);
-
   border-radius: 0;
-  padding: 9px 2px 8px;
 
+  padding: 9px 2px 8px;
   font: inherit;
   font-size: 1.02rem;
   color: #111;
@@ -423,7 +384,6 @@ LEFT — FORM
 .contact-envelope-field select{
   appearance: none;
   -webkit-appearance: none;
-
   background-image:
     linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.65) 50%),
     linear-gradient(135deg, rgba(0,0,0,0.65) 50%, transparent 50%);
@@ -432,11 +392,10 @@ LEFT — FORM
     calc(100% - 9px)  calc(1.05em);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
-
   padding-right: 30px;
 }
 
-/* focus underline = accent */
+/* focus underline accent */
 .contact-envelope-field input:focus,
 .contact-envelope-field select:focus,
 .contact-envelope-field textarea:focus{
@@ -456,14 +415,63 @@ LEFT — FORM
   box-shadow: none;
 }
 
-/* message */
+/* ================================
+MESSAGE ROW: textarea left, SEND right
+================================ */
+.contact-message-row{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 16px;
+}
+
+/* textarea block */
 .contact-envelope-message textarea{
-  min-height: 170px;
+  min-height: 240px; /* feels big/intentional */
   resize: vertical;
 }
 
+/* SEND BUTTON — big + aligned to message */
+.contact-send-btn{
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 44px;
+  min-width: 190px;
+
+  background: #111;
+  color: #fff;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+
+  transition: transform .16s ease, opacity .16s ease, box-shadow .16s ease;
+}
+
+.contact-send-btn:hover{
+  transform: translateY(-2px);
+  opacity: 0.95;
+  box-shadow: 0 18px 36px rgba(0,0,0,0.22);
+}
+
+.contact-send-btn:active{
+  transform: translateY(0);
+  opacity: 0.88;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
 /* ================================
-RIGHT — ICON GRID (2×3, HUGE, FILL SPACE)
+RIGHT — ICON GRID (HUGE + fills space)
 ================================ */
 .contact-right{
   min-width: 0;
@@ -474,21 +482,20 @@ RIGHT — ICON GRID (2×3, HUGE, FILL SPACE)
   gap: 18px;
 }
 
-/* ICON GRID fills right column height */
+/* Make it fill the column height so no empty space */
 .contact-icon-grid{
   width: 100%;
-  height: clamp(560px, 66vh, 820px);  /* ✅ BIG and space-filling */
+  height: clamp(680px, 78vh, 980px);  /* ✅ much taller */
   display: grid;
 
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
 
-  gap: clamp(28px, 4.6vh, 60px) clamp(28px, 4.4vw, 86px);
+  gap: clamp(26px, 4.8vh, 68px) clamp(24px, 4.8vw, 96px);
   align-items: center;
   justify-items: center;
 }
 
-/* Each icon link fills its cell */
 .contact-icon{
   width: 100%;
   height: 100%;
@@ -497,30 +504,35 @@ RIGHT — ICON GRID (2×3, HUGE, FILL SPACE)
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
-
   transition: transform .16s ease, opacity .16s ease;
 }
 
-/* ✅ Make your huge SVGs behave: ignore their width/height attrs */
+/* HUGE icons — override your SVG width/height attrs */
 .contact-icon svg{
-  width: min(100%, 170px);
-  height: min(100%, 170px);
-  max-width: 170px;
-  max-height: 170px;
+  width: min(100%, 260px);
+  height: min(100%, 260px);
+  max-width: 260px;
+  max-height: 260px;
   display: block;
+
+  /* ✅ grey static */
+  filter: grayscale(1) saturate(0) contrast(1.05) brightness(1.05);
+  transition: filter .18s ease, transform .18s ease, opacity .18s ease;
 }
 
-/* subtle interaction only (no recolor) */
-.contact-icon:hover{
-  transform: translateY(-2px) scale(1.03);
-  opacity: 0.95;
+/* hover = colored */
+.contact-icon:hover svg{
+  filter: none;
+  transform: scale(1.04);
+  opacity: 0.98;
 }
-.contact-icon:active{
+
+.contact-icon:active svg{
   transform: scale(0.985);
-  opacity: 0.88;
+  opacity: 0.9;
 }
 
-/* COPYRIGHT */
+/* copyright */
 .contact-copyright{
   position: relative;
   background: #eeeeee;
@@ -545,7 +557,7 @@ RESPONSIVE
 @media (max-width: 980px){
   .contact-layout{
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 22px;
   }
 
   .contact-icon-grid{
@@ -557,28 +569,25 @@ RESPONSIVE
   }
 
   .contact-icon svg{
-    max-width: 120px;
-    max-height: 120px;
-    width: 120px;
-    height: 120px;
-  }
-}
-
-@media (max-width: 640px){
-  #contact{
-    padding: 0 12px 22px;
+    max-width: 150px;
+    max-height: 150px;
+    width: 150px;
+    height: 150px;
   }
 
-  .contact-form-header{
-    margin-bottom: 14px;
+  .contact-message-row{
+    grid-template-columns: 1fr;
   }
 
   .contact-send-btn{
     width: 100%;
-    justify-content: center;
-    padding: 14px 22px;
-    font-size: 1rem;
+    min-width: 0;
+    padding: 18px 22px;
   }
+}
+
+@media (max-width: 640px){
+  #contact{ padding: 0 12px 22px; }
 
   .contact-envelope-field{
     border-radius: 12px;
@@ -590,14 +599,14 @@ RESPONSIVE
   }
 
   .contact-envelope-message textarea{
-    min-height: 150px;
+    min-height: 170px;
   }
 
   .contact-icon svg{
-    width: 92px;
-    height: 92px;
-    max-width: 92px;
-    max-height: 92px;
+    width: 110px;
+    height: 110px;
+    max-width: 110px;
+    max-height: 110px;
   }
 }
 
@@ -5344,9 +5353,6 @@ data-caption="Institutional events & conferences">
       <div class="contact-envelope">
 
         <!-- TOP-RIGHT SEND -->
-        <div class="contact-form-header">
-          <button type="submit" form="contact-form" class="contact-send-btn">Send</button>
-        </div>
 
         <form id="contact-form" class="contact-envelope-form">
 
@@ -5372,12 +5378,17 @@ data-caption="Institutional events & conferences">
             </div>
           </div>
 
-          <!-- message -->
-          <div class="contact-envelope-field contact-envelope-message">
-            <label for="contact-message">Message</label>
-            <textarea id="contact-message" name="message" rows="5"
-              placeholder="Write your message here..." required></textarea>
-          </div>
+          <!-- message + send (same row) -->
+<div class="contact-message-row">
+  <div class="contact-envelope-field contact-envelope-message">
+    <label for="contact-message">Message</label>
+    <textarea id="contact-message" name="message" rows="5"
+      placeholder="Write your message here..." required></textarea>
+  </div>
+
+  <button type="submit" form="contact-form" class="contact-send-btn">Send</button>
+</div>
+
 
           <!-- removed bottom send button -->
 
