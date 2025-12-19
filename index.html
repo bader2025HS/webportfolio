@@ -99,9 +99,10 @@ nav ul .nav-slider{
   height: 100%;
   width: 0;
 
-  background: #b8b8b8;           /* hover shade */
-  transform: translateX(0);
+  background: #b8b8b8;
+  border-radius: 8px;          /* ✅ slight rounded angles */
 
+  transform: translateX(0);
   transition:
     transform .35s cubic-bezier(.2,.8,.2,1),
     width .35s cubic-bezier(.2,.8,.2,1);
@@ -109,6 +110,7 @@ nav ul .nav-slider{
   pointer-events: none;
   z-index: 0;
 }
+
 
 /* links above the slider */
 nav a{
