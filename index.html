@@ -58,63 +58,59 @@ nav{
 }
 
 /* the long rounded bar */
+/* ===========================
+NAVBAR — FLAT GREY BAR (sharp, no shadows)
+=========================== */
+
 nav ul{
-  list-style:none;
-  display:flex;
-  align-items:center;
-  gap:0;                      /* no gaps: looks like one bar */
-  flex-wrap:nowrap;
-  padding: 6px;
-  margin: 0;
-
-  background: rgba(235, 235, 235, 0.92);
-  border: 1px solid rgba(0,0,0,0.10);
-  border-radius: 999px;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
-  backdrop-filter: blur(8px);
+  list-style: none;
+  display: inline-flex;          /* keeps it compact */
+  justify-content: center;
+  align-items: center;
+  gap: 0;                        /* no pills gaps */
+  flex-wrap: nowrap;
+  margin-top: 18px;              /* smaller than before */
+  padding: 0;
+  border: 2px solid #bfc6cf;     /* outer frame like screenshot */
+  border-radius: 0;              /* sharp angles */
+  background: #c9c9c9;           /* bar grey */
+  overflow: hidden;              /* makes segments feel “connected” */
 }
 
-/* each link inside the bar */
+/* each item is a segment */
+nav li{ margin: 0; }
+
+/* links: flat, sharp, no shadow */
 nav a{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  padding: 10px 18px;
-  border-radius: 999px;       /* pills */
-  border: 0;                  /* remove your old outline */
-  text-decoration:none;
+  padding: 8px 14px;             /* smaller */
+  border-radius: 0;              /* sharp angles */
+  border: 0;                     /* segments share container border */
+  background: transparent;
 
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 0.9rem;             /* smaller */
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #111;
 
-  transition: background .18s ease, color .18s ease, transform .18s ease;
+  transition: background .18s ease, color .18s ease;
 }
 
-/* hover */
-nav a:hover{
-  background: rgba(0,0,0,0.08);
-  transform: translateY(-1px);
+/* separator lines between items */
+nav li + li a{
+  border-left: 2px solid #bfc6cf;
 }
 
-/* active tab (darker pill like screenshot) */
+/* hover/active: darker grey (NOT turquoise) */
+nav a:hover,
 nav a.active{
-  background: rgba(0,0,0,0.18);
-  color:#111;
+  background: #8f8f8f;
+  color: #0b0b0b;
 }
-
-/* optional: last item (ENG) separated like screenshot */
-nav li:last-child a{
-  margin-left: 8px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.10);
-}
-nav li:last-child a:hover{
-  background: rgba(255,255,255,0.85);
-}
-
 
 /* ====== GLOBAL SECTION HANDLING ====== */
 main section {
