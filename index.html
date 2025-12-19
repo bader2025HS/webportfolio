@@ -256,19 +256,21 @@ white-space: nowrap;
 }
 
 /* ================================
-CONTACT — CLEAN FINAL (FULL REPLACEMENT)
-- Full width section (break out of wrapper)
-- Left: grey field-cards + underline
-- Send: TOP RIGHT, VERY BIG
-- Right: 2×3 icons, VERY VERY BIG (fill space)
+CONTACT — FINAL (matches your HTML)
+- Full-width breakout
+- Left: grey Toormix-like field cards
+- Send button: TOP-RIGHT, VERY BIG
+- Right: 2×3 ICON GRID, VERY VERY BIG (fills column)
 ================================ */
 
 /* FULL WIDTH BREAKOUT */
 #contact{
   margin-top: -20px;
+
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+
   padding: 0 clamp(14px, 3vw, 56px) 34px;
   box-sizing: border-box;
 }
@@ -278,6 +280,7 @@ CONTACT — CLEAN FINAL (FULL REPLACEMENT)
   width: 100%;
   max-width: none;
   margin: 0;
+
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
   gap: clamp(18px, 2.8vw, 42px);
@@ -285,7 +288,7 @@ CONTACT — CLEAN FINAL (FULL REPLACEMENT)
 }
 
 /* ================================
-LEFT — FORM SHELL
+LEFT — FORM
 ================================ */
 .contact-left{ min-width: 0; }
 
@@ -296,7 +299,7 @@ LEFT — FORM SHELL
   box-shadow: none;
 }
 
-/* TOP-RIGHT SEND HEADER */
+/* TOP RIGHT SEND BAR */
 .contact-form-header{
   display: flex;
   justify-content: flex-end;
@@ -304,11 +307,11 @@ LEFT — FORM SHELL
   margin: 0 0 16px;
 }
 
-/* VERY BIG SEND BUTTON (top-right) */
+/* SEND BUTTON — TOP RIGHT, VERY BIG */
 .contact-send-btn{
-  padding: 14px 34px;
-  font-size: 1.05rem;
-  font-weight: 800;
+  padding: 16px 42px;
+  font-size: 1.1rem;
+  font-weight: 900;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 
@@ -319,24 +322,23 @@ LEFT — FORM SHELL
   border-radius: 999px;
   cursor: pointer;
 
-  transition: transform .16s ease, opacity .16s ease;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+  transition: transform .16s ease, opacity .16s ease, box-shadow .16s ease;
 }
 
 .contact-send-btn:hover{
   transform: translateY(-2px);
-  opacity: 0.92;
+  opacity: 0.94;
+  box-shadow: 0 18px 36px rgba(0,0,0,0.22);
 }
 
 .contact-send-btn:active{
   transform: translateY(0);
-  opacity: 0.85;
+  opacity: 0.88;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
 }
 
-/* ================================
-FIELDS LAYOUT
-Name + Email same row on desktop
-Topic spans full width
-================================ */
+/* FIELDS GRID */
 .contact-envelope-fields{
   display: grid;
   grid-template-columns: 1fr;
@@ -344,23 +346,22 @@ Topic spans full width
   margin-bottom: 14px;
 }
 
+/* Desktop: Name + Email same row, Topic full width */
 @media (min-width: 900px){
   .contact-envelope-fields{
     grid-template-columns: 1fr 1fr;
   }
-  /* Topic = 3rd field spans both columns */
   .contact-envelope-fields .contact-envelope-field:nth-child(3){
     grid-column: 1 / -1;
   }
 }
 
-/* ================================
-FIELD CARD (Toormix-ish grey blocks)
-================================ */
+/* FIELD CARD */
 .contact-envelope-field{
   position: relative;
   background: #eeeeee;
   border-radius: 14px;
+
   padding: 16px 18px 14px;
   border: 2px solid transparent;
   overflow: hidden;
@@ -382,6 +383,7 @@ FIELD CARD (Toormix-ish grey blocks)
   transition: box-shadow .20s ease;
 }
 
+/* label */
 .contact-envelope-field label{
   display:block;
   font-size: 1.55rem;
@@ -400,11 +402,14 @@ FIELD CARD (Toormix-ish grey blocks)
   background: transparent;
   border: none;
   border-bottom: 2px solid rgba(0,0,0,0.55);
+
   border-radius: 0;
   padding: 9px 2px 8px;
+
   font: inherit;
   font-size: 1.02rem;
   color: #111;
+
   outline: none;
   transition: border-bottom-color .18s ease;
 }
@@ -418,6 +423,7 @@ FIELD CARD (Toormix-ish grey blocks)
 .contact-envelope-field select{
   appearance: none;
   -webkit-appearance: none;
+
   background-image:
     linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.65) 50%),
     linear-gradient(135deg, rgba(0,0,0,0.65) 50%, transparent 50%);
@@ -426,17 +432,18 @@ FIELD CARD (Toormix-ish grey blocks)
     calc(100% - 9px)  calc(1.05em);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
+
   padding-right: 30px;
 }
 
-/* focus underline = turquoise */
+/* focus underline = accent */
 .contact-envelope-field input:focus,
 .contact-envelope-field select:focus,
 .contact-envelope-field textarea:focus{
   border-bottom-color: var(--accent, #0ea5a2);
 }
 
-/* hover / focus-within: white + turquoise border + lift */
+/* hover/focus-within */
 .contact-envelope-field:hover,
 .contact-envelope-field:focus-within{
   background: #ffffff;
@@ -449,14 +456,14 @@ FIELD CARD (Toormix-ish grey blocks)
   box-shadow: none;
 }
 
-/* Message block */
+/* message */
 .contact-envelope-message textarea{
-  min-height: 160px;
+  min-height: 170px;
   resize: vertical;
 }
 
 /* ================================
-RIGHT — ICONS ONLY (2×3, VERY BIG, FILL SPACE)
+RIGHT — ICON GRID (2×3, HUGE, FILL SPACE)
 ================================ */
 .contact-right{
   min-width: 0;
@@ -464,21 +471,24 @@ RIGHT — ICONS ONLY (2×3, VERY BIG, FILL SPACE)
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
+  gap: 18px;
 }
 
-/* Make the icon grid fill the available right column height */
+/* ICON GRID fills right column height */
 .contact-icon-grid{
   width: 100%;
-  height: clamp(520px, 62vh, 760px); /* ✅ fills space like your screenshot */
+  height: clamp(560px, 66vh, 820px);  /* ✅ BIG and space-filling */
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: clamp(26px, 4.2vh, 54px) clamp(26px, 4vw, 80px);
+
+  gap: clamp(28px, 4.6vh, 60px) clamp(28px, 4.4vw, 86px);
   align-items: center;
   justify-items: center;
 }
 
-/* clickable areas fill each cell */
+/* Each icon link fills its cell */
 .contact-icon{
   width: 100%;
   height: 100%;
@@ -487,40 +497,40 @@ RIGHT — ICONS ONLY (2×3, VERY BIG, FILL SPACE)
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
+
   transition: transform .16s ease, opacity .16s ease;
 }
 
-/* VERY VERY BIG icons */
-.contact-icon svg,
-.contact-icon img{
-  width: clamp(78px, 7vw, 110px);
-  height: clamp(78px, 7vw, 110px);
+/* ✅ Make your huge SVGs behave: ignore their width/height attrs */
+.contact-icon svg{
+  width: min(100%, 170px);
+  height: min(100%, 170px);
+  max-width: 170px;
+  max-height: 170px;
   display: block;
 }
 
-/* subtle interaction only (no color manipulation) */
+/* subtle interaction only (no recolor) */
 .contact-icon:hover{
   transform: translateY(-2px) scale(1.03);
-  opacity: 0.92;
+  opacity: 0.95;
 }
 .contact-icon:active{
-  transform: scale(0.98);
-  opacity: 0.85;
+  transform: scale(0.985);
+  opacity: 0.88;
 }
 
-/* Copyright (kept) */
+/* COPYRIGHT */
 .contact-copyright{
-  margin-top: 18px;
+  position: relative;
   background: #eeeeee;
   border-radius: 14px;
   padding: 12px 14px;
   text-align: center;
   color: rgba(0,0,0,0.75);
   font-size: 0.9rem;
-  position: relative;
   overflow: hidden;
 }
-
 .contact-copyright::after{
   content:"";
   position:absolute;
@@ -542,18 +552,15 @@ RESPONSIVE
     height: auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 28px 24px;
-    padding: 8px 0;
+    gap: 26px 22px;
+    padding: 10px 0;
   }
 
-  .contact-icon svg,
-  .contact-icon img{
-    width: 72px;
-    height: 72px;
-  }
-
-  .contact-form-header{
-    margin-bottom: 14px;
+  .contact-icon svg{
+    max-width: 120px;
+    max-height: 120px;
+    width: 120px;
+    height: 120px;
   }
 }
 
@@ -562,9 +569,15 @@ RESPONSIVE
     padding: 0 12px 22px;
   }
 
+  .contact-form-header{
+    margin-bottom: 14px;
+  }
+
   .contact-send-btn{
-    padding: 12px 26px;
-    font-size: 0.95rem;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 22px;
+    font-size: 1rem;
   }
 
   .contact-envelope-field{
@@ -580,15 +593,17 @@ RESPONSIVE
     min-height: 150px;
   }
 
-  .contact-icon svg,
-  .contact-icon img{
-    width: 62px;
-    height: 62px;
+  .contact-icon svg{
+    width: 92px;
+    height: 92px;
+    max-width: 92px;
+    max-height: 92px;
   }
 }
 
 /* safety */
 html, body{ overflow-x: hidden; }
+
 
 /* ===========================
 ABOUT – LAYOUT
