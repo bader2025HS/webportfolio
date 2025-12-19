@@ -256,22 +256,25 @@ white-space: nowrap;
 }
 
 /* ================================
-CONTACT SECTION — CLEAN SYSTEM (TURQUOISE)
-Full replacement
+CONTACT — FULL WIDTH / LEFT STYLE IS THE MODEL
+- full screen width (no 1050px cap)
+- fields stacked vertically (Name, Email, Topic)
+- right side cards restyled to match left (grey blocks + minimal underline vibe)
 ================================ */
 
 #contact{
   margin-top: -20px;
-  padding-bottom: 10px;
+  padding: 0 24px 28px;
 }
 
-/* Layout: left form, right cards */
+/* full width layout */
 .contact-layout{
-  max-width: 1050px;
-  margin: 0 auto 20px;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
   align-items: start;
 }
 
@@ -281,43 +284,42 @@ LEFT — FORM
 
 .contact-left{ min-width: 0; }
 
-/* form shell */
+/* shell */
 .contact-envelope{
   background: transparent;
   border: none;
+  border-radius: 0;
   padding: 0;
   box-shadow: none;
 }
 
-/* title block (simple + centered) */
+/* header */
 .contact-title{
   margin: 0;
-  text-align: center;
+  text-align: left;
   letter-spacing: 0.20em;
   text-transform: uppercase;
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #111;
 }
 
 .contact-subline{
-  text-align: center;
-  font-size: 0.88rem;
+  text-align: left;
+  font-size: 0.9rem;
   margin: 10px 0 18px;
   color: rgba(0,0,0,0.65);
 }
 
-/* fields grid: 3 in a row on desktop */
-.contact-envelope-form{ width: 100%; }
-
+/* STACKED fields (not 3 across) */
 .contact-envelope-fields{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: 1fr;         /* ✅ stacked */
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
-/* field “card” like reference but cleaner */
+/* field block */
 .contact-envelope-field{
   background: #ededed;
   border-radius: 14px;
@@ -326,7 +328,7 @@ LEFT — FORM
   overflow: hidden;
 }
 
-/* subtle inner line (system) */
+/* subtle inner line like your system but softer */
 .contact-envelope-field::after{
   content:"";
   position:absolute;
@@ -335,10 +337,10 @@ LEFT — FORM
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
 }
 
-/* label = bold title */
+/* label = bold */
 .contact-envelope-field label{
-  display: block;
-  font-size: 2.2rem;
+  display:block;
+  font-size: 2.0rem;
   line-height: 1.0;
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -348,7 +350,7 @@ LEFT — FORM
   opacity: 1;
 }
 
-/* input area: underline only */
+/* underline inputs */
 .contact-envelope-field input,
 .contact-envelope-field select{
   width: 100%;
@@ -356,13 +358,11 @@ LEFT — FORM
   border: none;
   border-bottom: 2px solid rgba(0,0,0,0.65);
   border-radius: 0;
-
   padding: 8px 2px 8px;
   font: inherit;
   font-size: 1.02rem;
   color: #111;
   outline: none;
-
   transition: border-color .18s ease;
 }
 
@@ -370,7 +370,6 @@ LEFT — FORM
   color: rgba(0,0,0,0.45);
 }
 
-/* select arrow spacing */
 .contact-envelope-field select{
   appearance: none;
   -webkit-appearance: none;
@@ -378,20 +377,20 @@ LEFT — FORM
     linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.7) 50%),
     linear-gradient(135deg, rgba(0,0,0,0.7) 50%, transparent 50%);
   background-position:
-    calc(100% - 14px) calc(1.1em),
-    calc(100% - 9px) calc(1.1em);
+    calc(100% - 14px) calc(1.05em),
+    calc(100% - 9px)  calc(1.05em);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
   padding-right: 28px;
 }
 
-/* focus = turquoise underline (text stays black) */
+/* focus accent (underline only) */
 .contact-envelope-field input:focus,
 .contact-envelope-field select:focus{
   border-bottom-color: var(--accent, #0ea5a2);
 }
 
-/* MESSAGE block (full width) */
+/* message block */
 .contact-envelope-message{
   margin-top: 10px;
 }
@@ -400,28 +399,23 @@ LEFT — FORM
   padding: 18px 18px 16px;
 }
 
-/* message label bigger like reference */
 .contact-envelope-message .contact-envelope-field label{
-  font-size: 2.6rem;
+  font-size: 2.4rem;
 }
 
-/* textarea underline + large comfortable area */
 .contact-envelope-field textarea{
   width: 100%;
   background: transparent;
   border: none;
   border-bottom: 2px solid rgba(0,0,0,0.65);
   border-radius: 0;
-
   padding: 10px 2px 10px;
   font: inherit;
   font-size: 1.05rem;
   color: #111;
   outline: none;
-
-  min-height: 210px;
+  min-height: 220px;
   resize: vertical;
-
   transition: border-color .18s ease;
 }
 
@@ -433,30 +427,26 @@ LEFT — FORM
   color: rgba(0,0,0,0.45);
 }
 
-/* send button: minimal capsule */
+/* send button (simple, same grey language) */
 .contact-send-btn{
   margin-top: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 10px 22px;
   border-radius: 999px;
-
   border: 1px solid rgba(0,0,0,0.12);
   background: #ededed;
-
   color: #111;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease, transform .15s ease;
 }
 
 .contact-send-btn:hover{
-  background: #dff3f1;
+  background: #eafaf7;
   border-color: var(--accent, #0ea5a2);
   transform: translateY(-1px);
 }
@@ -466,108 +456,113 @@ LEFT — FORM
 }
 
 /* ================================
-RIGHT — INFO GRID (match your system)
+RIGHT — INFO GRID (MATCH LEFT GREY MODEL)
 ================================ */
 
 .contact-right{
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* 2 columns */
+/* grid */
 .contact-info-grid{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
-/* cards: crisp, consistent */
+/* cards become grey blocks like left */
 .contact-info-card{
   position: relative;
-  background: #f5f8ff;
-  border-radius: 0;
-  border: 2.5px solid transparent;
-  padding: 16px 14px 14px;
-  text-align: center;
+  background: #ededed;                 /* ✅ same as left blocks */
+  border-radius: 14px;                 /* ✅ same rounding */
+  padding: 18px 16px 14px;
+  text-align: left;                    /* looks more “form-like” */
   text-decoration: none;
   color: #111;
-  transition: background .20s ease, border-color .20s ease, transform .18s ease;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
 }
 
+/* same inner line */
 .contact-info-card::after{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
 }
 
-/* hover: white + turquoise frame (text stays black) */
+/* no “lift cards” behavior; keep minimal */
 .contact-info-card:hover{
-  background: #ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-2px);
+  /* optional: subtle accent underline instead of border/box */
 }
-.contact-info-card:hover::after{ box-shadow:none; }
+.contact-info-card:hover::after{}
 
-/* icon */
+/* icon + title like a field label */
 .contact-info-icon{
   display:flex;
   align-items:center;
-  justify-content:center;
+  gap: 10px;
   margin-bottom: 10px;
 }
+
 .contact-info-icon svg{
-  stroke: #1c2d5a;
-  transition: stroke .18s ease;
-}
-.contact-info-card:hover .contact-info-icon svg{
-  stroke: var(--accent, #0ea5a2);
+  stroke: #111;
 }
 
-/* title + text */
+/* title resembles field label */
 .contact-info-card h3{
-  margin: 0 0 6px;
-  font-size: 0.86rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 800;
-}
-.contact-info-card p{
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* text line resembles input line */
+.contact-info-card p{
+  margin: 10px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(0,0,0,0.65);  /* ✅ underline vibe */
+  font-size: 1.0rem;
   color: rgba(0,0,0,0.70);
 }
 
-/* social row */
+/* Social card: keep icons on one row */
 .social-links{
-  display:flex;
-  justify-content:center;
+  display: flex;
   gap: 12px;
-  margin-top: 6px;
-}
-.social-links a{ display:inline-flex; }
-.social-links svg{
-  transition: transform .15s ease, opacity .15s ease;
-}
-.social-links a:hover svg{
-  transform: translateY(-2px);
-  opacity: 0.75;
+  margin-top: 10px;
 }
 
-/* copyright matches the right column cards */
+.social-links a{
+  display: inline-flex;
+  padding: 6px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.10);
+}
+
+.social-links a:hover{
+  border-color: var(--accent, #0ea5a2);
+}
+
+/* Copyright becomes same grey block */
 .contact-copyright{
   position: relative;
-  background: #f5f8ff;
-  border-radius: 0;
-  border: 2.5px solid transparent;
+  background: #ededed;
+  border-radius: 14px;
   padding: 14px 16px;
   text-align: center;
-  font-size: 0.78rem;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
   color: rgba(0,0,0,0.75);
-  transition: background .20s ease, border-color .20s ease, transform .18s ease;
+  font-size: 0.85rem;
 }
 
 .contact-copyright::after{
@@ -575,61 +570,43 @@ RIGHT — INFO GRID (match your system)
   position:absolute;
   inset:0;
   pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
 }
 
-.contact-copyright:hover{
-  background:#ffffff;
-  border-color: var(--accent, #0ea5a2);
-  transform: translateY(-2px);
-}
-.contact-copyright:hover::after{ box-shadow:none; }
-
-.contact-copyright p{ margin:0; }
+.contact-copyright p{ margin: 0; }
 
 /* ================================
 RESPONSIVE
 ================================ */
 
-/* tablet: stack columns, fields become 1 column */
 @media (max-width: 900px){
   .contact-layout{
     grid-template-columns: 1fr;
     gap: 18px;
   }
-
-  .contact-envelope-fields{
-    grid-template-columns: 1fr;
-  }
 }
 
-/* phone: tighter typography + message height */
 @media (max-width: 640px){
-  .contact-title{ font-size: 0.95rem; }
-  .contact-subline{ font-size: 0.86rem; }
+  #contact{ padding: 0 12px 22px; }
 
   .contact-envelope-field{
     border-radius: 12px;
     padding: 16px 14px 12px;
   }
 
-  .contact-envelope-field label{
-    font-size: 1.7rem;
-  }
+  .contact-envelope-field label{ font-size: 1.6rem; }
+  .contact-envelope-message .contact-envelope-field label{ font-size: 2.0rem; }
 
-  .contact-envelope-message .contact-envelope-field label{
-    font-size: 2.0rem;
-  }
-
-  .contact-envelope-field textarea{
-    min-height: 180px;
-  }
+  .contact-envelope-field textarea{ min-height: 180px; }
 
   .contact-info-grid{
     grid-template-columns: 1fr;
   }
-}
 
+  .contact-info-card{
+    border-radius: 12px;
+  }
+}
 
 
 /* ===========================
