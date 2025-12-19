@@ -639,11 +639,12 @@ ABOUT — STATS (UPDATED CARDS)
 /* container stays the same grid you already use */
 .about-stats-grid{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 🔑 1 row, 4 boxes */
+  gap: 14px;
   position: relative;
-  z-index: 3;                 /* keeps this layer above focus chips */
+  z-index: 3;
 }
+
 
 /* CARD */
 .about-stat{
