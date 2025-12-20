@@ -1049,6 +1049,74 @@ PUT LAST
 
 
 
+/* =========================================================
+CONTACT — SOLID TURQUOISE FOCUS HOVER
+NO GRADIENT • NO SHADOW • NO FRAME
+========================================================= */
+
+/* Base (static stays exactly the same) */
+.contact-field,
+.contact-info-card{
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition:
+    background .16s ease,
+    transform .16s ease,
+    color .16s ease;
+}
+
+/* ===== INPUT CARDS ===== */
+.contact-field:hover{
+  background: #0ea5a2 !important;     /* 🔥 solid turquoise */
+  transform: scale(1.02) !important;  /* focus / zoom */
+}
+
+/* ===== INFO CARDS ===== */
+.contact-info-card:hover{
+  background: #0ea5a2 !important;     /* same turquoise */
+  transform: scale(1.025) !important;
+}
+
+/* Text contrast on turquoise */
+.contact-field:hover label,
+.contact-info-card:hover h3{
+  color: #ffffff !important;
+}
+
+.contact-field:hover input,
+.contact-field:hover textarea,
+.contact-field:hover select{
+  color: #ffffff !important;
+  border-bottom-color: rgba(255,255,255,0.85) !important;
+}
+
+.contact-field:hover input::placeholder,
+.contact-field:hover textarea::placeholder{
+  color: rgba(255,255,255,0.7) !important;
+}
+
+.contact-info-card:hover p{
+  color: rgba(255,255,255,0.9) !important;
+  opacity: 1 !important;
+}
+
+/* Icons / SVGs turn white */
+.contact-info-card:hover svg{
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* SEND button — keep strong but subtle */
+.contact-send-btn{
+  box-shadow: none !important;
+  transition: transform .16s ease, background .16s ease;
+}
+
+.contact-send-btn:hover{
+  transform: scale(1.04) !important;
+}
 
 
 
