@@ -259,91 +259,109 @@ white-space: nowrap;
 
 
 /* ===========================
-CONTACT — SINGLE GRID LAYOUT
-(complete replacement CSS)
+CONTACT — FULL WIDTH + BIGGER RIGHT BOXES
++ COMPACT TOP FIELDS (ALL-IN-ONE)
+(Replace your entire Contact CSS with this)
 =========================== */
 
 #contact{
+  width: 100vw;
+  max-width: none !important;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 16px 0;
+  padding: 18px 0;
 }
 
-.contact-wrap{
+/* breaks out of any global max-width container */
+#contact .contact-wrap{
   width: 100%;
-  max-width: 1050px;
-  margin: 0 auto;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: clamp(18px, 4vw, 70px);
+  padding-right: clamp(18px, 4vw, 70px);
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-/* MAIN GRID */
-.contact-grid{
+/* MAIN GRID (3 fields + right column) */
+#contact .contact-grid{
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) 320px;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 420px; /* ✅ bigger right column */
   grid-template-rows: auto auto;
-  gap: 16px;
+  gap: 18px;
   align-items: stretch;
 }
 
-/* GENERIC FIELD */
-.contact-field{
+/* FIELD BASE */
+#contact .contact-field{
   background: #f1f1f1;
   border: 1.5px solid rgba(0,0,0,0.18);
   border-radius: 12px;
-  padding: 14px;
+  padding: 12px 14px; /* ✅ tighter */
   display: flex;
   flex-direction: column;
 }
 
-.contact-field label{
-  font-size: 13px;
+/* TOP ROW FIELDS — compact (fix empty space) */
+#contact .contact-grid > .contact-field:not(.contact-message){
+  min-height: 118px;
+}
+
+/* LABEL */
+#contact .contact-field label{
+  font-size: 12.5px;
   font-weight: 700;
   margin-bottom: 6px;
 }
 
-.contact-field input,
-.contact-field select,
-.contact-field textarea{
+/* INPUTS / SELECT */
+#contact .contact-field input,
+#contact .contact-field select,
+#contact .contact-field textarea{
   border: none;
   outline: none;
   background: transparent;
   font-size: 15px;
-  padding: 6px 0;
-  border-bottom: 2px solid rgba(0,0,0,0.4);
+  padding: 8px 0;
+  border-bottom: 2px solid rgba(0,0,0,0.40);
 }
 
-.contact-field textarea{
+/* MESSAGE — spans 3 columns (left block) */
+#contact .contact-message{
+  grid-column: 1 / 4;
+  grid-row: 2;
+  min-height: 240px;
+}
+
+#contact .contact-field textarea{
   resize: none;
+  border-bottom: 0;              /* textarea doesn't need underline */
+  padding: 8px 0 0;
+  min-height: 170px;
   height: 100%;
 }
 
-/* MESSAGE spans full left block height */
-.contact-message{
-  grid-column: 1 / 4;
-  grid-row: 2 / span 1;
-}
-
 /* RIGHT COLUMN (SEND + SOCIAL) */
-.contact-actions{
+#contact .contact-actions{
   grid-column: 4 / 5;
   grid-row: 1 / span 2;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 /* SEND BUTTON */
-.contact-send-btn{
+#contact .contact-send-btn{
   width: 100%;
-  min-height: 72px;
+  min-height: 92px;              /* ✅ bigger */
   background: #111;
   color: #fff;
   border: none;
   border-radius: 14px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -351,26 +369,24 @@ CONTACT — SINGLE GRID LAYOUT
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.contact-send-btn:hover{
+#contact .contact-send-btn:hover{
   transform: translateY(-2px);
   box-shadow: 0 14px 30px rgba(0,0,0,0.18);
 }
 
-/* ===========================
-SOCIAL BOXES (UNCHANGED STYLE)
-=========================== */
-
-.contact-link-grid{
+/* RIGHT SIDE — TEXT BOX LINKS (NO ICONS) */
+#contact .contact-link-grid{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
-.contact-link-box{
+/* BIGGER BOXES */
+#contact .contact-link-box{
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 104px;
+  min-height: 140px;            /* ✅ bigger */
   text-decoration: none;
 
   background: #e9edf3;
@@ -379,9 +395,9 @@ SOCIAL BOXES (UNCHANGED STYLE)
   border-radius: 12px;
 
   font-weight: 800;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 18px;
 
   transition:
     background .18s ease,
@@ -391,23 +407,31 @@ SOCIAL BOXES (UNCHANGED STYLE)
     box-shadow .18s ease;
 }
 
-.contact-link-box:hover{
+#contact .contact-link-box:hover{
   transform: translateY(-3px);
   box-shadow: 0 14px 30px rgba(0,0,0,0.12);
   color: #fff;
 }
 
-.contact-link-box.is-whatsapp:hover{ background:#25D366; border-color:#25D366; }
-.contact-link-box.is-email:hover{ background:#EA4335; border-color:#EA4335; }
-.contact-link-box.is-cv:hover{ background:#111; border-color:#111; }
-.contact-link-box.is-linkedin:hover{ background:#0A66C2; border-color:#0A66C2; }
-.contact-link-box.is-instagram:hover{
+/* platform colors on hover */
+#contact .contact-link-box.is-whatsapp:hover{ background: #25D366; border-color: #25D366; }
+#contact .contact-link-box.is-email:hover{    background: #EA4335; border-color: #EA4335; }
+#contact .contact-link-box.is-cv:hover{       background: #111111; border-color: #111111; }
+#contact .contact-link-box.is-linkedin:hover{ background: #0A66C2; border-color: #0A66C2; }
+#contact .contact-link-box.is-instagram:hover{
   background: linear-gradient(135deg, #fa8f21, #d82d7e);
+  border-color: rgba(0,0,0,0.15);
 }
-.contact-link-box.is-facebook:hover{ background:#1877F2; border-color:#1877F2; }
+#contact .contact-link-box.is-facebook:hover{ background: #1877F2; border-color: #1877F2; }
+
+/* keyboard */
+#contact .contact-link-box:focus-visible{
+  outline: 3px solid rgba(34,197,235,0.6);
+  outline-offset: 3px;
+}
 
 /* COPYRIGHT */
-.contact-copyright{
+#contact .contact-copyright{
   text-align: center;
   font-size: 12px;
   padding: 8px 12px;
@@ -418,22 +442,36 @@ SOCIAL BOXES (UNCHANGED STYLE)
 /* ===========================
 RESPONSIVE
 =========================== */
+@media (max-width: 980px){
+  #contact{
+    align-items: flex-start;
+    padding: 18px 0 26px;
+  }
 
-@media (max-width: 900px){
-  .contact-grid{
+  #contact .contact-grid{
     grid-template-columns: 1fr;
   }
 
-  .contact-message,
-  .contact-actions{
+  #contact .contact-message,
+  #contact .contact-actions{
     grid-column: auto;
     grid-row: auto;
   }
 
-  .contact-link-grid{
+  #contact .contact-link-grid{
     grid-template-columns: repeat(2, minmax(0,1fr));
   }
+
+  #contact .contact-link-box{
+    min-height: 100px;
+    font-size: 16px;
+  }
+
+  #contact .contact-send-btn{
+    min-height: 72px;
+  }
 }
+
 
 
 
