@@ -187,6 +187,27 @@ MOBILE (unchanged behavior, new colors)
     border-radius: 7px;
   }
 }
+
+/* ===========================
+NAVBAR — FULL BLEED LIKE SKILLS (MOBILE)
+=========================== */
+@media (max-width: 768px) {
+
+  nav ul {
+    width: 100vw;
+    max-width: 100vw;
+
+    /* same breakout trick as Skills */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    /* IMPORTANT */
+    box-sizing: border-box;
+    padding-left: 16px;   /* MUST match skills-terminal padding */
+    padding-right: 16px;
+  }
+}
+
 /* ===========================
 CUSTOM CURSOR — DOT (GLOBAL)
 =========================== */
