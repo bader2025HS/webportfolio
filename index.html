@@ -709,6 +709,33 @@ CONTACT — NARROWER MESSAGE FIELD
 }
 
 
+/* =========================================
+CONTACT — FORCE LAYOUT (DESKTOP)
+Row1: name / email / topic
+Row2: message (span 2 cols) / actions (col 3)
+========================================= */
+@media (min-width: 900px){
+
+  .contact-grid{
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-areas:
+      "name email topic"
+      "message message actions" !important;
+    gap: clamp(14px, 2vw, 22px) !important;
+    align-items: start !important;
+  }
+
+  .contact-name{ grid-area: name !important; }
+  .contact-email{ grid-area: email !important; }
+  .contact-topic{ grid-area: topic !important; }
+
+  /* ✅ THIS is what makes Message end exactly at “middle of email box” */
+  .contact-message{ grid-area: message !important; }
+
+  /* right side (send + cards) under the topic column */
+  .contact-actions{ grid-area: actions !important; }
+}
 
 
 
