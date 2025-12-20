@@ -209,6 +209,53 @@ NAVBAR — FULL BLEED LIKE SKILLS (MOBILE)
 }
 
 /* ===========================
+NAV — MOBILE: FULL-WIDTH + HORIZONTAL SCROLL (CLEAN)
+=========================== */
+@media (max-width: 768px){
+
+  /* full-bleed like Skills */
+  nav ul{
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    box-sizing: border-box;
+    padding: 10px 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* ✅ make it scroll instead of cutting off */
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+
+    /* ✅ hide scrollbar */
+    scrollbar-width: none;          /* Firefox */
+  }
+  nav ul::-webkit-scrollbar{ display:none; } /* iOS/Chrome */
+
+  /* keep items as pills, never shrink */
+  nav ul li{
+    flex: 0 0 auto;
+  }
+  nav ul li a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  /* your slider often breaks with scrolling — disable it on mobile */
+  nav ul .nav-slider{
+    display: none !important;
+  }
+}
+
+/* ===========================
 CUSTOM CURSOR — DOT (GLOBAL)
 =========================== */
 
