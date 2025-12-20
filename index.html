@@ -911,6 +911,107 @@ NO HOVER • NO SHADOW
 }
 
 
+/* =========================================================
+CONTACT — MATCH SKILLS CARD SYSTEM (1:1)
+Blue static • inner thin line • hover white + thick turquoise
+========================================================= */
+
+/* ======================
+BASE CARDS (FIELDS + INFO)
+====================== */
+
+/* Contact input cards */
+.contact-field,
+.contact-info-card{
+  background: var(--bg1, #f5f8ff);     /* same blue as skills */
+  border: 2.5px solid transparent;     /* reserve hover border */
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+  box-sizing: border-box;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease,
+    transform .18s ease;
+}
+
+/* Inner thin static frame */
+.contact-field::after,
+.contact-info-card::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.18);
+}
+
+/* ======================
+HOVER (EXACTLY LIKE SKILLS)
+====================== */
+
+.contact-field:hover,
+.contact-info-card:hover{
+  background: #ffffff;
+  border-color: #0ea5a2;              /* turquoise */
+  transform: translateY(-3px);
+}
+
+/* Hide inner thin line when real border appears */
+.contact-field:hover::after,
+.contact-info-card:hover::after{
+  box-shadow: none;
+}
+
+/* ======================
+TEXT BEHAVIOR (UNCHANGED)
+====================== */
+
+.contact-field label,
+.contact-info-card h3{
+  color: #111;
+}
+
+.contact-info-card p{
+  color: #555;
+}
+
+/* ======================
+SEND BUTTON — SYSTEM STYLE
+====================== */
+
+.contact-send-btn{
+  background: #111;
+  border: 2.5px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease,
+    transform .18s ease;
+}
+
+/* inner thin line for send */
+.contact-send-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
+}
+
+/* hover like skills */
+.contact-send-btn:hover{
+  background: #111;
+  border-color: #0ea5a2;
+  transform: translateY(-3px);
+}
+
+.contact-send-btn:hover::after{
+  box-shadow: none;
+}
 
 
 
