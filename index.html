@@ -48,6 +48,10 @@ font-size: 3rem;
 text-transform: uppercase;
 letter-spacing: 0.05em;
 }
+/* ===========================
+NAVBAR — CLEAN SYSTEM PILLS
+(Structure unchanged)
+=========================== */
 
 /* ===========================
 NAVBAR — SLIDING HIGHLIGHT (TURQUOISE)
@@ -254,257 +258,6 @@ transition: opacity 0.12s ease;
 z-index: 99999;
 white-space: nowrap;
 }
-
-
-
-
-/* ===========================
-CONTACT — FULL WIDTH + BIGGER RIGHT BOXES
-+ COMPACT TOP FIELDS (ALL-IN-ONE)
-(Replace your entire Contact CSS with this)
-=========================== */
-
-#contact{
-  width: 100vw;
-  max-width: none !important;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 18px 0;
-}
-
-/* breaks out of any global max-width container */
-#contact .contact-wrap{
-  width: 100%;
-  max-width: none !important;
-  margin: 0 !important;
-  padding-left: clamp(18px, 4vw, 70px);
-  padding-right: clamp(18px, 4vw, 70px);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* MAIN GRID (3 fields + right column) */
-#contact .contact-grid{
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) 420px; /* ✅ bigger right column */
-  grid-template-rows: auto auto;
-  gap: 18px;
-  align-items: stretch;
-}
-
-/* FIELD BASE */
-#contact .contact-field{
-  background: #f1f1f1;
-  border: 1.5px solid rgba(0,0,0,0.18);
-  border-radius: 12px;
-  padding: 12px 14px; /* ✅ tighter */
-  display: flex;
-  flex-direction: column;
-}
-
-/* TOP ROW FIELDS — compact (fix empty space) */
-#contact .contact-grid > .contact-field:not(.contact-message){
-  min-height: 118px;
-}
-
-/* LABEL */
-#contact .contact-field label{
-  font-size: 12.5px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-/* INPUTS / SELECT */
-#contact .contact-field input,
-#contact .contact-field select,
-#contact .contact-field textarea{
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 15px;
-  padding: 8px 0;
-  border-bottom: 2px solid rgba(0,0,0,0.40);
-}
-
-/* MESSAGE — spans 3 columns (left block) */
-#contact .contact-message{
-  grid-column: 1 / 4;
-  grid-row: 2;
-  min-height: 240px;
-}
-
-#contact .contact-field textarea{
-  resize: none;
-  border-bottom: 0;              /* textarea doesn't need underline */
-  padding: 8px 0 0;
-  min-height: 170px;
-  height: 100%;
-}
-
-/* RIGHT COLUMN (SEND + SOCIAL) */
-#contact .contact-actions{
-  grid-column: 4 / 5;
-  grid-row: 1 / span 2;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* SEND BUTTON */
-#contact .contact-send-btn{
-  width: 100%;
-  min-height: 92px;              /* ✅ bigger */
-  background: #111;
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-
-#contact .contact-send-btn:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.18);
-}
-
-/* RIGHT SIDE — TEXT BOX LINKS (NO ICONS) */
-#contact .contact-link-grid{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-/* BIGGER BOXES */
-#contact .contact-link-box{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 140px;            /* ✅ bigger */
-  text-decoration: none;
-
-  background: #e9edf3;
-  color: #111;
-  border: 2px solid rgba(0,0,0,0.14);
-  border-radius: 12px;
-
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 18px;
-
-  transition:
-    background .18s ease,
-    color .18s ease,
-    border-color .18s ease,
-    transform .18s ease,
-    box-shadow .18s ease;
-}
-
-#contact .contact-link-box:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
-  color: #fff;
-}
-
-/* platform colors on hover */
-#contact .contact-link-box.is-whatsapp:hover{ background: #25D366; border-color: #25D366; }
-#contact .contact-link-box.is-email:hover{    background: #EA4335; border-color: #EA4335; }
-#contact .contact-link-box.is-cv:hover{       background: #111111; border-color: #111111; }
-#contact .contact-link-box.is-linkedin:hover{ background: #0A66C2; border-color: #0A66C2; }
-#contact .contact-link-box.is-instagram:hover{
-  background: linear-gradient(135deg, #fa8f21, #d82d7e);
-  border-color: rgba(0,0,0,0.15);
-}
-#contact .contact-link-box.is-facebook:hover{ background: #1877F2; border-color: #1877F2; }
-
-/* keyboard */
-#contact .contact-link-box:focus-visible{
-  outline: 3px solid rgba(34,197,235,0.6);
-  outline-offset: 3px;
-}
-
-/* COPYRIGHT */
-#contact .contact-copyright{
-  text-align: center;
-  font-size: 12px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.04);
-}
-
-/* ===========================
-RESPONSIVE
-=========================== */
-@media (max-width: 980px){
-  #contact{
-    align-items: flex-start;
-    padding: 18px 0 26px;
-  }
-
-  #contact .contact-grid{
-    grid-template-columns: 1fr;
-  }
-
-  #contact .contact-message,
-  #contact .contact-actions{
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  #contact .contact-link-grid{
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
-
-  #contact .contact-link-box{
-    min-height: 100px;
-    font-size: 16px;
-  }
-
-  #contact .contact-send-btn{
-    min-height: 72px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 
 /* ===========================
 ABOUT – LAYOUT
@@ -3335,6 +3088,395 @@ transform: scale(1.05);
 }
 
 
+/* ================================
+CONTACT SECTION — TURQUOISE VERSION
+================================ */
+
+#contact {
+  margin-top: -20px;
+}
+
+/* Layout: left form, right info grid */
+.contact-layout {
+  max-width: 1050px;
+  margin: 0 auto 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* LEFT SIDE – CONTACT FORM ("envelope") */
+
+.contact-left { min-width: 0; }
+
+.contact-envelope {
+  background: var(--bg1, #f5f8ff);
+  border: 2.5px solid transparent; /* reserve space */
+  border-radius: 0;
+  padding: 16px 32px 15px;
+  text-align: left;
+  position: relative;
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+.contact-envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+}
+
+.contact-envelope:hover {
+  background: #ffffff;
+  border-color: var(--accent, #0ea5a2);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
+
+.contact-envelope:hover::after {
+  box-shadow: none;
+}
+
+.contact-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.contact-subline {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.contact-envelope:hover .contact-title {
+  color: var(--accent, #0ea5a2); /* ✅ turquoise */
+}
+.contact-envelope:hover .contact-subline {
+  color: var(--accent, #0ea5a2);
+  opacity: 1;
+}
+
+/* 3 fields (name / email / topic) in one row on desktop */
+
+.contact-envelope-form { width: 100%; }
+
+.contact-envelope-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.contact-envelope-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.contact-envelope-field label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.contact-envelope-field input,
+.contact-envelope-field select,
+.contact-envelope-field textarea {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+}
+
+.contact-envelope-field input:focus,
+.contact-envelope-field select:focus,
+.contact-envelope-field textarea:focus {
+  border-color: var(--accent, #0ea5a2);                 /* ✅ turquoise */
+  box-shadow: 0 0 0 2px rgba(14, 165, 162, 0.18);       /* ✅ turquoise aura */
+  transform: translateY(-1px);
+}
+
+.contact-envelope-message { margin-top: 4px; }
+
+.contact-envelope-message textarea {
+  resize: vertical;
+  min-height: 160px;
+}
+
+/* Send button */
+.contact-send-btn {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 26px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+
+  background: var(--bg1, #f5f8ff);
+  color: #1c2d5a;
+
+  transition: background 0.20s ease, border-color 0.20s ease, color 0.20s ease,
+              box-shadow 0.20s ease, transform 0.15s ease;
+}
+
+/* Hover = turquoise accent */
+.contact-send-btn:hover {
+  background: #ffffff;
+  border-color: var(--accent, #0ea5a2); /* ✅ turquoise border */
+  color: var(--accent, #0ea5a2);        /* ✅ turquoise text */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Active press animation */
+.contact-send-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.contact-envelope:hover .contact-send-btn {
+  background: var(--accent, #0ea5a2); /* ✅ turquoise background */
+  color: white;
+  border-color: var(--accent, #0ea5a2);
+  transform: translateY(-2px);
+}
+
+/* RIGHT SIDE – 2×2 INFO GRID + COPYRIGHT */
+
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+/* 2×2 (now 3 rows) grid of cards */
+.contact-info-grid {
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Info card: slightly smaller */
+.contact-info-card {
+  position: relative;
+  padding: 14px 14px 12px;
+  border-radius: 0;
+
+  background: var(--bg1, #f5f8ff);
+
+  /* reserve hover border space */
+  border: 2.5px solid transparent;
+
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+/* inner crisp 1px line */
+.contact-info-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+}
+
+/* hover = same behavior as Activities */
+.contact-info-card:hover {
+  background: #ffffff;
+  border-color: var(--accent, #0ea5a2);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
+
+/* hide inner line when real border appears */
+.contact-info-card:hover::after {
+  box-shadow: none;
+}
+
+
+/* Title */
+.contact-info-card h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 4px;
+}
+
+/* Text */
+.contact-info-card p {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ICON COLOR FIX: always dark blue */
+.contact-info-icon svg {
+  stroke: #1c2d5a;
+  transition: stroke 0.20s ease;
+}
+
+/* ICON OPTIONAL HOVER EFFECT */
+.contact-info-card:hover .contact-info-icon svg {
+  stroke: var(--accent, #0ea5a2); /* ✅ turquoise on hover */
+}
+
+/* Icon centered above title */
+.contact-info-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.contact-info-icon svg { display: block; }
+
+/* Card title + text */
+.contact-info-card h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 6px;
+}
+
+.contact-info-card p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.contact-info-card a { color: inherit; }
+
+/* Social icons row */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.social-links a { display: inline-flex; }
+
+.social-links svg {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.social-links a:hover svg {
+  transform: translateY(-2px);
+  opacity: 0.7;
+}
+
+/* Copyright box styled like a card */
+.contact-copyright {
+  position: relative;
+  padding: 14px 16px;
+  border-radius: 0;
+
+  background: var(--bg1, #f5f8ff);
+  border: 2.5px solid transparent;
+
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: #1c2d5a;
+
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+.contact-copyright::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+}
+
+.contact-copyright:hover {
+  background:#ffffff;
+  border-color: var(--accent, #0ea5a2);
+  color: var(--accent, #0ea5a2);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
+
+.contact-copyright:hover::after {
+  box-shadow: none;
+}
+
+.contact-copyright p { margin: 0; }
+
+/* ================================
+RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-envelope-fields { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .contact-info-grid { grid-template-columns: 1fr; }
+}
+
+/* shared lift behavior (same as skills cards) */
+.contact-envelope,
+.contact-info-card,
+.contact-copyright{
+  transition:
+    background 0.20s ease,
+    border-color 0.20s ease,
+    color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.18s ease;
+}
+
+/* lift on hover */
+.contact-envelope:hover,
+.contact-info-card:hover,
+.contact-copyright:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(0,0,0,.14);
+}
 
 /* ===========================
 GALLERY (HOME)
@@ -5109,6 +5251,8 @@ data-panel-color="#be123c">
 
   <div class="activity-box">
     <div class="activity-icon" aria-hidden="true">
+
+<?xml version="1.0" encoding="iso-8859-1"?>
 <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 512 512" xml:space="preserve">
 <g>
@@ -5238,67 +5382,184 @@ data-caption="Institutional events & conferences">
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-wrap">
+<div class="contact-layout">
 
-    <!-- ROW 1: NAME / EMAIL / TOPIC -->
-    <form id="contact-form" class="contact-grid" action="#" method="post">
-      <!-- name -->
-      <div class="contact-field">
-        <label for="contact-name">What's your name?</label>
-        <input id="contact-name" name="name" type="text" placeholder="Your name" required />
-      </div>
+<!-- LEFT : FORM -->
+<div class="contact-left">
+<div class="contact-envelope">
+<h2 class="contact-title">Get in touch</h2>
+<p class="contact-subline">I'll get back to you as soon as I can.</p>
 
-      <!-- email -->
-      <div class="contact-field">
-        <label for="contact-email">Enter your email</label>
-        <input id="contact-email" name="email" type="email" placeholder="you@example.com" required />
-      </div>
 
-      <!-- topic -->
-      <div class="contact-field">
-        <label for="contact-topic">How can I help you?</label>
-        <select id="contact-topic" name="topic" required>
-          <option value="" selected disabled>Select</option>
-          <option>Other</option>
-          <option>Internship / Work</option>
-          <option>Collaboration</option>
-          <option>Talk / Event</option>
-        </select>
-      </div>
+<form class="contact-envelope-form">
 
-      <!-- ROW 2: MESSAGE (spans 2 rows total height) -->
-      <div class="contact-field contact-message">
-        <label for="contact-message">Message</label>
-        <textarea
-          id="contact-message"
-          name="message"
-          placeholder="Write your message here..."
-          required></textarea>
-      </div>
+<!-- three fields on one row -->
+<div class="contact-envelope-fields">
+<div class="contact-envelope-field">
+<label for="contact-name">Name</label>
+<input id="contact-name" name="name" type="text"
+placeholder="Your name" required />
+</div>
 
-      <!-- RIGHT COLUMN: SEND + SOCIAL BOXES -->
-      <div class="contact-actions">
-        <button type="submit" class="contact-send-btn">Send</button>
+<div class="contact-envelope-field">
+<label for="contact-email">E-mail</label>
+<input id="contact-email" name="email" type="email"
+placeholder="you@example.com" required />
+</div>
 
-        <div class="contact-link-grid">
-          <a class="contact-link-box is-whatsapp" href="https://wa.me/XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="contact-link-box is-email" href="mailto:bader.suliman@email.com">Email</a>
-          <a class="contact-link-box is-cv" href="assets/Bader_Suliman_CV.pdf" target="_blank" rel="noopener">CV</a>
-          <a class="contact-link-box is-linkedin" href="https://www.linkedin.com/in/your-link" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="contact-link-box is-instagram" href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-          <a class="contact-link-box is-facebook" href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        </div>
-      </div>
-    </form>
+<div class="contact-envelope-field">
+<label for="contact-topic">Topic</label>
+<select id="contact-topic" name="topic">
+<option>Other</option>
+<option>Internship / Work</option>
+<option>Collaboration</option>
+<option>Talk / Event</option>
+</select>
+</div>
+</div>
 
-    <div class="contact-copyright glass">
-      © 2025 Bader Suliman — All rights reserved.
-    </div>
+<!-- message -->
+<div class="contact-envelope-field contact-envelope-message">
+<label for="contact-message">Message</label>
+<textarea id="contact-message" name="message" rows="5"
+placeholder="Write your message here..." required></textarea>
+</div>
 
-  </div>
+<button type="submit" class="contact-send-btn">Send</button>
+</form>
+</div>
+</div>
+
+<!-- RIGHT : 2x2 INFO GRID + COPYRIGHT -->
+<aside class="contact-right">
+<div class="contact-info-grid">
+
+<!-- EMAIL -->
+<a class="contact-info-card" href="mailto:bader.suliman@email.com">
+<div class="contact-info-icon">
+<!-- email icon -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="5" width="18" height="14" rx="2"></rect>
+<polyline points="3 7 12 13 21 7"></polyline>
+</svg>
+</div>
+<h3>Email</h3>
+<p>bader.suliman@email.com</p>
+</a>
+
+<!-- CV -->
+<a class="contact-info-card" href="assets/Bader_Suliman_CV.pdf" target="_blank">
+<div class="contact-info-icon">
+<!-- document icon -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+</svg>
+</div>
+<h3>Download CV</h3>
+<p>Open my latest résumé.</p>
+</a>
+
+<!-- SOCIAL -->
+<div class="contact-info-card">
+<div class="contact-info-icon">
+<!-- globe / network icon -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" y1="12" x2="22" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"></path>
+<path d="M12 2a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10"></path>
+</svg>
+</div>
+<h3>Social</h3>
+
+<p class="social-links">
+<!-- LinkedIn -->
+<a href="https://www.linkedin.com/in/your-link" target="_blank">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="2" y="2" width="20" height="20" rx="3"></rect>
+<line x1="8" y1="11" x2="8" y2="16"></line>
+<line x1="8" y1="8" x2="8" y2="8"></line>
+<path d="M12 16v-5a3 3 0 0 1 6 0v5"></path>
+</svg>
+</a>
+
+<!-- Instagram -->
+<a href="https://instagram.com" target="_blank">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="2" y="2" width="20" height="20" rx="5"></rect>
+<circle cx="12" cy="12" r="4"></circle>
+<line x1="17" y1="7" x2="17" y2="7"></line>
+</svg>
+</a>
+
+<!-- Facebook -->
+<a href="https://facebook.com" target="_blank">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v9h4v-9h3l1-4h-4V6a1 1 0 0 1 1-1h3z"></path>
+</svg>
+</a>
+</p>
+</div>
+
+<!-- LOCATION -->
+<div class="contact-info-card">
+<div class="contact-info-icon">
+<!-- location pin icon -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+</div>
+<h3>Location</h3>
+<p>Paris, France</p>
+</div>
+
+<!-- BOOK A MEETING -->
+<a class="contact-info-card" href="https://calendly.com/your-link" target="_blank">
+<div class="contact-info-icon">
+<!-- calendar-plus icon -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="4" width="18" height="18" rx="2"></rect>
+<line x1="16" y1="2" x2="16" y2="6"></line>
+<line x1="8" y1="2" x2="8" y2="6"></line>
+<line x1="3" y1="10" x2="21" y2="10"></line>
+<line x1="12" y1="14" x2="12" y2="20"></line>
+<line x1="9" y1="17" x2="15" y2="17"></line>
+</svg>
+</div>
+<h3>Book a Meeting</h3>
+<p>Schedule a call with me</p>
+</a>
+
+<!-- WHATSAPP -->
+<a class="contact-info-card" href="https://wa.me/XXXXXXXXXX" target="_blank">
+<div class="contact-info-icon">
+<!-- WhatsApp icon -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M3 20l1.2-4A8 8 0 1 1 20 8a8 8 0 0 1-13.5 8.5L3 20z"></path>
+<path d="M15.5 14.5c-1-.3-2.5-1.1-3.5-2.1s-1.8-2.4-2.1-3.5"></path>
+</svg>
+</div>
+<h3>WhatsApp</h3>
+<p>Message me directly</p>
+</a>
+
+
+</div>
+
+<!-- COPYRIGHT -->
+<div class="contact-copyright glass">
+© 2025 Bader Suliman — All rights reserved.
+</div>
+
+</aside>
+
+
+</div>
 </section>
-
-
 
 
 
@@ -6324,4 +6585,4 @@ if (window.matchMedia("(min-width: 801px)").matches) {
 
 	
 </body>
-</html>
+</html>A
