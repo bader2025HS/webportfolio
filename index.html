@@ -267,28 +267,45 @@ white-space: nowrap;
 
 
 
-
-
 /* =========================================================
-CONTACT — TOORMIX-INSPIRED (YOUR CONTENT, SAME STRUCTURE)
-Works with the HTML I gave you:
-.contact-wrap > form.contact-form > .contact-grid
-(contact-name / contact-email / contact-topic / contact-message / contact-actions)
+CONTACT — CLEAN TOORMIX-ISH (MATCHES YOUR HTML EXACTLY)
+HTML used:
+#contact > .contact-wrap > form.contact-form > .contact-grid
+.contact-field.contact-name/.contact-email/.contact-topic/.contact-message
+aside.contact-actions > button.contact-send-btn + .contact-info-grid
 ========================================================= */
 
-/* wrapper (keeps it wide but inside screen) */
-.contact-wrap{
-  width: 100%;
-  max-width: 1900px;
-  margin: 0 auto;
-  padding: 0 clamp(16px, 3vw, 56px);
+#contact{
+  margin-top: -20px;
+  padding: 0 clamp(16px, 3vw, 64px) 40px;
   box-sizing: border-box;
 }
 
-/* main grid */
+/* Optional: break out of any centered wrapper */
+#contact{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.contact-wrap{
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.contact-form{ width: 100%; }
+
+/* =========================
+GRID LAYOUT
+Row 1: name / email / topic / actions
+Row 2: message (span 3) / actions
+========================= */
 .contact-grid{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(340px, 1.15fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(320px, 0.95fr);
   grid-template-areas:
     "name email topic actions"
     "message message message actions";
@@ -296,65 +313,67 @@ Works with the HTML I gave you:
   align-items: start;
 }
 
-/* area placement */
 .contact-name{ grid-area: name; }
 .contact-email{ grid-area: email; }
 .contact-topic{ grid-area: topic; }
 .contact-message{ grid-area: message; }
-.contact-actions{ grid-area: actions; min-width: 0; }
+.contact-actions{ grid-area: actions; }
 
-/* -----------------------------
-FIELD CARD (big label + underline input)
------------------------------ */
+/* =========================
+FIELD CARDS
+========================= */
 .contact-field{
   background: #ededed;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
-  padding: clamp(18px, 2.2vw, 28px);
+  padding: clamp(14px, 1.6vw, 20px);
   box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   min-width: 0;
 
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
 }
+
 .contact-field:hover{
+  background: #fff;
+  border-color: rgba(14,165,162,0.55);
   transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(0,0,0,.10);
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
 }
 
-/* big label like reference */
+/* Titles: less bold */
 .contact-field label{
-  font-family: Impact, "Arial Black", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.02;
-  text-transform: none;
-
-  font-size: clamp(26px, 2.4vw, 46px);
   margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 650;                  /* ✅ softer */
+  letter-spacing: -0.01em;
+  line-height: 1.05;
   color: #111;
+  font-size: clamp(20px, 1.7vw, 30px);
 }
 
-/* underline inputs */
+/* Underline inputs */
 .contact-field input,
 .contact-field select,
 .contact-field textarea{
+  width: 100%;
   background: transparent;
   border: 0;
   outline: none;
 
-  border-bottom: 2px solid rgba(0,0,0,0.75);
+  border-bottom: 2px solid rgba(0,0,0,0.70);
   border-radius: 0;
 
-  padding: 10px 0 8px;
+  padding: 8px 0 7px;
   font: inherit;
-  font-size: clamp(16px, 1.1vw, 19px);
+  font-size: clamp(15px, 1.05vw, 18px);
   color: #111;
-
   box-sizing: border-box;
+
+  transition: border-color .18s ease;
 }
 
 .contact-field input::placeholder,
@@ -372,143 +391,149 @@ FIELD CARD (big label + underline input)
     linear-gradient(45deg, transparent 50%, rgba(0,0,0,.7) 50%),
     linear-gradient(135deg, rgba(0,0,0,.7) 50%, transparent 50%);
   background-position:
-    calc(100% - 20px) 62%,
-    calc(100% - 12px) 62%;
+    calc(100% - 20px) 60%,
+    calc(100% - 12px) 60%;
   background-size: 8px 8px, 8px 8px;
   background-repeat: no-repeat;
 }
 
-/* focus underline accent */
 .contact-field input:focus,
 .contact-field select:focus,
 .contact-field textarea:focus{
   border-bottom-color: var(--accent, #0ea5a2);
 }
 
-/* message block */
+/* =========================
+MESSAGE — SMALLER (so actions aligns)
+========================= */
 .contact-message{
-  min-height: 380px;
-}
-.contact-message textarea{
-  border-bottom: 0;
-  resize: none;
-  min-height: 220px;
-  padding-top: 6px;
+  min-height: 260px;                 /* ✅ reduced */
 }
 
-/* -----------------------------
-RIGHT COLUMN: SEND + INFO GRID
------------------------------ */
+.contact-message textarea{
+  min-height: 140px;                 /* ✅ reduced */
+  max-height: 200px;
+  resize: vertical;
+  border-bottom: 2px solid rgba(0,0,0,0.70);
+}
+
+/* =========================
+RIGHT COLUMN (SEND + 2x2 CARDS)
+========================= */
 .contact-actions{
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 2vw, 18px);
+  gap: clamp(12px, 1.6vw, 18px);
   min-width: 0;
 }
 
-/* send button (big slab) */
+/* SEND — big slab, but not comically tall */
 .contact-send-btn{
   width: 100%;
-  min-height: 92px;
-
+  min-height: 84px;                  /* ✅ big but controlled */
   border: 0;
   border-radius: 18px;
   background: #111;
   color: #fff;
 
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.26em;
 
   cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
 }
+
 .contact-send-btn:hover{
   transform: translateY(-2px);
   box-shadow: 0 18px 44px rgba(0,0,0,.18);
 }
+
 .contact-send-btn:active{
   transform: translateY(0);
-  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  opacity: .92;
 }
 
-/* info cards grid */
+/* Cards grid */
 .contact-info-grid{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(12px, 1.6vw, 18px);
+  gap: clamp(12px, 1.5vw, 18px);
   min-width: 0;
 }
 
-/* info card style */
+/* Card */
 .contact-info-card{
   background: #ededed;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
-  padding: 18px;
+  padding: 16px;
   box-sizing: border-box;
 
   text-decoration: none;
   color: #111;
 
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-.contact-info-card:visited{ color: #111; }
-.contact-info-card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(0,0,0,.10);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
 }
 
-/* icon + headings */
+.contact-info-card:visited{ color: #111; }
+
+.contact-info-card:hover{
+  background: #fff;
+  border-color: rgba(14,165,162,0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.10);
+}
+
+/* Icon + text */
 .contact-info-icon{
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 10px;
 }
-.contact-info-icon svg{
-  stroke: rgba(0,0,0,0.75);
-}
 
 .contact-info-card h3{
   margin: 0 0 6px;
-  font-size: 0.95rem;
-  font-weight: 900;
+  font-size: 0.92rem;
+  font-weight: 700;                  /* ✅ softer than 900 */
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
 }
 
 .contact-info-card p{
   margin: 0;
   font-size: 0.95rem;
-  opacity: .75;
+  opacity: .78;
 }
 
-/* social row inside the social card */
+/* Social row */
 .social-links{
   display: flex;
   gap: 12px;
   margin: 8px 0 0;
   align-items: center;
 }
+
 .social-links a{
   display: inline-flex;
   text-decoration: none;
 }
-.social-links a:visited{ color: inherit; }
+
 .social-links svg{
-  opacity: .75;
+  opacity: .8;
   transition: transform .15s ease, opacity .15s ease;
 }
+
 .social-links a:hover svg{
   transform: translateY(-2px);
   opacity: 1;
 }
 
-/* -----------------------------
-MOBILE (KEEP GOOD LAYOUT)
------------------------------ */
+/* =========================
+RESPONSIVE
+========================= */
 @media (max-width: 1100px){
   .contact-grid{
     grid-template-columns: 1fr;
@@ -519,156 +544,18 @@ MOBILE (KEEP GOOD LAYOUT)
       "message"
       "actions";
   }
+
   .contact-info-grid{
     grid-template-columns: 1fr;
   }
+
   .contact-message{
-    min-height: 320px;
+    min-height: 240px;
   }
+
   .contact-send-btn{
-    min-height: 78px;
+    min-height: 76px;
   }
-}
-
-/* =========================
-DESKTOP GRID FIX (what you asked)
-Row 1: name / email / topic (full width only)
-Row 2: message (left) + actions (right)
-========================= */
-@media (min-width: 1101px){
-
-  /* 3 columns ONLY (no actions column in row 1) */
-  .contact-grid{
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    grid-template-areas:
-      "name email topic"
-      "message message actions" !important;
-    gap: clamp(14px, 2vw, 22px) !important;
-    align-items: start !important;
-  }
-
-  .contact-name{ grid-area: name !important; }
-  .contact-email{ grid-area: email !important; }
-  .contact-topic{ grid-area: topic !important; }
-  .contact-message{ grid-area: message !important; }
-  .contact-actions{ grid-area: actions !important; }
-
-  /* message big block like reference */
-  .contact-message{
-    min-height: 420px !important;
-  }
-
-  /* actions block sits only on row 2 (right side) */
-  .contact-actions{
-    align-self: start !important;
-    min-width: 0 !important;
-  }
-
-  /* keep send + cards stacked */
-  .contact-actions{
-    display: flex !important;
-    flex-direction: column !important;
-    gap: clamp(14px, 2vw, 18px) !important;
-  }
-
-  /* 2x2 cards grid */
-  .contact-info-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  /* optional: slightly taller send */
-  .contact-send-btn{
-    min-height: 90px !important;
-  }
-}
-
-
-
-/* =========================
-FULL-WIDTH DESKTOP CONTACT
-========================= */
-@media (min-width: 1101px){
-
-  /* break out of page constraints */
-  .contact-wrap{
-    max-width: none !important;
-    width: 100vw !important;
-    margin-left: calc(50% - 50vw) !important;
-    margin-right: calc(50% - 50vw) !important;
-
-    padding-left: clamp(24px, 4vw, 80px) !important;
-    padding-right: clamp(24px, 4vw, 80px) !important;
-  }
-
-}
-
-
-
-/* ================================
-CONTACT — SOFTER TYPOGRAPHY
-(append at end)
-================================ */
-
-/* Field titles */
-.contact-envelope-field label{
-  font-weight: 600;          /* was ~900 */
-  letter-spacing: -0.01em;
-}
-
-/* Message title */
-.contact-envelope-message label{
-  font-weight: 600;
-}
-
-/* Right-side small titles if any remain */
-.contact-info-card h3{
-  font-weight: 600;
-}
-/* ================================
-CONTACT — REDUCE MESSAGE HEIGHT
-================================ */
-
-.contact-envelope-message.contact-envelope-field{
-  min-height: 200px;      /* ↓ was very tall */
-  padding: 14px 16px 12px;
-}
-
-.contact-envelope-field textarea{
-  min-height: 140px;      /* ↓ key change */
-  max-height: 180px;
-  resize: vertical;
-}
-.contact-envelope-field input::placeholder,
-.contact-envelope-field textarea::placeholder{
-  opacity: 0.55;
-}
-
-/* =========================
-CONTACT — FIX OVERRIDES (PUT LAST)
-========================= */
-
-/* 1) make titles less bold (your current CSS forces 900) */
-.contact-field label{
-  font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
-  opacity: .95;
-}
-
-/* also soften right titles */
-.contact-info-card h3{
-  font-weight: 600 !important;
-}
-
-/* 2) shrink message block so right column can align horizontally */
-.contact-message{
-  min-height: 260px !important;   /* was 380/420 */
-}
-
-.contact-message textarea{
-  min-height: 140px !important;   /* was 220 */
-  max-height: 180px !important;
-  resize: vertical !important;
 }
 
 
