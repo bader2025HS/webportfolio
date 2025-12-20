@@ -2270,7 +2270,7 @@ padding-top: 0;
 
 /* container */
 .skillsGrid{
-width: 1050px;
+width: 1600px;
 max-width: 1050px;
 margin: 0 auto;
 padding: 14px 0 10px;
@@ -2632,45 +2632,6 @@ NO OTHER CHANGES
   border-radius: 16px !important; /* inner thin inset line */
 }
 
-
-/* =========================================================
-SKILLS — COPY CONTACT WIDTH BREAKOUT (DO NOT TOUCH margin-top)
-========================================================= */
-
-#skills{
-  /* ✅ keep your existing margin-top from earlier CSS */
-  padding: 0 clamp(16px, 3vw, 64px) 40px;  /* same as contact */
-  box-sizing: border-box;
-
-  /* break out of any centered wrapper */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* keep the inner skills container full width like contact-wrap */
-.skillsGrid{
-  width: 100% !important;
-  max-width: none !important;
-  box-sizing: border-box;
-  margin: 0 !important; /* same behavior as contact-wrap */
-}
-
-/* =========================================================
-SKILLS — CONTACT-STYLE WIDTH BREAKOUT ONLY
-NO padding changes • NO margin-top changes • NO vertical shifts
-========================================================= */
-
-#skills{
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* keep your existing 1050px centered container behavior */
-.skillsGrid{
-  margin: 0 auto !important;
-}
 
 
 /* ===========================
