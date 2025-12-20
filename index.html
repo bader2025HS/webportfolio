@@ -973,317 +973,60 @@ CONTACT — HOVER EFFECT (NO FRAME / NO SHADOW)
   background: #000 !important;
 }
 
-/* =========================================================
-CONTACT — COLORED ZOOM/FLOW HOVER (NO FRAME / NO SHADOW)
-PUT LAST
-========================================================= */
-
-/* Kill frames + shadows everywhere in contact */
-.contact-field,
-.contact-info-card{
-  border-color: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
-  transition:
-    transform .18s ease,
-    background .18s ease,
-    filter .18s ease;
-}
-
-/* ===== INPUT CARDS (name/email/topic/message) ===== */
-.contact-field{
-  background: #ededed !important;
-}
-
-.contact-field:hover{
-  /* colored "focus wash" */
-  background:
-    radial-gradient(circle at 15% 20%,
-      rgba(14,165,162,0.28) 0%,
-      rgba(14,165,162,0.12) 35%,
-      rgba(255,255,255,0.92) 70%,
-      #ffffff 100%) !important;
-
-  transform: scale(1.015) !important;          /* ✅ zoom in */
-  filter: saturate(1.15) contrast(1.05) !important; /* ✅ pop */
-}
-
-/* ===== INFO CARDS (6 boxes) ===== */
-.contact-info-card{
-  background: #ededed !important;
-}
-
-.contact-info-card:hover{
-  background:
-    radial-gradient(circle at 20% 25%,
-      rgba(14,165,162,0.30) 0%,
-      rgba(14,165,162,0.14) 38%,
-      rgba(255,255,255,0.92) 72%,
-      #ffffff 100%) !important;
-
-  transform: scale(1.02) !important;           /* ✅ stronger zoom */
-  filter: saturate(1.2) contrast(1.06) !important;
-}
-
-/* Keep text readable on tinted hover */
-.contact-field:hover label,
-.contact-info-card:hover h3{
-  color: #0b0f14 !important;
-}
-
-.contact-field:hover p,
-.contact-info-card:hover p{
-  opacity: .9 !important;
-}
-
-/* SEND button: zoom/focus, still flat */
-.contact-send-btn{
-  box-shadow: none !important;
-  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
-}
-
-.contact-send-btn:hover{
-  transform: scale(1.03) !important;
-  filter: saturate(1.1) contrast(1.05) !important;
-}
-
-
 
 /* =========================================================
-CONTACT — SOLID TURQUOISE FOCUS HOVER
-NO GRADIENT • NO SHADOW • NO FRAME
+CONTACT — REMOVE ALL HOVERS (HARD OVERRIDE)
+NO ANIMATION • NO COLOR CHANGE • NO TRANSFORM
 ========================================================= */
 
-/* Base (static stays exactly the same) */
-.contact-field,
-.contact-info-card{
-  border-color: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
-  transition:
-    background .16s ease,
-    transform .16s ease,
-    color .16s ease;
+/* Disable transitions */
+#contact *{
+  transition: none !important;
 }
 
-/* ===== INPUT CARDS ===== */
-.contact-field:hover{
-  background: #0ea5a2 !important;     /* 🔥 solid turquoise */
-  transform: scale(1.02) !important;  /* focus / zoom */
-}
-
-/* ===== INFO CARDS ===== */
+/* Kill hover effects on cards */
+.contact-field:hover,
 .contact-info-card:hover{
-  background: #0ea5a2 !important;     /* same turquoise */
-  transform: scale(1.025) !important;
-}
-
-/* Text contrast on turquoise */
-.contact-field:hover label,
-.contact-info-card:hover h3{
-  color: #ffffff !important;
-}
-
-.contact-field:hover input,
-.contact-field:hover textarea,
-.contact-field:hover select{
-  color: #ffffff !important;
-  border-bottom-color: rgba(255,255,255,0.85) !important;
-}
-
-.contact-field:hover input::placeholder,
-.contact-field:hover textarea::placeholder{
-  color: rgba(255,255,255,0.7) !important;
-}
-
-.contact-info-card:hover p{
-  color: rgba(255,255,255,0.9) !important;
+  background: #ededed !important;
+  transform: none !important;
+  filter: none !important;
   opacity: 1 !important;
 }
 
-/* Icons / SVGs turn white */
-.contact-info-card:hover svg{
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
-  opacity: 1 !important;
-}
-
-/* SEND button — keep strong but subtle */
-.contact-send-btn{
-  box-shadow: none !important;
-  transition: transform .16s ease, background .16s ease;
-}
-
-.contact-send-btn:hover{
-  transform: scale(1.04) !important;
-}
-
-
-/* =========================================================
-CONTACT — FOCUS SURFACE HOVER (CLEAN / SYSTEMIC)
-NO GRADIENT • NO SHADOW • NO FRAME
-========================================================= */
-
-/* Base */
-.contact-field,
-.contact-info-card{
-  position: relative;
-  overflow: hidden; /* needed for the effect */
-  border-color: transparent !important;
-  box-shadow: none !important;
-  background: #ededed !important;
-  transition: transform .15s ease;
-}
-
-/* turquoise focus layer */
+/* Remove pseudo-element hover tricks */
 .contact-field::before,
-.contact-info-card::before{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #0ea5a2;          /* solid turquoise */
-  transform: translateX(-100%); /* hidden */
-  transition: transform .18s ease;
-  z-index: 0;
+.contact-field::after,
+.contact-info-card::before,
+.contact-info-card::after{
+  content: none !important;
+  display: none !important;
 }
 
-/* hover action */
-.contact-field:hover,
-.contact-info-card:hover{
-  transform: scale(1.01);       /* very subtle focus */
-}
-
-.contact-field:hover::before,
-.contact-info-card:hover::before{
-  transform: translateX(0);     /* slide in */
-}
-
-/* keep content above the layer */
-.contact-field > *,
-.contact-info-card > *{
-  position: relative;
-  z-index: 1;
-  transition: color .15s ease, border-color .15s ease;
-}
-
-/* text contrast when focused */
-.contact-field:hover label,
-.contact-info-card:hover h3,
-.contact-info-card:hover p{
-  color: #ffffff !important;
-}
-
+/* Inputs stay unchanged on hover/focus */
 .contact-field:hover input,
 .contact-field:hover textarea,
-.contact-field:hover select{
-  color: #ffffff !important;
-  border-bottom-color: rgba(255,255,255,0.85) !important;
+.contact-field:hover select,
+.contact-field:hover label{
+  color: inherit !important;
+  border-bottom-color: rgba(0,0,0,0.7) !important;
 }
 
-.contact-field:hover input::placeholder,
-.contact-field:hover textarea::placeholder{
-  color: rgba(255,255,255,0.7) !important;
-}
-
-/* icons */
+/* Info cards text stays unchanged */
+.contact-info-card:hover h3,
+.contact-info-card:hover p,
 .contact-info-card:hover svg{
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+  color: inherit !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: inherit !important;
+}
+
+/* Send button: no hover feedback */
+.contact-send-btn:hover{
+  transform: none !important;
+  filter: none !important;
   opacity: 1 !important;
 }
-
-/* SEND stays simple */
-.contact-send-btn{
-  box-shadow: none !important;
-}
-
-
-/* =========================================================
-CONTACT — SCANNER SWEEP HOVER (COMPLETELY DIFFERENT)
-NO BORDER • NO SHADOW • NO TURQUOISE FILL
-PUT LAST
-========================================================= */
-
-/* Base: flat, frameless, no shadow */
-.contact-field,
-.contact-info-card{
-  position: relative;
-  overflow: hidden;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  background: #ededed !important; /* keep your static */
-  transition: transform .18s ease, filter .18s ease, background .18s ease;
-}
-
-/* Light sweep overlay (subtle, not a background change) */
-.contact-field::after,
-.contact-info-card::after{
-  content:"";
-  position:absolute;
-  inset:-40% -60%;
-  pointer-events:none;
-
-  /* NOT a “gradient background change” — it’s a small light sweep overlay */
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    rgba(255,255,255,0.0) 35%,
-    rgba(255,255,255,0.75) 50%,
-    rgba(255,255,255,0.0) 65%,
-    transparent 100%
-  );
-
-  transform: translateX(-35%) translateY(0);
-  opacity: 0;
-  transition: opacity .18s ease, transform .55s ease;
-}
-
-/* Hover: tight “focus” */
-.contact-field:hover,
-.contact-info-card:hover{
-  transform: scale(1.018);
-  filter: contrast(1.08);
-  background: #f6f6f6 !important; /* slight lift without color */
-}
-
-/* Play the sweep */
-.contact-field:hover::after,
-.contact-info-card:hover::after{
-  opacity: 1;
-  transform: translateX(35%) translateY(0);
-}
-
-/* Make content crisper on hover (no color theme) */
-.contact-field label,
-.contact-info-card h3{
-  transition: letter-spacing .18s ease, opacity .18s ease, transform .18s ease;
-}
-
-.contact-field:hover label,
-.contact-info-card:hover h3{
-  letter-spacing: 0.02em;
-  transform: translateY(-1px);
-}
-
-.contact-info-card p{
-  transition: opacity .18s ease, transform .18s ease;
-}
-
-.contact-info-card:hover p{
-  opacity: 0.95 !important;
-  transform: translateY(-1px);
-}
-
-/* Keep SEND flat (no shadow), but give it a “pressable” feel */
-.contact-send-btn{
-  box-shadow: none !important;
-  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
-}
-.contact-send-btn:hover{
-  transform: scale(1.02);
-  filter: contrast(1.05);
-}
-
 
 
 
