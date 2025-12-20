@@ -1198,6 +1198,91 @@ NO GRADIENT • NO SHADOW • NO FRAME
 }
 
 
+/* =========================================================
+CONTACT — SCANNER SWEEP HOVER (COMPLETELY DIFFERENT)
+NO BORDER • NO SHADOW • NO TURQUOISE FILL
+PUT LAST
+========================================================= */
+
+/* Base: flat, frameless, no shadow */
+.contact-field,
+.contact-info-card{
+  position: relative;
+  overflow: hidden;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  background: #ededed !important; /* keep your static */
+  transition: transform .18s ease, filter .18s ease, background .18s ease;
+}
+
+/* Light sweep overlay (subtle, not a background change) */
+.contact-field::after,
+.contact-info-card::after{
+  content:"";
+  position:absolute;
+  inset:-40% -60%;
+  pointer-events:none;
+
+  /* NOT a “gradient background change” — it’s a small light sweep overlay */
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255,255,255,0.0) 35%,
+    rgba(255,255,255,0.75) 50%,
+    rgba(255,255,255,0.0) 65%,
+    transparent 100%
+  );
+
+  transform: translateX(-35%) translateY(0);
+  opacity: 0;
+  transition: opacity .18s ease, transform .55s ease;
+}
+
+/* Hover: tight “focus” */
+.contact-field:hover,
+.contact-info-card:hover{
+  transform: scale(1.018);
+  filter: contrast(1.08);
+  background: #f6f6f6 !important; /* slight lift without color */
+}
+
+/* Play the sweep */
+.contact-field:hover::after,
+.contact-info-card:hover::after{
+  opacity: 1;
+  transform: translateX(35%) translateY(0);
+}
+
+/* Make content crisper on hover (no color theme) */
+.contact-field label,
+.contact-info-card h3{
+  transition: letter-spacing .18s ease, opacity .18s ease, transform .18s ease;
+}
+
+.contact-field:hover label,
+.contact-info-card:hover h3{
+  letter-spacing: 0.02em;
+  transform: translateY(-1px);
+}
+
+.contact-info-card p{
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.contact-info-card:hover p{
+  opacity: 0.95 !important;
+  transform: translateY(-1px);
+}
+
+/* Keep SEND flat (no shadow), but give it a “pressable” feel */
+.contact-send-btn{
+  box-shadow: none !important;
+  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+}
+.contact-send-btn:hover{
+  transform: scale(1.02);
+  filter: contrast(1.05);
+}
 
 
 
