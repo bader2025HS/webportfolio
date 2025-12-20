@@ -670,6 +670,29 @@ CONTACT — MESSAGE WIDTH + UNDERLINE FIX
   padding-bottom: 14px !important;
 }
 
+/* =====================================
+CONTACT — FIX TEXTAREA UNDERLINE POSITION
+===================================== */
+
+/* Make message card control its own height */
+.contact-field.contact-message{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* ⬅️ key */
+  padding-bottom: 16px;           /* same rhythm as others */
+}
+
+/* Push textarea underline to bottom */
+.contact-field.contact-message textarea{
+  flex: 1;                         /* fills available space */
+  display: block;
+
+  border-bottom: 2px solid rgba(0,0,0,0.75);
+  padding-bottom: 6px;             /* tight underline */
+  margin-bottom: 0;
+
+  resize: none;
+}
 
 
 
