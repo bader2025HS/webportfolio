@@ -626,6 +626,62 @@ CONTACT — make MESSAGE span only 1 column
 
 
 
+/* =========================================
+CONTACT — Row 2: message (col1) + actions (col2)
+Actions starts at column 2 + match message height
+(append at end)
+========================================= */
+@media (min-width: 900px){
+  .contact-grid{
+    grid-template-columns: 1fr 1fr 0.85fr !important;
+    grid-template-areas:
+      "name email topic"
+      "message actions ." !important; /* ✅ actions starts in column 2 */
+    align-items: start !important;
+  }
+
+  /* make both row-2 blocks match height */
+  .contact-message,
+  .contact-actions{
+    height: 100% !important;
+    align-self: stretch !important;  /* ✅ stretch to same row height */
+  }
+
+  /* make actions behave like a full-height column */
+  .contact-actions{
+    display: flex !important;
+    flex-direction: row !important;  /* SEND left, cards right */
+    gap: clamp(12px, 1.6vw, 18px) !important;
+  }
+
+  /* vertical SEND button takes full height */
+  .contact-send-btn{
+    width: 90px !important;          /* adjust */
+    min-height: 100% !important;     /* ✅ same height as textarea card */
+    height: auto !important;
+    border-radius: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    letter-spacing: 0.2em !important;
+  }
+
+  /* cards grid fills the remaining height next to SEND */
+  .contact-info-grid{
+    flex: 1 !important;
+    height: 100% !important;
+    grid-auto-rows: 1fr !important;  /* ✅ makes the 3 rows equal height */
+  }
+
+  /* ensure each card can stretch */
+  .contact-info-card{
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+}
 
 
 
