@@ -858,7 +858,25 @@ Fixes: send not stacked, weird side-by-side on iPhone
 }
 
 
-	
+	/* =========================
+SEND BUTTON — TYPOGRAPHY FIX
+========================= */
+@media (min-width: 900px){
+  .contact-send-btn{
+    font-size: 18px !important;          /* ⬆ bigger letters */
+    font-weight: 900 !important;         /* ⬆ stronger presence */
+    letter-spacing: 0.45em !important;   /* ⬆ spread letters vertically */
+
+    /* make text occupy full height */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    /* optical balance */
+    line-height: 1 !important;
+  }
+}
+
 
 
 
