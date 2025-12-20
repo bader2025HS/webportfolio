@@ -1014,13 +1014,23 @@ CONTACT — SEND BUTTON (NO TURQUOISE HOVER BORDER)
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25) !important;
 }
 
-/* Optional: keep lift or remove it */
-/* If you want ZERO lift, uncomment below */
-/*
-.contact-send-btn:hover{
-  transform: none !important;
+/* =========================================================
+CONTACT — COLOR SWAP ONLY
+Blue → Grey | Turquoise → Dark Grey
+NO OTHER CHANGES
+========================================================= */
+
+/* Static background: grey instead of blue */
+.contact-field,
+.contact-info-card{
+  background: #eeeeee !important; /* light neutral grey */
 }
-*/
+
+/* Hover border: dark grey instead of turquoise */
+.contact-field:hover,
+.contact-info-card:hover{
+  border-color: #444444 !important; /* dark grey */
+}
 
 	
 
