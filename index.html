@@ -828,6 +828,51 @@ Info cards = 1 per row
     gap: 14px !important;
   }
 }
+/* =========================================
+   CONTACT — MOBILE RESET (IMPORTANT)
+   ========================================= */
+@media (max-width: 768px){
+
+  /* 1. Nuke desktop grid */
+  .contact-grid{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px;
+  }
+
+  /* 2. Inputs stack normally */
+  .contact-grid > *{
+    width: 100%;
+    grid-area: unset !important;
+  }
+
+  /* 3. Textarea full width */
+  .contact-message{
+    width: 100%;
+    min-height: 180px;
+  }
+
+  /* 4. SEND button becomes NORMAL horizontal */
+  .contact-send{
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    height: auto !important;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 0;
+  }
+
+  /* 5. Contact boxes stack 1 per row */
+  .contact-info-grid{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px;
+  }
+
+  .contact-info-card{
+    width: 100%;
+  }
+}
 
 
 	
