@@ -700,25 +700,14 @@ CONTACT — NARROWER MESSAGE FIELD
 
 /* Reduce message width without breaking layout */
 .contact-field.contact-message{
-  max-width: 85%;        /* ← adjust: try 80–88% */
+  max-width: 100%;        /* ← adjust: try 80–88% */
 }
 
 /* Keep it aligned to the left */
 .contact-field.contact-message{
   margin-right: auto;
 }
-/* =========================================
-CONTACT — MESSAGE WIDTH = NAME + EMAIL
-========================================= */
 
-@media (min-width: 900px){
-
-  /* Force message to span ONLY first 2 columns */
-  .contact-message{
-    grid-column: 1 / 3;   /* name (1) + email (2) */
-  }
-
-}
 
 
 
