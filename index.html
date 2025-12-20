@@ -274,362 +274,165 @@ white-space: nowrap;
 
 
 
-
-
-
 /* ================================
-CONTACT — REFERENCE LOOK (BIG LABEL + UNDERLINE)
-DROP-IN REPLACEMENT (for your current HTML)
-================================ */
+CONTACT — TOORMIX STYLE (SAFE)
+No #contact selectors
+No content changes
+=============================== */
 
-/* FULL-WIDTH BREAKOUT (override global container constraints) */
-#contact{
-  margin-top: -20px;
-  width: 100vw;
-  max-width: none !important;
+/* layout stays the same but no hard max-width feeling */
+.contact-layout{
+  max-width: 1600px;
+  padding-left: clamp(16px, 3vw, 56px);
+  padding-right: clamp(16px, 3vw, 56px);
 }
 
-#contact .contact-layout{
-  max-width: none !important;
-  width: 100%;
-  margin: 0 !important;
-  padding-left: clamp(18px, 4vw, 70px);
-  padding-right: clamp(18px, 4vw, 70px);
-
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: clamp(18px, 3vw, 36px);
-  align-items: start;
-}
-
-/* -----------------------------
-LEFT: FORM ENVELOPE
------------------------------ */
-.contact-left{ min-width: 0; }
+/* -------- LEFT FORM -------- */
 
 .contact-envelope{
   background: transparent;
-  border: 0;
+  border: none;
   padding: 0;
   box-shadow: none;
 }
 
-/* optional title/subline (keep, but subtle) */
+/* titles stay as-is but lighter */
 .contact-title{
-  margin: 0 0 8px;
-  text-align: left;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.95rem;
   font-weight: 700;
-  opacity: .85;
+  letter-spacing: .2em;
 }
 
 .contact-subline{
-  margin: 0 0 18px;
-  text-align: left;
-  font-size: 0.9rem;
-  opacity: .65;
+  opacity: .7;
 }
 
-/* 3 fields on one row */
-.contact-envelope-form{ width: 100%; }
-
+/* 3 fields grid stays */
 .contact-envelope-fields{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(14px, 2vw, 22px);
-  margin-bottom: clamp(14px, 2vw, 22px);
 }
 
-/* FIELD = THE CARD (like reference) */
+/* FIELD = CARD */
 .contact-envelope-field{
-  background: #efefef;
+  background: #ededed;
   border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.08);
-  padding: 22px 22px 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 12px;
-  min-height: 155px;
+  padding: clamp(18px, 2vw, 26px);
+  gap: 14px;
+  min-height: 160px;
 }
 
 /* BIG QUESTION LABEL */
 .contact-envelope-field label{
-  text-transform: none;
-  letter-spacing: normal;
+  font-family: Impact, "Arial Black", system-ui, sans-serif;
   font-weight: 900;
-  opacity: 1;
+  text-transform: none;
+  letter-spacing: -0.02em;
   line-height: 1.05;
-
-  /* big like reference */
-  font-size: clamp(22px, 2.2vw, 42px);
+  font-size: clamp(30px, 3vw, 56px);
+  opacity: 1;
 }
 
-/* INPUTS LOOK LIKE PLACEHOLDER + UNDERLINE */
+/* UNDERLINE INPUT STYLE */
 .contact-envelope-field input,
 .contact-envelope-field select,
 .contact-envelope-field textarea{
   background: transparent;
-  border: 0;
-  outline: none;
-
-  /* the underline */
-  border-bottom: 2px solid rgba(0,0,0,0.70);
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,0.75);
   border-radius: 0;
-
   padding: 10px 0 8px;
-  font: inherit;
-  font-size: 18px;
-  color: #111;
-
-  transition: border-color .18s ease;
+  font-size: clamp(16px, 1.1vw, 20px);
 }
 
-/* placeholder text style */
+/* placeholder tone */
 .contact-envelope-field input::placeholder,
 .contact-envelope-field textarea::placeholder{
   color: rgba(0,0,0,0.45);
 }
 
-/* remove default select styling weirdness */
+/* select caret */
 .contact-envelope-field select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  padding-right: 28px;
-  cursor: pointer;
-}
-
-/* small caret for select (simple, like reference) */
-.contact-envelope-field{
-  position: relative;
-}
-.contact-envelope-field select{
-  background-image: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.6) 50%),
-                    linear-gradient(135deg, rgba(0,0,0,0.6) 50%, transparent 50%);
-  background-position: calc(100% - 18px) 60%, calc(100% - 12px) 60%;
-  background-size: 6px 6px, 6px 6px;
+  padding-right: 34px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(0,0,0,.7) 50%),
+    linear-gradient(135deg, rgba(0,0,0,.7) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 60%,
+    calc(100% - 12px) 60%;
+  background-size: 8px 8px;
   background-repeat: no-repeat;
 }
 
-/* focus state: subtle accent underline */
+/* focus accent */
 .contact-envelope-field input:focus,
 .contact-envelope-field select:focus,
 .contact-envelope-field textarea:focus{
   border-bottom-color: var(--accent, #0ea5a2);
 }
 
-/* MESSAGE = big card on its own row */
+/* MESSAGE = BIGGER CARD */
 .contact-envelope-message{
-  min-height: 240px;
-  padding: 26px 22px 22px;
+  min-height: 300px;
 }
-
 .contact-envelope-message textarea{
-  border-bottom: 0;                 /* reference message usually no underline */
-  padding-top: 6px;
+  border-bottom: none;
   resize: none;
-  min-height: 140px;
+  min-height: 160px;
 }
 
-/* SEND BUTTON: bold pill or big bar — keep yours but more “reference” */
+/* SEND BUTTON — bold Toormix-style */
 .contact-send-btn{
-  margin-top: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
   width: 100%;
-  min-height: 70px;
-
-  border-radius: 16px;
-  border: 0;
-  cursor: pointer;
-
+  min-height: 72px;
+  border-radius: 18px;
   background: #111;
   color: #fff;
-
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
   font-weight: 900;
-
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-}
-.contact-send-btn:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(0,0,0,.18);
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  margin-top: 20px;
 }
 
-/* -----------------------------
-RIGHT: INFO GRID (match style)
------------------------------ */
-.contact-right{
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
+/* -------- RIGHT INFO GRID -------- */
 
-/* 2x3 grid (your current HTML has 6 cards) */
 .contact-info-grid{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: clamp(14px, 2vw, 22px);
 }
 
-/* same rounded grey “field card” vibe */
+/* info cards match field cards */
 .contact-info-card{
-  position: relative;
-  background: #efefef;
+  background: #ededed;
   border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.08);
-  padding: 18px 18px 16px;
-
-  text-align: left;
-  text-decoration: none;
-  color: #111;
-
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  padding: 20px;
 }
 
+/* icons darker */
+.contact-info-icon svg{
+  stroke: rgba(0,0,0,.75);
+}
+
+/* titles bold uppercase */
+.contact-info-card h3{
+  font-weight: 900;
+  letter-spacing: .18em;
+  font-size: .95rem;
+}
+
+/* subtle hover lift only */
 .contact-info-card:hover{
   transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(0,0,0,.12);
-  border-color: rgba(0,0,0,0.14);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
 }
 
-/* icon + title */
-.contact-info-icon{
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.contact-info-icon svg{
-  stroke: rgba(0,0,0,0.75);
-}
-
-/* title like reference: strong + uppercase */
-.contact-info-card h3{
-  margin: 0 0 6px;
-  font-size: 0.95rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-.contact-info-card p{
-  margin: 0;
-  font-size: 0.95rem;
-  opacity: .78;
-}
-
-/* Social icons: keep them but make them neat */
-.social-links{
-  display: flex;
-  gap: 12px;
-  margin: 6px 0 0;
-  align-items: center;
-}
-.social-links a svg{
-  opacity: .75;
-  transition: transform .15s ease, opacity .15s ease;
-}
-.social-links a:hover svg{
-  transform: translateY(-2px);
-  opacity: 1;
-}
-
-/* copyright */
+/* copyright stays card-like */
 .contact-copyright{
-  background: #efefef;
+  background: #ededed;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 12px 14px;
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: .85;
+  border: 1px solid rgba(0,0,0,.08);
 }
 
-/* -----------------------------
-RESPONSIVE
------------------------------ */
-@media (max-width: 1100px){
-  #contact .contact-layout{
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 900px){
-  .contact-envelope-fields{
-    grid-template-columns: 1fr;
-  }
-  .contact-info-grid{
-    grid-template-columns: 1fr;
-  }
-  .contact-envelope-field{
-    min-height: 140px;
-  }
-  .contact-envelope-field label{
-    font-size: 26px;
-  }
-}
-
-
-
-
-/* ===========================
-CONTACT — FULL WIDTH BUT ALWAYS INSIDE VIEWPORT
-=========================== */
-
-#contact{
-  width: 100%;
-  max-width: none !important;
-  overflow-x: clip; /* prevents horizontal scroll from grid rounding */
-}
-
-/* the layout is full-width, but constrained by viewport padding */
-#contact .contact-layout{
-  width: min(1400px, 100%);  /* keeps it inside screen */
-  max-width: none !important;
-  margin: 0 auto !important;
-
-  /* responsive “gutters” so it never touches edges */
-  padding-left: clamp(16px, 3vw, 64px);
-  padding-right: clamp(16px, 3vw, 64px);
-
-  box-sizing: border-box;
-}
-
-/* make columns adapt so nothing overflows */
-#contact .contact-layout{
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: clamp(16px, 2.6vw, 36px);
-}
-
-/* prevent cards from forcing overflow */
-.contact-left,
-.contact-right,
-.contact-envelope-fields,
-.contact-info-grid{
-  min-width: 0;
-}
-
-.contact-envelope-field,
-.contact-info-card{
-  min-width: 0;
-}
-
-/* on slightly smaller screens, stack earlier so it never feels cramped */
-@media (max-width: 1050px){
-  #contact .contact-layout{
-    grid-template-columns: 1fr;
-  }
-}
 
 
 
