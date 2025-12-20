@@ -1031,25 +1031,6 @@ CONTACT — MOBILE WIDTH FIX
 }
 
 
-/* =========================================================
-CONTACT — FORCE SAME WIDTH SYSTEM AS SKILLS (MOBILE)
-PUT LAST
-========================================================= */
-@media (max-width: 700px){
-
-  #contact{
-    /* cancel breakout */
-    width: 100% !important;
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-
-    /* cancel clamp padding and match skills */
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-}
-
 
 
 
@@ -2694,12 +2675,27 @@ SKILLS — MOBILE ALIGN WITH NAVBAR
 /* ===========================
 SKILLS — MOBILE: MATCH NAVBAR WIDTH
 =========================== */
-@media (max-width: 700px){
+@media (max-width: 768px){
+
+  /* cancel the full-bleed breakout */
   #skills{
-    padding-left: 12px;
-    padding-right: 12px;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* keep the section aligned like the navbar (same side padding) */
+  .skills-terminal{
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
   }
 }
+
 
 
 @media (max-width: 700px){
