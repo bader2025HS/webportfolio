@@ -42,7 +42,37 @@ padding: 40px 20px;
 }
 
 /* Header */
-header { text-align: center; margin-bottom: 50px; }
+/* Header */
+header{
+  margin-bottom: 50px;
+}
+
+/* Desktop: name left, nav right */
+@media (min-width: 900px){
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    text-align: left; /* overrides old center */
+  }
+
+  header h1{
+    margin: 0;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  nav{
+    margin-top: 0;            /* was 22px */
+    justify-content: flex-end;
+    flex: 1 1 auto;
+  }
+
+  nav ul{
+    margin-left: auto;        /* keep nav hugging right */
+  }
+}
 header h1 {
 font-size: 3rem;
 text-transform: uppercase;
