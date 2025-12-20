@@ -270,25 +270,25 @@ white-space: nowrap;
 
 
 /* =========================================================
-CONTACT — ONE WRAP LAYOUT (for your NEW HTML structure)
-- no left/right wrapper
-- row1: name/email/topic | right: send + info grid
-- row2: message spans under the 3 fields
+CONTACT — TOORMIX-INSPIRED (YOUR CONTENT, SAME STRUCTURE)
+Works with the HTML I gave you:
+.contact-wrap > form.contact-form > .contact-grid
+(contact-name / contact-email / contact-topic / contact-message / contact-actions)
 ========================================================= */
 
-/* outer wrap */
+/* wrapper (keeps it wide but inside screen) */
 .contact-wrap{
-  max-width: 1600px;
+  width: 100%;
+  max-width: 1900px;
   margin: 0 auto;
-  padding-left: clamp(16px, 3vw, 56px);
-  padding-right: clamp(16px, 3vw, 56px);
+  padding: 0 clamp(16px, 3vw, 56px);
   box-sizing: border-box;
 }
 
 /* main grid */
 .contact-grid{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.15fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(340px, 1.15fr);
   grid-template-areas:
     "name email topic actions"
     "message message message actions";
@@ -296,7 +296,7 @@ CONTACT — ONE WRAP LAYOUT (for your NEW HTML structure)
   align-items: start;
 }
 
-/* place areas */
+/* area placement */
 .contact-name{ grid-area: name; }
 .contact-email{ grid-area: email; }
 .contact-topic{ grid-area: topic; }
@@ -304,23 +304,28 @@ CONTACT — ONE WRAP LAYOUT (for your NEW HTML structure)
 .contact-actions{ grid-area: actions; min-width: 0; }
 
 /* -----------------------------
-FIELD CARD (Toormix-ish)
+FIELD CARD (big label + underline input)
 ----------------------------- */
 .contact-field{
   background: #ededed;
   border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 14px;
-  padding: clamp(18px, 2.2vw, 26px);
+  border-radius: 16px;
+  padding: clamp(18px, 2.2vw, 28px);
   box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   gap: 14px;
-
   min-width: 0;
+
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.contact-field:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(0,0,0,.10);
 }
 
-/* big label */
+/* big label like reference */
 .contact-field label{
   font-family: Impact, "Arial Black", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 900;
@@ -328,7 +333,7 @@ FIELD CARD (Toormix-ish)
   line-height: 1.02;
   text-transform: none;
 
-  font-size: clamp(26px, 2.4vw, 44px);
+  font-size: clamp(26px, 2.4vw, 46px);
   margin: 0;
   color: #111;
 }
@@ -380,14 +385,14 @@ FIELD CARD (Toormix-ish)
   border-bottom-color: var(--accent, #0ea5a2);
 }
 
-/* message card bigger */
+/* message block */
 .contact-message{
-  min-height: 320px;
+  min-height: 380px;
 }
 .contact-message textarea{
   border-bottom: 0;
   resize: none;
-  min-height: 180px;
+  min-height: 220px;
   padding-top: 6px;
 }
 
@@ -401,10 +406,10 @@ RIGHT COLUMN: SEND + INFO GRID
   min-width: 0;
 }
 
-/* Send button */
+/* send button (big slab) */
 .contact-send-btn{
   width: 100%;
-  min-height: 72px;
+  min-height: 92px;
 
   border: 0;
   border-radius: 18px;
@@ -414,7 +419,7 @@ RIGHT COLUMN: SEND + INFO GRID
   font-size: 14px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
 
   cursor: pointer;
   transition: transform .18s ease, box-shadow .18s ease;
@@ -423,8 +428,12 @@ RIGHT COLUMN: SEND + INFO GRID
   transform: translateY(-2px);
   box-shadow: 0 18px 44px rgba(0,0,0,.18);
 }
+.contact-send-btn:active{
+  transform: translateY(0);
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+}
 
-/* info grid inside right column */
+/* info cards grid */
 .contact-info-grid{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -432,11 +441,11 @@ RIGHT COLUMN: SEND + INFO GRID
   min-width: 0;
 }
 
-/* info cards */
+/* info card style */
 .contact-info-card{
   background: #ededed;
   border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 18px;
   box-sizing: border-box;
 
@@ -448,9 +457,10 @@ RIGHT COLUMN: SEND + INFO GRID
 .contact-info-card:visited{ color: #111; }
 .contact-info-card:hover{
   transform: translateY(-2px);
-  box-shadow: 0 18px 44px rgba(0,0,0,.12);
+  box-shadow: 0 18px 44px rgba(0,0,0,.10);
 }
 
+/* icon + headings */
 .contact-info-icon{
   display: flex;
   align-items: center;
@@ -475,7 +485,7 @@ RIGHT COLUMN: SEND + INFO GRID
   opacity: .75;
 }
 
-/* social row inside Social card */
+/* social row inside the social card */
 .social-links{
   display: flex;
   gap: 12px;
@@ -488,7 +498,7 @@ RIGHT COLUMN: SEND + INFO GRID
 }
 .social-links a:visited{ color: inherit; }
 .social-links svg{
-  opacity: .7;
+  opacity: .75;
   transition: transform .15s ease, opacity .15s ease;
 }
 .social-links a:hover svg{
@@ -497,7 +507,7 @@ RIGHT COLUMN: SEND + INFO GRID
 }
 
 /* -----------------------------
-RESPONSIVE
+MOBILE (KEEP GOOD LAYOUT)
 ----------------------------- */
 @media (max-width: 1100px){
   .contact-grid{
@@ -512,95 +522,13 @@ RESPONSIVE
   .contact-info-grid{
     grid-template-columns: 1fr;
   }
-}
-
-
-/* =========================
-DESKTOP ONLY OVERRIDES
-(keep your mobile exactly the same)
-========================= */
-@media (min-width: 1101px){
-
-  /* wider container */
-  .contact-wrap{
-    max-width: 1750px;
-  }
-
-  /* exact desktop grid you described */
-  .contact-grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.15fr);
-    grid-template-areas:
-      "name email topic actions"
-      "message message message actions";
-    align-items: start;
-  }
-
-  /* make message area feel like Toormix big block */
   .contact-message{
-    min-height: 360px;
+    min-height: 320px;
   }
-
-  /* keep right column visually aligned and not too narrow */
-  .contact-actions{
-    align-self: start;
-  }
-
-  /* right info grid stays 2 columns on desktop */
-  .contact-info-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .contact-send-btn{
+    min-height: 78px;
   }
 }
-
-/* =========================
-FORCE DESKTOP LAYOUT (OVERRIDE)
-Paste at the END of CSS
-========================= */
-@media (min-width: 900px){
-
-  /* widen container */
-  .contact-wrap{
-    max-width: 1900px !important;
-  }
-
-  /* row1: 3 fields + actions | row2: message + actions */
-  .contact-grid{
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(340px, 1.15fr) !important;
-    grid-template-areas:
-      "name email topic actions"
-      "message message message actions" !important;
-    gap: clamp(14px, 2vw, 22px) !important;
-    align-items: start !important;
-  }
-
-  /* make sure each block is in the correct area */
-  .contact-name{ grid-area: name !important; }
-  .contact-email{ grid-area: email !important; }
-  .contact-topic{ grid-area: topic !important; }
-  .contact-message{ grid-area: message !important; }
-  .contact-actions{ grid-area: actions !important; }
-
-  /* message should feel like a big block on desktop */
-  .contact-message{
-    min-height: 380px !important;
-  }
-
-  /* keep right column stacked: send then grid */
-  .contact-actions{
-    display: flex !important;
-    flex-direction: column !important;
-    gap: clamp(14px, 2vw, 18px) !important;
-    align-self: start !important;
-    min-width: 0 !important;
-  }
-
-  /* cards grid stays 2 columns */
-  .contact-info-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-}
-
-
 
 
 
@@ -5388,26 +5316,27 @@ data-caption="Institutional events & conferences">
 </section>
 
 
-<!-- CONTACT (ONE WRAP / NO LEFT-RIGHT DIVISION) -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap">
 
     <form class="contact-form" id="contact-form">
 
-      <!-- TOP GRID: 3 fields (left) + SEND + INFO (right) -->
       <div class="contact-grid">
 
-        <!-- Row 1: name / email / topic -->
+        <!-- NAME -->
         <div class="contact-field contact-name">
           <label for="contact-name">What's your name</label>
           <input id="contact-name" name="name" type="text" placeholder="Your name" required />
         </div>
 
+        <!-- EMAIL -->
         <div class="contact-field contact-email">
           <label for="contact-email">Enter your email address</label>
           <input id="contact-email" name="email" type="email" placeholder="you@example.com" required />
         </div>
 
+        <!-- TOPIC -->
         <div class="contact-field contact-topic">
           <label for="contact-topic">How can I help you?</label>
           <select id="contact-topic" name="topic" required>
@@ -5418,12 +5347,12 @@ data-caption="Institutional events & conferences">
           </select>
         </div>
 
-        <!-- Right column: send + info grid -->
+        <!-- RIGHT COLUMN (SEND + INFO GRID) -->
         <aside class="contact-actions">
-
           <button type="submit" class="contact-send-btn">Send</button>
 
           <div class="contact-info-grid">
+
             <!-- EMAIL -->
             <a class="contact-info-card" href="mailto:bader.suliman@email.com">
               <div class="contact-info-icon">
@@ -5448,7 +5377,7 @@ data-caption="Institutional events & conferences">
               <p>Open my latest résumé.</p>
             </a>
 
-            <!-- SOCIAL (not a link) -->
+            <!-- SOCIAL -->
             <div class="contact-info-card">
               <div class="contact-info-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -5469,7 +5398,6 @@ data-caption="Institutional events & conferences">
                     <path d="M12 16v-5a3 3 0 0 1 6 0v5"></path>
                   </svg>
                 </a>
-
                 <a href="https://instagram.com" target="_blank" aria-label="Instagram">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="2" width="20" height="20" rx="5"></rect>
@@ -5477,7 +5405,6 @@ data-caption="Institutional events & conferences">
                     <line x1="17" y1="7" x2="17" y2="7"></line>
                   </svg>
                 </a>
-
                 <a href="https://facebook.com" target="_blank" aria-label="Facebook">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c2d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v9h4v-9h3l1-4h-4V6a1 1 0 0 1 1-1h3z"></path>
@@ -5497,10 +5424,11 @@ data-caption="Institutional events & conferences">
               <h3>WhatsApp</h3>
               <p>Message me directly</p>
             </a>
+
           </div>
         </aside>
 
-        <!-- Row 2: message spans 3 columns -->
+        <!-- MESSAGE (row 2 left) -->
         <div class="contact-field contact-message">
           <label for="contact-message">Message</label>
           <textarea id="contact-message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
