@@ -707,6 +707,18 @@ CONTACT — NARROWER MESSAGE FIELD
 .contact-field.contact-message{
   margin-right: auto;
 }
+/* =========================================
+CONTACT — MESSAGE WIDTH = NAME + EMAIL
+========================================= */
+
+@media (min-width: 900px){
+
+  /* Force message to span ONLY first 2 columns */
+  .contact-message{
+    grid-column: 1 / 3;   /* name (1) + email (2) */
+  }
+
+}
 
 
 
