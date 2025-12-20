@@ -585,6 +585,30 @@ Row 2: message (left) + actions (right)
 
 
 
+/* =========================
+FULL-WIDTH DESKTOP CONTACT
+========================= */
+@media (min-width: 1101px){
+
+  /* break out of page constraints */
+  .contact-wrap{
+    max-width: none !important;
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+
+    padding-left: clamp(24px, 4vw, 80px) !important;
+    padding-right: clamp(24px, 4vw, 80px) !important;
+  }
+
+}
+
+/* =========================
+CONTACT LABELS — FORCE BOLD
+========================= */
+.contact-field label{
+  font-weight: 900 !important;
+}
 
 
 
