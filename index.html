@@ -643,6 +643,32 @@ CONTACT — SHRINK MESSAGE BLOCK
   opacity: 0.55;
 }
 
+/* =====================================
+CONTACT — MESSAGE WIDTH + UNDERLINE FIX
+===================================== */
+
+/* reduce MESSAGE width relative to right column */
+@media (min-width: 1100px){
+  .contact-field.contact-message{
+    max-width: 92%;          /* ⬅️ makes it visually narrower */
+  }
+}
+
+/* bring underline closer to box bottom (like name/email) */
+.contact-field.contact-message textarea{
+  padding-bottom: 4px !important;  /* tighter */
+  margin-bottom: 0 !important;
+}
+
+/* move underline up slightly */
+.contact-field.contact-message textarea{
+  border-bottom-width: 2px;
+}
+
+/* optional: align underline exactly with others */
+.contact-field.contact-message{
+  padding-bottom: 14px !important;
+}
 
 
 
