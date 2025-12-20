@@ -700,6 +700,111 @@ CONTACT — FINAL OVERRIDES (APPEND ONLY)
 }
 
 
+/* ===========================
+RIGHT SIDE — TEXT BOX LINKS (NO ICONS)
+=========================== */
+
+.contact-link-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* base grey box (match left style) */
+.contact-link-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  text-decoration: none;
+
+  background: #e9edf3;          /* grey */
+  color: #111;
+  border: 2px solid rgba(0,0,0,0.14);
+  border-radius: 0;              /* sharp */
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 18px;
+
+  transition:
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+/* hover behavior like your cards */
+.contact-link-box:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+  color: #fff;
+}
+
+/* platform colors on hover */
+.contact-link-box.is-whatsapp:hover{ background: #25D366; border-color: #25D366; }
+.contact-link-box.is-email:hover{    background: #EA4335; border-color: #EA4335; }
+.contact-link-box.is-cv:hover{       background: #111111; border-color: #111111; }
+.contact-link-box.is-linkedin:hover{ background: #0A66C2; border-color: #0A66C2; }
+.contact-link-box.is-instagram:hover{
+  background: linear-gradient(135deg, #fa8f21, #d82d7e);
+  border-color: rgba(0,0,0,0.15);
+}
+.contact-link-box.is-facebook:hover{ background: #1877F2; border-color: #1877F2; }
+
+/* optional: keyboard accessibility */
+.contact-link-box:focus-visible{
+  outline: 3px solid rgba(34,197,235,0.6);
+  outline-offset: 3px;
+}
+
+/* mobile */
+@media (max-width: 900px){
+  .contact-link-grid{ grid-template-columns: 1fr; }
+  .contact-link-box{ min-height: 80px; font-size: 16px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 /* ===========================
 ABOUT – LAYOUT
@@ -5438,177 +5543,93 @@ data-caption="Institutional events & conferences">
     <!-- LEFT : FORM -->
     <div class="contact-left">
       <div class="contact-envelope">
-
-        <!-- TOP-RIGHT SEND -->
-
         <form id="contact-form" class="contact-envelope-form">
 
+          <!-- GRID ROWS -->
           <div class="contact-envelope-fields">
 
-  <!-- NAME -->
-  <div class="contact-envelope-field">
-    <label for="contact-name">What's your name?</label>
-    <input id="contact-name" name="name" type="text" placeholder="Your name" required />
-  </div>
+            <!-- NAME -->
+            <div class="contact-envelope-field">
+              <label for="contact-name">What's your name?</label>
+              <input id="contact-name" name="name" type="text" placeholder="Your name" required />
+            </div>
 
-  <!-- EMAIL -->
-  <div class="contact-envelope-field">
-    <label for="contact-email">Enter your email</label>
-    <input id="contact-email" name="email" type="email" placeholder="you@example.com" required />
-  </div>
+            <!-- EMAIL -->
+            <div class="contact-envelope-field">
+              <label for="contact-email">Enter your email</label>
+              <input id="contact-email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
 
-  <!-- TOPIC -->
-  <div class="contact-envelope-field">
-    <label for="contact-topic">How can I help you?</label>
-    <select id="contact-topic" name="topic">
-      <option>Other</option>
-      <option>Internship / Work</option>
-      <option>Collaboration</option>
-      <option>Talk / Event</option>
-    </select>
-  </div>
+            <!-- TOPIC -->
+            <div class="contact-envelope-field">
+              <label for="contact-topic">How can I help you?</label>
+              <select id="contact-topic" name="topic">
+				<option>Select</option>
+                <option>Other</option>
+                <option>Internship / Work</option>
+                <option>Collaboration</option>
+                <option>Talk / Event</option>
+              </select>
+            </div>
 
-  <!-- SEND BUTTON (same row as topic) -->
-  <button type="submit" class="contact-send-btn">Send</button>
+            <!-- SEND (same row as topic) -->
+            <button type="submit" class="contact-send-btn">Send</button>
 
-</div>
+          </div>
 
-
-          <!-- message + send (same row) -->
-<div class="contact-message-row">
-  <div class="contact-envelope-field contact-envelope-message">
-    <label for="contact-message">Message</label>
-    <textarea id="contact-message" name="message" rows="5"
-      placeholder="Write your message here..." required></textarea>
-  </div>
-
-  <button type="submit" form="contact-form" class="contact-send-btn">Send</button>
-</div>
-
-
-          <!-- removed bottom send button -->
+          <!-- MESSAGE (full width) -->
+          <div class="contact-envelope-field contact-envelope-message">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="7"
+              placeholder="Write your message here..." required></textarea>
+          </div>
 
         </form>
       </div>
     </div>
 
+    <!-- RIGHT : SOCIAL BOXES + COPYRIGHT -->
+    <aside class="contact-right">
 
-<!-- RIGHT : 2x2 INFO GRID + COPYRIGHT -->
-<aside class="contact-right">
+      <!-- TEXT-ONLY CONTACT LINKS -->
+      <div class="contact-link-grid">
 
-<!-- ICON-ONLY CONTACT LINKS -->
-<div class="contact-icon-grid">
+        <a class="contact-link-box is-whatsapp" href="https://wa.me/XXXXXXXXXX" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
 
-  <!-- WhatsApp -->
-  <a class="contact-icon" href="https://wa.me/XXXXXXXXXX" target="_blank" aria-label="WhatsApp">
-<svg width="800px" height="800px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <a class="contact-link-box is-email" href="mailto:bader.suliman@email.com">
+          Email
+        </a>
 
-<defs>
+        <a class="contact-link-box is-cv" href="assets/Bader_Suliman_CV.pdf" target="_blank" rel="noopener">
+          CV
+        </a>
 
-<path id="a" d="M1023.941 765.153c0 5.606-.171 17.766-.508 27.159-.824 22.982-2.646 52.639-5.401 66.151-4.141 20.306-10.392 39.472-18.542 55.425-9.643 18.871-21.943 35.775-36.559 50.364-14.584 14.56-31.472 26.812-50.315 36.416-16.036 8.172-35.322 14.426-55.744 18.549-13.378 2.701-42.812 4.488-65.648 5.3-9.402.336-21.564.505-27.15.505l-504.226-.081c-5.607 0-17.765-.172-27.158-.509-22.983-.824-52.639-2.646-66.152-5.4-20.306-4.142-39.473-10.392-55.425-18.542-18.872-9.644-35.775-21.944-50.364-36.56-14.56-14.584-26.812-31.471-36.415-50.314-8.174-16.037-14.428-35.323-18.551-55.744-2.7-13.378-4.487-42.812-5.3-65.649-.334-9.401-.503-21.563-.503-27.148l.08-504.228c0-5.607.171-17.766.508-27.159.825-22.983 2.646-52.639 5.401-66.151 4.141-20.306 10.391-39.473 18.542-55.426C34.154 93.24 46.455 76.336 61.07 61.747c14.584-14.559 31.472-26.812 50.315-36.416 16.037-8.172 35.324-14.426 55.745-18.549 13.377-2.701 42.812-4.488 65.648-5.3 9.402-.335 21.565-.504 27.149-.504l504.227.081c5.608 0 17.766.171 27.159.508 22.983.825 52.638 2.646 66.152 5.401 20.305 4.141 39.472 10.391 55.425 18.542 18.871 9.643 35.774 21.944 50.363 36.559 14.559 14.584 26.812 31.471 36.415 50.315 8.174 16.037 14.428 35.323 18.551 55.744 2.7 13.378 4.486 42.812 5.3 65.649.335 9.402.504 21.564.504 27.15l-.082 504.226z"/>
+        <a class="contact-link-box is-linkedin" href="https://www.linkedin.com/in/your-link" target="_blank" rel="noopener">
+          LinkedIn
+        </a>
 
-</defs>
+        <a class="contact-link-box is-instagram" href="https://instagram.com" target="_blank" rel="noopener">
+          Instagram
+        </a>
 
-<linearGradient id="b" gradientUnits="userSpaceOnUse" x1="512.001" y1=".978" x2="512.001" y2="1025.023">
+        <a class="contact-link-box is-facebook" href="https://facebook.com" target="_blank" rel="noopener">
+          Facebook
+        </a>
 
-<stop offset="0" stop-color="#61fd7d"/>
+      </div>
 
-<stop offset="1" stop-color="#2bb826"/>
+      <!-- COPYRIGHT -->
+      <div class="contact-copyright glass">
+        © 2025 Bader Suliman — All rights reserved.
+      </div>
 
-</linearGradient>
+    </aside>
 
-<use xlink:href="#a" overflow="visible" fill="url(#b)"/>
-
-<g>
-
-<path fill="#FFF" d="M783.302 243.246c-69.329-69.387-161.529-107.619-259.763-107.658-202.402 0-367.133 164.668-367.214 367.072-.026 64.699 16.883 127.854 49.017 183.522l-52.096 190.229 194.665-51.047c53.636 29.244 114.022 44.656 175.482 44.682h.151c202.382 0 367.128-164.688 367.21-367.094.039-98.087-38.121-190.319-107.452-259.706zM523.544 808.047h-.125c-54.767-.021-108.483-14.729-155.344-42.529l-11.146-6.612-115.517 30.293 30.834-112.592-7.259-11.544c-30.552-48.579-46.688-104.729-46.664-162.379.066-168.229 136.985-305.096 305.339-305.096 81.521.031 158.154 31.811 215.779 89.482s89.342 134.332 89.312 215.859c-.066 168.243-136.984 305.118-305.209 305.118zm167.415-228.515c-9.177-4.591-54.286-26.782-62.697-29.843-8.41-3.062-14.526-4.592-20.645 4.592-6.115 9.182-23.699 29.843-29.053 35.964-5.352 6.122-10.704 6.888-19.879 2.296-9.176-4.591-38.74-14.277-73.786-45.526-27.275-24.319-45.691-54.359-51.043-63.543-5.352-9.183-.569-14.146 4.024-18.72 4.127-4.109 9.175-10.713 13.763-16.069 4.587-5.355 6.117-9.183 9.175-15.304 3.059-6.122 1.529-11.479-.765-16.07-2.293-4.591-20.644-49.739-28.29-68.104-7.447-17.886-15.013-15.466-20.645-15.747-5.346-.266-11.469-.322-17.585-.322s-16.057 2.295-24.467 11.478-32.113 31.374-32.113 76.521c0 45.147 32.877 88.764 37.465 94.885 4.588 6.122 64.699 98.771 156.741 138.502 21.892 9.45 38.982 15.094 52.308 19.322 21.98 6.979 41.982 5.995 57.793 3.634 17.628-2.633 54.284-22.189 61.932-43.615 7.646-21.427 7.646-39.791 5.352-43.617-2.294-3.826-8.41-6.122-17.585-10.714z"/>
-
-</g>
-
-</svg>
-  </a>
-
-  <!-- Email -->
-  <a class="contact-icon" href="mailto:bader.suliman@email.com" aria-label="Email">
-<svg width="800px" height="800px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M2 11.9556C2 8.47078 2 6.7284 2.67818 5.39739C3.27473 4.22661 4.22661 3.27473 5.39739 2.67818C6.7284 2 8.47078 2 11.9556 2H20.0444C23.5292 2 25.2716 2 26.6026 2.67818C27.7734 3.27473 28.7253 4.22661 29.3218 5.39739C30 6.7284 30 8.47078 30 11.9556V20.0444C30 23.5292 30 25.2716 29.3218 26.6026C28.7253 27.7734 27.7734 28.7253 26.6026 29.3218C25.2716 30 23.5292 30 20.0444 30H11.9556C8.47078 30 6.7284 30 5.39739 29.3218C4.22661 28.7253 3.27473 27.7734 2.67818 26.6026C2 25.2716 2 23.5292 2 20.0444V11.9556Z" fill="white"/>
-<path d="M22.0515 8.52295L16.0644 13.1954L9.94043 8.52295V8.52421L9.94783 8.53053V15.0732L15.9954 19.8466L22.0515 15.2575V8.52295Z" fill="#EA4335"/>
-<path d="M23.6231 7.38639L22.0508 8.52292V15.2575L26.9983 11.459V9.17074C26.9983 9.17074 26.3978 5.90258 23.6231 7.38639Z" fill="#FBBC05"/>
-<path d="M22.0508 15.2575V23.9924H25.8428C25.8428 23.9924 26.9219 23.8813 26.9995 22.6513V11.459L22.0508 15.2575Z" fill="#34A853"/>
-<path d="M9.94811 24.0001V15.0732L9.94043 15.0669L9.94811 24.0001Z" fill="#C5221F"/>
-<path d="M9.94014 8.52404L8.37646 7.39382C5.60179 5.91001 5 9.17692 5 9.17692V11.4651L9.94014 15.0667V8.52404Z" fill="#C5221F"/>
-<path d="M9.94043 8.52441V15.0671L9.94811 15.0734V8.53073L9.94043 8.52441Z" fill="#C5221F"/>
-<path d="M5 11.4668V22.6591C5.07646 23.8904 6.15673 24.0003 6.15673 24.0003H9.94877L9.94014 15.0671L5 11.4668Z" fill="#4285F4"/>
-</svg>  </a>
-
-  <!-- CV -->
-  <a class="contact-icon" href="assets/Bader_Suliman_CV.pdf" target="_blank" aria-label="Download CV">
-<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 width="800px" height="800px" viewBox="0 0 45.057 45.057"
-	 xml:space="preserve">
-<g>
-	<g id="_x35_8_24_">
-		<g>
-			<path d="M19.558,25.389c-0.067,0.176-0.155,0.328-0.264,0.455c-0.108,0.129-0.24,0.229-0.396,0.301
-				c-0.156,0.072-0.347,0.107-0.57,0.107c-0.313,0-0.572-0.068-0.78-0.203c-0.208-0.137-0.374-0.316-0.498-0.541
-				c-0.124-0.223-0.214-0.477-0.27-0.756c-0.057-0.279-0.084-0.564-0.084-0.852c0-0.289,0.027-0.572,0.084-0.853
-				c0.056-0.281,0.146-0.533,0.27-0.756c0.124-0.225,0.29-0.404,0.498-0.541c0.208-0.137,0.468-0.203,0.78-0.203
-				c0.271,0,0.494,0.051,0.666,0.154c0.172,0.105,0.31,0.225,0.414,0.361c0.104,0.137,0.176,0.273,0.216,0.414
-				c0.04,0.139,0.068,0.25,0.084,0.33h2.568c-0.112-1.08-0.49-1.914-1.135-2.502c-0.644-0.588-1.558-0.887-2.741-0.895
-				c-0.664,0-1.263,0.107-1.794,0.324c-0.532,0.215-0.988,0.52-1.368,0.912c-0.38,0.392-0.672,0.863-0.876,1.416
-				c-0.204,0.551-0.307,1.165-0.307,1.836c0,0.631,0.097,1.223,0.288,1.77c0.192,0.549,0.475,1.021,0.847,1.422
-				s0.825,0.717,1.361,0.949c0.536,0.23,1.152,0.348,1.849,0.348c0.624,0,1.18-0.105,1.668-0.312
-				c0.487-0.209,0.897-0.482,1.229-0.822s0.584-0.723,0.756-1.146c0.172-0.422,0.259-0.852,0.259-1.283h-2.593
-				C19.68,25.023,19.627,25.214,19.558,25.389z"/>
-			<polygon points="26.62,24.812 26.596,24.812 25.192,19.616 22.528,19.616 25.084,28.184 28.036,28.184 30.713,19.616 28,19.616 
-							"/>
-			<path d="M33.431,0H5.179v45.057h34.699V6.251L33.431,0z M36.878,42.056H8.179V3h23.706v4.76h4.992L36.878,42.056L36.878,42.056z"
-				/>
-		</g>
-	</g>
-</g>
-</svg>  </a>
-
-  <!-- LinkedIn -->
-  <a class="contact-icon" href="https://www.linkedin.com/in/your-link" target="_blank" aria-label="LinkedIn">
-<svg width="800px" height="800px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
-    <g>
-        <path d="M218.123122,218.127392 L180.191928,218.127392 L180.191928,158.724263 C180.191928,144.559023 179.939053,126.323993 160.463756,126.323993 C140.707926,126.323993 137.685284,141.757585 137.685284,157.692986 L137.685284,218.123441 L99.7540894,218.123441 L99.7540894,95.9665207 L136.168036,95.9665207 L136.168036,112.660562 L136.677736,112.660562 C144.102746,99.9650027 157.908637,92.3824528 172.605689,92.9280076 C211.050535,92.9280076 218.138927,118.216023 218.138927,151.114151 L218.123122,218.127392 Z M56.9550587,79.2685282 C44.7981969,79.2707099 34.9413443,69.4171797 34.9391618,57.260052 C34.93698,45.1029244 44.7902948,35.2458562 56.9471566,35.2436736 C69.1040185,35.2414916 78.9608713,45.0950217 78.963054,57.2521493 C78.9641017,63.090208 76.6459976,68.6895714 72.5186979,72.8184433 C68.3913982,76.9473153 62.7929898,79.26748 56.9550587,79.2685282 M75.9206558,218.127392 L37.94995,218.127392 L37.94995,95.9665207 L75.9206558,95.9665207 L75.9206558,218.127392 Z M237.033403,0.0182577091 L18.8895249,0.0182577091 C8.57959469,-0.0980923971 0.124827038,8.16056231 -0.001,18.4706066 L-0.001,237.524091 C0.120519052,247.839103 8.57460631,256.105934 18.8895249,255.9977 L237.033403,255.9977 C247.368728,256.125818 255.855922,247.859464 255.999,237.524091 L255.999,18.4548016 C255.851624,8.12438979 247.363742,-0.133792868 237.033403,0.000790807055" fill="#0A66C2">
-
-</path>
-    </g>
-</svg>
-  </a>
-
-  <!-- Instagram -->
-  <a class="contact-icon" href="https://instagram.com" target="_blank" aria-label="Instagram">
-<svg width="800px" height="800px" viewBox="0 0 3364.7 3364.7" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="0" cx="217.76" cy="3290.99" r="4271.92" gradientUnits="userSpaceOnUse"><stop offset=".09" stop-color="#fa8f21"/><stop offset=".78" stop-color="#d82d7e"/></radialGradient><radialGradient id="1" cx="2330.61" cy="3182.95" r="3759.33" gradientUnits="userSpaceOnUse"><stop offset=".64" stop-color="#8c3aaa" stop-opacity="0"/><stop offset="1" stop-color="#8c3aaa"/></radialGradient></defs><path d="M853.2,3352.8c-200.1-9.1-308.8-42.4-381.1-70.6-95.8-37.3-164.1-81.7-236-153.5S119.7,2988.6,82.6,2892.8c-28.2-72.3-61.5-181-70.6-381.1C2,2295.4,0,2230.5,0,1682.5s2.2-612.8,11.9-829.3C21,653.1,54.5,544.6,82.5,472.1,119.8,376.3,164.3,308,236,236c71.8-71.8,140.1-116.4,236-153.5C544.3,54.3,653,21,853.1,11.9,1069.5,2,1134.5,0,1682.3,0c548,0,612.8,2.2,829.3,11.9,200.1,9.1,308.6,42.6,381.1,70.6,95.8,37.1,164.1,81.7,236,153.5s116.2,140.2,153.5,236c28.2,72.3,61.5,181,70.6,381.1,9.9,216.5,11.9,281.3,11.9,829.3,0,547.8-2,612.8-11.9,829.3-9.1,200.1-42.6,308.8-70.6,381.1-37.3,95.8-81.7,164.1-153.5,235.9s-140.2,116.2-236,153.5c-72.3,28.2-181,61.5-381.1,70.6-216.3,9.9-281.3,11.9-829.3,11.9-547.8,0-612.8-1.9-829.1-11.9" fill="url(#0)"/><path d="M853.2,3352.8c-200.1-9.1-308.8-42.4-381.1-70.6-95.8-37.3-164.1-81.7-236-153.5S119.7,2988.6,82.6,2892.8c-28.2-72.3-61.5-181-70.6-381.1C2,2295.4,0,2230.5,0,1682.5s2.2-612.8,11.9-829.3C21,653.1,54.5,544.6,82.5,472.1,119.8,376.3,164.3,308,236,236c71.8-71.8,140.1-116.4,236-153.5C544.3,54.3,653,21,853.1,11.9,1069.5,2,1134.5,0,1682.3,0c548,0,612.8,2.2,829.3,11.9,200.1,9.1,308.6,42.6,381.1,70.6,95.8,37.1,164.1,81.7,236,153.5s116.2,140.2,153.5,236c28.2,72.3,61.5,181,70.6,381.1,9.9,216.5,11.9,281.3,11.9,829.3,0,547.8-2,612.8-11.9,829.3-9.1,200.1-42.6,308.8-70.6,381.1-37.3,95.8-81.7,164.1-153.5,235.9s-140.2,116.2-236,153.5c-72.3,28.2-181,61.5-381.1,70.6-216.3,9.9-281.3,11.9-829.3,11.9-547.8,0-612.8-1.9-829.1-11.9" fill="url(#1)"/><path d="M1269.25,1689.52c0-230.11,186.49-416.7,416.6-416.7s416.7,186.59,416.7,416.7-186.59,416.7-416.7,416.7-416.6-186.59-416.6-416.7m-225.26,0c0,354.5,287.36,641.86,641.86,641.86s641.86-287.36,641.86-641.86-287.36-641.86-641.86-641.86S1044,1335,1044,1689.52m1159.13-667.31a150,150,0,1,0,150.06-149.94h-0.06a150.07,150.07,0,0,0-150,149.94M1180.85,2707c-121.87-5.55-188.11-25.85-232.13-43-58.36-22.72-100-49.78-143.78-93.5s-70.88-85.32-93.5-143.68c-17.16-44-37.46-110.26-43-232.13-6.06-131.76-7.27-171.34-7.27-505.15s1.31-373.28,7.27-505.15c5.55-121.87,26-188,43-232.13,22.72-58.36,49.78-100,93.5-143.78s85.32-70.88,143.78-93.5c44-17.16,110.26-37.46,232.13-43,131.76-6.06,171.34-7.27,505-7.27S2059.13,666,2191,672c121.87,5.55,188,26,232.13,43,58.36,22.62,100,49.78,143.78,93.5s70.78,85.42,93.5,143.78c17.16,44,37.46,110.26,43,232.13,6.06,131.87,7.27,171.34,7.27,505.15s-1.21,373.28-7.27,505.15c-5.55,121.87-25.95,188.11-43,232.13-22.72,58.36-49.78,100-93.5,143.68s-85.42,70.78-143.78,93.5c-44,17.16-110.26,37.46-232.13,43-131.76,6.06-171.34,7.27-505.15,7.27s-373.28-1.21-505-7.27M1170.5,447.09c-133.07,6.06-224,27.16-303.41,58.06-82.19,31.91-151.86,74.72-221.43,144.18S533.39,788.47,501.48,870.76c-30.9,79.46-52,170.34-58.06,303.41-6.16,133.28-7.57,175.89-7.57,515.35s1.41,382.07,7.57,515.35c6.06,133.08,27.16,223.95,58.06,303.41,31.91,82.19,74.62,152,144.18,221.43s139.14,112.18,221.43,144.18c79.56,30.9,170.34,52,303.41,58.06,133.35,6.06,175.89,7.57,515.35,7.57s382.07-1.41,515.35-7.57c133.08-6.06,223.95-27.16,303.41-58.06,82.19-32,151.86-74.72,221.43-144.18s112.18-139.24,144.18-221.43c30.9-79.46,52.1-170.34,58.06-303.41,6.06-133.38,7.47-175.89,7.47-515.35s-1.41-382.07-7.47-515.35c-6.06-133.08-27.16-224-58.06-303.41-32-82.19-74.72-151.86-144.18-221.43S2586.8,537.06,2504.71,505.15c-79.56-30.9-170.44-52.1-303.41-58.06C2068,441,2025.41,439.52,1686,439.52s-382.1,1.41-515.45,7.57" fill="#ffffff"/></svg>  
-  </a>
-
-  <!-- Facebook -->
-  <a class="contact-icon" href="https://facebook.com" target="_blank" aria-label="Facebook">
-<svg xmlns="http://www.w3.org/2000/svg"
-aria-label="Facebook" role="img"
-viewBox="0 0 512 512"><rect
-width="512" height="512"
-rx="15%"
-fill="#1877f2"/><path d="M355.6 330l11.4-74h-71v-48c0-20.2 9.9-40 41.7-40H370v-63s-29.3-5-57.3-5c-58.5 0-96.7 35.4-96.7 99.6V256h-65v74h65v182h80V330h59.6z" fill="#ffffff"/></svg> 
-  </a>
-
-</div>
-
-
-
-<!-- COPYRIGHT -->
-<div class="contact-copyright glass">
-© 2025 Bader Suliman — All rights reserved.
-</div>
-
-</aside>
-
-
-</div>
+  </div>
 </section>
+
 
 
 
