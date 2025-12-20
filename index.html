@@ -1028,6 +1028,39 @@ NO ANIMATION • NO COLOR CHANGE • NO TRANSFORM
   opacity: 1 !important;
 }
 
+/* =========================================================
+CONTACT — THIN INNER OUTLINE (SYSTEM STYLE)
+NO HOVER • NO SHADOW
+========================================================= */
+
+/* Base cards: inputs + message */
+.contact-field{
+  background: #ededed !important;
+  border: none !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.18) !important; /* thin inner border */
+}
+
+/* Info cards (right-side boxes) */
+.contact-info-card{
+  background: #ededed !important;
+  border: none !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.18) !important;
+}
+
+/* Send button — same logic */
+.contact-send-btn{
+  border: none !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25) !important;
+}
+
+/* Absolutely no hover change */
+.contact-field:hover,
+.contact-info-card:hover,
+.contact-send-btn:hover{
+  background: inherit !important;
+  box-shadow: inherit !important;
+  transform: none !important;
+}
 
 
 
