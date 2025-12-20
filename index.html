@@ -2638,6 +2638,46 @@ TOOLS — EVEN INTERVAL AUTO PULSE (LOGO ONLY)
   .card.tool .logoTile svg{ animation: none; transform: none; }
 }
 
+/* =========================================================
+SKILLS — MATCH CONTACT WIDTH + GREY THEME
+(override only, keep rest unchanged)
+========================================================= */
+
+/* Full-bleed section like contact */
+#skills{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+}
+
+/* Make the inner container stretch like contact */
+.skillsGrid{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 14px 0 10px !important; /* keep your rhythm */
+}
+
+/* Cards: blue -> grey, sharp -> rounded (everything else same) */
+.card{
+  background: #eeeeee !important;     /* was var(--bg1, #f5f8ff) */
+  border-radius: 16px !important;     /* instead of sharp */
+  box-shadow: none !important;
+}
+
+/* Inner thin inset line follows rounding */
+.card::after{
+  border-radius: 16px !important;
+}
+
+/* Hover border: turquoise -> dark grey */
+.card:hover{
+  border-color: #444444 !important;   /* was #0ea5a2 */
+  box-shadow: none !important;        /* just in case anything adds it */
+}
 
 /* ===========================
 EXPERIENCE – 2×2 GRID
