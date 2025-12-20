@@ -683,6 +683,75 @@ Actions starts at column 2 + match message height
   }
 }
 
+/* =========================================================
+CONTACT — DESKTOP FIX
+Row1: name / email / topic (UNCHANGED)
+Row2: message (col1) + actions (span col2-3)
+Actions: vertical SEND + 6 cards in 3x2
+(append at end)
+========================================================= */
+@media (min-width: 900px){
+
+  /* 3 columns on the whole section */
+  .contact-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-areas:
+      "name email topic"
+      "message actions actions" !important;  /* ✅ actions spans 2 columns */
+    align-items: stretch !important;         /* ✅ equal row height */
+  }
+
+  /* row 2 stretch */
+  .contact-message{ align-self: stretch !important; }
+  .contact-actions{
+    align-self: stretch !important;
+    height: 100% !important;
+
+    /* layout inside actions: SEND + cards grid */
+    display: grid !important;
+    grid-template-columns: 96px 1fr !important; /* SEND column + cards column */
+    gap: clamp(14px, 1.8vw, 22px) !important;
+  }
+
+  /* vertical SEND button takes full height */
+  .contact-send-btn{
+    width: 96px !important;
+    height: 100% !important;
+    min-height: 100% !important;
+
+    border-radius: 18px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    writing-mode: vertical-rl !important;   /* ✅ vertical text */
+    text-orientation: upright !important;   /* ✅ S E N D stacked */
+    letter-spacing: 0.28em !important;
+    padding: 0 !important;
+  }
+
+  /* 6 boxes => 3 columns x 2 rows */
+  .contact-info-grid{
+    height: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* ✅ 3 across */
+    grid-auto-rows: 1fr !important;                              /* ✅ equal rows */
+    gap: clamp(12px, 1.5vw, 18px) !important;
+
+    align-items: stretch !important;
+  }
+
+  /* each card stretches to fill its cell */
+  .contact-info-card{
+    height: 100% !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+}
 
 
 
