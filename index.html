@@ -52,10 +52,7 @@ font-size: 3rem;
 text-transform: uppercase;
 letter-spacing: 0.05em;
 }
-/* ===========================
-NAVBAR — CLEAN SYSTEM PILLS
-(Structure unchanged)
-=========================== */
+
 
 /* ===========================
 NAVBAR — SLIDING HIGHLIGHT (TURQUOISE)
@@ -2655,6 +2652,22 @@ NO OTHER CHANGES
   border-radius: 16px !important; /* inner thin inset line */
 }
 
+/* ===========================
+SKILLS — MOBILE ALIGN WITH NAVBAR
+(nav has padding: 0 12px on mobile)
+=========================== */
+
+@media (max-width: 700px){
+  #skills{
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media (max-width: 700px){
+  html, body{
+    overflow-x: hidden;
+  }
+}
 
 
 /* ===========================
