@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FOLIO</title>
+<title>PORT</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -2705,7 +2705,6 @@ SKILLS — MOBILE: MATCH NAVBAR WIDTH
 }
 
 
-
 /* ===========================
 EXPERIENCE – FULL WIDTH (like Skills/About/Contact)
 =========================== */
@@ -2732,8 +2731,7 @@ EXPERIENCE – FULL WIDTH (like Skills/About/Contact)
   z-index: 1;
   width: 100%;
   max-width: none;     /* ❌ remove 1050px */
-  margin: 0;
-  padding-top: -20px;   /* keep it clean */
+  margin: -20px 0 0;
   padding: 0;
 }
 
@@ -3099,44 +3097,28 @@ MOBILE — ALIGN WITH NAVBAR
 
 
 /* ===========================
-WORK — FULL WIDTH (extend the 3 strips)
+WORK – VERTICAL STRIPS
 =========================== */
 
-#work{
-  margin-top: -40px;
-  padding: 30px 0 70px;
-  position: relative;
-
-  /* full-bleed breakout like Experience */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-
-  /* same side padding system */
-  padding-left: clamp(16px, 3vw, 64px);
-  padding-right: clamp(16px, 3vw, 64px);
-  box-sizing: border-box;
-
-  overflow-x: hidden;
+#work {
+margin-top: -40px;
+padding: 30px 0 70px;
 }
 
-/* remove 1050px cap so strips can expand */
-.work-layout{
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  box-sizing: border-box;
+.work-layout {
+max-width: 1050px;
+margin: 0 auto;
 }
 
-/* keep shell filling available width */
-.work-shell{
-  width: 100%;
-  border-radius: 0;
-  overflow: hidden;
-  box-shadow: none;
-  min-height: 320px;
-  display: flex;
+.work-shell {
+display: flex;
+/* background is now controlled by JS */
+border-radius: 0;
+overflow: hidden;
+box-shadow: none;
+min-height: 320px;
 }
+
 
 /* LEFT PANEL (text) */
 
@@ -3662,60 +3644,27 @@ margin-top: 12px;
 gap: 12px;
 }
 
-@media (max-width: 700px){
-  #work{
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-}
 
 /* ===========================
-WORK — ROUNDED CORNERS ( aware of full-bleed )
+ACTIVITIES – clean horizontal cards
 =========================== */
 
-/* round the visible container, not the section */
-.work-shell{
-  border-radius: 18px;
-  overflow: hidden;   /* ensures inner strips respect the curve */
+#activities {
+margin-top: -20px;
+text-align: center;
 }
 
-/* optional: soften each strip slightly */
-.work-strip{
-  border-radius: 0;   /* keep strips square so the shell defines shape */
-}
-
-
-
-/* ===========================
-ACTIVITIES — FULL WIDTH (DESKTOP)
-=========================== */
-
-#activities{
-  margin-top: -20px;
-  text-align: center;
-
-  /* full-bleed breakout */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-
-  padding-left: clamp(16px, 3vw, 64px);
-  padding-right: clamp(16px, 3vw, 64px);
-  box-sizing: border-box;
-
-  overflow-x: hidden;
-}
-
-.activities-row{
-  width: 100%;
-  max-width: none;     /* ❌ remove 1070px cap */
-  margin: 0;
-  padding: 0;          /* section already handles padding */
-
+/* 3 equal boxes in one row */
+.activities-row {
+  max-width: 1070px;
+  margin: 0 auto;
+  padding: 0 10px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
+
+/* each card */
 
 /* each card */
 .activity-box{
