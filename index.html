@@ -783,6 +783,48 @@ RIGHT SIDE — TEXT BOX LINKS (NO ICONS)
 
 
 
+/* ===========================
+CONTACT — LEFT SIDE MICRO SHRINK
+(ONLY form / envelope / fields)
+=========================== */
+
+/* envelope container */
+.contact-envelope{
+  padding: 12px;              /* was larger */
+}
+
+/* grid spacing inside form */
+.contact-envelope-fields{
+  gap: 10px;
+}
+
+/* labels */
+.contact-envelope-field label{
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+
+/* inputs + select */
+.contact-envelope-field input,
+.contact-envelope-field select{
+  padding: 9px 10px;
+  font-size: 14px;
+}
+
+/* textarea (main height reducer) */
+.contact-envelope-message textarea{
+  height: clamp(135px, 19vh, 190px);
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* SEND button */
+.contact-send-btn{
+  min-height: 56px;
+  padding: 12px 16px;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+}
 
 
 
