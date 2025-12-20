@@ -973,6 +973,79 @@ CONTACT — HOVER EFFECT (NO FRAME / NO SHADOW)
   background: #000 !important;
 }
 
+/* =========================================================
+CONTACT — COLORED ZOOM/FLOW HOVER (NO FRAME / NO SHADOW)
+PUT LAST
+========================================================= */
+
+/* Kill frames + shadows everywhere in contact */
+.contact-field,
+.contact-info-card{
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    filter .18s ease;
+}
+
+/* ===== INPUT CARDS (name/email/topic/message) ===== */
+.contact-field{
+  background: #ededed !important;
+}
+
+.contact-field:hover{
+  /* colored "focus wash" */
+  background:
+    radial-gradient(circle at 15% 20%,
+      rgba(14,165,162,0.28) 0%,
+      rgba(14,165,162,0.12) 35%,
+      rgba(255,255,255,0.92) 70%,
+      #ffffff 100%) !important;
+
+  transform: scale(1.015) !important;          /* ✅ zoom in */
+  filter: saturate(1.15) contrast(1.05) !important; /* ✅ pop */
+}
+
+/* ===== INFO CARDS (6 boxes) ===== */
+.contact-info-card{
+  background: #ededed !important;
+}
+
+.contact-info-card:hover{
+  background:
+    radial-gradient(circle at 20% 25%,
+      rgba(14,165,162,0.30) 0%,
+      rgba(14,165,162,0.14) 38%,
+      rgba(255,255,255,0.92) 72%,
+      #ffffff 100%) !important;
+
+  transform: scale(1.02) !important;           /* ✅ stronger zoom */
+  filter: saturate(1.2) contrast(1.06) !important;
+}
+
+/* Keep text readable on tinted hover */
+.contact-field:hover label,
+.contact-info-card:hover h3{
+  color: #0b0f14 !important;
+}
+
+.contact-field:hover p,
+.contact-info-card:hover p{
+  opacity: .9 !important;
+}
+
+/* SEND button: zoom/focus, still flat */
+.contact-send-btn{
+  box-shadow: none !important;
+  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+}
+
+.contact-send-btn:hover{
+  transform: scale(1.03) !important;
+  filter: saturate(1.1) contrast(1.05) !important;
+}
 
 
 
