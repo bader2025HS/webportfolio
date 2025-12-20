@@ -1015,6 +1015,17 @@ CONTACT — SEND BUTTON (NO TURQUOISE HOVER BORDER)
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25) !important;
 }
 
+/* ===========================
+CONTACT — MOBILE WIDTH FIX
+(align with navbar padding)
+=========================== */
+
+@media (max-width: 700px){
+  #contact{
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
 
 
 
@@ -2671,35 +2682,50 @@ SKILLS — MOBILE ALIGN WITH NAVBAR
 
 
 /* ===========================
-EXPERIENCE – 2×2 GRID
+EXPERIENCE – FULL WIDTH (like Skills/About/Contact)
 =========================== */
 
 #experience{
-  margin-top:-10px;
-  padding:10px 0 0;
-  position:relative;
+  margin-top: -10px;
+  padding-top: 10px;
+  position: relative;
+
+  /* 🔑 full-bleed breakout */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+
+  overflow-x: hidden;
 }
 
+/* inner layout (no width cap anymore) */
 .experience-layout{
-  position:relative;
-  z-index:1;
-  max-width:1050px;
-  margin:-20px auto 0;
-  padding:0;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;     /* ❌ remove 1050px */
+  margin: -20px 0 0;
+  padding: 0;
 }
 
 /* 2×2 grid */
 .exp-mosaic{
-  max-width:1050px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  grid-auto-rows:minmax(200px,1fr);
+  width: 100%;
+  max-width: none;     /* ❌ remove 1050px */
+  margin: 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(200px, 1fr);
   grid-template-areas:
     "ngo io"
     "research assoc";
-  gap:18px;
-  perspective:1200px;
+  gap: 18px;
+
+  perspective: 1200px;
 }
 
 /* ======================
@@ -3032,6 +3058,17 @@ EXPANSION
   }
 }
 
+/* ===========================
+MOBILE — ALIGN WITH NAVBAR
+(nav uses padding: 0 12px)
+=========================== */
+
+@media (max-width: 700px){
+  #experience{
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
 
 
 
