@@ -530,9 +530,86 @@ MOBILE (KEEP GOOD LAYOUT)
   }
 }
 
+/* =========================
+DESKTOP GRID FIX (what you asked)
+Row 1: name / email / topic (full width only)
+Row 2: message (left) + actions (right)
+========================= */
+@media (min-width: 1101px){
+
+  /* 3 columns ONLY (no actions column in row 1) */
+  .contact-grid{
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-areas:
+      "name email topic"
+      "message message actions" !important;
+    gap: clamp(14px, 2vw, 22px) !important;
+    align-items: start !important;
+  }
+
+  .contact-name{ grid-area: name !important; }
+  .contact-email{ grid-area: email !important; }
+  .contact-topic{ grid-area: topic !important; }
+  .contact-message{ grid-area: message !important; }
+  .contact-actions{ grid-area: actions !important; }
+
+  /* message big block like reference */
+  .contact-message{
+    min-height: 420px !important;
+  }
+
+  /* actions block sits only on row 2 (right side) */
+  .contact-actions{
+    align-self: start !important;
+    min-width: 0 !important;
+  }
+
+  /* keep send + cards stacked */
+  .contact-actions{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: clamp(14px, 2vw, 18px) !important;
+  }
+
+  /* 2x2 cards grid */
+  .contact-info-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* optional: slightly taller send */
+  .contact-send-btn{
+    min-height: 90px !important;
+  }
+}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 	
