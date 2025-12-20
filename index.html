@@ -620,6 +620,28 @@ Font: Trebuchet MS everywhere
 }
 
 
+/* =====================================
+CONTACT — SHRINK MESSAGE BLOCK
+===================================== */
+
+/* reduce overall message card height */
+.contact-field.contact-message{
+  min-height: 220px !important;
+  padding: 18px 20px !important;
+}
+
+/* reduce textarea height */
+.contact-field.contact-message textarea{
+  min-height: 110px !important;
+  max-height: 150px !important;
+  resize: vertical;
+  font-size: 0.95rem;       /* slightly lighter feel */
+}
+
+/* optional: soften placeholder spacing */
+.contact-field.contact-message textarea::placeholder{
+  opacity: 0.55;
+}
 
 
 
