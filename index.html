@@ -975,6 +975,52 @@ SEND BUTTON — SAME LOGIC
 .contact-send-btn:hover::after{
   box-shadow: none;
 }
+/* =========================================================
+CONTACT — ROUNDED CORNERS (SYSTEM SAFE)
+Everything else stays IDENTICAL to Skills
+========================================================= */
+
+/* Cards */
+.contact-field,
+.contact-info-card{
+  border-radius: 16px !important;   /* match your other rounded sections */
+}
+
+/* Inner inset line follows radius */
+.contact-field::after,
+.contact-info-card::after{
+  border-radius: 16px !important;
+}
+
+/* Send button */
+.contact-send-btn{
+  border-radius: 16px !important;
+}
+
+.contact-send-btn::after{
+  border-radius: 16px !important;
+}
+/* =========================================================
+CONTACT — SEND BUTTON (NO TURQUOISE HOVER BORDER)
+========================================================= */
+
+/* Remove turquoise border on hover */
+.contact-send-btn:hover{
+  border-color: transparent !important;  /* ❌ no turquoise */
+}
+
+/* Keep inner thin line even on hover */
+.contact-send-btn:hover::after{
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25) !important;
+}
+
+/* Optional: keep lift or remove it */
+/* If you want ZERO lift, uncomment below */
+/*
+.contact-send-btn:hover{
+  transform: none !important;
+}
+*/
 
 	
 
