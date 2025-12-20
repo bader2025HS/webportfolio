@@ -2632,60 +2632,30 @@ NO OTHER CHANGES
   border-radius: 16px !important; /* inner thin inset line */
 }
 
-/* =========================================================
-SKILLS — FULL WIDTH WITH INNER CONSTRAINT (LIKE CONTACT)
-NO TOP MARGIN CHANGE
-NO EFFECT ON ABOUT / OTHERS
-========================================================= */
-
-/* Keep skills section full-bleed */
-#skills{
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  /* ❌ do NOT touch margin-top */
-}
-
-/* Re-apply inner constraint (same philosophy as contact) */
-#skills .skillsGrid{
-  max-width: 1600px;                 /* same visual ceiling as contact */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: clamp(16px, 3vw, 64px);
-  padding-right: clamp(16px, 3vw, 64px);
-  box-sizing: border-box;
-}
-
-/* Safety: do NOT leak into other sections */
-#about .skillsGrid,
-#education .skillsGrid,
-#experience .skillsGrid{
-  all: unset;
-}
 
 /* =========================================================
-SKILLS — SAME WIDTH BEHAVIOR AS CONTACT (FIX LEFT PUSH)
-DO NOT TOUCH margin-top
+SKILLS — COPY CONTACT WIDTH BREAKOUT (DO NOT TOUCH margin-top)
 ========================================================= */
 
 #skills{
-  /* keep your existing margin-top exactly as is */
+  /* ✅ keep your existing margin-top from earlier CSS */
   padding: 0 clamp(16px, 3vw, 64px) 40px;  /* same as contact */
   box-sizing: border-box;
 
+  /* break out of any centered wrapper */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-/* put the grid back to centered */
+/* keep the inner skills container full width like contact-wrap */
 .skillsGrid{
-  width: min(1050px, 100%) !important;  /* same centered block feel */
-  max-width: 1050px !important;
-  margin: 0 auto !important;            /* ✅ THIS is what fixes "pushed to the side" */
+  width: 100% !important;
+  max-width: none !important;
   box-sizing: border-box;
-  /* keep your existing padding from earlier CSS (14px 0 10px) */
+  margin: 0 !important; /* same behavior as contact-wrap */
 }
+
 
 
 /* ===========================
