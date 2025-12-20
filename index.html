@@ -915,6 +915,63 @@ CONTACT — NO FRAMES / NO SHADOWS (OVERRIDE ONLY)
   box-shadow: none !important;
 }
 
+/* =========================================================
+CONTACT — HOVER EFFECT (NO FRAME / NO SHADOW)
+========================================================= */
+
+/* FIELD CARDS (inputs + message) */
+.contact-field{
+  background: #ededed !important;
+  border-color: #ededed !important;
+  box-shadow: none !important;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.contact-field:hover{
+  /* subtle contrast */
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(14,165,162,0.55),
+      rgba(14,165,162,0.25)
+    ) border-box;
+
+  border: 2px solid transparent !important; /* enables accent ring */
+  transform: translateY(-2px);
+}
+
+/* INFO CARDS (right-side boxes) */
+.contact-info-card{
+  background: #ededed !important;
+  border-color: #ededed !important;
+  box-shadow: none !important;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.contact-info-card:hover{
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(14,165,162,0.55),
+      rgba(14,165,162,0.25)
+    ) border-box;
+
+  border: 2px solid transparent !important;
+  transform: translateY(-2px);
+}
+
+/* SEND BUTTON — keep strong but flat */
+.contact-send-btn{
+  box-shadow: none !important;
+  transition: transform .18s ease, background .18s ease;
+}
+
+.contact-send-btn:hover{
+  transform: translateY(-2px);
+  background: #000 !important;
+}
 
 
 
