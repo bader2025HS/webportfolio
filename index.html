@@ -785,50 +785,58 @@ CONTACT — TEXTAREA UNDERLINE AT BOTTOM
 }
 
 
+/* =========================================================
+CONTACT — HARD MOBILE OVERRIDE (PUT LAST)
+Fixes: send not stacked, weird side-by-side on iPhone
+========================================================= */
+@media (max-width: 899px){
 
+  /* stop the 100vw breakout on mobile (prevents layout weirdness / horizontal math) */
+  #contact{
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 
+  /* main layout already 1 column, keep it */
+  .contact-grid{
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "name"
+      "email"
+      "topic"
+      "message"
+      "actions" !important;
+  }
 
+  /* 🔑 IMPORTANT: force actions to stack vertically */
+  .contact-actions{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
 
-
-/* =====================================
-CONTACT — MOBILE FIX
-Send = horizontal
-Info cards = 1 per row
-===================================== */
-
-@media (max-width: 1100px){
-
-  /* SEND button back to normal horizontal */
+  /* SEND becomes normal horizontal button */
   .contact-send-btn{
     width: 100% !important;
     min-height: 72px !important;
-    border-radius: 18px !important;
+    height: auto !important;
 
-    /* cancel vertical behaviour */
     writing-mode: horizontal-tb !important;
     text-orientation: mixed !important;
-    letter-spacing: 0.26em !important;
+
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
-  /* If you used <br> or stacked letters somewhere, cancel it */
-  .contact-send-btn br{ display: none !important; }
-
-  /* Info cards: each takes its own row */
+  /* cards: 1 per row */
   .contact-info-grid{
+    display: grid !important;
     grid-template-columns: 1fr !important;
-  }
-
-  /* Social icons row: keep in one line OR wrap nicely */
-  .social-links{
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-    gap: 14px !important;
+    gap: 12px !important;
   }
 }
-
 
 	
 
