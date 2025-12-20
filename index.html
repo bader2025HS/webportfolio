@@ -2670,12 +2670,30 @@ SKILLS — MOBILE ALIGN WITH NAVBAR
 (nav has padding: 0 12px on mobile)
 =========================== */
 
-@media (max-width: 700px){
+/* ===========================
+SKILLS — MOBILE: MATCH NAVBAR WIDTH
+=========================== */
+@media (max-width: 768px){
+
+  /* cancel the full-bleed breakout */
   #skills{
-    padding-left: 12px;
-    padding-right: 12px;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* keep the section aligned like the navbar (same side padding) */
+  .skills-terminal{
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
   }
 }
+
 @media (max-width: 700px){
   html, body{
     overflow-x: hidden;
