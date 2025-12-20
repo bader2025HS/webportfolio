@@ -551,6 +551,54 @@ DESKTOP ONLY OVERRIDES
   }
 }
 
+/* =========================
+FORCE DESKTOP LAYOUT (OVERRIDE)
+Paste at the END of CSS
+========================= */
+@media (min-width: 900px){
+
+  /* widen container */
+  .contact-wrap{
+    max-width: 1900px !important;
+  }
+
+  /* row1: 3 fields + actions | row2: message + actions */
+  .contact-grid{
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(340px, 1.15fr) !important;
+    grid-template-areas:
+      "name email topic actions"
+      "message message message actions" !important;
+    gap: clamp(14px, 2vw, 22px) !important;
+    align-items: start !important;
+  }
+
+  /* make sure each block is in the correct area */
+  .contact-name{ grid-area: name !important; }
+  .contact-email{ grid-area: email !important; }
+  .contact-topic{ grid-area: topic !important; }
+  .contact-message{ grid-area: message !important; }
+  .contact-actions{ grid-area: actions !important; }
+
+  /* message should feel like a big block on desktop */
+  .contact-message{
+    min-height: 380px !important;
+  }
+
+  /* keep right column stacked: send then grid */
+  .contact-actions{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: clamp(14px, 2vw, 18px) !important;
+    align-self: start !important;
+    min-width: 0 !important;
+  }
+
+  /* cards grid stays 2 columns */
+  .contact-info-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
 
 
 
