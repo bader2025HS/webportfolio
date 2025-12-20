@@ -611,6 +611,44 @@ CONTACT LABELS — FORCE BOLD
 }
 
 
+/* ================================
+CONTACT — SOFTER TYPOGRAPHY
+(append at end)
+================================ */
+
+/* Field titles */
+.contact-envelope-field label{
+  font-weight: 600;          /* was ~900 */
+  letter-spacing: -0.01em;
+}
+
+/* Message title */
+.contact-envelope-message label{
+  font-weight: 600;
+}
+
+/* Right-side small titles if any remain */
+.contact-info-card h3{
+  font-weight: 600;
+}
+/* ================================
+CONTACT — REDUCE MESSAGE HEIGHT
+================================ */
+
+.contact-envelope-message.contact-envelope-field{
+  min-height: 200px;      /* ↓ was very tall */
+  padding: 14px 16px 12px;
+}
+
+.contact-envelope-field textarea{
+  min-height: 140px;      /* ↓ key change */
+  max-height: 180px;
+  resize: vertical;
+}
+.contact-envelope-field input::placeholder,
+.contact-envelope-field textarea::placeholder{
+  opacity: 0.55;
+}
 
 
 
