@@ -604,6 +604,25 @@ RESPONSIVE
 }
 
 
+/* =========================================
+CONTACT — make MESSAGE span only 1 column
+(append at end)
+========================================= */
+@media (min-width: 900px){
+  .contact-grid{
+    /* keep row 1 unchanged */
+    grid-template-columns: 1fr 1fr 0.85fr !important;
+    grid-template-areas:
+      "name email topic"
+      "message . actions" !important;   /* ✅ message only 1 column */
+  }
+
+  /* make sure message doesn't stretch weirdly */
+  .contact-message{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
 
 
 
