@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BYE G</title>
+<title>PORTFOLIO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -1057,20 +1057,31 @@ CONTACT — SEND BUTTON (NO TURQUOISE HOVER BORDER)
 
 	
 /* ===========================
-ABOUT – LAYOUT
+ABOUT – LAYOUT (FULL WIDTH)
 =========================== */
 
 #about{
-  margin-top: -60px;    /* stronger pull up */
+  margin-top: -60px;
   padding-top: 0;
+
+  /* 🔑 same breakout logic as skills/contact */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+
+  box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: visible;
 }
 
+/* inner shell now stretches like others */
 .about-shell{
-  padding-top: 5px;      /* ✅ hover lift room */
-  max-width: 1050px;
-  margin: 0 auto 32px;
+  width: 100%;
+  max-width: none;      /* ❌ remove 1050px cap */
+  margin: 0;
+  padding-top: 5px;
   display: flex;
   flex-direction: column;
   gap: 14px;
