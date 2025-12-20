@@ -830,15 +830,32 @@ Fixes: send not stacked, weird side-by-side on iPhone
     justify-content: center !important;
   }
 
-  /* cards: 1 per row */
+ /* info cards: 2 per row */
   .contact-info-grid{
     display: grid !important;
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px !important;
   }
-}
 
+  /* cards fill nicely */
+  .contact-info-card{
+    width: 100% !important;
+  }
+}
 	
+@media (max-width: 899px){
+  .contact-info-card{
+    padding: 14px !important;
+  }
+
+  .contact-info-card h3{
+    font-size: 0.85rem;
+  }
+
+  .contact-info-card p{
+    font-size: 0.9rem;
+  }
+}
 
 
 	
