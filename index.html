@@ -1748,46 +1748,63 @@ ABOUT — PHONE: STATS ONE COLUMN
 
 
 /* ===========================
-EDUCATION MAPS
-============================ */
+EDUCATION – FULL WIDTH (like Skills/Contact/About)
+=========================== */
 
-#education { 
-	margin-top: -20px; 
+#education{
+  margin-top: -20px;
+
+  /* 🔑 same breakout logic */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+
+  overflow-x: hidden;
 }
 
-.education-maps {
-display: none; /* becomes flex only when Education is shown + maps loaded */
-width: 100%;
-justify-content: space-between;
-align-items: flex-start;
-gap: 20px;
-margin-top: 0;
+/* your maps row */
+.education-maps{
+  display: none; /* keep: becomes flex only when Education is shown + maps loaded */
+
+  width: 100%;
+  max-width: none; /* ✅ important */
+  margin: 0;       /* ✅ important */
+
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 0;
 }
 
-.map-column {
-display: flex;
-flex-direction: column;
-align-items: center;
+/* keep your existing styles */
+.map-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.map-label {
-font-size: 1.1rem;
-text-transform: uppercase;
-letter-spacing: 0.28em;
-margin-bottom: 32px;
+.map-label{
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  margin-bottom: 32px;
 }
 
-.country-map {
-width: 340px;
-height: 340px;
-cursor: pointer;
-transition: transform 0.25s ease, box-shadow 0.25s ease;
+.country-map{
+  width: 340px;
+  height: 340px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.country-map:hover {
-transform: scale(1.06); /* "zoom" effect */
-box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+.country-map:hover{
+  transform: scale(1.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
 }
+
 
 /* ===========================
 EDUCATION MAPS — SVG
