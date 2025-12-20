@@ -267,25 +267,40 @@ white-space: nowrap;
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* =========================================================
-CONTACT — CLEAN TOORMIX-ISH (MATCHES YOUR HTML EXACTLY)
-HTML used:
-#contact > .contact-wrap > form.contact-form > .contact-grid
-.contact-field.contact-name/.contact-email/.contact-topic/.contact-message
-aside.contact-actions > button.contact-send-btn + .contact-info-grid
+CONTACT — UPDATED (uses YOUR class names)
+REQUIREMENTS MET:
+- Row 1 stays: NAME | EMAIL | TOPIC
+- Row 2: LEFT = message (~70%) | RIGHT = (vertical SEND + 6 contact cards)
+- SEND is vertical (S E N D stacked)
+- Trebuchet MS everywhere in contact
 ========================================================= */
 
 #contact{
   margin-top: -20px;
   padding: 0 clamp(16px, 3vw, 64px) 40px;
   box-sizing: border-box;
-}
 
-/* Optional: break out of any centered wrapper */
-#contact{
+  /* break out of any centered wrapper */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+}
+
+/* font everywhere inside contact */
+#contact,
+#contact *{
+  font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif !important;
 }
 
 .contact-wrap{
@@ -299,18 +314,25 @@ aside.contact-actions > button.contact-send-btn + .contact-info-grid
 .contact-form{ width: 100%; }
 
 /* =========================
-GRID LAYOUT
-Row 1: name / email / topic / actions
-Row 2: message (span 3) / actions
+GRID LAYOUT (DESKTOP)
+Row 1: name / email / topic
+Row 2: message (70%) / actions (30%)
 ========================= */
 .contact-grid{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(320px, 0.95fr);
-  grid-template-areas:
-    "name email topic actions"
-    "message message message actions";
   gap: clamp(14px, 2vw, 22px);
   align-items: start;
+}
+
+/* Desktop layout */
+@media (min-width: 900px){
+  .contact-grid{
+    /* col3 slightly smaller => row2 becomes ~70/30 (message spans col1+col2) */
+    grid-template-columns: 1fr 1fr 0.85fr;
+    grid-template-areas:
+      "name email topic"
+      "message message actions";
+  }
 }
 
 .contact-name{ grid-area: name; }
@@ -344,11 +366,10 @@ FIELD CARDS
   box-shadow: 0 16px 40px rgba(0,0,0,.10);
 }
 
-/* Titles: less bold */
+/* Titles: softer */
 .contact-field label{
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-weight: 650;                  /* ✅ softer */
+  font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.05;
   color: #111;
@@ -386,7 +407,6 @@ FIELD CARDS
   appearance: none;
   padding-right: 34px;
   cursor: pointer;
-
   background-image:
     linear-gradient(45deg, transparent 50%, rgba(0,0,0,.7) 50%),
     linear-gradient(135deg, rgba(0,0,0,.7) 50%, transparent 50%);
@@ -404,42 +424,59 @@ FIELD CARDS
 }
 
 /* =========================
-MESSAGE — SMALLER (so actions aligns)
+MESSAGE — smaller + underline close to bottom
 ========================= */
 .contact-message{
-  min-height: 260px;                 /* ✅ reduced */
+  min-height: 260px;
+  /* keep underline low like other fields */
+  padding-bottom: clamp(12px, 1.3vw, 18px);
 }
 
 .contact-message textarea{
-  min-height: 140px;                 /* ✅ reduced */
+  /* make it feel tighter + underline closer to card bottom */
+  min-height: 140px;
   max-height: 200px;
   resize: vertical;
-  border-bottom: 2px solid rgba(0,0,0,0.70);
+
+  padding-bottom: 4px; /* helps visually */
+  margin-bottom: 0;
 }
 
 /* =========================
-RIGHT COLUMN (SEND + 2x2 CARDS)
+RIGHT SIDE: (VERTICAL SEND + 6 BOXES)
 ========================= */
 .contact-actions{
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 1.6vw, 18px);
   min-width: 0;
+
+  /* button + grid side-by-side */
+  display: grid;
+  grid-template-columns: 86px 1fr; /* button strip + content */
+  gap: clamp(12px, 1.6vw, 18px);
+  align-items: start;
 }
 
-/* SEND — big slab, but not comically tall */
+/* SEND — vertical */
 .contact-send-btn{
-  width: 100%;
-  min-height: 84px;                  /* ✅ big but controlled */
+  grid-column: 1;
+  grid-row: 1;
+
+  width: 86px;
+  height: 100%;
+  min-height: 320px; /* makes it feel like a vertical bar next to cards */
+
   border: 0;
   border-radius: 18px;
   background: #111;
   color: #fff;
 
+  /* vertical text */
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.18em;
 
   cursor: pointer;
   transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
@@ -455,8 +492,11 @@ RIGHT COLUMN (SEND + 2x2 CARDS)
   opacity: .92;
 }
 
-/* Cards grid */
+/* Cards grid — 2 x 3 (works for 6 cards) */
 .contact-info-grid{
+  grid-column: 2;
+  grid-row: 1;
+
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(12px, 1.5vw, 18px);
@@ -497,7 +537,7 @@ RIGHT COLUMN (SEND + 2x2 CARDS)
 .contact-info-card h3{
   margin: 0 0 6px;
   font-size: 0.92rem;
-  font-weight: 700;                  /* ✅ softer than 900 */
+  font-weight: 650;
   text-transform: uppercase;
   letter-spacing: 0.16em;
 }
@@ -534,7 +574,7 @@ RIGHT COLUMN (SEND + 2x2 CARDS)
 /* =========================
 RESPONSIVE
 ========================= */
-@media (max-width: 1100px){
+@media (max-width: 899px){
   .contact-grid{
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -545,196 +585,22 @@ RESPONSIVE
       "actions";
   }
 
-  .contact-info-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .contact-message{
-    min-height: 240px;
+  .contact-actions{
+    grid-template-columns: 1fr; /* stack on mobile */
   }
 
   .contact-send-btn{
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    width: 100%;
     min-height: 76px;
-  }
-}
-
-/* =========================================================
-CONTACT — OVERRIDES (YOUR RULES)
-Row 1: name/email/topic ONLY
-Row 2: message left + actions right
-Font: Trebuchet MS everywhere
-========================================================= */
-
-/* font everywhere inside contact */
-#contact, 
-#contact *{
-  font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif !important;
-}
-
-/* GRID: 3 columns only */
-@media (min-width: 1101px){
-  .contact-grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    grid-template-areas:
-      "name email topic"
-      "message message actions" !important;
-    align-items: start !important;
+    height: auto;
+    letter-spacing: 0.26em;
   }
 
-  .contact-name{ grid-area: name !important; }
-  .contact-email{ grid-area: email !important; }
-  .contact-topic{ grid-area: topic !important; }
-  .contact-message{ grid-area: message !important; }
-  .contact-actions{ grid-area: actions !important; }
-}
-
-/* message: keep it compact so actions sits nicely next to it */
-.contact-message{
-  min-height: 280px !important;
-}
-.contact-message textarea{
-  min-height: 150px !important;
-  max-height: 220px !important;
-}
-
-/* actions column: make it a proper right-side stack */
-.contact-actions{
-  display: flex !important;
-  flex-direction: column !important;
-  gap: clamp(12px, 1.6vw, 18px) !important;
-  min-width: 0 !important;
-}
-
-/* soften typography (less bold) */
-.contact-field label{
-  font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
-}
-.contact-info-card h3{
-  font-weight: 650 !important;
-}
-
-/* keep send button full width of actions column */
-.contact-send-btn{
-  width: 100% !important;
-}
-
-
-/* =====================================
-CONTACT — SHRINK MESSAGE BLOCK
-===================================== */
-
-/* reduce overall message card height */
-.contact-field.contact-message{
-  min-height: 220px !important;
-  padding: 18px 20px !important;
-}
-
-/* reduce textarea height */
-.contact-field.contact-message textarea{
-  min-height: 110px !important;
-  max-height: 150px !important;
-  resize: vertical;
-  font-size: 0.95rem;       /* slightly lighter feel */
-}
-
-/* optional: soften placeholder spacing */
-.contact-field.contact-message textarea::placeholder{
-  opacity: 0.55;
-}
-
-/* =====================================
-CONTACT — MESSAGE WIDTH + UNDERLINE FIX
-===================================== */
-
-/* reduce MESSAGE width relative to right column */
-@media (min-width: 1100px){
-  .contact-field.contact-message{
-    max-width: 92%;          /* ⬅️ makes it visually narrower */
+  .contact-info-grid{
+    grid-template-columns: 1fr;
   }
-}
-
-/* bring underline closer to box bottom (like name/email) */
-.contact-field.contact-message textarea{
-  padding-bottom: 4px !important;  /* tighter */
-  margin-bottom: 0 !important;
-}
-
-/* move underline up slightly */
-.contact-field.contact-message textarea{
-  border-bottom-width: 2px;
-}
-
-/* optional: align underline exactly with others */
-.contact-field.contact-message{
-  padding-bottom: 14px !important;
-}
-
-/* =====================================
-CONTACT — FIX TEXTAREA UNDERLINE POSITION
-===================================== */
-
-/* Make message card control its own height */
-.contact-field.contact-message{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* ⬅️ key */
-  padding-bottom: 16px;           /* same rhythm as others */
-}
-
-/* Push textarea underline to bottom */
-.contact-field.contact-message textarea{
-  flex: 1;                         /* fills available space */
-  display: block;
-
-  border-bottom: 2px solid rgba(0,0,0,0.75);
-  padding-bottom: 6px;             /* tight underline */
-  margin-bottom: 0;
-
-  resize: none;
-}
-
-/* =====================================
-CONTACT — NARROWER MESSAGE FIELD
-===================================== */
-
-/* Reduce message width without breaking layout */
-.contact-field.contact-message{
-  max-width: 100%;        /* ← adjust: try 80–88% */
-}
-
-/* Keep it aligned to the left */
-.contact-field.contact-message{
-  margin-right: auto;
-}
-
-
-/* =========================================
-CONTACT — FORCE LAYOUT (DESKTOP)
-Row1: name / email / topic
-Row2: message (span 2 cols) / actions (col 3)
-========================================= */
-@media (min-width: 900px){
-
-  .contact-grid{
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    grid-template-areas:
-      "name email topic"
-      "message message actions" !important;
-    gap: clamp(14px, 2vw, 22px) !important;
-    align-items: start !important;
-  }
-
-  .contact-name{ grid-area: name !important; }
-  .contact-email{ grid-area: email !important; }
-  .contact-topic{ grid-area: topic !important; }
-
-  /* ✅ THIS is what makes Message end exactly at “middle of email box” */
-  .contact-message{ grid-area: message !important; }
-
-  /* right side (send + cards) under the topic column */
-  .contact-actions{ grid-area: actions !important; }
 }
 
 
