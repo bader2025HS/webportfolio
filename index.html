@@ -1119,6 +1119,83 @@ NO GRADIENT • NO SHADOW • NO FRAME
 }
 
 
+/* =========================================================
+CONTACT — FOCUS SURFACE HOVER (CLEAN / SYSTEMIC)
+NO GRADIENT • NO SHADOW • NO FRAME
+========================================================= */
+
+/* Base */
+.contact-field,
+.contact-info-card{
+  position: relative;
+  overflow: hidden; /* needed for the effect */
+  border-color: transparent !important;
+  box-shadow: none !important;
+  background: #ededed !important;
+  transition: transform .15s ease;
+}
+
+/* turquoise focus layer */
+.contact-field::before,
+.contact-info-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0ea5a2;          /* solid turquoise */
+  transform: translateX(-100%); /* hidden */
+  transition: transform .18s ease;
+  z-index: 0;
+}
+
+/* hover action */
+.contact-field:hover,
+.contact-info-card:hover{
+  transform: scale(1.01);       /* very subtle focus */
+}
+
+.contact-field:hover::before,
+.contact-info-card:hover::before{
+  transform: translateX(0);     /* slide in */
+}
+
+/* keep content above the layer */
+.contact-field > *,
+.contact-info-card > *{
+  position: relative;
+  z-index: 1;
+  transition: color .15s ease, border-color .15s ease;
+}
+
+/* text contrast when focused */
+.contact-field:hover label,
+.contact-info-card:hover h3,
+.contact-info-card:hover p{
+  color: #ffffff !important;
+}
+
+.contact-field:hover input,
+.contact-field:hover textarea,
+.contact-field:hover select{
+  color: #ffffff !important;
+  border-bottom-color: rgba(255,255,255,0.85) !important;
+}
+
+.contact-field:hover input::placeholder,
+.contact-field:hover textarea::placeholder{
+  color: rgba(255,255,255,0.7) !important;
+}
+
+/* icons */
+.contact-info-card:hover svg{
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* SEND stays simple */
+.contact-send-btn{
+  box-shadow: none !important;
+}
 
 
 
