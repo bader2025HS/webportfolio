@@ -603,12 +603,6 @@ FULL-WIDTH DESKTOP CONTACT
 
 }
 
-/* =========================
-CONTACT LABELS — FORCE BOLD
-========================= */
-.contact-field label{
-  font-weight: 900 !important;
-}
 
 
 /* ================================
@@ -650,6 +644,32 @@ CONTACT — REDUCE MESSAGE HEIGHT
   opacity: 0.55;
 }
 
+/* =========================
+CONTACT — FIX OVERRIDES (PUT LAST)
+========================= */
+
+/* 1) make titles less bold (your current CSS forces 900) */
+.contact-field label{
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  opacity: .95;
+}
+
+/* also soften right titles */
+.contact-info-card h3{
+  font-weight: 600 !important;
+}
+
+/* 2) shrink message block so right column can align horizontally */
+.contact-message{
+  min-height: 260px !important;   /* was 380/420 */
+}
+
+.contact-message textarea{
+  min-height: 140px !important;   /* was 220 */
+  max-height: 180px !important;
+  resize: vertical !important;
+}
 
 
 
