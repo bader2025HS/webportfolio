@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PORT</title>
+<title>FOLIO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -3098,28 +3098,44 @@ MOBILE — ALIGN WITH NAVBAR
 
 
 /* ===========================
-WORK – VERTICAL STRIPS
+WORK — FULL WIDTH (extend the 3 strips)
 =========================== */
 
-#work {
-margin-top: -40px;
-padding: 30px 0 70px;
+#work{
+  margin-top: -40px;
+  padding: 30px 0 70px;
+  position: relative;
+
+  /* full-bleed breakout like Experience */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  /* same side padding system */
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+
+  overflow-x: hidden;
 }
 
-.work-layout {
-max-width: 1050px;
-margin: 0 auto;
+/* remove 1050px cap so strips can expand */
+.work-layout{
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.work-shell {
-display: flex;
-/* background is now controlled by JS */
-border-radius: 0;
-overflow: hidden;
-box-shadow: none;
-min-height: 320px;
+/* keep shell filling available width */
+.work-shell{
+  width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  min-height: 320px;
+  display: flex;
 }
-
 
 /* LEFT PANEL (text) */
 
@@ -3643,6 +3659,13 @@ margin-bottom: 26px;
 .work-tags {
 margin-top: 12px; 
 gap: 12px;
+}
+
+@media (max-width: 700px){
+  #work{
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
 }
 
 
