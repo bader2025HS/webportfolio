@@ -558,6 +558,66 @@ RESPONSIVE
   }
 }
 
+/* =========================================================
+CONTACT — OVERRIDES (YOUR RULES)
+Row 1: name/email/topic ONLY
+Row 2: message left + actions right
+Font: Trebuchet MS everywhere
+========================================================= */
+
+/* font everywhere inside contact */
+#contact, 
+#contact *{
+  font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif !important;
+}
+
+/* GRID: 3 columns only */
+@media (min-width: 1101px){
+  .contact-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-areas:
+      "name email topic"
+      "message message actions" !important;
+    align-items: start !important;
+  }
+
+  .contact-name{ grid-area: name !important; }
+  .contact-email{ grid-area: email !important; }
+  .contact-topic{ grid-area: topic !important; }
+  .contact-message{ grid-area: message !important; }
+  .contact-actions{ grid-area: actions !important; }
+}
+
+/* message: keep it compact so actions sits nicely next to it */
+.contact-message{
+  min-height: 280px !important;
+}
+.contact-message textarea{
+  min-height: 150px !important;
+  max-height: 220px !important;
+}
+
+/* actions column: make it a proper right-side stack */
+.contact-actions{
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(12px, 1.6vw, 18px) !important;
+  min-width: 0 !important;
+}
+
+/* soften typography (less bold) */
+.contact-field label{
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+.contact-info-card h3{
+  font-weight: 650 !important;
+}
+
+/* keep send button full width of actions column */
+.contact-send-btn{
+  width: 100% !important;
+}
 
 
 
