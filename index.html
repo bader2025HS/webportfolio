@@ -752,6 +752,37 @@ Actions: vertical SEND + 6 cards in 3x2
     justify-content: flex-start !important;
   }
 }
+/* =====================================
+CONTACT — TEXTAREA UNDERLINE AT BOTTOM
+===================================== */
+
+/* Make message card control vertical spacing */
+.contact-field.contact-message{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important; /* key */
+  padding-bottom: 18px !important;            /* same rhythm as others */
+}
+
+/* Push textarea to fill card */
+.contact-field.contact-message textarea{
+  flex: 1 !important;                          /* fills vertical space */
+  align-self: stretch !important;
+
+  border: 0 !important;
+  border-bottom: 2px solid rgba(0,0,0,0.7) !important;
+
+  padding-bottom: 6px !important;              /* tight like row 1 */
+  margin-bottom: 0 !important;
+
+  resize: none !important;
+  background: transparent !important;
+}
+
+/* Ensure label stays at top */
+.contact-field.contact-message label{
+  flex-shrink: 0 !important;
+}
 
 
 
