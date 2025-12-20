@@ -3669,33 +3669,64 @@ gap: 12px;
   }
 }
 
+/* ===========================
+WORK — ROUNDED CORNERS ( aware of full-bleed )
+=========================== */
+
+/* round the visible container, not the section */
+.work-shell{
+  border-radius: 18px;
+  overflow: hidden;   /* ensures inner strips respect the curve */
+}
+
+/* optional: soften each strip slightly */
+.work-strip{
+  border-radius: 0;   /* keep strips square so the shell defines shape */
+}
+
 
 /* ===========================
 ACTIVITIES – clean horizontal cards
 =========================== */
 
-#activities {
-margin-top: -20px;
-text-align: center;
+
+
+/* ===========================
+ACTIVITIES — FULL WIDTH (DESKTOP)
+=========================== */
+
+#activities{
+  margin-top: -20px;
+  text-align: center;
+
+  /* full-bleed breakout */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+
+  overflow-x: hidden;
 }
 
-/* 3 equal boxes in one row */
-.activities-row {
-  max-width: 1070px;
-  margin: 0 auto;
-  padding: 0 10px;
+.activities-row{
+  width: 100%;
+  max-width: none;     /* ❌ remove 1070px cap */
+  margin: 0;
+  padding: 0;          /* section already handles padding */
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
-
-/* each card */
 
 /* each card */
 .activity-box{
   background: #f5f8ff;
   border: 2.5px solid transparent;    /* reserve space for thick hover border */
-  border-radius: 0;
+  border-radius: 26px;
   padding: 18px 22px;
 
   display: grid;
