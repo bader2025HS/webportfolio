@@ -515,6 +515,41 @@ RESPONSIVE
 }
 
 
+/* =========================
+DESKTOP ONLY OVERRIDES
+(keep your mobile exactly the same)
+========================= */
+@media (min-width: 1101px){
+
+  /* wider container */
+  .contact-wrap{
+    max-width: 1750px;
+  }
+
+  /* exact desktop grid you described */
+  .contact-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.15fr);
+    grid-template-areas:
+      "name email topic actions"
+      "message message message actions";
+    align-items: start;
+  }
+
+  /* make message area feel like Toormix big block */
+  .contact-message{
+    min-height: 360px;
+  }
+
+  /* keep right column visually aligned and not too narrow */
+  .contact-actions{
+    align-self: start;
+  }
+
+  /* right info grid stays 2 columns on desktop */
+  .contact-info-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 
 
