@@ -2633,24 +2633,36 @@ NO OTHER CHANGES
 }
 
 /* =========================================================
-SKILLS — MATCH CONTACT WIDTH (ONLY WIDTH)
-NO COLORS • NO HOVERS • NO RADIUS • NO LOGIC CHANGES
+SKILLS — FULL WIDTH WITH INNER CONSTRAINT (LIKE CONTACT)
+NO TOP MARGIN CHANGE
+NO EFFECT ON ABOUT / OTHERS
 ========================================================= */
 
+/* Keep skills section full-bleed */
 #skills{
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+  /* ❌ do NOT touch margin-top */
+}
+
+/* Re-apply inner constraint (same philosophy as contact) */
+#skills .skillsGrid{
+  max-width: 1600px;                 /* same visual ceiling as contact */
+  margin-left: auto;
+  margin-right: auto;
   padding-left: clamp(16px, 3vw, 64px);
   padding-right: clamp(16px, 3vw, 64px);
   box-sizing: border-box;
 }
 
-.skillsGrid{
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
+/* Safety: do NOT leak into other sections */
+#about .skillsGrid,
+#education .skillsGrid,
+#experience .skillsGrid{
+  all: unset;
 }
+
 
 
 /* ===========================
