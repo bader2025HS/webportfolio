@@ -269,108 +269,74 @@ white-space: nowrap;
 
 
 
-
-
-
-
-
 /* =========================================================
-CONTACT — TOORMIX STYLE (FULL + SELF-CONTAINED)
-NO #contact selectors
-KEEP YOUR HTML/CONTENT
+CONTACT — ONE WRAP LAYOUT (for your NEW HTML structure)
+- no left/right wrapper
+- row1: name/email/topic | right: send + info grid
+- row2: message spans under the 3 fields
 ========================================================= */
 
-/* ====== MAIN LAYOUT (RESTORE) ====== */
-.contact-layout{
-  max-width: 2000px;
-  margin: 0 auto 16px;
+/* outer wrap */
+.contact-wrap{
+  max-width: 1600px;
+  margin: 0 auto;
   padding-left: clamp(16px, 3vw, 56px);
   padding-right: clamp(16px, 3vw, 56px);
+  box-sizing: border-box;
+}
 
+/* main grid */
+.contact-grid{
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-  gap: clamp(18px, 2.6vw, 36px);
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.15fr);
+  grid-template-areas:
+    "name email topic actions"
+    "message message message actions";
+  gap: clamp(14px, 2vw, 22px);
   align-items: start;
 }
 
-/* prevent grid children from forcing overflow */
-.contact-left,
-.contact-right,
-.contact-envelope,
-.contact-info-grid{
-  min-width: 0;
-}
+/* place areas */
+.contact-name{ grid-area: name; }
+.contact-email{ grid-area: email; }
+.contact-topic{ grid-area: topic; }
+.contact-message{ grid-area: message; }
+.contact-actions{ grid-area: actions; min-width: 0; }
 
-/* ====== LEFT SIDE (ENVELOPE WRAPPER) ====== */
-.contact-envelope{
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  box-shadow: none;
-  transform: none;
-}
-
-/* keep your heading/subline */
-.contact-title{
-  margin: 0 0 6px;
-  text-align: left;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  font-weight: 700;
-  opacity: .85;
-}
-
-.contact-subline{
-  margin: 0 0 18px;
-  text-align: left;
-  font-size: 0.9rem;
-  opacity: .7;
-}
-
-/* ====== 3 FIELDS IN ONE ROW (RESTORE) ====== */
-.contact-envelope-form{ width: 100%; }
-
-.contact-envelope-fields{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(14px, 2vw, 22px);
-  margin-bottom: clamp(14px, 2vw, 22px);
-}
-
-/* ====== FIELD CARD (TOORMIX LOOK) ====== */
-.contact-envelope-field{
+/* -----------------------------
+FIELD CARD (Toormix-ish)
+----------------------------- */
+.contact-field{
   background: #ededed;
-  border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.08);
-
+  border-radius: 14px;
   padding: clamp(18px, 2.2vw, 26px);
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   gap: 14px;
 
-  min-height: 170px;
-  box-sizing: border-box;
+  min-width: 0;
 }
 
-/* BIG LABEL (but not insane) */
-.contact-envelope-field label{
+/* big label */
+.contact-field label{
   font-family: Impact, "Arial Black", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 900;
-  text-transform: none;
   letter-spacing: -0.02em;
   line-height: 1.02;
+  text-transform: none;
 
   font-size: clamp(26px, 2.4vw, 44px);
-  opacity: 1;
   margin: 0;
+  color: #111;
 }
 
-/* UNDERLINE INPUTS (REMOVE INNER BOXES) */
-.contact-envelope-field input,
-.contact-envelope-field select,
-.contact-envelope-field textarea{
+/* underline inputs */
+.contact-field input,
+.contact-field select,
+.contact-field textarea{
   background: transparent;
   border: 0;
   outline: none;
@@ -382,17 +348,17 @@ KEEP YOUR HTML/CONTENT
   font: inherit;
   font-size: clamp(16px, 1.1vw, 19px);
   color: #111;
+
   box-sizing: border-box;
 }
 
-/* placeholder */
-.contact-envelope-field input::placeholder,
-.contact-envelope-field textarea::placeholder{
+.contact-field input::placeholder,
+.contact-field textarea::placeholder{
   color: rgba(0,0,0,0.45);
 }
 
 /* select caret */
-.contact-envelope-field select{
+.contact-field select{
   appearance: none;
   padding-right: 34px;
   cursor: pointer;
@@ -408,100 +374,93 @@ KEEP YOUR HTML/CONTENT
 }
 
 /* focus underline accent */
-.contact-envelope-field input:focus,
-.contact-envelope-field select:focus,
-.contact-envelope-field textarea:focus{
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus{
   border-bottom-color: var(--accent, #0ea5a2);
 }
 
-/* MESSAGE CARD */
-.contact-envelope-message{
+/* message card bigger */
+.contact-message{
   min-height: 320px;
 }
-
-.contact-envelope-message textarea{
+.contact-message textarea{
   border-bottom: 0;
-  padding-top: 6px;
   resize: none;
-  min-height: 170px;
+  min-height: 180px;
+  padding-top: 6px;
 }
 
-/* SEND BUTTON (keep yours, but sane + aligned) */
+/* -----------------------------
+RIGHT COLUMN: SEND + INFO GRID
+----------------------------- */
+.contact-actions{
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 18px);
+  min-width: 0;
+}
+
+/* Send button */
 .contact-send-btn{
-  margin-top: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  min-height: 72px;
 
-  min-height: 64px;
-  padding: 14px 28px;
-  border-radius: 18px;
   border: 0;
-
+  border-radius: 18px;
   background: #111;
   color: #fff;
 
   font-size: 14px;
   font-weight: 900;
-  letter-spacing: 0.24em;
   text-transform: uppercase;
+  letter-spacing: 0.24em;
 
   cursor: pointer;
   transition: transform .18s ease, box-shadow .18s ease;
 }
-
 .contact-send-btn:hover{
   transform: translateY(-2px);
   box-shadow: 0 18px 44px rgba(0,0,0,.18);
 }
 
-/* ====== RIGHT SIDE GRID (RESTORE) ====== */
-.contact-right{
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
+/* info grid inside right column */
 .contact-info-grid{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(14px, 2vw, 22px);
+  gap: clamp(12px, 1.6vw, 18px);
+  min-width: 0;
 }
 
-/* IMPORTANT: remove default link styling */
+/* info cards */
 .contact-info-card{
   background: #ededed;
-  border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.08);
-  padding: 20px;
+  border-radius: 14px;
+  padding: 18px;
   box-sizing: border-box;
 
+  text-decoration: none;
   color: #111;
-  text-decoration: none; /* ✅ kills underline */
-  display: block;
 
   transition: transform .18s ease, box-shadow .18s ease;
 }
-
 .contact-info-card:visited{ color: #111; }
 .contact-info-card:hover{
   transform: translateY(-2px);
   box-shadow: 0 18px 44px rgba(0,0,0,.12);
 }
 
-/* icon */
 .contact-info-icon{
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
   margin-bottom: 10px;
 }
 .contact-info-icon svg{
   stroke: rgba(0,0,0,0.75);
 }
 
-/* titles + text */
 .contact-info-card h3{
   margin: 0 0 6px;
   font-size: 0.95rem;
@@ -516,11 +475,12 @@ KEEP YOUR HTML/CONTENT
   opacity: .75;
 }
 
-/* social links row inside the Social card */
+/* social row inside Social card */
 .social-links{
   display: flex;
   gap: 12px;
-  margin-top: 8px;
+  margin: 8px 0 0;
+  align-items: center;
 }
 .social-links a{
   display: inline-flex;
@@ -536,37 +496,23 @@ KEEP YOUR HTML/CONTENT
   opacity: 1;
 }
 
-/* copyright */
-.contact-copyright{
-  background: #ededed;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 12px 14px;
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: .85;
-}
-
-/* ====== RESPONSIVE ====== */
+/* -----------------------------
+RESPONSIVE
+----------------------------- */
 @media (max-width: 1100px){
-  .contact-layout{
+  .contact-grid{
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 900px){
-  .contact-envelope-fields{
-    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "email"
+      "topic"
+      "message"
+      "actions";
   }
   .contact-info-grid{
     grid-template-columns: 1fr;
   }
 }
-
-
-
-
-
 
 
 
