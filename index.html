@@ -2464,12 +2464,14 @@ grid-row: auto;
 RESPONSIVE
 ====================== */
 
+/* keep skills full width on all screens */
 @media (max-width: 1100px){
-.skillsGrid{
-width: min(1050px, 92vw);
-max-width: 92vw;
+  .skillsGrid{
+    width: 100%;
+    max-width: none;
+  }
 }
-}
+
 
 /* tablet */
 @media (max-width: 900px){
