@@ -1755,23 +1755,22 @@ ABOUT — PHONE: STATS ONE COLUMN
     width: 100%;
   }
 }
+
 /* ===========================
-ABOUT — MATCH NAVBAR INSET (MOBILE)
+ABOUT — MATCH NAVBAR INSET (MOBILE) — FIXED
+PUT LAST
 =========================== */
 @media (max-width: 700px){
 
-  /* section padding = navbar padding */
+  /* keep breakout, but use same inset as navbar */
   #about{
     padding-left: 12px !important;
     padding-right: 12px !important;
     box-sizing: border-box;
   }
 
-  /* remove extra inner padding / width caps */
-  .about-wrap,
-  .about-layout,
-  .about-content,
-  .about-inner{
+  /* 🔑 remove the extra inner padding that was making About narrower */
+  .about-shell{
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin-left: 0 !important;
@@ -1781,6 +1780,7 @@ ABOUT — MATCH NAVBAR INSET (MOBILE)
     box-sizing: border-box;
   }
 }
+
 
 
 /* ===========================
