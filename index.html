@@ -3828,16 +3828,37 @@ ACTIVITIES — FULL WIDTH (SYSTEM)
 }
 
 
-/* 3 equal boxes in one row */
+/* ===========================
+ACTIVITIES — 4 CARDS / ONE ROW
+=========================== */
+
 .activities-row{
   width: 100%;
-  max-width: none;        /* ✅ remove cap */
+  max-width: none;
   margin: 0;
-  padding: 0;             /* section already handles padding */
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* ✅ 4 equal columns */
   gap: 16px;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
 }
+
+/* Tablet */
+@media (max-width: 1000px){
+  .activities-row{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Phone */
+@media (max-width: 700px){
+  .activities-row{
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 /* each card */
@@ -4188,6 +4209,17 @@ ACTIVITIES — MOBILE ALIGN WITH NAVBAR
     padding: 0;
     margin: 0;
   }
+}
+
+/* ===========================
+ACTIVITIES — REMOVE LOCAL SCROLLBAR
+=========================== */
+
+#activities{
+  overflow: visible !important;
+  overflow-y: visible !important;
+  height: auto !important;
+  max-height: none !important;
 }
 
 
