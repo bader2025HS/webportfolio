@@ -3282,6 +3282,28 @@ PUT LAST
 }
 
 
+/* ===========================
+EXPERIENCE — ROUNDED CORNERS (MATCH SYSTEM)
+=========================== */
+
+.exp-card-face{
+  border-radius: 16px;        /* same as About / Contact */
+}
+
+.exp-card-face::after{
+  border-radius: 16px;        /* inner thin line follows */
+}
+
+/* front + back explicitly (safe) */
+.exp-card-front,
+.exp-card-back{
+  border-radius: 16px;
+}
+
+/* expanded state safety */
+.exp-card--expanded .exp-card-face{
+  border-radius: 16px;
+}
 
 
 
