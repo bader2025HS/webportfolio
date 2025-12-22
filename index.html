@@ -3258,6 +3258,28 @@ PUT LAST
 
 
 
+/* ===========================
+EXPERIENCE — FIX HOVER BORDER TOP (DESKTOP)
+PUT LAST
+=========================== */
+
+/* ensure cards can stack */
+.exp-card{
+  position: relative;   /* already, but keep */
+  z-index: 0;
+}
+
+/* hovered card must come above neighbors */
+@media (hover: hover) and (min-width: 801px){
+  .exp-card:hover{
+    z-index: 10;
+  }
+}
+
+/* also ensure border sizing is clean */
+.exp-card-face{
+  box-sizing: border-box;
+}
 
 
 
