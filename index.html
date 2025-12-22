@@ -3239,21 +3239,22 @@ PUT LAST
 
 
 
+
+
 /* ===========================
-EXPERIENCE — STOP TOP CROP (ALL SCREENS)
+EXPERIENCE — MATCH OTHER SECTIONS (NO CROP)
+DESKTOP + MOBILE
 PUT LAST
 =========================== */
 #experience{
-  margin-top: 0 !important;          /* kill the upward pull */
-  padding-top: 24px !important;      /* consistent breathing space */
-  scroll-margin-top: 90px;           /* prevents anchor jump hiding top */
+  margin-top: -20px !important;   /* ✅ same as others */
+  padding-top: 0 !important;      /* no artificial push */
+  scroll-margin-top: 90px;        /* keep anchor safe */
 }
 
 .experience-layout{
-  margin-top: 0 !important;          /* kill the -20px */
+  margin-top: 0 !important;       /* ❌ remove the -20px here */
 }
-
-
 
 
 
