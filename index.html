@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PORTO</title>
+<title>PORTFOLIO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -3306,6 +3306,32 @@ EXPERIENCE — ROUNDED CORNERS (MATCH SYSTEM)
 }
 
 
+/* ================================
+EXPERIENCE — STOP HOVER BORDER CLIPPING
+PUT LAST
+================================ */
+
+/* don’t let the section clip hover lift */
+#experience{
+  overflow: visible !important;       /* 🔑 this is the main fix */
+}
+
+/* also ensure the grid doesn't clip */
+.experience-layout,
+.exp-mosaic{
+  overflow: visible !important;
+}
+
+/* give 3px “breathing room” so lift never touches the top edge */
+.experience-layout{
+  padding-top: 6px !important;
+}
+
+/* keep your nice rounded system */
+.exp-card-face,
+.exp-card-face::after{
+  border-radius: 16px !important;
+}
 
 
 	
