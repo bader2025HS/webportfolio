@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PORTFOLIO</title>
+<title>PORTO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -3180,6 +3180,37 @@ EXPERIENCE — MATCH NAVBAR INSET (MOBILE)
   }
 }
 
+/* ===========================
+EXPERIENCE — MOBILE: ALIGN WITH NAVBAR
+(disable 100vw breakout on phone)
+PUT LAST
+=========================== */
+@media (max-width: 700px){
+
+  #experience{
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .experience-layout,
+  .exp-mosaic{
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+
 
 /* ===========================
 WORK – VERTICAL STRIPS
@@ -3729,6 +3760,72 @@ margin-top: 12px;
 gap: 12px;
 }
 
+/* ===========================
+WORK — FULL WIDTH + MOBILE ALIGN (PUT LAST)
+=========================== */
+
+/* full-bleed breakout like About/Experience/Contact */
+#work{
+  /* keep your existing spacing */
+  margin-top: -40px;
+  padding: 30px 0 70px;
+  position: relative;
+
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+/* let the 3 boxes/card stretch full width */
+.work-layout{
+  width: 100%;
+  max-width: none;   /* overrides 1050px */
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* keep rounded corners (you said you want rounded) */
+.work-shell{
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+
+/* ===========================
+WORK — MOBILE: ALIGN WITH NAVBAR (ONLY)
+PUT LAST
+=========================== */
+@media (max-width: 700px){
+
+  /* kill any horizontal breakout on phone */
+  #work{
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    /* EXACT same inset as navbar */
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* remove desktop centering / width caps */
+  .work-layout{
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
 
 /* ===========================
 ACTIVITIES – clean horizontal cards
