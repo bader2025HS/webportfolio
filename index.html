@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>POROFIFOO</title>
+<title>mammia</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -2794,15 +2794,26 @@ SKILLS — MATCH NAVBAR INSET (MOBILE)
 
 
 	
+/* =========================================================
+EXPERIENCE — FULL CSS (CLEAN + NO DUPLICATES)
+- full width breakout like your other sections
+- margin-top aligned (same rhythm as About/Skills: -20px)
+- NO top crop (hover border always visible)
+- rounded corners like other sections (16px)
+- desktop: 2×2 grid + flip
+- mobile: stacked cards, back only (no flip, no dim, no expand)
+========================================================= */
 
 /* ===========================
-EXPERIENCE – FULL WIDTH (like Skills/About/Contact)
+SECTION — FULL WIDTH + SPACING
 =========================== */
 
 #experience{
+  margin-top: -20px;                 /* ✅ same rhythm as other sections */
+  padding-top: 0;
   position: relative;
 
-  /* 🔑 full-bleed breakout */
+  /* full-bleed breakout */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
@@ -2810,22 +2821,33 @@ EXPERIENCE – FULL WIDTH (like Skills/About/Contact)
   padding-right: clamp(16px, 3vw, 64px);
   box-sizing: border-box;
 
-  overflow-x: hidden;
+  /* 🔑 don't clip hover border */
+  overflow: visible;
+
+  /* anchor safety under nav */
+  scroll-margin-top: 90px;
 }
 
-/* inner layout (no width cap anymore) */
+/* inner layout */
 .experience-layout{
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: none;     /* ❌ remove 1050px */
-  padding: 0;
+  max-width: none;
+  margin: 0;                         /* ✅ kills old -20px culprit */
+  padding: 6px 0 0;                  /* tiny breathing room for hover lift */
+  box-sizing: border-box;
+
+  overflow: visible;
 }
 
-/* 2×2 grid */
+/* ===========================
+GRID
+=========================== */
+
 .exp-mosaic{
   width: 100%;
-  max-width: none;     /* ❌ remove 1050px */
+  max-width: none;
   margin: 0;
 
   display: grid;
@@ -2837,72 +2859,83 @@ EXPERIENCE – FULL WIDTH (like Skills/About/Contact)
   gap: 18px;
 
   perspective: 1200px;
+
+  overflow: visible;                 /* ✅ don't clip hover */
 }
 
+/* keep grid areas */
+.exp-card--ngo{ grid-area: ngo; }
+.exp-card--io{ grid-area: io; }
+.exp-card--research{ grid-area: research; }
+.exp-card--assoc{ grid-area: assoc; }
+
 /* ======================
-CARD SHELL (UNIFIED SYSTEM)
+CARD SHELL
 ====================== */
 
 .exp-card{
-  position:relative;
-  cursor:pointer;
-  overflow:visible;
+  position: relative;
+  cursor: pointer;
+  overflow: visible;                 /* ✅ no clipping */
+  z-index: 0;
+
+  transition: transform .22s ease;
 }
 
 /* lift */
-.exp-card{
-  transition: transform .22s ease;
-}
-.exp-card:hover{
-  transform: translateY(-3px);
-}
-
-/* faces */
-.exp-card-face{
-  position:absolute;
-  inset:0;
-  border-radius:0;
-  backface-visibility:hidden;
-  overflow:hidden;
-
-  /* 🔑 unified border system */
-  background:#f5f8ff;
-  border:2.5px solid transparent;       /* reserve hover space */
-  box-shadow:none;
+@media (hover:hover){
+  .exp-card:hover{
+    transform: translateY(-3px);
+    z-index: 10;                     /* ✅ border shows on top */
+  }
 }
 
-/* inner thin static line */
-.exp-card-face::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
-}
-
-/* hover = activate real border */
-.exp-card:hover .exp-card-face{
-  background:#ffffff;
-  border-color: var(--exp-accent,#0ea5a2);
-}
-
-/* hide inner line on hover */
-.exp-card:hover .exp-card-face::after{
-  box-shadow:none;
-}
-
-/* ======================
-FLIP
-====================== */
-
+/* inner 3D wrapper */
 .exp-card-inner{
-  width:100%;
-  height:100%;
-  transform-style:preserve-3d;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
   transition: transform .6s cubic-bezier(.2,.8,.25,1);
 }
 .exp-card.is-flipped .exp-card-inner{
   transform: rotateY(180deg);
+}
+
+/* faces */
+.exp-card-face{
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+
+  /* unified system */
+  background: #f5f8ff;
+  border: 2.5px solid transparent;      /* reserve hover thickness */
+  box-shadow: none;
+  box-sizing: border-box;
+
+  border-radius: 16px;                  /* ✅ rounded like other sections */
+}
+
+/* thin inner static line */
+.exp-card-face::after{
+  content:"";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+  border-radius: 16px;
+}
+
+/* hover border */
+@media (hover:hover){
+  .exp-card:hover .exp-card-face{
+    background: #ffffff;
+    border-color: var(--exp-accent, #0ea5a2);
+  }
+  .exp-card:hover .exp-card-face::after{
+    box-shadow: none;
+  }
 }
 
 /* ======================
@@ -2910,52 +2943,37 @@ FRONT
 ====================== */
 
 .exp-card-front{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:24px 26px;
-  gap:14px;
-  color:#1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 26px;
+  gap: 14px;
+  color: #1f2937;
+
+  border-radius: 16px; /* safe */
 }
 
 .exp-front-left{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .exp-front-main{
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  font-size:.8rem;
-  color:var(--exp-accent);
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .8rem;
+  color: var(--exp-accent, #0ea5a2);
 }
 
 .exp-front-sub{
-  margin-top:10px;
-  font-size:1.35rem;
-  font-weight:600;
-  max-width:14ch;
-  line-height:1.15;
+  margin-top: 10px;
+  font-size: 1.35rem;
+  font-weight: 600;
+  max-width: 14ch;
+  line-height: 1.15;
 }
 
-/* gate */
-.exp-gate{
-  text-align:right;
-  min-width:90px;
-}
-.exp-gate-label{
-  font-size:.7rem;
-  letter-spacing:.18em;
-  color:#9ca3af;
-}
-.exp-gate-code{
-  margin-top:4px;
-  font-size:2.1rem;
-  font-weight:700;
-  letter-spacing:.16em;
-  color:#d79a3b; /* honey */
-}
 
 /* ======================
 BACK
@@ -2963,101 +2981,97 @@ BACK
 
 .exp-card-back{
   transform: rotateY(180deg);
-  display:flex;
-  flex-direction:column;
-  color:#1f2937;
+  display: flex;
+  flex-direction: column;
+  color: #1f2937;
+
+  border-radius: 16px; /* safe */
 }
 
 .exp-card-back-inner{
-  padding:14px 14px 10px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  height:100%;
-  overflow-y:auto;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .exp-back-label{
-  font-size:.75rem;
-  letter-spacing:.18em;
-  color:#1c2d5a;
+  font-size: .75rem;
+  letter-spacing: .18em;
+  color: #1c2d5a;
 }
 
 /* org block */
 .exp-org{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:14px;
-  align-items:center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
 }
 
 .exp-org-logo{
-  width:90px;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .exp-org-logo img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .exp-org-text{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .exp-org-text h3{
-  font-size:.95rem;
-  margin:0;
+  font-size: .95rem;
+  margin: 0;
 }
 
 .exp-org-meta{
-  font-size:.78rem;
-  color:var(--exp-accent);
+  font-size: .78rem;
+  color: var(--exp-accent, #0ea5a2);
 }
 
 .exp-org-list{
-  grid-column:1/-1;
-  padding-left:20px;
-  font-size:.82rem;
-  line-height:1.45;
+  grid-column: 1 / -1;
+  padding-left: 20px;
+  font-size: .82rem;
+  line-height: 1.45;
 }
 
 /* ======================
-ACCENTS
+ACCENT
 ====================== */
 
-.exp-card{ --exp-accent:#0ea5a2; }   /* one accent for all cards */
-
-/* keep grid areas */
-.exp-card--ngo{ grid-area:ngo; }
-.exp-card--io{ grid-area:io; }
-.exp-card--research{ grid-area:research; }
-.exp-card--assoc{ grid-area:assoc; }
-
+.exp-card{ --exp-accent:#0ea5a2; }
 
 /* ======================
-EXPANSION
+EXPANSION + DIM (DESKTOP ONLY)
+(kept as you had it)
 ====================== */
 
 .exp-card--expanded{
-  z-index:20;
+  z-index: 20;
 }
 
 .exp-card--expanded .exp-card-back{
-  position:absolute;
-  left:0;
-  right:0;
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  position: absolute;
+  left: 0;
+  right: 0;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
 }
 
 .exp-card--ngo.exp-card--expanded .exp-card-back{
-  top:0;
+  top: 0;
   height: calc(200% + 18px);
 }
 .exp-card--research.exp-card--expanded .exp-card-back{
@@ -3065,18 +3079,34 @@ EXPANSION
   height: calc(200% + 18px);
 }
 
-/* dim others */
 .exp-mosaic.dim-others .exp-card{
-  opacity:.35;
+  opacity: .35;
 }
 .exp-mosaic.dim-others .exp-card--expanded{
-  opacity:1;
+  opacity: 1;
 }
-@media (max-width:800px){
 
-  /* =========================
-     LAYOUT — STACK VERTICALLY
-  ========================= */
+/* ===========================
+MOBILE — STACK, BACK ONLY
+(no flip, no dim, no expand)
+=========================== */
+
+@media (max-width: 800px){
+
+  /* align with navbar inset on phone */
+  #experience{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    overflow: visible;
+  }
+
+  .experience-layout{
+    padding-top: 0;
+  }
+
   .exp-mosaic{
     display: flex;
     flex-direction: column;
@@ -3091,22 +3121,19 @@ EXPANSION
     cursor: default;
   }
 
-  /* =========================
-     KILL FLIP COMPLETELY
-  ========================= */
+  /* kill flip completely */
   .exp-card-inner{
     width: 100%;
     height: auto;
-    transform: none;
+    transform: none !important;
     transform-style: flat;
     transition: none;
   }
-
   .exp-card.is-flipped .exp-card-inner{
-    transform: none;
+    transform: none !important;
   }
 
-  /* faces MUST be normal blocks */
+  /* faces become normal blocks */
   .exp-card-face{
     position: relative;
     inset: auto;
@@ -3122,7 +3149,7 @@ EXPANSION
   .exp-card-back{
     display: flex;
     position: relative;
-    transform: none;
+    transform: none !important;
     box-shadow: none;
   }
 
@@ -3133,10 +3160,7 @@ EXPANSION
     padding: 16px 14px 18px;
   }
 
-  /* =========================
-     KILL EXPANSION + DIM SYSTEM
-     (THIS IS WHAT YOU WERE MISSING)
-  ========================= */
+  /* kill dim + expansion */
   .exp-mosaic.dim-others .exp-card{
     opacity: 1 !important;
   }
@@ -3160,175 +3184,11 @@ EXPANSION
     height: auto !important;
   }
 
-  /* =========================
-     NO HOVER / NO TAP EFFECTS
-  ========================= */
+  /* no hover lift on touch */
   .exp-card:hover{
     transform: none;
-    box-shadow: none;
   }
 }
-
-
-
-/* ===========================
-EXPERIENCE — MATCH NAVBAR INSET (MOBILE)
-=========================== */
-@media (max-width: 700px){
-
-  /* section padding = navbar padding */
-  #experience{
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    box-sizing: border-box;
-  }
-
-  /* remove any inner width constraints */
-  .experience-layout,
-  .exp-mosaic{
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    max-width: none !important;
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-}
-
-/* ===========================
-EXPERIENCE — MOBILE: ALIGN WITH NAVBAR
-(disable 100vw breakout on phone)
-PUT LAST
-=========================== */
-@media (max-width: 700px){
-
-  #experience{
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-  }
-
-  .experience-layout,
-  .exp-mosaic{
-    width: 100% !important;
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    box-sizing: border-box !important;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===========================
-EXPERIENCE — FIX HOVER BORDER TOP (DESKTOP)
-PUT LAST
-=========================== */
-
-/* ensure cards can stack */
-.exp-card{
-  position: relative;   /* already, but keep */
-  z-index: 0;
-}
-
-/* hovered card must come above neighbors */
-@media (hover: hover) and (min-width: 801px){
-  .exp-card:hover{
-    z-index: 10;
-  }
-}
-
-/* also ensure border sizing is clean */
-.exp-card-face{
-  box-sizing: border-box;
-}
-
-
-/* ===========================
-EXPERIENCE — ROUNDED CORNERS (MATCH SYSTEM)
-=========================== */
-
-.exp-card-face{
-  border-radius: 16px;        /* same as About / Contact */
-}
-
-.exp-card-face::after{
-  border-radius: 16px;        /* inner thin line follows */
-}
-
-/* front + back explicitly (safe) */
-.exp-card-front,
-.exp-card-back{
-  border-radius: 16px;
-}
-
-/* expanded state safety */
-.exp-card--expanded .exp-card-face{
-  border-radius: 16px;
-}
-
-
-/* ================================
-EXPERIENCE — STOP HOVER BORDER CLIPPING
-PUT LAST
-================================ */
-
-/* don’t let the section clip hover lift */
-#experience{
-  overflow: visible !important;       /* 🔑 this is the main fix */
-}
-
-/* also ensure the grid doesn't clip */
-.experience-layout,
-.exp-mosaic{
-  overflow: visible !important;
-}
-
-/* give 3px “breathing room” so lift never touches the top edge */
-.experience-layout{
-  padding-top: 6px !important;
-}
-
-/* keep your nice rounded system */
-.exp-card-face,
-.exp-card-face::after{
-  border-radius: 16px !important;
-}
-
-/* ===========================
-EXPERIENCE — FINAL ALIGNMENT
-(IDENTICAL to About / Skills)
-=========================== */
-
-#experience{
-  margin-top: -20px;
-  padding-top: 0;
-  overflow: visible;
-  scroll-margin-top: 90px;
-}
-
-
 
 
 
