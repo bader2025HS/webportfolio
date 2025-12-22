@@ -1019,27 +1019,27 @@ CONTACT — MOBILE WIDTH FIX
 (align with navbar padding)
 =========================== */
 
-@media (max-width: 700px){
+
+
+@media (max-width: 899px){
+
+  /* ✅ DO NOT cancel breakout anymore */
   #contact{
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-}
-/* FINAL OVERRIDE — put this as the last lines of your CSS */
-@media (max-width: 700px){
-  #contact{
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+
+    /* mobile padding like Skills */
     padding-left: 12px !important;
     padding-right: 12px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
+
+  /* keep the rest of your mobile layout rules exactly as you have them... */
 }
 
-/* FINAL OVERRIDE — put this as the last lines of your CSS */
-@media (max-width: 899px){
-  #contact{
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-}
 
 
 
