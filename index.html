@@ -3190,6 +3190,62 @@ MOBILE — STACK, BACK ONLY
   }
 }
 
+/* =========================================
+EXPERIENCE — FINAL (fix margin-top + keep hover)
+PUT THIS AT VERY END
+========================================= */
+
+/* 1) stop margin-collapsing so section top spacing is predictable */
+#experience{
+  display: flow-root;                 /* ✅ prevents first-child margin collapse */
+  margin-top: -20px !important;       /* ✅ match your other sections */
+  padding-top: 0 !important;          /* no fake push */
+  padding-bottom: 40px;               /* optional, nice breathing room */
+
+  /* full-bleed breakout (keep) */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
+
+  /* keep hover borders visible */
+  overflow: visible !important;
+}
+
+/* 2) kill any hidden “-20px” offsets inside */
+.experience-layout{
+  margin: 0 !important;               /* ✅ removes your earlier margin:-20px 0 0 */
+  padding-top: 6px !important;        /* tiny breathing room so hover never hits top */
+  overflow: visible !important;
+}
+
+/* grid also must not clip */
+.exp-mosaic{
+  overflow: visible !important;
+}
+
+/* 3) the REAL culprit on many pages: the section title margin */
+#experience h2,
+#experience .section-title,
+#experience .section-heading{
+  margin-top: 0 !important;           /* ✅ makes it match other sections */
+}
+
+/* 4) hover stacking + rounded corners (keep your system) */
+.exp-card{ position: relative; z-index: 0; }
+@media (hover:hover) and (min-width:801px){
+  .exp-card:hover{ z-index: 10; }
+}
+
+.exp-card-face,
+.exp-card-face::after,
+.exp-card-front,
+.exp-card-back{
+  border-radius: 16px !important;
+  box-sizing: border-box;
+}
 
 
 /* ===========================
