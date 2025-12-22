@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>hey</title>
+<title>PORTO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -188,6 +188,61 @@ MOBILE (unchanged behavior, new colors)
   }
 }
 
+/* ===========================
+NAVBAR — MIRROR / GLASS EFFECT
+PUT LAST (doesn't change layout)
+=========================== */
+
+nav ul{
+  position: relative; /* already, but ensure ::before anchors correctly */
+}
+
+/* glossy highlight + subtle reflection */
+nav ul::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2; /* above bg + slider, below links (links are z-index:1 so we keep this low via mix-blend) */
+
+  /* mirror-style sheen */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,255,255,0.18) 28%,
+      rgba(255,255,255,0.06) 55%,
+      rgba(255,255,255,0.00) 100%
+    );
+
+  /* keep it subtle */
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+
+/* thin inner glass edge */
+nav ul::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),   /* top highlight */
+    inset 0 -1px 0 rgba(0,0,0,0.06);        /* bottom shadow */
+  border-radius: 12px; /* match your nav ul */
+}
+
+/* keep slider under the glass */
+nav ul .nav-slider{
+  z-index: 1; /* was 0; keeps it visible under the mirror layer */
+}
+
+/* keep text above everything */
+nav a{
+  z-index: 3; /* ensures links stay crisp above the mirror layer */
+}
 
 
 /* ===========================
