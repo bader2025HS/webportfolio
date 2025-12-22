@@ -1757,30 +1757,40 @@ ABOUT — PHONE: STATS ONE COLUMN
 }
 
 /* ===========================
-ABOUT — MATCH NAVBAR INSET (MOBILE) — FIXED
+ABOUT — FINAL MOBILE WIDTH MATCH (NAV = 12px)
 PUT LAST
 =========================== */
 @media (max-width: 700px){
 
-  /* keep breakout, but use same inset as navbar */
+  /* section inset = navbar inset */
   #about{
     padding-left: 12px !important;
     padding-right: 12px !important;
     box-sizing: border-box;
   }
 
-  /* 🔑 remove the extra inner padding that was making About narrower */
+  /* kill all inner side padding (this was the problem) */
   .about-shell{
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding: 0 !important;          /* overrides 0 8px / 0 10px rules */
     margin-left: 0 !important;
     margin-right: 0 !important;
+    width: 100% !important;
     max-width: none !important;
+    box-sizing: border-box;
+  }
+
+  /* ensure main blocks don’t introduce extra inset */
+  .about-text-box,
+  .about-grid{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     width: 100% !important;
     box-sizing: border-box;
   }
 }
 
+
+	
 
 
 /* ===========================
