@@ -284,6 +284,10 @@ white-space: nowrap;
 /* =========================================================
 CONTACT — UPDATED (uses YOUR class names)
 REQUIREMENTS MET:
+- Row 1 stays: NAME | EMAIL | TOPIC
+- Row 2: LEFT = message (~70%) | RIGHT = (vertical SEND + 6 contact cards)
+- SEND is vertical (S E N D stacked)
+- Trebuchet MS everywhere in contact
 ========================================================= */
 
 #contact{
@@ -1019,60 +1023,13 @@ CONTACT — MOBILE WIDTH FIX
 (align with navbar padding)
 =========================== */
 
-
-
-@media (max-width: 899px){
-
-  /* ✅ DO NOT cancel breakout anymore */
+@media (max-width: 700px){
   #contact{
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin-left: calc(50% - 50vw) !important;
-    margin-right: calc(50% - 50vw) !important;
-
-    /* mobile padding like Skills */
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-  }
-
-  /* keep the rest of your mobile layout rules exactly as you have them... */
-}
-/* ===========================
-CONTACT — FIX TOP BORDER CLIP UNDER NAV (iPhone)
-=========================== */
-@media (max-width: 899px){
-
-  /* stop pulling Contact upward on mobile */
-  #contact{
-    margin-top: 0 !important;
-    padding-top: 18px !important;      /* creates breathing room under nav */
-    scroll-margin-top: 110px;          /* adjust to your nav height */
-  }
-
-  /* when focusing an input, keep it from sitting under the header */
-  .contact-field{
-    scroll-margin-top: 110px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 
-/* ===========================
-CONTACT — MOBILE TOP ALIGN LIKE SKILLS
-=========================== */
-@media (max-width: 899px){
-
-  /* kill any extra top gap */
-  #contact{
-    margin-top: -20px !important;   /* same visual lift as your other sections */
-    padding-top: 0 !important;      /* remove the extra "breathing room" */
-  }
-
-  /* if the first card still feels low, pull the grid up a bit */
-  .contact-wrap{
-    margin-top: -8px !important;    /* tiny nudge */
-  }
-}
 
 
 
