@@ -1039,6 +1039,23 @@ CONTACT — MOBILE WIDTH FIX
 
   /* keep the rest of your mobile layout rules exactly as you have them... */
 }
+/* ===========================
+CONTACT — FIX TOP BORDER CLIP UNDER NAV (iPhone)
+=========================== */
+@media (max-width: 899px){
+
+  /* stop pulling Contact upward on mobile */
+  #contact{
+    margin-top: 0 !important;
+    padding-top: 18px !important;      /* creates breathing room under nav */
+    scroll-margin-top: 110px;          /* adjust to your nav height */
+  }
+
+  /* when focusing an input, keep it from sitting under the header */
+  .contact-field{
+    scroll-margin-top: 110px;
+  }
+}
 
 
 
