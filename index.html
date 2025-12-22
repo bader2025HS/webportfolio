@@ -4343,6 +4343,19 @@ GALLERY — MOBILE ALIGN WITH NAVBAR
   transform: translateY(-2px);
 }
 
+/* ===========================
+GALLERY — SAME HOVER ZOOM AS FILMSTRIP
+=========================== */
+
+.gallery-item img{
+  transition: transform 0.25s ease;
+}
+.gallery-item{
+  overflow: hidden;
+}
+.gallery-item:hover img{
+  transform: scale(1.05);
+}
 
 
 /* ===========================
