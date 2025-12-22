@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PORT</title>
+<title>PORTFOLIO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -1786,6 +1786,31 @@ PUT LAST
     margin-right: 0 !important;
     width: 100% !important;
     box-sizing: border-box;
+  }
+}
+/* ===========================
+ABOUT — MOBILE: ALIGN WITH NAVBAR
+(disable 100vw breakout on phone)
+PUT LAST
+=========================== */
+@media (max-width: 700px){
+
+  #about{
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* remove inner side padding so it doesn't double-inset */
+  .about-shell{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 
