@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>portfolio</title>
+<title>portofofof</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -3179,6 +3179,100 @@ height: auto !important;
 transform: none;
 }
 }
+
+
+/* =========================================================
+EXPERIENCE — HOVER REVEAL (Kesk'IA-style)
+- title moves up
+- content slides up from bottom + fades in
+- keeps your cards, grid, accents, lift
+- no HTML changes
+========================================================= */
+
+/* kill the 3D flip behavior (desktop) */
+@media (hover:hover){
+  .exp-card-inner{
+    transform: none !important;
+    transform-style: flat !important;
+    transition: none !important;
+  }
+  .exp-card.is-flipped .exp-card-inner{
+    transform: none !important;
+  }
+
+  /* ensure both faces stack, not flip */
+  .exp-card-front,
+  .exp-card-back{
+    transform: none !important;
+  }
+
+  /* IMPORTANT: clip reveal inside the rounded card */
+  .exp-card-face{
+    overflow: hidden; /* keep reveal inside */
+  }
+
+  /* front stays on top */
+  .exp-card-front{
+    z-index: 2;
+  }
+
+  /* back becomes the hidden sliding panel */
+  .exp-card-back{
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(22px) !important;
+    pointer-events: none;
+    transition: transform .28s ease, opacity .28s ease;
+  }
+
+  /* move the title block upward on hover */
+  .exp-card-front .exp-front-left{
+    transform: translateY(0);
+    transition: transform .28s ease;
+  }
+
+  /* hover: reveal back + push title up */
+  .exp-card:hover .exp-card-back{
+    opacity: 1;
+    transform: translateY(0) !important;
+    pointer-events: auto;
+  }
+
+  .exp-card:hover .exp-card-front .exp-front-left{
+    transform: translateY(-38px);
+  }
+
+  /* optional: make front feel “lighter” while content appears */
+  .exp-card:hover .exp-card-front{
+    background: #ffffff;
+  }
+}
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 /* ===========================
 WORK – VERTICAL STRIPS
