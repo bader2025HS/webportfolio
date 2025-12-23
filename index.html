@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>portofofof</title>
+<title>porto</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -3182,15 +3182,26 @@ transform: none;
 
 
 /* =========================================================
-EXPERIENCE — HOVER REVEAL (Kesk'IA-style)
-- title moves up
-- content slides up from bottom + fades in
-- keeps your cards, grid, accents, lift
-- no HTML changes
+EXPERIENCE — HOVER REVEAL (NO EXPAND, CLIPPED IN CARD)
+PASTE THIS AT THE VERY END OF YOUR CSS
 ========================================================= */
 
-/* kill the 3D flip behavior (desktop) */
 @media (hover:hover){
+
+  /* 1) hard-disable your old "expanded = 200% height" behavior */
+  .exp-card--expanded .exp-card-back,
+  .exp-card--ngo.exp-card--expanded .exp-card-back,
+  .exp-card--research.exp-card--expanded .exp-card-back{
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* 2) stop the 3D flip system from affecting layout */
   .exp-card-inner{
     transform: none !important;
     transform-style: flat !important;
@@ -3200,56 +3211,46 @@ EXPERIENCE — HOVER REVEAL (Kesk'IA-style)
     transform: none !important;
   }
 
-  /* ensure both faces stack, not flip */
-  .exp-card-front,
-  .exp-card-back{
-    transform: none !important;
-  }
-
-  /* IMPORTANT: clip reveal inside the rounded card */
+  /* 3) IMPORTANT: clip inside the rounded card */
   .exp-card-face{
-    overflow: hidden; /* keep reveal inside */
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important;     /* <- this is what keeps content inside */
+    border-radius: 16px;
   }
 
-  /* front stays on top */
-  .exp-card-front{
-    z-index: 2;
-  }
-
-  /* back becomes the hidden sliding panel */
+  /* 4) set layers */
+  .exp-card-front{ z-index: 2; }
   .exp-card-back{
     z-index: 1;
     opacity: 0;
-    transform: translateY(22px) !important;
+    transform: translateY(26px) !important;
     pointer-events: none;
     transition: transform .28s ease, opacity .28s ease;
   }
 
-  /* move the title block upward on hover */
+  /* 5) title goes up on hover */
   .exp-card-front .exp-front-left{
     transform: translateY(0);
     transition: transform .28s ease;
   }
 
-  /* hover: reveal back + push title up */
+  /* 6) hover reveal (no click) */
   .exp-card:hover .exp-card-back{
     opacity: 1;
     transform: translateY(0) !important;
     pointer-events: auto;
   }
-
   .exp-card:hover .exp-card-front .exp-front-left{
-    transform: translateY(-38px);
+    transform: translateY(-42px);
   }
 
-  /* optional: make front feel “lighter” while content appears */
-  .exp-card:hover .exp-card-front{
-    background: #ffffff;
+  /* 7) keep back content scrolling INSIDE card if long */
+  .exp-card-back-inner{
+    height: 100%;
+    overflow: auto;
   }
 }
-
-
-
 
 
 
