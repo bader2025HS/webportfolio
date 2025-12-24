@@ -2792,17 +2792,14 @@ box-sizing: border-box;
 
 
 
-
-
 /* =========================================================
-EXPERIENCE — FULL REBUILD (HOVER REVEAL, NO CLICK, NO EXPAND)
-Works with your existing HTML structure:
-.exp-mosaic > .exp-card > .exp-card-inner > (.exp-card-front + .exp-card-back)
+EXPERIENCE — Kesk'IA style hover reveal (REAL version)
+- fixed frame (no expand)
+- title slides up
+- content rises from bottom + fades in
+- everything clipped inside card
 ========================================================= */
 
-/* ===========================
-SECTION — FULL WIDTH
-=========================== */
 #experience{
   margin-top: -25px;
   padding-top: 0;
@@ -2820,22 +2817,16 @@ SECTION — FULL WIDTH
 }
 
 .experience-layout{
-  position: relative;
-  z-index: 1;
   width: 100%;
-  max-width: none;
   margin: 0;
   padding: 6px 0 0;
-  box-sizing: border-box;
-  overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
-/* ===========================
-GRID — 2×2 MOSAIC
-=========================== */
+/* grid */
 .exp-mosaic{
   width: 100%;
-  max-width: none;
   margin: 0;
 
   display: grid;
@@ -2849,25 +2840,18 @@ GRID — 2×2 MOSAIC
   overflow: visible;
 }
 
-/* keep your area classes */
+/* keep your areas */
 .exp-card--ngo{ grid-area: ngo; }
 .exp-card--io{ grid-area: io; }
 .exp-card--research{ grid-area: research; }
 .exp-card--assoc{ grid-area: assoc; }
 
-/* ===========================
-CARD — FRAME + LAYERS
-=========================== */
+/* card shell */
 .exp-card{
   --exp-accent: #0ea5a2;
-
   position: relative;
-  width: 100%;
   min-height: 240px;
-
-  cursor: default;
   z-index: 0;
-
   transition: transform .22s ease;
 }
 
@@ -2878,72 +2862,48 @@ CARD — FRAME + LAYERS
   }
 }
 
-/* inner wrapper (no 3D, no flip) */
-.exp-card-inner{
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* both faces are stacked and clipped inside the same rounded frame */
-.exp-card-front,
-.exp-card-back{
+/* the single frame that clips everything */
+.exp-card-frame{
   position: absolute;
   inset: 0;
 
   border-radius: 16px;
   background: #f5f8ff;
-
-  border: 2.5px solid transparent; /* reserve hover thickness */
+  border: 2.5px solid transparent;
   box-sizing: border-box;
 
-  overflow: hidden; /* ✅ keeps everything inside */
+  overflow: hidden;              /* ✅ keeps reveal inside */
 }
 
-/* subtle inner stroke */
-.exp-card-front::after,
-.exp-card-back::after{
+/* subtle inner line */
+.exp-card-frame::after{
   content:"";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
   border-radius: 16px;
 }
 
-/* hover border/background */
 @media (hover:hover) and (pointer:fine){
-  .exp-card:hover .exp-card-front,
-  .exp-card:hover .exp-card-back{
+  .exp-card:hover .exp-card-frame{
     background: #ffffff;
     border-color: var(--exp-accent);
   }
-  .exp-card:hover .exp-card-front::after,
-  .exp-card:hover .exp-card-back::after{
+  .exp-card:hover .exp-card-frame::after{
     box-shadow: none;
   }
 }
 
-/* ===========================
-FRONT — TITLE MOVES UP ON HOVER
-=========================== */
-.exp-card-front{
+/* TITLE ZONE */
+.exp-title{
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform .28s ease, top .28s ease;
   z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  padding: 24px 26px;
-  color: #1f2937;
-}
-
-.exp-front-left{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  transform: translateY(0);
-  transition: transform .28s ease;
 }
 
 .exp-front-main{
@@ -2955,54 +2915,57 @@ FRONT — TITLE MOVES UP ON HOVER
 
 .exp-front-sub{
   margin-top: 10px;
-  font-size: 1.45rem;   /* bigger, like you asked earlier */
+  font-size: 1.45rem;
   font-weight: 700;
-  max-width: 18ch;
   line-height: 1.12;
+  max-width: 18ch;
+  color: #1f2937;
 }
 
-/* ===========================
-BACK — CONTENT SLIDES UP + FADES IN
-=========================== */
-.exp-card-back{
-  z-index: 1;
+/* REVEAL ZONE (hidden until hover) */
+.exp-reveal{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
+  height: 100%;
   opacity: 0;
   transform: translateY(28px);
   transition: transform .28s ease, opacity .28s ease;
 
-  pointer-events: none; /* no interaction until visible */
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* reveal on hover */
-@media (hover:hover) and (pointer:fine){
-  .exp-card:hover .exp-card-back{
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  /* title goes upward */
-  .exp-card:hover .exp-front-left{
-    transform: translateY(-46px);
-  }
-}
-
-/* back inner scroll area (stays inside card) */
+/* content scrolling stays inside the frame */
 .exp-card-back-inner{
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  padding: 16px 14px 18px;
   overflow: auto;
-  padding: 14px 14px 16px;
 
   display: flex;
   flex-direction: column;
   gap: 14px;
+  color: #1f2937;
 }
 
-/* ===========================
-BACK CONTENT — ORG BLOCKS
-(works with your current markup)
-=========================== */
+/* HOVER REVEAL (desktop only) */
+@media (hover:hover) and (pointer:fine){
+  .exp-card:hover .exp-title{
+    top: 22px;                  /* title goes up */
+    transform: translateY(0);
+  }
+
+  .exp-card:hover .exp-reveal{
+    opacity: 1;
+    transform: translateY(0);   /* content comes up from bottom */
+    pointer-events: auto;
+  }
+}
+
+/* org blocks */
 .exp-org{
   display: grid;
   grid-template-columns: auto 1fr;
@@ -3048,9 +3011,7 @@ BACK CONTENT — ORG BLOCKS
   line-height: 1.5;
 }
 
-/* ===========================
-MOBILE — STACK + SHOW CONTENT (NO HOVER)
-=========================== */
+/* MOBILE — no hover, show content */
 @media (max-width: 800px){
   #experience{
     width: 100%;
@@ -3066,275 +3027,41 @@ MOBILE — STACK + SHOW CONTENT (NO HOVER)
     gap: 18px;
   }
 
-  .exp-card{
-    min-height: auto;
-  }
+  .exp-card{ min-height: auto; }
 
-  /* show back as the visible face on mobile */
-  .exp-card-front{
-    display: none;
-  }
-
-  .exp-card-back{
+  .exp-card-frame{
     position: relative;
     inset: auto;
+    min-height: 240px;
+  }
+
+  .exp-title{
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none;
+    padding: 22px 26px 8px;
+  }
+
+  .exp-reveal{
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    height: auto;
     opacity: 1;
     transform: none;
     pointer-events: auto;
   }
 
   .exp-card-back-inner{
-    height: auto;
+    position: relative;
+    inset: auto;
     overflow: visible;
+    padding: 0 14px 18px;
   }
 }
-
-
-/* =========================================================
-EXPERIENCE — HOVER REVEAL (FORCE OVERRIDE VERSION)
-- No click, no expand
-- Title slides UP on hover
-- Content rises from bottom + fades in
-- Everything clipped INSIDE the card
-Paste at the VERY END of your CSS
-========================================================= */
-
-#experience{ 
-  width: 100vw !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  padding-left: clamp(16px, 3vw, 64px) !important;
-  padding-right: clamp(16px, 3vw, 64px) !important;
-  box-sizing: border-box !important;
-  overflow: visible !important;
-  scroll-margin-top: 90px !important;
-}
-
-#experience .experience-layout{
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 6px 0 0 !important;
-  overflow: visible !important;
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* grid */
-#experience .exp-mosaic{
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  grid-auto-rows: minmax(240px, 1fr) !important;
-  gap: 18px !important;
-
-  overflow: visible !important;
-}
-
-#experience .exp-card--ngo{ grid-area: ngo !important; }
-#experience .exp-card--io{ grid-area: io !important; }
-#experience .exp-card--research{ grid-area: research !important; }
-#experience .exp-card--assoc{ grid-area: assoc !important; }
-
-/* card */
-#experience .exp-card{
-  --exp-accent: #0ea5a2 !important;
-  position: relative !important;
-  min-height: 240px !important;
-  width: 100% !important;
-  cursor: default !important;
-  z-index: 0 !important;
-  transform: none !important;
-  transition: transform .22s ease !important;
-}
-
-@media (hover:hover) and (pointer:fine){
-  #experience .exp-card:hover{
-    transform: translateY(-3px) !important;
-    z-index: 10 !important;
-  }
-}
-
-/* kill any old 3D/flip/expanded influence */
-#experience .exp-card-inner{
-  position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform: none !important;
-  transition: none !important;
-  transform-style: flat !important;
-}
-#experience .exp-card.is-flipped .exp-card-inner{ transform: none !important; }
-
-#experience .exp-card--expanded,
-#experience .exp-mosaic.dim-others{
-  all: unset !important; /* hard nuke the old “expanded/dim” behaviors if present */
-}
-
-/* faces stacked + clipped */
-#experience .exp-card-front,
-#experience .exp-card-back{
-  position: absolute !important;
-  inset: 0 !important;
-  border-radius: 16px !important;
-  overflow: hidden !important;              /* ✅ CLIP inside card */
-  background: #f5f8ff !important;
-  border: 2.5px solid transparent !important;
-  box-shadow: none !important;
-  box-sizing: border-box !important;
-}
-
-/* subtle inner line */
-#experience .exp-card-front::after,
-#experience .exp-card-back::after{
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  pointer-events: none !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12) !important;
-  border-radius: 16px !important;
-}
-
-/* layers */
-#experience .exp-card-front{ z-index: 2 !important; }
-#experience .exp-card-back{ z-index: 1 !important; }
-
-/* hover border */
-@media (hover:hover) and (pointer:fine){
-  #experience .exp-card:hover .exp-card-front,
-  #experience .exp-card:hover .exp-card-back{
-    background: #ffffff !important;
-    border-color: var(--exp-accent) !important;
-  }
-  #experience .exp-card:hover .exp-card-front::after,
-  #experience .exp-card:hover .exp-card-back::after{
-    box-shadow: none !important;
-  }
-}
-
-/* FRONT layout */
-#experience .exp-card-front{
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  padding: 24px 26px !important;
-  color: #1f2937 !important;
-}
-
-#experience .exp-front-left{
-  transform: translateY(0) !important;
-  transition: transform .28s ease !important;
-}
-
-#experience .exp-front-main{
-  text-transform: uppercase !important;
-  letter-spacing: .2em !important;
-  font-size: .8rem !important;
-  color: var(--exp-accent) !important;
-}
-#experience .exp-front-sub{
-  margin-top: 10px !important;
-  font-size: 1.45rem !important;
-  font-weight: 700 !important;
-  line-height: 1.12 !important;
-  max-width: 18ch !important;
-}
-
-/* BACK hidden by default (desktop) */
-#experience .exp-card-back{
-  opacity: 0 !important;
-  transform: translateY(28px) !important;
-  transition: transform .28s ease, opacity .28s ease !important;
-  pointer-events: none !important;
-}
-
-@media (hover:hover) and (pointer:fine){
-  #experience .exp-card:hover .exp-card-back{
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-  }
-  #experience .exp-card:hover .exp-front-left{
-    transform: translateY(-46px) !important;
-  }
-}
-
-/* back scrolling content stays inside */
-#experience .exp-card-back-inner{
-  height: 100% !important;
-  overflow: auto !important;
-  padding: 14px 14px 16px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 14px !important;
-}
-
-/* org blocks */
-#experience .exp-org{
-  display: grid !important;
-  grid-template-columns: auto 1fr !important;
-  gap: 14px !important;
-  align-items: center !important;
-}
-#experience .exp-org-logo{
-  width: 84px !important;
-  height: 84px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-#experience .exp-org-logo img{
-  max-width: 100% !important;
-  max-height: 100% !important;
-  object-fit: contain !important;
-}
-#experience .exp-org-text h3{
-  margin: 0 !important;
-  font-size: .98rem !important;
-}
-#experience .exp-org-meta{
-  font-size: .8rem !important;
-  color: var(--exp-accent) !important;
-}
-#experience .exp-org-list{
-  grid-column: 1 / -1 !important;
-  margin: 0 !important;
-  padding-left: 18px !important;
-  font-size: .86rem !important;
-  line-height: 1.5 !important;
-}
-
-/* MOBILE — stack, show back only */
-@media (max-width: 800px){
-  #experience{
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-  #experience .exp-mosaic{
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 18px !important;
-  }
-  #experience .exp-card-front{ display: none !important; }
-  #experience .exp-card-back{
-    position: relative !important;
-    inset: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-    pointer-events: auto !important;
-  }
-  #experience .exp-card-back-inner{
-    height: auto !important;
-    overflow: visible !important;
-  }
-}
-
 
   
 
@@ -5756,202 +5483,177 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
 
 
 <!-- EXPERIENCE – MOSAIC SQUARE -->
-
 <section id="experience">
-<div class="experience-layout">
+  <div class="experience-layout">
+    <div class="exp-mosaic">
 
-<div class="exp-mosaic">
+      <!-- INTERNATIONAL ORG -->
+      <div class="exp-card exp-card--io">
+        <div class="exp-card-frame">
 
-<!-- BIG TILE – INTERNATIONAL ORG -->
-<div class="exp-card exp-card--io">
-<div class="exp-card-inner">
+          <!-- Title zone (always visible, moves up on hover) -->
+          <div class="exp-title">
+            <div class="exp-front-main">International organisation</div>
+            <div class="exp-front-sub">Multilateral &amp; Francophonie</div>
+          </div>
 
-<div class="exp-card-face exp-card-front">
-<div class="exp-front-left">
-<div class="exp-front-main">International organisation</div>
-<div class="exp-front-sub">Multilateral &amp; Francophonie</div>
-</div>
-</div>
+          <!-- Reveal zone (hidden, comes up from bottom on hover) -->
+          <div class="exp-reveal">
+            <div class="exp-card-back-inner">
 
+              <div class="exp-org">
+                <div class="exp-org-logo">
+                  <img src="oif.png" alt="OIF logo">
+                </div>
+                <div class="exp-org-text">
+                  <h3>International Organisation of La Francophonie</h3>
+                  <div class="exp-org-meta">
+                    Project Design &amp; Monitoring Unit – Paris · 2024
+                  </div>
+                  <ul class="exp-org-list">
+                    <li>Compiled and analysed operational data across 90 member states.</li>
+                    <li>Built dashboards and visualisations (Power BI, Excel) for 10+ indicators.</li>
+                    <li>Produced 54+ country briefs feeding into the 2025 Implementation Report.</li>
+                  </ul>
+                </div>
+              </div>
 
-<div class="exp-card-face exp-card-back">
-<div class="exp-card-back-inner">
+            </div>
+          </div>
 
-<div class="exp-org">
-<div class="exp-org-logo">
-<img src="oif.png" alt="OIF logo">
-</div>
-<div class="exp-org-text">
-<h3>International Organisation of La Francophonie</h3>
-<div class="exp-org-meta">
-Project Design &amp; Monitoring Unit – Paris · 2024
-</div>
-<ul class="exp-org-list">
-<li>Compiled and analysed operational data across 90 member states.</li>
-<li>Built dashboards and visualisations (Power BI, Excel) for 10+ indicators.</li>
-<li>Produced 54+ country briefs feeding into the 2025 Implementation Report.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
+        </div>
+      </div>
 
-</div>
-</div>
+      <!-- NGO -->
+      <div class="exp-card exp-card--ngo">
+        <div class="exp-card-frame">
+          <div class="exp-title">
+            <div class="exp-front-main">NGO &amp; humanitarian</div>
+            <div class="exp-front-sub">Data, protection &amp; field support</div>
+          </div>
 
-<!-- TOP RIGHT – NGO / HUMANITARIAN -->
-<div class="exp-card exp-card--ngo">
-<div class="exp-card-inner">
+          <div class="exp-reveal">
+            <div class="exp-card-back-inner">
 
-<div class="exp-card-face exp-card-front">
-<div class="exp-front-left">
-<div class="exp-front-main">NGO &amp; humanitarian</div>
-<div class="exp-front-sub">Data, protection &amp; field support</div>
-</div>
-</div>
+              <div class="exp-org">
+                <div class="exp-org-logo">
+                  <img src="aqlity.png" alt="AQLITY logo">
+                </div>
+                <div class="exp-org-text">
+                  <h3>AQLITY Humanitarian Innovation</h3>
+                  <div class="exp-org-meta">Graduate trainee – remote</div>
+                  <ul class="exp-org-list">
+                    <li>Cleaned and harmonised humanitarian datasets for operations.</li>
+                    <li>Mapped displacement and settlements with interactive tools (Mapbox, Excel).</li>
+                    <li>Helped design dashboards and visuals used by field teams.</li>
+                  </ul>
+                </div>
+              </div>
 
+              <div class="exp-org">
+                <div class="exp-org-logo">
+                  <img src="ardhis.png" alt="ARDHIS logo">
+                </div>
+                <div class="exp-org-text">
+                  <h3>ARDHIS</h3>
+                  <div class="exp-org-meta">Volunteer – Paris</div>
+                  <ul class="exp-org-list">
+                    <li>Accompanied asylum seekers through OFPRA and CNDA procedures.</li>
+                    <li>Conducted in-depth legal and country-of-origin research (DRC, Guinea, etc.).</li>
+                    <li>Prepared structured narratives and internal briefs for casework.</li>
+                  </ul>
+                </div>
+              </div>
 
-<div class="exp-card-face exp-card-back">
-<div class="exp-card-back-inner">
+            </div>
+          </div>
 
-<!-- AQLITY -->
-<div class="exp-org">
-<div class="exp-org-logo">
-<img src="aqlity.png" alt="AQLITY logo">
-</div>
-<div class="exp-org-text">
-<h3>AQLITY Humanitarian Innovation</h3>
-<div class="exp-org-meta">
-Graduate trainee – remote
-</div>
-<ul class="exp-org-list">
-<li>Cleaned and harmonised humanitarian datasets for operations.</li>
-<li>Mapped displacement and settlements with interactive tools (Mapbox, Excel).</li>
-<li>Helped design dashboards and visuals used by field teams.</li>
-</ul>
-</div>
-</div>
+        </div>
+      </div>
 
-<!-- ARDHIS -->
-<div class="exp-org">
-<div class="exp-org-logo">
-<img src="ardhis.png" alt="ARDHIS logo">
-</div>
-<div class="exp-org-text">
-<h3>ARDHIS</h3>
-<div class="exp-org-meta">
-Volunteer – Paris
-</div>
-<ul class="exp-org-list">
-<li>Accompanied asylum seekers through OFPRA and CNDA procedures.</li>
-<li>Conducted in-depth legal and country-of-origin research (DRC, Guinea, etc.).</li>
-<li>Prepared structured narratives and internal briefs for casework.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
+      <!-- RESEARCH -->
+      <div class="exp-card exp-card--research">
+        <div class="exp-card-frame">
+          <div class="exp-title">
+            <div class="exp-front-main">Research &amp; science-policy</div>
+            <div class="exp-front-sub">Water, energy &amp; MENA</div>
+          </div>
 
-</div>
-</div>
+          <div class="exp-reveal">
+            <div class="exp-card-back-inner">
 
-<!-- MIDDLE RIGHT – RESEARCH / SCIENCE POLICY -->
-<div class="exp-card exp-card--research">
-<div class="exp-card-inner">
+              <div class="exp-org">
+                <div class="exp-org-logo">
+                  <img src="rss.png" alt="Royal Scientific Society logo">
+                </div>
+                <div class="exp-org-text">
+                  <h3>Royal Scientific Society</h3>
+                  <div class="exp-org-meta">Research intern – Amman</div>
+                  <ul class="exp-org-list">
+                    <li>Researched desalination and water–energy projects across the MENA region.</li>
+                    <li>Mapped initiatives and partnerships with international organisations.</li>
+                    <li>Drafted analytical notes and contributed to publication work.</li>
+                  </ul>
+                </div>
+              </div>
 
-<div class="exp-card-face exp-card-front">
-<div class="exp-front-left">
-<div class="exp-front-main">Research &amp; science-policy</div>
-<div class="exp-front-sub">Water, energy &amp; MENA</div>
-</div>
-</div>
+              <div class="exp-org">
+                <div class="exp-org-logo">
+                  <img src="nancy.png" alt="Ville de Nancy logo">
+                </div>
+                <div class="exp-org-text">
+                  <h3>City Hall of Nancy</h3>
+                  <div class="exp-org-meta">Liaison &amp; student ambassador</div>
+                  <ul class="exp-org-list">
+                    <li>Acted as liaison for delegations from twin cities (Newcastle, Lviv, Lublin).</li>
+                    <li>Organised cultural visits and presented local institutions.</li>
+                    <li>Participated in a conference on Nancy’s environmental policy.</li>
+                  </ul>
+                </div>
+              </div>
 
-<div class="exp-card-face exp-card-back">
-<div class="exp-card-back-inner">
+            </div>
+          </div>
 
-<!-- RSS -->
-<div class="exp-org">
-<div class="exp-org-logo">
-<img src="rss.png" alt="Royal Scientific Society logo">
-</div>
-<div class="exp-org-text">
-<h3>Royal Scientific Society</h3>
-<div class="exp-org-meta">
-Research intern – Amman
-</div>
-<ul class="exp-org-list">
-<li>Researched desalination and water–energy projects across the MENA region.</li>
-<li>Mapped initiatives and partnerships with international organisations.</li>
-<li>Drafted analytical notes and contributed to publication work.</li>
-</ul>
-</div>
-</div>
+        </div>
+      </div>
 
-<!-- Nancy (moved here) -->
-<div class="exp-org">
-<div class="exp-org-logo">
-<img src="nancy.png" alt="Ville de Nancy logo">
-</div>
-<div class="exp-org-text">
-<h3>City Hall of Nancy</h3>
-<div class="exp-org-meta">
-Liaison &amp; student ambassador
-</div>
-<ul class="exp-org-list">
-<li>Acted as liaison for delegations from twin cities (Newcastle, Lviv, Lublin).</li>
-<li>Organised cultural visits and presented local institutions.</li>
-<li>Participated in a conference on Nancy’s environmental policy.</li>
-</ul>
-</div>
-</div>
+      <!-- ASSOCIATION -->
+      <div class="exp-card exp-card--assoc">
+        <div class="exp-card-frame">
+          <div class="exp-title">
+            <div class="exp-front-main">Association &amp; leadership</div>
+            <div class="exp-front-sub">Student-led MENA projects</div>
+          </div>
 
-</div>
-</div>
+          <div class="exp-reveal">
+            <div class="exp-card-back-inner">
 
-</div>
-</div>
+              <div class="exp-org">
+                <div class="exp-org-logo">
+                  <img src="spma.png" alt="SPMA logo">
+                </div>
+                <div class="exp-org-text">
+                  <h3>Arab World Student Society</h3>
+                  <div class="exp-org-meta">Board &amp; project lead</div>
+                  <ul class="exp-org-list">
+                    <li>Co-designed research and cultural projects on the MENA region.</li>
+                    <li>Coordinated partners, speakers and student teams across campuses.</li>
+                    <li>Prepared written outputs, visuals and communication materials.</li>
+                  </ul>
+                </div>
+              </div>
 
-<!-- BOTTOM RIGHT – ASSOCIATION / LEADERSHIP -->
-<div class="exp-card exp-card--assoc">
-<div class="exp-card-inner">
+            </div>
+          </div>
 
-<div class="exp-card-face exp-card-front">
-<div class="exp-front-left">
-<div class="exp-front-main">Association &amp; leadership</div>
-<div class="exp-front-sub">Student-led MENA projects</div>
-</div>
-</div>
+        </div>
+      </div>
 
-
-<div class="exp-card-face exp-card-back">
-<div class="exp-card-back-inner">
-
-<div class="exp-org">
-<div class="exp-org-logo">
-<img src="spma.png" alt="SPMA logo">
-</div>
-<div class="exp-org-text">
-<h3>Arab World Student Society</h3>
-<div class="exp-org-meta">
-Board &amp; project lead
-</div>
-<ul class="exp-org-list">
-<li>Co-designed research and cultural projects on the MENA region.</li>
-<li>Coordinated partners, speakers and student teams across campuses.</li>
-<li>Prepared written outputs, visuals and communication materials.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-</div><!-- /exp-mosaic -->
-
-</div>
+    </div>
+  </div>
 </section>
+
 
 
 <!-- WORK – VERTICAL STRIPS -->
