@@ -2900,9 +2900,8 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   transform: translateY(-50%);
   z-index: 2;
 
-  transition:
-    transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity   0.25s ease 0.2s;
+  /* SLIDE ONLY — no fade */
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 
@@ -2956,7 +2955,6 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
     transform: translateY(-160%);
-    opacity: 0;
     pointer-events: none;
   }
 }
@@ -3043,8 +3041,6 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   }
 
   .exp-reveal{
-    transition:
-    transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
     opacity   0.35s ease;
     position: relative;
     left: auto;
@@ -3066,10 +3062,8 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
 
   
 .exp-reveal{
-  transition: 
-    transform .28s ease,
-    opacity .28s ease;
-}
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+
 
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-reveal{
