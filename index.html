@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>porto</title>
+<title>portofooo</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -2794,464 +2794,300 @@ box-sizing: border-box;
 
 
 
-/* ===========================
-SECTION — FULL WIDTH + SPACING
-=========================== */
+/* =========================================================
+EXPERIENCE — FULL REBUILD (HOVER REVEAL, NO CLICK, NO EXPAND)
+Works with your existing HTML structure:
+.exp-mosaic > .exp-card > .exp-card-inner > (.exp-card-front + .exp-card-back)
+========================================================= */
 
+/* ===========================
+SECTION — FULL WIDTH
+=========================== */
 #experience{
-margin-top: -25px; /* ✅ same rhythm as other sections */
-padding-top: 0;
-position: relative;
+  margin-top: -25px;
+  padding-top: 0;
+  position: relative;
 
-/* full-bleed breakout */
-width: 100vw;
-margin-left: calc(50% - 50vw);
-margin-right: calc(50% - 50vw);
-padding-left: clamp(16px, 3vw, 64px);
-padding-right: clamp(16px, 3vw, 64px);
-box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(16px, 3vw, 64px);
+  padding-right: clamp(16px, 3vw, 64px);
+  box-sizing: border-box;
 
-/* 🔑 don't clip hover border */
-overflow: visible;
-
-/* anchor safety under nav */
-scroll-margin-top: 90px;
+  overflow: visible;
+  scroll-margin-top: 90px;
 }
 
-/* inner layout */
 .experience-layout{
-position: relative;
-z-index: 1;
-width: 100%;
-max-width: none;
-margin: 0; /* ✅ kills old -20px culprit */
-padding: 6px 0 0; /* tiny breathing room for hover lift */
-box-sizing: border-box;
-
-overflow: visible;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 6px 0 0;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 /* ===========================
-GRID
+GRID — 2×2 MOSAIC
 =========================== */
-
 .exp-mosaic{
-width: 100%;
-max-width: none;
-margin: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 
-display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-grid-auto-rows: minmax(200px, 1fr);
-grid-template-areas:
-"ngo io"
-"research assoc";
-gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(240px, 1fr);
+  grid-template-areas:
+    "ngo io"
+    "research assoc";
+  gap: 18px;
 
-perspective: 1200px;
-
-overflow: visible; /* ✅ don't clip hover */
+  overflow: visible;
 }
 
-/* keep grid areas */
+/* keep your area classes */
 .exp-card--ngo{ grid-area: ngo; }
 .exp-card--io{ grid-area: io; }
 .exp-card--research{ grid-area: research; }
 .exp-card--assoc{ grid-area: assoc; }
 
-/* ======================
-CARD SHELL
-====================== */
-
+/* ===========================
+CARD — FRAME + LAYERS
+=========================== */
 .exp-card{
-position: relative;
-cursor: pointer;
-overflow: visible; /* ✅ no clipping */
-z-index: 0;
+  --exp-accent: #0ea5a2;
 
-transition: transform .22s ease;
+  position: relative;
+  width: 100%;
+  min-height: 240px;
+
+  cursor: default;
+  z-index: 0;
+
+  transition: transform .22s ease;
 }
 
-/* lift */
-@media (hover:hover){
-.exp-card:hover{
-transform: translateY(-3px);
-z-index: 10; /* ✅ border shows on top */
-}
+@media (hover:hover) and (pointer:fine){
+  .exp-card:hover{
+    transform: translateY(-3px);
+    z-index: 10;
+  }
 }
 
-/* inner 3D wrapper */
+/* inner wrapper (no 3D, no flip) */
 .exp-card-inner{
-width: 100%;
-height: 100%;
-transform-style: preserve-3d;
-transition: transform .6s cubic-bezier(.2,.8,.25,1);
-}
-.exp-card.is-flipped .exp-card-inner{
-transform: rotateY(180deg);
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-/* faces */
-.exp-card-face{
-position: absolute;
-inset: 0;
-backface-visibility: hidden;
-overflow: hidden;
-
-/* unified system */
-background: #f5f8ff;
-border: 2.5px solid transparent; /* reserve hover thickness */
-box-shadow: none;
-box-sizing: border-box;
-
-border-radius: 16px; /* ✅ rounded like other sections */
-}
-
-/* thin inner static line */
-.exp-card-face::after{
-content:"";
-position: absolute;
-inset: 0;
-pointer-events: none;
-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
-border-radius: 16px;
-}
-
-/* hover border */
-@media (hover:hover){
-.exp-card:hover .exp-card-face{
-background: #ffffff;
-border-color: var(--exp-accent, #0ea5a2);
-}
-.exp-card:hover .exp-card-face::after{
-box-shadow: none;
-}
-}
-
-/* ======================
-FRONT
-====================== */
-
-.exp-card-front{
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 24px 26px;
-gap: 14px;
-color: #1f2937;
-
-border-radius: 16px; /* safe */
-}
-
-.exp-front-left{
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-}
-
-.exp-front-main{
-text-transform: uppercase;
-letter-spacing: .2em;
-font-size: .8rem;
-color: var(--exp-accent, #0ea5a2);
-}
-
-.exp-front-sub{
-margin-top: 10px;
-font-size: 1.35rem;
-font-weight: 600;
-max-width: 14ch;
-line-height: 1.15;
-}
-
-
-/* ======================
-BACK
-====================== */
-
+/* both faces are stacked and clipped inside the same rounded frame */
+.exp-card-front,
 .exp-card-back{
-transform: rotateY(180deg);
-display: flex;
-flex-direction: column;
-color: #1f2937;
+  position: absolute;
+  inset: 0;
 
-border-radius: 16px; /* safe */
+  border-radius: 16px;
+  background: #f5f8ff;
+
+  border: 2.5px solid transparent; /* reserve hover thickness */
+  box-sizing: border-box;
+
+  overflow: hidden; /* ✅ keeps everything inside */
 }
 
-.exp-card-back-inner{
-padding: 14px 14px 10px;
-display: flex;
-flex-direction: column;
-gap: 10px;
-height: 100%;
-overflow-y: auto;
+/* subtle inner stroke */
+.exp-card-front::after,
+.exp-card-back::after{
+  content:"";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+  border-radius: 16px;
 }
 
-.exp-back-label{
-font-size: .75rem;
-letter-spacing: .18em;
-color: #1c2d5a;
-}
-
-/* org block */
-.exp-org{
-display: grid;
-grid-template-columns: auto 1fr;
-gap: 14px;
-align-items: center;
-}
-
-.exp-org-logo{
-width: 90px;
-height: 90px;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.exp-org-logo img{
-max-width: 100%;
-max-height: 100%;
-object-fit: contain;
-}
-
-.exp-org-text{
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.exp-org-text h3{
-font-size: .95rem;
-margin: 0;
-}
-
-.exp-org-meta{
-font-size: .78rem;
-color: var(--exp-accent, #0ea5a2);
-}
-
-.exp-org-list{
-grid-column: 1 / -1;
-padding-left: 20px;
-font-size: .82rem;
-line-height: 1.45;
-}
-
-/* ======================
-ACCENT
-====================== */
-
-.exp-card{ --exp-accent:#0ea5a2; }
-
-/* ======================
-EXPANSION + DIM (DESKTOP ONLY)
-(kept as you had it)
-====================== */
-
-.exp-card--expanded{
-z-index: 20;
-}
-
-.exp-card--expanded .exp-card-back{
-position: absolute;
-left: 0;
-right: 0;
-box-shadow: 0 18px 40px rgba(0,0,0,.18);
-}
-
-.exp-card--ngo.exp-card--expanded .exp-card-back{
-top: 0;
-height: calc(200% + 18px);
-}
-.exp-card--research.exp-card--expanded .exp-card-back{
-top: calc(-100% - 18px);
-height: calc(200% + 18px);
-}
-
-.exp-mosaic.dim-others .exp-card{
-opacity: .35;
-}
-.exp-mosaic.dim-others .exp-card--expanded{
-opacity: 1;
+/* hover border/background */
+@media (hover:hover) and (pointer:fine){
+  .exp-card:hover .exp-card-front,
+  .exp-card:hover .exp-card-back{
+    background: #ffffff;
+    border-color: var(--exp-accent);
+  }
+  .exp-card:hover .exp-card-front::after,
+  .exp-card:hover .exp-card-back::after{
+    box-shadow: none;
+  }
 }
 
 /* ===========================
-MOBILE — STACK, BACK ONLY
-(no flip, no dim, no expand)
+FRONT — TITLE MOVES UP ON HOVER
 =========================== */
-
-@media (max-width: 800px){
-
-/* align with navbar inset on phone */
-#experience{
-width: 100%;
-margin-left: 0;
-margin-right: 0;
-padding-left: 12px;
-padding-right: 12px;
-overflow: visible;
-}
-
-.experience-layout{
-padding-top: 0;
-}
-
-.exp-mosaic{
-display: flex;
-flex-direction: column;
-gap: 18px;
-perspective: none;
-}
-
-.exp-card{
-grid-area: auto !important;
-width: 100%;
-height: auto;
-cursor: default;
-}
-
-/* kill flip completely */
-.exp-card-inner{
-width: 100%;
-height: auto;
-transform: none !important;
-transform-style: flat;
-transition: none;
-}
-.exp-card.is-flipped .exp-card-inner{
-transform: none !important;
-}
-
-/* faces become normal blocks */
-.exp-card-face{
-position: relative;
-inset: auto;
-height: auto;
-backface-visibility: visible;
-}
-
-/* front gone, back only */
 .exp-card-front{
-display: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 24px 26px;
+  color: #1f2937;
 }
 
+.exp-front-left{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  transform: translateY(0);
+  transition: transform .28s ease;
+}
+
+.exp-front-main{
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .8rem;
+  color: var(--exp-accent);
+}
+
+.exp-front-sub{
+  margin-top: 10px;
+  font-size: 1.45rem;   /* bigger, like you asked earlier */
+  font-weight: 700;
+  max-width: 18ch;
+  line-height: 1.12;
+}
+
+/* ===========================
+BACK — CONTENT SLIDES UP + FADES IN
+=========================== */
 .exp-card-back{
-display: flex;
-position: relative;
-transform: none !important;
-box-shadow: none;
+  z-index: 1;
+
+  opacity: 0;
+  transform: translateY(28px);
+  transition: transform .28s ease, opacity .28s ease;
+
+  pointer-events: none; /* no interaction until visible */
 }
 
-.exp-card-back-inner{
-height: auto;
-max-height: none;
-overflow: visible;
-padding: 16px 14px 18px;
-}
-
-/* kill dim + expansion */
-.exp-mosaic.dim-others .exp-card{
-opacity: 1 !important;
-}
-
-.exp-card--expanded{
-z-index: auto !important;
-}
-
-.exp-card--expanded .exp-card-back{
-position: relative !important;
-top: auto !important;
-left: auto !important;
-right: auto !important;
-height: auto !important;
-box-shadow: none !important;
-}
-
-.exp-card--ngo.exp-card--expanded .exp-card-back,
-.exp-card--research.exp-card--expanded .exp-card-back{
-top: auto !important;
-height: auto !important;
-}
-
-/* no hover lift on touch */
-.exp-card:hover{
-transform: none;
-}
-}
-
-
-/* =========================================================
-EXPERIENCE — HOVER REVEAL (NO EXPAND, CLIPPED IN CARD)
-PASTE THIS AT THE VERY END OF YOUR CSS
-========================================================= */
-
-@media (hover:hover){
-
-  /* 1) hard-disable your old "expanded = 200% height" behavior */
-  .exp-card--expanded .exp-card-back,
-  .exp-card--ngo.exp-card--expanded .exp-card-back,
-  .exp-card--research.exp-card--expanded .exp-card-back{
-    position: absolute !important;
-    inset: 0 !important;
-    height: 100% !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* 2) stop the 3D flip system from affecting layout */
-  .exp-card-inner{
-    transform: none !important;
-    transform-style: flat !important;
-    transition: none !important;
-  }
-  .exp-card.is-flipped .exp-card-inner{
-    transform: none !important;
-  }
-
-  /* 3) IMPORTANT: clip inside the rounded card */
-  .exp-card-face{
-    position: absolute !important;
-    inset: 0 !important;
-    overflow: hidden !important;     /* <- this is what keeps content inside */
-    border-radius: 16px;
-  }
-
-  /* 4) set layers */
-  .exp-card-front{ z-index: 2; }
-  .exp-card-back{
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(26px) !important;
-    pointer-events: none;
-    transition: transform .28s ease, opacity .28s ease;
-  }
-
-  /* 5) title goes up on hover */
-  .exp-card-front .exp-front-left{
-    transform: translateY(0);
-    transition: transform .28s ease;
-  }
-
-  /* 6) hover reveal (no click) */
+/* reveal on hover */
+@media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-card-back{
     opacity: 1;
-    transform: translateY(0) !important;
+    transform: translateY(0);
     pointer-events: auto;
   }
-  .exp-card:hover .exp-card-front .exp-front-left{
-    transform: translateY(-42px);
-  }
 
-  /* 7) keep back content scrolling INSIDE card if long */
-  .exp-card-back-inner{
-    height: 100%;
-    overflow: auto;
+  /* title goes upward */
+  .exp-card:hover .exp-front-left{
+    transform: translateY(-46px);
   }
 }
 
+/* back inner scroll area (stays inside card) */
+.exp-card-back-inner{
+  height: 100%;
+  overflow: auto;
+  padding: 14px 14px 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===========================
+BACK CONTENT — ORG BLOCKS
+(works with your current markup)
+=========================== */
+.exp-org{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.exp-org-logo{
+  width: 84px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp-org-logo img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.exp-org-text{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exp-org-text h3{
+  margin: 0;
+  font-size: .98rem;
+}
+
+.exp-org-meta{
+  font-size: .8rem;
+  color: var(--exp-accent);
+}
+
+.exp-org-list{
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-left: 18px;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+/* ===========================
+MOBILE — STACK + SHOW CONTENT (NO HOVER)
+=========================== */
+@media (max-width: 800px){
+  #experience{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .exp-mosaic{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .exp-card{
+    min-height: auto;
+  }
+
+  /* show back as the visible face on mobile */
+  .exp-card-front{
+    display: none;
+  }
+
+  .exp-card-back{
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .exp-card-back-inner{
+    height: auto;
+    overflow: visible;
+  }
+}
 
 
 
@@ -6770,60 +6606,6 @@ showSection("home");
 
 
 /* ===============================
-EXPERIENCE CARDS — HOVER REVEAL ONLY
-- Desktop: hover only (no click, no expand, no dim)
-- Mobile: keep your current "back only" layout (no JS needed)
-=============================== */
-
-const expCards = document.querySelectorAll(".exp-card");
-const expMosaic = document.querySelector(".exp-mosaic");
-
-function isDesktopHover() {
-  return window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-}
-
-function clearExpClasses() {
-  expCards.forEach(card => {
-    card.classList.remove("is-flipped");
-    card.classList.remove("exp-card--expanded");
-  });
-  if (expMosaic) expMosaic.classList.remove("dim-others");
-}
-
-/* kill any leftover states on load */
-clearExpClasses();
-
-/* IMPORTANT:
-   If you had old click listeners, we stop clicks from doing anything on desktop.
-   (We cannot "remove" old listeners unless we control references, so we intercept.)
-*/
-document.addEventListener("click", (e) => {
-  if (!isDesktopHover()) return;
-  const card = e.target.closest(".exp-card");
-  if (!card) return;
-
-  // prevent your old click-to-flip listeners from firing
-  e.preventDefault();
-  e.stopPropagation();
-  e.stopImmediatePropagation();
-
-  // ensure it never stays "expanded"
-  clearExpClasses();
-}, true);
-
-/* Optional: also stop keyboard "Enter" triggering click on desktop */
-document.addEventListener("keydown", (e) => {
-  if (!isDesktopHover()) return;
-  if (e.key !== "Enter" && e.key !== " ") return;
-  const el = document.activeElement;
-  if (!el) return;
-  const card = el.closest?.(".exp-card");
-  if (!card) return;
-  e.preventDefault();
-  clearExpClasses();
-}, true);
-
-/* ===============================
 TOOLTIP (EXPERIENCE ONLY)
 =============================== */
 
@@ -6857,20 +6639,6 @@ tooltip.style.opacity = 1;
 function hideTooltip() {
 tooltip.style.opacity = 0;
 }
-
-
-/* ---- EXPERIENCE CARDS: hover hint (desktop only) ---- */
-expCards.forEach(card => {
-  card.addEventListener("mousemove", e => {
-    if (!isDesktopHover()) return;
-    showTooltip("Hover to view", e.clientX, e.clientY);
-  });
-
-  card.addEventListener("mouseleave", () => {
-    if (!isDesktopHover()) return;
-    hideTooltip();
-  });
-});
 
 
 /* ---- EDUCATION MAPS: "Show education pass" ---- */
