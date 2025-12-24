@@ -2794,10 +2794,6 @@ box-sizing: border-box;
 
 /* =========================================================
 EXPERIENCE — Kesk'IA style hover reveal (REAL version)
-- fixed frame (no expand)
-- title slides up
-- content rises from bottom + fades in
-- everything clipped inside card
 ========================================================= */
 
 #experience{
@@ -2902,9 +2898,12 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   right: 26px;
   top: 50%;
   transform: translateY(-50%);
-  transition: transform .28s ease, top .28s ease;
+  transition: 
+    transform .28s ease,
+    opacity .2s ease;
   z-index: 2;
 }
+
 
 .exp-front-main{
   text-transform: uppercase;
@@ -2954,16 +2953,12 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
 /* HOVER REVEAL (desktop only) */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    top: 22px;                  /* title goes up */
-    transform: translateY(0);
-  }
-
-  .exp-card:hover .exp-reveal{
-    opacity: 1;
-    transform: translateY(0);   /* content comes up from bottom */
-    pointer-events: auto;
+    transform: translateY(-140%); /* 🚀 moves fully out of card */
+    opacity: 0;                  /* 👻 disappears */
+    pointer-events: none;
   }
 }
+
 
 /* org blocks */
 .exp-org{
@@ -3064,6 +3059,17 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
 }
 
   
+.exp-reveal{
+  transition: 
+    transform .28s ease,
+    opacity .28s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .exp-card:hover .exp-reveal{
+    transition-delay: .06s; /* subtle stagger */
+  }
+}
 
 
 
