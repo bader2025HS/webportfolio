@@ -3090,6 +3090,250 @@ MOBILE — STACK + SHOW CONTENT (NO HOVER)
 }
 
 
+/* =========================================================
+EXPERIENCE — HOVER REVEAL (FORCE OVERRIDE VERSION)
+- No click, no expand
+- Title slides UP on hover
+- Content rises from bottom + fades in
+- Everything clipped INSIDE the card
+Paste at the VERY END of your CSS
+========================================================= */
+
+#experience{ 
+  width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  padding-left: clamp(16px, 3vw, 64px) !important;
+  padding-right: clamp(16px, 3vw, 64px) !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  scroll-margin-top: 90px !important;
+}
+
+#experience .experience-layout{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 6px 0 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* grid */
+#experience .exp-mosaic{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-auto-rows: minmax(240px, 1fr) !important;
+  gap: 18px !important;
+
+  overflow: visible !important;
+}
+
+#experience .exp-card--ngo{ grid-area: ngo !important; }
+#experience .exp-card--io{ grid-area: io !important; }
+#experience .exp-card--research{ grid-area: research !important; }
+#experience .exp-card--assoc{ grid-area: assoc !important; }
+
+/* card */
+#experience .exp-card{
+  --exp-accent: #0ea5a2 !important;
+  position: relative !important;
+  min-height: 240px !important;
+  width: 100% !important;
+  cursor: default !important;
+  z-index: 0 !important;
+  transform: none !important;
+  transition: transform .22s ease !important;
+}
+
+@media (hover:hover) and (pointer:fine){
+  #experience .exp-card:hover{
+    transform: translateY(-3px) !important;
+    z-index: 10 !important;
+  }
+}
+
+/* kill any old 3D/flip/expanded influence */
+#experience .exp-card-inner{
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+  transition: none !important;
+  transform-style: flat !important;
+}
+#experience .exp-card.is-flipped .exp-card-inner{ transform: none !important; }
+
+#experience .exp-card--expanded,
+#experience .exp-mosaic.dim-others{
+  all: unset !important; /* hard nuke the old “expanded/dim” behaviors if present */
+}
+
+/* faces stacked + clipped */
+#experience .exp-card-front,
+#experience .exp-card-back{
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;              /* ✅ CLIP inside card */
+  background: #f5f8ff !important;
+  border: 2.5px solid transparent !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+/* subtle inner line */
+#experience .exp-card-front::after,
+#experience .exp-card-back::after{
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12) !important;
+  border-radius: 16px !important;
+}
+
+/* layers */
+#experience .exp-card-front{ z-index: 2 !important; }
+#experience .exp-card-back{ z-index: 1 !important; }
+
+/* hover border */
+@media (hover:hover) and (pointer:fine){
+  #experience .exp-card:hover .exp-card-front,
+  #experience .exp-card:hover .exp-card-back{
+    background: #ffffff !important;
+    border-color: var(--exp-accent) !important;
+  }
+  #experience .exp-card:hover .exp-card-front::after,
+  #experience .exp-card:hover .exp-card-back::after{
+    box-shadow: none !important;
+  }
+}
+
+/* FRONT layout */
+#experience .exp-card-front{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 24px 26px !important;
+  color: #1f2937 !important;
+}
+
+#experience .exp-front-left{
+  transform: translateY(0) !important;
+  transition: transform .28s ease !important;
+}
+
+#experience .exp-front-main{
+  text-transform: uppercase !important;
+  letter-spacing: .2em !important;
+  font-size: .8rem !important;
+  color: var(--exp-accent) !important;
+}
+#experience .exp-front-sub{
+  margin-top: 10px !important;
+  font-size: 1.45rem !important;
+  font-weight: 700 !important;
+  line-height: 1.12 !important;
+  max-width: 18ch !important;
+}
+
+/* BACK hidden by default (desktop) */
+#experience .exp-card-back{
+  opacity: 0 !important;
+  transform: translateY(28px) !important;
+  transition: transform .28s ease, opacity .28s ease !important;
+  pointer-events: none !important;
+}
+
+@media (hover:hover) and (pointer:fine){
+  #experience .exp-card:hover .exp-card-back{
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+  #experience .exp-card:hover .exp-front-left{
+    transform: translateY(-46px) !important;
+  }
+}
+
+/* back scrolling content stays inside */
+#experience .exp-card-back-inner{
+  height: 100% !important;
+  overflow: auto !important;
+  padding: 14px 14px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+/* org blocks */
+#experience .exp-org{
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  gap: 14px !important;
+  align-items: center !important;
+}
+#experience .exp-org-logo{
+  width: 84px !important;
+  height: 84px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#experience .exp-org-logo img{
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+}
+#experience .exp-org-text h3{
+  margin: 0 !important;
+  font-size: .98rem !important;
+}
+#experience .exp-org-meta{
+  font-size: .8rem !important;
+  color: var(--exp-accent) !important;
+}
+#experience .exp-org-list{
+  grid-column: 1 / -1 !important;
+  margin: 0 !important;
+  padding-left: 18px !important;
+  font-size: .86rem !important;
+  line-height: 1.5 !important;
+}
+
+/* MOBILE — stack, show back only */
+@media (max-width: 800px){
+  #experience{
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  #experience .exp-mosaic{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+  #experience .exp-card-front{ display: none !important; }
+  #experience .exp-card-back{
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+  #experience .exp-card-back-inner{
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
 
 
   
