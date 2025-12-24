@@ -3071,6 +3071,14 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   }
 }
 
+@media (hover:hover) and (pointer:fine){
+  .exp-card:hover .exp-reveal{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: .06s; /* keep your stagger */
+  }
+}
 
 
 
