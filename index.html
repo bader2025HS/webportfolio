@@ -2898,11 +2898,13 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   right: 26px;
   top: 50%;
   transform: translateY(-50%);
-  transition: 
-    transform .28s ease,
-    opacity .2s ease;
   z-index: 2;
+
+  transition:
+    transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity   0.25s ease 0.2s;
 }
+
 
 
 .exp-front-main{
@@ -2953,11 +2955,12 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
 /* HOVER REVEAL (desktop only) */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    transform: translateY(-140%); /* 🚀 moves fully out of card */
-    opacity: 0;                  /* 👻 disappears */
+    transform: translateY(-160%);
+    opacity: 0;
     pointer-events: none;
   }
 }
+
 
 
 /* org blocks */
@@ -3040,6 +3043,9 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   }
 
   .exp-reveal{
+    transition:
+    transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity   0.35s ease;
     position: relative;
     left: auto;
     right: auto;
