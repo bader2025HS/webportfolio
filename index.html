@@ -6770,44 +6770,74 @@ showSection("home");
 
 
 /* ===============================
-EXPERIENCE CARDS — SAFE VERSION
+EXPERIENCE CARDS — HOVER REVEAL ONLY
+- Desktop: hover only (no click, no expand, no dim)
+- Mobile: keep your current "back only" layout (no JS needed)
 =============================== */
 
 const expCards = document.querySelectorAll(".exp-card");
 const expMosaic = document.querySelector(".exp-mosaic");
 
-if (expCards && expCards.length) {
+function isDesktopHover() {
+  return window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+}
 
-function resetExpLayout() {
+function clearExpClasses() {
+  expCards.forEach(card => {
+    card.classList.remove("is-flipped");
+    card.classList.remove("exp-card--expanded");
+  });
+  if (expMosaic) expMosaic.classList.remove("dim-others");
+}
+
+/* kill any leftover states on load */
+clearExpClasses();
+
+/* IMPORTANT:
+   If you had old click listeners, we stop clicks from doing anything on desktop.
+   (We cannot "remove" old listeners unless we control references, so we intercept.)
+*/
+document.addEventListener("click", (e) => {
+  if (!isDesktopHover()) return;
+  const card = e.target.closest(".exp-card");
+  if (!card) return;
+
+  // prevent your old click-to-flip listeners from firing
+  e.preventDefault();
+  e.stopPropagation();
+  e.stopImmediatePropagation();
+
+  // ensure it never stays "expanded"
+  clearExpClasses();
+}, true);
+
+/* Optional: also stop keyboard "Enter" triggering click on desktop */
+document.addEventListener("keydown", (e) => {
+  if (!isDesktopHover()) return;
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const el = document.activeElement;
+  if (!el) return;
+  const card = el.closest?.(".exp-card");
+  if (!card) return;
+  e.preventDefault();
+  clearExpClasses();
+}, true);
+
+/* ===============================
+TOOLTIP (EXPERIENCE ONLY)
+=============================== */
+
 expCards.forEach(card => {
-card.classList.remove("is-flipped");
-card.classList.remove("exp-card--expanded");
+  card.addEventListener("mousemove", e => {
+    if (!isDesktopHover()) return; // no tooltip on touch/mobile
+    showTooltip("Hover to view", e.clientX, e.clientY);
+  });
+
+  card.addEventListener("mouseleave", () => {
+    if (!isDesktopHover()) return;
+    hideTooltip();
+  });
 });
-if (expMosaic) {
-expMosaic.classList.remove("dim-others");
-}
-}
-
-expCards.forEach(card => {
-card.addEventListener("click", () => {
-const alreadyFlipped = card.classList.contains("is-flipped");
-
-// reset everything first
-resetExpLayout();
-
-// if it was already open, just close
-if (alreadyFlipped) return;
-
-// open clicked card
-card.classList.add("is-flipped");
-card.classList.add("exp-card--expanded");
-
-if (expMosaic) {
-expMosaic.classList.add("dim-others");
-}
-});
-});
-}
 
 
 
@@ -6828,27 +6858,20 @@ function hideTooltip() {
 tooltip.style.opacity = 0;
 }
 
-/* ---- EXPERIENCE CARDS: "Click to flip" (only on FRONT) ---- */
 
+/* ---- EXPERIENCE CARDS: hover hint (desktop only) ---- */
 expCards.forEach(card => {
-card.addEventListener("mousemove", e => {
-// if card is flipped, no tooltip
-if (card.classList.contains("is-flipped")) {
-hideTooltip();
-return;
-}
-showTooltip("Click to flip", e.clientX, e.clientY);
+  card.addEventListener("mousemove", e => {
+    if (!isDesktopHover()) return;
+    showTooltip("Hover to view", e.clientX, e.clientY);
+  });
+
+  card.addEventListener("mouseleave", () => {
+    if (!isDesktopHover()) return;
+    hideTooltip();
+  });
 });
 
-card.addEventListener("mouseleave", () => {
-hideTooltip();
-});
-
-card.addEventListener("click", () => {
-// hide immediately after click
-hideTooltip();
-});
-});
 
 /* ---- EDUCATION MAPS: "Show education pass" ---- */
 
