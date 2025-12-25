@@ -2895,10 +2895,11 @@ TITLE ZONE — slide only (no fade)
   transform: translateY(-50%);
   z-index: 2;
 
-  /* ✅ slower + “slider” easing */
-  transition: transform 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+  /* SLOW + smooth slider */
+  transition: transform 1.05s cubic-bezier(0.2, 0.0, 0.2, 1);
   will-change: transform;
 }
+
 
 
 .exp-front-main{
@@ -2928,15 +2929,12 @@ REVEAL ZONE — content slides up
   bottom: 0;
 
   height: 100%;
-  transform: translateY(28px);
-  opacity: 0;
+  transform: translateY(80px); /* start lower so you SEE it move up */
   pointer-events: none;
   z-index: 3;
 
-  /* ✅ same duration + same easing as title */
-  transition:
-    transform 0.70s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.20s ease;
+  /* SLOW + same curve as title */
+  transition: transform 1.05s cubic-bezier(0.2, 0.0, 0.2, 1);
   will-change: transform;
 }
 
@@ -2959,18 +2957,17 @@ HOVER REVEAL (desktop only)
 =========================== */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    /* ✅ exits fully, but still feels like a panel */
-    transform: translateY(calc(-50% - 260px));
+    /* move it fully out, slowly */
+    transform: translateY(calc(-50% - 380px));
     pointer-events: none;
   }
 
   .exp-card:hover .exp-reveal{
     transform: translateY(0);
-    opacity: 1;
     pointer-events: auto;
-    transition-delay: 0s; /* ✅ IMPORTANT: no stagger */
   }
 }
+
 
 
 /* ===========================
