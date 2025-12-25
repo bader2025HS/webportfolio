@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>portofoo</title>
+<title>portofolio</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -2850,18 +2850,21 @@ CARD SHELL
   }
 }
 
-/* the single frame that clips everything */
+/* keep your #experience / layout / grid / card shell as you like,
+   but you MUST have this: */
 .exp-card-frame{
   position: absolute;
   inset: 0;
-
   border-radius: 16px;
   background: #f5f8ff;
   border: 2.5px solid transparent;
   box-sizing: border-box;
-
-  overflow: hidden;
+  overflow: hidden; /* ✅ clip like Kesk'IA */
 }
+
+/* IMPORTANT: make frame the positioning context */
+.exp-card-frame{ position: absolute; }
+.exp-card{ position: relative; }
 
 /* subtle inner line */
 .exp-card-frame::after{
@@ -2889,17 +2892,19 @@ TITLE ZONE — slide only (no fade)
 /* TITLE ZONE — smooth slider (transform only) */
 .exp-title{
   position: absolute;
-  left: 26px;
-  right: 26px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
+  inset: 0;
+  padding: 0 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-  /* SLOW + smooth slider */
-  transition: transform 1.05s cubic-bezier(0.2, 0.0, 0.2, 1);
+  transform: translateY(0);
   will-change: transform;
-}
 
+  /* ✅ slow + readable */
+  transition: transform 1.15s cubic-bezier(0.25, 0.0, 0.2, 1);
+  z-index: 2;
+}
 
 
 .exp-front-main{
@@ -2924,18 +2929,16 @@ REVEAL ZONE — content slides up
 /* REVEAL ZONE — slides up same time as title */
 .exp-reveal{
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
 
-  height: 100%;
-  transform: translateY(80px); /* start lower so you SEE it move up */
-  pointer-events: none;
+  /* ✅ start fully hidden below card */
+  transform: translateY(100%);
+  will-change: transform;
+
+  transition: transform 1.15s cubic-bezier(0.25, 0.0, 0.2, 1);
   z-index: 3;
 
-  /* SLOW + same curve as title */
-  transition: transform 1.05s cubic-bezier(0.2, 0.0, 0.2, 1);
-  will-change: transform;
+  pointer-events: none; /* becomes scrollable on hover */
 }
 
 
@@ -2945,7 +2948,6 @@ REVEAL ZONE — content slides up
   inset: 0;
   padding: 16px 14px 18px;
   overflow: auto;
-
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -2957,12 +2959,12 @@ HOVER REVEAL (desktop only)
 =========================== */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    /* move it fully out, slowly */
-    transform: translateY(calc(-50% - 380px));
-    pointer-events: none;
+    /* ✅ exits completely upward */
+    transform: translateY(-100%);
   }
 
   .exp-card:hover .exp-reveal{
+    /* ✅ slides up into view */
     transform: translateY(0);
     pointer-events: auto;
   }
@@ -3038,32 +3040,25 @@ MOBILE — stack + show content (no hover)
 
   .exp-card{ min-height: auto; }
 
-  .exp-card-frame{
+ .exp-card-frame{
     position: relative;
     inset: auto;
     min-height: 240px;
   }
 
-  .exp-title{
+ .exp-title{
     position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
+    inset: auto;
     transform: none;
     padding: 22px 26px 8px;
     transition: none;
   }
-
-  .exp-reveal{
+.exp-reveal{
     position: relative;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    height: auto;
+    inset: auto;
     transform: none;
-    opacity: 1;
-    pointer-events: auto;
     transition: none;
+    pointer-events: auto;
   }
 
   .exp-card-back-inner{
