@@ -2782,13 +2782,8 @@ box-sizing: border-box;
 
 
 
-
 /* =========================================================
-EXPERIENCE — Kesk'IA style hover reveal (FULL BLOCK)
-- Desktop: 3×2 grid
-- Hover: title slides UP and fully exits, content slides UP into view
-- No expand, stays inside frame
-- Title: NO fade (slide only)
+EXPERIENCE — Kesk'IA style hover reveal (FULL BLOCK) — FIXED
 ========================================================= */
 
 #experience{
@@ -2823,7 +2818,7 @@ GRID — 3×2
   margin: 0;
 
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ 3 columns */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: minmax(240px, 1fr);
   gap: 18px;
 
@@ -2865,7 +2860,7 @@ CARD SHELL
   border: 2.5px solid transparent;
   box-sizing: border-box;
 
-  overflow: hidden; /* ✅ keeps reveal inside */
+  overflow: hidden;
 }
 
 /* subtle inner line */
@@ -2895,12 +2890,14 @@ TITLE ZONE — slide only (no fade)
   position: absolute;
   left: 26px;
   right: 26px;
+
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 
-  /* slower “panel” slide */
-  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition:
+    top 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .exp-front-main{
@@ -2921,7 +2918,6 @@ TITLE ZONE — slide only (no fade)
 
 /* ===========================
 REVEAL ZONE — content slides up
-(no fade by default)
 =========================== */
 .exp-reveal{
   position: absolute;
@@ -2931,9 +2927,10 @@ REVEAL ZONE — content slides up
 
   height: 100%;
   transform: translateY(28px);
-  opacity: 0;                 /* keep; remove if you want zero fade */
+  opacity: 0;
   pointer-events: none;
-  z-index: 1;
+
+  z-index: 3; /* ✅ keep content above if overlap happens */
 
   transition:
     transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -2955,19 +2952,19 @@ REVEAL ZONE — content slides up
 
 /* ===========================
 HOVER REVEAL (desktop only)
-- title exits upward (slide only)
-- content rises from bottom
 =========================== */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    transform: translateY(-160%); /* ✅ fully exits the card */
+    top: -60px;
+    transform: translateY(-100%);
+    pointer-events: none;
   }
 
   .exp-card:hover .exp-reveal{
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
-    transition-delay: .06s; /* subtle stagger like Kesk'IA */
+    transition-delay: .06s;
   }
 }
 
@@ -3074,6 +3071,7 @@ MOBILE — stack + show content (no hover)
     padding: 0 14px 18px;
   }
 }
+
 
 
 
