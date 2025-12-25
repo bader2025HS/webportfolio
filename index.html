@@ -6562,47 +6562,6 @@ showSection(targetId);
 showSection("home");
 
 
-/* ===============================
-EXPERIENCE CARDS — SAFE VERSION
-=============================== */
-
-const expCards = document.querySelectorAll(".exp-card");
-const expMosaic = document.querySelector(".exp-mosaic");
-
-if (expCards && expCards.length) {
-
-function resetExpLayout() {
-expCards.forEach(card => {
-card.classList.remove("is-flipped");
-card.classList.remove("exp-card--expanded");
-});
-if (expMosaic) {
-expMosaic.classList.remove("dim-others");
-}
-}
-
-expCards.forEach(card => {
-card.addEventListener("click", () => {
-const alreadyFlipped = card.classList.contains("is-flipped");
-
-// reset everything first
-resetExpLayout();
-
-// if it was already open, just close
-if (alreadyFlipped) return;
-
-// open clicked card
-card.classList.add("is-flipped");
-card.classList.add("exp-card--expanded");
-
-if (expMosaic) {
-expMosaic.classList.add("dim-others");
-}
-});
-});
-}
-
-
 
 /* ===============================
 TOOLTIP (EXP + EDUCATION MAPS)
@@ -6621,27 +6580,6 @@ function hideTooltip() {
 tooltip.style.opacity = 0;
 }
 
-/* ---- EXPERIENCE CARDS: "Click to flip" (only on FRONT) ---- */
-
-expCards.forEach(card => {
-card.addEventListener("mousemove", e => {
-// if card is flipped, no tooltip
-if (card.classList.contains("is-flipped")) {
-hideTooltip();
-return;
-}
-showTooltip("Click to flip", e.clientX, e.clientY);
-});
-
-card.addEventListener("mouseleave", () => {
-hideTooltip();
-});
-
-card.addEventListener("click", () => {
-// hide immediately after click
-hideTooltip();
-});
-});
 
 /* ---- EDUCATION MAPS: "Show education pass" ---- */
 
