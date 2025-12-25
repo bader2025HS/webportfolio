@@ -2780,22 +2780,23 @@ box-sizing: border-box;
 
 
 
-
-
 /* =========================================================
-EXPERIENCE — Kesk'IA style hover reveal (FULL BLOCK) — FIXED
+EXPERIENCE — 6 CARDS (SMALLER + CENTERED FRONT + NO VISIBLE SCROLLBAR)
+Works with your NEW HTML:
+.exp-title -> contains .exp-front-logo + .exp-front-title
+Back = text only inside .exp-card-back-inner
 ========================================================= */
 
 #experience{
-  margin-top: -25px;
+  margin-top: -18px;              /* smaller */
   padding-top: 0;
   position: relative;
 
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding-left: clamp(16px, 3vw, 64px);
-  padding-right: clamp(16px, 3vw, 64px);
+  padding-left: clamp(14px, 2.4vw, 52px);
+  padding-right: clamp(14px, 2.4vw, 52px);
   box-sizing: border-box;
 
   overflow: visible;
@@ -2805,13 +2806,13 @@ EXPERIENCE — Kesk'IA style hover reveal (FULL BLOCK) — FIXED
 .experience-layout{
   width: 100%;
   margin: 0;
-  padding: 6px 0 0;
+  padding: 2px 0 0;               /* smaller */
   position: relative;
   z-index: 1;
 }
 
 /* ===========================
-GRID — 3×2
+GRID — 3×2 (tighter)
 =========================== */
 .exp-mosaic{
   width: 100%;
@@ -2819,16 +2820,16 @@ GRID — 3×2
 
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: minmax(240px, 1fr);
-  gap: 18px;
-
+  grid-auto-rows: 200px;           /* ✅ smaller cards */
+  gap: 14px;                       /* ✅ tighter gap */
   overflow: visible;
 }
 
-/* tablet: 2 columns */
+/* tablet */
 @media (max-width: 1050px){
   .exp-mosaic{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 205px;
   }
 }
 
@@ -2838,33 +2839,27 @@ CARD SHELL
 .exp-card{
   --exp-accent: #0ea5a2;
   position: relative;
-  min-height: 240px;
+  min-height: 200px;               /* ✅ smaller */
   z-index: 0;
-  transition: transform .22s ease;
+  transition: transform .18s ease; /* a bit snappier */
 }
 
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover{
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     z-index: 10;
   }
 }
 
-/* keep your #experience / layout / grid / card shell as you like,
-   but you MUST have this: */
 .exp-card-frame{
   position: absolute;
   inset: 0;
   border-radius: 16px;
-  background: #f5f8ff;
-  border: 2.5px solid transparent;
+  background: linear-gradient(180deg, #f7faff 0%, #f3f7ff 100%);
+  border: 2px solid transparent;
   box-sizing: border-box;
   overflow: hidden; /* ✅ clip like Kesk'IA */
 }
-
-/* IMPORTANT: make frame the positioning context */
-.exp-card-frame{ position: absolute; }
-.exp-card{ position: relative; }
 
 /* subtle inner line */
 .exp-card-frame::after{
@@ -2872,7 +2867,7 @@ CARD SHELL
   position:absolute;
   inset:0;
   pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
   border-radius: 16px;
 }
 
@@ -2887,122 +2882,90 @@ CARD SHELL
 }
 
 /* ===========================
-TITLE ZONE — slide only (no fade)
+FRONT — LOGO TOP + TITLE UNDER (CENTERED)
 =========================== */
-/* TITLE ZONE — smooth slider (transform only) */
-/* FRONT panel layout: label top, title middle, logo bottom */
 .exp-title{
   position: absolute;
   inset: 0;
-  padding: 22px 26px;
+  padding: 16px 18px;             /* ✅ smaller padding */
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* ✅ creates structure */
-  text-align: left;              /* ✅ looks more premium than centered */
+  align-items: center;            /* ✅ centered */
+  justify-content: center;        /* ✅ centered */
+  text-align: center;
+  gap: 14px;
+
   transform: translateY(0);
-  transition: transform 1.15s cubic-bezier(0.25, 0.0, 0.2, 1);
+  will-change: transform;
+  transition: transform 1.25s cubic-bezier(0.25, 0.0, 0.2, 1);
   z-index: 2;
 }
 
-
-
-.exp-front-main{
-  font-size: .75rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--exp-accent);
+/* logo box (smaller + centered) */
+.exp-front-logo{
+  width: 104px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .95;
 }
 
-.exp-front-sub{
-  margin-top: 10px;
-  font-size: 1.55rem;     /* ✅ a bit bigger */
-  font-weight: 750;       /* ✅ stronger */
-  line-height: 1.08;      /* ✅ more “Kesk’IA” */
-  max-width: 20ch;
+.exp-front-logo img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: saturate(1.05);
+}
+
+/* your new front title */
+.exp-front-title{
+  font-size: 1.28rem;
+  font-weight: 780;
+  line-height: 1.15;
+  max-width: 22ch;
   color: #1f2937;
 }
 
-
 /* ===========================
-REVEAL ZONE — content slides up
+BACK — SLIDES UP (text only)
+Hide visible scrollbar (“progress bar”) but keep scrolling possible
 =========================== */
-/* REVEAL ZONE — slides up same time as title */
 .exp-reveal{
   position: absolute;
   inset: 0;
 
-  /* ✅ start fully hidden below card */
   transform: translateY(100%);
   will-change: transform;
+  transition: transform 1.25s cubic-bezier(0.25, 0.0, 0.2, 1);
 
-  transition: transform 1.15s cubic-bezier(0.25, 0.0, 0.2, 1);
   z-index: 3;
-
-  pointer-events: none; /* becomes scrollable on hover */
+  pointer-events: none;
 }
 
-
-/* content scrolling stays inside the frame */
+/* back content */
 .exp-card-back-inner{
   position: absolute;
   inset: 0;
-  padding: 16px 14px 18px;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  padding: 14px 14px 16px;        /* tighter */
+  overflow: auto;                  /* keep scroll if needed */
   color: #1f2937;
-}
 
-/* ===========================
-HOVER REVEAL (desktop only)
-=========================== */
-@media (hover:hover) and (pointer:fine){
-  .exp-card:hover .exp-title{
-    /* ✅ exits completely upward */
-    transform: translateY(-100%);
-  }
-
-  .exp-card:hover .exp-reveal{
-    /* ✅ slides up into view */
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-}
-
-
-
-/* ===========================
-ORG BLOCKS
-=========================== */
-.exp-org{
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
-  align-items: center;
-}
-
-.exp-org-logo{
-  width: 84px;
-  height: 84px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.exp-org-logo img{
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.exp-org-text{
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+
+  /* ✅ hide scrollbar (no visible “progress bar”) */
+  scrollbar-width: none;           /* Firefox */
+}
+.exp-card-back-inner::-webkit-scrollbar{
+  width: 0;
+  height: 0;
 }
 
-.exp-org-text h3{
+/* text sizing (smaller so it fits more often) */
+.exp-card-back-inner h3{
   margin: 0;
   font-size: .98rem;
 }
@@ -3013,11 +2976,23 @@ ORG BLOCKS
 }
 
 .exp-org-list{
-  grid-column: 1 / -1;
   margin: 0;
   padding-left: 18px;
   font-size: .86rem;
-  line-height: 1.5;
+  line-height: 1.45;
+}
+
+/* ===========================
+HOVER REVEAL — title up + content up (same timing)
+=========================== */
+@media (hover:hover) and (pointer:fine){
+  .exp-card:hover .exp-title{
+    transform: translateY(-100%);
+  }
+  .exp-card:hover .exp-reveal{
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 }
 
 /* ===========================
@@ -3035,25 +3010,26 @@ MOBILE — stack + show content (no hover)
   .exp-mosaic{
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 14px;
   }
 
   .exp-card{ min-height: auto; }
 
- .exp-card-frame{
+  .exp-card-frame{
     position: relative;
     inset: auto;
-    min-height: 240px;
+    min-height: 220px;
   }
 
- .exp-title{
+  .exp-title{
     position: relative;
     inset: auto;
     transform: none;
-    padding: 22px 26px 8px;
     transition: none;
+    padding: 16px 16px 10px;
   }
-.exp-reveal{
+
+  .exp-reveal{
     position: relative;
     inset: auto;
     transform: none;
@@ -3064,50 +3040,10 @@ MOBILE — stack + show content (no hover)
   .exp-card-back-inner{
     position: relative;
     inset: auto;
-    overflow: visible;
-    padding: 0 14px 18px;
+    overflow: visible;            /* no scroll on mobile */
+    padding: 0 16px 16px;
   }
 }
-
-
-.exp-front-logo{
-  width: 110px;
-  height: 80px;                 /* ✅ consistent “badge” shape */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;  /* aligns with text */
-  opacity: .95;
-}
-
-.exp-front-logo img{
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: saturate(1.05);
-}
-
-.exp-card-frame{
-  background: linear-gradient(180deg, #f7faff 0%, #f3f7ff 100%);
-}
-
-.exp-card-frame::after{
-  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
-}
-
-.exp-title,
-.exp-reveal{
-  transition-duration: 1.25s; /* ✅ slower, more premium */
-}
-
-.exp-front-title{
-  font-size: 1.45rem;
-  font-weight: 750;
-  line-height: 1.15;
-  max-width: 22ch;
-  text-align: center;
-  color: #1f2937;
-}
-
 
 
 
