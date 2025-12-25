@@ -188,6 +188,36 @@ border-radius: 7px;
 }
 }
 
+/* ===========================
+NAVBAR — ACTIVE = BOLD + PREMIUM FEEL
+(add AFTER your current navbar CSS)
+=========================== */
+
+/* default weight */
+nav a{
+  font-weight: 500;
+}
+
+/* active/selected link */
+nav a.active{
+  font-weight: 800;            /* ✅ bold */
+  letter-spacing: 0.14em;      /* ✅ slightly tighter/premium */
+}
+
+/* optional: on hover, a gentle emphasis but not as strong as active */
+@media (hover:hover){
+  nav a:hover{
+    font-weight: 650;
+  }
+}
+
+/* keep mobile readable (bold but not too heavy) */
+@media (max-width: 700px){
+  nav a.active{
+    font-weight: 750;
+    letter-spacing: 0.12em;
+  }
+}
 
 
 /* ===========================
