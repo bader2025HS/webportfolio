@@ -3089,15 +3089,6 @@ AQLITY + SPMA ONLY
 }
 
 /* ===========================
-FRONT LOGO — NANCY BIGGER (MATCH OTHERS)
-=========================== */
-
-.exp-card img[src*="nancy"]{
-  width: 112px;   /* ⬅️ bigger, matches perceived size */
-  height: auto;
-}
-
-/* ===========================
 FRONT TITLE — CHIP STYLE
 =========================== */
 
@@ -3122,6 +3113,21 @@ FRONT TITLE — CHIP STYLE
   box-shadow: 0 1px 0 rgba(0,0,0,0.04);
 }
 
+/* ===========================
+NANCY LOGO — FORCE VISUAL MATCH
+=========================== */
+
+/* make the logo container bigger ONLY for Nancy */
+.exp-card img[src*="nancy"]{
+  width: 130px;      /* ⬅️ clearly bigger */
+  height: auto;
+  max-width: none;   /* ⬅️ IMPORTANT: stop container limiting it */
+}
+
+/* ensure the parent does not shrink it */
+.exp-card img[src*="nancy"]{
+  transform: scale(1.05); /* optical boost */
+}
 
 
 
