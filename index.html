@@ -2886,19 +2886,20 @@ CARD SHELL
 /* ===========================
 TITLE ZONE — slide only (no fade)
 =========================== */
+/* TITLE ZONE — smooth slider (transform only) */
 .exp-title{
   position: absolute;
   left: 26px;
   right: 26px;
-
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 
-  transition:
-    top 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* ✅ slower + “slider” easing */
+  transition: transform 0.70s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
+
 
 .exp-front-main{
   text-transform: uppercase;
@@ -2919,6 +2920,7 @@ TITLE ZONE — slide only (no fade)
 /* ===========================
 REVEAL ZONE — content slides up
 =========================== */
+/* REVEAL ZONE — slides up same time as title */
 .exp-reveal{
   position: absolute;
   left: 0;
@@ -2929,13 +2931,15 @@ REVEAL ZONE — content slides up
   transform: translateY(28px);
   opacity: 0;
   pointer-events: none;
+  z-index: 3;
 
-  z-index: 3; /* ✅ keep content above if overlap happens */
-
+  /* ✅ same duration + same easing as title */
   transition:
-    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 0.25s ease;
+    transform 0.70s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.20s ease;
+  will-change: transform;
 }
+
 
 /* content scrolling stays inside the frame */
 .exp-card-back-inner{
@@ -2955,8 +2959,8 @@ HOVER REVEAL (desktop only)
 =========================== */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    top: -60px;
-    transform: translateY(-100%);
+    /* ✅ exits fully, but still feels like a panel */
+    transform: translateY(calc(-50% - 260px));
     pointer-events: none;
   }
 
@@ -2964,9 +2968,10 @@ HOVER REVEAL (desktop only)
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
-    transition-delay: .06s;
+    transition-delay: 0s; /* ✅ IMPORTANT: no stagger */
   }
 }
+
 
 /* ===========================
 ORG BLOCKS
