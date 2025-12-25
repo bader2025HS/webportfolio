@@ -3143,6 +3143,47 @@ NANCY LOGO — REALLY APPLY (override container clamp)
   height: auto !important;
 }
 
+/* ===========================
+FRONT ALIGNMENT — SAME LOGO SLOT + SAME CHIP LINE
+=========================== */
+
+/* 1) same slot for ALL logos */
+.exp-front-logo{
+  width: 110px !important;
+  height: 78px !important;      /* <- uniform height = uniform layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2) keep all logos inside the slot */
+.exp-front-logo img{
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+/* 3) make the chip always sit the same way */
+.exp-title{
+  gap: 12px !important;         /* consistent spacing */
+  justify-content: center !important;
+}
+
+/* ===========================
+NANCY — slightly bigger but aligned
+=========================== */
+.exp-front-logo:has(img[src*="nancy"]){
+  width: 130px !important;      /* a bit wider than others */
+  height: 78px !important;      /* SAME height -> aligns with chips */
+}
+
+.exp-front-logo:has(img[src*="nancy"]) img{
+  max-height: 100% !important;
+  max-width: 100% !important;
+  transform: scale(1.08);       /* subtle boost, not huge */
+}
 
 
 
