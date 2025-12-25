@@ -3125,25 +3125,6 @@ NANCY LOGO — FORCE VISUAL MATCH
   transform: scale(1.05); /* optical boost */
 }
 
-/* ===========================
-NANCY LOGO — REALLY APPLY (override container clamp)
-=========================== */
-
-/* 1) make Nancy's logo slot bigger */
-.exp-front-logo:has(img[src*="nancy"]){
-  width: 120px !important;
-  height: 100px !important;
-}
-
-/* 2) remove the max-width/max-height clamp only for Nancy */
-.exp-front-logo:has(img[src*="nancy"]) img{
-  max-width: none !important;
-  max-height: none !important;
-  width: 120px !important;   /* adjust if needed */
-  height: auto !important;
-}
-
-
 
 
 
