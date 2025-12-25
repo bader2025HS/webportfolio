@@ -2784,11 +2784,11 @@ box-sizing: border-box;
 
 
 /* =========================================================
-EXPERIENCE — Kesk'IA style hover reveal (REAL version)
-- fixed frame (no expand)
-- title slides up
-- content rises from bottom + fades in
-- everything clipped inside card
+EXPERIENCE — Kesk'IA style hover reveal (FULL BLOCK)
+- Desktop: 3×2 grid
+- Hover: title slides UP and fully exits, content slides UP into view
+- No expand, stays inside frame
+- Title: NO fade (slide only)
 ========================================================= */
 
 #experience{
@@ -2815,29 +2815,31 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   z-index: 1;
 }
 
-/* grid */
+/* ===========================
+GRID — 3×2
+=========================== */
 .exp-mosaic{
   width: 100%;
   margin: 0;
 
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ 3 columns */
   grid-auto-rows: minmax(240px, 1fr);
-  grid-template-areas:
-    "ngo io"
-    "research assoc";
   gap: 18px;
 
   overflow: visible;
 }
 
-/* keep your areas */
-.exp-card--ngo{ grid-area: ngo; }
-.exp-card--io{ grid-area: io; }
-.exp-card--research{ grid-area: research; }
-.exp-card--assoc{ grid-area: assoc; }
+/* tablet: 2 columns */
+@media (max-width: 1050px){
+  .exp-mosaic{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
-/* card shell */
+/* ===========================
+CARD SHELL
+=========================== */
 .exp-card{
   --exp-accent: #0ea5a2;
   position: relative;
@@ -2863,7 +2865,7 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   border: 2.5px solid transparent;
   box-sizing: border-box;
 
-  overflow: hidden;              /* ✅ keeps reveal inside */
+  overflow: hidden; /* ✅ keeps reveal inside */
 }
 
 /* subtle inner line */
@@ -2886,19 +2888,20 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   }
 }
 
-/* TITLE ZONE */
+/* ===========================
+TITLE ZONE — slide only (no fade)
+=========================== */
 .exp-title{
   position: absolute;
   left: 26px;
   right: 26px;
   top: 50%;
   transform: translateY(-50%);
-  transition: 
-    transform .28s ease,
-    opacity .2s ease;
   z-index: 2;
-}
 
+  /* slower “panel” slide */
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
 
 .exp-front-main{
   text-transform: uppercase;
@@ -2916,7 +2919,10 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   color: #1f2937;
 }
 
-/* REVEAL ZONE (hidden until hover) */
+/* ===========================
+REVEAL ZONE — content slides up
+(no fade by default)
+=========================== */
 .exp-reveal{
   position: absolute;
   left: 0;
@@ -2924,12 +2930,14 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   bottom: 0;
 
   height: 100%;
-  opacity: 0;
   transform: translateY(28px);
-  transition: transform .28s ease, opacity .28s ease;
-
+  opacity: 0;                 /* keep; remove if you want zero fade */
   pointer-events: none;
   z-index: 1;
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.25s ease;
 }
 
 /* content scrolling stays inside the frame */
@@ -2945,24 +2953,27 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   color: #1f2937;
 }
 
-/* HOVER REVEAL (desktop only) */
+/* ===========================
+HOVER REVEAL (desktop only)
+- title exits upward (slide only)
+- content rises from bottom
+=========================== */
 @media (hover:hover) and (pointer:fine){
   .exp-card:hover .exp-title{
-    transform: translateY(-140%); /* 🚀 moves fully out of card */
-    opacity: 0;                  /* 👻 disappears */
-    pointer-events: none;
+    transform: translateY(-160%); /* ✅ fully exits the card */
   }
-}
-
 
   .exp-card:hover .exp-reveal{
+    transform: translateY(0);
     opacity: 1;
-    transform: translateY(0);   /* content comes up from bottom */
     pointer-events: auto;
+    transition-delay: .06s; /* subtle stagger like Kesk'IA */
   }
 }
 
-/* org blocks */
+/* ===========================
+ORG BLOCKS
+=========================== */
 .exp-org{
   display: grid;
   grid-template-columns: auto 1fr;
@@ -3008,7 +3019,9 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
   line-height: 1.5;
 }
 
-/* MOBILE — no hover, show content */
+/* ===========================
+MOBILE — stack + show content (no hover)
+=========================== */
 @media (max-width: 800px){
   #experience{
     width: 100%;
@@ -3039,6 +3052,7 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
     top: auto;
     transform: none;
     padding: 22px 26px 8px;
+    transition: none;
   }
 
   .exp-reveal{
@@ -3047,9 +3061,10 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
     right: auto;
     bottom: auto;
     height: auto;
-    opacity: 1;
     transform: none;
+    opacity: 1;
     pointer-events: auto;
+    transition: none;
   }
 
   .exp-card-back-inner{
@@ -3057,18 +3072,6 @@ EXPERIENCE — Kesk'IA style hover reveal (REAL version)
     inset: auto;
     overflow: visible;
     padding: 0 14px 18px;
-  }
-}
-
-.exp-reveal{
-  transition: 
-    transform .28s ease,
-    opacity .28s ease;
-}
-
-@media (hover:hover) and (pointer:fine){
-  .exp-card:hover .exp-reveal{
-    transition-delay: .06s; /* subtle stagger */
   }
 }
 
@@ -5493,34 +5496,29 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
 
 <!-- EXPERIENCE – MOSAIC SQUARE -->
 
-<!-- EXPERIENCE – MOSAIC SQUARE -->
+<!-- EXPERIENCE – 6 CARDS -->
 <section id="experience">
   <div class="experience-layout">
-    <div class="exp-mosaic">
+    <div class="exp-mosaic exp-6">
 
-      <!-- INTERNATIONAL ORG -->
-      <div class="exp-card exp-card--io">
+      <!-- OIF -->
+      <div class="exp-card">
         <div class="exp-card-frame">
 
-          <!-- Title zone (always visible, moves up on hover) -->
           <div class="exp-title">
             <div class="exp-front-main">International organisation</div>
             <div class="exp-front-sub">Multilateral &amp; Francophonie</div>
           </div>
 
-          <!-- Reveal zone (hidden, comes up from bottom on hover) -->
           <div class="exp-reveal">
             <div class="exp-card-back-inner">
-
               <div class="exp-org">
                 <div class="exp-org-logo">
                   <img src="oif.png" alt="OIF logo">
                 </div>
                 <div class="exp-org-text">
                   <h3>International Organisation of La Francophonie</h3>
-                  <div class="exp-org-meta">
-                    Project Design &amp; Monitoring Unit – Paris · 2024
-                  </div>
+                  <div class="exp-org-meta">Project Design &amp; Monitoring Unit – Paris · 2024</div>
                   <ul class="exp-org-list">
                     <li>Compiled and analysed operational data across 90 member states.</li>
                     <li>Built dashboards and visualisations (Power BI, Excel) for 10+ indicators.</li>
@@ -5528,24 +5526,23 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
                   </ul>
                 </div>
               </div>
-
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- NGO -->
-      <div class="exp-card exp-card--ngo">
+      <!-- AQLITY -->
+      <div class="exp-card">
         <div class="exp-card-frame">
+
           <div class="exp-title">
             <div class="exp-front-main">NGO &amp; humanitarian</div>
-            <div class="exp-front-sub">Data, protection &amp; field support</div>
+            <div class="exp-front-sub">Humanitarian data &amp; mapping</div>
           </div>
 
           <div class="exp-reveal">
             <div class="exp-card-back-inner">
-
               <div class="exp-org">
                 <div class="exp-org-logo">
                   <img src="aqlity.png" alt="AQLITY logo">
@@ -5560,7 +5557,23 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
 
+        </div>
+      </div>
+
+      <!-- ARDHIS -->
+      <div class="exp-card">
+        <div class="exp-card-frame">
+
+          <div class="exp-title">
+            <div class="exp-front-main">NGO &amp; humanitarian</div>
+            <div class="exp-front-sub">LGBT asylum support</div>
+          </div>
+
+          <div class="exp-reveal">
+            <div class="exp-card-back-inner">
               <div class="exp-org">
                 <div class="exp-org-logo">
                   <img src="ardhis.png" alt="ARDHIS logo">
@@ -5575,24 +5588,23 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
                   </ul>
                 </div>
               </div>
-
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- RESEARCH -->
-      <div class="exp-card exp-card--research">
+      <!-- RSS -->
+      <div class="exp-card">
         <div class="exp-card-frame">
+
           <div class="exp-title">
             <div class="exp-front-main">Research &amp; science-policy</div>
-            <div class="exp-front-sub">Water, energy &amp; MENA</div>
+            <div class="exp-front-sub">Desalination &amp; MENA</div>
           </div>
 
           <div class="exp-reveal">
             <div class="exp-card-back-inner">
-
               <div class="exp-org">
                 <div class="exp-org-logo">
                   <img src="rss.png" alt="Royal Scientific Society logo">
@@ -5607,7 +5619,23 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
 
+        </div>
+      </div>
+
+      <!-- NANCY -->
+      <div class="exp-card">
+        <div class="exp-card-frame">
+
+          <div class="exp-title">
+            <div class="exp-front-main">Public sector</div>
+            <div class="exp-front-sub">City liaison &amp; events</div>
+          </div>
+
+          <div class="exp-reveal">
+            <div class="exp-card-back-inner">
               <div class="exp-org">
                 <div class="exp-org-logo">
                   <img src="nancy.png" alt="Ville de Nancy logo">
@@ -5622,16 +5650,16 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
                   </ul>
                 </div>
               </div>
-
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- ASSOCIATION -->
-      <div class="exp-card exp-card--assoc">
+      <!-- SPMA / ASSOCIATION -->
+      <div class="exp-card">
         <div class="exp-card-frame">
+
           <div class="exp-title">
             <div class="exp-front-main">Association &amp; leadership</div>
             <div class="exp-front-sub">Student-led MENA projects</div>
@@ -5639,7 +5667,6 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
 
           <div class="exp-reveal">
             <div class="exp-card-back-inner">
-
               <div class="exp-org">
                 <div class="exp-org-logo">
                   <img src="spma.png" alt="SPMA logo">
@@ -5654,7 +5681,6 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
                   </ul>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -5664,6 +5690,7 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
     </div>
   </div>
 </section>
+
 
 
 
