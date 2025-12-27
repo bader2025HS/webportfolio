@@ -3147,646 +3147,12 @@ NANCY LOGO — FORCE VISUAL MATCH
 
   
 /* ===========================
-WORK – VERTICAL STRIPS
-=========================== */
-
-#work {
-margin-top: -40px;
-padding: 30px 0 70px;
-}
-
-.work-layout {
-max-width: 1050px;
-margin: 0 auto;
-}
-
-.work-shell {
-display: flex;
-/* background is now controlled by JS */
-border-radius: 0;
-overflow: hidden;
-box-shadow: none;
-min-height: 320px;
-}
-
-
-/* LEFT PANEL (text) */
-
-.work-main {
-flex: 3;
-padding: 32px 40px 34px;
-color: #f9fafb;
-display: flex;
-flex-direction: column;
-justify-content: center;
-gap: 18px;
-}
-
-.work-main-label {
-font-size: 0.8rem;
-text-transform: uppercase;
-letter-spacing: 0.18em;
-color: #9ca3af;
-}
-
-.work-main-title {
-font-size: 2rem;
-line-height: 1.2;
-}
-
-.work-main-desc {
-font-size: 0.98rem;
-max-width: 38rem;
-color: #e5e7eb;
-}
-
-/* meta rows */
-
-.work-main-meta {
-display: flex;
-flex-wrap: wrap;
-gap: 10px 30px;
-font-size: 0.85rem;
-color: #e5e7eb;
-}
-
-/* Make sure we can layer stuff behind the content */
-.work-main {
-position: relative;
-overflow: hidden;
-}
-
-/* soft abstract gradient blobs */
-.work-main::before {
-content: "";
-position: absolute;
-inset: -30%;
-background:
-radial-gradient(circle at 0% 0%,
-rgba(255,255,255,0.14) 0,
-transparent 55%),
-radial-gradient(circle at 120% 20%,
-rgba(56,189,248,0.18) 0,
-transparent 60%),
-radial-gradient(circle at 20% 120%,
-rgba(251,191,36,0.18) 0,
-transparent 60%);
-opacity: 0.8;
-mix-blend-mode: screen;
-pointer-events: none;
-z-index: 0;
-}
-
-/* subtle concentric circles on the right side */
-.work-main::after {
-content: "";
-position: absolute;
-width: 420px;
-height: 420px;
-left: -140px; /* was right:-140px */
-top: -120px; /* stays similar, now top-left */
-border-radius: 50%;
-border: 1px solid rgba(248,250,252,0.18);
-box-shadow:
-0 0 0 18px rgba(15,23,42,0.35),
-0 0 0 40px rgba(15,23,42,0.2);
-opacity: 0.65;
-pointer-events: none;
-z-index: 0;
-}
-
-
-/* ensure actual content stays above the abstract shapes */
-.work-board-left > * {
-position: relative;
-z-index: 1;
-}
-
-.work-meta-item {
-display: flex;
-gap: 6px;
-}
-
-.work-meta-label {
-text-transform: uppercase;
-letter-spacing: 0.16em;
-font-size: 0.75rem;
-color: #9ca3af;
-}
-
-/* chips */
-
-.work-main-chips {
-margin-top: 4px;
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-}
-
-.work-chip-pill {
-font-size: 0.78rem;
-padding: 6px 12px 5px;
-border-radius: 999px;
-border: 1px solid rgba(148,163,184,0.6);
-background: rgba(15,23,42,0.9);
-}
-
-/* slide-in animation when project changes */
-
-.work-detail {
-display: none;
-animation: workSlideIn 0.35s ease-out;
-}
-
-.work-detail.is-active {
-display: block;
-}
-
-@keyframes workSlideIn {
-from {
-opacity: 0;
-transform: translateX(24px);
-}
-to {
-opacity: 1;
-transform: translateX(0);
-}
-}
-
-.work-main-title {
-position: relative;
-}
-
-/* huge faded word behind the title */
-.work-main-title::before {
-content: "PROJECT";
-position: absolute;
-left: -6px;
-top: -46px;
-font-size: 4.5rem;
-letter-spacing: 0.25em;
-text-transform: uppercase;
-opacity: 0.08;
-white-space: nowrap;
-pointer-events: none;
-}
-
-/* RIGHT SIDE – vertical strips */
-
-.work-strips {
-flex: 1.1;
-display: flex;
-align-self: stretch; /* make the strip column match panel height */
-}
-
-.work-strip {
-position: relative;
-flex: 0 0 70px; /* narrower base width */
-border: none;
-cursor: pointer;
-padding: 20px 0 16px; /* less bottom padding = no empty space */
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between;
-gap: 12px;
-color: #020617;
-height: 100%; /* fill the dark panel height */
-transition:
-flex-basis 0.3s ease,
-opacity 0.2s ease;
-}
-
-/* active strip just a bit wider */
-.work-strip.is-active {
-flex-basis: 82px;
-opacity: 1;
-box-shadow: none;
-}
-
-/* hide the old + icon */
-.work-strip-plus {
-display: none;
-}
-
-/* small + icon */
-
-.work-strip-plus {
-font-size: 1rem;
-opacity: 0.8;
-}
-
-/* vertical label */
-
-.work-strip-label {
-writing-mode: vertical-rl;
-text-orientation: mixed;
-text-transform: uppercase;
-letter-spacing: 0.2em;
-font-size: 0.75rem;
-}
-
-/* very light pastel colors */
-.work-strip--hsq { background: #dbeafe; } /* light blue */
-.work-strip--oda { background: #ffedd5; } /* light orange */
-.work-strip--cox { background: #dcfce7; } /* light green */
-.work-strip--vsl { background: #ffe4e6; } /* light pink */
-
-
-/* inactive strips a bit dimmed */
-
-.work-strip {
-opacity: 0.7;
-}
-
-.work-strip.is-active {
-flex-grow: 1.3;
-opacity: 1;
-box-shadow: none;
-}
-
-/* tiny caption at bottom of strip */
-
-.work-strip-caption {
-font-size: 0.65rem;
-text-transform: uppercase;
-letter-spacing: 0.16em;
-opacity: 0.8;
-text-align: center;
-}
-
-/* add the little "<" above the code at the bottom */
-.work-strip-caption::before {
-content: "‹";
-display: block;
-margin-bottom: 2px;
-font-size: 0.9rem;
-}
-
-/* Make strips overlap the left panel cleanly */
-.work-strip {
-position: relative;
-z-index: 3; /* sits on top of the left panel */
-}
-
-/* Give rounded strips a solid background (same as their color) */
-.work-strip:first-child {
-background-clip: padding-box;
-z-index: 4;
-}
-
-/* ---------------------------------
-WORK – per-project file button
-----------------------------------*/
-
-.work-main-links {
-margin-top: 22px;
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-}
-
-.work-main-link-btn {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 10px 18px;
-border-radius: 999px;
-border: 1px solid rgba(248, 250, 252, 0.85);
-background: transparent;
-color: #f9fafb;
-font-size: 0.85rem;
-text-transform: uppercase;
-letter-spacing: 0.12em;
-font-weight: 500;
-text-decoration: none;
-transition:
-background 0.2s ease,
-transform 0.2s ease,
-box-shadow 0.2s ease,
-border-color 0.2s ease;
-}
-
-.work-main-link-btn span.icon {
-font-size: 1.05rem;
-}
-
-.work-main-link-btn:hover {
-background: rgba(255, 255, 255, 0.14);
-border-color: #ffffff;
-transform: translateY(-1px);
-box-shadow: 0 12px 24px rgba(15, 23, 42, 0.4);
-}
-
-/* style the main work button a bit more “special” */
-.work-main .work-chip-button,
-.work-main .work-cta-btn {
-position: relative;
-overflow: hidden;
-}
-
-/* if your button is currently just a <button>, target it directly */
-.work-main .work-chip-pill,
-.work-main .work-main-chips + .work-cta-btn {}
-
-/* orbiting ring around the button */
-.work-main .work-cta-btn::before {
-content: "";
-position: absolute;
-inset: 4px;
-border-radius: 999px;
-border: 1px dashed rgba(248,250,252,0.45);
-opacity: 0;
-transform: scale(0.92);
-transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-/* tiny moving dot */
-.work-main .work-cta-btn::after {
-content: "";
-position: absolute;
-width: 7px;
-height: 7px;
-border-radius: 999px;
-background: #f9fafb;
-top: 50%;
-right: 14px;
-transform: translate(0,-50%);
-box-shadow: 0 0 8px rgba(248,250,252,0.9);
-opacity: 0;
-transition: opacity 0.25s ease;
-}
-
-/* animate on hover */
-.work-main .work-cta-btn:hover::before {
-opacity: 1;
-transform: scale(1);
-}
-
-.work-main .work-cta-btn:hover::after {
-opacity: 1;
-animation: workOrbitDot 1.4s linear infinite;
-}
-
-@keyframes workOrbitDot {
-0% { transform: translate(0, -50%); }
-25% { transform: translate(-25%, -130%); }
-50% { transform: translate(-50%, -50%); }
-75% { transform: translate(-25%, 30%); }
-100% { transform: translate(0, -50%); }
-}
-
-/* Force Trebuchet on WORK strip titles */
-.work-strip-label,
-.work-strip-caption {
-font-family: "Trebuchet MS", system-ui, -apple-system, "Segoe UI", sans-serif;
-font-weight: 600;
-}
-
-
-/* Responsive */
-
-@media (max-width: 840px) {
-
-/* Whole card becomes vertical */
-.work-shell {
-flex-direction: column; /* strips at the top, content below */
-border-radius: 0;
-overflow: hidden;
-min-height: auto;
-}
-
-/* ORDER → strips first, content after */
-.work-strips {
-order: 0;
-}
-
-.work-main {
-order: 1;
-}
-
-/* Strips = vertical stack */
-.work-strips {
-flex: 0 0 auto;
-display: flex;
-flex-direction: column;
-width: 100%;
-min-height: auto;
-}
-
-.work-strip {
-flex: 0 0 auto;
-width: 100%;
-height: auto;
-flex-direction: row; /* horizontal: LABEL | arrow */
-align-items: center;
-justify-content: space-between;
-padding: 14px 18px;
-gap: 10px;
-border-bottom: none;
-opacity: 0.95;
-box-shadow: none;
-}
-
-.work-strip:last-child {
-border-bottom: none;
-}
-
-/* kill “wider when active” behavior on mobile */
-.work-strip,
-.work-strip.is-active {
-flex-basis: auto;
-flex-grow: 0;
-box-shadow: none;
-}
-
-/* Strip label now horizontal */
-.work-strip-label {
-writing-mode: horizontal-tb;
-text-orientation: mixed;
-font-size: 0.84rem;
-letter-spacing: 0.15em;
-text-align: left;
-}
-
-.work-strip-caption {
-text-align: right;
-font-size: 0.7rem;
-}
-
-/* Mobile: arrow points DOWN because content opens below */
-.work-strip-caption::before {
-content: "⌄";
-font-size: 0.9rem;
-margin-bottom: 0;
-}
-
-/* Content panel below strips – really pull it left */
-.work-main {
-padding: 24px 18px !important; /* ← much smaller & forced */
-}
-
-.work-main-title {
-font-size: 1.65rem;
-margin-left: 0;
-}
-
-.work-main-title::before {
-font-size: 3.2rem;
-top: -34px;
-left: -4px;
-}
-
-.work-main-desc {
-font-size: 0.95rem;
-margin-left: 0;
-}
-
-.work-main-meta,
-.work-main-chips,
-.work-main-links {
-margin-left: 0;
-}
-}
-
-/* push the blue content down a bit on mobile */
-.work-main {
-padding-top: 50px !important; /* try 32; go 36 if you want more space */
-}
-
-@media (max-width: 540px) {
-.work-main-title {
-font-size: 1.6rem;
-}
-.work-main-desc {
-font-size: 0.9rem;
-}
-}
-
-/* MAKE LEFT WORK PANEL MORE AIRY */
-.work-board-left {
-padding: 48px 56px; /* was too tight → now spacious */
-line-height: 1.55; /* better readability */
-}
-
-/* spacing around the title */
-.work-detail h2 {
-margin-top: 10px;
-margin-bottom: 22px; /* more space below title */
-}
-
-/* spacing under the description paragraph */
-.work-detail p {
-margin-bottom: 28px;
-}
-
-/* spacing between TYPE / CONTEXT / FOCUS metadata */
-.work-meta {
-display: flex;
-flex-wrap: wrap;
-gap: 20px 40px; /* more air between groups */
-margin-bottom: 26px;
-}
-
-/* tags spacing */
-.work-tags {
-margin-top: 12px; 
-gap: 12px;
-}
-
-/* ===========================
-WORK — FULL WIDTH + MOBILE ALIGN (PUT LAST)
-=========================== */
-
-/* full-bleed breakout like About/Experience/Contact */
-#work{
-/* keep your existing spacing */
-margin-top: -40px;
-padding: 30px 0 70px;
-position: relative;
-
-width: 100vw;
-margin-left: calc(50% - 50vw);
-margin-right: calc(50% - 50vw);
-
-padding-left: clamp(16px, 3vw, 64px);
-padding-right: clamp(16px, 3vw, 64px);
-box-sizing: border-box;
-
-overflow-x: hidden;
-}
-
-/* let the 3 boxes/card stretch full width */
-.work-layout{
-width: 100%;
-max-width: none; /* overrides 1050px */
-margin: 0;
-box-sizing: border-box;
-}
-
-/* keep rounded corners (you said you want rounded) */
-.work-shell{
-border-radius: 16px;
-overflow: hidden;
-}
-
-
-/* ===========================
-WORK — MOBILE: ALIGN WITH NAVBAR (ONLY)
-PUT LAST
-=========================== */
-@media (max-width: 700px){
-
-/* kill any horizontal breakout on phone */
-#work{
-width: 100% !important;
-margin-left: 0 !important;
-margin-right: 0 !important;
-
-/* EXACT same inset as navbar */
-padding-left: 12px !important;
-padding-right: 12px !important;
-
-box-sizing: border-box !important;
-overflow-x: hidden !important;
-}
-
-/* remove desktop centering / width caps */
-.work-layout{
-width: 100% !important;
-max-width: none !important;
-margin: 0 !important;
-padding: 0 !important;
-box-sizing: border-box !important;
-}
-}
-
-
-
-/* ===========================
-WORK — ALIGN TOP SPACING WITH OTHER SECTIONS
-(GLOBAL: desktop + mobile)
-=========================== */
-#work{
-margin-top: -20px !important; /* match About / Contact */
-padding-top: 0 !important; /* remove extra offset */
-}
-
-
-
-/* ===========================
-WORK — INDEX + DETAIL (NEW)
-Matches your clean “system” style:
-- sharp, thin borders
-- no shadows
-- Trebuchet
-- full width breakout
+WORK — FINAL SYSTEM (CLEAN)
 =========================== */
 
 #work{
   margin-top: -20px;
   padding: 0 0 70px;
-  position: relative;
 
   width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -3794,49 +3160,53 @@ Matches your clean “system” style:
 
   padding-left: clamp(16px, 3vw, 64px);
   padding-right: clamp(16px, 3vw, 64px);
-  box-sizing: border-box;
 
+  box-sizing: border-box;
   overflow-x: hidden;
+
   font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;
 }
 
+/* wrapper */
 .work-layout{
   width: 100%;
   max-width: none;
   margin: 0;
-  box-sizing: border-box;
 }
 
+/* main shell */
 .work-shell{
   --work-accent: #0ea5a4;
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 14px;
+  gap: 16px;
 
-  border-radius: 0;          /* sharp like your other sections */
-  box-shadow: none;
-  overflow: visible;
+  border-radius: 18px;
+  overflow: hidden;
+
+  background: #0b1220;
 }
 
-/* LEFT (detail) */
+/* ===========================
+LEFT PANEL — CONTENT
+=========================== */
+
 .work-board-left{
   position: relative;
-  background: #ffffff;
-  border: 2px solid #111;
-  padding: 34px 36px 30px;
-  box-sizing: border-box;
+  background: #0f1a33;
+  padding: 40px 42px 36px;
 
-  /* accent rail */
-  outline: 0;
+  color: #f8fafc;
 }
 
+/* accent bar */
 .work-board-left::before{
   content:"";
   position: absolute;
-  left: -2px;
-  top: -2px;
-  bottom: -2px;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 6px;
   background: var(--work-accent);
 }
@@ -3844,220 +3214,231 @@ Matches your clean “system” style:
 /* header */
 .work-head{
   display: grid;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 22px;
 }
 
 .work-kicker{
   font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.20em;
-  color: #6b7280;
+  letter-spacing: 0.22em;
+  color: rgba(226,232,240,0.7);
 }
 
 .work-title{
-  font-size: clamp(1.7rem, 2.2vw, 2.35rem);
-  line-height: 1.12;
+  font-size: clamp(1.8rem, 2.3vw, 2.45rem);
+  line-height: 1.15;
   margin: 0;
   letter-spacing: 0.02em;
   position: relative;
 }
 
-/* subtle “grid stamp” behind title (very light) */
+/* faded word */
 .work-title::after{
-  content:"WORK";
+  content: "WORK";
   position: absolute;
   left: -2px;
-  top: -44px;
-  font-size: 4.2rem;
-  letter-spacing: 0.26em;
-  opacity: 0.06;
+  top: -46px;
+  font-size: 4.4rem;
+  letter-spacing: 0.28em;
+  opacity: 0.07;
   text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none;
 }
 
+/* description — FIXED */
 .work-desc{
-  margin: 0 0 18px;
-  color: #111;
+  width: 100%;
+  max-width: none;              /* 🔑 no more half-width */
+  margin: 0 0 22px;
+
   font-size: 0.98rem;
-  line-height: 1.6;
-  max-width: 62ch;
+  line-height: 1.65;
+  color: rgba(248,250,252,0.9);
 }
 
 /* chips */
 .work-chips{
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 4px 0 18px;
+  gap: 10px;
+  margin-bottom: 22px;
 }
 
 .work-chip{
   font-size: 0.78rem;
-  padding: 6px 10px 5px;
+  padding: 6px 12px 5px;
   border-radius: 999px;
-  border: 1.8px solid #111;
-  background: #fff;
+
+  border: 1.6px solid rgba(248,250,252,0.45);
+  background: rgba(255,255,255,0.04);
 }
 
 /* links */
 .work-links{
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 12px;
 }
 
 .work-link{
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
-  border: 2px solid #111;
-  background: #fff;
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  border: 1.8px solid rgba(248,250,252,0.75);
+  background: transparent;
+
+  color: #f8fafc;
   text-decoration: none;
-  color: #111;
 
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 600;
 
-  transition: transform .15s ease, background .15s ease;
+  transition: transform .18s ease, background .18s ease;
 }
 
 .work-link:hover{
   transform: translateY(-2px);
-  background: rgba(0,0,0,0.04);
+  background: rgba(255,255,255,0.12);
 }
 
 .work-link .icon{
   font-size: 1.05rem;
-  line-height: 1;
 }
 
-/* detail switching */
+/* content switching */
 .work-detail{ display:none; }
 .work-detail.is-active{
   display:block;
-  animation: workFade .20s ease-out;
+  animation: workFade .22s ease-out;
 }
 
 @keyframes workFade{
-  from{ opacity:0; transform: translateY(6px); }
+  from{ opacity:0; transform: translateY(8px); }
   to{ opacity:1; transform: translateY(0); }
 }
 
-/* RIGHT (index) */
+/* ===========================
+RIGHT PANEL — INDEX
+=========================== */
+
 .work-index{
-  background: #ffffff;
-  border: 2px solid #111;
-  padding: 16px;
-  box-sizing: border-box;
+  background: #0b1220;
+  padding: 20px 18px;
+  color: #f8fafc;
 }
 
 .work-index-head{
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .work-index-title{
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .work-index-hint{
   font-size: 0.78rem;
-  color: #6b7280;
+  color: rgba(226,232,240,0.6);
 }
 
-/* index items */
+/* index buttons */
 .work-item{
   width: 100%;
-  border: 2px solid #111;
-  background: #fff;
-  padding: 14px 14px;
-  margin: 10px 0 0;
+  margin-top: 12px;
+  padding: 16px 16px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
+
+  background: #0f1a33;
+  border-radius: 14px;
+  border: 1.6px solid rgba(248,250,252,0.18);
 
   cursor: pointer;
+  color: #f8fafc;
   text-align: left;
   font-family: inherit;
 
-  transition: transform .15s ease, background .15s ease;
+  transition: transform .18s ease, background .18s ease;
 }
 
 .work-item:hover{
   transform: translateY(-2px);
-  background: rgba(0,0,0,0.03);
+  background: rgba(255,255,255,0.08);
 }
 
 .work-item.is-active{
-  background: rgba(0,0,0,0.04);
-  border-left-width: 8px;
-  border-left-color: var(--work-accent);
+  border-left: 6px solid var(--work-accent);
+  background: rgba(255,255,255,0.10);
 }
 
 .work-item-left{
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   min-width: 0;
 }
 
 .work-item-code{
-  font-weight: 900;
-  letter-spacing: 0.14em;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
   font-size: 0.82rem;
-  opacity: 0.75;
 }
 
 .work-item-name{
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.03em;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .work-item-arrow{
-  font-weight: 900;
+  font-size: 1.1rem;
   opacity: 0.7;
 }
 
-/* Responsive: stack */
+/* ===========================
+RESPONSIVE
+=========================== */
+
 @media (max-width: 900px){
   .work-shell{
     grid-template-columns: 1fr;
   }
   .work-index{
-    order: -1; /* index on top */
+    order: -1;
   }
 }
 
-/* Mobile align with navbar inset */
 @media (max-width: 700px){
   #work{
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    box-sizing: border-box !important;
+    padding-left: 12px;
+    padding-right: 12px;
   }
+
   .work-board-left{
-    padding: 24px 18px 22px;
+    padding: 28px 20px;
   }
+
   .work-title::after{
     font-size: 3.2rem;
     top: -34px;
