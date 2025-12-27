@@ -3430,6 +3430,34 @@ Matches your clean “system” style:
   }
 }
 
+/* WORK — remove kicker cleanly */
+.work-kicker{
+  display: none;
+}
+
+/* tighten header spacing */
+.work-head{
+  gap: 0;
+  margin-bottom: 16px;
+}
+
+/* reposition faded WORK stamp */
+.work-title::after{
+  top: -30px;      /* was too high after removing kicker */
+  opacity: 0.045;  /* softer */
+}
+
+/* WORK — index items fill full height */
+.work-index{
+  display: flex;
+  flex-direction: column;
+}
+
+.work-item{
+  flex: 1;                 /* 🔑 each item takes equal height */
+  display: flex;
+  align-items: center;
+}
 
 
 
@@ -5383,6 +5411,7 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
         <!-- RESEARCH PAPERS -->
         <article class="work-detail is-active" data-project="hsq">
           <div class="work-head">
+            <div class="work-kicker">Selected work</div>
             <h2 class="work-title">Research Papers</h2>
           </div>
 
