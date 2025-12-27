@@ -3145,12 +3145,18 @@ NANCY LOGO — FORCE VISUAL MATCH
 
 
 /* ===========================
-WORK — INDEX + DETAIL (RESTORED)
+WORK — INDEX + DETAIL (NEW)
+Matches your clean “system” style:
+- sharp, thin borders
+- no shadows
+- Trebuchet
+- full width breakout
 =========================== */
 
 #work{
   margin-top: -20px;
   padding: 0 0 70px;
+  position: relative;
 
   width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -3158,10 +3164,9 @@ WORK — INDEX + DETAIL (RESTORED)
 
   padding-left: clamp(16px, 3vw, 64px);
   padding-right: clamp(16px, 3vw, 64px);
-
   box-sizing: border-box;
-  overflow-x: hidden;
 
+  overflow-x: hidden;
   font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;
 }
 
@@ -3169,9 +3174,9 @@ WORK — INDEX + DETAIL (RESTORED)
   width: 100%;
   max-width: none;
   margin: 0;
+  box-sizing: border-box;
 }
 
-/* main container */
 .work-shell{
   --work-accent: #0ea5a4;
 
@@ -3179,262 +3184,256 @@ WORK — INDEX + DETAIL (RESTORED)
   grid-template-columns: minmax(0, 1fr) 360px;
   gap: 14px;
 
-  background: #0b1220;
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: 0;          /* sharp like your other sections */
+  box-shadow: none;
+  overflow: visible;
 }
 
-/* ===========================
-LEFT PANEL
-=========================== */
-
+/* LEFT (detail) */
 .work-board-left{
   position: relative;
-  background: #0f1a33;
-  padding: 36px 40px 34px;
-  color: #f8fafc;
+  background: #ffffff;
+  border: 2px solid #111;
+  padding: 34px 36px 30px;
+  box-sizing: border-box;
+
+  /* accent rail */
+  outline: 0;
 }
 
-/* accent rail */
 .work-board-left::before{
   content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:6px;
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  bottom: -2px;
+  width: 6px;
   background: var(--work-accent);
 }
 
 /* header */
 .work-head{
   display: grid;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 18px;
 }
 
 .work-kicker{
   font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: rgba(226,232,240,0.65);
+  letter-spacing: 0.20em;
+  color: #6b7280;
 }
 
 .work-title{
-  font-size: clamp(1.75rem, 2.2vw, 2.35rem);
-  line-height: 1.15;
+  font-size: clamp(1.7rem, 2.2vw, 2.35rem);
+  line-height: 1.12;
   margin: 0;
   letter-spacing: 0.02em;
   position: relative;
 }
 
-/* faded title stamp */
+/* subtle “grid stamp” behind title (very light) */
 .work-title::after{
-  content: "WORK";
-  position:absolute;
-  left:-4px;
-  top:-44px;
-  font-size:4.2rem;
-  letter-spacing:0.28em;
-  opacity:0.06;
-  text-transform:uppercase;
-  white-space:nowrap;
-  pointer-events:none;
+  content:"WORK";
+  position: absolute;
+  left: -2px;
+  top: -44px;
+  font-size: 4.2rem;
+  letter-spacing: 0.26em;
+  opacity: 0.06;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
-/* ✅ FIXED TEXT WIDTH */
 .work-desc{
-  width: 100%;
-  max-width: none;     /* ← this fixes the halfway issue */
-  margin: 0 0 20px;
-
+  margin: 0 0 18px;
+  color: #111;
   font-size: 0.98rem;
-  line-height: 1.65;
-  color: rgba(248,250,252,0.9);
+  line-height: 1.6;
+  max-width: 62ch;
 }
 
 /* chips */
 .work-chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 18px;
 }
 
 .work-chip{
-  font-size:0.78rem;
-  padding:6px 12px 5px;
-  border-radius:999px;
-  border:1.5px solid rgba(248,250,252,0.45);
-  background:rgba(255,255,255,0.04);
+  font-size: 0.78rem;
+  padding: 6px 10px 5px;
+  border-radius: 999px;
+  border: 1.8px solid #111;
+  background: #fff;
 }
 
 /* links */
 .work-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
 }
 
 .work-link{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 2px solid #111;
+  background: #fff;
+  text-decoration: none;
+  color: #111;
 
-  padding:10px 18px;
-  border-radius:999px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  font-weight: 700;
 
-  border:1.6px solid rgba(248,250,252,0.75);
-  background:transparent;
-
-  color:#f8fafc;
-  text-decoration:none;
-
-  text-transform:uppercase;
-  letter-spacing:0.14em;
-  font-size:0.78rem;
-  font-weight:600;
-
-  transition:transform .18s ease, background .18s ease;
+  transition: transform .15s ease, background .15s ease;
 }
 
 .work-link:hover{
-  transform:translateY(-2px);
-  background:rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+  background: rgba(0,0,0,0.04);
 }
 
 .work-link .icon{
-  font-size:1.05rem;
+  font-size: 1.05rem;
+  line-height: 1;
 }
 
-/* switching */
+/* detail switching */
 .work-detail{ display:none; }
 .work-detail.is-active{
   display:block;
-  animation: workFade .22s ease-out;
+  animation: workFade .20s ease-out;
 }
 
 @keyframes workFade{
-  from{ opacity:0; transform:translateY(6px); }
-  to{ opacity:1; transform:translateY(0); }
+  from{ opacity:0; transform: translateY(6px); }
+  to{ opacity:1; transform: translateY(0); }
 }
 
-/* ===========================
-RIGHT PANEL — INDEX
-=========================== */
-
+/* RIGHT (index) */
 .work-index{
-  background:#0b1220;
-  padding:18px;
-  color:#f8fafc;
+  background: #ffffff;
+  border: 2px solid #111;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .work-index-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  margin-bottom:12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
 }
 
 .work-index-title{
-  font-size:0.9rem;
-  font-weight:700;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
 .work-index-hint{
-  font-size:0.78rem;
-  color:rgba(226,232,240,0.6);
+  font-size: 0.78rem;
+  color: #6b7280;
 }
 
-/* index buttons */
+/* index items */
 .work-item{
-  width:100%;
-  margin-top:12px;
-  padding:14px 16px;
+  width: 100%;
+  border: 2px solid #111;
+  background: #fff;
+  padding: 14px 14px;
+  margin: 10px 0 0;
 
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 
-  background:#0f1a33;
-  border-radius:12px;
-  border:1.5px solid rgba(248,250,252,0.18);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
 
-  cursor:pointer;
-  color:#f8fafc;
-  text-align:left;
-  font-family:inherit;
-
-  transition:transform .18s ease, background .18s ease;
+  transition: transform .15s ease, background .15s ease;
 }
 
 .work-item:hover{
-  transform:translateY(-2px);
-  background:rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+  background: rgba(0,0,0,0.03);
 }
 
 .work-item.is-active{
-  border-left:6px solid var(--work-accent);
-  background:rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.04);
+  border-left-width: 8px;
+  border-left-color: var(--work-accent);
 }
 
 .work-item-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  min-width:0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
 }
 
 .work-item-code{
-  font-weight:800;
-  letter-spacing:0.18em;
-  opacity:0.7;
-  font-size:0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  font-size: 0.82rem;
+  opacity: 0.75;
 }
 
 .work-item-name{
-  font-weight:700;
-  letter-spacing:0.03em;
-  font-size:0.95rem;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .work-item-arrow{
-  font-size:1.1rem;
-  opacity:0.7;
+  font-weight: 900;
+  opacity: 0.7;
 }
 
-/* ===========================
-RESPONSIVE
-=========================== */
-
+/* Responsive: stack */
 @media (max-width: 900px){
   .work-shell{
-    grid-template-columns:1fr;
+    grid-template-columns: 1fr;
   }
   .work-index{
-    order:-1;
+    order: -1; /* index on top */
   }
 }
 
+/* Mobile align with navbar inset */
 @media (max-width: 700px){
   #work{
-    padding-left:12px;
-    padding-right:12px;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
   }
   .work-board-left{
-    padding:26px 20px;
+    padding: 24px 18px 22px;
   }
   .work-title::after{
-    font-size:3.1rem;
-    top:-34px;
+    font-size: 3.2rem;
+    top: -34px;
   }
 }
+
 
 
 
