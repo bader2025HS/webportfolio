@@ -6867,6 +6867,43 @@ if (e.key === "ArrowLeft") showPrev();
 
 
 
+/* ===============================
+WORK — INDEX INTERACTION (NEW DESIGN)
+Replaces the old "work-strip" JS
+=============================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const workItems   = document.querySelectorAll(".work-item");   // right-side index buttons
+  const workDetails = document.querySelectorAll(".work-detail"); // left-side panels
+  const workShell   = document.querySelector(".work-shell");     // holds CSS var --work-accent
+
+  function setActiveWork(project){
+    // toggle content
+    workDetails.forEach(d => {
+      d.classList.toggle("is-active", d.dataset.project === project);
+    });
+
+    // toggle index + set accent color
+    workItems.forEach(btn => {
+      const active = btn.dataset.project === project;
+      btn.classList.toggle("is-active", active);
+
+      if(active && workShell){
+        workShell.style.setProperty("--work-accent", btn.dataset.accent || "#0ea5a4");
+      }
+    });
+  }
+
+  // listeners
+  workItems.forEach(btn => {
+    btn.addEventListener("click", () => setActiveWork(btn.dataset.project));
+  });
+
+  // init
+  const initial = document.querySelector(".work-item.is-active") || workItems[0];
+  if(initial) setActiveWork(initial.dataset.project);
+});
+
 </script>
 
 <script>
@@ -7046,4 +7083,3 @@ el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
 
 </body>
 </html>
-
