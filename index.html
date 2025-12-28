@@ -3472,7 +3472,130 @@ Matches your clean “system” style:
   display: none;
 }
 
-  
+  /* LAYOUT: index left, content right */
+.work-shell{
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* LEFT COLUMN: no container box look */
+.work-index{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* INDEX ITEMS = “experience card” vibe */
+.work-item{
+  width: 100%;
+  border-radius: 18px;
+  border: 2px solid #cbd5e1;              /* light border like exp */
+  background: #f3f7ff;                     /* soft blue card */
+  padding: 22px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+
+/* hover = white */
+.work-item:hover{
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: #94a3b8;
+}
+
+/* active = accent rail */
+.work-item.is-active{
+  border-left: 10px solid var(--work-accent);
+}
+
+/* text */
+.work-item-left{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.work-item-code{
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  font-size: 0.86rem;
+  opacity: 0.75;
+}
+
+.work-item-name{
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-item-arrow{
+  font-weight: 900;
+  opacity: 0.55;
+  font-size: 1.2rem;
+}
+
+/* RIGHT PANEL: keep your clean bordered system look */
+.work-board-left{
+  background: #ffffff;
+  border: 2px solid #111;
+  border-radius: 18px;
+  padding: 34px 36px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* accent rail on content panel */
+.work-board-left::before{
+  content:"";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--work-accent);
+}
+
+/* remove ghost word completely */
+.work-title::after{
+  content: none;
+}
+
+/* text uses full width */
+.work-desc{
+  max-width: none;
+}
+
+/* Responsive: stack */
+@media (max-width: 900px){
+  .work-shell{
+    grid-template-columns: 1fr;
+  }
+  .work-index{
+    order: 0;
+  }
+  .work-board-left{
+    order: 1;
+  }
+}
+
 
 
 
@@ -5408,126 +5531,12 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
 
 
 
-<!-- WORK — INDEX + DETAIL (NEW DESIGN) -->
 <section id="work">
   <div class="work-layout">
     <div class="work-shell">
 
-      <!-- LEFT: DETAIL PANEL -->
-      <div class="work-main work-board-left">
-
-        <!-- RESEARCH PAPERS -->
-        <article class="work-detail is-active" data-project="hsq">
-          <div class="work-head">
-            <div class="work-kicker">Selected work</div>
-            <h2 class="work-title">Research Papers</h2>
-          </div>
-
-          <p class="work-desc">
-            Authored two research papers: a qualitative study examining the urbanization dynamics of refugee camps in Cox’s Bazar,
-            focusing on governance, infrastructure, and everyday socio-spatial practices; and a quantitative analysis assessing the
-            impact and allocation of France’s Official Development Assistance.
-          </p>
-
-          <div class="work-chips">
-            <span class="work-chip">Development</span>
-            <span class="work-chip">Displacement</span>
-            <span class="work-chip">Asia/Africa</span>
-            <span class="work-chip">Case studies</span>
-            <span class="work-chip">Excel</span>
-          </div>
-
-          <div class="work-links">
-            <a class="work-link" href="files/cox-bazar-study.pdf" target="_blank" rel="noreferrer">
-              <span class="icon">↗</span><span>Cox’s Bazar</span>
-            </a>
-            <a class="work-link" href="files/oda-impact-study.pdf" target="_blank" rel="noreferrer">
-              <span class="icon">↗</span><span>ODA</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- OIF NOTES -->
-        <article class="work-detail" data-project="oda">
-          <div class="work-head">
-            <div class="work-kicker">Selected work</div>
-            <h2 class="work-title">Cooperation Notes</h2>
-          </div>
-
-          <p class="work-desc">
-            Prepared country briefs and strategic notes for the OIF, analyzing political contexts, socio-economic trends,
-            and institutional frameworks, while outlining bilateral and multilateral cooperation dynamics and identifying
-            strategic priorities for engagement.
-          </p>
-
-          <div class="work-chips">
-            <span class="work-chip">Francophonie</span>
-            <span class="work-chip">Multilateral diplomacy</span>
-            <span class="work-chip">Power BI</span>
-          </div>
-
-          <div class="work-links">
-            <a class="work-link" href="files/french-oda-renewables.xlsx" target="_blank" rel="noreferrer">
-              <span class="icon">↗</span><span>View note</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- SOCIAL MEDIA -->
-        <article class="work-detail" data-project="cox">
-          <div class="work-head">
-            <div class="work-kicker">Selected work</div>
-            <h2 class="work-title">Social Media</h2>
-          </div>
-
-          <p class="work-desc">
-            Produced a selection of social media content and communication visuals for outreach and public engagement,
-            adapting content to different audiences and objectives, including infographics, short-form posts, and visual summaries.
-          </p>
-
-          <div class="work-chips">
-            <span class="work-chip">Design</span>
-            <span class="work-chip">Engagement</span>
-            <span class="work-chip">Instagram</span>
-          </div>
-
-          <div class="work-links">
-            <a class="work-link" href="files/cox-bazar-brief.pdf" target="_blank" rel="noreferrer">
-              <span class="icon">↗</span><span>View posts</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- VISUALS -->
-        <article class="work-detail" data-project="vsl">
-          <div class="work-head">
-            <div class="work-kicker">Selected work</div>
-            <h2 class="work-title">Humanitarian visuals &amp; infographics</h2>
-          </div>
-
-          <p class="work-desc">
-            Produced a comprehensive set of maps, charts, and layout materials for humanitarian and development actors,
-            combining geospatial outputs with clean, accessible visual designs to support analysis, reporting, and communication needs.
-          </p>
-
-          <div class="work-chips">
-            <span class="work-chip">Canva</span>
-            <span class="work-chip">Illustrator</span>
-            <span class="work-chip">Data-viz</span>
-          </div>
-
-          <div class="work-links">
-            <a class="work-link" href="files/humanitarian-visuals-portfolio.pdf" target="_blank" rel="noreferrer">
-              <span class="icon">↗</span><span>View visuals</span>
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <!-- RIGHT: INDEX PANEL -->
+      <!-- LEFT: INDEX (cards) -->
       <aside class="work-index" aria-label="Work index">
-        <div class="work-index-head">
-        </div>
 
         <button class="work-item is-active" data-project="hsq" data-accent="#0ea5a4" type="button">
           <div class="work-item-left">
@@ -5560,12 +5569,115 @@ l1.834-8.327l-23.218-18.005L134.374,160.3l10.173,0.075l35.777-24.884l9.22,1.762l
           </div>
           <span class="work-item-arrow">→</span>
         </button>
+
       </aside>
+
+      <!-- RIGHT: DETAIL PANEL -->
+      <div class="work-main work-board-left">
+
+        <article class="work-detail is-active" data-project="hsq">
+          <div class="work-head">
+            <h2 class="work-title">Research Papers</h2>
+          </div>
+
+          <p class="work-desc">
+            Authored two research papers: a qualitative study examining the urbanization dynamics of refugee camps in Cox’s Bazar,
+            focusing on governance, infrastructure, and everyday socio-spatial practices; and a quantitative analysis assessing the
+            impact and allocation of France’s Official.
+          </p>
+
+          <div class="work-chips">
+            <span class="work-chip">Development</span>
+            <span class="work-chip">Displacement</span>
+            <span class="work-chip">Asia/Africa</span>
+            <span class="work-chip">Case studies</span>
+            <span class="work-chip">Excel</span>
+          </div>
+
+          <div class="work-links">
+            <a class="work-link" href="files/cox-bazar-study.pdf" target="_blank" rel="noreferrer">
+              <span class="icon">↗</span><span>Cox’s Bazar</span>
+            </a>
+            <a class="work-link" href="files/oda-impact-study.pdf" target="_blank" rel="noreferrer">
+              <span class="icon">↗</span><span>ODA</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="work-detail" data-project="oda">
+          <div class="work-head">
+            <h2 class="work-title">Cooperation Notes</h2>
+          </div>
+          <p class="work-desc">
+            Prepared country briefs and strategic notes for the OIF, analyzing political contexts, socio-economic trends,
+            and institutional frameworks, while outlining bilateral and multilateral cooperation dynamics and identifying
+            strategic priorities for engagement.
+          </p>
+
+          <div class="work-chips">
+            <span class="work-chip">Francophonie</span>
+            <span class="work-chip">Multilateral diplomacy</span>
+            <span class="work-chip">Power BI</span>
+          </div>
+
+          <div class="work-links">
+            <a class="work-link" href="files/french-oda-renewables.xlsx" target="_blank" rel="noreferrer">
+              <span class="icon">↗</span><span>View note</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="work-detail" data-project="cox">
+          <div class="work-head">
+            <h2 class="work-title">Social Media</h2>
+          </div>
+
+          <p class="work-desc">
+            Produced a selection of social media content and communication visuals for outreach and public engagement,
+            adapting content to different audiences and objectives, including infographics, short-form posts, and visual summaries.
+          </p>
+
+          <div class="work-chips">
+            <span class="work-chip">Design</span>
+            <span class="work-chip">Engagement</span>
+            <span class="work-chip">Instagram</span>
+          </div>
+
+          <div class="work-links">
+            <a class="work-link" href="files/cox-bazar-brief.pdf" target="_blank" rel="noreferrer">
+              <span class="icon">↗</span><span>View posts</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="work-detail" data-project="vsl">
+          <div class="work-head">
+            <h2 class="work-title">Humanitarian visuals &amp; infographics</h2>
+          </div>
+
+          <p class="work-desc">
+            Produced a comprehensive set of maps, charts, and layout materials for humanitarian and development actors,
+            combining geospatial outputs with clean, accessible visual designs to support analysis, reporting, and communication needs.
+          </p>
+
+          <div class="work-chips">
+            <span class="work-chip">Canva</span>
+            <span class="work-chip">Illustrator</span>
+            <span class="work-chip">Data-viz</span>
+          </div>
+
+          <div class="work-links">
+            <a class="work-link" href="files/humanitarian-visuals-portfolio.pdf" target="_blank" rel="noreferrer">
+              <span class="icon">↗</span><span>View visuals</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
 
     </div>
   </div>
 </section>
-
 
 
 
