@@ -3650,7 +3650,113 @@ PASTE AT END
   overflow: hidden !important;
 }
 
+/* =========================================================
+WORK — MOBILE LAYOUT FIX (PHONE)
+PASTE AT END
+========================================================= */
+@media (max-width: 800px){
 
+  /* section aligns with navbar inset */
+  #work{
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* stack index then content */
+  .work-shell{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    grid-template-columns: none !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* index list becomes full width */
+  .work-index{
+    width: 100% !important;
+    height: auto !important;
+    gap: 12px !important;
+  }
+
+  /* buttons become normal height (no “fill height”) */
+  .work-item{
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-height: 76px !important;
+    padding: 16px 16px !important;
+    transform: none !important; /* kill hover translate on touch */
+  }
+
+  /* keep your card look but stop hover-only changes from sticking on touch */
+  .work-item:hover{
+    transform: none !important;
+  }
+
+  /* tighten text for phone */
+  .work-item-code{
+    font-size: 0.80rem !important;
+  }
+  .work-item-name{
+    font-size: 0.98rem !important;
+  }
+  .work-item-arrow{
+    font-size: 1.1rem !important;
+  }
+
+  /* content panel full width + readable padding */
+  .work-board-left{
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 16px !important;
+  }
+
+  /* the active article should NOT scroll inside on phone */
+  .work-detail{
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 22px 18px 20px !important;
+  }
+
+  .work-title{
+    font-size: 1.75rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .work-desc{
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .work-chips{
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .work-link{
+    width: 100% !important;       /* nicer on phone: full-width buttons */
+    justify-content: center !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
