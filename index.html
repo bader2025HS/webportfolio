@@ -3590,6 +3590,23 @@ RESPONSIVE
 }
 
 
+/* WORK — stop forced tall height, only cap it */
+.work-shell{
+  height: auto !important;                 /* ✅ don't force tall */
+  max-height: min(72vh, 660px) !important; /* ✅ never exceed viewport */
+}
+
+/* keep both columns equal height */
+.work-index,
+.work-board-left{
+  height: auto !important;
+}
+
+/* if content gets long, scroll INSIDE the right panel */
+.work-detail{
+  max-height: min(72vh, 660px) !important; /* matches the cap */
+  overflow: auto !important;
+}
 
 
 
