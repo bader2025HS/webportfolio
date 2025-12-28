@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>portfolio</title>
+<title>Portfolio</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -3251,15 +3251,17 @@ WORK — MATCH EXPERIENCE CARD STYLE + EQUAL HEIGHT
 
 
 
-/* ===========================
-WORK — INDEX + DETAIL (NEW)
-Matches your clean “system” style:
-- sharp, thin borders
-- no shadows
-- Trebuchet
-- full width breakout
-=========================== */
+/* =========================================================
+WORK — NEW CSS (CLEAN + MATCH EXPERIENCE)
+GOALS MET:
+- index LEFT, content RIGHT
+- BOTH SIDES SAME HEIGHT
+- index items = same blue card + SAME hover (no per-item colors)
+- fits viewport (never taller) + internal scroll if needed
+- inset border + white-on-hover like Experience cards
+========================================================= */
 
+/* SECTION WRAP (keep your full-bleed system) */
 #work{
   margin-top: -20px;
   padding: 0 0 70px;
@@ -3268,7 +3270,6 @@ Matches your clean “system” style:
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-
   padding-left: clamp(16px, 3vw, 64px);
   padding-right: clamp(16px, 3vw, 64px);
   box-sizing: border-box;
@@ -3279,79 +3280,211 @@ Matches your clean “system” style:
 
 .work-layout{
   width: 100%;
-  max-width: none;
   margin: 0;
   box-sizing: border-box;
 }
 
+/* =========================================================
+MAIN SHELL (height control)
+- uses viewport height so it never grows higher than the screen
+========================================================= */
 .work-shell{
-  --work-accent: #0ea5a4;
+  --work-accent: #0ea5a2; /* one accent for everything */
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 18px;
+
+  /* ✅ FIT VIEWPORT, NOT HIGHER */
+  height: clamp(520px, 72vh, 660px);
+  max-height: 72vh;
+
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+LEFT: INDEX (no outer box)
+========================================================= */
+.work-index{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
 
-  border-radius: 0;          /* sharp like your other sections */
-  box-shadow: none;
-  overflow: visible;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  box-sizing: border-box;
 }
 
-/* LEFT (detail) */
-.work-board-left{
+/* index items share height evenly */
+.work-item{
+  flex: 1 1 0;
+  min-height: 0; /* important so flex can shrink inside fixed height */
+
   position: relative;
-  background: #ffffff;
-  border: 2px solid #111;
-  padding: 34px 36px 30px;
+  border-radius: 16px;
+
+  /* ✅ EXPERIENCE CARD BLUE BASE */
+  background: linear-gradient(180deg, #f7faff 0%, #f3f7ff 100%);
+  border: 2px solid transparent;
+  box-shadow: none;
+  overflow: hidden;
   box-sizing: border-box;
 
-  /* accent rail */
-  outline: 0;
+  /* layout */
+  padding: 18px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
 }
 
+/* subtle inner line (inset border) like exp-card-frame::after */
+.work-item::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
+  border-radius: 16px;
+}
+
+/* ONE hover rule for all items (blue → white + accent border) */
+@media (hover:hover) and (pointer:fine){
+  .work-item:hover{
+    transform: translateY(-2px);
+    background: #ffffff;
+    border-color: var(--work-accent);
+  }
+  .work-item:hover::after{
+    box-shadow: none;
+  }
+}
+
+/* active: keep same system (no per-item colors) */
+.work-item.is-active{
+  background: #ffffff;
+  border-color: var(--work-accent);
+}
+.work-item.is-active::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width: 8px;
+  background: var(--work-accent);
+}
+
+/* index typography */
+.work-item-left{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.work-item-code{
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  font-size: 0.86rem;
+  opacity: 0.70;
+}
+
+.work-item-name{
+  font-weight: 780;
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-item-arrow{
+  font-weight: 900;
+  opacity: 0.55;
+  font-size: 1.2rem;
+}
+
+/* =========================================================
+RIGHT: CONTENT PANEL (same height as index)
+========================================================= */
+.work-board-left{
+  height: 100%;
+  min-height: 0;
+
+  position: relative;
+  border-radius: 16px;
+
+  /* match your clean system */
+  background: #ffffff;
+  border: 2px solid #111;
+
+  overflow: hidden; /* clip inset + allow inner scroll */
+  box-sizing: border-box;
+}
+
+/* accent rail */
 .work-board-left::before{
   content:"";
-  position: absolute;
-  left: -2px;
-  top: -2px;
-  bottom: -2px;
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
   width: 6px;
   background: var(--work-accent);
 }
 
-/* header */
-.work-head{
-  display: grid;
-  gap: 10px;
-  margin-bottom: 18px;
+/* inset border inside content panel (like experience) */
+.work-board-left::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
+  border-radius: 16px;
 }
 
-.work-kicker{
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.20em;
-  color: #6b7280;
+/* the actual article content should scroll if needed (so shell never grows) */
+.work-detail{
+  display: none;
+  height: 100%;
+  overflow: auto;
+  padding: 34px 36px 30px;
+  box-sizing: border-box;
+
+  /* hide scrollbar like your experience back */
+  scrollbar-width: none;
 }
+.work-detail::-webkit-scrollbar{ width: 0; height: 0; }
+
+.work-detail.is-active{
+  display: block;
+  animation: workFade .20s ease-out;
+}
+
+@keyframes workFade{
+  from{ opacity:0; transform: translateY(6px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* remove any ghost word */
+.work-title::after{ content: none !important; }
 
 .work-title{
-  font-size: clamp(1.7rem, 2.2vw, 2.35rem);
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
   line-height: 1.12;
-  margin: 0;
   letter-spacing: 0.02em;
-  position: relative;
-}
-
-/* subtle “grid stamp” behind title (very light) */
-.work-title::after{
-  content:"WORK";
-  position: absolute;
-  left: -2px;
-  top: -44px;
-  font-size: 4.2rem;
-  letter-spacing: 0.26em;
-  opacity: 0.06;
-  text-transform: uppercase;
-  white-space: nowrap;
-  pointer-events: none;
 }
 
 .work-desc{
@@ -3359,18 +3492,16 @@ Matches your clean “system” style:
   color: #111;
   font-size: 0.98rem;
   line-height: 1.6;
-  max-width: none !important;
-  width: 100% !important;
+  max-width: none; /* full width */
 }
 
-/* chips */
+/* chips + links keep your system style */
 .work-chips{
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 4px 0 18px;
+  gap: 10px;
+  margin: 6px 0 18px;
 }
-
 .work-chip{
   font-size: 0.78rem;
   padding: 6px 10px 5px;
@@ -3379,14 +3510,12 @@ Matches your clean “system” style:
   background: #fff;
 }
 
-/* links */
 .work-links{
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 6px;
 }
-
 .work-link{
   display: inline-flex;
   align-items: center;
@@ -3404,126 +3533,52 @@ Matches your clean “system” style:
 
   transition: transform .15s ease, background .15s ease;
 }
-
 .work-link:hover{
   transform: translateY(-2px);
   background: rgba(0,0,0,0.04);
 }
-
 .work-link .icon{
   font-size: 1.05rem;
   line-height: 1;
 }
 
-/* detail switching */
-.work-detail{ display:none; }
-.work-detail.is-active{
-  display:block;
-  animation: workFade .20s ease-out;
+/* =========================================================
+RESPONSIVE
+========================================================= */
+@media (max-width: 1050px){
+  .work-shell{
+    grid-template-columns: 360px minmax(0, 1fr);
+    height: clamp(520px, 74vh, 660px);
+  }
 }
 
-@keyframes workFade{
-  from{ opacity:0; transform: translateY(6px); }
-  to{ opacity:1; transform: translateY(0); }
-}
-
-/* RIGHT (index) */
-.work-index{
-  background: #ffffff;
-  border: 2px solid #111;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-.work-index-head{
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 12px;
-}
-
-.work-index-title{
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-.work-index-hint{
-  font-size: 0.78rem;
-  color: #6b7280;
-}
-
-/* index items */
-.work-item{
-  width: 100%;
-  border: 2px solid #111;
-  background: #fff;
-  padding: 14px 14px;
-  margin: 10px 0 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-
-  transition: transform .15s ease, background .15s ease;
-}
-
-.work-item:hover{
-  transform: translateY(-2px);
-  background: rgba(0,0,0,0.03);
-}
-
-.work-item.is-active{
-  background: rgba(0,0,0,0.04);
-  border-left-width: 8px;
-  border-left-color: var(--work-accent);
-}
-
-.work-item-left{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-
-.work-item-code{
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  font-size: 0.82rem;
-  opacity: 0.75;
-}
-
-.work-item-name{
-  font-weight: 900;
-  letter-spacing: 0.03em;
-  font-size: 0.92rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.work-item-arrow{
-  font-weight: 900;
-  opacity: 0.7;
-}
-
-/* Responsive: stack */
 @media (max-width: 900px){
   .work-shell{
     grid-template-columns: 1fr;
+    height: auto;
+    max-height: none;
   }
+
   .work-index{
-    order: -1; /* index on top */
+    height: auto;
+  }
+
+  .work-item{
+    flex: 0 0 auto;
+    min-height: 92px;
+  }
+
+  .work-board-left{
+    height: auto;
+  }
+
+  .work-detail{
+    height: auto;
+    overflow: visible;
+    padding: 26px 20px 22px;
   }
 }
 
-/* Mobile align with navbar inset */
 @media (max-width: 700px){
   #work{
     width: 100% !important;
@@ -3531,306 +3586,8 @@ Matches your clean “system” style:
     margin-right: 0 !important;
     padding-left: 12px !important;
     padding-right: 12px !important;
-    box-sizing: border-box !important;
-  }
-  .work-board-left{
-    padding: 24px 18px 22px;
-  }
-  .work-title::after{
-    font-size: 3.2rem;
-    top: -34px;
   }
 }
-
-/* WORK — remove kicker cleanly */
-.work-kicker{
-  display: none;
-}
-
-/* tighten header spacing */
-.work-head{
-  gap: 0;
-  margin-bottom: 16px;
-}
-
-/* reposition faded WORK stamp */
-.work-title::after{
-  top: -30px;      /* was too high after removing kicker */
-  opacity: 0.045;  /* softer */
-}
-
-
-/* WORK — remove background / ghost word */
-.work-title::after{
-  content: none;
-}
-
-
-
-/* WORK — index items fill full height */
-.work-index{
-  display: flex;
-  flex-direction: column;
-}
-
-
-.work-item{
-  flex: 1;                 /* 🔑 each item takes equal height */
-  display: flex;
-  align-items: center;
-}
-
-.work-index-head{
-  display: none;
-}
-
-  /* LAYOUT: index left, content right */
-.work-shell{
-  display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 18px;
-  align-items: stretch;
-}
-
-/* LEFT COLUMN: no container box look */
-.work-index{
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0;
-  background: transparent;
-  border: none;
-}
-
-/* INDEX ITEMS = “experience card” vibe */
-.work-item{
-  width: 100%;
-  border-radius: 18px;
-  border: 2px solid #cbd5e1;              /* light border like exp */
-  background: #f3f7ff;                     /* soft blue card */
-  padding: 22px 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-
-  transition: transform .18s ease, background .18s ease, border-color .18s ease;
-}
-
-/* hover = white */
-.work-item:hover{
-  transform: translateY(-2px);
-  background: #ffffff;
-  border-color: #94a3b8;
-}
-
-/* active = accent rail */
-.work-item.is-active{
-  border-left: 10px solid var(--work-accent);
-}
-
-/* text */
-.work-item-left{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-
-.work-item-code{
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  font-size: 0.86rem;
-  opacity: 0.75;
-}
-
-.work-item-name{
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  font-size: 1.05rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.work-item-arrow{
-  font-weight: 900;
-  opacity: 0.55;
-  font-size: 1.2rem;
-}
-
-/* RIGHT PANEL: keep your clean bordered system look */
-.work-board-left{
-  background: #ffffff;
-  border: 2px solid #111;
-  border-radius: 18px;
-  padding: 34px 36px 30px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* accent rail on content panel */
-.work-board-left::before{
-  content:"";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-  background: var(--work-accent);
-}
-
-/* remove ghost word completely */
-.work-title::after{
-  content: none;
-}
-
-/* text uses full width */
-.work-desc{
-  max-width: none;
-}
-
-/* Responsive: stack */
-@media (max-width: 900px){
-  .work-shell{
-    grid-template-columns: 1fr;
-  }
-  .work-index{
-    order: 0;
-  }
-  .work-board-left{
-    order: 1;
-  }
-}
-/* LAYOUT: index left, content right */
-.work-shell{
-  display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 18px;
-  align-items: stretch;
-}
-
-/* LEFT COLUMN: no container box look */
-.work-index{
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0;
-  background: transparent;
-  border: none;
-}
-
-/* INDEX ITEMS = “experience card” vibe */
-.work-item{
-  width: 100%;
-  border-radius: 18px;
-  border: 2px solid #cbd5e1;              /* light border like exp */
-  background: #f3f7ff;                     /* soft blue card */
-  padding: 22px 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-
-  transition: transform .18s ease, background .18s ease, border-color .18s ease;
-}
-
-/* hover = white */
-.work-item:hover{
-  transform: translateY(-2px);
-  background: #ffffff;
-  border-color: #94a3b8;
-}
-
-/* active = accent rail */
-.work-item.is-active{
-  border-left: 10px solid var(--work-accent);
-}
-
-/* text */
-.work-item-left{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-
-.work-item-code{
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  font-size: 0.86rem;
-  opacity: 0.75;
-}
-
-.work-item-name{
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  font-size: 1.05rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.work-item-arrow{
-  font-weight: 900;
-  opacity: 0.55;
-  font-size: 1.2rem;
-}
-
-/* RIGHT PANEL: keep your clean bordered system look */
-.work-board-left{
-  background: #ffffff;
-  border: 2px solid #111;
-  border-radius: 18px;
-  padding: 34px 36px 30px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* accent rail on content panel */
-.work-board-left::before{
-  content:"";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-  background: var(--work-accent);
-}
-
-/* remove ghost word completely */
-.work-title::after{
-  content: none;
-}
-
-/* text uses full width */
-.work-desc{
-  max-width: none;
-}
-
-/* Responsive: stack */
-@media (max-width: 900px){
-  .work-shell{
-    grid-template-columns: 1fr;
-  }
-  .work-index{
-    order: 0;
-  }
-  .work-board-left{
-    order: 1;
-  }
-}
-
 
 
 
