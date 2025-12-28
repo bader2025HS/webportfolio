@@ -3610,6 +3610,45 @@ RESPONSIVE
 
 
 
+/* =========================================================
+WORK — HARD RESET HEIGHT (LIKE EXPERIENCE)
+PASTE AT END
+========================================================= */
+
+/* remove any forced sizing */
+.work-shell,
+.work-index,
+.work-board-left,
+.work-detail{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* keep the layout, but natural height (no empty space) */
+.work-shell{
+  display: grid !important;
+  grid-template-columns: 420px minmax(0, 1fr) !important;
+  gap: 18px !important;
+  align-items: stretch !important;
+}
+
+/* left stack + right panel will be the same height (tallest wins) */
+.work-index{
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+/* items share the available height ONLY if there is height — otherwise they size naturally */
+.work-item{
+  flex: 0 0 auto !important;   /* ✅ stop "fill height" behavior */
+}
+
+/* make both columns LOOK aligned by adding consistent padding/margins */
+.work-board-left{
+  overflow: hidden !important;
+}
 
 
 
