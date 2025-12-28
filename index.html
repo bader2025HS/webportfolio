@@ -3447,39 +3447,6 @@ Matches your clean “system” style:
   opacity: 0.045;  /* softer */
 }
 
-/* ===========================
-WORK — RIGHT INDEX ITEMS FILL ENTIRE BOX (ALL-IN-ONE)
-Paste this AT THE END of your CSS
-=========================== */
-
-/* 1) make both columns stretch to same height */
-.work-shell{
-  align-items: stretch;
-}
-
-/* 2) make the right panel a full-height flex column */
-.work-index{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 0;              /* since you removed the header, kill top padding */
-}
-
-/* 3) each item takes an equal share of the full height */
-.work-item{
-  flex: 1 1 0;
-  margin: 0;               /* remove gaps that create “unused space” */
-  border-radius: 0;        /* optional: clean blocks; remove if you want rounded */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;         /* balanced inside spacing */
-}
-
-/* optional: add separators between the blocks (keeps your border look) */
-.work-item + .work-item{
-  border-top: 0;
-}
 
 /* WORK — remove background / ghost word */
 .work-title::after{
@@ -3488,6 +3455,18 @@ Paste this AT THE END of your CSS
 
 
 
+/* WORK — index items fill full height */
+.work-index{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.work-item{
+  flex: 1;                 /* 🔑 each item takes equal height */
+  display: flex;
+  align-items: center;
+}
 
 
   
