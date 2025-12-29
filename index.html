@@ -1888,6 +1888,27 @@ PUT LAST
   transform: none !important;
 }
 
+/* =========================================================
+ABOUT — FINAL OVERRIDE (MAP ONLY)
+PUT LAST
+========================================================= */
+
+.map-card{
+  border-radius: 18px !important;
+  overflow: hidden !important; /* clip Leaflet */
+}
+
+/* inner frame follows rounding */
+.map-card::after{
+  border-radius: inherit !important;
+}
+
+/* ensure no shadow / lift on map only */
+.map-card,
+.map-card:hover{
+  box-shadow: none !important;
+  transform: none !important;
+}
 
 
 /* ===========================
