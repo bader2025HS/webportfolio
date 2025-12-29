@@ -1910,6 +1910,31 @@ PUT LAST
   transform: none !important;
 }
 
+/* =========================================================
+ABOUT — FIX: KEEP ALL LIFT / REMOVE SHADOWS ONLY
+PUT LAST
+========================================================= */
+
+/* Remove shadows ONLY */
+#about,
+#about *{
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Explicitly allow transforms (lift stays) */
+.about-text-box:hover,
+.about-stat:hover,
+.about-focus-chip:hover,
+.map-card:hover{
+  transform: translateY(-2px) !important;
+}
+
+/* Stats number micro-move stays */
+.about-stat:hover .about-stat-number{
+  transform: translateY(-1px) !important;
+}
+
 
 /* ===========================
 EDUCATION MAPS
