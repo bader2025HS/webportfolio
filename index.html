@@ -1848,6 +1848,45 @@ Rounded boxes + mobile stats 2×2
     width: 100% !important;
   }
 }
+/* =========================================================
+ABOUT — FINAL OVERRIDE (NO SHADOWS ANYWHERE)
+PUT LAST
+========================================================= */
+
+/* Kill all shadows globally inside ABOUT */
+#about,
+#about *{
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Text box — keep border hover but NO shadow */
+.about-text-box:hover{
+  box-shadow: none !important;
+  transform: none !important; /* optional: prevents lift illusion */
+}
+
+/* Stats cards — no shadow, no lift */
+.about-stat,
+.about-stat:hover{
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Map card — no shadow */
+.map-card,
+.map-card:hover{
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Focus chips — no shadow */
+.about-focus-chip,
+.about-focus-chip:hover{
+  box-shadow: none !important;
+  transform: none !important;
+}
 
 
 
