@@ -1814,6 +1814,40 @@ padding-right: 0 !important;
 }
 
 
+/* =========================================================
+ABOUT — FINAL OVERRIDES (PUT LAST)
+Rounded boxes + mobile stats 2×2
+========================================================= */
+
+/* Rounded ABOUT text box */
+.about-text-box{
+  border-radius: 16px !important;
+}
+
+.about-text-box::after{
+  border-radius: inherit !important;
+}
+
+/* Rounded stats cards */
+.about-stat{
+  border-radius: 16px !important;
+}
+
+.about-stat::after{
+  border-radius: inherit !important;
+}
+
+/* MOBILE: stats should be 2×2 (not stacked) */
+@media (max-width: 640px){
+  .about-stats-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .about-stat{
+    width: 100% !important;
+  }
+}
 
 
 
