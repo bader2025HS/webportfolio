@@ -2569,6 +2569,29 @@ PUT LAST
     font-size: 0.94rem;
   }
 }
+/* =========================================================
+ABOUT — DESKTOP: DECREASE RIGHT COLUMN HEIGHT
+(align with left text box)
+PUT LAST
+========================================================= */
+@media (min-width: 961px){
+
+  /* ↓ Make the map shorter */
+  .map-card{
+    height: 245px !important;   /* was taller */
+  }
+
+  /* ↓ Compress stats cards vertically */
+  .about-stat{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  /* ↓ Slightly tighten stat label spacing */
+  .about-stat-label{
+    margin-top: 6px !important;
+  }
+}
 
 /* ===========================
 EDUCATION MAPS
