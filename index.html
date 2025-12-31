@@ -2285,6 +2285,145 @@ PUT LAST
   z-index: 1 !important;
 }
 
+/* Keep the MAP border/frame on top of the Leaflet layers */
+.map-card{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.map-card::after{
+  z-index: 3;            /* inner frame always visible */
+}
+
+/* Map itself stays below the frame */
+#visitedMap{
+  position: relative;
+  z-index: 1;
+}
+
+/* Tooltips above everything */
+.about-stat-tooltip{
+  z-index: 9999 !important;
+}
+
+/* =========================================================
+ABOUT — GLOBAL SCALE UP (PUT LAST)
+========================================================= */
+
+/* Text box content */
+.about-text-box{
+  font-size: 1.02rem;              /* ⬆️ was ~0.96 */
+  line-height: 1.7;
+  padding: 22px 24px;              /* more breathing room */
+}
+
+/* Hello / greeting */
+#hello-rotate{
+  font-size: 2.1rem;               /* ⬆️ more presence */
+}
+
+/* Paragraph spacing */
+.about-text-box p{
+  margin-bottom: 14px;
+}
+
+/* =========================================================
+FOCUS TAGS — BIGGER, AIRIER
+========================================================= */
+
+.about-inline-tags{
+  gap: 10px 14px;                  /* more space between tags */
+  margin-top: 18px;
+}
+
+.about-focus-chip{
+  padding: 8px 16px;               /* ⬆️ bigger pill */
+  font-size: 0.82rem;              /* ⬆️ from ~0.78 */
+  border-width: 2.5px;
+}
+
+/* =========================================================
+STATS — BIGGER, MORE LEGIBLE
+========================================================= */
+
+.about-stat{
+  padding: 14px 8px;               /* ⬆️ card height */
+}
+
+.about-stat-number{
+  font-size: 2.6rem;               /* ⬆️ from ~2.25 */
+}
+
+.about-stat-label{
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  margin-top: 8px;
+}
+
+/* =========================================================
+MAP — SLIGHTLY TALLER
+========================================================= */
+
+.map-card{
+  height: 235px;                   /* ⬆️ was ~210 */
+}
+
+/* =========================================================
+MOBILE — FOCUS TAGS = 2 COLUMNS (2 × 4)
+========================================================= */
+
+@media (max-width: 640px){
+  .about-inline-tags{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+  }
+
+  .about-focus-chip{
+    width: 100%;
+    text-align: center;
+  }
+}
+/* =========================================================
+ABOUT — MOBILE TOOLTIP FIX (NO CROPPING, FULL RADIUS)
+PUT LAST
+========================================================= */
+
+@media (max-width: 640px){
+
+  /* Ensure no parent clips the tooltip */
+  .about-right,
+  .about-stats-grid,
+  .about-stat{
+    overflow: visible !important;
+  }
+
+  /* Tooltip container */
+  .about-stat-tooltip{
+    left: 8px !important;          /* anchor inside viewport */
+    right: 8px !important;         /* prevent overflow */
+    bottom: calc(100% + 10px) !important;
+
+    transform: none !important;    /* ❌ kill translateX(-50%) */
+
+    max-width: calc(100vw - 16px) !important;
+    width: auto !important;
+
+    border-radius: 14px !important;
+    padding: 10px 14px !important;
+
+    box-sizing: border-box !important;
+    text-align: center;
+
+    z-index: 9999 !important;
+  }
+
+  /* Tooltip arrow — center relative to card, not viewport */
+  .about-stat-tooltip::after{
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}
 
 
 
