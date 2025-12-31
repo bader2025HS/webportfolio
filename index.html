@@ -1936,7 +1936,108 @@ PUT LAST
 }
 
 
+/* =========================================================
+ABOUT — FINAL STRUCTURE
+========================================================= */
 
+/* 2-column desktop layout */
+.about-shell{
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 16px;
+}
+
+/* columns */
+.about-left,
+.about-right{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* shared card shell */
+.about-card{
+  background: #ffffff;
+  border: 2.5px solid transparent;
+  position: relative;
+  padding: 16px 18px 18px;
+  box-sizing: border-box;
+}
+
+/* inner thin frame */
+.about-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+}
+
+/* card title */
+.about-card-title{
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* hover border only (no shadow) */
+.about-card:hover{
+  border-color: var(--accent, #0ea5a2);
+}
+
+/* =========================================================
+STATS — FORCE ONE LINE
+========================================================= */
+
+.about-stats-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* =========================================================
+FOCUS CHIPS — GRID
+========================================================= */
+
+.about-focus-chips{
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 10px 14px;
+}
+
+/* =========================================================
+MAP
+========================================================= */
+
+.about-map-box .map-card{
+  height: 210px;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 960px){
+  .about-shell{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .about-stats-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-focus-chips{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+  
 
 
 
@@ -4611,69 +4712,83 @@ data-caption="Muscat, Oman – April 2025" />
 
 <!-- ABOUT -->
 <section id="about">
-<div class="about-shell">
+  <div class="about-shell">
 
-<!-- ROW 1: FULL-WIDTH TEXT BOX -->
-<div class="about-text-box about-fullwidth">
-<p class="about-hello">
-<span class="rotator">
-<span id="hello-rotate" class="hello-fade">Hi.</span>
-</span>
-</p>
-<p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
-<p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
-</div>
+    <!-- LEFT COLUMN -->
+    <div class="about-left">
 
-<!-- ROW 2: 3-COLUMN GRID (STATS | FOCUS | MAP) -->
-<div class="about-grid">
+      <!-- TEXT -->
+      <div class="about-card about-text-box">
+        <p class="about-hello">
+          <span class="rotator">
+            <span id="hello-rotate" class="hello-fade">Hi.</span>
+          </span>
+        </p>
+        <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
+        <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
+      </div>
 
-<!-- LEFT: STATS 2×2 GRID -->
-<div class="about-stats-grid">
-<div class="about-stat">
-<div class="about-stat-number">30</div>
-<div class="about-stat-label">Countries</div>
-<div class="about-stat-tooltip">Visited, lived, studies, explored. See map for details.</div>
-</div>
-<div class="about-stat">
-<div class="about-stat-number">100+</div>
-<div class="about-stat-label">Translations</div>
-<div class="about-stat-tooltip">Asylees from the MENA region in the US and the UK.</div>
-</div>
-<div class="about-stat">
-<div class="about-stat-number">200+</div>
-<div class="about-stat-label">Refugees</div>
-<div class="about-stat-tooltip">Refugees from Sub-Saharan Africa and South-East Asia</div>
-</div>
-<div class="about-stat">
-<div class="about-stat-number">8</div>
-<div class="about-stat-label">Cities</div>
-<div class="about-stat-tooltip">Damascus, Abu Dhabi, Amman, Niort, Nancy, Menton, Tokyo, Paris.</div>
-</div>
-</div>
+      <!-- FOCUS AREAS -->
+      <div class="about-card about-focus-box">
+        <div class="about-card-title">Focus areas</div>
 
-<!-- MIDDLE: FOCUS AREAS -->
-<div class="about-focus">
-<div class="about-focus-chips">
-<span class="about-focus-chip">Forced displacement</span>
-<span class="about-focus-chip">Sustainability</span>
-<span class="about-focus-chip">Energy transitions</span>
-<span class="about-focus-chip">MENA & Africa</span>
-<span class="about-focus-chip">Development policies</span>
-<span class="about-focus-chip">Peacebuilding</span>
-<span class="about-focus-chip">Global risks</span>
-<span class="about-focus-chip">Resource management</span>
-</div>
-</div>
+        <div class="about-focus-chips">
+          <span class="about-focus-chip">Forced displacement</span>
+          <span class="about-focus-chip">Sustainability</span>
+          <span class="about-focus-chip">Energy transitions</span>
+          <span class="about-focus-chip">MENA & Africa</span>
+          <span class="about-focus-chip">Development policies</span>
+          <span class="about-focus-chip">Peacebuilding</span>
+          <span class="about-focus-chip">Global risks</span>
+          <span class="about-focus-chip">Resource management</span>
+        </div>
+      </div>
 
-<!-- RIGHT: MAP -->
-<div class="about-map">
-<div class="map-card">
-<div id="visitedMap"></div>
-</div>
-</div>
+    </div>
 
-</div>
-</div>
+    <!-- RIGHT COLUMN -->
+    <div class="about-right">
+
+      <!-- STATS -->
+      <div class="about-card about-stats-box">
+        <div class="about-card-title">At a glance</div>
+
+        <div class="about-stats-grid">
+          <div class="about-stat">
+            <div class="about-stat-number">30</div>
+            <div class="about-stat-label">Countries</div>
+            <div class="about-stat-tooltip">Visited, lived, studied.</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-number">100+</div>
+            <div class="about-stat-label">Translations</div>
+            <div class="about-stat-tooltip">Asylum-related work.</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-number">200+</div>
+            <div class="about-stat-label">Refugees</div>
+            <div class="about-stat-tooltip">Supported across regions.</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-number">8</div>
+            <div class="about-stat-label">Cities</div>
+            <div class="about-stat-tooltip">Lived & studied.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="about-card about-map-box">
+        <div class="about-card-title">Geography</div>
+
+        <div class="map-card">
+          <div id="visitedMap"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
 
