@@ -7202,12 +7202,19 @@ zoomControl: true,
 zoomSnap: 0.5,
 zoomDelta: 0.5
 });
+let didIntroZoom = false;  // run only once per page load
 
 function setEurasiaView() {
-map.setView([32, 25], 2.3); // centred-ish on Europe / MENA / Asia
+  map.setView([32, 25], 2.3);
 }
-setEurasiaView();
-window.addEventListener("resize", setEurasiaView);
+
+// Start a bit wider (so the zoom-in is visible)
+map.setView([25, 10], 1.6);
+window.addEventListener("resize", () => {
+  if (!didIntroZoom) return; // don’t fight the intro
+  setEurasiaView();
+});
+
 
 const visitedNames = [
 "France","Germany","Belgium","Netherlands","Italy","Luxembourg","United Kingdom","Malta",
@@ -7269,8 +7276,21 @@ try { layer.resetStyle(e.target); } catch {}
 }
 }).addTo(map);
 
+// ✅ Landing zoom (once) after polygons are on the map
+setTimeout(() => {
+  map.invalidateSize(); // important because About was hidden before
+  if (didIntroZoom) return;
+  didIntroZoom = true;
+
+  // Option A: fly to your “Eurasia” view
+  map.flyTo([32, 25], 2.3, {
+    duration: 1.4,
+    easeLinearity: 0.25
+  });
+}, 250);
+
+
 // re-assert view after polygons load
-setTimeout(setEurasiaView, 0);
 } catch (err) {
 console.error("GeoJSON load error for visited map:", err);
 el.innerHTML =
