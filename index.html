@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>pooo</title>
+<title>PORTFOLIO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -2038,6 +2038,94 @@ MOBILE
 
 
   
+/* =========================================================
+ABOUT — CLEAN SECTIONS (NO BOXES)
+========================================================= */
+
+/* layout */
+.about-shell{
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 16px;
+}
+
+.about-left,
+.about-right{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* section wrapper (no background, no border) */
+.about-section{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* section titles */
+.about-section-title{
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+/* =========================================================
+STATS — ONE LINE
+========================================================= */
+
+.about-stats-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* ensure stats cards remain clean */
+.about-stat{
+  background: transparent !important;
+  border: none !important;
+  padding: 12px 6px;
+}
+
+/* =========================================================
+FOCUS CHIPS
+========================================================= */
+
+.about-focus-chips{
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 10px 14px;
+}
+
+/* =========================================================
+MAP
+========================================================= */
+
+.map-card{
+  height: 210px;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 960px){
+  .about-shell{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .about-stats-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-focus-chips{
+    grid-template-columns: 1fr;
+  }
+}
 
 
 
@@ -4711,14 +4799,15 @@ data-caption="Muscat, Oman – April 2025" />
 </section>
 
 <!-- ABOUT -->
+<!-- ABOUT -->
 <section id="about">
   <div class="about-shell">
 
     <!-- LEFT COLUMN -->
     <div class="about-left">
 
-      <!-- TEXT -->
-      <div class="about-card about-text-box">
+      <!-- TEXT (KEEP BOX) -->
+      <div class="about-text-box">
         <p class="about-hello">
           <span class="rotator">
             <span id="hello-rotate" class="hello-fade">Hi.</span>
@@ -4728,9 +4817,9 @@ data-caption="Muscat, Oman – April 2025" />
         <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
       </div>
 
-      <!-- FOCUS AREAS -->
-      <div class="about-card about-focus-box">
-        <div class="about-card-title">Focus areas</div>
+      <!-- FOCUS (NO BOX) -->
+      <div class="about-section">
+        <div class="about-section-title">Focus areas</div>
 
         <div class="about-focus-chips">
           <span class="about-focus-chip">Forced displacement</span>
@@ -4749,9 +4838,9 @@ data-caption="Muscat, Oman – April 2025" />
     <!-- RIGHT COLUMN -->
     <div class="about-right">
 
-      <!-- STATS -->
-      <div class="about-card about-stats-box">
-        <div class="about-card-title">At a glance</div>
+      <!-- STATS (NO BOX, ONE LINE) -->
+      <div class="about-section">
+        <div class="about-section-title">At a glance</div>
 
         <div class="about-stats-grid">
           <div class="about-stat">
@@ -4777,9 +4866,9 @@ data-caption="Muscat, Oman – April 2025" />
         </div>
       </div>
 
-      <!-- MAP -->
-      <div class="about-card about-map-box">
-        <div class="about-card-title">Geography</div>
+      <!-- MAP (NO BOX TITLE, MAP CARD STAYS) -->
+      <div class="about-section">
+        <div class="about-section-title">Geography</div>
 
         <div class="map-card">
           <div id="visitedMap"></div>
