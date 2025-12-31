@@ -2385,43 +2385,53 @@ MOBILE — FOCUS TAGS = 2 COLUMNS (2 × 4)
   }
 }
 /* =========================================================
-ABOUT — MOBILE TOOLTIP FIX (NO CROPPING, FULL RADIUS)
+ABOUT — TOOLTIP (MOBILE) — BACK TO ORIGINAL BEHAVIOR
+NO JS, NO SLIDE, JUST APPEAR ABOVE
 PUT LAST
 ========================================================= */
+@media (max-width: 700px){
 
-@media (max-width: 640px){
-
-  /* Ensure no parent clips the tooltip */
+  /* make sure tooltip isn't clipped */
   .about-right,
   .about-stats-grid,
   .about-stat{
     overflow: visible !important;
   }
 
-  /* Tooltip container */
+  /* tooltip: fixed anchor above, NO motion */
   .about-stat-tooltip{
-    left: 8px !important;          /* anchor inside viewport */
-    right: 8px !important;         /* prevent overflow */
-    bottom: calc(100% + 10px) !important;
+    position: absolute !important;
+    left: 50% !important;
+    bottom: calc(100% + 12px) !important;
 
-    transform: none !important;    /* ❌ kill translateX(-50%) */
+    transform: translateX(-50%) !important;   /* static center */
+    transition: opacity .20s ease !important; /* only fade */
+    opacity: 0 !important;
 
-    max-width: calc(100vw - 16px) !important;
+    padding: 8px 12px !important;
+    border-radius: 14px !important;
+
+    min-width: 180px !important;
+    max-width: calc(100vw - 24px) !important; /* prevent edge crop */
     width: auto !important;
 
-    border-radius: 14px !important;
-    padding: 10px 14px !important;
-
+    white-space: normal !important;
+    text-align: center !important;
     box-sizing: border-box !important;
-    text-align: center;
 
     z-index: 9999 !important;
   }
 
-  /* Tooltip arrow — center relative to card, not viewport */
+  /* arrow: centered */
   .about-stat-tooltip::after{
     left: 50% !important;
     transform: translateX(-50%) !important;
+  }
+
+  /* show on hover OR your existing touch "open" class */
+  .about-stat:hover .about-stat-tooltip,
+  .about-stat.tooltip-open .about-stat-tooltip{
+    opacity: 1 !important;
   }
 }
 
