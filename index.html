@@ -2518,6 +2518,28 @@ ABOUT — DESKTOP SCALE UP ONLY
   }
 }
 
+/* =========================================================
+ABOUT — DESKTOP: ALIGN TEXT BOX HEIGHT WITH STATS
+PUT LAST
+========================================================= */
+@media (min-width: 961px){
+
+  /* Make text box a bit tighter */
+  .about-text-box{
+    padding: 18px 22px;        /* ⬅️ was larger */
+    line-height: 1.65;         /* slightly tighter */
+  }
+
+  /* Reduce paragraph gaps */
+  .about-text-box p{
+    margin-bottom: 10px;       /* ⬅️ was ~14px */
+  }
+
+  /* Reduce space before tags */
+  .about-inline-tags{
+    margin-top: 12px;          /* ⬅️ was ~18px */
+  }
+}
 
 
 /* ===========================
