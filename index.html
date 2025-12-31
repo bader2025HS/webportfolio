@@ -7209,7 +7209,7 @@ function setEurasiaView() {
 }
 
 // Start a bit wider (so the zoom-in is visible)
-map.setView([25, 10], 1.6);
+map.setView([25, 10], 1.3);  // was 1.6
 window.addEventListener("resize", () => {
   if (!didIntroZoom) return; // don’t fight the intro
   setEurasiaView();
@@ -7283,10 +7283,10 @@ setTimeout(() => {
   didIntroZoom = true;
 
   // Option A: fly to your “Eurasia” view
-  map.flyTo([32, 25], 2.3, {
-    duration: 1.4,
-    easeLinearity: 0.25
-  });
+ map.flyTo([32, 25], 3.1, {
+  duration: 1.6,
+  easeLinearity: 0.22
+});
 }, 250);
 
 
