@@ -2127,6 +2127,77 @@ MOBILE
   }
 }
 
+/* =========================================================
+ABOUT — INLINE TAGS INSIDE TEXT BOX
+========================================================= */
+
+.about-inline-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 14px;
+}
+
+/* tags behave like Work area tags */
+.about-focus-chip{
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  background: #f5f8ff;
+  color: #1f2937;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+/* =========================================================
+STATS — ONE LINE, NO BOX
+========================================================= */
+
+.about-stats-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.about-stat{
+  background: transparent !important;
+  border: none !important;
+  padding: 10px 4px;
+}
+
+/* =========================================================
+LAYOUT
+========================================================= */
+
+.about-shell{
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 16px;
+}
+
+.about-left,
+.about-right{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 960px){
+  .about-shell{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .about-stats-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 
 
@@ -4806,22 +4877,25 @@ data-caption="Muscat, Oman – April 2025" />
     <!-- LEFT COLUMN -->
     <div class="about-left">
 
-      <!-- TEXT (KEEP BOX) -->
+      <!-- TEXT BOX (WITH TAGS INSIDE) -->
       <div class="about-text-box">
+
         <p class="about-hello">
           <span class="rotator">
             <span id="hello-rotate" class="hello-fade">Hi.</span>
           </span>
         </p>
-        <p>I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.</p>
-        <p>I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.</p>
-      </div>
 
-      <!-- FOCUS (NO BOX) -->
-      <div class="about-section">
-        <div class="about-section-title">Focus areas</div>
+        <p>
+          I make sense first, then make it simple. Think press reviews that highlight what matters, maps that you can read in five seconds, and short briefs that help a team decide the next step.
+        </p>
 
-        <div class="about-focus-chips">
+        <p>
+          I also enjoy research the practical way, from digging through datasets and field notes to speaking with practitioners, then turning that into concise takeaways and visuals that move work forward.
+        </p>
+
+        <!-- TAGS INSIDE TEXT BOX -->
+        <div class="about-inline-tags">
           <span class="about-focus-chip">Forced displacement</span>
           <span class="about-focus-chip">Sustainability</span>
           <span class="about-focus-chip">Energy transitions</span>
@@ -4831,6 +4905,7 @@ data-caption="Muscat, Oman – April 2025" />
           <span class="about-focus-chip">Global risks</span>
           <span class="about-focus-chip">Resource management</span>
         </div>
+
       </div>
 
     </div>
@@ -4838,48 +4913,39 @@ data-caption="Muscat, Oman – April 2025" />
     <!-- RIGHT COLUMN -->
     <div class="about-right">
 
-      <!-- STATS (NO BOX, ONE LINE) -->
-      <div class="about-section">
-        <div class="about-section-title">At a glance</div>
-
-        <div class="about-stats-grid">
-          <div class="about-stat">
-            <div class="about-stat-number">30</div>
-            <div class="about-stat-label">Countries</div>
-            <div class="about-stat-tooltip">Visited, lived, studied.</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-number">100+</div>
-            <div class="about-stat-label">Translations</div>
-            <div class="about-stat-tooltip">Asylum-related work.</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-number">200+</div>
-            <div class="about-stat-label">Refugees</div>
-            <div class="about-stat-tooltip">Supported across regions.</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-number">8</div>
-            <div class="about-stat-label">Cities</div>
-            <div class="about-stat-tooltip">Lived & studied.</div>
-          </div>
+      <!-- STATS (INLINE, NO TITLE, ONE ROW) -->
+      <div class="about-stats-grid">
+        <div class="about-stat">
+          <div class="about-stat-number">30</div>
+          <div class="about-stat-label">Countries</div>
+          <div class="about-stat-tooltip">Visited, lived, studied.</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-number">100+</div>
+          <div class="about-stat-label">Translations</div>
+          <div class="about-stat-tooltip">Asylum-related work.</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-number">200+</div>
+          <div class="about-stat-label">Refugees</div>
+          <div class="about-stat-tooltip">Supported across regions.</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-number">8</div>
+          <div class="about-stat-label">Cities</div>
+          <div class="about-stat-tooltip">Lived & studied.</div>
         </div>
       </div>
 
-      <!-- MAP (NO BOX TITLE, MAP CARD STAYS) -->
-      <div class="about-section">
-        <div class="about-section-title">Geography</div>
-
-        <div class="map-card">
-          <div id="visitedMap"></div>
-        </div>
+      <!-- MAP (NO TITLE) -->
+      <div class="map-card">
+        <div id="visitedMap"></div>
       </div>
 
     </div>
 
   </div>
 </section>
-
 
 
 
