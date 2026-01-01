@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio</title>
+<title>PORTOFOFO</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -7476,7 +7476,6 @@ const eduToYearEl = document.getElementById("eduToYear");
 const eduToMonthEl = document.getElementById("eduToMonth");
 
 const eduPassengerEl = document.getElementById("eduPassenger");
-const eduSeatEl = document.getElementById("eduSeat");
 const eduGateEl = document.getElementById("eduGate");
 const eduTerminalEl = document.getElementById("eduTerminal");
 
@@ -7493,7 +7492,6 @@ fromMonth: "SEPTEMBER",
 toYear: "2026",
 toMonth: "JUNE",
 passenger: "BADER SULIMAN",
-seat: "XXXX",
 gate: "B.A. & M.A.",
 terminal: "International Security",
 country: "FRANCE",
@@ -7511,7 +7509,6 @@ fromMonth: "SEPTEMBER",
 toYear: "2024",
 toMonth: "JULY",
 passenger: "BADER SULIMAN",
-seat: "XXXX",
 gate: "Exchange",
 terminal: "Asia-Pacific",
 country: "JAPAN",
@@ -7529,7 +7526,6 @@ fromMonth: "OCTOBER",
 toYear: "2027",
 toMonth: "SEPTEMBER",
 passenger: "BADER SULIMAN",
-seat: "XXXXX",
 gate: "M.A.",
 terminal: "European Affairs",
 country: "GERMANY",
@@ -7547,11 +7543,6 @@ function openEduPopup(countryKey) {
 const data = eduTicketData[countryKey];
 if (!data) return;
 
-// ✅ remove ID NO field (label + value)
-const seatWrap = document.getElementById("eduSeat")?.closest(".edu-mini");
-if (seatWrap) seatWrap.style.display = "none";
-
-
 
 const ticketLeft = document.querySelector(".edu-ticket-left");
 ticketLeft.classList.remove(
@@ -7568,7 +7559,6 @@ eduToYearEl.textContent = data.toYear;
 eduToMonthEl.textContent = data.toMonth;
 
 eduPassengerEl.textContent = data.passenger;
-eduSeatEl.textContent = data.seat;
 eduGateEl.textContent = data.gate;
 eduTerminalEl.textContent = data.terminal;
 
