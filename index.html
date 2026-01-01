@@ -7547,6 +7547,12 @@ function openEduPopup(countryKey) {
 const data = eduTicketData[countryKey];
 if (!data) return;
 
+// ✅ remove ID NO field (label + value)
+const seatWrap = document.getElementById("eduSeat")?.closest(".edu-mini");
+if (seatWrap) seatWrap.style.display = "none";
+
+
+
 const ticketLeft = document.querySelector(".edu-ticket-left");
 ticketLeft.classList.remove(
 "edu-ticket-left--france",
