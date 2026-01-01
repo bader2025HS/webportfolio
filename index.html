@@ -3918,6 +3918,63 @@ NANCY LOGO — FORCE VISUAL MATCH
   transform: scale(1.05); /* optical boost */
 }
 
+/* =========================================
+EXPERIENCE — FIX CHIP OVERLAP (LONG TITLES)
+PUT THIS AT THE VERY END OF YOUR CSS
+========================================= */
+
+.exp-front-title{
+  /* keep pill look */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 14px;
+  border-radius: 999px;
+
+  /* ✅ responsive size so it never clashes */
+  font-size: clamp(.92rem, 1.05vw, 1.05rem);
+  font-weight: 650;
+  line-height: 1.25;
+
+  color: #0f172a;
+  background: rgba(14, 165, 162, 0.08);
+  border: 1px solid rgba(14, 165, 162, 0.18);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+
+  /* ✅ allow 2 lines instead of forcing one */
+  white-space: normal;          /* was nowrap */
+  text-align: center;
+  max-width: min(30ch, 92%);    /* prevents touching card edges */
+  padding-inline: 16px;
+
+  /* nice wrapping */
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+/* optional: slightly tighter on very small widths */
+@media (max-width: 420px){
+  .exp-front-title{
+    font-size: .92rem;
+    padding: 8px 12px;
+    max-width: 90%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 /* ===========================
 WORK — MATCH EXPERIENCE CARD STYLE + EQUAL HEIGHT
 (PASTE AT END)
