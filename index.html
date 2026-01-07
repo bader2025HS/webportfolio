@@ -1082,6 +1082,21 @@ CONTACT — FIX SVG ICON SIZE
 
 
 
+/* =====================================
+CONTACT — ICON COLOR BEHAVIOR
+Static = grey | Hover = original colors
+===================================== */
+
+/* default: icons greyed out */
+.contact-info-icon svg{
+  filter: grayscale(1) brightness(0.75);
+  transition: filter .18s ease;
+}
+
+/* on card hover: restore original colors */
+.contact-info-card:hover .contact-info-icon svg{
+  filter: none;
+}
 
 
 
