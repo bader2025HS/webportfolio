@@ -1098,6 +1098,23 @@ Static = grey | Hover = original colors
   filter: none;
 }
 
+/* =====================================
+CONTACT — ICON GREY (SOFTER)
+===================================== */
+
+.contact-info-icon svg{
+  filter:
+    grayscale(1)
+    brightness(1.05)
+    contrast(0.85)
+    opacity(0.75);
+  transition: filter .18s ease;
+}
+
+/* hover = real colors */
+.contact-info-card:hover .contact-info-icon svg{
+  filter: none;
+}
 
 
 
