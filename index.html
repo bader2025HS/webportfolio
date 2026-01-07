@@ -8257,59 +8257,6 @@ el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
 })();
 </script>
 
-<script>
-(() => {
-  // only on touch devices (phones/tablets)
-  if (!window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
-
-  const targets = document.querySelectorAll(
-    "#contact .contact-field, #contact .contact-info-card, #contact .contact-send-btn"
-  );
-
-  // choose the element closest to viewport center
-  const pickClosestToCenter = (entries) => {
-    const centerY = window.innerHeight / 2;
-    let best = null;
-    let bestDist = Infinity;
-
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      const r = e.target.getBoundingClientRect();
-      const mid = r.top + r.height / 2;
-      const d = Math.abs(mid - centerY);
-      if (d < bestDist) { bestDist = d; best = e.target; }
-    }
-    return best;
-  };
-
-  let current = null;
-
-  const io = new IntersectionObserver((entries) => {
-    const best = pickClosestToCenter(entries);
-
-    if (best && best !== current) {
-      if (current) current.classList.remove("touch-hover");
-      best.classList.add("touch-hover");
-      current = best;
-    }
-
-    // if nothing intersecting, clear
-    const anyVisible = entries.some(e => e.isIntersecting);
-    if (!anyVisible && current) {
-      current.classList.remove("touch-hover");
-      current = null;
-    }
-  }, {
-    root: null,
-    threshold: [0.35, 0.5, 0.65],
-  });
-
-  targets.forEach(t => io.observe(t));
-})();
-</script>
-
-
-
 
 </body>
 </html>
