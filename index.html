@@ -1053,6 +1053,32 @@ CONTACT — CENTER CONTENT INSIDE INFO CARDS
 
 
 
+/* =====================================
+CONTACT — FIX SVG ICON SIZE
+===================================== */
+
+/* icon wrapper */
+.contact-info-icon{
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* svg itself */
+.contact-info-icon svg{
+  width: 100%;
+  height: 100%;
+  max-width: 48px;
+  max-height: 48px;
+  display: block;
+}
+
+/* safety: prevent SVG overflow */
+.contact-info-card svg{
+  overflow: visible;
+}
 
 
 
