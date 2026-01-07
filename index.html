@@ -281,12 +281,7 @@ white-space: nowrap;
 
 
 /* =========================================================
-CONTACT — UPDATED (uses YOUR class names)
-REQUIREMENTS MET:
-- Row 1 stays: NAME | EMAIL | TOPIC
-- Row 2: LEFT = message (~70%) | RIGHT = (vertical SEND + 6 contact cards)
-- SEND is vertical (S E N D stacked)
-- Trebuchet MS everywhere in contact
+CONTACT — UPDATED
 ========================================================= */
 
 #contact{
@@ -1030,6 +1025,28 @@ padding-right: 12px;
 }
 
 
+/* =====================================
+CONTACT — CENTER CONTENT INSIDE INFO CARDS
+(ONLY affects the 6 contact boxes)
+===================================== */
+
+.contact-info-card{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;     /* horizontal centering */
+  justify-content: center !important; /* vertical centering */
+  text-align: center !important;
+}
+
+/* icon block centered */
+.contact-info-icon{
+  justify-content: center !important;
+}
+
+/* social icons centered */
+.social-links{
+  justify-content: center !important;
+}
 
 
 
