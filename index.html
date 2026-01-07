@@ -1173,6 +1173,22 @@ CONTACT — FIX EMAIL & CV HOVER COLORS
 }
 
 
+/* =====================================
+CONTACT — ICON MICRO ZOOM ON HOVER
+===================================== */
+
+/* prepare icon for transform */
+.contact-info-icon svg{
+  transition:
+    transform .22s ease,
+    filter .18s ease;
+  transform-origin: center;
+}
+
+/* zoom icon slightly when card is hovered */
+.contact-info-card:hover .contact-info-icon svg{
+  transform: scale(1.12);
+}
 
 
 
