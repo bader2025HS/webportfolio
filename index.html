@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portofolio</title>
+<title>portofo</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -1210,6 +1210,35 @@ CONTACT — VERTICAL SEND BUTTON LETTER SPACING
   }
 }
 
+/* =====================================
+CONTACT — TOUCH HOVER (mobile scroll hover)
+===================================== */
+
+/* apply hover visuals when .touch-hover is present */
+.contact-field:is(:hover, .touch-hover),
+.contact-info-card:is(:hover, .touch-hover){
+  background: #ffffff;
+  transform: translateY(-3px);
+}
+
+.contact-field:is(:hover, .touch-hover)::after,
+.contact-info-card:is(:hover, .touch-hover)::after{
+  box-shadow: none;
+}
+
+/* brand border colors should also apply on touch-hover */
+.contact-info-card[href^="mailto"]:is(:hover, .touch-hover){ border-color:#ea4335 !important; }
+.contact-info-card[href$=".pdf"]:is(:hover, .touch-hover){ border-color:#0ea5a2 !important; }
+.contact-info-card[href*="wa.me"]:is(:hover, .touch-hover){ border-color:#25d366 !important; }
+.contact-info-card[href*="linkedin"]:is(:hover, .touch-hover){ border-color:#0a66c2 !important; }
+.contact-info-card[href*="instagram"]:is(:hover, .touch-hover){ border-color:#e1306c !important; }
+.contact-info-card[href*="facebook"]:is(:hover, .touch-hover){ border-color:#1877f2 !important; }
+
+/* icon: grey -> real colors + zoom, also on touch-hover */
+.contact-info-card:is(:hover, .touch-hover) .contact-info-icon svg{
+  filter: none !important;
+  transform: scale(1.12);
+}
 
 
 
@@ -8225,6 +8254,57 @@ document.querySelectorAll(hoverables).forEach(el => {
 el.addEventListener("mouseenter", () => dot.classList.add("is-hover"));
 el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
 });
+})();
+</script>
+
+<script>
+(() => {
+  // only on touch devices (phones/tablets)
+  if (!window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
+
+  const targets = document.querySelectorAll(
+    "#contact .contact-field, #contact .contact-info-card, #contact .contact-send-btn"
+  );
+
+  // choose the element closest to viewport center
+  const pickClosestToCenter = (entries) => {
+    const centerY = window.innerHeight / 2;
+    let best = null;
+    let bestDist = Infinity;
+
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const r = e.target.getBoundingClientRect();
+      const mid = r.top + r.height / 2;
+      const d = Math.abs(mid - centerY);
+      if (d < bestDist) { bestDist = d; best = e.target; }
+    }
+    return best;
+  };
+
+  let current = null;
+
+  const io = new IntersectionObserver((entries) => {
+    const best = pickClosestToCenter(entries);
+
+    if (best && best !== current) {
+      if (current) current.classList.remove("touch-hover");
+      best.classList.add("touch-hover");
+      current = best;
+    }
+
+    // if nothing intersecting, clear
+    const anyVisible = entries.some(e => e.isIntersecting);
+    if (!anyVisible && current) {
+      current.classList.remove("touch-hover");
+      current = null;
+    }
+  }, {
+    root: null,
+    threshold: [0.35, 0.5, 0.65],
+  });
+
+  targets.forEach(t => io.observe(t));
 })();
 </script>
 
