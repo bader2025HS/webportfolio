@@ -1282,6 +1282,26 @@ CONTACT — ENABLE "FAKE HOVER" VIA CLASS
 
 	
 
+/* =====================================================
+CONTACT — INPUT FIELDS: BLACK BORDER ON HOVER
+(Name / Email / Topic / Message ONLY)
+===================================================== */
+
+/* Desktop hover */
+.contact-field:hover{
+  border-color: #111 !important; /* solid black */
+}
+
+/* Mobile simulated hover */
+.contact-field.is-touch-hover{
+  border-color: #111 !important;
+}
+
+/* Keep inner inset line disabled on hover (same as before) */
+.contact-field:hover::after,
+.contact-field.is-touch-hover::after{
+  box-shadow: none !important;
+}
 
 
 
