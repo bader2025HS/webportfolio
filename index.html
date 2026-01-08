@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio</title>
+<title>pooooooooo</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -1258,6 +1258,27 @@ Use :active + :focus on touch devices to mimic hover
 }
 
 
+/* =====================================
+CONTACT — ENABLE "FAKE HOVER" VIA CLASS
+===================================== */
+
+.contact-field.is-touch-hover,
+.contact-info-card.is-touch-hover{
+  background: #ffffff !important;
+  transform: translateY(-3px) !important;
+  border-color: inherit !important; /* keeps your brand rules */
+}
+
+.contact-field.is-touch-hover::after,
+.contact-info-card.is-touch-hover::after{
+  box-shadow: none !important;
+}
+
+/* icon: color + zoom when "touch hovered" */
+.contact-info-card.is-touch-hover .contact-info-icon svg{
+  filter: none !important;
+  transform: scale(1.12) !important;
+}
 
 	
 
@@ -8271,6 +8292,59 @@ el.addEventListener("mouseleave", () => dot.classList.remove("is-hover"));
 })();
 </script>
 
+<script>
+(() => {
+  // Only on touch devices
+  if (!window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
+
+  const CONTACT_SEL = "#contact .contact-info-card, #contact .contact-field";
+
+  let current = null;
+
+  const clearCurrent = () => {
+    if (current) current.classList.remove("is-touch-hover");
+    current = null;
+  };
+
+  const setCurrent = (el) => {
+    if (!el || el === current) return;
+    clearCurrent();
+    el.classList.add("is-touch-hover");
+    current = el;
+  };
+
+  // Find element under finger
+  const pickUnderFinger = (touch) => {
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (!el) return null;
+    return el.closest(CONTACT_SEL);
+  };
+
+  // While finger moves (including scrolling), update the hovered element
+  const onTouchMove = (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    const target = pickUnderFinger(e.touches[0]);
+    setCurrent(target);
+  };
+
+  // Start: set immediately
+  const onTouchStart = (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    const target = pickUnderFinger(e.touches[0]);
+    setCurrent(target);
+  };
+
+  // End: clear
+  const onTouchEnd = () => clearCurrent();
+  const onTouchCancel = () => clearCurrent();
+
+  // Use capture + passive so it doesn't mess with scroll
+  document.addEventListener("touchstart", onTouchStart, { passive: true, capture: true });
+  document.addEventListener("touchmove",  onTouchMove,  { passive: true, capture: true });
+  document.addEventListener("touchend",   onTouchEnd,   { passive: true, capture: true });
+  document.addEventListener("touchcancel",onTouchCancel,{ passive: true, capture: true });
+})();
+</script>
 
 </body>
 </html>
