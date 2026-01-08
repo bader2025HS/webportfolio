@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>portofo</title>
+<title>Portfolio</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet"
@@ -1210,38 +1210,52 @@ CONTACT — VERTICAL SEND BUTTON LETTER SPACING
   }
 }
 
-/* =====================================
-CONTACT — TOUCH HOVER (mobile scroll hover)
-===================================== */
 
-/* apply hover visuals when .touch-hover is present */
-.contact-field:is(:hover, .touch-hover),
-.contact-info-card:is(:hover, .touch-hover){
-  background: #ffffff;
-  transform: translateY(-3px);
+
+/* =========================================================
+CONTACT — MOBILE "HOVER" LIKE EDUCATION MAPS
+Use :active + :focus on touch devices to mimic hover
+========================================================= */
+
+@media (hover: none) and (pointer: coarse){
+
+  /* make cards feel tappable like the maps */
+  .contact-info-card,
+  .contact-send-btn{
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ✅ apply the same hover visuals when touched/focused */
+  .contact-info-card:active,
+  .contact-info-card:focus,
+  .contact-info-card:focus-visible{
+    background: #ffffff !important;
+    transform: translateY(-3px) !important;
+  }
+
+  .contact-info-card:active::after,
+  .contact-info-card:focus::after,
+  .contact-info-card:focus-visible::after{
+    box-shadow: none !important;
+  }
+
+  /* ✅ icons: grey -> real colors + zoom on touch */
+  .contact-info-card:active .contact-info-icon svg,
+  .contact-info-card:focus .contact-info-icon svg,
+  .contact-info-card:focus-visible .contact-info-icon svg{
+    filter: none !important;
+    transform: scale(1.12) !important;
+  }
+
+  /* ✅ brand borders on touch (same rules as hover) */
+  .contact-info-card[href^="mailto"]:is(:active,:focus,:focus-visible){ border-color:#ea4335 !important; }
+  .contact-info-card[href$=".pdf"]:is(:active,:focus,:focus-visible){ border-color:#0ea5a2 !important; }
+  .contact-info-card[href*="wa.me"]:is(:active,:focus,:focus-visible){ border-color:#25d366 !important; }
+  .contact-info-card[href*="linkedin"]:is(:active,:focus,:focus-visible){ border-color:#0a66c2 !important; }
+  .contact-info-card[href*="instagram"]:is(:active,:focus,:focus-visible){ border-color:#e1306c !important; }
+  .contact-info-card[href*="facebook"]:is(:active,:focus,:focus-visible){ border-color:#1877f2 !important; }
 }
-
-.contact-field:is(:hover, .touch-hover)::after,
-.contact-info-card:is(:hover, .touch-hover)::after{
-  box-shadow: none;
-}
-
-/* brand border colors should also apply on touch-hover */
-.contact-info-card[href^="mailto"]:is(:hover, .touch-hover){ border-color:#ea4335 !important; }
-.contact-info-card[href$=".pdf"]:is(:hover, .touch-hover){ border-color:#0ea5a2 !important; }
-.contact-info-card[href*="wa.me"]:is(:hover, .touch-hover){ border-color:#25d366 !important; }
-.contact-info-card[href*="linkedin"]:is(:hover, .touch-hover){ border-color:#0a66c2 !important; }
-.contact-info-card[href*="instagram"]:is(:hover, .touch-hover){ border-color:#e1306c !important; }
-.contact-info-card[href*="facebook"]:is(:hover, .touch-hover){ border-color:#1877f2 !important; }
-
-/* icon: grey -> real colors + zoom, also on touch-hover */
-.contact-info-card:is(:hover, .touch-hover) .contact-info-icon svg{
-  filter: none !important;
-  transform: scale(1.12);
-}
-
-
-
 
 
 
