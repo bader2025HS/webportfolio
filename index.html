@@ -4415,624 +4415,254 @@ EXPERIENCE — THICKER HOVER BORDER
 	
 
 
-
-
-  
-/* ===========================
-WORK — MATCH EXPERIENCE CARD STYLE + EQUAL HEIGHT
-(PASTE AT END)
-=========================== */
-
-/* 1) make both columns the same height */
-.work-shell{
-  align-items: stretch;          /* grid children match tallest */
-}
-
-/* right panel stretches */
-.work-board-left{
-  height: 100%;
-  min-height: 520px;             /* keeps index from being taller on short content */
-  border-radius: 16px;
-  overflow: hidden;              /* clip inset border like experience */
-}
-
-/* 2) index column: same total height as content panel */
-.work-index{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* each item shares the column height evenly */
-.work-item{
-  flex: 1 1 0;
-  border-radius: 16px;
-  position: relative;
-  overflow: hidden;              /* clip inset border */
-  border: 2px solid transparent; /* like exp-card-frame */
-  background: linear-gradient(180deg, #f7faff 0%, #f3f7ff 100%);
-  box-sizing: border-box;
-
-  transition: transform .18s ease, background .18s ease, border-color .18s ease;
-}
-
-/* subtle inner line (inset border) */
-.work-item::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
-  border-radius: 16px;
-}
-
-/* hover = white + accent border (same as experience) */
-@media (hover:hover) and (pointer:fine){
-  .work-item:hover{
-    transform: translateY(-2px);
-    background: #ffffff;
-    border-color: var(--work-accent);
-  }
-  .work-item:hover::after{
-    box-shadow: none;
-  }
-}
-
-/* active = accent rail on left, without changing layout */
-.work-item.is-active{
-  border-color: rgba(17,24,39,0.16);
-}
-.work-item.is-active::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width: 8px;
-  background: var(--work-accent);
-}
-
-/* tighten inside layout so it looks like your cards */
-.work-item{
-  padding: 18px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-/* typography like experience */
-.work-item-code{
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  opacity: 0.65;
-  font-size: 0.84rem;
-}
-
-.work-item-name{
-  font-weight: 780;
-  font-size: 1.02rem;
-  letter-spacing: 0.02em;
-}
-
-.work-item-arrow{
-  opacity: 0.55;
-  font-weight: 900;
-}
-
-/* 3) if right content is taller, keep left cards from collapsing weirdly */
-.work-index,
-.work-board-left{
-  min-height: 520px;
-}
-
-/* MOBILE: stack stays fine */
-@media (max-width: 900px){
-  .work-board-left,
-  .work-index{
-    min-height: auto;
-  }
-}
-
-
-
-
-
-
-
-
-
-
 /* =========================================================
-WORK — NEW CSS (CLEAN + MATCH EXPERIENC
+WORK — EDITORIAL DOSSIER STYLE
+Totally different look
 ========================================================= */
 
-/* SECTION WRAP (keep your full-bleed system) */
 #work{
-  margin-top: -16px;
-  padding: 0 0 70px;
-  position: relative;
+  --work-bg: #f8f6f1;
+  --work-card: #fffdf8;
+  --work-text: #111111;
+  --work-muted: rgba(17,17,17,0.62);
+  --work-line: rgba(17,17,17,0.12);
+  --work-accent: #111111;
 
+  position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding-left: clamp(16px, 3vw, 64px);
-  padding-right: clamp(16px, 3vw, 64px);
+  padding: 10px clamp(16px, 3vw, 64px) 90px;
   box-sizing: border-box;
-
+  background: var(--work-bg);
   overflow-x: hidden;
   font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;
 }
 
 .work-layout{
   width: 100%;
-  margin: 0;
-  box-sizing: border-box;
+  max-width: 1320px;
+  margin: 0 auto;
 }
 
-/* =========================================================
-MAIN SHELL (height control)
-- uses viewport height so it never grows higher than the screen
-========================================================= */
+/* remove the old split layout logic */
 .work-shell{
-  --work-accent: #0ea5a2; /* one accent for everything */
-
-  display: grid;
-  grid-template-columns: 420px minmax(0, 1fr);
-  gap: 18px;
-
-  /* ✅ FIT VIEWPORT, NOT HIGHER */
-  height: clamp(520px, 72vh, 660px);
-  max-height: 72vh;
-
-  align-items: stretch;
-  box-sizing: border-box;
-}
-
-/* =========================================================
-LEFT: INDEX (no outer box)
-========================================================= */
-.work-index{
-  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-
-  padding: 0;
-  margin: 0;
-  background: none;
-  border: none;
-  box-sizing: border-box;
+  gap: 26px;
+  height: auto !important;
+  max-height: none !important;
 }
 
-/* index items share height evenly */
-.work-item{
-  flex: 1 1 0;
-  min-height: 0; /* important so flex can shrink inside fixed height */
-
-  position: relative;
-  border-radius: 16px;
-
-  /* ✅ EXPERIENCE CARD BLUE BASE */
-  background: linear-gradient(180deg, #f7faff 0%, #f3f7ff 100%);
-  border: 2px solid transparent;
-  box-shadow: none;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  /* layout */
-  padding: 18px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-
-  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+.work-index{
+  display: none !important;
 }
 
-/* subtle inner line (inset border) like exp-card-frame::after */
-.work-item::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
-  border-radius: 16px;
-}
-
-/* ONE hover rule for all items (blue → white + accent border) */
-@media (hover:hover) and (pointer:fine){
-  .work-item:hover{
-    transform: translateY(-2px);
-    background: #ffffff;
-    border-color: var(--work-accent);
-  }
-  .work-item:hover::after{
-    box-shadow: none;
-  }
-}
-
-/* active: keep same system (no per-item colors) */
-.work-item.is-active{
-  background: #ffffff;
-  border-color: var(--work-accent);
-}
-.work-item.is-active::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width: 8px;
-  background: var(--work-accent);
-}
-
-/* index typography */
-.work-item-left{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-
-.work-item-code{
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  font-size: 0.86rem;
-  opacity: 0.70;
-}
-
-.work-item-name{
-  font-weight: 780;
-  font-size: 1.02rem;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.work-item-arrow{
-  font-weight: 900;
-  opacity: 0.55;
-  font-size: 1.2rem;
-}
-
-/* =========================================================
-RIGHT: CONTENT PANEL (same height as index)
-========================================================= */
-.work-board-left{
-  height: 100%;
-  min-height: 0;
-
-  position: relative;
-  border-radius: 16px;
-
-  /* match your clean system */
-  background: #ffffff;
-  border: 2px solid #111;
-
-  overflow: hidden; /* clip inset + allow inner scroll */
-  box-sizing: border-box;
-}
-
-/* accent rail */
-.work-board-left::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width: 6px;
-  background: var(--work-accent);
-}
-
-/* inset border inside content panel (like experience) */
-.work-board-left::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.10);
-  border-radius: 16px;
-}
-
-/* the actual article content should scroll if needed (so shell never grows) */
+/* each detail becomes a visible card */
 .work-detail{
-  display: none;
-  height: 100%;
-  overflow: auto;
-  padding: 34px 36px 30px;
-  box-sizing: border-box;
-
-  /* hide scrollbar like your experience back */
-  scrollbar-width: none;
-}
-.work-detail::-webkit-scrollbar{ width: 0; height: 0; }
-
-.work-detail.is-active{
-  display: block;
-  animation: workFade .20s ease-out;
-}
-
-@keyframes workFade{
-  from{ opacity:0; transform: translateY(6px); }
-  to{ opacity:1; transform: translateY(0); }
+  display: block !important;
+  position: relative;
+  overflow: hidden;
+  padding: 34px 34px 28px;
+  min-height: 250px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,253,248,0.98));
+  border: 1px solid var(--work-line);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.75),
+    0 8px 30px rgba(17,17,17,0.04);
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease;
 }
 
-/* remove any ghost word */
-.work-title::after{ content: none !important; }
+/* alternating alignment for less rigid feeling */
+.work-detail:nth-child(even){
+  margin-left: 7%;
+}
+
+.work-detail:nth-child(odd){
+  margin-right: 7%;
+}
+
+.work-detail::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 120px;
+  background:
+    radial-gradient(circle at top left, rgba(17,17,17,0.06), transparent 68%);
+  pointer-events: none;
+}
+
+.work-detail::after{
+  content: "";
+  position: absolute;
+  right: 28px;
+  top: 22px;
+  width: 88px;
+  height: 88px;
+  border-top: 1px solid rgba(17,17,17,0.08);
+  border-right: 1px solid rgba(17,17,17,0.08);
+  border-radius: 0 18px 0 0;
+  pointer-events: none;
+}
+
+/* hover */
+@media (hover:hover) and (pointer:fine){
+  .work-detail:hover{
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.75),
+      0 16px 38px rgba(17,17,17,0.08);
+    border-color: rgba(17,17,17,0.18);
+  }
+}
+
+/* optional manual numbering
+   add data-num="01" etc. to each .work-detail in HTML */
+.work-detail[data-num] .work-title-wrap::before{
+  content: attr(data-num);
+  position: absolute;
+  top: -22px;
+  right: 0;
+  font-size: clamp(3.8rem, 10vw, 7rem);
+  line-height: 0.9;
+  font-weight: 900;
+  color: rgba(17,17,17,0.06);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+}
+
+.work-title-wrap{
+  position: relative;
+  margin-bottom: 12px;
+  padding-right: 80px;
+}
 
 .work-title{
-  margin: 0 0 14px;
-  font-size: clamp(2rem, 2.6vw, 2.6rem);
-  line-height: 1.12;
-  letter-spacing: 0.02em;
+  margin: 0;
+  max-width: 780px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--work-text);
 }
 
 .work-desc{
-  margin: 0 0 18px;
-  color: #111;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  max-width: none; /* full width */
+  max-width: 760px;
+  margin: 0 0 20px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--work-muted);
 }
 
-/* chips + links keep your system style */
 .work-chips{
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 6px 0 18px;
+  margin: 0 0 22px;
 }
+
 .work-chip{
-  font-size: 0.78rem;
-  padding: 6px 10px 5px;
+  padding: 7px 12px 6px;
   border-radius: 999px;
-  border: 1.8px solid #111;
-  background: #fff;
+  background: transparent;
+  border: 1px solid rgba(17,17,17,0.16);
+  color: #111;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .work-links{
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 12px;
 }
+
 .work-link{
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
-  border: 2px solid #111;
-  background: #fff;
+  padding: 12px 16px;
+  border-radius: 999px;
   text-decoration: none;
-  color: #111;
-
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  color: #fff;
+  background: #111;
+  border: 1px solid #111;
   font-size: 0.78rem;
-  font-weight: 700;
-
-  transition: transform .15s ease, background .15s ease;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    color .18s ease;
 }
+
 .work-link:hover{
   transform: translateY(-2px);
-  background: rgba(0,0,0,0.04);
+  background: transparent;
+  color: #111;
 }
+
 .work-link .icon{
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
-/* =========================================================
-RESPONSIVE
-========================================================= */
-@media (max-width: 1050px){
-  .work-shell{
-    grid-template-columns: 360px minmax(0, 1fr);
-    height: clamp(520px, 74vh, 660px);
-  }
-}
-
+/* mobile */
 @media (max-width: 900px){
+  #work{
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 72px;
+  }
+
   .work-shell{
-    grid-template-columns: 1fr;
-    height: auto;
-    max-height: none;
+    gap: 16px;
   }
 
-  .work-index{
-    height: auto;
-  }
-
-  .work-item{
-    flex: 0 0 auto;
-    min-height: 92px;
-  }
-
-  .work-board-left{
-    height: auto;
+  .work-detail,
+  .work-detail:nth-child(even),
+  .work-detail:nth-child(odd){
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .work-detail{
-    height: auto;
-    overflow: visible;
-    padding: 26px 20px 22px;
-  }
-}
-
-@media (max-width: 700px){
-  #work{
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-}
-
-
-/* WORK — stop forced tall height, only cap it */
-.work-shell{
-  height: auto !important;                 /* ✅ don't force tall */
-  max-height: min(72vh, 660px) !important; /* ✅ never exceed viewport */
-}
-
-/* keep both columns equal height */
-.work-index,
-.work-board-left{
-  height: auto !important;
-}
-
-/* if content gets long, scroll INSIDE the right panel */
-.work-detail{
-  max-height: min(72vh, 660px) !important; /* matches the cap */
-  overflow: auto !important;
-}
-
-
-
-/* =========================================================
-WORK — HARD RESET HEIGHT (LIKE EXPERIENCE)
-PASTE AT END
-========================================================= */
-
-/* remove any forced sizing */
-.work-shell,
-.work-index,
-.work-board-left,
-.work-detail{
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-}
-
-/* keep the layout, but natural height (no empty space) */
-.work-shell{
-  display: grid !important;
-  grid-template-columns: 420px minmax(0, 1fr) !important;
-  gap: 18px !important;
-  align-items: stretch !important;
-}
-
-/* left stack + right panel will be the same height (tallest wins) */
-.work-index{
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 14px !important;
-}
-
-/* items share the available height ONLY if there is height — otherwise they size naturally */
-.work-item{
-  flex: 0 0 auto !important;   /* ✅ stop "fill height" behavior */
-}
-
-/* make both columns LOOK aligned by adding consistent padding/margins */
-.work-board-left{
-  overflow: hidden !important;
-}
-
-/* =========================================================
-WORK — MOBILE LAYOUT FIX (PHONE)
-PASTE AT END
-========================================================= */
-@media (max-width: 800px){
-
-  /* section aligns with navbar inset */
-  #work{
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    box-sizing: border-box !important;
+    min-height: auto;
+    padding: 24px 18px 20px;
+    border-radius: 22px;
   }
 
-  /* stack index then content */
-  .work-shell{
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 14px !important;
-    grid-template-columns: none !important;
-    height: auto !important;
-    max-height: none !important;
-  }
-
-  /* index list becomes full width */
-  .work-index{
-    width: 100% !important;
-    height: auto !important;
-    gap: 12px !important;
-  }
-
-  /* buttons become normal height (no “fill height”) */
-  .work-item{
-    flex: 0 0 auto !important;
-    width: 100% !important;
-    min-height: 76px !important;
-    padding: 16px 16px !important;
-    transform: none !important; /* kill hover translate on touch */
-  }
-
-  /* keep your card look but stop hover-only changes from sticking on touch */
-  .work-item:hover{
-    transform: none !important;
-  }
-
-  /* tighten text for phone */
-  .work-item-code{
-    font-size: 0.80rem !important;
-  }
-  .work-item-name{
-    font-size: 0.98rem !important;
-  }
-  .work-item-arrow{
-    font-size: 1.1rem !important;
-  }
-
-  /* content panel full width + readable padding */
-  .work-board-left{
-    width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    border-radius: 16px !important;
-  }
-
-  /* the active article should NOT scroll inside on phone */
-  .work-detail{
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    padding: 22px 18px 20px !important;
+  .work-title-wrap{
+    padding-right: 0;
   }
 
   .work-title{
-    font-size: 1.75rem !important;
-    margin-bottom: 12px !important;
+    font-size: 1.9rem;
+    line-height: 1;
   }
 
   .work-desc{
-    font-size: 0.95rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 16px !important;
-  }
-
-  .work-chips{
-    gap: 8px !important;
-    margin-bottom: 14px !important;
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 
   .work-link{
-    width: 100% !important;       /* nicer on phone: full-width buttons */
-    justify-content: center !important;
+    width: 100%;
+    justify-content: center;
   }
 }
-
 
 
 
