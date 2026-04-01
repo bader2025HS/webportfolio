@@ -1,6 +1,0 @@
-<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-  <path d="M20 110 C40 100, 60 90, 80 110" stroke="#000" stroke-width="4" fill="none"/>
-  <circle cx="80" cy="110" r="10" fill="#000"/>
-  <path d="M85 105 L115 75" stroke="#000" stroke-width="4"/>
-  <polygon points="115,75 125,70 120,80" fill="#000"/>
-</svg>
