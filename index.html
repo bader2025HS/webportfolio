@@ -4427,13 +4427,7 @@ EXPERIENCE — THICKER HOVER BORDER
 
 
 
-
-
-
-
-
-
-	/* =========================================================
+/* =========================================================
 WORK — STUDIO ARCHIVE STYLE / WHITE VERSION
 ========================================================= */
 
@@ -4446,7 +4440,7 @@ WORK — STUDIO ARCHIVE STYLE / WHITE VERSION
   --work-accent: #111111;
 
   position: relative;
-  margin-top: -38px; /* pulls section upward */
+  margin-top: -38px;
   padding: 0 0 72px;
 
   width: 100vw;
@@ -4475,7 +4469,7 @@ MAIN LAYOUT
   display: grid;
   grid-template-columns: minmax(230px, 310px) minmax(0, 1fr);
   gap: 28px;
-  align-items: start;
+  align-items: stretch; /* key */
 }
 
 /* =========================================================
@@ -4489,6 +4483,8 @@ LEFT SIDE
   top: 76px;
   align-self: start;
   padding-top: 2px;
+
+  height: 100%;
 }
 
 .work-item{
@@ -4576,11 +4572,12 @@ RIGHT SIDE
 ========================================================= */
 .work-main{
   min-width: 0;
+  height: 100%;
 }
 
 .work-board-left{
   position: relative;
-  min-height: 470px; /* smaller so more fits on screen */
+  height: 100%;
   border-radius: 28px;
   background: var(--work-paper);
   border: 1px solid rgba(17,17,17,0.09);
@@ -4620,8 +4617,9 @@ DETAIL PANELS
   display: none;
   position: relative;
   padding: 34px 34px 30px;
-  min-height: 470px;
   box-sizing: border-box;
+  height: auto;
+  min-height: 0;
 }
 
 .work-detail.is-active{
@@ -4640,7 +4638,7 @@ DETAIL PANELS
   }
 }
 
-/* REMOVE big background project code */
+/* remove big background project code */
 .work-detail::before{
   content: none;
 }
@@ -4666,22 +4664,19 @@ DETAIL PANELS
   position: relative;
   z-index: 1;
   max-width: 760px;
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   font-size: 0.98rem;
   line-height: 1.72;
   color: var(--work-muted);
 }
 
-/* =========================================================
-CHIPS
-========================================================= */
 .work-chips{
   position: relative;
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 0 0 22px;
+  margin: 0 0 18px;
 }
 
 .work-chip{
@@ -4698,9 +4693,6 @@ CHIPS
   text-transform: uppercase;
 }
 
-/* =========================================================
-LINKS
-========================================================= */
 .work-links{
   position: relative;
   z-index: 1;
@@ -4764,6 +4756,7 @@ RESPONSIVE
     top: auto;
     gap: 0;
     border-top: 1px solid rgba(17,17,17,0.10);
+    height: auto;
   }
 
   .work-item{
@@ -4788,13 +4781,16 @@ RESPONSIVE
     }
   }
 
+  .work-main,
   .work-board-left{
-    min-height: auto;
+    height: auto;
+  }
+
+  .work-board-left{
     border-radius: 24px;
   }
 
   .work-detail{
-    min-height: auto;
     padding: 26px 22px 22px;
   }
 
@@ -4838,8 +4834,6 @@ RESPONSIVE
     letter-spacing: 0.12em;
   }
 }
-
-
 
 
 
