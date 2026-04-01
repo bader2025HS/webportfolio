@@ -4857,8 +4857,28 @@ RESPONSIVE
   }
 }
 
+/* =========================================================
+REMOVE NUMBERS (01, 02, etc.)
+========================================================= */
 
-	
+/* hide the numbers */
+.work-item-code{
+  display: none;
+}
+
+/* tighten spacing since numbers are gone */
+.work-item-left{
+  gap: 0;
+}
+
+/* adjust padding slightly */
+.work-item{
+  padding: 12px 0 14px;
+}
+
+	.work-item::before{
+  left: -10px; /* was -18px */
+}
 
 	
 
